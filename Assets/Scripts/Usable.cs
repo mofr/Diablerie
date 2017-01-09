@@ -10,33 +10,28 @@ public class Usable : MonoBehaviour {
 
 	static public Usable hot;
 	SpriteRenderer spriteRenderer;
-	Animator animator;
-	bool used = false;
+	public bool active = true;
 
 	void Awake () {
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		animator = GetComponent<Animator>();
 	}
 
 	void OnMouseEnter() {
-		if (used)
+		if (!active)
 			return;
 		hot = this;
 		spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
 	}
 
 	void OnMouseExit() {
-		if (used)
+		if (!active)
 			return;
 		hot = null;
 		spriteRenderer.material.SetFloat("_SelfIllum", 0.75f);
 	}
 
 	public void Use() {
-		animator.Play("Use");
-		used = true;
+		SendMessage("OnUse");
 		hot = null;
-		Tilemap.instance[Iso.MapToIso(transform.position)] = true;
-		spriteRenderer.sortingLayerName = "OnFloor";
 	}
 }
