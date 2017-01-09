@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &61637163
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &260822547
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &325120452
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &376547162
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +524,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &647427555
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +603,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &660946591
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 0
+  width: 5
+  height: 5
 --- !u!1 &830010667
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +761,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &860545502
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +840,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &919912189
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &951332997
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +998,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1132721581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1077,146 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
+--- !u!1 &1142534568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1142534570}
+  - component: {fileID: 1142534569}
+  - component: {fileID: 1142534571}
+  - component: {fileID: 1142534572}
+  - component: {fileID: 1142534573}
+  - component: {fileID: 1142534574}
+  - component: {fileID: 1142534575}
+  m_Layer: 0
+  m_Name: Barrel_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1142534569
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3332d649ebabc1f42b2bf16f9cbe4ed9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ae6d538a352719c449bd92c1fe00e8b3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &1142534570
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142534571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 1
+  height: 1
+--- !u!114 &1142534572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
+  tilePos: {x: 0, y: 0}
+--- !u!61 &1142534573
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.00026464462, y: 0.1605736}
+  serializedVersion: 2
+  m_Size: {x: 0.3602497, y: 0.56973386}
+--- !u!114 &1142534574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a534dbce548294b906bd0e3a362cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1142534575
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1142534568}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 427452b81cb73f140b097d52f6f5cb01, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1145679205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1173199665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1211973647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1392636078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,6 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  usable: {fileID: 0}
 --- !u!114 &1392636083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1475989575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,6 +1732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1607945261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,6 +1811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1690734381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,6 +1890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1708189524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1740556119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +2048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1859398374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,6 +2227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &1981156763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,6 +2306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &2105332663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,6 +2385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5
 --- !u!1 &2107904822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,3 +2464,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 1
+  width: 5
+  height: 5

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof(SpriteRenderer))]
 public class Iso : MonoBehaviour {
 
 	static public float tileSize = 0.2f;
 	public Vector2 pos;
 	public Vector2 tilePos;
+	SpriteRenderer spriteRenderer;
 
 	static public Vector3 MapToWorld(Vector3 iso) {
 		return new Vector3(iso.x - iso.y, (iso.x + iso.y) / 2) * tileSize;
@@ -41,12 +43,19 @@ public class Iso : MonoBehaviour {
 		return pos;
 	}
 
+	void Awake() {
+		pos = MapToIso(transform.position);
+		tilePos = Snap(pos);
+		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
 	void Start () {
 		
 	}
 
 	void Update () {
 		transform.position = MapToWorld(pos);
+		spriteRenderer.sortingOrder = -(int)(transform.position.y * spriteRenderer.sprite.pixelsPerUnit);
 	}
 		
 	void OnDrawGizmosSelected() {

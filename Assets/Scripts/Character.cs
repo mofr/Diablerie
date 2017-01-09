@@ -10,6 +10,7 @@ public class Character : MonoBehaviour {
 	public int direction = 0;
 	static public float speed = 3.5f;
 	List<Vector2> path = new List<Vector2>();
+	public Usable usable;
 	float traveled = 0;
 
 	void Start() {
@@ -17,7 +18,16 @@ public class Character : MonoBehaviour {
 		animator = GetComponent<Animator>();
 	}
 
+	public void Use(Usable usable) {
+		if (this.usable == usable)
+			return;
+		GoTo(usable.GetComponent<Iso>().tilePos);
+		this.usable = usable;
+	}
+
 	public void GoTo(Vector2 target) {
+		this.usable = null;
+
 		Vector2 startPos = iso.tilePos;
 		if (path.Count > 0) {
 			Vector2 firstStep = path[0];
@@ -46,6 +56,11 @@ public class Character : MonoBehaviour {
 		Pathing.DebugDrawPath(iso.tilePos, path);
 
 		Move();
+
+		if (path.Count == 0 && usable) {
+			usable.Use();
+			usable = null;
+		}
 	}
 
 	void Move() {

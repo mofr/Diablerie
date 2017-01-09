@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +14,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update () {
-		Vector3 tilePos = Iso.Snap(iso.pos);
-		Vector3 mouseTile = Iso.MouseTile();
-		Iso.DebugDrawTile(mouseTile, Tilemap.instance[mouseTile] ? Color.green : Color.red, 0.1f);
-		Pathing.DebugDrawPath(tilePos, Pathing.BuildPath(tilePos, mouseTile));
+		Vector3 targetTile;
+		if (Usable.hot != null) {
+			targetTile = Iso.MapToIso(Usable.hot.transform.position);
+		} else {
+			targetTile = Iso.MouseTile();
+		}
+		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
+		Pathing.BuildPath(iso.tilePos, targetTile);
 
 		if (Input.GetMouseButton(0)) {
-			character.GoTo(Iso.MouseTile());
+			if (Usable.hot != null) {
+				character.Use(Usable.hot);
+			} else {
+				character.GoTo(targetTile);
+			}
 		}
 
 		if (Input.GetMouseButtonDown(1)) {

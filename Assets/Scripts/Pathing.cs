@@ -93,9 +93,7 @@ public class Pathing {
 					newNode = Node.Get();
 				newNode.pos = pos;
 				if (!closeNodes.Contains(newNode) && !openNodes.Contains(newNode)) {
-					float cost = 1;
-					float distance = Vector2.Distance(target, newNode.pos);
-					newNode.score = cost + distance;
+					newNode.score = CalcScore(target, newNode.pos);
 					newNode.parent = node;
 					newNode.direction = direction;
 					openNodes.Add(newNode);
@@ -106,6 +104,10 @@ public class Pathing {
 
 		if (newNode != null)
 			newNode.Recycle();
+	}
+
+	static private float CalcScore(Vector2 src, Vector2 target) {
+		return 1 + Vector2.Distance(src, target);
 	}
 
 	static private void TraverseBack(Node node) {
@@ -120,16 +122,21 @@ public class Pathing {
 		Node.Recycle(openNodes);
 		Node.Recycle(closeNodes);
 		path.Clear();
-		if (from == target || !Tilemap.instance[target])
+		if (from == target)
 			return path;
 		Node startNode = Node.Get();
 		startNode.parent = null;
 		startNode.pos = from;
+		startNode.score = CalcScore(from, target);
 		openNodes.Add(startNode);
 		int iterCount = 0;
 		while (openNodes.Count > 0) {
 			openNodes.Sort();
 			Node node = openNodes[0];
+			if (!Tilemap.instance[target] && node.parent != null && node.score >= node.parent.score) {
+				TraverseBack(node.parent);
+				break;
+			}
 			if (node.pos == target) {
 				TraverseBack(node);
 				break;
