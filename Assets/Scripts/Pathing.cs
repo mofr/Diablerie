@@ -5,40 +5,13 @@ using UnityEngine;
 
 public class Pathing {
 
-	static private List<Vector2> path = new List<Vector2>();
-
-	static public List<Vector2> BuildPathNoCollision(Vector2 from, Vector2 target) {
-		Vector2 startPos = from;
-		path.Clear();
-
-		startPos.x = Mathf.Round(startPos.x);
-		startPos.y = Mathf.Round(startPos.y);
-		Vector2 dir = target - startPos;
-		dir.x = dir.x / Mathf.Abs(dir.x);
-		dir.y = dir.y / Mathf.Abs(dir.y);
-
-		float x = startPos.x;
-		float y = startPos.y;
-		while (x != target.x || y != target.y) {
-			Vector2 step = new Vector2(0, 0);
-			if (x != target.x) {
-				step += new Vector2(dir.x, 0);
-				x += dir.x;
-			}
-			if (y != target.y) {
-				step += new Vector2(0, dir.y);
-				y += dir.y;
-			}
-			path.Add(step);
-			if (path.Count > 100) {
-				Debug.Log("Infinite x path building");
-				return path;
-			}
-		}
-
-		return path;
+	public struct Step {
+		public Vector2 direction;
+		public Vector2 pos;
 	}
-		
+
+	static private List<Step> path = new List<Step>();
+
 	class Node : IEquatable<Node>, IComparable<Node> {
 		public float score;
 		public Vector2 pos;
@@ -112,12 +85,15 @@ public class Pathing {
 
 	static private void TraverseBack(Node node) {
 		while (node.parent != null) {
-			path.Insert(0, node.direction);
+			Step step = new Step();
+			step.direction = node.direction;
+			step.pos = node.pos;
+			path.Insert(0, step);
 			node = node.parent;
 		}
 	}
 
-	static public List<Vector2> BuildPath(Vector2 from, Vector2 target) {
+	static public List<Step> BuildPath(Vector2 from, Vector2 target) {
 		Pathing.target = target;
 		Node.Recycle(openNodes);
 		Node.Recycle(closeNodes);
@@ -159,11 +135,9 @@ public class Pathing {
 		return path;
 	}
 
-	static public void DebugDrawPath(Vector2 start, List<Vector2> path) {
-		Vector3 pos = start;
-		foreach (Vector3 step in path) {
-			Debug.DrawLine(Iso.MapToWorld(pos), Iso.MapToWorld(pos + step));
-			pos += step;
+	static public void DebugDrawPath(List<Step> path) {
+		for (int i = 0; i < path.Count - 1; ++i) {
+			Debug.DrawLine(Iso.MapToWorld(path[i].pos), Iso.MapToWorld(path[i + 1].pos));
 		}
 	}
 }

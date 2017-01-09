@@ -44,11 +44,13 @@ public class Tilemap : MonoBehaviour {
 	void Update() {
 		Color color = new Color(1, 1, 1, 0.07f);
 		Color redColor = new Color(1, 0, 0, 0.2f);
-		Vector3 pos = Iso.MapToIso(transform.position);
-		pos.x -= 50;
-		pos.y -= 50;
-		for (int x = 0; x < 100; ++x) {
-			for (int y = 0; y < 100; ++y) {
+		Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
+		int debugWidth = 100;
+		int debugHeight = 100;
+		pos.x -= debugWidth / 2;
+		pos.y -= debugHeight / 2;
+		for (int x = 0; x < debugWidth; ++x) {
+			for (int y = 0; y < debugHeight; ++y) {
 				Iso.DebugDrawTile(pos + new Vector3(x, y), this[pos + new Vector3(x, y)] ? color: redColor);
 			}
 		}

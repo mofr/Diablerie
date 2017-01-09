@@ -1,0 +1,566 @@
+fileFormatVersion: 2
+guid: e6ac8a0a6bc77f44398f9d943b8b463d
+timeCreated: 1483980107
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CatacombsFloor_0
+    21300002: CatacombsFloor_1
+    21300004: CatacombsFloor_2
+    21300006: CatacombsFloor_3
+    21300008: CatacombsFloor_4
+    21300010: CatacombsFloor_5
+    21300012: CatacombsFloor_6
+    21300014: CatacombsFloor_7
+    21300016: CatacombsFloor_8
+    21300018: CatacombsFloor_9
+    21300020: CatacombsFloor_10
+    21300022: CatacombsFloor_11
+    21300024: CatacombsFloor_12
+    21300026: CatacombsFloor_13
+    21300028: CatacombsFloor_14
+    21300030: CatacombsFloor_15
+    21300032: CatacombsFloor_16
+    21300034: CatacombsFloor_17
+    21300036: CatacombsFloor_18
+    21300038: CatacombsFloor_19
+    21300040: CatacombsFloor_20
+    21300042: CatacombsFloor_21
+    21300044: CatacombsFloor_22
+    21300046: CatacombsFloor_23
+    21300048: CatacombsFloor_24
+    21300050: CatacombsFloor_25
+    21300052: CatacombsFloor_26
+    21300054: CatacombsFloor_27
+    21300056: CatacombsFloor_28
+    21300058: CatacombsFloor_29
+    21300060: CatacombsFloor_30
+    21300062: CatacombsFloor_31
+    21300064: CatacombsFloor_32
+    21300066: CatacombsFloor_33
+    21300068: CatacombsFloor_34
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 80
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CatacombsFloor_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 487
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 487
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 487
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 487
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 487
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 407
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_6
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 407
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_7
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 407
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_8
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 407
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_9
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 407
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 327
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_11
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 327
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_12
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 327
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_13
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 327
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_14
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 327
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 247
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 247
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_17
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 247
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_18
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 247
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_19
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 247
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 167
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 167
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_22
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 167
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_23
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 167
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_24
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 167
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 87
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_26
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 87
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_27
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 87
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_28
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 87
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_29
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 87
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_31
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 7
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_32
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 7
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_33
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 7
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CatacombsFloor_34
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 7
+        width: 160
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

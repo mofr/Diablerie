@@ -9,7 +9,7 @@ public class Character : MonoBehaviour {
 	Animator animator;
 	public int direction = 0;
 	static public float speed = 3.5f;
-	List<Vector2> path = new List<Vector2>();
+	List<Pathing.Step> path = new List<Pathing.Step>();
 	public Usable usable;
 	float traveled = 0;
 
@@ -30,8 +30,8 @@ public class Character : MonoBehaviour {
 
 		Vector2 startPos = iso.tilePos;
 		if (path.Count > 0) {
-			Vector2 firstStep = path[0];
-			startPos += firstStep;
+			var firstStep = path[0];
+			startPos = firstStep.pos;
 			path.Clear();
 			path.Add(firstStep);
 		} else {
@@ -44,16 +44,24 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Teleport(Vector2 target) {
+		if (Tilemap.instance[target]) {
+			iso.pos = target;
+			iso.tilePos = target;
+		} else {
+			var pathToTarget = Pathing.BuildPath(Iso.Snap(iso.tilePos), target);
+			if (pathToTarget.Count == 0)
+				return;
+			iso.pos = pathToTarget[pathToTarget.Count - 1].pos;
+			iso.tilePos = iso.pos;
+		}
 		path.Clear();
 		traveled = 0;
-		iso.pos = target;
-		iso.tilePos = target;
 		UpdateAnimation();
 	}
 
 	void Update() {
 		Iso.DebugDrawTile(iso.tilePos);
-		Pathing.DebugDrawPath(iso.tilePos, path);
+		Pathing.DebugDrawPath(path);
 
 		Move();
 
@@ -67,7 +75,7 @@ public class Character : MonoBehaviour {
 		if (path.Count == 0)
 			return;
 
-		Vector2 step = path[0];
+		Vector2 step = path[0].direction;
 		float stepLen = step.magnitude;
 
 		float distance = speed * Time.deltaTime;
@@ -80,7 +88,7 @@ public class Character : MonoBehaviour {
 			path.RemoveAt(0);
 			UpdateAnimation();
 			if (path.Count > 0)
-				step = path[0];
+				step = path[0].direction;
 		}
 		if (path.Count > 0) {
 			traveled += distance;
@@ -101,7 +109,7 @@ public class Character : MonoBehaviour {
 		}
 		else {
 			animation = "Walk";
-			Vector2 vel = path[0];
+			Vector2 vel = path[0].direction;
 			if (vel.x > 0 && vel.y < 0) {
 				direction = 0;
 			} else if (vel.x > 0 && vel.y == 0) {
