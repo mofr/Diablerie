@@ -57,7 +57,7 @@ public class Tilemap : MonoBehaviour {
 	}
 
 	private int MapToIndex(Vector3 tilePos) {
-		return origin + (int)(tilePos.x + tilePos.y * width);
+		return origin + (int)Mathf.Round(tilePos.x + tilePos.y * width);
 	}
 
 	public bool this[Vector3 tilePos]
