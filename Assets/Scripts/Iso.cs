@@ -30,8 +30,17 @@ public class Iso : MonoBehaviour {
 		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color);
 		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)), color);
 	}
+    static public void GizmosDrawTile(Vector3 pos, float size = 1.0f)
+    {
+        pos = Iso.MapToWorld(pos);
+        float d = 0.5f * size;
+        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(d, -d)));
+        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(-d, -d)), pos + Iso.MapToWorld(new Vector2(-d, d)));
+        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(-d, d)));
+        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)));
+    }
 
-	static public void DebugDrawTile(Vector3 pos, float margin = 0) {
+    static public void DebugDrawTile(Vector3 pos, float margin = 0) {
 		DebugDrawTile(pos, Color.white, margin);
 	}
 
