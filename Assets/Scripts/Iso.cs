@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[ExecuteInEditMode]
 [RequireComponent (typeof(SpriteRenderer))]
 public class Iso : MonoBehaviour {
 
 	static public float tileSize = 0.2f;
-	public Vector2 pos;
+    static public float tileSizeY = tileSize / 2;
+    public Vector2 pos;
 	public Vector2 tilePos;
 	SpriteRenderer spriteRenderer;
+    public int macroTileOrder;
 
 	static public Vector3 MapToWorld(Vector3 iso) {
 		return new Vector3(iso.x - iso.y, (iso.x + iso.y) / 2) * tileSize;
@@ -43,6 +47,14 @@ public class Iso : MonoBehaviour {
 		return pos;
 	}
 
+    static public Vector3 MacroTile(Vector3 pos)
+    {
+        var macroTile = pos;
+        macroTile.x = Mathf.Round(pos.x / 5);
+        macroTile.y = Mathf.Round(pos.y / 5);
+        return macroTile;
+    }
+
 	void Awake() {
 		pos = MapToIso(transform.position);
 		tilePos = Snap(pos);
@@ -52,13 +64,24 @@ public class Iso : MonoBehaviour {
 	void Start () {
 		
 	}
+    static float fmod(float a, float b)
+    {
+        return a - b * Mathf.Round(a / b);
+    }
 
-	void Update () {
-		transform.position = MapToWorld(pos);
-		spriteRenderer.sortingOrder = -(int)(transform.position.y * spriteRenderer.sprite.pixelsPerUnit);
-	}
-		
-	void OnDrawGizmosSelected() {
-		DebugDrawTile(pos);
-	}
+    void Update () {
+        if (Application.isPlaying)
+        {
+            transform.position = MapToWorld(pos);
+        }
+        else
+        {
+            transform.position = MapToWorld(Snap(MapToIso(transform.position)));
+            pos = MapToIso(transform.position);
+        }
+		spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y / tileSizeY);
+        var macroTile = MacroTile(pos);
+        macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);
+        spriteRenderer.sortingOrder += macroTileOrder * 1000;
+    }
 }

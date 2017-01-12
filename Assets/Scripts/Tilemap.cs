@@ -33,8 +33,8 @@ public class Tilemap : MonoBehaviour {
 			Vector3 pos = Iso.MapToIso(tile.transform.position);
 			pos.x -= tile.width / 2;
 			pos.y -= tile.height / 2;
-			for (int x = 0; x < tile.height; ++x) {
-				for (int y = 0; y < tile.width; ++y) {
+			for (int x = 0; x < tile.width; ++x) {
+				for (int y = 0; y < tile.height; ++y) {
 					Tilemap.instance[pos + new Vector3(x, y)] = tile.passable;
 				}
 			}

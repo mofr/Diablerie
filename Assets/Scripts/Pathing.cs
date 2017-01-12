@@ -120,9 +120,8 @@ public class Pathing {
 			openNodes.RemoveAt(0);
 			StepTo(node);
 			iterCount += 1;
-			if (iterCount > 1000) {
-				Debug.LogWarning("Too much path iterations");
-				Debug.Break();
+			if (iterCount > 100) {
+                TraverseBack(node);
 				break;
 			}
 		}

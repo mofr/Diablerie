@@ -111,7 +111,7 @@ Material:
       second: 0.02
     - first:
         name: _SelfIllum
-      second: 0.75
+      second: 1
     - first:
         name: _SmoothnessTextureChannel
       second: 0

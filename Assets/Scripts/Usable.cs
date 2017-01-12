@@ -20,18 +20,18 @@ public class Usable : MonoBehaviour {
 		if (!active)
 			return;
 		hot = this;
-		spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
+		spriteRenderer.material.SetFloat("_SelfIllum", 2.0f);
 	}
 
 	void OnMouseExit() {
 		if (!active)
 			return;
-		hot = null;
-		spriteRenderer.material.SetFloat("_SelfIllum", 0.75f);
-	}
+        hot = null;
+        spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
+    }
 
 	public void Use() {
 		SendMessage("OnUse");
-		hot = null;
-	}
+        hot = null;
+    }
 }
