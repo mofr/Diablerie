@@ -53,7 +53,9 @@ public class Tilemap : MonoBehaviour {
 		pos.y -= debugHeight / 2;
 		for (int x = 0; x < debugWidth; ++x) {
 			for (int y = 0; y < debugHeight; ++y) {
-				Iso.DebugDrawTile(pos + new Vector3(x, y), this[pos + new Vector3(x, y)] ? color: redColor, 0.9f);
+                bool passable = this[pos + new Vector3(x, y)];
+                if (!passable)
+                    Iso.DebugDrawTile(pos + new Vector3(x, y), passable ? color: redColor, 0.9f);
 			}
 		}
 	}
@@ -75,12 +77,13 @@ public class Tilemap : MonoBehaviour {
 
     void OnDrawGizmos()
     {
+        var cameraTile = Iso.MacroTile(Iso.MapToIso(Camera.current.transform.position));
         Gizmos.color = new Color(0.35f, 0.35f, 0.35f);
         for (int x = -10; x < 10; ++x)
         {
             for (int y = -10; y < 10; ++y)
             {
-                var pos = Iso.MapToWorld(new Vector3(x, y) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
+                var pos = Iso.MapToWorld(cameraTile + new Vector3(x, y) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
                 Gizmos.DrawRay(pos, new Vector3(20, 10));
                 Gizmos.DrawRay(pos, new Vector3(20, -10));
             }

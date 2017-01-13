@@ -187,6 +187,7 @@ MonoBehaviour:
   pos: {x: 45, y: -25}
   tilePos: {x: 45, y: -25}
   macroTileOrder: -4
+  macro: 0
 --- !u!1 &17858934
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +486,7 @@ MonoBehaviour:
   pos: {x: 40, y: -30}
   tilePos: {x: 40, y: -30}
   macroTileOrder: -2
+  macro: 0
 --- !u!1 &116819497
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +532,7 @@ MonoBehaviour:
   pos: {x: 30, y: -35}
   tilePos: {x: 30, y: -35}
   macroTileOrder: 1
+  macro: 0
 --- !u!114 &116819500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,7 +609,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 132879770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.6000004, y: -2, z: 0}
+  m_LocalPosition: {x: 4.6000013, y: -2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -623,9 +626,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 28, y: -32}
-  tilePos: {x: 28, y: -32}
-  macroTileOrder: 0
+  pos: {x: 30.000002, y: -35}
+  tilePos: {x: 30, y: -35}
+  macroTileOrder: 1
+  macro: 1
 --- !u!212 &132879773
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -656,7 +660,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1005
   m_Sprite: {fileID: 21300036, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -674,9 +678,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 2
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &133827309
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +726,7 @@ MonoBehaviour:
   pos: {x: 80, y: -35}
   tilePos: {x: 80, y: -35}
   macroTileOrder: -9
+  macro: 0
 --- !u!114 &133827312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,6 +823,7 @@ MonoBehaviour:
   pos: {x: 75, y: -35}
   tilePos: {x: 75, y: -35}
   macroTileOrder: -8
+  macro: 0
 --- !u!114 &164136415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +885,7 @@ GameObject:
   - component: {fileID: 211075620}
   - component: {fileID: 211075622}
   - component: {fileID: 211075621}
+  - component: {fileID: 211075623}
   m_Layer: 8
   m_Name: CatacombsWalls_26 (1)
   m_TagString: Untagged
@@ -893,7 +900,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 211075619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6000004, y: 1.0000001, z: 0}
+  m_LocalPosition: {x: 2.6000004, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -910,9 +917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 38, y: -11.999999}
-  tilePos: {x: 38, y: -12}
-  macroTileOrder: -6
+  pos: {x: 40, y: -15}
+  tilePos: {x: 40, y: -15}
+  macroTileOrder: -5
+  macro: 1
 --- !u!212 &211075622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -943,11 +951,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -6026
+  m_SortingOrder: -5025
   m_Sprite: {fileID: 21300052, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &211075623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 211075619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &211668847
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +1017,7 @@ MonoBehaviour:
   pos: {x: 80, y: -30}
   tilePos: {x: 80, y: -30}
   macroTileOrder: -10
+  macro: 0
 --- !u!114 &211668850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,6 +1114,7 @@ MonoBehaviour:
   pos: {x: 20, y: -10}
   tilePos: {x: 20, y: -10}
   macroTileOrder: -2
+  macro: 0
 --- !u!114 &217349043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,6 +1262,7 @@ MonoBehaviour:
   pos: {x: 45, y: -30}
   tilePos: {x: 45, y: -30}
   macroTileOrder: -3
+  macro: 0
 --- !u!1 &254922483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1359,7 @@ MonoBehaviour:
   pos: {x: 35, y: -20}
   tilePos: {x: 35, y: -20}
   macroTileOrder: -3
+  macro: 0
 --- !u!1 &260822547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,6 +1451,7 @@ GameObject:
   - component: {fileID: 263532982}
   - component: {fileID: 263532983}
   - component: {fileID: 263532984}
+  - component: {fileID: 263532985}
   m_Layer: 8
   m_Name: CatacombsWalls_10
   m_TagString: Untagged
@@ -1437,7 +1466,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 263532981}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.6000004, y: 3.5, z: 0}
+  m_LocalPosition: {x: 7.6000004, y: 3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -1473,7 +1502,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -11051
+  m_SortingOrder: -10050
   m_Sprite: {fileID: 21300020, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1489,9 +1518,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 63, y: -12}
-  tilePos: {x: 63, y: -12}
-  macroTileOrder: -11
+  pos: {x: 65, y: -15}
+  tilePos: {x: 65, y: -15}
+  macroTileOrder: -10
+  macro: 1
+--- !u!114 &263532985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 263532981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &269263719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1634,7 @@ MonoBehaviour:
   pos: {x: 75, y: -15}
   tilePos: {x: 75, y: -15}
   macroTileOrder: -12
+  macro: 0
 --- !u!1 &294149595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,6 +1680,7 @@ MonoBehaviour:
   pos: {x: 75, y: -10}
   tilePos: {x: 75, y: -10}
   macroTileOrder: -13
+  macro: 0
 --- !u!114 &294149598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1810,6 +1858,7 @@ MonoBehaviour:
   pos: {x: 20, y: -15}
   tilePos: {x: 20, y: -15}
   macroTileOrder: -1
+  macro: 0
 --- !u!114 &368711618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1906,6 +1955,7 @@ MonoBehaviour:
   pos: {x: 80, y: -15}
   tilePos: {x: 80, y: -15}
   macroTileOrder: -13
+  macro: 0
 --- !u!114 &374119167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2048,6 +2098,7 @@ GameObject:
   - component: {fileID: 385991483}
   - component: {fileID: 385991484}
   - component: {fileID: 385991485}
+  - component: {fileID: 385991486}
   m_Layer: 8
   m_Name: CatacombsWalls_17
   m_TagString: Untagged
@@ -2062,7 +2113,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 385991482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.6, y: 3, z: 0}
+  m_LocalPosition: {x: 12.600002, y: 2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -2098,7 +2149,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -10046
+  m_SortingOrder: -9045
   m_Sprite: {fileID: 21300034, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2114,105 +2165,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 78, y: -32}
-  tilePos: {x: 78, y: -32}
-  macroTileOrder: -10
---- !u!1 &387343858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 387343859}
-  - component: {fileID: 387343862}
-  - component: {fileID: 387343861}
-  - component: {fileID: 387343860}
-  m_Layer: 8
-  m_Name: CatacombsWalls_18 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &387343859
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 387343858}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.200001, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1088713869}
-  m_RootOrder: 31
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &387343860
+  pos: {x: 75, y: -30.000004}
+  tilePos: {x: 75, y: -30}
+  macroTileOrder: -9
+  macro: 1
+--- !u!114 &385991486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 387343858}
+  m_GameObject: {fileID: 385991482}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 0
-  width: 5
-  height: 3
-  offsetX: 2
+  width: 4
+  height: 5
+  offsetX: 1
   offsetY: 0
---- !u!114 &387343861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 387343858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pos: {x: 37, y: -46}
-  tilePos: {x: 37, y: -46}
-  macroTileOrder: 2
---- !u!212 &387343862
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 387343858}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 2009
-  m_Sprite: {fileID: 21300036, guid: 23b382e0b408f014086e111187aca624, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
 --- !u!1 &398968307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,6 +2281,7 @@ MonoBehaviour:
   pos: {x: 50, y: -25}
   tilePos: {x: 50, y: -25}
   macroTileOrder: -5
+  macro: 0
 --- !u!1 &399340730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2292,7 @@ GameObject:
   - component: {fileID: 399340731}
   - component: {fileID: 399340733}
   - component: {fileID: 399340732}
+  - component: {fileID: 399340734}
   m_Layer: 8
   m_Name: CatacombsWalls_26 (2)
   m_TagString: Untagged
@@ -2333,7 +2307,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 399340730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.39999962, y: 0, z: 0}
+  m_LocalPosition: {x: 0.6000004, y: -0.100000024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -2350,9 +2324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 28, y: -12}
-  tilePos: {x: 28, y: -12}
-  macroTileOrder: -4
+  pos: {x: 30, y: -15}
+  tilePos: {x: 30, y: -15}
+  macroTileOrder: -3
+  macro: 1
 --- !u!212 &399340733
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2383,11 +2358,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -4016
+  m_SortingOrder: -3015
   m_Sprite: {fileID: 21300052, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &399340734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 399340730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &401553346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,6 +2389,7 @@ GameObject:
   - component: {fileID: 401553347}
   - component: {fileID: 401553348}
   - component: {fileID: 401553349}
+  - component: {fileID: 401553350}
   m_Layer: 8
   m_Name: CatacombsWalls_23
   m_TagString: Untagged
@@ -2412,7 +2404,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 401553346}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.800001, y: 4.1000004, z: 0}
+  m_LocalPosition: {x: 8.6, y: 3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -2448,7 +2440,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -12057
+  m_SortingOrder: -11055
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2464,9 +2456,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 69.00001, y: -12}
-  tilePos: {x: 69, y: -12}
-  macroTileOrder: -12
+  pos: {x: 70, y: -15}
+  tilePos: {x: 70, y: -15}
+  macroTileOrder: -11
+  macro: 1
+--- !u!114 &401553350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 401553346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &425487388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,6 +2572,7 @@ MonoBehaviour:
   pos: {x: 50, y: -15}
   tilePos: {x: 50, y: -15}
   macroTileOrder: -7
+  macro: 0
 --- !u!1 &433819469
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,6 +2669,7 @@ MonoBehaviour:
   pos: {x: 25, y: -20}
   tilePos: {x: 25, y: -20}
   macroTileOrder: -1
+  macro: 0
 --- !u!1 &457108086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2715,7 @@ MonoBehaviour:
   pos: {x: 65, y: -10}
   tilePos: {x: 65, y: -10}
   macroTileOrder: -11
+  macro: 0
 --- !u!114 &457108089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2800,6 +2812,7 @@ MonoBehaviour:
   pos: {x: 70, y: -10}
   tilePos: {x: 70, y: -10}
   macroTileOrder: -12
+  macro: 0
 --- !u!114 &463357359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2896,6 +2909,7 @@ MonoBehaviour:
   pos: {x: 45, y: -10}
   tilePos: {x: 45, y: -10}
   macroTileOrder: -7
+  macro: 0
 --- !u!114 &478196478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,7 +2986,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 509109860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.800001, y: 1.6, z: 0}
+  m_LocalPosition: {x: 11.6, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -2989,9 +3003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 64, y: -32.000004}
-  tilePos: {x: 64, y: -32}
-  macroTileOrder: -7
+  pos: {x: 65, y: -35}
+  tilePos: {x: 65, y: -35}
+  macroTileOrder: -6
+  macro: 1
 --- !u!212 &509109863
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3022,7 +3037,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -7032
+  m_SortingOrder: -6030
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3040,9 +3055,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 3
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &542099246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3139,6 +3154,7 @@ MonoBehaviour:
   pos: {x: 55, y: -20}
   tilePos: {x: 55, y: -20}
   macroTileOrder: -7
+  macro: 0
 --- !u!1 &555829599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,6 +3200,7 @@ MonoBehaviour:
   pos: {x: 20, y: -25}
   tilePos: {x: 20, y: -25}
   macroTileOrder: 1
+  macro: 0
 --- !u!114 &555829602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3331,6 +3348,7 @@ MonoBehaviour:
   pos: {x: 70, y: -25}
   tilePos: {x: 70, y: -25}
   macroTileOrder: -9
+  macro: 0
 --- !u!1 &580854066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,7 +3374,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 580854066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.8000002, y: -2.4, z: 0}
+  m_LocalPosition: {x: 3.6000004, y: -2.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -3373,9 +3391,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23.999998, y: -32}
-  tilePos: {x: 24, y: -32}
-  macroTileOrder: 1
+  pos: {x: 25, y: -35}
+  tilePos: {x: 25, y: -35}
+  macroTileOrder: 2
+  macro: 1
 --- !u!212 &580854069
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3406,7 +3425,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1008
+  m_SortingOrder: 2010
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3424,9 +3443,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 2
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &598626112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,6 +3542,7 @@ MonoBehaviour:
   pos: {x: 55, y: -25}
   tilePos: {x: 55, y: -25}
   macroTileOrder: -6
+  macro: 0
 --- !u!1 &602448821
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,6 +3588,7 @@ MonoBehaviour:
   pos: {x: 60, y: -35}
   tilePos: {x: 60, y: -35}
   macroTileOrder: -5
+  macro: 0
 --- !u!114 &602448824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,6 +3685,7 @@ MonoBehaviour:
   pos: {x: 35, y: -10}
   tilePos: {x: 35, y: -10}
   macroTileOrder: -5
+  macro: 0
 --- !u!114 &644865373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3922,6 +3944,7 @@ MonoBehaviour:
   pos: {x: 25, y: -10}
   tilePos: {x: 25, y: -10}
   macroTileOrder: -3
+  macro: 0
 --- !u!114 &685510675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4018,6 +4041,7 @@ MonoBehaviour:
   pos: {x: 55, y: -10}
   tilePos: {x: 55, y: -10}
   macroTileOrder: -9
+  macro: 0
 --- !u!114 &696591528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4114,6 +4138,7 @@ MonoBehaviour:
   pos: {x: 55, y: -35}
   tilePos: {x: 55, y: -35}
   macroTileOrder: -4
+  macro: 0
 --- !u!114 &706562151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4175,6 +4200,7 @@ GameObject:
   - component: {fileID: 720681564}
   - component: {fileID: 720681566}
   - component: {fileID: 720681565}
+  - component: {fileID: 720681567}
   m_Layer: 8
   m_Name: CatacombsWalls_13
   m_TagString: Untagged
@@ -4189,7 +4215,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 720681563}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.39999962, y: -1, z: 0}
+  m_LocalPosition: {x: -1.3999996, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -4206,9 +4232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23, y: -17}
-  tilePos: {x: 23, y: -17}
-  macroTileOrder: -2
+  pos: {x: 20, y: -15}
+  tilePos: {x: 20, y: -15}
+  macroTileOrder: -1
+  macro: 1
 --- !u!212 &720681566
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4239,11 +4266,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -2006
+  m_SortingOrder: -1005
   m_Sprite: {fileID: 21300026, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &720681567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 720681563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0
 --- !u!1 &740800017
 GameObject:
   m_ObjectHideFlags: 0
@@ -4269,7 +4312,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 740800017}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.800001, y: 0.6, z: 0}
+  m_LocalPosition: {x: 9.6, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -4286,9 +4329,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 54, y: -32.000004}
-  tilePos: {x: 54, y: -32}
-  macroTileOrder: -5
+  pos: {x: 55, y: -35}
+  tilePos: {x: 55, y: -35}
+  macroTileOrder: -4
+  macro: 1
 --- !u!212 &740800020
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4319,7 +4363,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -5022
+  m_SortingOrder: -4020
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4337,9 +4381,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 2
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &762508406
 GameObject:
   m_ObjectHideFlags: 0
@@ -4350,6 +4394,7 @@ GameObject:
   - component: {fileID: 762508407}
   - component: {fileID: 762508408}
   - component: {fileID: 762508409}
+  - component: {fileID: 762508410}
   m_Layer: 8
   m_Name: CatacombsWalls_22
   m_TagString: Untagged
@@ -4364,7 +4409,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 762508406}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.6, y: 4, z: 0}
+  m_LocalPosition: {x: 10.6, y: 3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -4400,7 +4445,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -12056
+  m_SortingOrder: -11055
   m_Sprite: {fileID: 21300044, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4416,9 +4461,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 78, y: -22}
-  tilePos: {x: 78, y: -22}
-  macroTileOrder: -12
+  pos: {x: 75, y: -20}
+  tilePos: {x: 75, y: -20}
+  macroTileOrder: -11
+  macro: 1
+--- !u!114 &762508410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 762508406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0
 --- !u!1 &769012735
 GameObject:
   m_ObjectHideFlags: 0
@@ -4515,6 +4577,7 @@ MonoBehaviour:
   pos: {x: 45, y: -15}
   tilePos: {x: 45, y: -15}
   macroTileOrder: -6
+  macro: 0
 --- !u!1 &800900016
 GameObject:
   m_ObjectHideFlags: 0
@@ -4611,6 +4674,7 @@ MonoBehaviour:
   pos: {x: 60, y: -25}
   tilePos: {x: 60, y: -25}
   macroTileOrder: -7
+  macro: 0
 --- !u!1 &812986908
 GameObject:
   m_ObjectHideFlags: 0
@@ -4621,6 +4685,7 @@ GameObject:
   - component: {fileID: 812986909}
   - component: {fileID: 812986910}
   - component: {fileID: 812986911}
+  - component: {fileID: 812986912}
   m_Layer: 8
   m_Name: CatacombsWalls_24
   m_TagString: Untagged
@@ -4635,7 +4700,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 812986908}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6000004, y: 1.5000001, z: 0}
+  m_LocalPosition: {x: 3.6000004, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -4671,7 +4736,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -7031
+  m_SortingOrder: -6030
   m_Sprite: {fileID: 21300048, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4687,9 +4752,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 43, y: -11.999999}
-  tilePos: {x: 43, y: -12}
-  macroTileOrder: -7
+  pos: {x: 45, y: -15}
+  tilePos: {x: 45, y: -15}
+  macroTileOrder: -6
+  macro: 1
+--- !u!114 &812986912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812986908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &820751936
 GameObject:
   m_ObjectHideFlags: 0
@@ -4735,6 +4817,7 @@ MonoBehaviour:
   pos: {x: 70, y: -35}
   tilePos: {x: 70, y: -35}
   macroTileOrder: -7
+  macro: 0
 --- !u!114 &820751939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4963,6 +5046,7 @@ MonoBehaviour:
   pos: {x: 70, y: -20}
   tilePos: {x: 70, y: -20}
   macroTileOrder: -10
+  macro: 0
 --- !u!1 &849678368
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,6 +5143,7 @@ MonoBehaviour:
   pos: {x: 25, y: -15}
   tilePos: {x: 25, y: -15}
   macroTileOrder: -2
+  macro: 0
 --- !u!1 &860079355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5155,6 +5240,7 @@ MonoBehaviour:
   pos: {x: 75, y: -20}
   tilePos: {x: 75, y: -20}
   macroTileOrder: -11
+  macro: 0
 --- !u!1 &860545502
 GameObject:
   m_ObjectHideFlags: 0
@@ -5278,6 +5364,7 @@ GameObject:
   - component: {fileID: 868875192}
   - component: {fileID: 868875193}
   - component: {fileID: 868875194}
+  - component: {fileID: 868875195}
   m_Layer: 8
   m_Name: CatacombsWalls_4
   m_TagString: Untagged
@@ -5292,7 +5379,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868875191}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.6000004, y: 3, z: 0}
+  m_LocalPosition: {x: 6.6000004, y: 2.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -5328,7 +5415,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -10046
+  m_SortingOrder: -9045
   m_Sprite: {fileID: 21300008, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5344,9 +5431,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 58, y: -12}
-  tilePos: {x: 58, y: -12}
-  macroTileOrder: -10
+  pos: {x: 60, y: -15}
+  tilePos: {x: 60, y: -15}
+  macroTileOrder: -9
+  macro: 1
+--- !u!114 &868875195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868875191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 3
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &872361703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5357,6 +5461,7 @@ GameObject:
   - component: {fileID: 872361704}
   - component: {fileID: 872361706}
   - component: {fileID: 872361705}
+  - component: {fileID: 872361707}
   m_Layer: 8
   m_Name: CatacombsWalls_17
   m_TagString: Untagged
@@ -5371,7 +5476,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 872361703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6000004, y: -1.5, z: 0}
+  m_LocalPosition: {x: -0.39999962, y: -1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -5388,9 +5493,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23, y: -22}
-  tilePos: {x: 23, y: -22}
-  macroTileOrder: -1
+  pos: {x: 20, y: -20}
+  tilePos: {x: 20, y: -20}
+  macroTileOrder: 0
+  macro: 1
 --- !u!212 &872361706
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5421,11 +5527,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -1001
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300034, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &872361707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 872361703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0
 --- !u!1 &896308112
 GameObject:
   m_ObjectHideFlags: 0
@@ -5569,6 +5691,7 @@ MonoBehaviour:
   pos: {x: 5, y: -10}
   tilePos: {x: 5, y: -10}
   macroTileOrder: 1
+  macro: 0
 --- !u!114 &896308120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5758,6 +5881,7 @@ MonoBehaviour:
   pos: {x: 70, y: -15}
   tilePos: {x: 70, y: -15}
   macroTileOrder: -11
+  macro: 0
 --- !u!1 &950947869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5803,6 +5927,7 @@ MonoBehaviour:
   pos: {x: 80, y: -10}
   tilePos: {x: 80, y: -10}
   macroTileOrder: -14
+  macro: 0
 --- !u!114 &950947872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6031,6 +6156,7 @@ MonoBehaviour:
   pos: {x: 55, y: -30}
   tilePos: {x: 55, y: -30}
   macroTileOrder: -5
+  macro: 0
 --- !u!1 &976093492
 GameObject:
   m_ObjectHideFlags: 0
@@ -6041,6 +6167,7 @@ GameObject:
   - component: {fileID: 976093493}
   - component: {fileID: 976093494}
   - component: {fileID: 976093495}
+  - component: {fileID: 976093496}
   m_Layer: 8
   m_Name: CatacombsWalls_18
   m_TagString: Untagged
@@ -6055,7 +6182,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 976093492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.6000004, y: 2, z: 0}
+  m_LocalPosition: {x: 4.6000013, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -6091,7 +6218,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -8036
+  m_SortingOrder: -7035
   m_Sprite: {fileID: 21300036, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6107,9 +6234,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 48, y: -12}
-  tilePos: {x: 48, y: -12}
-  macroTileOrder: -8
+  pos: {x: 50, y: -15.000002}
+  tilePos: {x: 50, y: -15}
+  macroTileOrder: -7
+  macro: 1
+--- !u!114 &976093496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976093492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1009445700
 GameObject:
   m_ObjectHideFlags: 0
@@ -6135,7 +6279,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1009445700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.6000004, y: -1, z: 0}
+  m_LocalPosition: {x: 6.6000004, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -6152,9 +6296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 38, y: -32}
-  tilePos: {x: 38, y: -32}
-  macroTileOrder: -2
+  pos: {x: 40, y: -35}
+  tilePos: {x: 40, y: -35}
+  macroTileOrder: -1
+  macro: 1
 --- !u!212 &1009445703
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6185,7 +6330,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -2006
+  m_SortingOrder: -1005
   m_Sprite: {fileID: 21300020, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6203,9 +6348,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 3
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1023137137
 GameObject:
   m_ObjectHideFlags: 0
@@ -6231,7 +6376,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1023137137}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.6000004, y: 0, z: 0}
+  m_LocalPosition: {x: 8.6, y: -0.100000024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -6248,9 +6393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 48, y: -32}
-  tilePos: {x: 48, y: -32}
-  macroTileOrder: -4
+  pos: {x: 50, y: -35}
+  tilePos: {x: 50, y: -35}
+  macroTileOrder: -3
+  macro: 1
 --- !u!212 &1023137140
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6281,7 +6427,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -4016
+  m_SortingOrder: -3015
   m_Sprite: {fileID: 21300052, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6299,9 +6445,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 2
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1027851769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6398,6 +6544,7 @@ MonoBehaviour:
   pos: {x: 70, y: -30}
   tilePos: {x: 70, y: -30}
   macroTileOrder: -8
+  macro: 0
 --- !u!1 &1039088753
 GameObject:
   m_ObjectHideFlags: 0
@@ -6494,6 +6641,7 @@ MonoBehaviour:
   pos: {x: 40, y: -15}
   tilePos: {x: 40, y: -15}
   macroTileOrder: -5
+  macro: 0
 --- !u!1 &1046818752
 GameObject:
   m_ObjectHideFlags: 0
@@ -6590,6 +6738,7 @@ MonoBehaviour:
   pos: {x: 65, y: -20}
   tilePos: {x: 65, y: -20}
   macroTileOrder: -9
+  macro: 0
 --- !u!1 &1072933911
 GameObject:
   m_ObjectHideFlags: 0
@@ -6600,6 +6749,7 @@ GameObject:
   - component: {fileID: 1072933912}
   - component: {fileID: 1072933913}
   - component: {fileID: 1072933914}
+  - component: {fileID: 1072933915}
   m_Layer: 8
   m_Name: CatacombsWalls_25
   m_TagString: Untagged
@@ -6614,7 +6764,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1072933911}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.6, y: 3.5, z: 0}
+  m_LocalPosition: {x: 11.6, y: 3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -6650,7 +6800,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -11051
+  m_SortingOrder: -10050
   m_Sprite: {fileID: 21300050, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6666,9 +6816,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 78, y: -27}
-  tilePos: {x: 78, y: -27}
-  macroTileOrder: -11
+  pos: {x: 75, y: -25}
+  tilePos: {x: 75, y: -25}
+  macroTileOrder: -10
+  macro: 1
+--- !u!114 &1072933915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1072933911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0
 --- !u!1 &1078325033
 GameObject:
   m_ObjectHideFlags: 0
@@ -6765,6 +6932,7 @@ MonoBehaviour:
   pos: {x: 25, y: -25}
   tilePos: {x: 25, y: -25}
   macroTileOrder: 0
+  macro: 0
 --- !u!1 &1078591687
 GameObject:
   m_ObjectHideFlags: 0
@@ -6790,7 +6958,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1078591687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.6000004, y: -1.5, z: 0}
+  m_LocalPosition: {x: 5.6000004, y: -1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -6807,9 +6975,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 33, y: -32}
-  tilePos: {x: 33, y: -32}
-  macroTileOrder: -1
+  pos: {x: 35, y: -35}
+  tilePos: {x: 35, y: -35}
+  macroTileOrder: 0
+  macro: 1
 --- !u!212 &1078591690
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6840,7 +7009,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -1001
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300022, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6857,10 +7026,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 0
-  width: 5
+  width: 4
   height: 3
-  offsetX: 2
-  offsetY: 0
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1088713868
 GameObject:
   m_ObjectHideFlags: 0
@@ -6917,8 +7086,6 @@ Transform:
   - {fileID: 872361704}
   - {fileID: 1145288624}
   - {fileID: 2136189132}
-  - {fileID: 387343859}
-  - {fileID: 1980948942}
   m_Father: {fileID: 1903836869}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6967,6 +7134,7 @@ MonoBehaviour:
   pos: {x: 65, y: -35}
   tilePos: {x: 65, y: -35}
   macroTileOrder: -6
+  macro: 0
 --- !u!114 &1101656749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7063,6 +7231,7 @@ MonoBehaviour:
   pos: {x: 80, y: -20}
   tilePos: {x: 80, y: -20}
   macroTileOrder: -12
+  macro: 0
 --- !u!114 &1102470472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7139,7 +7308,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1109903205}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6000004, y: -2.5, z: 0}
+  m_LocalPosition: {x: 2.6000004, y: -3.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -7156,9 +7325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23, y: -32}
-  tilePos: {x: 23, y: -32}
-  macroTileOrder: 1
+  pos: {x: 20, y: -35}
+  tilePos: {x: 20, y: -35}
+  macroTileOrder: 3
+  macro: 1
 --- !u!212 &1109903208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7189,7 +7359,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1009
+  m_SortingOrder: 3015
   m_Sprite: {fileID: 21300002, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7206,10 +7376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passable: 0
-  width: 3
-  height: 3
-  offsetX: 0
-  offsetY: 0
+  width: 4
+  height: 4
+  offsetX: 1
+  offsetY: 1
 --- !u!1 &1117856803
 GameObject:
   m_ObjectHideFlags: 0
@@ -7255,6 +7425,7 @@ MonoBehaviour:
   pos: {x: 20, y: -35}
   tilePos: {x: 20, y: -35}
   macroTileOrder: 3
+  macro: 0
 --- !u!114 &1117856806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7487,6 +7658,7 @@ MonoBehaviour:
   pos: {x: 10, y: -5}
   tilePos: {x: 10, y: -5}
   macroTileOrder: -1
+  macro: 0
 --- !u!61 &1142534573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7551,6 +7723,7 @@ GameObject:
   - component: {fileID: 1145288624}
   - component: {fileID: 1145288626}
   - component: {fileID: 1145288625}
+  - component: {fileID: 1145288627}
   m_Layer: 8
   m_Name: CatacombsWalls_25
   m_TagString: Untagged
@@ -7565,7 +7738,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1145288623}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6000004, y: -2, z: 0}
+  m_LocalPosition: {x: 0.6000004, y: -2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -7582,9 +7755,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23, y: -27}
-  tilePos: {x: 23, y: -27}
-  macroTileOrder: 0
+  pos: {x: 20, y: -25}
+  tilePos: {x: 20, y: -25}
+  macroTileOrder: 1
+  macro: 1
 --- !u!212 &1145288626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7615,11 +7789,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1005
   m_Sprite: {fileID: 21300050, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1145288627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1145288623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0
 --- !u!1 &1145679205
 GameObject:
   m_ObjectHideFlags: 0
@@ -7711,6 +7901,7 @@ GameObject:
   - component: {fileID: 1153047676}
   - component: {fileID: 1153047678}
   - component: {fileID: 1153047677}
+  - component: {fileID: 1153047679}
   m_Layer: 8
   m_Name: CatacombsWalls_26
   m_TagString: Untagged
@@ -7725,7 +7916,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1153047675}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.3999996, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.39999962, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -7742,9 +7933,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23, y: -12}
-  tilePos: {x: 23, y: -12}
-  macroTileOrder: -3
+  pos: {x: 25, y: -15}
+  tilePos: {x: 25, y: -15}
+  macroTileOrder: -2
+  macro: 1
 --- !u!212 &1153047678
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7775,11 +7967,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -3011
+  m_SortingOrder: -2010
   m_Sprite: {fileID: 21300052, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1153047679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1153047675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1173199665
 GameObject:
   m_ObjectHideFlags: 0
@@ -7957,6 +8165,7 @@ MonoBehaviour:
   pos: {x: 60, y: -30}
   tilePos: {x: 60, y: -30}
   macroTileOrder: -6
+  macro: 0
 --- !u!1 &1203505178
 GameObject:
   m_ObjectHideFlags: 0
@@ -7982,7 +8191,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1203505178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.6, y: 1.0000001, z: 0}
+  m_LocalPosition: {x: 10.6, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -7999,9 +8208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 58, y: -31.999998}
-  tilePos: {x: 58, y: -32}
-  macroTileOrder: -6
+  pos: {x: 60, y: -35}
+  tilePos: {x: 60, y: -35}
+  macroTileOrder: -5
+  macro: 1
 --- !u!212 &1203505181
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8032,7 +8242,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -6026
+  m_SortingOrder: -5025
   m_Sprite: {fileID: 21300042, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8050,9 +8260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 3
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1211973647
 GameObject:
   m_ObjectHideFlags: 0
@@ -8230,102 +8440,7 @@ MonoBehaviour:
   pos: {x: 50, y: -20}
   tilePos: {x: 50, y: -20}
   macroTileOrder: -6
---- !u!1 &1247828446
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1247828447}
-  - component: {fileID: 1247828450}
-  - component: {fileID: 1247828449}
-  - component: {fileID: 1247828448}
-  m_Layer: 0
-  m_Name: CatacombsFloor_16 (36)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1247828447
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1247828446}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.6000004, y: -3.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1300062094}
-  m_RootOrder: 78
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1247828448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1247828446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pos: {x: 30, y: -50}
-  tilePos: {x: 30, y: -50}
-  macroTileOrder: 4
---- !u!114 &1247828449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1247828446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passable: 1
-  width: 5
-  height: 5
-  offsetX: 0
-  offsetY: 0
---- !u!212 &1247828450
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1247828446}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 237075421
-  m_SortingOrder: 4020
-  m_Sprite: {fileID: 21300032, guid: e6ac8a0a6bc77f44398f9d943b8b463d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
+  macro: 0
 --- !u!1 &1251164057
 GameObject:
   m_ObjectHideFlags: 0
@@ -8371,6 +8486,7 @@ MonoBehaviour:
   pos: {x: 35, y: -35}
   tilePos: {x: 35, y: -35}
   macroTileOrder: 0
+  macro: 0
 --- !u!114 &1251164060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8518,6 +8634,7 @@ MonoBehaviour:
   pos: {x: 65, y: -25}
   tilePos: {x: 65, y: -25}
   macroTileOrder: -8
+  macro: 0
 --- !u!1 &1289994031
 GameObject:
   m_ObjectHideFlags: 0
@@ -8614,6 +8731,7 @@ MonoBehaviour:
   pos: {x: 75, y: -25}
   tilePos: {x: 75, y: -25}
   macroTileOrder: -10
+  macro: 0
 --- !u!1 &1300062093
 GameObject:
   m_ObjectHideFlags: 0
@@ -8717,7 +8835,6 @@ Transform:
   - {fileID: 820751937}
   - {fileID: 602448822}
   - {fileID: 1101656747}
-  - {fileID: 1247828447}
   m_Father: {fileID: 1903836869}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8766,6 +8883,7 @@ MonoBehaviour:
   pos: {x: 25, y: -35}
   tilePos: {x: 25, y: -35}
   macroTileOrder: 2
+  macro: 0
 --- !u!114 &1304242923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8913,6 +9031,7 @@ MonoBehaviour:
   pos: {x: 35, y: -30}
   tilePos: {x: 35, y: -30}
   macroTileOrder: -1
+  macro: 0
 --- !u!1 &1356202376
 GameObject:
   m_ObjectHideFlags: 0
@@ -9009,6 +9128,7 @@ MonoBehaviour:
   pos: {x: 60, y: -20}
   tilePos: {x: 60, y: -20}
   macroTileOrder: -8
+  macro: 0
 --- !u!1 &1360600716
 GameObject:
   m_ObjectHideFlags: 0
@@ -9105,6 +9225,7 @@ MonoBehaviour:
   pos: {x: 30, y: -20}
   tilePos: {x: 30, y: -20}
   macroTileOrder: -2
+  macro: 0
 --- !u!1 &1369431796
 GameObject:
   m_ObjectHideFlags: 0
@@ -9208,6 +9329,7 @@ MonoBehaviour:
   pos: {x: 52.000004, y: -16}
   tilePos: {x: 52, y: -16}
   macroTileOrder: -7
+  macro: 0
 --- !u!114 &1369431803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9326,7 +9448,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 4016
+  m_SortingOrder: -4
   m_Sprite: {fileID: 21300112, guid: 9d37f7b0bb054584d867b2e407d9359f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9338,7 +9460,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1392636078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: -1.6, z: 0}
+  m_LocalPosition: {x: 14, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9368,9 +9490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 32, y: -48}
-  tilePos: {x: 31, y: -49}
-  macroTileOrder: 4
+  pos: {x: 37, y: -33}
+  tilePos: {x: 37, y: -33}
+  macroTileOrder: 0
+  macro: 0
 --- !u!114 &1392636084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9478,6 +9601,7 @@ MonoBehaviour:
   pos: {x: 60, y: -15}
   tilePos: {x: 60, y: -15}
   macroTileOrder: -9
+  macro: 0
 --- !u!1 &1432112358
 GameObject:
   m_ObjectHideFlags: 0
@@ -9655,6 +9779,7 @@ MonoBehaviour:
   pos: {x: 65, y: -30}
   tilePos: {x: 65, y: -30}
   macroTileOrder: -7
+  macro: 0
 --- !u!1 &1475989575
 GameObject:
   m_ObjectHideFlags: 0
@@ -9832,6 +9957,7 @@ MonoBehaviour:
   pos: {x: 45, y: -20}
   tilePos: {x: 45, y: -20}
   macroTileOrder: -5
+  macro: 0
 --- !u!1 &1500859975
 GameObject:
   m_ObjectHideFlags: 0
@@ -9842,6 +9968,7 @@ GameObject:
   - component: {fileID: 1500859977}
   - component: {fileID: 1500859976}
   - component: {fileID: 1500859978}
+  - component: {fileID: 1500859979}
   m_Layer: 8
   m_Name: CatacombsWalls_28
   m_TagString: Untagged
@@ -9879,7 +10006,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -13061
+  m_SortingOrder: -12060
   m_Sprite: {fileID: 21300056, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9891,7 +10018,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1500859975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.6, y: 4.5, z: 0}
+  m_LocalPosition: {x: 9.6, y: 4.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -9908,9 +10035,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 73, y: -12}
-  tilePos: {x: 73, y: -12}
-  macroTileOrder: -13
+  pos: {x: 75, y: -15}
+  tilePos: {x: 75, y: -15}
+  macroTileOrder: -12
+  macro: 1
+--- !u!114 &1500859979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1500859975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1505337866
 GameObject:
   m_ObjectHideFlags: 0
@@ -10007,6 +10151,7 @@ MonoBehaviour:
   pos: {x: 25, y: -30}
   tilePos: {x: 25, y: -30}
   macroTileOrder: 1
+  macro: 0
 --- !u!1 &1512707792
 GameObject:
   m_ObjectHideFlags: 0
@@ -10052,6 +10197,7 @@ MonoBehaviour:
   pos: {x: 50, y: -10}
   tilePos: {x: 50, y: -10}
   macroTileOrder: -8
+  macro: 0
 --- !u!114 &1512707795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10148,6 +10294,7 @@ MonoBehaviour:
   pos: {x: 20, y: -30}
   tilePos: {x: 20, y: -30}
   macroTileOrder: 2
+  macro: 0
 --- !u!114 &1520619886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10244,6 +10391,7 @@ MonoBehaviour:
   pos: {x: 60, y: -10}
   tilePos: {x: 60, y: -10}
   macroTileOrder: -10
+  macro: 0
 --- !u!114 &1533853718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10305,6 +10453,7 @@ GameObject:
   - component: {fileID: 1582433325}
   - component: {fileID: 1582433326}
   - component: {fileID: 1582433327}
+  - component: {fileID: 1582433328}
   m_Layer: 8
   m_Name: CatacombsWalls_23
   m_TagString: Untagged
@@ -10319,7 +10468,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582433324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.8, y: 2.6000004, z: 0}
+  m_LocalPosition: {x: 5.6000004, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -10355,7 +10504,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -9042
+  m_SortingOrder: -8040
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10371,9 +10520,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 54, y: -11.999998}
-  tilePos: {x: 54, y: -12}
-  macroTileOrder: -9
+  pos: {x: 55, y: -15}
+  tilePos: {x: 55, y: -15}
+  macroTileOrder: -8
+  macro: 1
+--- !u!114 &1582433328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1582433324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1607945261
 GameObject:
   m_ObjectHideFlags: 0
@@ -10500,6 +10666,7 @@ MonoBehaviour:
   pos: {x: 80, y: -25}
   tilePos: {x: 80, y: -25}
   macroTileOrder: -11
+  macro: 0
 --- !u!114 &1634329775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10647,6 +10814,7 @@ MonoBehaviour:
   pos: {x: 30, y: -25}
   tilePos: {x: 30, y: -25}
   macroTileOrder: -1
+  macro: 0
 --- !u!1 &1647660460
 GameObject:
   m_ObjectHideFlags: 0
@@ -10743,6 +10911,7 @@ MonoBehaviour:
   pos: {x: 30, y: -15}
   tilePos: {x: 30, y: -15}
   macroTileOrder: -3
+  macro: 0
 --- !u!1 &1653672784
 GameObject:
   m_ObjectHideFlags: 0
@@ -10788,6 +10957,7 @@ MonoBehaviour:
   pos: {x: 50, y: -35}
   tilePos: {x: 50, y: -35}
   macroTileOrder: -3
+  macro: 0
 --- !u!114 &1653672787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10935,6 +11105,7 @@ MonoBehaviour:
   pos: {x: 40, y: -20}
   tilePos: {x: 40, y: -20}
   macroTileOrder: -4
+  macro: 0
 --- !u!1 &1690734381
 GameObject:
   m_ObjectHideFlags: 0
@@ -11026,6 +11197,7 @@ GameObject:
   - component: {fileID: 1696313856}
   - component: {fileID: 1696313855}
   - component: {fileID: 1696313857}
+  - component: {fileID: 1696313858}
   m_Layer: 8
   m_Name: CatacombsWalls_27
   m_TagString: Untagged
@@ -11063,7 +11235,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -13061
+  m_SortingOrder: -12060
   m_Sprite: {fileID: 21300054, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11075,7 +11247,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1696313854}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.6, y: 4.5, z: 0}
+  m_LocalPosition: {x: 9.6, y: 4.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -11092,9 +11264,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 78, y: -17}
-  tilePos: {x: 78, y: -17}
-  macroTileOrder: -13
+  pos: {x: 75, y: -15}
+  tilePos: {x: 75, y: -15}
+  macroTileOrder: -12
+  macro: 1
+--- !u!114 &1696313858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1696313854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0
 --- !u!1 &1708189524
 GameObject:
   m_ObjectHideFlags: 0
@@ -11272,6 +11461,7 @@ MonoBehaviour:
   pos: {x: 65, y: -15}
   tilePos: {x: 65, y: -15}
   macroTileOrder: -10
+  macro: 0
 --- !u!1 &1734859586
 GameObject:
   m_ObjectHideFlags: 0
@@ -11297,7 +11487,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1734859586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.8, y: -0.39999998, z: 0}
+  m_LocalPosition: {x: 7.6000004, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -11314,9 +11504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 44, y: -31.999998}
-  tilePos: {x: 44, y: -32}
-  macroTileOrder: -3
+  pos: {x: 45, y: -35}
+  tilePos: {x: 45, y: -35}
+  macroTileOrder: -2
+  macro: 1
 --- !u!212 &1734859589
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11347,7 +11538,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -3012
+  m_SortingOrder: -2010
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11365,9 +11556,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 2
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1740556119
 GameObject:
   m_ObjectHideFlags: 0
@@ -11494,6 +11685,7 @@ MonoBehaviour:
   pos: {x: 20, y: -20}
   tilePos: {x: 20, y: -20}
   macroTileOrder: 0
+  macro: 0
 --- !u!114 &1765116156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11641,6 +11833,7 @@ MonoBehaviour:
   pos: {x: 55, y: -15}
   tilePos: {x: 55, y: -15}
   macroTileOrder: -8
+  macro: 0
 --- !u!1 &1822124296
 GameObject:
   m_ObjectHideFlags: 0
@@ -11686,6 +11879,7 @@ MonoBehaviour:
   pos: {x: 40, y: -35}
   tilePos: {x: 40, y: -35}
   macroTileOrder: -1
+  macro: 0
 --- !u!114 &1822124299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11833,6 +12027,7 @@ MonoBehaviour:
   pos: {x: 30, y: -30}
   tilePos: {x: 30, y: -30}
   macroTileOrder: 0
+  macro: 0
 --- !u!1 &1844235809
 GameObject:
   m_ObjectHideFlags: 0
@@ -11858,7 +12053,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1844235809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.6, y: 2.5, z: 0}
+  m_LocalPosition: {x: 13.6, y: 2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -11875,9 +12070,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 73, y: -32}
-  tilePos: {x: 73, y: -32}
-  macroTileOrder: -9
+  pos: {x: 75, y: -35}
+  tilePos: {x: 75, y: -35}
+  macroTileOrder: -8
+  macro: 1
 --- !u!212 &1844235812
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11908,7 +12104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -9041
+  m_SortingOrder: -8040
   m_Sprite: {fileID: 21300032, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11926,9 +12122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 3
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &1859398374
 GameObject:
   m_ObjectHideFlags: 0
@@ -12074,6 +12270,7 @@ MonoBehaviour:
   pos: {x: 30, y: -10}
   tilePos: {x: 30, y: -10}
   macroTileOrder: -4
+  macro: 0
 --- !u!114 &1879148106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12332,6 +12529,7 @@ MonoBehaviour:
   pos: {x: 35, y: -25}
   tilePos: {x: 35, y: -25}
   macroTileOrder: -2
+  macro: 0
 --- !u!1 &1977236169
 GameObject:
   m_ObjectHideFlags: 0
@@ -12377,6 +12575,7 @@ MonoBehaviour:
   pos: {x: 40, y: -10}
   tilePos: {x: 40, y: -10}
   macroTileOrder: -6
+  macro: 0
 --- !u!114 &1977236172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12425,102 +12624,6 @@ SpriteRenderer:
   m_SortingLayerID: 237075421
   m_SortingOrder: -6030
   m_Sprite: {fileID: 21300032, guid: e6ac8a0a6bc77f44398f9d943b8b463d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!1 &1980948941
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1980948942}
-  - component: {fileID: 1980948945}
-  - component: {fileID: 1980948944}
-  - component: {fileID: 1980948943}
-  m_Layer: 8
-  m_Name: CatacombsWalls_23 (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1980948942
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1980948941}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.4000006, y: -3.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1088713869}
-  m_RootOrder: 32
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1980948943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1980948941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passable: 0
-  width: 5
-  height: 3
-  offsetX: 2
-  offsetY: 0
---- !u!114 &1980948944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1980948941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pos: {x: 28, y: -46}
-  tilePos: {x: 28, y: -46}
-  macroTileOrder: 3
---- !u!212 &1980948945
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1980948941}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 3018
-  m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12754,6 +12857,7 @@ MonoBehaviour:
   pos: {x: 35, y: -15}
   tilePos: {x: 35, y: -15}
   macroTileOrder: -4
+  macro: 0
 --- !u!1 &2031213086
 GameObject:
   m_ObjectHideFlags: 0
@@ -12799,6 +12903,7 @@ MonoBehaviour:
   pos: {x: 45, y: -35}
   tilePos: {x: 45, y: -35}
   macroTileOrder: -2
+  macro: 0
 --- !u!114 &2031213089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12946,6 +13051,7 @@ MonoBehaviour:
   pos: {x: 50, y: -30}
   tilePos: {x: 50, y: -30}
   macroTileOrder: -4
+  macro: 0
 --- !u!1 &2079360485
 GameObject:
   m_ObjectHideFlags: 0
@@ -13042,6 +13148,7 @@ MonoBehaviour:
   pos: {x: 75, y: -30}
   tilePos: {x: 75, y: -30}
   macroTileOrder: -9
+  macro: 0
 --- !u!1 &2087352451
 GameObject:
   m_ObjectHideFlags: 0
@@ -13067,7 +13174,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2087352451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.6, y: 2, z: 0}
+  m_LocalPosition: {x: 12.600002, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -13084,9 +13191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 68, y: -32}
-  tilePos: {x: 68, y: -32}
-  macroTileOrder: -8
+  pos: {x: 70, y: -35.000004}
+  tilePos: {x: 70, y: -35}
+  macroTileOrder: -7
+  macro: 1
 --- !u!212 &2087352454
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13117,7 +13225,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -8036
+  m_SortingOrder: -7035
   m_Sprite: {fileID: 21300048, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -13135,9 +13243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passable: 0
   width: 5
-  height: 3
-  offsetX: 3
-  offsetY: 0
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &2105332663
 GameObject:
   m_ObjectHideFlags: 0
@@ -13310,6 +13418,7 @@ GameObject:
   - component: {fileID: 2121953231}
   - component: {fileID: 2121953233}
   - component: {fileID: 2121953232}
+  - component: {fileID: 2121953234}
   m_Layer: 8
   m_Name: CatacombsWalls_23
   m_TagString: Untagged
@@ -13324,7 +13433,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2121953230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8000002, y: 0.6, z: 0}
+  m_LocalPosition: {x: 1.6000004, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -13341,9 +13450,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 34, y: -11.999999}
-  tilePos: {x: 34, y: -12}
-  macroTileOrder: -5
+  pos: {x: 35, y: -15}
+  tilePos: {x: 35, y: -15}
+  macroTileOrder: -4
+  macro: 1
 --- !u!212 &2121953233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13374,11 +13484,27 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: -5022
+  m_SortingOrder: -4020
   m_Sprite: {fileID: 21300046, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &2121953234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2121953230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 5
+  height: 4
+  offsetX: 0
+  offsetY: 1
 --- !u!1 &2125287585
 GameObject:
   m_ObjectHideFlags: 0
@@ -13475,6 +13601,7 @@ MonoBehaviour:
   pos: {x: 40, y: -25}
   tilePos: {x: 40, y: -25}
   macroTileOrder: -3
+  macro: 0
 --- !u!1 &2136189131
 GameObject:
   m_ObjectHideFlags: 0
@@ -13485,6 +13612,7 @@ GameObject:
   - component: {fileID: 2136189132}
   - component: {fileID: 2136189134}
   - component: {fileID: 2136189133}
+  - component: {fileID: 2136189135}
   m_Layer: 8
   m_Name: CatacombsWalls_25 (1)
   m_TagString: Untagged
@@ -13499,7 +13627,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2136189131}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6000004, y: -2.5, z: 0}
+  m_LocalPosition: {x: 1.6000004, y: -2.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1088713869}
@@ -13516,9 +13644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffda8165787be4e8b771609419c699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 23, y: -32}
-  tilePos: {x: 23, y: -32}
-  macroTileOrder: 1
+  pos: {x: 20, y: -30}
+  tilePos: {x: 20, y: -30}
+  macroTileOrder: 2
+  macro: 1
 --- !u!212 &2136189134
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13549,8 +13678,24 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1009
+  m_SortingOrder: 2010
   m_Sprite: {fileID: 21300050, guid: 23b382e0b408f014086e111187aca624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &2136189135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2136189131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bbc0479df528d428d25c766a266d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passable: 0
+  width: 4
+  height: 5
+  offsetX: 1
+  offsetY: 0

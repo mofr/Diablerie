@@ -13,6 +13,7 @@ public class Iso : MonoBehaviour {
 	public Vector2 tilePos;
 	SpriteRenderer spriteRenderer;
     public int macroTileOrder;
+    public bool macro = false;
 
 	static public Vector3 MapToWorld(Vector3 iso) {
 		return new Vector3(iso.x - iso.y, (iso.x + iso.y) / 2) * tileSize;
@@ -85,7 +86,14 @@ public class Iso : MonoBehaviour {
         }
         else
         {
-            transform.position = MapToWorld(Snap(MapToIso(transform.position)));
+            if (macro)
+            {
+                transform.position = MapToWorld(MacroTile(MapToIso(transform.position))) * 5;
+            }
+            else
+            {
+                transform.position = MapToWorld(Snap(MapToIso(transform.position)));
+            }
             pos = MapToIso(transform.position);
         }
 		spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y / tileSizeY);
