@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
+[RequireComponent(typeof(Iso))]
 public class Tile : MonoBehaviour {
 
 	public bool passable = true;

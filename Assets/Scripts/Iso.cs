@@ -11,9 +11,10 @@ public class Iso : MonoBehaviour {
     static public float tileSizeY = tileSize / 2;
     public Vector2 pos;
 	public Vector2 tilePos;
-	SpriteRenderer spriteRenderer;
-    public int macroTileOrder;
     public bool macro = false;
+	public bool sort = true;
+
+	SpriteRenderer spriteRenderer;
 
 	static public Vector3 MapToWorld(Vector3 iso) {
 		return new Vector3(iso.x - iso.y, (iso.x + iso.y) / 2) * tileSize;
@@ -93,9 +94,11 @@ public class Iso : MonoBehaviour {
             pos = MapToIso(transform.position);
         }
 
-		spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y / tileSizeY);
-        var macroTile = MacroTile(pos);
-        macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);
-        spriteRenderer.sortingOrder += macroTileOrder * 1000;
+		if (sort) {
+			spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y / tileSizeY);
+			var macroTile = MacroTile(pos);
+			int macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);
+			spriteRenderer.sortingOrder += macroTileOrder * 1000;
+		}
     }
 }
