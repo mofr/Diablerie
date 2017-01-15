@@ -19,6 +19,7 @@ public class Character : MonoBehaviour {
 	Animator animator;
 	List<Pathing.Step> path = new List<Pathing.Step>();
 	float traveled = 0;
+	int targetDirection = 0;
 
 	void Start() {
 		iso = GetComponent<Iso>();
@@ -47,7 +48,6 @@ public class Character : MonoBehaviour {
 		}
 
 		path.AddRange(Pathing.BuildPath(Iso.Snap(startPos), target, directionCount));
-		UpdateAnimation();
 	}
 
 	public void Teleport(Vector2 target) {
@@ -63,7 +63,6 @@ public class Character : MonoBehaviour {
 		}
 		path.Clear();
 		traveled = 0;
-		UpdateAnimation();
 	}
 
 	void Update() {
@@ -76,6 +75,8 @@ public class Character : MonoBehaviour {
 			usable.Use();
 			usable = null;
 		}
+
+		UpdateAnimation();
 	}
 
 	void Move() {
@@ -93,7 +94,6 @@ public class Character : MonoBehaviour {
 			traveled += firstPart - stepLen;
 			iso.tilePos += step;
 			path.RemoveAt(0);
-			UpdateAnimation();
 			if (path.Count > 0)
 				step = path[0].direction;
 		}
@@ -116,7 +116,12 @@ public class Character : MonoBehaviour {
 		}
 		else {
 			animation = run ? "Run" : "Walk";
-			direction = path[0].directionIndex;
+			targetDirection = path[0].directionIndex;
+		}
+
+		if (direction != targetDirection) {
+			int diff = (int)Mathf.Sign(Tools.ShortestDelta(direction, targetDirection, directionCount));
+			direction = (direction + diff + directionCount) % directionCount;
 		}
 
 		animation += direction.ToString();
