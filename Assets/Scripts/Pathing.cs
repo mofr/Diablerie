@@ -14,6 +14,7 @@ public class Pathing {
 	static private List<Step> path = new List<Step>();
 
 	class Node : IEquatable<Node>, IComparable<Node> {
+		public float gScore;
 		public float score;
 		public Vector2 pos;
 		public Node parent;
@@ -74,7 +75,8 @@ public class Pathing {
 					newNode.parent = node;
 					newNode.direction = direction;
 					newNode.directionIndex = i;
-					newNode.score = CalcScore(target, newNode);
+					newNode.gScore = node.gScore + direction.magnitude;
+					newNode.score = newNode.gScore + Vector2.Distance(target, newNode.pos);
 					openNodes.Add(newNode);
 					newNode = null;
 				}
@@ -83,10 +85,6 @@ public class Pathing {
 
 		if (newNode != null)
 			newNode.Recycle();
-	}
-
-	static private float CalcScore(Vector2 src, Node target) {
-		return target.direction.magnitude + Vector2.Distance(src, target.pos);
 	}
 
 	static private void TraverseBack(Node node) {
@@ -111,6 +109,7 @@ public class Pathing {
 		Node startNode = Node.Get();
 		startNode.parent = null;
 		startNode.pos = from;
+		startNode.gScore = 0;
 		startNode.score = 999;
 		openNodes.Add(startNode);
 		int iterCount = 0;
