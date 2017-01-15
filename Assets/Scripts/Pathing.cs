@@ -7,6 +7,7 @@ public class Pathing {
 
 	public struct Step {
 		public Vector2 direction;
+		public int directionIndex;
 		public Vector2 pos;
 	}
 
@@ -17,6 +18,7 @@ public class Pathing {
 		public Vector2 pos;
 		public Node parent;
 		public Vector2 direction;
+		public int directionIndex;
 
 		private Node() {
 		}
@@ -53,22 +55,26 @@ public class Pathing {
 	static private Vector2 target;
 	static private List<Node> openNodes = new List<Node>();
 	static private List<Node> closeNodes = new List<Node>();
-	static private Vector2[] directions = { new Vector2(1, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(-1, 0), new Vector2(0, -1), new Vector2(-1, -1), new Vector2(1, -1), new Vector2(-1, 1) };
+	static private Vector2[] directions;
+	static private Vector2[] directions8 = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1) };
+	static private Vector2[] directions16 = { new Vector2(-1, -1), new Vector2(-2, -1), new Vector2(-1, 0), new Vector2(-2, 1), new Vector2(-1, 1), new Vector2(-1, 2), new Vector2(0, 1), new Vector2(1, 2), new Vector2(1, 1), new Vector2(2, 1), new Vector2(1, 0), new Vector2(2, -1), new Vector2(1, -1), new Vector2(1, -2), new Vector2(0, -1), new Vector2(-1, -2) };
 
 	static private void StepTo(Node node) {
 		closeNodes.Add(node);
 		Node newNode = null;
 
-		foreach (Vector2 direction in directions) {
+		for (int i = 0; i < directions.Length; ++i) {
+			Vector2 direction = directions[i];
 			Vector2 pos = node.pos + direction;
 			if (Tilemap.instance[pos]) {
 				if (newNode == null)
 					newNode = Node.Get();
 				newNode.pos = pos;
 				if (!closeNodes.Contains(newNode) && !openNodes.Contains(newNode)) {
-					newNode.score = CalcScore(target, newNode.pos);
 					newNode.parent = node;
 					newNode.direction = direction;
+					newNode.directionIndex = i;
+					newNode.score = CalcScore(target, newNode);
 					openNodes.Add(newNode);
 					newNode = null;
 				}
@@ -79,21 +85,23 @@ public class Pathing {
 			newNode.Recycle();
 	}
 
-	static private float CalcScore(Vector2 src, Vector2 target) {
-		return 1 + Vector2.Distance(src, target);
+	static private float CalcScore(Vector2 src, Node target) {
+		return target.direction.magnitude + Vector2.Distance(src, target.pos);
 	}
 
 	static private void TraverseBack(Node node) {
 		while (node.parent != null) {
 			Step step = new Step();
 			step.direction = node.direction;
+			step.directionIndex = node.directionIndex;
 			step.pos = node.pos;
 			path.Insert(0, step);
 			node = node.parent;
 		}
 	}
 
-	static public List<Step> BuildPath(Vector2 from, Vector2 target) {
+	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8) {
+		directions = directionCount == 8 ? directions8 : directions16;
 		Pathing.target = target;
 		Node.Recycle(openNodes);
 		Node.Recycle(closeNodes);
@@ -103,7 +111,7 @@ public class Pathing {
 		Node startNode = Node.Get();
 		startNode.parent = null;
 		startNode.pos = from;
-		startNode.score = CalcScore(from, target);
+		startNode.score = 999;
 		openNodes.Add(startNode);
 		int iterCount = 0;
 		while (openNodes.Count > 0) {

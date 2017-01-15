@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+	public int directionCount = 8;
+	public float speed = 3.5f;
+	public bool run = false;
+
+	[HideInInspector]
+	public Usable usable;
+
+	[HideInInspector]
+	public int direction = 0;
+
 	Iso iso;
 	Animator animator;
-	public int direction = 0;
-	static public float speed = 3.5f;
 	List<Pathing.Step> path = new List<Pathing.Step>();
-	public Usable usable;
 	float traveled = 0;
 
 	void Start() {
@@ -39,7 +46,7 @@ public class Character : MonoBehaviour {
 			traveled = 0;
 		}
 
-		path.AddRange(Pathing.BuildPath(Iso.Snap(startPos), target));
+		path.AddRange(Pathing.BuildPath(Iso.Snap(startPos), target, directionCount));
 		UpdateAnimation();
 	}
 
@@ -48,7 +55,7 @@ public class Character : MonoBehaviour {
 			iso.pos = target;
 			iso.tilePos = target;
 		} else {
-			var pathToTarget = Pathing.BuildPath(Iso.Snap(iso.tilePos), target);
+			var pathToTarget = Pathing.BuildPath(Iso.Snap(iso.tilePos), target, directionCount);
 			if (pathToTarget.Count == 0)
 				return;
 			iso.pos = pathToTarget[pathToTarget.Count - 1].pos;
@@ -108,45 +115,13 @@ public class Character : MonoBehaviour {
 			animation = "Idle";
 		}
 		else {
-			animation = "Walk";
-			Vector2 vel = path[0].direction;
-			if (vel.x > 0 && vel.y < 0) {
-				direction = 0;
-			} else if (vel.x > 0 && vel.y == 0) {
-				direction = 1;
-			} else if (vel.x > 0 && vel.y > 0) {
-				direction = 2;
-			} else if (vel.x == 0 && vel.y > 0) {
-				direction = 3;
-			} else if (vel.x < 0 && vel.y > 0) {
-				direction = 4;
-			} else if (vel.x < 0 && vel.y == 0) {
-				direction = 5;
-			} else if (vel.x < 0 && vel.y < 0) {
-				direction = 6;
-			} else if (vel.x == 0 && vel.y < 0) {
-				direction = 7;
-			}
+			animation = run ? "Run" : "Walk";
+			direction = path[0].directionIndex;
 		}
 
-		if (direction == 0) {
-			animation += "Right";
-		} else if (direction == 1) {
-			animation += "UpRight";
-		} else if (direction == 2) {
-			animation += "Up";
-		} else if (direction == 3) {
-			animation += "UpLeft";
-		} else if (direction == 4) {
-			animation += "Left";
-		} else if (direction == 5) {
-			animation += "DownLeft";
-		} else if (direction == 6) {
-			animation += "Down";
-		} else if (direction == 7) {
-			animation += "DownRight";
+		animation += direction.ToString();
+		if (!animator.GetCurrentAnimatorStateInfo(0).IsName(animation)) {
+			animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 		}
-
-		animator.Play(animation);
 	}
 }

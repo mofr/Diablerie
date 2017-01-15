@@ -127,6 +127,9 @@ Material:
     - first:
         name: _ZWrite
       second: 1
+    - first:
+        name: _z0
+      second: 0
     m_Colors:
     - first:
         name: _Color

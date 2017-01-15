@@ -5,12 +5,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+	public Character character;
 	Iso iso;
-	Character character;
+
+	void Awake() {
+		if (character == null)
+			character = GameObject.FindWithTag("Player").GetComponent<Character>();
+		SetCharacter(character);
+	}
 
 	void Start () {
-		iso = GetComponent<Iso>();
-		character = GetComponent<Character>();
+	}
+
+	void SetCharacter (Character character) {
+		this.character = character;
+		iso = character.GetComponent<Iso>();
 	}
 
 	void Update () {
@@ -21,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 			targetTile = Iso.MouseTile();
 		}
 		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
-		Pathing.BuildPath(iso.tilePos, targetTile);
+		Pathing.BuildPath(iso.tilePos, targetTile, character.directionCount);
 
 		if (Input.GetMouseButton(0)) {
 			if (Usable.hot != null) {
@@ -33,6 +42,15 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(1)) {
 			character.Teleport(Iso.MouseTile());
+		}
+
+		if (Input.GetKeyDown(KeyCode.Tab)) {
+			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {
+				if (this.character != character) {
+					SetCharacter(character);
+					return;
+				}
+			}
 		}
 	}
 }

@@ -74,10 +74,6 @@ public class Iso : MonoBehaviour {
 	void Start () {
 		
 	}
-    static float fmod(float a, float b)
-    {
-        return a - b * Mathf.Round(a / b);
-    }
 
     void Update () {
         if (Application.isPlaying)
@@ -96,6 +92,7 @@ public class Iso : MonoBehaviour {
             }
             pos = MapToIso(transform.position);
         }
+
 		spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y / tileSizeY);
         var macroTile = MacroTile(pos);
         macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);

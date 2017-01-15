@@ -4,13 +4,10 @@ using System;
 
 public class CameraController : MonoBehaviour {
 
-	public Transform target;
+	PlayerController playerController;
 
-	void Start () {
-		if (!target) {
-			target = GameObject.FindWithTag("Player").transform;
-		}
-
+	void Awake () {
+		playerController = GameObject.FindObjectOfType<PlayerController>();
 		transform.position = CalcTargetPos();
 	}
 
@@ -19,7 +16,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	Vector3 CalcTargetPos() {
-		Vector3 targetPos = target.position;
+		Vector3 targetPos = playerController.character.transform.position;
 		targetPos.z = transform.position.z;
 
 		return targetPos;
