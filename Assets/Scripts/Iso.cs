@@ -46,12 +46,6 @@ public class Iso : MonoBehaviour {
 		DebugDrawTile(pos, Color.white, margin);
 	}
 
-	static public Vector3 MouseTile() {
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		mousePos.z = 0;
-		return Snap(MapToIso(mousePos));
-	}
-
 	static public Vector3 Snap(Vector3 pos) {
 		pos.x = Mathf.Round(pos.x);
 		pos.y = Mathf.Round(pos.y);

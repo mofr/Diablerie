@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 		if (Usable.hot != null) {
 			targetTile = Iso.MapToIso(Usable.hot.transform.position);
 		} else {
-			targetTile = Iso.MouseTile();
+			targetTile = IsoInput.mouseTile;
 		}
 		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
 		Pathing.BuildPath(iso.tilePos, targetTile, character.directionCount);
@@ -41,8 +41,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown(1)) {
-			character.Teleport(Iso.MouseTile());
+			character.Teleport(IsoInput.mouseTile);
 		}
+
+		character.LookAt(IsoInput.mousePosition);
 
 		if (Input.GetKeyDown(KeyCode.Tab)) {
 			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {

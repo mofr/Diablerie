@@ -129,4 +129,12 @@ public class Character : MonoBehaviour {
 			animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 		}
 	}
+
+	public void LookAt(Vector3 target)
+	{
+		var dir = target - (Vector3)iso.pos;
+		var angle = Vector3.Angle(new Vector3(-1, -1), dir) * Mathf.Sign(dir.y - dir.x);
+		var directionDegrees = 360.0f / directionCount;
+		targetDirection = Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
+	}
 }
