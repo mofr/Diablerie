@@ -124,7 +124,7 @@ public class Character : MonoBehaviour {
 			direction = (direction + diff + directionCount) % directionCount;
 		}
 
-		animation += direction.ToString();
+		animation += "_" + direction.ToString();
 		if (!animator.GetCurrentAnimatorStateInfo(0).IsName(animation)) {
 			animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 		}
