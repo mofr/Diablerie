@@ -6451,6 +6451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directionCount: 16
   speed: 14
+  attackSpeed: 2.5
   run: 1
   usable: {fileID: 0}
   direction: 0
@@ -15915,6 +15916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directionCount: 8
   speed: 5
+  attackSpeed: 1.5
   run: 0
   usable: {fileID: 0}
   direction: 0

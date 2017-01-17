@@ -1,0 +1,3660 @@
+fileFormatVersion: 2
+guid: fc7a68ae75da0af498ae82a836b92a13
+timeCreated: 1484666706
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Attack2_0
+    21300002: Attack2_1
+    21300004: Attack2_2
+    21300006: Attack2_3
+    21300008: Attack2_4
+    21300010: Attack2_5
+    21300012: Attack2_6
+    21300014: Attack2_7
+    21300016: Attack2_8
+    21300018: Attack2_9
+    21300020: Attack2_10
+    21300022: Attack2_11
+    21300024: Attack2_12
+    21300026: Attack2_13
+    21300028: Attack2_14
+    21300030: Attack2_15
+    21300032: Attack2_16
+    21300034: Attack2_17
+    21300036: Attack2_18
+    21300038: Attack2_19
+    21300040: Attack2_20
+    21300042: Attack2_21
+    21300044: Attack2_22
+    21300046: Attack2_23
+    21300048: Attack2_24
+    21300050: Attack2_25
+    21300052: Attack2_26
+    21300054: Attack2_27
+    21300056: Attack2_28
+    21300058: Attack2_29
+    21300060: Attack2_30
+    21300062: Attack2_31
+    21300064: Attack2_32
+    21300066: Attack2_33
+    21300068: Attack2_34
+    21300070: Attack2_35
+    21300072: Attack2_36
+    21300074: Attack2_37
+    21300076: Attack2_38
+    21300078: Attack2_39
+    21300080: Attack2_40
+    21300082: Attack2_41
+    21300084: Attack2_42
+    21300086: Attack2_43
+    21300088: Attack2_44
+    21300090: Attack2_45
+    21300092: Attack2_46
+    21300094: Attack2_47
+    21300096: Attack2_48
+    21300098: Attack2_49
+    21300100: Attack2_50
+    21300102: Attack2_51
+    21300104: Attack2_52
+    21300106: Attack2_53
+    21300108: Attack2_54
+    21300110: Attack2_55
+    21300112: Attack2_56
+    21300114: Attack2_57
+    21300116: Attack2_58
+    21300118: Attack2_59
+    21300120: Attack2_60
+    21300122: Attack2_61
+    21300124: Attack2_62
+    21300126: Attack2_63
+    21300128: Attack2_64
+    21300130: Attack2_65
+    21300132: Attack2_66
+    21300134: Attack2_67
+    21300136: Attack2_68
+    21300138: Attack2_69
+    21300140: Attack2_70
+    21300142: Attack2_71
+    21300144: Attack2_72
+    21300146: Attack2_73
+    21300148: Attack2_74
+    21300150: Attack2_75
+    21300152: Attack2_76
+    21300154: Attack2_77
+    21300156: Attack2_78
+    21300158: Attack2_79
+    21300160: Attack2_80
+    21300162: Attack2_81
+    21300164: Attack2_82
+    21300166: Attack2_83
+    21300168: Attack2_84
+    21300170: Attack2_85
+    21300172: Attack2_86
+    21300174: Attack2_87
+    21300176: Attack2_88
+    21300178: Attack2_89
+    21300180: Attack2_90
+    21300182: Attack2_91
+    21300184: Attack2_92
+    21300186: Attack2_93
+    21300188: Attack2_94
+    21300190: Attack2_95
+    21300192: Attack2_96
+    21300194: Attack2_97
+    21300196: Attack2_98
+    21300198: Attack2_99
+    21300200: Attack2_100
+    21300202: Attack2_101
+    21300204: Attack2_102
+    21300206: Attack2_103
+    21300208: Attack2_104
+    21300210: Attack2_105
+    21300212: Attack2_106
+    21300214: Attack2_107
+    21300216: Attack2_108
+    21300218: Attack2_109
+    21300220: Attack2_110
+    21300222: Attack2_111
+    21300224: Attack2_112
+    21300226: Attack2_113
+    21300228: Attack2_114
+    21300230: Attack2_115
+    21300232: Attack2_116
+    21300234: Attack2_117
+    21300236: Attack2_118
+    21300238: Attack2_119
+    21300240: Attack2_120
+    21300242: Attack2_121
+    21300244: Attack2_122
+    21300246: Attack2_123
+    21300248: Attack2_124
+    21300250: Attack2_125
+    21300252: Attack2_126
+    21300254: Attack2_127
+    21300256: Attack2_128
+    21300258: Attack2_129
+    21300260: Attack2_130
+    21300262: Attack2_131
+    21300264: Attack2_132
+    21300266: Attack2_133
+    21300268: Attack2_134
+    21300270: Attack2_135
+    21300272: Attack2_136
+    21300274: Attack2_137
+    21300276: Attack2_138
+    21300278: Attack2_139
+    21300280: Attack2_140
+    21300282: Attack2_141
+    21300284: Attack2_142
+    21300286: Attack2_143
+    21300288: Attack2_144
+    21300290: Attack2_145
+    21300292: Attack2_146
+    21300294: Attack2_147
+    21300296: Attack2_148
+    21300298: Attack2_149
+    21300300: Attack2_150
+    21300302: Attack2_151
+    21300304: Attack2_152
+    21300306: Attack2_153
+    21300308: Attack2_154
+    21300310: Attack2_155
+    21300312: Attack2_156
+    21300314: Attack2_157
+    21300316: Attack2_158
+    21300318: Attack2_159
+    21300320: Attack2_160
+    21300322: Attack2_161
+    21300324: Attack2_162
+    21300326: Attack2_163
+    21300328: Attack2_164
+    21300330: Attack2_165
+    21300332: Attack2_166
+    21300334: Attack2_167
+    21300336: Attack2_168
+    21300338: Attack2_169
+    21300340: Attack2_170
+    21300342: Attack2_171
+    21300344: Attack2_172
+    21300346: Attack2_173
+    21300348: Attack2_174
+    21300350: Attack2_175
+    21300352: Attack2_176
+    21300354: Attack2_177
+    21300356: Attack2_178
+    21300358: Attack2_179
+    21300360: Attack2_180
+    21300362: Attack2_181
+    21300364: Attack2_182
+    21300366: Attack2_183
+    21300368: Attack2_184
+    21300370: Attack2_185
+    21300372: Attack2_186
+    21300374: Attack2_187
+    21300376: Attack2_188
+    21300378: Attack2_189
+    21300380: Attack2_190
+    21300382: Attack2_191
+    21300384: Attack2_192
+    21300386: Attack2_193
+    21300388: Attack2_194
+    21300390: Attack2_195
+    21300392: Attack2_196
+    21300394: Attack2_197
+    21300396: Attack2_198
+    21300398: Attack2_199
+    21300400: Attack2_200
+    21300402: Attack2_201
+    21300404: Attack2_202
+    21300406: Attack2_203
+    21300408: Attack2_204
+    21300410: Attack2_205
+    21300412: Attack2_206
+    21300414: Attack2_207
+    21300416: Attack2_208
+    21300418: Attack2_209
+    21300420: Attack2_210
+    21300422: Attack2_211
+    21300424: Attack2_212
+    21300426: Attack2_213
+    21300428: Attack2_214
+    21300430: Attack2_215
+    21300432: Attack2_216
+    21300434: Attack2_217
+    21300436: Attack2_218
+    21300438: Attack2_219
+    21300440: Attack2_220
+    21300442: Attack2_221
+    21300444: Attack2_222
+    21300446: Attack2_223
+    21300448: Attack2_224
+    21300450: Attack2_225
+    21300452: Attack2_226
+    21300454: Attack2_227
+    21300456: Attack2_228
+    21300458: Attack2_229
+    21300460: Attack2_230
+    21300462: Attack2_231
+    21300464: Attack2_232
+    21300466: Attack2_233
+    21300468: Attack2_234
+    21300470: Attack2_235
+    21300472: Attack2_236
+    21300474: Attack2_237
+    21300476: Attack2_238
+    21300478: Attack2_239
+    21300480: Attack2_240
+    21300482: Attack2_241
+    21300484: Attack2_242
+    21300486: Attack2_243
+    21300488: Attack2_244
+    21300490: Attack2_245
+    21300492: Attack2_246
+    21300494: Attack2_247
+    21300496: Attack2_248
+    21300498: Attack2_249
+    21300500: Attack2_250
+    21300502: Attack2_251
+    21300504: Attack2_252
+    21300506: Attack2_253
+    21300508: Attack2_254
+    21300510: Attack2_255
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 80
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 4096
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Attack2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_2
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_3
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_4
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_5
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_6
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_7
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_8
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_9
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_10
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_11
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_12
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_13
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_14
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_15
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 2250
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_17
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_18
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_19
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_20
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_21
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_22
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_23
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_24
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_25
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_26
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_27
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_28
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_29
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_30
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_31
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 2100
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_33
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_34
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_35
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_36
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_37
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_38
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_39
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_40
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_41
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_42
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_43
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_44
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_45
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_46
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_47
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1950
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_49
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_50
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_51
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_52
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_53
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_54
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_55
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_56
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_57
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_58
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_59
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_60
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_61
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_62
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_63
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1800
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_65
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_66
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_67
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_68
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_69
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_70
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_71
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_72
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_73
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_74
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_75
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_76
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_77
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_78
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_79
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1650
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_81
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_82
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_83
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_84
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_85
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_86
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_87
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_88
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_89
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_90
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_91
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_92
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_93
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_94
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_95
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1500
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_97
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_98
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_99
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_100
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_101
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_102
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_103
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_104
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_105
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_106
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_107
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_108
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_109
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_110
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_111
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1350
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_113
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_114
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_115
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_116
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_117
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_118
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_119
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_120
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_121
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_122
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_123
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_124
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_125
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_126
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_127
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1200
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_128
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_129
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_130
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_131
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_132
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_133
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_134
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_135
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_136
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_137
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_138
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_139
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_140
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_141
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_142
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_143
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 1050
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_144
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_145
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_146
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_147
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_148
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_149
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_150
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_151
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_152
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_153
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_154
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_155
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_156
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_157
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_158
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_159
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 900
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_160
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_161
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_162
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_163
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_164
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_165
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_166
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_167
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_168
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_169
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_170
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_171
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_172
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_173
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_174
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_175
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 750
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_176
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_177
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_178
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_179
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_180
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_181
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_182
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_183
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_184
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_185
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_186
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_187
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_188
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_189
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_190
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_191
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 600
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_192
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_193
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_194
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_195
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_196
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_197
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_198
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_199
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_200
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_201
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_202
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_203
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_204
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_205
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_206
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_207
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 450
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_208
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_209
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_210
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_211
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_212
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_213
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_214
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_215
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_216
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_217
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_218
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_219
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_220
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_221
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_222
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_223
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 300
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_224
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_225
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_226
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_227
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_228
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_229
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_230
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_231
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_232
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_233
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_234
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_235
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_236
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_237
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_238
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_239
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 150
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_240
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_241
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_242
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_243
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_244
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_245
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_246
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_247
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_248
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_249
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_250
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_251
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_252
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_253
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_254
+      rect:
+        serializedVersion: 2
+        x: 2548
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attack2_255
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 0
+        width: 182
+        height: 150
+      alignment: 9
+      pivot: {x: 0.5, y: 0.295}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

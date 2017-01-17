@@ -23,18 +23,20 @@ public class EditorTools : MonoBehaviour {
 		Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(texturePath).OfType<Sprite>().ToArray();
 		int framesPerAnimation = sprites.Length / directionCount;
 
+		var eventName = texture.name;
+
 		for (int i = 0; i < directionCount; ++i) {
 			var name = texture.name + "_" + i.ToString();
 			int direction = i;
 			if (directionCount == 8)
 				direction = (direction + 4) % directionCount;
 			Sprite[] animSprites = sprites.Skip(direction * framesPerAnimation).Take(framesPerAnimation).ToArray();
-			AnimationClip animation = CreateSpriteAnimationClip(name, animSprites);
+			AnimationClip animation = CreateSpriteAnimationClip(name, animSprites, eventName);
 			AssetDatabase.CreateAsset(animation, "Assets/Animations/" + dir + "/" + name + ".anim");
 		}
 	}
 
-	static private AnimationClip CreateSpriteAnimationClip(string name, Sprite[] sprites, int fps = 12)
+	static private AnimationClip CreateSpriteAnimationClip(string name, Sprite[] sprites, string eventName, int fps = 12)
 	{
 		int frameCount = sprites.Length;
 	    float frameLength = 1f / fps;
@@ -60,11 +62,15 @@ public class EditorTools : MonoBehaviour {
 			
 	    AnimationUtility.SetObjectReferenceCurve(clip, curveBinding, keyFrames);
 
-
 		SerializedObject serializedClip = new SerializedObject(clip);
 		AnimationClipSettings clipSettings = new AnimationClipSettings(serializedClip.FindProperty("m_AnimationClipSettings"));
 		clipSettings.loopTime = true;
 		serializedClip.ApplyModifiedProperties();
+
+		AnimationUtility.SetAnimationEvents(clip, new[] { 
+			new AnimationEvent() { time = clip.length, functionName = "On" + eventName + "Finish" },
+			new AnimationEvent() { time = clip.length, functionName = "OnAnimationFinish" },
+		});
 
 	    return clip;
 	}

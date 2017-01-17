@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ public class Character : MonoBehaviour {
 
 	public int directionCount = 8;
 	public float speed = 3.5f;
+	public float attackSpeed = 1.0f;
 	public bool run = false;
 
 	[HideInInspector]
@@ -20,6 +20,8 @@ public class Character : MonoBehaviour {
 	List<Pathing.Step> path = new List<Pathing.Step>();
 	float traveled = 0;
 	int targetDirection = 0;
+	bool attack = false;
+	int attackAnimation;
 
 	void Start() {
 		iso = GetComponent<Iso>();
@@ -34,6 +36,9 @@ public class Character : MonoBehaviour {
 	}
 
 	public void GoTo(Vector2 target) {
+		if (attack)
+			return;
+		
 		this.usable = null;
 
 		Vector2 startPos = iso.tilePos;
@@ -51,6 +56,8 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Teleport(Vector2 target) {
+		if (attack)
+			return;
 		if (Tilemap.instance[target]) {
 			iso.pos = target;
 			iso.tilePos = target;
@@ -110,23 +117,32 @@ public class Character : MonoBehaviour {
 	}
 
 	void UpdateAnimation() {
-		String animation;
-		if (path.Count == 0) {
+		bool preserveTime = false;
+		string animation;
+		animator.speed = 1.0f;
+		if (attack) {
+			animation = "Attack" + attackAnimation;
+			animator.speed = attackSpeed;
+		} else if (path.Count == 0) {
 			animation = "Idle";
-		}
-		else {
+			preserveTime = true;
+		} else {
 			animation = run ? "Run" : "Walk";
+			preserveTime = true;
 			targetDirection = path[0].directionIndex;
 		}
 
-		if (direction != targetDirection) {
+		if (!attack && direction != targetDirection) {
 			int diff = (int)Mathf.Sign(Tools.ShortestDelta(direction, targetDirection, directionCount));
 			direction = (direction + diff + directionCount) % directionCount;
 		}
 
 		animation += "_" + direction.ToString();
 		if (!animator.GetCurrentAnimatorStateInfo(0).IsName(animation)) {
-			animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+			if (preserveTime)
+				animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+			else
+				animator.Play(animation);
 		}
 	}
 
@@ -136,5 +152,23 @@ public class Character : MonoBehaviour {
 		var angle = Vector3.Angle(new Vector3(-1, -1), dir) * Mathf.Sign(dir.y - dir.x);
 		var directionDegrees = 360.0f / directionCount;
 		targetDirection = Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
+	}
+
+	public void Attack() {
+		if (!attack && direction == targetDirection && path.Count == 0) {
+			attack = true;
+			attackAnimation = Random.Range(1, 3);
+		}
+	}
+
+	void OnAnimationFinish() {
+		if (attack)
+			attack = false;
+	}
+
+	void OnAttack1Finish() {
+	}
+
+	void OnAttack2Finish() {
 	}
 }
