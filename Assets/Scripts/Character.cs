@@ -7,12 +7,40 @@ public class Character : MonoBehaviour {
 	public int directionCount = 8;
 	public float speed = 3.5f;
 	public float attackSpeed = 1.0f;
-	public bool run = false;
+    public float useRange = 1.5f;
+    public float attackRange = 2.5f;
+    public bool run = false;
 
-	[HideInInspector]
-	public Usable usable;
+    [HideInInspector]
+    public GameObject target
+    {
+        get
+        {
+            return m_Target;
+        }
 
-	[HideInInspector]
+        set
+        {
+            var usable = value.GetComponent<Usable>();
+            if (usable != null)
+                Use(usable);
+            else
+            {
+                var targetCharacter = value.GetComponent<Character>();
+                if (targetCharacter) {
+                    Attack(targetCharacter);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            m_Target = value;
+        }
+    }
+
+    [HideInInspector]
 	public int direction = 0;
 
 	Iso iso;
@@ -22,37 +50,34 @@ public class Character : MonoBehaviour {
 	int targetDirection = 0;
 	bool attack = false;
 	int attackAnimation;
+    GameObject m_Target;
+    Usable usable;
+    Character targetCharacter;
 
-	void Start() {
+    void Start() {
 		iso = GetComponent<Iso>();
 		animator = GetComponent<Animator>();
 	}
 
+    void PathTo(Vector2 target, float minRange = 0.1f)
+    {
+        AbortMovement();
+        Vector2 startPos = path.Count > 0 ? path[0].pos : iso.tilePos;
+        path.AddRange(Pathing.BuildPath(Iso.Snap(startPos), target, directionCount, minRange));
+    }
+
 	public void Use(Usable usable) {
-		if (this.usable == usable)
-			return;
-		GoTo(usable.GetComponent<Iso>().tilePos);
+        if (attack)
+            return;
+        PathTo(usable.GetComponent<Iso>().tilePos, useRange);
 		this.usable = usable;
 	}
 
 	public void GoTo(Vector2 target) {
 		if (attack)
 			return;
-		
-		this.usable = null;
 
-		Vector2 startPos = iso.tilePos;
-		if (path.Count > 0) {
-			var firstStep = path[0];
-			startPos = firstStep.pos;
-			path.Clear();
-			path.Add(firstStep);
-		} else {
-			path.Clear();
-			traveled = 0;
-		}
-
-		path.AddRange(Pathing.BuildPath(Iso.Snap(startPos), target, directionCount));
+        PathTo(target);
 	}
 
 	public void Teleport(Vector2 target) {
@@ -72,16 +97,50 @@ public class Character : MonoBehaviour {
 		traveled = 0;
 	}
 
+    void AbortMovement()
+    {
+        m_Target = null;
+        usable = null;
+        targetCharacter = null;
+
+        if (path.Count > 0)
+        {
+            var firstStep = path[0];
+            path.Clear();
+            path.Add(firstStep);
+        }
+        else {
+            path.Clear();
+            traveled = 0;
+        }
+    }
+
 	void Update() {
 		Iso.DebugDrawTile(iso.tilePos);
 		Pathing.DebugDrawPath(path);
 
 		Move();
 
-		if (path.Count == 0 && usable) {
-			usable.Use();
-			usable = null;
-		}
+		if (path.Count == 0) {
+            if (usable)
+            {
+                if (Vector2.Distance(usable.GetComponent<Iso>().tilePos, iso.tilePos) <= useRange)
+                    usable.Use();
+                usable = null;
+            }
+            if (targetCharacter)
+            {
+                Vector2 target = targetCharacter.GetComponent<Iso>().tilePos;
+                if (Vector2.Distance(target, iso.tilePos) <= attackRange)
+                {
+                    attack = true;
+                    attackAnimation = Random.Range(1, 3);
+                    direction = Iso.Direction(iso.tilePos, target, directionCount);
+                }
+                targetCharacter = null;
+            }
+            m_Target = null;
+        }
 
 		UpdateAnimation();
 	}
@@ -139,7 +198,7 @@ public class Character : MonoBehaviour {
 
 		animation += "_" + direction.ToString();
 		if (!animator.GetCurrentAnimatorStateInfo(0).IsName(animation)) {
-			if (preserveTime)
+            if (preserveTime)
 				animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
 			else
 				animator.Play(animation);
@@ -148,18 +207,25 @@ public class Character : MonoBehaviour {
 
 	public void LookAt(Vector3 target)
 	{
-		var dir = target - (Vector3)iso.pos;
-		var angle = Vector3.Angle(new Vector3(-1, -1), dir) * Mathf.Sign(dir.y - dir.x);
-		var directionDegrees = 360.0f / directionCount;
-		targetDirection = Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
-	}
+        targetDirection = Iso.Direction(iso.tilePos, target, directionCount);
+    }
 
-	public void Attack() {
+    public void Attack() {
 		if (!attack && direction == targetDirection && path.Count == 0) {
 			attack = true;
             attackAnimation = Random.Range(1, 3);
 		}
 	}
+
+    public void Attack(Character targetCharacter)
+    {
+        if (attack)
+            return;
+
+        Iso targetIso = targetCharacter.GetComponent<Iso>();
+        PathTo(targetIso.tilePos, attackRange);
+        this.targetCharacter = targetCharacter;
+    }
 
 	void OnAnimationFinish() {
         if (attack)

@@ -98,7 +98,7 @@ public class Pathing {
 		}
 	}
 
-	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8) {
+	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8, float minRange = 0.1f) {
 		directions = directionCount == 8 ? directions8 : directions16;
 		Pathing.target = target;
 		Node.Recycle(openNodes);
@@ -116,11 +116,11 @@ public class Pathing {
 		while (openNodes.Count > 0) {
 			openNodes.Sort();
 			Node node = openNodes[0];
-			if (!Tilemap.instance[target] && node.parent != null && node.score >= node.parent.score) {
+			if (!Tilemap.instance[target] && node.parent != null && node.score > node.parent.score) {
 				TraverseBack(node.parent);
 				break;
 			}
-			if (node.pos == target) {
+			if (Vector2.Distance(node.pos, target) <= minRange) {
 				TraverseBack(node);
 				break;
 			}

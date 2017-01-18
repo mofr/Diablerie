@@ -26,44 +26,15 @@ public class PlayerController : MonoBehaviour {
 		iso = character.GetComponent<Iso>();
 	}
 
-	void Update () {
-		Vector3 targetTile;
-		if (Usable.hot != null) {
-			targetTile = Iso.MapToIso(Usable.hot.transform.position);
-		} else {
-			targetTile = IsoInput.mouseTile;
-		}
-		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
-		Pathing.BuildPath(iso.tilePos, targetTile, character.directionCount);
-
-		if (Input.GetKeyDown(KeyCode.F4)) {
-			character.Teleport(IsoInput.mouseTile);
-		}
-
-		if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0))) {
-			character.Attack();
-		}
-		else if (Input.GetMouseButton(0)) {
-			if (Usable.hot != null) {
-				character.Use(Usable.hot);
-			} else {
-				character.GoTo(targetTile);
-			}
-		}
-
-		character.LookAt(IsoInput.mousePosition);
-
-		if (Input.GetKeyDown(KeyCode.Tab)) {
-			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {
-				if (this.character != character) {
-					SetCharacter(character);
-					return;
-				}
-			}
-		}
+    void UpdateHover()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            return;
+        }
 
         GameObject newHover = null;
-        var mousePos = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
         if (hit)
         {
@@ -84,5 +55,44 @@ public class PlayerController : MonoBehaviour {
                 spriteRenderer.material.SetFloat("_SelfIllum", 1.75f);
             }
         }
+    }
+
+	void Update () {
+        UpdateHover();
+
+        Vector3 targetTile;
+		if (hover != null) {
+			targetTile = Iso.MapToIso(hover.transform.position);
+		} else {
+			targetTile = IsoInput.mouseTile;
+		}
+		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
+		Pathing.BuildPath(iso.tilePos, targetTile, character.directionCount, character.useRange);
+
+		if (Input.GetKeyDown(KeyCode.F4)) {
+			character.Teleport(IsoInput.mouseTile);
+		}
+
+		if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0))) {
+			character.Attack();
+		}
+		else if (Input.GetMouseButton(0)) {
+			if (hover != null) {
+                character.target = hover;
+			} else {
+				character.GoTo(targetTile);
+			}
+		}
+
+		character.LookAt(IsoInput.mousePosition);
+
+		if (Input.GetKeyDown(KeyCode.Tab)) {
+			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {
+				if (this.character != character) {
+					SetCharacter(character);
+					return;
+				}
+			}
+		}
 	}
 }

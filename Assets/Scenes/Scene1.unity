@@ -6452,8 +6452,9 @@ MonoBehaviour:
   directionCount: 16
   speed: 14
   attackSpeed: 2.5
+  useRange: 2
+  attackRange: 3.5
   run: 1
-  usable: {fileID: 0}
   direction: 0
 --- !u!114 &610455194
 MonoBehaviour:
@@ -15918,8 +15919,9 @@ MonoBehaviour:
   directionCount: 8
   speed: 5
   attackSpeed: 1.5
+  useRange: 1
+  attackRange: 1.5
   run: 0
-  usable: {fileID: 0}
   direction: 0
 --- !u!114 &1392636083
 MonoBehaviour:

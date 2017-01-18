@@ -60,6 +60,14 @@ public class Iso : MonoBehaviour {
         return macroTile;
     }
 
+    static public int Direction(Vector2 from, Vector3 target, int directionCount)
+    {
+        var dir = target - (Vector3)from;
+        var angle = Vector3.Angle(new Vector3(-1, -1), dir) * Mathf.Sign(dir.y - dir.x);
+        var directionDegrees = 360.0f / directionCount;
+        return Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
+    }
+
 	void Awake() {
 		pos = MapToIso(transform.position);
 		tilePos = Snap(pos);
