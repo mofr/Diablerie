@@ -32,11 +32,11 @@ public class PlayerController : MonoBehaviour {
 		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
 		Pathing.BuildPath(iso.tilePos, targetTile, character.directionCount);
 
-		if (Input.GetMouseButtonDown(1)) {
+		if (Input.GetKeyDown(KeyCode.F4)) {
 			character.Teleport(IsoInput.mouseTile);
 		}
 
-		if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)) {
+		if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0))) {
 			character.Attack();
 		}
 		else if (Input.GetMouseButton(0)) {
