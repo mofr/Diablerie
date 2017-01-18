@@ -157,12 +157,12 @@ public class Character : MonoBehaviour {
 	public void Attack() {
 		if (!attack && direction == targetDirection && path.Count == 0) {
 			attack = true;
-			attackAnimation = Random.Range(1, 3);
+            attackAnimation = Random.Range(1, 3);
 		}
 	}
 
 	void OnAnimationFinish() {
-		if (attack)
+        if (attack)
 			attack = false;
 	}
 
@@ -170,5 +170,5 @@ public class Character : MonoBehaviour {
 	}
 
 	void OnAttack2Finish() {
-	}
+    }
 }
