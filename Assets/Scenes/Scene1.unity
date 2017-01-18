@@ -15831,6 +15831,7 @@ GameObject:
   - component: {fileID: 1392636079}
   - component: {fileID: 1392636082}
   - component: {fileID: 1392636083}
+  - component: {fileID: 1392636084}
   m_Layer: 0
   m_Name: Goatman
   m_TagString: Untagged
@@ -15935,6 +15936,20 @@ MonoBehaviour:
   tilePos: {x: 1, y: -4}
   macro: 0
   sort: 1
+--- !u!61 &1392636084
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1392636078}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.328125}
+  serializedVersion: 2
+  m_Size: {x: 0.8375, y: 0.9375}
 --- !u!1 &1401584559
 GameObject:
   m_ObjectHideFlags: 0

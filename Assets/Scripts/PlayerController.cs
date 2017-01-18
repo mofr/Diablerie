@@ -6,7 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public Character character;
-	Iso iso;
+
+    [HideInInspector]
+    static public GameObject hover;
+
+    Iso iso;
 
 	void Awake() {
 		if (character == null)
@@ -57,5 +61,28 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
+
+        GameObject newHover = null;
+        var mousePos = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        if (hit)
+        {
+            newHover = hit.collider.gameObject;
+        }
+
+        if (newHover != hover)
+        {
+            if (hover != null)
+            {
+                var spriteRenderer = hover.GetComponent<SpriteRenderer>();
+                spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
+            }
+            hover = newHover;
+            if (hover != null)
+            {
+                var spriteRenderer = hover.GetComponent<SpriteRenderer>();
+                spriteRenderer.material.SetFloat("_SelfIllum", 1.75f);
+            }
+        }
 	}
 }
