@@ -59,7 +59,6 @@ public class EditorTools : MonoBehaviour {
 	        ObjectReferenceKeyframe kf = new ObjectReferenceKeyframe();
 	        kf.time = i * frameLength;
 	        kf.value = sprites[i];
-            Debug.Log(sprites[i].name);
 	        keyFrames[i] = kf;
 	    }
 

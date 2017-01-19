@@ -227,10 +227,15 @@ public class Character : MonoBehaviour {
         this.targetCharacter = targetCharacter;
     }
 
+    public void TakeDamage()
+    {
+        takingDamage = true;
+    }
+
 	void OnAnimationFinish() {
-        if (attack)
-			attack = false;
-	}
+        attack = false;
+        takingDamage = false;
+    }
 
 	void OnAttack1Finish() {
 	}
