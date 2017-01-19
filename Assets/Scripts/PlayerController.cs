@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour {
     static public GameObject hover;
 
     Iso iso;
+    Collider2D[] hoverColliders = new Collider2D[4];
 
-	void Awake() {
+
+    void Awake() {
 		if (character == null)
 			character = GameObject.FindWithTag("Player").GetComponent<Character>();
 		SetCharacter(character);
@@ -35,10 +37,10 @@ public class PlayerController : MonoBehaviour {
 
         GameObject newHover = null;
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        if (hit)
+        int overlapCount = Physics2D.OverlapPointNonAlloc(mousePos, hoverColliders);
+        if (overlapCount > 0)
         {
-            newHover = hit.collider.gameObject;
+            newHover = hoverColliders[0].gameObject;
         }
 
         if (newHover != hover)
