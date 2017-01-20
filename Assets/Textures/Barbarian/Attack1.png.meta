@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 31ed8a9abeb5a154296ce17c7af0c1ac
-timeCreated: 1484662943
+timeCreated: 1484898563
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -315,6 +315,14 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
+    maxTextureSize: 4096
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
     maxTextureSize: 4096
     textureFormat: -1
     textureCompression: 1
@@ -3655,6 +3663,6 @@ TextureImporter:
       tessellationDetail: 0
     outline: []
   spritePackingTag: 
-  userData: 
+  userData: animation dirs 16, loop 1
   assetBundleName: 
   assetBundleVariant: 

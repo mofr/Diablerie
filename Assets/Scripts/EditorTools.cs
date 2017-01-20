@@ -1,48 +1,60 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.Animations;
 
-public class EditorTools : MonoBehaviour {
+public class EditorTools {
 
-	[MenuItem("Assets/Create/16-way animation")]
-	static public void CreateAnimation16Way() {
-		CreateAnimation(16);
-	}
+ //   [MenuItem("Assets/Create/16-way animation", validate = true)]
+ //   static public bool ValidateCreateAnimation16Way()
+ //   {
+ //       return Selection.activeObject is Texture2D;
+ //   }
 
-	[MenuItem("Assets/Create/8-way animation")]
-	static public void CreateAnimation8Way() {
-		CreateAnimation(8);
-	}
+ //   [MenuItem("Assets/Create/8-way animation", validate = true)]
+ //   static public bool ValidateCreateAnimation8Way()
+ //   {
+ //       return Selection.activeObject is Texture2D;
+ //   }
 
-	static public void CreateAnimation(int directionCount) {
-		var texture = Selection.activeObject as Texture2D;
-		var texturePath = AssetDatabase.GetAssetPath(texture);
-		string dir = texturePath.Split('/')[2];
-        Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(texturePath).OfType<Sprite>().OrderBy(s => s.name.Length).ThenBy(s => s.name).ToArray();
+ //   [MenuItem("Assets/Create/16-way animation")]
+	//static public void CreateAnimation16Way() {
+ //       var texture = Selection.activeObject as Texture2D;
+ //       CreateAnimation(texture, AssetDatabase.GetAssetPath(texture), 16);
+	//}
+
+	//[MenuItem("Assets/Create/8-way animation")]
+	//static public void CreateAnimation8Way() {
+ //       var texture = Selection.activeObject as Texture2D;
+ //       CreateAnimation(texture, AssetDatabase.GetAssetPath(texture), 8);
+	//}
+
+	static public AnimationClip[] CreateAnimation(Texture2D texture, string spritesPath, int directionCount, int dirOffset, bool loop) {
+        var clips = new AnimationClip[directionCount];
+
+		string dir = spritesPath.Split('/')[2];
+        Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(spritesPath).OfType<Sprite>().OrderBy(s => s.name.Length).ThenBy(s => s.name).ToArray();
 		int framesPerAnimation = sprites.Length / directionCount;
+        string textureName = ExtractFileName(spritesPath);
 
         for (int i = 0; i < directionCount; ++i) {
-			var name = texture.name + "_" + i.ToString();
-			int direction = i;
-			if (directionCount == 8)
-				direction = (direction + 4) % directionCount;
+			var name = textureName + "_" + i.ToString();
+			int direction = (i + dirOffset) % directionCount;
             Sprite[] animSprites = sprites.Skip(direction * framesPerAnimation).Take(framesPerAnimation).ToArray();
-            var assetPath = "Assets/Animations/" + dir + "/" + name + ".anim";
-            var animationClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(assetPath);
-            if (animationClip == null)
-            {
-                animationClip = new AnimationClip();
-                AssetDatabase.CreateAsset(animationClip, assetPath);
-            }
+            clips[i] = new AnimationClip();
+            var animationClip = clips[i];
             animationClip.name = name;
             animationClip.frameRate = 12;
-            FillAnimationClip(animationClip, animSprites);
+            FillAnimationClip(animationClip, animSprites, loop);
         }
+
+        return clips;
 	}
 
-	static private void FillAnimationClip(AnimationClip clip, Sprite[] sprites)
+	static private void FillAnimationClip(AnimationClip clip, Sprite[] sprites, bool loop)
 	{
 		int frameCount = sprites.Length;
 	    float frameLength = 1f / clip.frameRate;
@@ -66,7 +78,7 @@ public class EditorTools : MonoBehaviour {
 
 		SerializedObject serializedClip = new SerializedObject(clip);
 		AnimationClipSettings clipSettings = new AnimationClipSettings(serializedClip.FindProperty("m_AnimationClipSettings"));
-		clipSettings.loopTime = true;
+		clipSettings.loopTime = loop;
 		serializedClip.ApplyModifiedProperties();
 
 		AnimationUtility.SetAnimationEvents(clip, new[] {
@@ -74,6 +86,27 @@ public class EditorTools : MonoBehaviour {
             new AnimationEvent() { time = clip.length, functionName = "OnAnimationFinish" },
 		});
 	}
+
+    static public string ExtractFileName(string path)
+    {
+        return path.Split('/').Last().Split('.')[0];
+    }
+
+    [MenuItem("Assets/Create/Iso Animation")]
+    static public void CreateIsoAnimation()
+    {
+        ScriptableObjectUtility.CreateAsset<IsoAnimation>();
+    }
+}
+
+[System.Serializable]
+class IsoAnimation : ScriptableObject
+{
+    public int directionCount = 8;
+    public int directionOffset = 0;
+    public bool loop = true;
+    public int newParameter = 456;
+    public Texture2D texture;
 }
 
 class AnimationClipSettings
@@ -100,4 +133,111 @@ class AnimationClipSettings
 	public bool keepOriginalPositionXZ { get { return Get("m_KeepOriginalPositionXZ").boolValue; } set { Get("m_KeepOriginalPositionXZ").boolValue = value; } }
 	public bool heightFromFeet { get { return Get("m_HeightFromFeet").boolValue; } set { Get("m_HeightFromFeet").boolValue = value; } }
 	public bool mirror { get { return Get("m_Mirror").boolValue; } set { Get("m_Mirror").boolValue = value; } }
+}
+
+//class Postprocessor : AssetPostprocessor
+//{
+    //void OnPostprocessTexture(Texture2D texture)
+    //{
+    //    if (assetImporter.userData.Length == 0)
+    //        return;
+
+    //    var splitted = assetImporter.userData.Split(" ".ToCharArray(), 2);
+    //    var name = splitted[0];
+    //    var args = new Dictionary<string, string>();
+
+    //    foreach(string kv in splitted[1].Split(','))
+    //    {
+    //        var splittedArg = kv.Trim().Split(' ');
+    //        args.Add(splittedArg[0], splittedArg[1]);
+    //    }
+
+    //    if (name == "animation")
+    //    {
+    //        int dirs = int.Parse(args["dirs"]);
+    //        int dirOffset = int.Parse(args.GetValueOrDefault("dirOffset", "0"));
+    //        bool loop = int.Parse(args.GetValueOrDefault("loop", "1")) == 1;
+    //        EditorTools.CreateAnimation(texture, assetPath, dirs, dirOffset, loop);
+    //    }
+    //}
+
+    //static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+    //{
+    //    foreach (string str in importedAssets)
+    //    {
+    //        Debug.Log(AssetDatabase.LoadAssetAtPath<IsoAnimation>(str));
+    //    }
+    //}
+//}
+
+public static class ScriptableObjectUtility
+{
+    /// <summary>
+    //	This makes it easy to create, name and place unique new ScriptableObject asset files.
+    /// </summary>
+    public static T CreateAsset<T>() where T : ScriptableObject
+    {
+        T asset = ScriptableObject.CreateInstance<T>();
+
+        string path = AssetDatabase.GetAssetPath(Selection.activeObject);
+        if (path == "")
+        {
+            path = "Assets";
+        }
+        else if (Path.GetExtension(path) != "")
+        {
+            path = path.Replace(Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
+        }
+
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/New" + typeof(T).ToString() + ".asset");
+
+        AssetDatabase.CreateAsset(asset, assetPathAndName);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = asset;
+        return asset;
+    }
+}
+
+[CustomEditor(typeof(IsoAnimation))]
+public class IsoAnimationEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var isoAnimation = target as IsoAnimation;
+        if (GUILayout.Button("Build"))
+        {
+            var assetPath = AssetDatabase.GetAssetPath(isoAnimation);
+            var spritesPath = AssetDatabase.GetAssetPath(isoAnimation.texture);
+            var existingClips = new Dictionary<string, AnimationClip>();
+            foreach(var obj in AssetDatabase.LoadAllAssetsAtPath(assetPath))
+            {
+                var clip = obj as AnimationClip;
+                if (clip)
+                    existingClips.Add(clip.name, clip);
+            }
+            foreach(var clip in EditorTools.CreateAnimation(isoAnimation.texture, spritesPath, isoAnimation.directionCount, isoAnimation.directionOffset, isoAnimation.loop))
+            {
+                if (existingClips.ContainsKey(clip.name))
+                {
+                    EditorUtility.CopySerialized(clip, existingClips[clip.name]);
+                    existingClips.Remove(clip.name);
+                }
+                else
+                {
+                    AssetDatabase.AddObjectToAsset(clip, assetPath);
+                    AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(clip));
+                }
+            }
+            foreach(var clip in existingClips.Values)
+            {
+                DestroyImmediate(clip, true);
+            }
+            AssetDatabase.ImportAsset(assetPath);
+        }
+    }
 }
