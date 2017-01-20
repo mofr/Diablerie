@@ -22,7 +22,6 @@ public class EditorTools : MonoBehaviour {
 		string dir = texturePath.Split('/')[2];
         Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(texturePath).OfType<Sprite>().OrderBy(s => s.name.Length).ThenBy(s => s.name).ToArray();
 		int framesPerAnimation = sprites.Length / directionCount;
-		var eventName = texture.name;
 
         for (int i = 0; i < directionCount; ++i) {
 			var name = texture.name + "_" + i.ToString();
@@ -39,11 +38,11 @@ public class EditorTools : MonoBehaviour {
             }
             animationClip.name = name;
             animationClip.frameRate = 12;
-            FillAnimationClip(animationClip, animSprites, eventName);
+            FillAnimationClip(animationClip, animSprites);
         }
 	}
 
-	static private void FillAnimationClip(AnimationClip clip, Sprite[] sprites, string eventName)
+	static private void FillAnimationClip(AnimationClip clip, Sprite[] sprites)
 	{
 		int frameCount = sprites.Length;
 	    float frameLength = 1f / clip.frameRate;
@@ -70,9 +69,9 @@ public class EditorTools : MonoBehaviour {
 		clipSettings.loopTime = true;
 		serializedClip.ApplyModifiedProperties();
 
-		AnimationUtility.SetAnimationEvents(clip, new[] { 
-			new AnimationEvent() { time = clip.length, functionName = "On" + eventName + "Finish" },
-			new AnimationEvent() { time = clip.length, functionName = "OnAnimationFinish" },
+		AnimationUtility.SetAnimationEvents(clip, new[] {
+            new AnimationEvent() { time = clip.length / 2, functionName = "OnAnimationMiddle" },
+            new AnimationEvent() { time = clip.length, functionName = "OnAnimationFinish" },
 		});
 	}
 }

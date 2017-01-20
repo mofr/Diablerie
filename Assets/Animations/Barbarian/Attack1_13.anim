@@ -111,8 +111,8 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_IsEmpty: 0
   m_Events:
-  - time: 1.3333334
-    functionName: OnAttack1Finish
+  - time: 0.6666667
+    functionName: OnAnimationMiddle
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -50,6 +50,7 @@ public class Character : MonoBehaviour {
 	int targetDirection = 0;
 	bool attack = false;
 	int attackAnimation;
+    bool takingDamage = false;
     GameObject m_Target;
     Usable usable;
     Character targetCharacter;
@@ -67,21 +68,21 @@ public class Character : MonoBehaviour {
     }
 
 	public void Use(Usable usable) {
-        if (attack)
+        if (attack || takingDamage)
             return;
         PathTo(usable.GetComponent<Iso>().tilePos, useRange);
 		this.usable = usable;
 	}
 
 	public void GoTo(Vector2 target) {
-		if (attack)
+		if (attack || takingDamage)
 			return;
 
         PathTo(target);
 	}
 
 	public void Teleport(Vector2 target) {
-		if (attack)
+		if (attack && takingDamage)
 			return;
 		if (Tilemap.instance[target]) {
 			iso.pos = target;
@@ -127,8 +128,9 @@ public class Character : MonoBehaviour {
                 if (Vector2.Distance(usable.GetComponent<Iso>().tilePos, iso.tilePos) <= useRange)
                     usable.Use();
                 usable = null;
+                m_Target = null;
             }
-            if (targetCharacter)
+            if (targetCharacter && !attack)
             {
                 Vector2 target = targetCharacter.GetComponent<Iso>().tilePos;
                 if (Vector2.Distance(target, iso.tilePos) <= attackRange)
@@ -137,9 +139,7 @@ public class Character : MonoBehaviour {
                     attackAnimation = Random.Range(1, 3);
                     direction = Iso.Direction(iso.tilePos, target, directionCount);
                 }
-                targetCharacter = null;
             }
-            m_Target = null;
         }
 
 		UpdateAnimation();
@@ -182,16 +182,23 @@ public class Character : MonoBehaviour {
 		if (attack) {
 			animation = "Attack" + attackAnimation;
 			animator.speed = attackSpeed;
-		} else if (path.Count == 0) {
-			animation = "Idle";
-			preserveTime = true;
-		} else {
-			animation = run ? "Run" : "Walk";
-			preserveTime = true;
-			targetDirection = path[0].directionIndex;
 		}
+        else if (takingDamage)
+        {
+            animation = "TakeDamage";
+        }
+        else if (path.Count == 0)
+        {
+            animation = "Idle";
+        }
+        else
+        {
+            animation = run ? "Run" : "Walk";
+            preserveTime = true;
+            targetDirection = path[0].directionIndex;
+        }
 
-		if (!attack && direction != targetDirection) {
+		if (!attack && !takingDamage && direction != targetDirection) {
 			int diff = (int)Mathf.Sign(Tools.ShortestDelta(direction, targetDirection, directionCount));
 			direction = (direction + diff + directionCount) % directionCount;
 		}
@@ -211,7 +218,7 @@ public class Character : MonoBehaviour {
     }
 
     public void Attack() {
-		if (!attack && direction == targetDirection && path.Count == 0) {
+		if (!attack && !takingDamage && direction == targetDirection && path.Count == 0) {
 			attack = true;
             attackAnimation = Random.Range(1, 3);
 		}
@@ -219,7 +226,7 @@ public class Character : MonoBehaviour {
 
     public void Attack(Character targetCharacter)
     {
-        if (attack)
+        if (attack || takingDamage)
             return;
 
         Iso targetIso = targetCharacter.GetComponent<Iso>();
@@ -231,15 +238,22 @@ public class Character : MonoBehaviour {
     {
         takingDamage = true;
     }
-
-	void OnAnimationFinish() {
-        attack = false;
-        takingDamage = false;
+    void OnAnimationMiddle()
+    {
+        if (attack)
+        {
+            if (targetCharacter)
+            {
+                targetCharacter.TakeDamage();
+                targetCharacter = null;
+                m_Target = null;
+            }
+        }
     }
 
-	void OnAttack1Finish() {
-	}
-
-	void OnAttack2Finish() {
+    void OnAnimationFinish() {
+        attack = false;
+        takingDamage = false;
+        UpdateAnimation();
     }
 }
