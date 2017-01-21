@@ -29,3 +29,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Visual Studio upgrade files
+Backup*/
+UpgradeLog*

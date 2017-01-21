@@ -32,10 +32,10 @@ public class EditorTools {
  //       CreateAnimation(texture, AssetDatabase.GetAssetPath(texture), 8);
 	//}
 
-	static public AnimationClip[] CreateAnimation(Texture2D texture, string spritesPath, int directionCount, int dirOffset, bool loop) {
+	static public AnimationClip[] CreateAnimation(Texture2D texture, int directionCount, int dirOffset, bool loop) {
+        var spritesPath = AssetDatabase.GetAssetPath(texture);
         var clips = new AnimationClip[directionCount];
 
-		string dir = spritesPath.Split('/')[2];
         Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(spritesPath).OfType<Sprite>().OrderBy(s => s.name.Length).ThenBy(s => s.name).ToArray();
 		int framesPerAnimation = sprites.Length / directionCount;
         string textureName = ExtractFileName(spritesPath);
@@ -104,9 +104,9 @@ class IsoAnimation : ScriptableObject
 {
     public int directionCount = 8;
     public int directionOffset = 0;
-    public bool loop = true;
-    public int newParameter = 456;
-    public Texture2D texture;
+    public bool loop = true; 
+    public Texture2D[] textures;
+    public AnimatorController controller;
 }
 
 class AnimationClipSettings
@@ -192,7 +192,6 @@ public static class ScriptableObjectUtility
         string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/New" + typeof(T).ToString() + ".asset");
 
         AssetDatabase.CreateAsset(asset, assetPathAndName);
-
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();
@@ -212,31 +211,63 @@ public class IsoAnimationEditor : Editor
         if (GUILayout.Button("Build"))
         {
             var assetPath = AssetDatabase.GetAssetPath(isoAnimation);
-            var spritesPath = AssetDatabase.GetAssetPath(isoAnimation.texture);
             var existingClips = new Dictionary<string, AnimationClip>();
-            foreach(var obj in AssetDatabase.LoadAllAssetsAtPath(assetPath))
+            //AnimatorController controller = null;
+            foreach (var obj in AssetDatabase.LoadAllAssetsAtPath(assetPath))
             {
                 var clip = obj as AnimationClip;
                 if (clip)
                     existingClips.Add(clip.name, clip);
+
+                //if (obj is AnimatorController)
+                //    controller = obj as AnimatorController;
             }
-            foreach(var clip in EditorTools.CreateAnimation(isoAnimation.texture, spritesPath, isoAnimation.directionCount, isoAnimation.directionOffset, isoAnimation.loop))
+
+            if (isoAnimation.controller == null)
+                isoAnimation.controller = AnimatorController.CreateAnimatorControllerAtPath("Assets/Animations/" + isoAnimation.name + ".controller");
+
+            isoAnimation.controller.name = isoAnimation.name;
+            if (isoAnimation.controller.layers.Length < 1)
+                isoAnimation.controller.AddLayer("layer 1");
+
+            foreach (var texture in isoAnimation.textures)
             {
-                if (existingClips.ContainsKey(clip.name))
+                var clips = EditorTools.CreateAnimation(texture, isoAnimation.directionCount, isoAnimation.directionOffset, isoAnimation.loop);
+                foreach (var clip in clips)
                 {
-                    EditorUtility.CopySerialized(clip, existingClips[clip.name]);
-                    existingClips.Remove(clip.name);
-                }
-                else
-                {
-                    AssetDatabase.AddObjectToAsset(clip, assetPath);
-                    AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(clip));
+                    if (existingClips.ContainsKey(clip.name))
+                    {
+                        EditorUtility.CopySerialized(clip, existingClips[clip.name]);
+                        existingClips.Remove(clip.name);
+                    }
+                    else
+                    {
+                        AssetDatabase.AddObjectToAsset(clip, assetPath);
+                    }
+
+                    var state = isoAnimation.controller.AddMotion(clip, 0);
+                    state.motion = clip;
+                    //AssetDatabase.AddObjectToAsset(state, "Assets/Animations/" + isoAnimation.name + ".controller");
                 }
             }
-            foreach(var clip in existingClips.Values)
+
+            //if (isoAnimation.controller)
+            //{
+            //    EditorUtility.CopySerialized(newController, isoAnimation.controller);
+            //}
+            //else
+            //{
+            //    EditorUtility.CopySerialized(newController, isoAnimation.controller);
+
+            //    //AssetDatabase.CreateAsset(newController, "Assets/Animations/" + isoAnimation.name + ".controller");
+            //    //isoAnimation.controller = newController;
+            //}
+
+            foreach (var clip in existingClips.Values)
             {
                 DestroyImmediate(clip, true);
             }
+
             AssetDatabase.ImportAsset(assetPath);
         }
     }
