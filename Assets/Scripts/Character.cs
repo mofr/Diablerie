@@ -44,7 +44,7 @@ public class Character : MonoBehaviour {
 	public int direction = 0;
 
 	Iso iso;
-	Animator animator;
+	IsoAnimator animator;
 	List<Pathing.Step> path = new List<Pathing.Step>();
 	float traveled = 0;
 	int targetDirection = 0;
@@ -57,7 +57,7 @@ public class Character : MonoBehaviour {
 
     void Start() {
 		iso = GetComponent<Iso>();
-		animator = GetComponent<Animator>();
+		animator = GetComponent<IsoAnimator>();
 	}
 
     void PathTo(Vector2 target, float minRange = 0.1f)
@@ -176,13 +176,12 @@ public class Character : MonoBehaviour {
 	}
 
 	void UpdateAnimation() {
-		bool preserveTime = false;
 		string animation;
 		animator.speed = 1.0f;
 		if (attack) {
 			animation = "Attack" + attackAnimation;
 			animator.speed = attackSpeed;
-		}
+        }
         else if (takingDamage)
         {
             animation = "TakeDamage";
@@ -194,23 +193,16 @@ public class Character : MonoBehaviour {
         else
         {
             animation = run ? "Run" : "Walk";
-            preserveTime = true;
             targetDirection = path[0].directionIndex;
         }
 
 		if (!attack && !takingDamage && direction != targetDirection) {
 			int diff = (int)Mathf.Sign(Tools.ShortestDelta(direction, targetDirection, directionCount));
 			direction = (direction + diff + directionCount) % directionCount;
-		}
+        }
 
-		animation += "_" + direction.ToString();
-		if (!animator.GetCurrentAnimatorStateInfo(0).IsName(animation)) {
-            if (preserveTime)
-				animator.Play(animation, 0, animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-			else
-				animator.Play(animation);
-		}
-	}
+        animator.SetState(animation);
+    }
 
 	public void LookAt(Vector3 target)
 	{
