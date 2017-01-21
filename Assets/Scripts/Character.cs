@@ -43,16 +43,21 @@ public class Character : MonoBehaviour {
     [HideInInspector]
 	public int direction = 0;
 
-	Iso iso;
+    Iso iso;
 	IsoAnimator animator;
 	List<Pathing.Step> path = new List<Pathing.Step>();
 	float traveled = 0;
 	int targetDirection = 0;
 	bool attack = false;
     bool takingDamage = false;
+    bool dying = false;
+    bool dead = false;
     GameObject m_Target;
     Usable usable;
     Character targetCharacter;
+    int attackDamage = 30;
+    int health = 100;
+    int maxHealth = 100;
 
     void Start() {
 		iso = GetComponent<Iso>();
@@ -176,7 +181,12 @@ public class Character : MonoBehaviour {
 	void UpdateAnimation() {
 		string animation;
 		animator.speed = 1.0f;
-		if (attack) {
+        if (dying || dead)
+        {
+            animation = "Death";
+        }
+        else if (attack)
+        {
             animation = "Attack";
 			animator.speed = attackSpeed;
         }
@@ -223,9 +233,19 @@ public class Character : MonoBehaviour {
         this.targetCharacter = targetCharacter;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(Character originator, int damage)
     {
-        takingDamage = true;
+        health -= damage;
+        if (health > 0)
+        {
+            takingDamage = true;
+        }
+        else
+        {
+            direction = Iso.Direction(iso.tilePos, originator.iso.tilePos, directionCount);
+            targetDirection = direction;
+            dying = true;
+        }
     }
 
     void OnAnimationMiddle()
@@ -234,7 +254,7 @@ public class Character : MonoBehaviour {
         {
             if (targetCharacter)
             {
-                targetCharacter.TakeDamage();
+                targetCharacter.TakeDamage(this, attackDamage);
                 targetCharacter = null;
                 m_Target = null;
             }
@@ -244,6 +264,10 @@ public class Character : MonoBehaviour {
     void OnAnimationFinish() {
         attack = false;
         takingDamage = false;
+        if (dying)
+        {
+            dead = true;
+        }
         UpdateAnimation();
     }
 }

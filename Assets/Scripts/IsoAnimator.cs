@@ -47,7 +47,6 @@ public class IsoAnimator : MonoBehaviour {
         }
 
         SetState(firstState);
-        frameDuration = 1.0f / anim.fps;
     }
 	
 	void Update () {
@@ -108,5 +107,6 @@ public class IsoAnimator : MonoBehaviour {
         spritesPerDirection = variation.sprites.Length / anim.directionCount;
         if (spritesPerDirection == 0)
             spritesPerDirection = 1;
+        frameDuration = 1.0f / variation.fps;
     }
 }
