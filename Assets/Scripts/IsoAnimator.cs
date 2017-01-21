@@ -11,32 +11,63 @@ public class IsoAnimator : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     Character character;
     float time = 0;
-    IsoAnimation.State state;
+    State state;
+    IsoAnimation.State variation;
     int frameIndex = 0;
     float frameDuration;
     int spritesPerDirection;
+    public Dictionary<string, State> states = new Dictionary<string, State>();
+
+    public class State
+    {
+        public string name;
+        public List<IsoAnimation.State> variations = new List<IsoAnimation.State>();
+    }
 
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
         character = GetComponent<Character>();
 
-        SetState(anim.states[0]);
+        State firstState = null;
+        foreach(var state in anim.states)
+        {
+            if (states.ContainsKey(state.name))
+            {
+                states[state.name].variations.Add(state);
+            }
+            else
+            {
+                var newState = new State();
+                newState.name = state.name;
+                newState.variations.Add(state);
+                states.Add(state.name, newState);
+                if (firstState == null)
+                    firstState = newState;
+            }
+        }
+
+        SetState(firstState);
         frameDuration = 1.0f / anim.fps;
     }
 	
 	void Update () {
+        if (frameIndex >= spritesPerDirection - 1)
+            return;
         time += Time.deltaTime * speed;
         while (time >= frameDuration)
         {
             time -= frameDuration;
-            if (frameIndex < spritesPerDirection - 1 || state.loop)
+            if (frameIndex < spritesPerDirection - 1)
                 frameIndex += 1;
             if (frameIndex == spritesPerDirection / 2)
                 SendMessage("OnAnimationMiddle", SendMessageOptions.DontRequireReceiver);
             if (frameIndex == spritesPerDirection - 1)
+            {
                 SendMessage("OnAnimationFinish", SendMessageOptions.DontRequireReceiver);
+                if (variation.loop)
+                    SetupState();
+            }
         }
-        frameIndex = frameIndex % spritesPerDirection;
     }
 
     void LateUpdate()
@@ -50,25 +81,18 @@ public class IsoAnimator : MonoBehaviour {
         if (character)
             direction = (character.direction + anim.directionOffset) % anim.directionCount;
         int spriteIndex = direction * spritesPerDirection + frameIndex;
-        spriteRenderer.sprite = state.sprites[spriteIndex];
+        spriteRenderer.sprite = variation.sprites[spriteIndex];
     }
 
     public void SetState(string stateName)
     {
         if (stateName == state.name)
             return;
-        
-        foreach (var state in anim.states)
-        {
-            if (state.name == stateName)
-            {
-                SetState(state);
-                break;
-            }
-        }
+
+        SetState(states[stateName]);
     }
 
-    public void SetState(IsoAnimation.State state)
+    public void SetState(State state)
     {
         if (this.state == state)
             return;
@@ -80,7 +104,8 @@ public class IsoAnimator : MonoBehaviour {
     void SetupState()
     {
         frameIndex = 0;
-        spritesPerDirection = state.sprites.Length / anim.directionCount;
+        variation = state.variations[Random.Range(0, state.variations.Count)];
+        spritesPerDirection = variation.sprites.Length / anim.directionCount;
         if (spritesPerDirection == 0)
             spritesPerDirection = 1;
     }

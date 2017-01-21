@@ -49,7 +49,6 @@ public class Character : MonoBehaviour {
 	float traveled = 0;
 	int targetDirection = 0;
 	bool attack = false;
-	int attackAnimation;
     bool takingDamage = false;
     GameObject m_Target;
     Usable usable;
@@ -136,7 +135,6 @@ public class Character : MonoBehaviour {
                 if (Vector2.Distance(target, iso.tilePos) <= attackRange)
                 {
                     attack = true;
-                    attackAnimation = Random.Range(1, 3);
                     direction = Iso.Direction(iso.tilePos, target, directionCount);
                 }
             }
@@ -179,7 +177,7 @@ public class Character : MonoBehaviour {
 		string animation;
 		animator.speed = 1.0f;
 		if (attack) {
-			animation = "Attack" + attackAnimation;
+            animation = "Attack";
 			animator.speed = attackSpeed;
         }
         else if (takingDamage)
@@ -212,7 +210,6 @@ public class Character : MonoBehaviour {
     public void Attack() {
 		if (!attack && !takingDamage && direction == targetDirection && path.Count == 0) {
 			attack = true;
-            attackAnimation = Random.Range(1, 3);
 		}
 	}
 
@@ -230,6 +227,7 @@ public class Character : MonoBehaviour {
     {
         takingDamage = true;
     }
+
     void OnAnimationMiddle()
     {
         if (attack)

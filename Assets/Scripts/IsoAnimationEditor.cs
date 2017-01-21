@@ -29,7 +29,8 @@ public class IsoAnimationEditor : Editor
         {
             if (state.texture)
             {
-                state.name = state.texture.name;
+                if (state.name == null || state.name.Length == 0)
+                    state.name = state.texture.name;
                 var spritesPath = AssetDatabase.GetAssetPath(state.texture);
                 state.sprites = AssetDatabase.LoadAllAssetsAtPath(spritesPath).OfType<Sprite>().OrderBy(s => s.name.Length).ThenBy(s => s.name).ToArray();
             }
