@@ -11,6 +11,9 @@ public class Character : MonoBehaviour {
     public float attackRange = 2.5f;
     public bool run = false;
 
+    public delegate void TakeDamageHandler(Character originator, int damage);
+    public event TakeDamageHandler OnTakeDamage;
+
     [HideInInspector]
     public GameObject target
     {
@@ -55,11 +58,12 @@ public class Character : MonoBehaviour {
     GameObject m_Target;
     Usable usable;
     Character targetCharacter;
-    int attackDamage = 30;
+    public int attackDamage = 30;
     int health = 100;
     int maxHealth = 100;
 
-    void Start() {
+    void Awake()
+    {
 		iso = GetComponent<Iso>();
 		animator = GetComponent<IsoAnimator>();
 	}
@@ -79,7 +83,7 @@ public class Character : MonoBehaviour {
 	}
 
 	public void GoTo(Vector2 target) {
-		if (attack || takingDamage)
+		if (attack || takingDamage || dying || dead)
 			return;
 
         PathTo(target);
@@ -204,7 +208,7 @@ public class Character : MonoBehaviour {
             targetDirection = path[0].directionIndex;
         }
 
-		if (!attack && !takingDamage && direction != targetDirection) {
+		if (!dead && !dying && !attack && !takingDamage && direction != targetDirection) {
 			int diff = (int)Mathf.Sign(Tools.ShortestDelta(direction, targetDirection, directionCount));
 			direction = (direction + diff + directionCount) % directionCount;
         }
@@ -218,7 +222,7 @@ public class Character : MonoBehaviour {
     }
 
     public void Attack() {
-		if (!attack && !takingDamage && direction == targetDirection && path.Count == 0) {
+		if (!dead && !dying && !attack && !takingDamage && direction == targetDirection && path.Count == 0) {
 			attack = true;
 		}
 	}
@@ -238,6 +242,8 @@ public class Character : MonoBehaviour {
         health -= damage;
         if (health > 0)
         {
+            if (OnTakeDamage != null)
+                OnTakeDamage(originator, damage);
             takingDamage = true;
         }
         else
