@@ -3171,7 +3171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Goatman
+  m_Text: Enemy name
 --- !u!222 &286237966
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18135,6 +18135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 185270960}
+  title: {fileID: 286237965}
   character: {fileID: 0}
 --- !u!1 &1582433324
 GameObject:

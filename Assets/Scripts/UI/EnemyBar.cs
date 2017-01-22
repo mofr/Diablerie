@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 public class EnemyBar : MonoBehaviour {
 
-    public Slider slider;
+    [SerializeField]
+    Slider slider;
+
+    [SerializeField]
+    Text title;
+
     [HideInInspector]
     public Character character;
+
     static public EnemyBar instance;
 
     void Awake()
@@ -20,6 +26,7 @@ public class EnemyBar : MonoBehaviour {
         slider.gameObject.SetActive(character != null);
         if (character)
         {
+            title.text = character.name;
             slider.maxValue = character.maxHealth;
             slider.value = character.health;
         }
