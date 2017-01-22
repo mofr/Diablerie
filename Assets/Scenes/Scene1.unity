@@ -10786,6 +10786,10 @@ Prefab:
       propertyPath: m_Name
       value: Goatman (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1548379781030528, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}
   m_IsPrefabParent: 0
@@ -20205,6 +20209,10 @@ Prefab:
       propertyPath: m_Name
       value: Goatman (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1548379781030528, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}
   m_IsPrefabParent: 0
@@ -21419,6 +21427,10 @@ Prefab:
     - target: {fileID: 1548379781030528, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}
       propertyPath: m_Name
       value: Goatman (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548379781030528, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ddebe38050038cf44a043cd9adfb921d, type: 2}

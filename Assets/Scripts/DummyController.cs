@@ -21,7 +21,6 @@ public class DummyController : MonoBehaviour {
 
     void OnTakeDamage(Character originator, int damage)
     {
-        StopCoroutine("Roam");
         target = originator;
         StartCoroutine(Attack());
     }
@@ -29,7 +28,7 @@ public class DummyController : MonoBehaviour {
     IEnumerator Roam()
     {
         yield return new WaitForEndOfFrame();
-        while (true)
+        while (!target)
         {
             var target = iso.tilePos + new Vector2(Random.Range(-8, 8), Random.Range(-8, 8));
             character.GoTo(target);

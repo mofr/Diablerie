@@ -76,7 +76,7 @@ public class Character : MonoBehaviour {
     }
 
 	public void Use(Usable usable) {
-        if (attack || takingDamage)
+        if (attack || takingDamage || dying || dead)
             return;
         PathTo(usable.GetComponent<Iso>().tilePos, useRange);
 		this.usable = usable;
@@ -130,7 +130,7 @@ public class Character : MonoBehaviour {
 
 		Move();
 
-		if (path.Count == 0) {
+		if (path.Count == 0 && !takingDamage && !dead && !dying) {
             if (usable)
             {
                 if (Vector2.Distance(usable.GetComponent<Iso>().tilePos, iso.tilePos) <= useRange)
@@ -144,7 +144,7 @@ public class Character : MonoBehaviour {
                 if (Vector2.Distance(target, iso.tilePos) <= attackRange)
                 {
                     attack = true;
-                    direction = Iso.Direction(iso.tilePos, target, directionCount);
+                    targetDirection = direction = Iso.Direction(iso.tilePos, target, directionCount);
                 }
             }
         }
@@ -153,7 +153,7 @@ public class Character : MonoBehaviour {
 	}
 
 	void Move() {
-		if (path.Count == 0)
+		if (path.Count == 0 || attack || takingDamage || dead || dying)
 			return;
 
 		Vector2 step = path[0].direction;
@@ -229,7 +229,7 @@ public class Character : MonoBehaviour {
 
     public void Attack(Character targetCharacter)
     {
-        if (attack || takingDamage)
+        if (attack || takingDamage || dead || dying)
             return;
 
         Iso targetIso = targetCharacter.GetComponent<Iso>();
@@ -245,6 +245,7 @@ public class Character : MonoBehaviour {
             if (OnTakeDamage != null)
                 OnTakeDamage(originator, damage);
             takingDamage = true;
+            attack = false;
         }
         else
         {
@@ -272,6 +273,7 @@ public class Character : MonoBehaviour {
         takingDamage = false;
         if (dying)
         {
+            dying = false;
             dead = true;
         }
         UpdateAnimation();
