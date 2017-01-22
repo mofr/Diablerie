@@ -48,7 +48,8 @@ public class Character : MonoBehaviour {
 
     Iso iso;
 	IsoAnimator animator;
-	List<Pathing.Step> path = new List<Pathing.Step>();
+    SpriteRenderer spriteRenderer;
+    List<Pathing.Step> path = new List<Pathing.Step>();
 	float traveled = 0;
 	int targetDirection = 0;
 	bool attack = false;
@@ -66,7 +67,8 @@ public class Character : MonoBehaviour {
     {
 		iso = GetComponent<Iso>();
 		animator = GetComponent<IsoAnimator>();
-	}
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     void PathTo(Vector2 target, float minRange = 0.1f)
     {
@@ -249,9 +251,9 @@ public class Character : MonoBehaviour {
         }
         else
         {
-            direction = Iso.Direction(iso.tilePos, originator.iso.tilePos, directionCount);
-            targetDirection = direction;
+            targetDirection = direction = Iso.Direction(iso.tilePos, originator.iso.tilePos, directionCount);
             dying = true;
+            attack = false;
         }
     }
 
@@ -273,6 +275,7 @@ public class Character : MonoBehaviour {
         takingDamage = false;
         if (dying)
         {
+            spriteRenderer.sortingLayerName = "OnFloor";
             dying = false;
             dead = true;
         }
