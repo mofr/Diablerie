@@ -59,8 +59,8 @@ public class Character : MonoBehaviour {
     Usable usable;
     Character targetCharacter;
     public int attackDamage = 30;
-    int health = 100;
-    int maxHealth = 100;
+    public int health = 100;
+    public int maxHealth = 100;
 
     void Awake()
     {

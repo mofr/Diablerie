@@ -55,6 +55,12 @@ public class PlayerController : MonoBehaviour {
             {
                 var spriteRenderer = hover.GetComponent<SpriteRenderer>();
                 spriteRenderer.material.SetFloat("_SelfIllum", 1.75f);
+
+                EnemyBar.instance.character = hover.GetComponent<Character>();
+            }
+            else
+            {
+                EnemyBar.instance.character = null;
             }
         }
     }
