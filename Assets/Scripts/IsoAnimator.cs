@@ -16,7 +16,7 @@ public class IsoAnimator : MonoBehaviour {
     int frameIndex = 0;
     float frameDuration;
     int spritesPerDirection;
-    public Dictionary<string, State> states = new Dictionary<string, State>();
+    Dictionary<string, State> states = new Dictionary<string, State>();
 
     public class State
     {
@@ -50,17 +50,17 @@ public class IsoAnimator : MonoBehaviour {
     }
 	
 	void Update () {
-        if (frameIndex >= spritesPerDirection - 1)
+        if (!variation.loop && frameIndex >= spritesPerDirection - 1)
             return;
         time += Time.deltaTime * speed;
         while (time >= frameDuration)
         {
             time -= frameDuration;
-            if (frameIndex < spritesPerDirection - 1)
+            if (frameIndex < spritesPerDirection)
                 frameIndex += 1;
             if (frameIndex == spritesPerDirection / 2)
                 SendMessage("OnAnimationMiddle", SendMessageOptions.DontRequireReceiver);
-            if (frameIndex == spritesPerDirection - 1)
+            if (frameIndex == spritesPerDirection)
             {
                 SendMessage("OnAnimationFinish", SendMessageOptions.DontRequireReceiver);
                 if (variation.loop)
@@ -79,7 +79,7 @@ public class IsoAnimator : MonoBehaviour {
         int direction = 0;
         if (character)
             direction = (character.direction + anim.directionOffset) % anim.directionCount;
-        int spriteIndex = direction * spritesPerDirection + frameIndex;
+        int spriteIndex = direction * spritesPerDirection + frameIndex % spritesPerDirection;
         spriteRenderer.sprite = variation.sprites[spriteIndex];
     }
 

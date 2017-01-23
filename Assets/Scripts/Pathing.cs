@@ -99,14 +99,17 @@ public class Pathing {
 	}
 
 	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8, float minRange = 0.1f) {
-		directions = directionCount == 8 ? directions8 : directions16;
-		Pathing.target = target;
+        from = Iso.Snap(from);
+        target = Iso.Snap(target);
+        path.Clear();
+        if (from == target)
+            return path;
 		Node.Recycle(openNodes);
 		Node.Recycle(closeNodes);
-		path.Clear();
-		if (from == target)
-			return path;
-		Node startNode = Node.Get();
+
+        directions = directionCount == 8 ? directions8 : directions16;
+        Pathing.target = target;
+        Node startNode = Node.Get();
 		startNode.parent = null;
 		startNode.pos = from;
 		startNode.gScore = 0;

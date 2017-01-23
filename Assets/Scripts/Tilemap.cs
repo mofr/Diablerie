@@ -16,6 +16,8 @@ public class Tilemap : MonoBehaviour {
 		map = new bool[width * height];
 		origin = map.Length / 2;
 		instance = this;
+        for (int i = 0; i < map.Length; ++i)
+            map[i] = true;
 	}
 
 	class TileOrderComparer : IComparer<Tile> {

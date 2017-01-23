@@ -30,7 +30,7 @@ public class DummyController : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         while (!target)
         {
-            var target = iso.tilePos + new Vector2(Random.Range(-8, 8), Random.Range(-8, 8));
+            var target = iso.pos + new Vector2(Random.Range(-8, 8), Random.Range(-8, 8));
             character.GoTo(target);
             yield return new WaitForSeconds(Random.Range(1, 5));
         }

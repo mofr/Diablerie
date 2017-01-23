@@ -10,7 +10,6 @@ public class Iso : MonoBehaviour {
 	static public float tileSize = 0.2f;
     static public float tileSizeY = tileSize / 2;
     public Vector2 pos;
-	public Vector2 tilePos;
     public bool macro = false;
 	public bool sort = true;
 
@@ -70,7 +69,6 @@ public class Iso : MonoBehaviour {
 
 	void Awake() {
 		pos = MapToIso(transform.position);
-		tilePos = Snap(pos);
 		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 

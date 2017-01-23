@@ -75,24 +75,28 @@ public class PlayerController : MonoBehaviour {
 			targetTile = IsoInput.mouseTile;
 		}
 		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
-		Pathing.BuildPath(iso.tilePos, targetTile, character.directionCount, character.useRange);
+		Pathing.BuildPath(iso.pos, targetTile, character.directionCount, character.useRange);
 
-		if (Input.GetKeyDown(KeyCode.F4)) {
+        character.LookAt(IsoInput.mousePosition);
+
+        if (Input.GetKeyDown(KeyCode.F4)) {
 			character.Teleport(IsoInput.mouseTile);
 		}
 
-		if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0))) {
-			character.Attack();
-		}
-		else if (Input.GetMouseButton(0)) {
-			if (hover != null) {
+        if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
+        {
+            character.Attack();
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            if (hover != null)
+            {
                 character.target = hover;
-			} else {
-				character.GoTo(targetTile);
-			}
-		}
-
-		character.LookAt(IsoInput.mousePosition);
+            }
+            else {
+                character.GoTo(IsoInput.mousePosition);
+            }
+        }
 
 		if (Input.GetKeyDown(KeyCode.Tab)) {
 			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {
