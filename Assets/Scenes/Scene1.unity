@@ -6628,8 +6628,9 @@ MonoBehaviour:
   directionCount: 16
   speed: 14
   attackSpeed: 2.2
-  useRange: 2
-  attackRange: 3.5
+  useRange: 1
+  attackRange: 2
+  diameter: 2
   run: 1
   direction: 0
   attackDamage: 30

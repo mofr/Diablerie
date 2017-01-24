@@ -7,8 +7,9 @@ public class Character : MonoBehaviour {
 	public int directionCount = 8;
 	public float speed = 3.5f;
 	public float attackSpeed = 1.0f;
-    public float useRange = 1.5f;
-    public float attackRange = 2.5f;
+    public float useRange = 1f;
+    public float attackRange = 1f;
+    public float diameter = 1f;
     public bool run = false;
 
     public delegate void TakeDamageHandler(Character originator, int damage);
@@ -143,7 +144,7 @@ public class Character : MonoBehaviour {
 		if (path.Count == 0 && !takingDamage && !dead && !dying) {
             if (usable)
             {
-                if (Vector2.Distance(usable.GetComponent<Iso>().pos, iso.pos) <= useRange)
+                if (Vector2.Distance(usable.GetComponent<Iso>().pos, iso.pos) <= useRange + diameter / 2)
                     usable.Use();
                 usable = null;
                 m_Target = null;
@@ -151,15 +152,15 @@ public class Character : MonoBehaviour {
             if (targetCharacter && !attack)
             {
                 Vector2 target = targetCharacter.GetComponent<Iso>().pos;
-                if (Vector2.Distance(target, iso.pos) <= attackRange)
+                if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + targetCharacter.diameter / 2)
                 {
                     attack = true;
-                    desiredDirection = direction = Iso.Direction(iso.pos, target, directionCount);
+                    LookAtImmidietly(target);
                 }
             }
         }
 
-        UpdateDirection();
+        Turn();
 	}
 
     void LateUpdate()
@@ -167,7 +168,7 @@ public class Character : MonoBehaviour {
         UpdateAnimation();
     }
 
-    void UpdateDirection()
+    void Turn()
     {
         if (!dead && !dying && !attack && !takingDamage && direction != desiredDirection)
         {
@@ -191,8 +192,10 @@ public class Character : MonoBehaviour {
 			distance -= firstPart;
 			traveled += firstPart - stepLen;
 			path.RemoveAt(0);
-			if (path.Count > 0)
-				step = path[0].direction;
+            if (path.Count > 0)
+            {
+                step = path[0].direction;
+            }
 		}
 		if (path.Count > 0) {
 			traveled += distance;
@@ -233,7 +236,7 @@ public class Character : MonoBehaviour {
     }
 
     void UpdateAnimation() {
-		string animation;
+        string animation;
 		animator.speed = 1.0f;
         if (dying || dead)
         {
@@ -262,7 +265,13 @@ public class Character : MonoBehaviour {
 
 	public void LookAt(Vector3 target)
 	{
-        desiredDirection = Iso.Direction(iso.pos, target, directionCount);
+        if (!moving)
+            desiredDirection = Iso.Direction(iso.pos, target, directionCount);
+    }
+
+    public void LookAtImmidietly(Vector3 target)
+    {
+        direction = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
     }
 
     public void Attack() {
@@ -277,7 +286,7 @@ public class Character : MonoBehaviour {
             return;
 
         Iso targetIso = targetCharacter.GetComponent<Iso>();
-        PathTo(targetIso.pos, attackRange);
+        PathTo(targetIso.pos, attackRange + diameter / 2 + targetCharacter.diameter / 2);
         this.targetCharacter = targetCharacter;
     }
 
@@ -293,11 +302,12 @@ public class Character : MonoBehaviour {
         }
         else
         {
-            desiredDirection = direction = Iso.Direction(iso.pos, originator.iso.pos, directionCount);
+            LookAtImmidietly(originator.iso.pos);
             dying = true;
             attack = false;
         }
         moving = false;
+        targetCharacter = null;
     }
 
     void OnAnimationMiddle()
