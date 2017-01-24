@@ -87,16 +87,34 @@ public class Pathing {
 			newNode.Recycle();
 	}
 
+    static private void Collapse(Node node)
+    {
+        while (node.parent != null && node.parent.parent != null)
+        {
+            bool passable = true; // todo real raycast
+            if (passable)
+            {
+                node.parent = node.parent.parent;
+                node.parent.direction = node.pos - node.parent.pos;
+                node.parent.directionIndex = Iso.Direction(node.parent.pos, node.pos, directions.Length);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
 	static private void TraverseBack(Node node) {
-		while (node.parent != null) {
-			Step step = new Step();
+        while (node.parent != null) {
+            Step step = new Step();
 			step.direction = node.direction;
 			step.directionIndex = node.directionIndex;
 			step.pos = node.pos;
 			path.Insert(0, step);
 			node = node.parent;
 		}
-	}
+    }
 
 	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8, float minRange = 0.1f) {
         from = Iso.Snap(from);
@@ -135,12 +153,12 @@ public class Pathing {
 				break;
 			}
 		}
-		foreach (Node node in closeNodes) {
-			Iso.DebugDrawTile(node.pos, Color.magenta, 0.3f);
-		}
-		foreach (Node node in openNodes) {
-			Iso.DebugDrawTile(node.pos, Color.green, 0.3f);
-		}
+		//foreach (Node node in closeNodes) {
+		//	Iso.DebugDrawTile(node.pos, Color.magenta, 0.3f);
+		//}
+		//foreach (Node node in openNodes) {
+		//	Iso.DebugDrawTile(node.pos, Color.green, 0.3f);
+		//}
 		return path;
 	}
 
@@ -148,5 +166,11 @@ public class Pathing {
 		for (int i = 0; i < path.Count - 1; ++i) {
 			Debug.DrawLine(Iso.MapToWorld(path[i].pos), Iso.MapToWorld(path[i + 1].pos));
 		}
+        if (path.Count > 0)
+        {
+            var center = Iso.MapToWorld(path[path.Count - 1].pos);
+            Debug.DrawLine(center + Iso.MapToWorld(new Vector2(0, 0.1f)), center + Iso.MapToWorld(new Vector2(0, -0.1f)));
+            Debug.DrawLine(center + Iso.MapToWorld(new Vector2(-0.1f, 0)), center + Iso.MapToWorld(new Vector2(0.1f, 0)));
+        }
 	}
 }

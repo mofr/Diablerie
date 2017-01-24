@@ -75,7 +75,8 @@ public class PlayerController : MonoBehaviour {
 			targetTile = IsoInput.mouseTile;
 		}
 		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
-		Pathing.BuildPath(iso.pos, targetTile, character.directionCount, character.useRange);
+		//var path = Pathing.BuildPath(iso.pos, targetTile, character.directionCount, character.useRange);
+        //Pathing.DebugDrawPath(path);
 
         character.LookAt(IsoInput.mousePosition);
 
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour {
                 character.target = hover;
             }
             else {
-                character.GoTo(IsoInput.mousePosition);
+                character.GoToSmooth(IsoInput.mousePosition);
             }
         }
 

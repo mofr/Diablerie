@@ -31,7 +31,7 @@ public class DummyController : MonoBehaviour {
         while (!target)
         {
             var target = iso.pos + new Vector2(Random.Range(-8, 8), Random.Range(-8, 8));
-            character.GoTo(target);
+            character.GoToSmooth(target);
             yield return new WaitForSeconds(Random.Range(1, 5));
         }
     }

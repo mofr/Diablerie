@@ -98,8 +98,20 @@ public class Character : MonoBehaviour {
         if (attack || takingDamage || dying || dead)
             return;
 
-        targetPoint = target;
-        moving = true;
+        var dir = (target - iso.pos).normalized;
+        var forePos = iso.pos + dir * diameter;
+        Debug.DrawLine(Iso.MapToWorld(iso.pos), Iso.MapToWorld(forePos));
+        Iso.DebugDrawTile(Iso.Snap(forePos), Color.yellow, 0.2f);
+        if (Tilemap.instance[Iso.Snap(forePos)])
+        {
+            AbortMovement();
+            targetPoint = target;
+            moving = true;
+        }
+        else
+        {
+            GoTo(target);
+        }
     }
 
     public void Teleport(Vector2 target) {
@@ -224,9 +236,18 @@ public class Character : MonoBehaviour {
             return;
         }
 
-        float distance = speed * Time.deltaTime;
         var dir = (targetPoint - iso.pos).normalized;
+        var forePos = iso.pos + dir * diameter;
+        Debug.DrawLine(Iso.MapToWorld(iso.pos), Iso.MapToWorld(forePos));
+        Iso.DebugDrawTile(Iso.Snap(forePos), Color.yellow, 0.2f);
+        if (!Tilemap.instance[Iso.Snap(forePos)])
+        {
+            PathTo(targetPoint);
+            return;
+        }
+        float distance = speed * Time.deltaTime;
         iso.pos += dir * distance;
+        desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
 
         if (Vector2.Distance(iso.pos, targetPoint) < 1)
         {
