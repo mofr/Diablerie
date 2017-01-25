@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
                 character.target = hover;
             }
             else {
-                character.GoToSmooth(IsoInput.mousePosition);
+                character.GoTo(IsoInput.mousePosition);
             }
         }
 
