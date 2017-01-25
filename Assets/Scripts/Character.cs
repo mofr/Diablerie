@@ -73,30 +73,30 @@ public class Character : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void PathTo(Vector2 target, float minRange = 0.1f)
+    bool DirectlyAccessible(Vector2 target)
     {
-        AbortPath();
+        int stepCount = 10;
+        float stepLen = 0.5f;
         var dir = (target - iso.pos).normalized;
-        var forePos = iso.pos + dir * (diameter / 2 + 1);
-        Debug.DrawLine(Iso.MapToWorld(iso.pos), Iso.MapToWorld(forePos));
-        Iso.DebugDrawTile(Iso.Snap(forePos), Color.yellow, 0.2f);
-        if (Tilemap.instance[Iso.Snap(forePos)])
+        for (int i = 0; i < stepCount; ++i)
         {
-            targetPoint = target;
-            moving = true;
+            var forePos = iso.pos + dir * (diameter / 2 + stepLen * i);
+            Debug.DrawLine(Iso.MapToWorld(iso.pos), Iso.MapToWorld(forePos));
+            Iso.DebugDrawTile(Iso.Snap(forePos), Color.yellow, 0.2f);
+            if (!Tilemap.instance[Iso.Snap(forePos)])
+                return false;
         }
-        else
-        {
-            path.AddRange(Pathing.BuildPath(iso.pos, target, directionCount, minRange));
-        }
+        return true;
     }
 
 	public void Use(Usable usable) {
         if (attack || takingDamage || dying || dead)
             return;
-        PathTo(usable.GetComponent<Iso>().pos, useRange);
+        targetPoint = usable.GetComponent<Iso>().pos;
 		this.usable = usable;
-	}
+        targetCharacter = null;
+        moving = true;
+    }
 
     public void GoTo(Vector2 target)
     {
@@ -105,7 +105,6 @@ public class Character : MonoBehaviour {
 
         moving = true;
         targetPoint = target;
-        AbortPath();
         usable = null;
         targetCharacter = null;
     }
@@ -123,31 +122,39 @@ public class Character : MonoBehaviour {
 		}
 		path.Clear();
 		traveled = 0;
+        moving = false;
 	}
+    public void Attack()
+    {
+        if (!dead && !dying && !attack && !takingDamage && direction == desiredDirection && !moving)
+        {
+            attack = true;
+        }
+    }
+
+    public void Attack(Character targetCharacter)
+    {
+        if (attack || takingDamage || dead || dying)
+            return;
+
+        Iso targetIso = targetCharacter.GetComponent<Iso>();
+        targetPoint = targetIso.pos;
+        this.targetCharacter = targetCharacter;
+        usable = null;
+        moving = true;
+    }
 
     void AbortPath()
     {
         m_Target = null;
-
-        if (path.Count > 0)
-        {
-            var firstStep = path[0];
-            path.Clear();
-            path.Add(firstStep);
-        }
-        else {
-            path.Clear();
-            traveled = 0;
-        }
+        path.Clear();
+        traveled = 0;
     }
 
 	void Update() {
-		Pathing.DebugDrawPath(path);
+        Pathing.DebugDrawPath(path);
 
-        MoveToTargetPoint();
-        MoveAlongPath();
-
-		if (!takingDamage && !dead && !dying) {
+        if (!takingDamage && !dead && !dying) {
             if (usable)
             {
                 if (Vector2.Distance(usable.GetComponent<Iso>().pos, iso.pos) <= useRange + diameter / 2)
@@ -170,6 +177,7 @@ public class Character : MonoBehaviour {
             }
         }
 
+        MoveToTargetPoint();
         Turn();
 	}
 
@@ -223,24 +231,29 @@ public class Character : MonoBehaviour {
 
     void MoveToTargetPoint()
     {
-        if (path.Count > 0 || !moving || attack || takingDamage || dead || dying)
+        if (!moving)
             return;
 
-        if (Vector2.Distance(iso.pos, targetPoint) < 1)
+        if (DirectlyAccessible(targetPoint))
         {
-            moving = false;
-            return;
+            AbortPath();
+            var dir = (targetPoint - iso.pos).normalized;
+            float distance = speed * Time.deltaTime;
+            iso.pos += dir * distance;
+            desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
+        }
+        else
+        {
+            var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
+            if (path.Count == 0 || newPath.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
+            {
+                AbortPath();
+                path.AddRange(newPath);
+            }
+            MoveAlongPath();
         }
 
-        PathTo(targetPoint);
-        if (path.Count > 0)
-            return;
-        var dir = (targetPoint - iso.pos).normalized;
-        float distance = speed * Time.deltaTime;
-        iso.pos += dir * distance;
-        desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
-
-        if (Vector2.Distance(iso.pos, targetPoint) < 1)
+        if (usable == null && targetCharacter == null && Vector2.Distance(iso.pos, targetPoint) < 1)
         {
             moving = false;
         }
@@ -283,23 +296,6 @@ public class Character : MonoBehaviour {
     public void LookAtImmidietly(Vector3 target)
     {
         direction = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
-    }
-
-    public void Attack() {
-		if (!dead && !dying && !attack && !takingDamage && direction == desiredDirection && path.Count == 0) {
-			attack = true;
-		}
-	}
-
-    public void Attack(Character targetCharacter)
-    {
-        if (attack || takingDamage || dead || dying)
-            return;
-
-        Iso targetIso = targetCharacter.GetComponent<Iso>();
-        PathTo(targetIso.pos, attackRange + diameter / 2 + targetCharacter.diameter / 2);
-        this.targetCharacter = targetCharacter;
-        usable = null;
     }
 
     public void TakeDamage(Character originator, int damage)
