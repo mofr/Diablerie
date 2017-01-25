@@ -77,6 +77,36 @@ public class Tilemap : MonoBehaviour {
 		}
 	}
 
+    public struct RaycastHit
+    {
+        public bool hit;
+        public Vector2 pos;
+
+        public static implicit operator bool(RaycastHit value)
+        {
+            return value.hit;
+        }
+    }
+
+    static public RaycastHit Raycast(Vector2 from, Vector2 to, float maxRayLength = Mathf.Infinity)
+    {
+        var hit = new RaycastHit();
+        var diff = to - from;
+        var stepLen = 0.1f;
+        float rayLength = Mathf.Min(diff.magnitude, maxRayLength);
+        int stepCount = Mathf.RoundToInt(rayLength / stepLen);
+        var step = diff.normalized * stepLen;
+        var pos = from;
+        for (int i = 0; i < stepCount; ++i)
+        {
+            pos += step;
+            hit.hit = !instance[Iso.Snap(pos)];
+            if (hit.hit)
+                break;
+        }
+        return hit;
+    }
+
     void OnDrawGizmos()
     {
         var cameraTile = Iso.MacroTile(Iso.MapToIso(Camera.current.transform.position));

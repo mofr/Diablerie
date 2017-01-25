@@ -73,22 +73,6 @@ public class Character : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    bool DirectlyAccessible(Vector2 target)
-    {
-        int stepCount = 10;
-        float stepLen = 0.5f;
-        var dir = (target - iso.pos).normalized;
-        for (int i = 0; i < stepCount; ++i)
-        {
-            var forePos = iso.pos + dir * (diameter / 2 + stepLen * i);
-            Debug.DrawLine(Iso.MapToWorld(iso.pos), Iso.MapToWorld(forePos));
-            Iso.DebugDrawTile(Iso.Snap(forePos), Color.yellow, 0.2f);
-            if (!Tilemap.instance[Iso.Snap(forePos)])
-                return false;
-        }
-        return true;
-    }
-
 	public void Use(Usable usable) {
         if (attack || takingDamage || dying || dead)
             return;
@@ -124,6 +108,7 @@ public class Character : MonoBehaviour {
 		traveled = 0;
         moving = false;
 	}
+
     public void Attack()
     {
         if (!dead && !dying && !attack && !takingDamage && direction == desiredDirection && !moving)
@@ -152,8 +137,6 @@ public class Character : MonoBehaviour {
     }
 
 	void Update() {
-        Pathing.DebugDrawPath(path);
-
         if (!takingDamage && !dead && !dying) {
             if (usable)
             {
@@ -234,9 +217,9 @@ public class Character : MonoBehaviour {
         if (!moving)
             return;
 
-        if (DirectlyAccessible(targetPoint))
+        bool directlyAccesible = !Tilemap.Raycast(iso.pos, targetPoint, maxRayLength: 2.0f);
+        if (directlyAccesible)
         {
-            AbortPath();
             var dir = (targetPoint - iso.pos).normalized;
             float distance = speed * Time.deltaTime;
             iso.pos += dir * distance;
@@ -252,6 +235,7 @@ public class Character : MonoBehaviour {
             }
             if (path.Count == 0)
                 moving = false;
+            Pathing.DebugDrawPath(iso.pos, path);
             MoveAlongPath();
         }
 
