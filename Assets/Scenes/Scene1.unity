@@ -6724,7 +6724,7 @@ MonoBehaviour:
   attackRange: 2
   diameter: 2
   run: 1
-  direction: 0
+  directionIndex: 0
   attackDamage: 30
   health: 100
   maxHealth: 100

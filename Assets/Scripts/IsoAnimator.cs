@@ -78,7 +78,7 @@ public class IsoAnimator : MonoBehaviour {
     {
         int direction = 0;
         if (character)
-            direction = (character.direction + anim.directionOffset) % anim.directionCount;
+            direction = (character.directionIndex + anim.directionOffset) % anim.directionCount;
         int spriteIndex = direction * spritesPerDirection + frameIndex % spritesPerDirection;
         spriteRenderer.sprite = variation.sprites[spriteIndex];
     }

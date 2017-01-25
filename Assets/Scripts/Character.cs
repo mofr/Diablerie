@@ -12,6 +12,8 @@ public class Character : MonoBehaviour {
     public float diameter = 1f;
     public bool run = false;
 
+    static float turnSpeed = 3f; // full rotations per second
+
     public delegate void TakeDamageHandler(Character originator, int damage);
     public event TakeDamageHandler OnTakeDamage;
 
@@ -45,7 +47,8 @@ public class Character : MonoBehaviour {
     }
 
     [HideInInspector]
-	public int direction = 0;
+	public int directionIndex = 0;
+    float direction = 0;
 
     Iso iso;
 	IsoAnimator animator;
@@ -111,7 +114,7 @@ public class Character : MonoBehaviour {
 
     public void Attack()
     {
-        if (!dead && !dying && !attack && !takingDamage && direction == desiredDirection && !moving)
+        if (!dead && !dying && !attack && !takingDamage && directionIndex == desiredDirection && !moving)
         {
             attack = true;
         }
@@ -171,10 +174,12 @@ public class Character : MonoBehaviour {
 
     void Turn()
     {
-        if (!dead && !dying && !attack && !takingDamage && direction != desiredDirection)
+        if (!dead && !dying && !attack && !takingDamage && directionIndex != desiredDirection)
         {
-            int diff = (int)Mathf.Sign(Tools.ShortestDelta(direction, desiredDirection, directionCount));
-            direction = (direction + diff + directionCount) % directionCount;
+            float diff = Mathf.Sign(Tools.ShortestDelta(directionIndex, desiredDirection, directionCount));
+            direction += diff * turnSpeed * Time.deltaTime * directionCount;
+            direction = Tools.Mod(direction + directionCount, directionCount);
+            directionIndex = Mathf.RoundToInt(direction);
         }
     }
 
@@ -281,7 +286,7 @@ public class Character : MonoBehaviour {
 
     public void LookAtImmidietly(Vector3 target)
     {
-        direction = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
+        directionIndex = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
     }
 
     public void TakeDamage(Character originator, int damage)
