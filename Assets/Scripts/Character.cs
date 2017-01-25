@@ -250,6 +250,8 @@ public class Character : MonoBehaviour {
                 AbortPath();
                 path.AddRange(newPath);
             }
+            if (path.Count == 0)
+                moving = false;
             MoveAlongPath();
         }
 

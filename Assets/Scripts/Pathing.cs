@@ -15,7 +15,8 @@ public class Pathing {
 
 	class Node : IEquatable<Node>, IComparable<Node> {
 		public float gScore;
-		public float score;
+        public float hScore;
+        public float score;
 		public Vector2 pos;
 		public Node parent;
 		public Vector2 direction;
@@ -76,7 +77,8 @@ public class Pathing {
 					newNode.direction = direction;
 					newNode.directionIndex = i;
 					newNode.gScore = node.gScore + direction.magnitude;
-					newNode.score = newNode.gScore + Vector2.Distance(target, newNode.pos);
+                    newNode.hScore = Vector2.Distance(target, newNode.pos);
+                    newNode.score = newNode.gScore + newNode.hScore;
 					openNodes.Add(newNode);
 					newNode = null;
 				}
@@ -131,17 +133,22 @@ public class Pathing {
 		startNode.parent = null;
 		startNode.pos = from;
 		startNode.gScore = 0;
-		startNode.score = 999;
+        startNode.hScore = Mathf.Infinity;
+        startNode.score = Mathf.Infinity;
 		openNodes.Add(startNode);
 		int iterCount = 0;
+        Node bestNode = startNode;
 		while (openNodes.Count > 0) {
 			openNodes.Sort();
 			Node node = openNodes[0];
-			if (!Tilemap.instance[target] && node.parent != null && node.score > node.parent.score) {
-				TraverseBack(node.parent);
-				break;
-			}
-			if (Vector2.Distance(node.pos, target) <= minRange) {
+            if (node.hScore < bestNode.hScore)
+                bestNode = node;
+            if (!Tilemap.instance[target] && node.parent != null && node.hScore > node.parent.hScore)
+            {
+                TraverseBack(bestNode.parent);
+                break;
+            }
+            if (Vector2.Distance(node.pos, target) <= minRange) {
 				TraverseBack(node);
 				break;
 			}
@@ -149,17 +156,19 @@ public class Pathing {
 			StepTo(node);
 			iterCount += 1;
 			if (iterCount > 100) {
-                TraverseBack(node);
-				break;
+                TraverseBack(bestNode.parent);
+                break;
 			}
 		}
-		//foreach (Node node in closeNodes) {
-		//	Iso.DebugDrawTile(node.pos, Color.magenta, 0.3f);
-		//}
-		//foreach (Node node in openNodes) {
-		//	Iso.DebugDrawTile(node.pos, Color.green, 0.3f);
-		//}
-		return path;
+        foreach (Node node in closeNodes)
+        {
+            Iso.DebugDrawTile(node.pos, Color.magenta, 0.3f);
+        }
+        foreach (Node node in openNodes)
+        {
+            Iso.DebugDrawTile(node.pos, Color.green, 0.3f);
+        }
+        return path;
 	}
 
 	static public void DebugDrawPath(List<Step> path) {
