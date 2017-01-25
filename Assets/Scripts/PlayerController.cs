@@ -68,14 +68,14 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
         UpdateHover();
 
-        Vector3 targetTile;
+        Vector3 targetPosition;
 		if (hover != null) {
-			targetTile = Iso.MapToIso(hover.transform.position);
+			targetPosition = Iso.MapToIso(hover.transform.position);
 		} else {
-			targetTile = IsoInput.mouseTile;
+			targetPosition = IsoInput.mousePosition;
 		}
-		Iso.DebugDrawTile(targetTile, Tilemap.instance[targetTile] ? Color.green : Color.red, 0.1f);
-        var path = Pathing.BuildPath(iso.pos, targetTile, character.directionCount);
+		Iso.DebugDrawTile(targetPosition, Tilemap.Passable(targetPosition) ? Color.green : Color.red, 0.1f);
+        var path = Pathing.BuildPath(iso.pos, targetPosition, character.directionCount);
         Pathing.DebugDrawPath(iso.pos, path);
 
         character.LookAt(IsoInput.mousePosition);

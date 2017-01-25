@@ -18,7 +18,7 @@ public class Barrel : MonoBehaviour {
 	void OnUse() {
 		animator.SetState("Use");
 		usable.active = false;
-		Tilemap.instance[Iso.MapToIso(transform.position)] = true;
+		Tilemap.SetPassable(Iso.MapToIso(transform.position), true);
 		spriteRenderer.sortingLayerName = "OnFloor";
 	}
 }

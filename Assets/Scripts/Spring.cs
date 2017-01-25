@@ -20,6 +20,8 @@ public class Spring : MonoBehaviour {
 	}
 
 	void OnUse() {
+        if (fullness == 0)
+            return;
 		fullness -= 1;
 		animator.Play(fullness.ToString());
 		usable.active = fullness != 0;

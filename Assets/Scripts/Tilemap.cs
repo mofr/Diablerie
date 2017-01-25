@@ -5,81 +5,105 @@ using UnityEngine;
 
 public class Tilemap : MonoBehaviour {
 
-	static public Tilemap instance;
+    static private Tilemap instance;
 
-	private int width = 1024;
-	private int height = 1024;
-	private int origin;
-	private bool[] map;
+    public struct Cell
+    {
+        public bool passable;
+        public GameObject gameObject;
+    }
 
-	void Awake() {
-		map = new bool[width * height];
-		origin = map.Length / 2;
-		instance = this;
+    private int width = 1024;
+    private int height = 1024;
+    private int origin;
+    private Cell[] map;
+
+    void Awake() {
+        map = new Cell[width * height];
+        origin = map.Length / 2;
+        instance = this;
         for (int i = 0; i < map.Length; ++i)
-            map[i] = true;
-	}
+            map[i].passable = true;
+    }
 
-	class TileOrderComparer : IComparer<Tile> {
-		public int Compare(Tile a, Tile b) {
-			bool floor1 = a.GetComponent<SpriteRenderer>().sortingLayerName == "Floor";
-			bool floor2 = b.GetComponent<SpriteRenderer>().sortingLayerName == "Floor";
-			return -floor1.CompareTo(floor2);
-		}
-	}
+    class TileOrderComparer : IComparer<Tile> {
+        public int Compare(Tile a, Tile b) {
+            bool floor1 = a.GetComponent<SpriteRenderer>().sortingLayerName == "Floor";
+            bool floor2 = b.GetComponent<SpriteRenderer>().sortingLayerName == "Floor";
+            return -floor1.CompareTo(floor2);
+        }
+    }
 
-	void Start() {
-		Tile[] tiles = GameObject.FindObjectsOfType<Tile>();
-		Array.Sort(tiles, new TileOrderComparer());
-		foreach (Tile tile in tiles) {
-			Vector3 pos = Iso.MapToIso(tile.transform.position);
-			pos.x -= tile.width / 2;
-			pos.y -= tile.height / 2;
+    void Start() {
+        Tile[] tiles = GameObject.FindObjectsOfType<Tile>();
+        Array.Sort(tiles, new TileOrderComparer());
+        foreach (Tile tile in tiles) {
+            Vector3 pos = Iso.MapToIso(tile.transform.position);
+            pos.x -= tile.width / 2;
+            pos.y -= tile.height / 2;
             pos.x += tile.offsetX;
             pos.y += tile.offsetY;
-			for (int x = 0; x < tile.width; ++x) {
-				for (int y = 0; y < tile.height; ++y) {
-					Tilemap.instance[pos + new Vector3(x, y)] = tile.passable;
-				}
-			}
-		}
-	}
+            for (int x = 0; x < tile.width; ++x) {
+                for (int y = 0; y < tile.height; ++y) {
+                    int index = MapToIndex(pos + new Vector3(x, y));
+                    map[index].passable = tile.passable;
+                    map[index].gameObject = tile.gameObject;
+                }
+            }
+        }
+    }
 
-	void Update() {
-		Color color = new Color(1, 1, 1, 0.15f);
-		Color redColor = new Color(1, 0, 0, 0.3f);
-		Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
-		int debugWidth = 100;
-		int debugHeight = 100;
-		pos.x -= debugWidth / 2;
-		pos.y -= debugHeight / 2;
-		for (int x = 0; x < debugWidth; ++x) {
-			for (int y = 0; y < debugHeight; ++y) {
-                bool passable = this[pos + new Vector3(x, y)];
+    void Update() {
+        Color color = new Color(1, 1, 1, 0.15f);
+        Color redColor = new Color(1, 0, 0, 0.3f);
+        Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
+        int debugWidth = 100;
+        int debugHeight = 100;
+        pos.x -= debugWidth / 2;
+        pos.y -= debugHeight / 2;
+        for (int x = 0; x < debugWidth; ++x) {
+            for (int y = 0; y < debugHeight; ++y) {
+                bool passable = Passable(pos + new Vector3(x, y));
                 if (!passable)
-                    Iso.DebugDrawTile(pos + new Vector3(x, y), passable ? color: redColor, 0.9f);
-			}
-		}
-	}
+                    Iso.DebugDrawTile(pos + new Vector3(x, y), passable ? color : redColor, 0.9f);
+            }
+        }
+    }
 
-	private int MapToIndex(Vector3 tilePos) {
+    private int MapToIndex(Vector3 tilePos) {
 		return origin + Mathf.RoundToInt(tilePos.x + tilePos.y * width);
 	}
 
-	public bool this[Vector3 tilePos]
-	{
-		get {
-			return map[MapToIndex(tilePos)];
-		}
+    public static Cell GetCell(Vector3 pos)
+    {
+        var tilePos = Iso.Snap(pos);
+        int index = instance.MapToIndex(tilePos);
+        return instance.map[index];
+    }
 
-		set {
-			map[MapToIndex(tilePos)] = value;
-		}
-	}
+    public static bool Passable(Vector3 pos)
+    {
+        var tilePos = Iso.Snap(pos);
+        int index = instance.MapToIndex(tilePos);
+        return instance.map[index].passable;
+    }
+
+    public static bool PassableTile(Vector3 tilePos)
+    {
+        int index = instance.MapToIndex(tilePos);
+        return instance.map[index].passable;
+    }
+
+    public static void SetPassable(Vector3 tilePos, bool passable)
+    {
+        int index = instance.MapToIndex(tilePos);
+        instance.map[index].passable = passable;
+    }
 
     public struct RaycastHit
     {
         public bool hit;
+        public GameObject gameObject;
         public Vector2 pos;
 
         public static implicit operator bool(RaycastHit value)
@@ -100,9 +124,13 @@ public class Tilemap : MonoBehaviour {
         for (int i = 0; i < stepCount; ++i)
         {
             pos += step;
-            hit.hit = !instance[Iso.Snap(pos)];
-            if (hit.hit)
+            Cell cell = GetCell(pos);
+            if (!cell.passable)
+            {
+                hit.hit = !cell.passable;
+                hit.gameObject = cell.gameObject;
                 break;
+            }
         }
         return hit;
     }

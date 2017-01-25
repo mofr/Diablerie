@@ -99,7 +99,7 @@ public class Character : MonoBehaviour {
     public void Teleport(Vector2 target) {
 		if (attack && takingDamage)
 			return;
-		if (Tilemap.instance[target]) {
+		if (Tilemap.Passable(target)) {
 			iso.pos = target;
 		} else {
 			var pathToTarget = Pathing.BuildPath(iso.pos, target, directionCount);
@@ -143,7 +143,8 @@ public class Character : MonoBehaviour {
         if (!takingDamage && !dead && !dying) {
             if (usable)
             {
-                if (Vector2.Distance(usable.GetComponent<Iso>().pos, iso.pos) <= useRange + diameter / 2)
+                Tilemap.RaycastHit hit = Tilemap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2);
+                if (hit.gameObject == usable.gameObject)
                 {
                     usable.Use();
                     moving = false;

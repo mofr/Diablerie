@@ -30,9 +30,9 @@ public class DummyController : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         while (!target)
         {
-            var target = iso.pos + new Vector2(Random.Range(-8, 8), Random.Range(-8, 8));
+            var target = iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
             character.GoTo(target);
-            yield return new WaitForSeconds(Random.Range(1, 5));
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
     }
 
@@ -41,7 +41,7 @@ public class DummyController : MonoBehaviour {
         while (true)
         {
             character.Attack(target);
-            yield return new WaitForSeconds(Random.Range(0.5f, 3));
+            yield return new WaitForSeconds(Random.Range(0.5f, 3f));
         }
     }
 }
