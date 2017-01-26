@@ -36,8 +36,10 @@ public class Tilemap : MonoBehaviour {
 
     void Start() {
         Tile[] tiles = GameObject.FindObjectsOfType<Tile>();
-        Array.Sort(tiles, new TileOrderComparer());
+        //Array.Sort(tiles, new TileOrderComparer());
         foreach (Tile tile in tiles) {
+            if (tile.passable)
+                continue;
             Vector3 pos = Iso.MapToIso(tile.transform.position);
             pos.x -= tile.width / 2;
             pos.y -= tile.height / 2;

@@ -270,7 +270,7 @@ public class Character : MonoBehaviour {
             Tilemap.SetCell(iso.pos, newCell);
         }
 
-        if (usable == null && targetCharacter == null && Vector2.Distance(iso.pos, targetPoint) < 1)
+        if (Vector2.Distance(iso.pos, targetPoint) < 1)
         {
             moving = false;
         }
