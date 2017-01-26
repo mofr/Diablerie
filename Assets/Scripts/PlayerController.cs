@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			targetPosition = IsoInput.mousePosition;
 		}
-		Iso.DebugDrawTile(targetPosition, Tilemap.Passable(targetPosition) ? Color.green : Color.red, 0.1f);
         var path = Pathing.BuildPath(iso.pos, targetPosition, character.directionCount);
         Pathing.DebugDrawPath(iso.pos, path);
 
