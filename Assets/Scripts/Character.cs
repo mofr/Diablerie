@@ -12,7 +12,7 @@ public class Character : MonoBehaviour {
     public float diameter = 1f;
     public bool run = false;
 
-    static float turnSpeed = 3f; // full rotations per second
+    static float turnSpeed = 4f; // full rotations per second
 
     public delegate void TakeDamageHandler(Character originator, int damage);
     public event TakeDamageHandler OnTakeDamage;
@@ -177,8 +177,9 @@ public class Character : MonoBehaviour {
     {
         if (!dead && !dying && !attack && !takingDamage && directionIndex != desiredDirection)
         {
-            float diff = Mathf.Sign(Tools.ShortestDelta(directionIndex, desiredDirection, directionCount));
-            direction += diff * turnSpeed * Time.deltaTime * directionCount;
+            float diff = Tools.ShortestDelta(directionIndex, desiredDirection, directionCount);
+            float delta = Mathf.Abs(diff);
+            direction += Mathf.Clamp(Mathf.Sign(diff) * turnSpeed * Time.deltaTime * directionCount, -delta, delta);
             direction = Tools.Mod(direction + directionCount, directionCount);
             directionIndex = Mathf.RoundToInt(direction);
         }
