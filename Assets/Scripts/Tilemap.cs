@@ -81,6 +81,13 @@ public class Tilemap : MonoBehaviour {
         return instance.map[index];
     }
 
+    public static void SetCell(Vector3 pos, Cell cell)
+    {
+        var tilePos = Iso.Snap(pos);
+        int index = instance.MapToIndex(tilePos);
+        instance.map[index] = cell;
+    }
+
     public static bool Passable(Vector3 pos)
     {
         var tilePos = Iso.Snap(pos);
@@ -112,20 +119,23 @@ public class Tilemap : MonoBehaviour {
         }
     }
 
-    static public RaycastHit Raycast(Vector2 from, Vector2 to, float maxRayLength = Mathf.Infinity)
+    static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, GameObject ignore = null, bool debug = false)
     {
         var hit = new RaycastHit();
         var diff = to - from;
         var stepLen = 0.1f;
-        float rayLength = Mathf.Min(diff.magnitude, maxRayLength);
+        if (rayLength == Mathf.Infinity)
+            rayLength = Mathf.Min(diff.magnitude, maxRayLength);
         int stepCount = Mathf.RoundToInt(rayLength / stepLen);
         var step = diff.normalized * stepLen;
         var pos = from;
         for (int i = 0; i < stepCount; ++i)
         {
             pos += step;
+            if (debug)
+                Iso.DebugDrawTile(Iso.Snap(pos), margin: 0.3f, duration: 0.5f);
             Cell cell = GetCell(pos);
-            if (!cell.passable)
+            if (!cell.passable && (ignore == null || ignore != cell.gameObject))
             {
                 hit.hit = !cell.passable;
                 hit.gameObject = cell.gameObject;

@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
         {
-            character.Attack();
+            character.Attack(IsoInput.mousePosition);
         }
         else if (Input.GetMouseButton(0))
         {

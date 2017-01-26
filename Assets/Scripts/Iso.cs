@@ -23,13 +23,13 @@ public class Iso : MonoBehaviour {
 		return new Vector3(world.y + world.x / 2, world.y - world.x / 2) / tileSize;
 	}
 
-	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0) {
+	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f) {
 		pos = Iso.MapToWorld(pos);
 		float d = 0.5f - margin;
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(d, -d)), color);
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(-d, -d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color);
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color);
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)), color);
+		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(d, -d)), color, duration);
+		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(-d, -d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color, duration);
+		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color, duration);
+		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)), color, duration);
 	}
     static public void GizmosDrawTile(Vector3 pos, float size = 1.0f)
     {
@@ -41,8 +41,8 @@ public class Iso : MonoBehaviour {
         Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)));
     }
 
-    static public void DebugDrawTile(Vector3 pos, float margin = 0) {
-		DebugDrawTile(pos, Color.white, margin);
+    static public void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f) {
+		DebugDrawTile(pos, Color.white, margin, duration);
 	}
 
 	static public Vector3 Snap(Vector3 pos) {

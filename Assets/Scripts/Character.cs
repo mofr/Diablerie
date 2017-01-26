@@ -97,8 +97,9 @@ public class Character : MonoBehaviour {
     }
 
     public void Teleport(Vector2 target) {
-		if (attack && takingDamage)
+		if (attack || takingDamage)
 			return;
+
 		if (Tilemap.Passable(target)) {
 			iso.pos = target;
 		} else {
@@ -112,11 +113,12 @@ public class Character : MonoBehaviour {
         moving = false;
 	}
 
-    public void Attack()
+    public void Attack(Vector3 target)
     {
         if (!dead && !dying && !attack && !takingDamage && directionIndex == desiredDirection && !moving)
         {
             attack = true;
+            targetPoint = target;
         }
     }
 
@@ -143,7 +145,7 @@ public class Character : MonoBehaviour {
         if (!takingDamage && !dead && !dying) {
             if (usable)
             {
-                Tilemap.RaycastHit hit = Tilemap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2);
+                var hit = Tilemap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2, ignore: gameObject);
                 if (hit.gameObject == usable.gameObject)
                 {
                     usable.Use();
@@ -224,26 +226,39 @@ public class Character : MonoBehaviour {
         if (!moving)
             return;
 
-        bool directlyAccesible = !Tilemap.Raycast(iso.pos, targetPoint, maxRayLength: 2.0f);
+        bool directlyAccesible = !Tilemap.Raycast(iso.pos, targetPoint, maxRayLength: 2.0f, ignore: gameObject);
         if (directlyAccesible)
         {
             var dir = (targetPoint - iso.pos).normalized;
             float distance = speed * Time.deltaTime;
+
+            var cell = Tilemap.GetCell(iso.pos);
+            cell.passable = true;
+            cell.gameObject = null;
+            Tilemap.SetCell(iso.pos, cell);
+
             iso.pos += dir * distance;
+
+            cell = Tilemap.GetCell(iso.pos);
+            cell.passable = false;
+            cell.gameObject = gameObject;
+            Tilemap.SetCell(iso.pos, cell);
+
             desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
         }
         else
         {
-            var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
-            if (path.Count == 0 || newPath.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
-            {
-                AbortPath();
-                path.AddRange(newPath);
-            }
-            if (path.Count == 0)
-                moving = false;
-            Pathing.DebugDrawPath(iso.pos, path);
-            MoveAlongPath();
+            moving = false;
+            //var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
+            //if (path.Count == 0 || newPath.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
+            //{
+            //    AbortPath();
+            //    path.AddRange(newPath);
+            //}
+            //if (path.Count == 0)
+            //    moving = false;
+            //Pathing.DebugDrawPath(iso.pos, path);
+            //MoveAlongPath();
         }
 
         if (usable == null && targetCharacter == null && Vector2.Distance(iso.pos, targetPoint) < 1)
@@ -315,9 +330,22 @@ public class Character : MonoBehaviour {
     {
         if (attack)
         {
+            if (targetCharacter == null)
+            {
+                var hit = Tilemap.Raycast(iso.pos, targetPoint, rayLength: diameter / 2 + attackRange, ignore: gameObject, debug: true);
+                if (hit.gameObject != null)
+                {
+                    targetCharacter = hit.gameObject.GetComponent<Character>();
+                }
+            }
+
             if (targetCharacter)
             {
-                targetCharacter.TakeDamage(this, attackDamage);
+                Vector2 target = targetCharacter.GetComponent<Iso>().pos;
+                if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + targetCharacter.diameter / 2)
+                {
+                    targetCharacter.TakeDamage(this, attackDamage);
+                }
                 targetCharacter = null;
                 m_Target = null;
             }
