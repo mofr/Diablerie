@@ -102,10 +102,10 @@ MonoBehaviour:
   attackRange: 1.2
   diameter: 2
   run: 0
-  direction: 0
+  directionIndex: 0
   attackDamage: 3
-  health: 100
-  maxHealth: 100
+  health: 50
+  maxHealth: 50
 --- !u!114 &114647504033276172
 MonoBehaviour:
   m_ObjectHideFlags: 1

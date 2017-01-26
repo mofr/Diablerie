@@ -145,6 +145,32 @@ public class Tilemap : MonoBehaviour {
         return hit;
     }
 
+    static public int OverlapBox(Vector2 center, Vector2 size, GameObject[] result)
+    {
+        int count = 0;
+        if (result.Length == 0)
+            return 0;
+        int rows = Mathf.RoundToInt(size.y);
+        int columns = Mathf.RoundToInt(size.x);
+        int index = instance.MapToIndex(Iso.Snap(center - size / 2));
+        for(int row = 0; row < rows; ++row)
+        {
+            for(int column = 0; column < columns; ++column)
+            {
+                var gameObject = instance.map[index + column].gameObject;
+                if (gameObject != null)
+                {
+                    result[count] = gameObject;
+                    count += 1;
+                    if (count >= result.Length)
+                        return count;
+                }
+            }
+            index += instance.width;
+        }
+        return count;
+    }
+
     void OnDrawGizmos()
     {
         var cameraTile = Iso.MacroTile(Iso.MapToIso(Camera.current.transform.position));
