@@ -226,6 +226,12 @@ public class Character : MonoBehaviour {
         if (!moving)
             return;
 
+        if (Vector2.Distance(iso.pos, targetPoint) < 0.5f)
+        {
+            moving = false;
+            return;
+        }
+
         var prevPos = iso.pos;
 
         bool directlyAccesible = !Tilemap.Raycast(iso.pos, targetPoint, maxRayLength: 2.0f, ignore: gameObject);
@@ -268,11 +274,6 @@ public class Character : MonoBehaviour {
             newCell.passable = false;
             newCell.gameObject = gameObject;
             Tilemap.SetCell(iso.pos, newCell);
-        }
-
-        if (Vector2.Distance(iso.pos, targetPoint) < 1)
-        {
-            moving = false;
         }
     }
 

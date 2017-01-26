@@ -58,7 +58,7 @@ public class DummyController : MonoBehaviour {
         while (true)
         {
             character.Attack(target);
-            yield return new WaitForSeconds(Random.Range(0.5f, 3f));
+            yield return new WaitForSeconds(Random.Range(0.15f, 1f));
         }
     }
 }
