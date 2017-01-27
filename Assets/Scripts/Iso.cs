@@ -24,21 +24,28 @@ public class Iso : MonoBehaviour {
 	}
 
 	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f) {
-		pos = Iso.MapToWorld(pos);
 		float d = 0.5f - margin;
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(d, -d)), color, duration);
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(-d, -d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color, duration);
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(-d, d)), color, duration);
-		Debug.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)), color, duration);
+        var topRight = MapToWorld(pos + new Vector3(d, d));
+        var topLeft = MapToWorld(pos + new Vector3(-d, d));
+        var bottomRight = MapToWorld(pos + new Vector3(d, -d));
+        var bottomLeft = MapToWorld(pos + new Vector3(-d, -d));
+        Debug.DrawLine(topRight, bottomRight, color, duration);
+		Debug.DrawLine(bottomLeft, topLeft, color, duration);
+		Debug.DrawLine(topRight, topLeft, color, duration);
+		Debug.DrawLine(bottomRight, bottomLeft, color, duration);
 	}
+
     static public void GizmosDrawTile(Vector3 pos, float size = 1.0f)
     {
-        pos = Iso.MapToWorld(pos);
         float d = 0.5f * size;
-        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(d, -d)));
-        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(-d, -d)), pos + Iso.MapToWorld(new Vector2(-d, d)));
-        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, d)), pos + Iso.MapToWorld(new Vector2(-d, d)));
-        Gizmos.DrawLine(pos + Iso.MapToWorld(new Vector2(d, -d)), pos + Iso.MapToWorld(new Vector2(-d, -d)));
+        var topRight = MapToWorld(pos + new Vector3(d, d));
+        var topLeft = MapToWorld(pos + new Vector3(-d, d));
+        var bottomRight = MapToWorld(pos + new Vector3(d, -d));
+        var bottomLeft = MapToWorld(pos + new Vector3(-d, -d));
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+        Gizmos.DrawLine(topRight, topLeft);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
     }
 
     static public void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f) {

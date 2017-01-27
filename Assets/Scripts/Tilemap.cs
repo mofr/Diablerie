@@ -56,19 +56,21 @@ public class Tilemap : MonoBehaviour {
     }
 
     void Update() {
-        Color color = new Color(1, 1, 1, 0.15f);
-        Color redColor = new Color(1, 0, 0, 0.3f);
+        Color color = new Color(1, 0, 0, 0.3f);
         Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
         int debugWidth = 100;
         int debugHeight = 100;
         pos.x -= debugWidth / 2;
         pos.y -= debugHeight / 2;
-        for (int x = 0; x < debugWidth; ++x) {
-            for (int y = 0; y < debugHeight; ++y) {
-                bool passable = Passable(pos + new Vector3(x, y));
-                if (!passable)
-                    Iso.DebugDrawTile(pos + new Vector3(x, y), passable ? color : redColor, 0.9f);
+        int index = instance.MapToIndex(Iso.Snap(pos));
+        for (int y = 0; y < debugHeight; ++y)
+        {
+            for (int x = 0; x < debugWidth; ++x)
+            {
+                if (!instance.map[index + x].passable)
+                    Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
             }
+            index += width;
         }
     }
 
@@ -179,12 +181,14 @@ public class Tilemap : MonoBehaviour {
         Gizmos.color = new Color(0.35f, 0.35f, 0.35f);
         for (int x = -10; x < 10; ++x)
         {
-            for (int y = -10; y < 10; ++y)
-            {
-                var pos = Iso.MapToWorld(cameraTile + new Vector3(x, y) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
-                Gizmos.DrawRay(pos, new Vector3(20, 10));
-                Gizmos.DrawRay(pos, new Vector3(20, -10));
-            }
+            var pos = Iso.MapToWorld(cameraTile + new Vector3(x, 10) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
+            Gizmos.DrawRay(pos, new Vector3(20, -10f));
+        }
+
+        for (int y = -10; y < 10; ++y)
+        {
+            var pos = Iso.MapToWorld(cameraTile + new Vector3(-10, y) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
+            Gizmos.DrawRay(pos, new Vector3(20, 10f));
         }
     }
 }
