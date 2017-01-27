@@ -360,6 +360,11 @@ public class Character : MonoBehaviour {
                 m_Target = null;
             }
         }
+
+        if (dying)
+        {
+            spriteRenderer.sortingLayerName = "OnFloor";
+        }
     }
 
     void OnAnimationFinish() {
@@ -367,7 +372,7 @@ public class Character : MonoBehaviour {
         takingDamage = false;
         if (dying)
         {
-            spriteRenderer.sortingLayerName = "OnFloor";
+            Debug.Log("DEAD");
             dying = false;
             dead = true;
         }

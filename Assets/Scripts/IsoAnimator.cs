@@ -50,7 +50,7 @@ public class IsoAnimator : MonoBehaviour {
     }
 	
 	void Update () {
-        if (!variation.loop && frameIndex >= spritesPerDirection - 1)
+        if (!variation.loop && frameIndex >= spritesPerDirection)
             return;
         time += Time.deltaTime * speed;
         while (time >= frameDuration)
@@ -79,7 +79,7 @@ public class IsoAnimator : MonoBehaviour {
         int direction = 0;
         if (character)
             direction = (character.directionIndex + anim.directionOffset) % anim.directionCount;
-        int spriteIndex = direction * spritesPerDirection + frameIndex % spritesPerDirection;
+        int spriteIndex = direction * spritesPerDirection + Mathf.Min(frameIndex, spritesPerDirection - 1);
         spriteRenderer.sprite = variation.sprites[spriteIndex];
     }
 
