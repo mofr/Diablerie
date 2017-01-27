@@ -372,7 +372,6 @@ public class Character : MonoBehaviour {
         takingDamage = false;
         if (dying)
         {
-            Debug.Log("DEAD");
             dying = false;
             dead = true;
         }
