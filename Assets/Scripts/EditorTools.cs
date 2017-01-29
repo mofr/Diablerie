@@ -10,6 +10,20 @@ public class EditorTools {
     {
         ScriptableObjectUtility.CreateAsset<IsoAnimation>();
     }
+
+    [MenuItem("Assets/Load DS1")]
+    static public void LoadDS1()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        DS1.Import(assetPath);
+    }
+
+    [MenuItem("Assets/Load DS1", true)]
+    static public bool LoadDS1Validate()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        return assetPath.EndsWith("ds1");
+    }
 }
 
 public static class ScriptableObjectUtility
@@ -39,5 +53,23 @@ public static class ScriptableObjectUtility
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = asset;
         return asset;
+    }
+}
+
+public class PostProcessor : AssetPostprocessor
+{
+    static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+    {
+        foreach (string assetPath in importedAssets)
+        {
+            if (assetPath.EndsWith(".dt1"))
+            {
+                //DT1.Import(assetPath);
+            }
+            else if (assetPath.EndsWith(".ds1"))
+            {
+                //DS1.Import(assetPath);
+            }
+        }
     }
 }
