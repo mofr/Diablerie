@@ -17,7 +17,12 @@ public class DS1
         public byte flags;
     };
 
-	static public void Import(string ds1Path)
+    public struct ImportResult
+    {
+        public Vector3 center;
+    }
+
+	static public ImportResult Import(string ds1Path)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -193,7 +198,7 @@ public class DS1
                             if (tiles.TryGetValue(index, out tile))
                             {
                                 var tileObject = CreateFloor(tile, orderInLayer: -p);
-                                var pos = Iso.MapToWorld(new Vector3(x, y)) * 5;
+                                var pos = Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
                                 pos.y = -pos.y;
                                 tileObject.transform.position = pos;
                                 tileObject.transform.SetParent(parent.transform);
@@ -261,6 +266,11 @@ public class DS1
 
         sw.Stop();
         Debug.Log("DS1 loaded in " + sw.Elapsed);
+
+        var result = new ImportResult();
+        result.center = Iso.MapToWorld(new Vector3(width, height)) / 2 / Iso.tileSize;
+        result.center.y = -result.center.y;
+        return result;
     }
 
     static GameObject CreateFloor(DT1.Tile tile, int orderInLayer)
