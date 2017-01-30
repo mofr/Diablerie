@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public Character character;
+    static public PlayerController instance;
 
     [HideInInspector]
     static public GameObject hover;
@@ -15,15 +16,20 @@ public class PlayerController : MonoBehaviour {
 
 
     void Awake() {
-		if (character == null)
-			character = GameObject.FindWithTag("Player").GetComponent<Character>();
-		SetCharacter(character);
+        instance = this;
+
+        if (character == null)
+        {
+            var player = GameObject.FindWithTag("Player");
+            if (player != null)
+                SetCharacter(player.GetComponent<Character>());
+        }   
 	}
 
 	void Start () {
 	}
 
-	void SetCharacter (Character character) {
+	public void SetCharacter (Character character) {
 		this.character = character;
 		iso = character.GetComponent<Iso>();
 	}
@@ -66,6 +72,9 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void Update () {
+        if (character == null)
+            return;
+
         UpdateHover();
 
         Vector3 targetPosition;

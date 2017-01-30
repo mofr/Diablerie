@@ -46,7 +46,7 @@ public class DS1
             //    t_num = 1;
         }
 
-        DT1.Tile[] tiles = new DT1.Tile[4096];
+        var tiles = new Dictionary<int, DT1.Tile>();
 
         if (version >= 3)
         {
@@ -65,7 +65,8 @@ public class DS1
                 {
                     if (tile.texture == null)
                         continue;
-                    tiles[tile.index] = tile;
+                    if (!tiles.ContainsKey(tile.index))
+                        tiles[tile.index] = tile;
                 }
             }
         }
@@ -186,9 +187,10 @@ public class DS1
 
                             int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
                             int subIndex = prop2;
-                            int index = (mainIndex << 6) + subIndex;
-                            DT1.Tile tile = tiles[index];
-                            if (tile.texture != null)
+                            int orientation = 0;
+                            int index = (((mainIndex << 6) + subIndex) << 5) + orientation;
+                            DT1.Tile tile;
+                            if (tiles.TryGetValue(index, out tile))
                             {
                                 var tileObject = CreateFloor(tile, orderInLayer: -p);
                                 var pos = Iso.MapToWorld(new Vector3(x, y)) * 5;
