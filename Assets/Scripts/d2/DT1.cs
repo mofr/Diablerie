@@ -49,13 +49,24 @@ public class DT1
             blockDatasLength = reader.ReadInt32();
             blockCount = reader.ReadInt32();
             reader.ReadBytes(12); // zeros
-            index = (((mainIndex << 6) + subIndex) << 5) + orientation;
-            Debug.Assert(orientation <= 16);
+            index = Index(mainIndex, subIndex, orientation);
+        }
+
+        static public int Index(int mainIndex, int subIndex, int orientation)
+        {
+            return (((mainIndex << 6) + subIndex) << 5) + orientation;
         }
     }
 
-    static public Tile[] Import(string dt1Path)
+    public struct ImportResult
     {
+        public Tile[] tiles;
+        public Texture2D[] textures;
+    }
+
+    static public ImportResult Import(string dt1Path)
+    {
+        var importResult = new ImportResult();
         var stream = new BufferedStream(File.OpenRead(dt1Path));
         var reader = new BinaryReader(stream);
         int version1 = reader.ReadInt32();
@@ -63,7 +74,7 @@ public class DT1
         if (version1 != 7 || version2 != 6)
         {
             Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
-            return null;
+            return importResult;
         }
         reader.ReadBytes(260);
         int tileCount = reader.ReadInt32();
@@ -144,7 +155,23 @@ public class DT1
             texture.Apply();
         stream.Close();
 
-        return tiles;
+        importResult.tiles = tiles;
+        importResult.textures = packer.textures.ToArray();
+        return importResult;
+    }
+
+    static public void ConvertToPng(string assetPath)
+    {
+        Palette.LoadPalette(1);
+        ImportResult result = Import(assetPath);
+        int i = 0;
+        foreach(var texture in result.textures)
+        {
+            var pngData = texture.EncodeToPNG();
+            var pngPath = assetPath + "." + i + ".png";
+            File.WriteAllBytes(pngPath, pngData);
+            AssetDatabase.ImportAsset(pngPath);
+        }
     }
 
     static void drawBlockNormal(Texture2D texture, int x0, int y0, byte[] data, int length)

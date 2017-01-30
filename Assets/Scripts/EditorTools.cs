@@ -24,6 +24,20 @@ public class EditorTools {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         return assetPath.EndsWith("ds1");
     }
+
+    [MenuItem("Assets/Convert DT1 to PNG")]
+    static public void ConvertDT1ToPNG()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        DT1.ConvertToPng(assetPath);
+    }
+
+    [MenuItem("Assets/Convert DT1 to PNG", true)]
+    static public bool ConvertDT1ToPNGValidate()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        return assetPath.EndsWith("dt1");
+    }
 }
 
 public static class ScriptableObjectUtility
