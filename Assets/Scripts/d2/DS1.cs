@@ -13,7 +13,6 @@ public class DS1
         public byte prop3;
         public byte prop4;
         public byte orientation;
-        public int bt_idx;
         public byte flags;
     };
 
@@ -22,7 +21,13 @@ public class DS1
         public Vector3 center;
     }
 
-	static public ImportResult Import(string ds1Path)
+    static byte[] dirLookup = {
+                  0x00, 0x01, 0x02, 0x01, 0x02, 0x03, 0x03, 0x05, 0x05, 0x06,
+                  0x06, 0x07, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E,
+                  0x0F, 0x10, 0x11, 0x12, 0x14
+               };
+
+    static public ImportResult Import(string ds1Path)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -51,7 +56,8 @@ public class DS1
             //    t_num = 1;
         }
 
-        var tiles = new Dictionary<int, DT1.Tile>();
+        var tiles = new Dictionary<int, List<DT1.Tile>>();
+        var rarities = new Dictionary<int, int>();
 
         if (version >= 3)
         {
@@ -68,10 +74,22 @@ public class DS1
                 filename = filename.Replace(".tg1", ".dt1");
                 foreach (var tile in DT1.Import("Assets" + filename))
                 {
-                    if (tile.texture == null)
-                        continue;
-                    if (!tiles.ContainsKey(tile.index))
-                        tiles[tile.index] = tile;
+                    List<DT1.Tile> list = tiles.GetValueOrDefault(tile.index, null);
+                    if (list == null)
+                    {
+                        list = new List<DT1.Tile>();
+                        tiles[tile.index] = list;
+                    }
+
+                    if (i == 0)
+                        list.Insert(0, tile);
+                    else
+                        list.Add(tile);
+
+                    if (!rarities.ContainsKey(tile.index))
+                        rarities[tile.index] = tile.rarity;
+                    else
+                        rarities[tile.index] += tile.rarity;
                 }
             }
         }
@@ -107,7 +125,7 @@ public class DS1
         Debug.Log("layers : (2 * " + w_num + " walls) + " + f_num + " floors + " + s_num + " shadow + " + t_num + " tag");
 
         Cell[][] walls = new Cell[w_num][];
-        for (int i = 0; i < f_num; ++i)
+        for (int i = 0; i < w_num; ++i)
             walls[i] = new Cell[width * height];
 
         Cell[][] floors = new Cell[f_num][];
@@ -145,6 +163,7 @@ public class DS1
 
         for (int n = 0; n < layerCount; n++)
         {
+            Debug.Log("Read layer " + n + " " + layout[n]);
             int p;
             int i = 0;
             for (int y = 0; y < height; y++)
@@ -158,12 +177,11 @@ public class DS1
                         case 2:
                         case 3:
                         case 4:
-                            reader.ReadBytes(4);
-                            //p = layout[n] - 1;
-                            //walls[p][i].prop1 = reader.ReadByte();
-                            //walls[p][i].prop2 = reader.ReadByte();
-                            //walls[p][i].prop3 = reader.ReadByte();
-                            //walls[p][i].prop4 = reader.ReadByte();
+                            p = layout[n] - 1;
+                            walls[p][i].prop1 = reader.ReadByte();
+                            walls[p][i].prop2 = reader.ReadByte();
+                            walls[p][i].prop3 = reader.ReadByte();
+                            walls[p][i].prop4 = reader.ReadByte();
                             break;
 
                         // orientations
@@ -171,40 +189,86 @@ public class DS1
                         case 6:
                         case 7:
                         case 8:
-                            p = layout[n] - 5;
-                            byte o = reader.ReadByte();
-                            //if (version < 7)
-                            //    walls[p][i].orientation = dir_lookup[o];
-                            //else
-                            //    walls[p][i].orientation = o;
+                            {
+                                p = layout[n] - 5;
+                                byte o = reader.ReadByte();
+                                if (version < 7)
+                                    walls[p][i].orientation = dirLookup[o];
+                                else
+                                    walls[p][i].orientation = o;
 
-                            reader.ReadBytes(3);
-                            break;
+                                reader.ReadBytes(3);
+
+                                if (walls[p][i].prop1 == 0)
+                                    break;
+
+                                int prop1 = walls[p][i].prop1;
+                                int prop2 = walls[p][i].prop2;
+                                int prop3 = walls[p][i].prop3;
+                                int prop4 = walls[p][i].prop4;
+
+                                int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
+                                int subIndex = prop2;
+                                int orientation = walls[p][i].orientation;
+                                int index = (((mainIndex << 6) + subIndex) << 5) + orientation;
+                                //DT1.Tile tile;
+                                //if (tiles.TryGetValue(index, out tile))
+                                //{
+                                //    Debug.Assert(mainIndex == tile.mainIndex);
+                                //    Debug.Assert(subIndex == tile.subIndex);
+                                //    Debug.Assert(orientation == tile.orientation);
+
+                                //    var tileObject = CreateWall(tile);
+                                //    var pos = Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
+                                //    pos.y = -pos.y;
+                                //    tileObject.transform.position = pos;
+                                //    tileObject.transform.SetParent(parent.transform);
+                                //}
+
+                                break;
+                            }
 
                         // floors
                         case 9:
                         case 10:
-                            p = layout[n] - 9;
-                            int prop1 = reader.ReadByte();
-                            int prop2 = reader.ReadByte();
-                            int prop3 = reader.ReadByte();
-                            int prop4 = reader.ReadByte();
-
-                            int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
-                            int subIndex = prop2;
-                            int orientation = 0;
-                            int index = (((mainIndex << 6) + subIndex) << 5) + orientation;
-                            DT1.Tile tile;
-                            if (tiles.TryGetValue(index, out tile))
                             {
-                                var tileObject = CreateFloor(tile, orderInLayer: -p);
-                                var pos = Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
-                                pos.y = -pos.y;
-                                tileObject.transform.position = pos;
-                                tileObject.transform.SetParent(parent.transform);
+                                p = layout[n] - 9;
+                                int prop1 = reader.ReadByte();
+                                int prop2 = reader.ReadByte();
+                                int prop3 = reader.ReadByte();
+                                int prop4 = reader.ReadByte();
+
+                                if (prop1 == 0) // no tile here
+                                    break;
+
+                                int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
+                                int subIndex = prop2;
+                                int orientation = 0;
+                                int index = (((mainIndex << 6) + subIndex) << 5) + orientation;
+                                List<DT1.Tile> tileList;
+                                if (tiles.TryGetValue(index, out tileList))
+                                {
+                                    DT1.Tile tile;
+                                    int raritySum = rarities[index];
+                                    if (raritySum == 0)
+                                        tile = tileList[0];
+                                    else
+                                    {
+                                        int randomIndex = Random.Range(0, tileList.Count - 1);
+                                        while(tileList[randomIndex].rarity == 0)
+                                        {
+                                            randomIndex = (randomIndex + 1) % tileList.Count;
+                                        }
+                                        tile = tileList[randomIndex];
+                                    }
+                                    var tileObject = CreateFloor(tile, orderInLayer: p);
+                                    var pos = Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
+                                    pos.y = -pos.y;
+                                    tileObject.transform.position = pos;
+                                    tileObject.transform.SetParent(parent.transform);
+                                }
                                 break;
                             }
-                            break;
 
                         // shadow
                         case 11:
@@ -298,6 +362,33 @@ public class DS1
         meshRenderer.material = tile.material;
         meshRenderer.sortingLayerName = "Floor";
         meshRenderer.sortingOrder = orderInLayer;
+        return gameObject;
+    }
+
+    static GameObject CreateWall(DT1.Tile tile)
+    {
+        var texture = tile.texture;
+
+        GameObject gameObject = new GameObject();
+        gameObject.name = "wall_" + tile.mainIndex + "_" + tile.subIndex;
+        var meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        var meshFilter = gameObject.AddComponent<MeshFilter>();
+        gameObject.AddComponent<DebugText>().text = tile.mainIndex + ", " + tile.subIndex + ", " + tile.orientation;
+        Mesh mesh = new Mesh();
+        mesh.name = "generated wall mesh";
+        mesh.vertices = new Vector3[] { new Vector3(-1, 0.5f), new Vector3(-1, -0.5f), new Vector3(1, -0.5f), new Vector3(1, 0.5f) };
+        mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
+        float x0 = tile.textureX;
+        float y0 = tile.textureY;
+        mesh.uv = new Vector2[] {
+                  new Vector2 (x0 / texture.width, -y0 / texture.height),
+                  new Vector2 (x0 / texture.width, (-y0 -tile.height) / texture.height),
+                  new Vector2 ((x0 + tile.width) / texture.width, (-y0 -tile.height) / texture.height),
+                  new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
+        };
+        meshFilter.mesh = mesh;
+
+        meshRenderer.material = tile.material;
         return gameObject;
     }
 }

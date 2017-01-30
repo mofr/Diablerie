@@ -50,6 +50,7 @@ public class DT1
             blockCount = reader.ReadInt32();
             reader.ReadBytes(12); // zeros
             index = (((mainIndex << 6) + subIndex) << 5) + orientation;
+            Debug.Assert(orientation <= 16);
         }
     }
 
@@ -87,6 +88,11 @@ public class DT1
             tiles[i].textureY = result.y;
             tiles[i].texture = result.texture;
             tiles[i].material = material;
+
+            if (tiles[i].orientation > 0 && tiles[i].orientation < 15)
+            {
+                tiles[i].textureY += (-tiles[i].height);
+            }
         }
 
         Debug.Log(dt1Path + ", tiles " + tileCount + ", " + packer.textures.Count + " textures");
@@ -121,10 +127,6 @@ public class DT1
                 if (blockData.Length < length)
                     blockData = new byte[length];
                 reader.Read(blockData, 0, length);
-                if (tile.orientation > 0 && tile.orientation < 15)
-                {
-                    y += (-tile.height);
-                }
                 if (format == 1)
                 {
                     drawBlockIsometric(tile.texture, tile.textureX + x, tile.textureY + y, blockData, length);

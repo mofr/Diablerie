@@ -11,7 +11,9 @@ public class MapBuilder : MonoBehaviour
 	void Start ()
     {
         var result = DS1.Import("Assets/d2/data/global/tiles/" + path);
-        var player = GameObject.Instantiate(playerPrefab, result.center, Quaternion.identity);
+        var playerPos = result.center;
+
+        var player = Instantiate(playerPrefab, playerPos, Quaternion.identity);
         PlayerController.instance.SetCharacter(player);
 	}
 }
