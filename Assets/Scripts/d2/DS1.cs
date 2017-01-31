@@ -4,6 +4,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+class DT1Index
+{
+    Dictionary<int, List<DT1.Tile>> tiles = new Dictionary<int, List<DT1.Tile>>();
+    new Dictionary<int, int> rarities = new Dictionary<int, int>();
+    int dt1Count = 0;
+
+    public void Add(DT1.Tile[] newTiles)
+    {
+        foreach (var tile in newTiles)
+        {
+            List<DT1.Tile> list = tiles.GetValueOrDefault(tile.index, null);
+            if (list == null)
+            {
+                list = new List<DT1.Tile>();
+                tiles[tile.index] = list;
+            }
+
+            if (dt1Count == 0)
+                list.Insert(0, tile);
+            else
+                list.Add(tile);
+
+            if (!rarities.ContainsKey(tile.index))
+                rarities[tile.index] = tile.rarity;
+            else
+                rarities[tile.index] += tile.rarity;
+        }
+        dt1Count += 1;
+    }
+
+    public bool Find(int index, out DT1.Tile tile)
+    {
+        List<DT1.Tile> tileList;
+        if (!tiles.TryGetValue(index, out tileList))
+        {
+            tile = new DT1.Tile();
+            return false;
+        }
+
+        int raritySum = rarities[index];
+        if (raritySum == 0)
+        {
+            tile = tileList[0];
+        }
+        else
+        {
+            int randomIndex = Random.Range(0, tileList.Count - 1);
+            while (tileList[randomIndex].rarity == 0)
+            {
+                randomIndex = (randomIndex + 1) % tileList.Count;
+            }
+            tile = tileList[randomIndex];
+        }
+        
+        return true;
+    }
+}
+
 public class DS1
 {
     struct Cell
@@ -59,8 +117,7 @@ public class DS1
             //    t_num = 1;
         }
 
-        var tiles = new Dictionary<int, List<DT1.Tile>>();
-        var rarities = new Dictionary<int, int>();
+        var dt1Index = new DT1Index();
 
         int totalTiles = 0;
         if (version >= 3)
@@ -78,25 +135,7 @@ public class DS1
                 filename = filename.Replace(".tg1", ".dt1");
                 var imported = DT1.Import("Assets" + filename);
                 totalTiles += imported.tiles.Length;
-                foreach (var tile in imported.tiles)
-                {
-                    List<DT1.Tile> list = tiles.GetValueOrDefault(tile.index, null);
-                    if (list == null)
-                    {
-                        list = new List<DT1.Tile>();
-                        tiles[tile.index] = list;
-                    }
-
-                    if (i == 0)
-                        list.Insert(0, tile);
-                    else
-                        list.Add(tile);
-
-                    if (!rarities.ContainsKey(tile.index))
-                        rarities[tile.index] = tile.rarity;
-                    else
-                        rarities[tile.index] += tile.rarity;
-                }
+                dt1Index.Add(imported.tiles);
             }
         }
 
@@ -249,22 +288,9 @@ public class DS1
                                     Debug.Log("Found map entry at " + x + " " + y);
                                 }
 
-                                List<DT1.Tile> tileList;
-                                if (tiles.TryGetValue(index, out tileList))
+                                DT1.Tile tile;
+                                if (dt1Index.Find(index, out tile))
                                 {
-                                    DT1.Tile tile;
-                                    int raritySum = rarities[index];
-                                    if (raritySum == 0)
-                                        tile = tileList[0];
-                                    else
-                                    {
-                                        int randomIndex = Random.Range(0, tileList.Count - 1);
-                                        while (tileList[randomIndex].rarity == 0)
-                                        {
-                                            randomIndex = (randomIndex + 1) % tileList.Count;
-                                        }
-                                        tile = tileList[randomIndex];
-                                    }
                                     var tileObject = CreateTile(tile);
                                     var pos = MapToWorld(x, y);
                                     tileObject.transform.position = pos;
@@ -291,22 +317,9 @@ public class DS1
                                 int subIndex = prop2;
                                 int orientation = 0;
                                 int index = DT1.Tile.Index(mainIndex, subIndex, orientation);
-                                List<DT1.Tile> tileList;
-                                if (tiles.TryGetValue(index, out tileList))
+                                DT1.Tile tile;
+                                if (dt1Index.Find(index, out tile))
                                 {
-                                    DT1.Tile tile;
-                                    int raritySum = rarities[index];
-                                    if (raritySum == 0)
-                                        tile = tileList[0];
-                                    else
-                                    {
-                                        int randomIndex = Random.Range(0, tileList.Count - 1);
-                                        while(tileList[randomIndex].rarity == 0)
-                                        {
-                                            randomIndex = (randomIndex + 1) % tileList.Count;
-                                        }
-                                        tile = tileList[randomIndex];
-                                    }
                                     var tileObject = CreateTile(tile, orderInLayer: p);
                                     var pos = MapToWorld(x, y);
                                     tileObject.transform.position = pos;
@@ -401,7 +414,7 @@ public class DS1
         float h = -tile.height / Iso.pixelsPerUnit;
         if(tile.orientation == 0)
         {
-            var topLeft = new Vector3(-0.5f * w, 0.5f);
+            var topLeft = new Vector3(-1f, 0.5f);
             mesh.vertices = new Vector3[] {
                 topLeft,
                 topLeft + new Vector3(0, -h),
@@ -421,7 +434,7 @@ public class DS1
         }
         else
         {
-            var topLeft = new Vector3(-0.5f * w, h - 0.5f);
+            var topLeft = new Vector3(-1f, h - 0.5f);
             mesh.vertices = new Vector3[] {
                 topLeft,
                 topLeft + new Vector3(0, -h),
