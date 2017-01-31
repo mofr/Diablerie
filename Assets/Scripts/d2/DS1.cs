@@ -294,6 +294,10 @@ public class DS1
                                     var tileObject = CreateTile(tile, x, y);
                                     tileObject.transform.SetParent(wallLayers[p].transform);
                                 }
+                                else
+                                {
+                                    Debug.LogWarning("wall tile not found (index " + mainIndex + " " + subIndex + " " + orientation + ") at " + x + ", " + y);
+                                }
 
                                 break;
                             }

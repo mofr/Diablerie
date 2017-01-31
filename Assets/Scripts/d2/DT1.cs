@@ -66,6 +66,11 @@ public class DT1
 
     static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
 
+    static public void ResetCache()
+    {
+        cache.Clear();
+    }
+
     static public ImportResult Import(string dt1Path)
     {
         if(cache.ContainsKey(dt1Path))

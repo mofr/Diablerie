@@ -38,6 +38,12 @@ public class EditorTools {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         return assetPath.EndsWith("dt1");
     }
+
+    [MenuItem("Assets/Reset DT1 cache")]
+    static public void ResetDT1()
+    {
+        DT1.ResetCache();
+    }
 }
 
 public static class ScriptableObjectUtility
