@@ -299,6 +299,20 @@ public class DS1
                                     Debug.LogWarning("wall tile not found (index " + mainIndex + " " + subIndex + " " + orientation + ") at " + x + ", " + y);
                                 }
 
+                                if (orientation == 3)
+                                {
+                                    index = DT1.Tile.Index(mainIndex, subIndex, 4);
+                                    if (dt1Index.Find(index, out tile))
+                                    {
+                                        var tileObject = CreateTile(tile, x, y);
+                                        tileObject.transform.SetParent(wallLayers[p].transform);
+                                    }
+                                    else
+                                    {
+                                        Debug.LogWarning("wall tile not found (index " + mainIndex + " " + subIndex + " " + orientation + ") at " + x + ", " + y);
+                                    }
+                                }
+
                                 break;
                             }
 
