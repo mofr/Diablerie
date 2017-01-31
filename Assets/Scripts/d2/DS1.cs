@@ -291,9 +291,7 @@ public class DS1
                                 DT1.Tile tile;
                                 if (dt1Index.Find(index, out tile))
                                 {
-                                    var tileObject = CreateTile(tile);
-                                    var pos = MapToWorld(x, y);
-                                    tileObject.transform.position = pos;
+                                    var tileObject = CreateTile(tile, x, y);
                                     tileObject.transform.SetParent(wallLayers[p].transform);
                                 }
 
@@ -320,9 +318,7 @@ public class DS1
                                 DT1.Tile tile;
                                 if (dt1Index.Find(index, out tile))
                                 {
-                                    var tileObject = CreateTile(tile, orderInLayer: p);
-                                    var pos = MapToWorld(x, y);
-                                    tileObject.transform.position = pos;
+                                    var tileObject = CreateTile(tile, x, y, orderInLayer: p);
                                     tileObject.transform.SetParent(floorLayers[p].transform);
                                 }
                                 break;
@@ -399,12 +395,14 @@ public class DS1
         return pos;
     }
 
-    static GameObject CreateTile(DT1.Tile tile, int orderInLayer = 0)
+    static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0)
     {
         var texture = tile.texture;
+        var pos = MapToWorld(x, y);
 
         GameObject gameObject = new GameObject();
         gameObject.name = tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
+        gameObject.transform.position = pos;
         var meshRenderer = gameObject.AddComponent<MeshRenderer>();
         var meshFilter = gameObject.AddComponent<MeshFilter>();
         Mesh mesh = new Mesh();
@@ -448,6 +446,7 @@ public class DS1
                 new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
                 new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
             };
+            meshRenderer.sortingOrder = Iso.SortingOrder(pos);
         }
         meshFilter.mesh = mesh;
 

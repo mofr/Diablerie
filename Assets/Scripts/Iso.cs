@@ -24,6 +24,15 @@ public class Iso : MonoBehaviour {
 		return new Vector3(world.y + world.x / 2, world.y - world.x / 2) / tileSize;
 	}
 
+    static public int SortingOrder(Vector3 worldPosition)
+    {
+        int sortingOrder = -Mathf.RoundToInt(worldPosition.y / tileSizeY);
+        var macroTile = MacroTile(MapToIso(worldPosition));
+        int macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);
+        sortingOrder += macroTileOrder * 1000;
+        return sortingOrder;
+    }
+
 	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f) {
 		float d = 0.5f - margin;
         var topRight = MapToWorld(pos + new Vector3(d, d));
@@ -103,10 +112,7 @@ public class Iso : MonoBehaviour {
         }
 
 		if (sort) {
-			spriteRenderer.sortingOrder = -Mathf.RoundToInt(transform.position.y / tileSizeY);
-			var macroTile = MacroTile(pos);
-			int macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);
-			spriteRenderer.sortingOrder += macroTileOrder * 1000;
+			spriteRenderer.sortingOrder = SortingOrder(transform.position);
 		}
     }
 }
