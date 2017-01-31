@@ -265,7 +265,7 @@ public class DS1
                                         }
                                         tile = tileList[randomIndex];
                                     }
-                                    var tileObject = CreateWall(tile);
+                                    var tileObject = CreateTile(tile);
                                     var pos = MapToWorld(x, y);
                                     tileObject.transform.position = pos;
                                     tileObject.transform.SetParent(wallLayers[p].transform);
@@ -307,7 +307,7 @@ public class DS1
                                         }
                                         tile = tileList[randomIndex];
                                     }
-                                    var tileObject = CreateFloor(tile, orderInLayer: p);
+                                    var tileObject = CreateTile(tile, orderInLayer: p);
                                     var pos = MapToWorld(x, y);
                                     tileObject.transform.position = pos;
                                     tileObject.transform.SetParent(floorLayers[p].transform);
@@ -386,69 +386,56 @@ public class DS1
         return pos;
     }
 
-    static GameObject CreateFloor(DT1.Tile tile, int orderInLayer)
+    static GameObject CreateTile(DT1.Tile tile, int orderInLayer = 0)
     {
         var texture = tile.texture;
 
         GameObject gameObject = new GameObject();
-        gameObject.name = "floor_" + tile.mainIndex + "_" + tile.subIndex;
+        gameObject.name = tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
         var meshRenderer = gameObject.AddComponent<MeshRenderer>();
         var meshFilter = gameObject.AddComponent<MeshFilter>();
         Mesh mesh = new Mesh();
-        mesh.name = "generated floor mesh";
-        float w = tile.width;
-        float h = -tile.height;
-        mesh.vertices = new Vector3[] {
-            new Vector3(-0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit),
-            new Vector3(-0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
-            new Vector3(0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
-            new Vector3(0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit)
-        };
-        mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
         float x0 = tile.textureX;
         float y0 = tile.textureY;
-        mesh.uv = new Vector2[] {
-            new Vector2 (x0 / texture.width, -y0 / texture.height),
-            new Vector2 (x0 / texture.width, (-y0 -h) / texture.height),
-            new Vector2 ((x0 + w) / texture.width, (-y0 -h) / texture.height),
-            new Vector2 ((x0 + w) / texture.width, -y0 / texture.height)
-        };
-        meshFilter.mesh = mesh;
+        float w = tile.width / Iso.pixelsPerUnit;
+        float h = -tile.height / Iso.pixelsPerUnit;
+        if(tile.orientation == 0)
+        {
+            var topLeft = new Vector3(-0.5f * w, 0.5f);
+            mesh.vertices = new Vector3[] {
+                topLeft,
+                topLeft + new Vector3(0, -h),
+                topLeft + new Vector3(w, -h),
+                topLeft + new Vector3(w, 0)
+            };
+            mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
+            mesh.uv = new Vector2[] {
+                new Vector2 (x0 / texture.width, -y0 / texture.height),
+                new Vector2 (x0 / texture.width, (-y0 +tile.height) / texture.height),
+                new Vector2 ((x0 + tile.width) / texture.width, (-y0 +tile.height) / texture.height),
+                new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
+            };
 
-        meshRenderer.material = tile.material;
-        meshRenderer.sortingLayerName = "Floor";
-        meshRenderer.sortingOrder = orderInLayer;
-        return gameObject;
-    }
-
-    static GameObject CreateWall(DT1.Tile tile)
-    {
-        var texture = tile.texture;
-
-        GameObject gameObject = new GameObject();
-        gameObject.name = "wall_" + tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
-
-        var meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        var meshFilter = gameObject.AddComponent<MeshFilter>();
-        Mesh mesh = new Mesh();
-        mesh.name = "generated wall mesh";
-        float w = tile.width;
-        float h = -tile.height;
-        mesh.vertices = new Vector3[] {
-            new Vector3(-0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit),
-            new Vector3(-0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
-            new Vector3(0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
-            new Vector3(0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit)
-        };
-        mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
-        float x0 = tile.textureX;
-        float y0 = tile.textureY;
-        mesh.uv = new Vector2[] {
-            new Vector2 (x0 / texture.width, (-y0 + h) / texture.height),
-            new Vector2 (x0 / texture.width, -y0 / texture.height),
-            new Vector2 ((x0 + w) / texture.width, -y0 / texture.height),
-            new Vector2 ((x0 + w) / texture.width, (-y0 +h) / texture.height)
-        };
+            meshRenderer.sortingLayerName = "Floor";
+            meshRenderer.sortingOrder = orderInLayer;
+        }
+        else
+        {
+            var topLeft = new Vector3(-0.5f * w, h - 0.5f);
+            mesh.vertices = new Vector3[] {
+                topLeft,
+                topLeft + new Vector3(0, -h),
+                topLeft + new Vector3(w, -h),
+                topLeft + new Vector3(w, 0)
+            };
+            mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
+            mesh.uv = new Vector2[] {
+                new Vector2 (x0 / texture.width, (-y0 - tile.height) / texture.height),
+                new Vector2 (x0 / texture.width, -y0 / texture.height),
+                new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
+                new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
+            };
+        }
         meshFilter.mesh = mesh;
 
         meshRenderer.material = tile.material;
