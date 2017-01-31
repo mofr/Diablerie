@@ -100,7 +100,11 @@ public class DT1
             tiles[i].texture = result.texture;
             tiles[i].material = material;
 
-            if (tiles[i].orientation > 0 && tiles[i].orientation < 15)
+            if (tiles[i].orientation == 0 && tiles[i].height != 0)
+            {
+                tiles[i].height = -80;
+            }
+            else if (tiles[i].orientation > 0 && tiles[i].orientation < 15)
             {
                 tiles[i].textureY += (-tiles[i].height);
             }
