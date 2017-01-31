@@ -28,7 +28,7 @@ public class DS1
                   0x0F, 0x10, 0x11, 0x12, 0x14
                };
 
-    static int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
+    static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
 
     static public ImportResult Import(string ds1Path)
     {
@@ -201,12 +201,20 @@ public class DS1
                         case 2:
                         case 3:
                         case 4:
-                            p = layout[n] - 1;
-                            walls[p][i].prop1 = reader.ReadByte();
-                            walls[p][i].prop2 = reader.ReadByte();
-                            walls[p][i].prop3 = reader.ReadByte();
-                            walls[p][i].prop4 = reader.ReadByte();
-                            break;
+                            {
+                                p = layout[n] - 1;
+                                byte prop1 = reader.ReadByte();
+                                byte prop2 = reader.ReadByte();
+                                byte prop3 = reader.ReadByte();
+                                byte prop4 = reader.ReadByte();
+
+                                walls[p][i].prop1 = prop1;
+                                walls[p][i].prop2 = prop2;
+                                walls[p][i].prop3 = prop3;
+                                walls[p][i].prop4 = prop4;
+
+                                break;
+                            }
 
                         // orientations
                         case 5:
@@ -223,8 +231,8 @@ public class DS1
 
                                 reader.ReadBytes(3);
 
-                                //if (walls[p][i].prop1 == 0)
-                                //    break;
+                                if (walls[p][i].prop1 == 0)
+                                    break;
 
                                 int prop1 = walls[p][i].prop1;
                                 int prop2 = walls[p][i].prop2;
@@ -339,9 +347,9 @@ public class DS1
                             //bptr += 4;
                             break;
                     }
+                    ++i;
                 }
             }
-            ++i;
         }
 
         if (version >= 2)
@@ -388,15 +396,20 @@ public class DS1
         var meshFilter = gameObject.AddComponent<MeshFilter>();
         Mesh mesh = new Mesh();
         mesh.name = "generated floor mesh";
-        mesh.vertices = new Vector3[] { new Vector3(-1, 0.5f), new Vector3(-1, -0.5f), new Vector3(1, -0.5f), new Vector3(1, 0.5f) };
+        mesh.vertices = new Vector3[] {
+            new Vector3(-1, 0.5f),
+            new Vector3(-1, -0.5f),
+            new Vector3(1, -0.5f),
+            new Vector3(1, 0.5f)
+        };
         mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
         float x0 = tile.textureX;
         float y0 = tile.textureY;
         mesh.uv = new Vector2[] {
-                  new Vector2 (x0 / texture.width, -y0 / texture.height),
-                  new Vector2 (x0 / texture.width, (-y0 -80f) / texture.height),
-                  new Vector2 ((x0 + 160f) / texture.width, (-y0 -80f) / texture.height),
-                  new Vector2 ((x0 + 160f) / texture.width, -y0 / texture.height)
+            new Vector2 (x0 / texture.width, -y0 / texture.height),
+            new Vector2 (x0 / texture.width, (-y0 -80f) / texture.height),
+            new Vector2 ((x0 + 160f) / texture.width, (-y0 -80f) / texture.height),
+            new Vector2 ((x0 + 160f) / texture.width, -y0 / texture.height)
         };
         meshFilter.mesh = mesh;
 
@@ -411,10 +424,12 @@ public class DS1
         var texture = tile.texture;
 
         GameObject gameObject = new GameObject();
-        gameObject.name = "wall_" + tile.mainIndex + "_" + tile.subIndex;
+        gameObject.name = "wall_" + tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
+        return gameObject;
+
         var meshRenderer = gameObject.AddComponent<MeshRenderer>();
         var meshFilter = gameObject.AddComponent<MeshFilter>();
-        gameObject.AddComponent<DebugText>().text = tile.mainIndex + ", " + tile.subIndex + ", " + tile.orientation;
+        //gameObject.AddComponent<DebugText>().text = tile.mainIndex + ", " + tile.subIndex + ", " + tile.orientation;
         Mesh mesh = new Mesh();
         mesh.name = "generated wall mesh";
         mesh.vertices = new Vector3[] { new Vector3(-1, 0.5f), new Vector3(-1, -0.5f), new Vector3(1, -0.5f), new Vector3(1, 0.5f) };

@@ -7,8 +7,9 @@ using UnityEngine;
 [RequireComponent (typeof(SpriteRenderer))]
 public class Iso : MonoBehaviour {
 
-	static public float tileSize = 0.2f;
-    static public float tileSizeY = tileSize / 2;
+    public const float pixelsPerUnit = 80;
+    public const float tileSize = 0.2f;
+    public const float tileSizeY = tileSize / 2;
     public Vector2 pos;
     public bool macro = false;
 	public bool sort = true;

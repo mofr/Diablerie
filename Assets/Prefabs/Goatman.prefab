@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 61596612515295052}
   - component: {fileID: 114647504033276172}
   - component: {fileID: 114244886764272186}
-  - component: {fileID: 114990906656477012}
   m_Layer: 0
   m_Name: Goatman
   m_TagString: Untagged
@@ -120,18 +119,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 11400000, guid: f446f55a90eb83941b8fb91c03fe06d4, type: 2}
   speed: 1
---- !u!114 &114990906656477012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1548379781030528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4f00f01f12ca7b43a0f716f5c403ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: 
 --- !u!212 &212648863976824714
 SpriteRenderer:
   m_ObjectHideFlags: 1
