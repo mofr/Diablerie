@@ -396,20 +396,22 @@ public class DS1
         var meshFilter = gameObject.AddComponent<MeshFilter>();
         Mesh mesh = new Mesh();
         mesh.name = "generated floor mesh";
+        float w = tile.width;
+        float h = -tile.height;
         mesh.vertices = new Vector3[] {
-            new Vector3(-1, 0.5f),
-            new Vector3(-1, -0.5f),
-            new Vector3(1, -0.5f),
-            new Vector3(1, 0.5f)
+            new Vector3(-0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit),
+            new Vector3(-0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
+            new Vector3(0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
+            new Vector3(0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit)
         };
         mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
         float x0 = tile.textureX;
         float y0 = tile.textureY;
         mesh.uv = new Vector2[] {
             new Vector2 (x0 / texture.width, -y0 / texture.height),
-            new Vector2 (x0 / texture.width, (-y0 -80f) / texture.height),
-            new Vector2 ((x0 + 160f) / texture.width, (-y0 -80f) / texture.height),
-            new Vector2 ((x0 + 160f) / texture.width, -y0 / texture.height)
+            new Vector2 (x0 / texture.width, (-y0 -h) / texture.height),
+            new Vector2 ((x0 + w) / texture.width, (-y0 -h) / texture.height),
+            new Vector2 ((x0 + w) / texture.width, -y0 / texture.height)
         };
         meshFilter.mesh = mesh;
 
@@ -425,22 +427,27 @@ public class DS1
 
         GameObject gameObject = new GameObject();
         gameObject.name = "wall_" + tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
-        return gameObject;
 
         var meshRenderer = gameObject.AddComponent<MeshRenderer>();
         var meshFilter = gameObject.AddComponent<MeshFilter>();
-        //gameObject.AddComponent<DebugText>().text = tile.mainIndex + ", " + tile.subIndex + ", " + tile.orientation;
         Mesh mesh = new Mesh();
         mesh.name = "generated wall mesh";
-        mesh.vertices = new Vector3[] { new Vector3(-1, 0.5f), new Vector3(-1, -0.5f), new Vector3(1, -0.5f), new Vector3(1, 0.5f) };
+        float w = tile.width;
+        float h = -tile.height;
+        mesh.vertices = new Vector3[] {
+            new Vector3(-0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit),
+            new Vector3(-0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
+            new Vector3(0.5f * w / Iso.pixelsPerUnit, -0.5f * h / Iso.pixelsPerUnit),
+            new Vector3(0.5f * w / Iso.pixelsPerUnit, 0.5f * h / Iso.pixelsPerUnit)
+        };
         mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
         float x0 = tile.textureX;
         float y0 = tile.textureY;
         mesh.uv = new Vector2[] {
-                  new Vector2 (x0 / texture.width, -y0 / texture.height),
-                  new Vector2 (x0 / texture.width, (-y0 -tile.height) / texture.height),
-                  new Vector2 ((x0 + tile.width) / texture.width, (-y0 -tile.height) / texture.height),
-                  new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
+            new Vector2 (x0 / texture.width, (-y0 + h) / texture.height),
+            new Vector2 (x0 / texture.width, -y0 / texture.height),
+            new Vector2 ((x0 + w) / texture.width, -y0 / texture.height),
+            new Vector2 ((x0 + w) / texture.width, (-y0 +h) / texture.height)
         };
         meshFilter.mesh = mesh;
 
