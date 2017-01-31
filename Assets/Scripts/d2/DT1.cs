@@ -64,8 +64,14 @@ public class DT1
         public Texture2D[] textures;
     }
 
+    static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
+
     static public ImportResult Import(string dt1Path)
     {
+        if(cache.ContainsKey(dt1Path))
+        {
+            return cache[dt1Path];
+        }
         var importResult = new ImportResult();
         var stream = new BufferedStream(File.OpenRead(dt1Path));
         var reader = new BinaryReader(stream);
@@ -162,6 +168,7 @@ public class DT1
 
         importResult.tiles = tiles;
         importResult.textures = packer.textures.ToArray();
+        cache[dt1Path] = importResult;
         return importResult;
     }
 
