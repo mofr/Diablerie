@@ -452,6 +452,20 @@ public class DS1
         }
         meshFilter.mesh = mesh;
 
+        int flagIndex = 0;
+        for(int dx = -2; dx < 3; ++dx)
+        {
+            for(int dy = 2; dy > -3; --dy)
+            {
+                if ((tile.flags[flagIndex] & 1) != 0)
+                {
+                    var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
+                    Tilemap.SetPassable(subCellPos, false);
+                }
+                ++flagIndex;
+            }
+        }
+
         meshRenderer.material = tile.material;
         return gameObject;
     }
