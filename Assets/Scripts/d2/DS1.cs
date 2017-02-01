@@ -70,8 +70,6 @@ public class DS1
         public byte prop2;
         public byte prop3;
         public byte prop4;
-        public byte orientation;
-        public byte flags;
     };
 
     public struct ImportResult
@@ -148,34 +146,30 @@ public class DS1
         if ((version >= 9) && (version <= 13))
             reader.ReadBytes(2);
 
-        int w_num = 1; // # of wall & orientation layers
-        int f_num = 1; // # of floor layer
-        int s_num = 1; // # of shadow layer, always here
-        int t_num = 0; // # of tag layer
+        int wallLayerCount = 1;
+        int floorLayerCount = 1;
+        int shadowLayerCount = 1;
+        int tagLayerCount = 0;
 
         if (version >= 4)
         {
-            w_num = reader.ReadInt32();
+            wallLayerCount = reader.ReadInt32();
 
             if (version >= 16)
             {
-                f_num = reader.ReadInt32();
+                floorLayerCount = reader.ReadInt32();
             }
         }
         else
         {
-            t_num = 1;
+            tagLayerCount = 1;
         }
 
-        Debug.Log("layers : (2 * " + w_num + " walls) + " + f_num + " floors + " + s_num + " shadow + " + t_num + " tag");
+        Debug.Log("layers : (2 * " + wallLayerCount + " walls) + " + floorLayerCount + " floors + " + shadowLayerCount + " shadow + " + tagLayerCount + " tag");
 
-        Cell[][] walls = new Cell[w_num][];
-        for (int i = 0; i < w_num; ++i)
+        Cell[][] walls = new Cell[wallLayerCount][];
+        for (int i = 0; i < wallLayerCount; ++i)
             walls[i] = new Cell[width * height];
-
-        Cell[][] floors = new Cell[f_num][];
-        for (int i = 0; i < f_num; ++i)
-            floors[i] = new Cell[width * height];
 
         int layerCount = 0;
         int[] layout = new int[14];
@@ -191,30 +185,30 @@ public class DS1
         else
         {
             layerCount = 0;
-            for (int x = 0; x < w_num; x++)
+            for (int x = 0; x < wallLayerCount; x++)
             {
                 layout[layerCount++] = 1 + x; // wall x
                 layout[layerCount++] = 5 + x; // orientation x
             }
-            for (int x = 0; x < f_num; x++)
+            for (int x = 0; x < floorLayerCount; x++)
                 layout[layerCount++] = 9 + x; // floor x
-            if (s_num != 0)
+            if (shadowLayerCount != 0)
                 layout[layerCount++] = 11;    // shadow
-            if (t_num != 0)
+            if (tagLayerCount != 0)
                 layout[layerCount++] = 12;    // tag
         }
 
         GameObject parent = new GameObject("tristram");
 
-        var floorLayers = new GameObject[f_num];
-        for(int i = 0; i < f_num;  ++i)
+        var floorLayers = new GameObject[floorLayerCount];
+        for(int i = 0; i < floorLayerCount;  ++i)
         {
             floorLayers[i] = new GameObject("f" + (i + 1));
             floorLayers[i].transform.SetParent(parent.transform);
         }
 
-        var wallLayers = new GameObject[w_num];
-        for (int i = 0; i < w_num; ++i)
+        var wallLayers = new GameObject[wallLayerCount];
+        for (int i = 0; i < wallLayerCount; ++i)
         {
             wallLayers[i] = new GameObject("w" + (i + 1));
             wallLayers[i].transform.SetParent(parent.transform);
@@ -242,16 +236,10 @@ public class DS1
                         case 4:
                             {
                                 p = layout[n] - 1;
-                                byte prop1 = reader.ReadByte();
-                                byte prop2 = reader.ReadByte();
-                                byte prop3 = reader.ReadByte();
-                                byte prop4 = reader.ReadByte();
-
-                                walls[p][i].prop1 = prop1;
-                                walls[p][i].prop2 = prop2;
-                                walls[p][i].prop3 = prop3;
-                                walls[p][i].prop4 = prop4;
-
+                                walls[p][i].prop1 = reader.ReadByte();
+                                walls[p][i].prop2 = reader.ReadByte();
+                                walls[p][i].prop3 = reader.ReadByte();
+                                walls[p][i].prop4 = reader.ReadByte();
                                 break;
                             }
 
@@ -262,25 +250,21 @@ public class DS1
                         case 8:
                             {
                                 p = layout[n] - 5;
-                                byte o = reader.ReadByte();
+                                int orientation = reader.ReadByte();
                                 if (version < 7)
-                                    walls[p][i].orientation = dirLookup[o];
-                                else
-                                    walls[p][i].orientation = o;
+                                    orientation = dirLookup[orientation];
 
                                 reader.ReadBytes(3);
 
                                 if (walls[p][i].prop1 == 0)
                                     break;
 
-                                int prop1 = walls[p][i].prop1;
                                 int prop2 = walls[p][i].prop2;
                                 int prop3 = walls[p][i].prop3;
                                 int prop4 = walls[p][i].prop4;
 
                                 int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
                                 int subIndex = prop2;
-                                int orientation = walls[p][i].orientation;
                                 int index = DT1.Tile.Index(mainIndex, subIndex, orientation);
                                 if (index == mapEntryIndex)
                                 {
