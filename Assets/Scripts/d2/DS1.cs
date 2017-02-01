@@ -198,7 +198,7 @@ public class DS1
                 layout[layerCount++] = 12;    // tag
         }
 
-        GameObject parent = new GameObject("tristram");
+        GameObject parent = new GameObject(Path.GetFileName(ds1Path));
 
         var floorLayers = new GameObject[floorLayerCount];
         for(int i = 0; i < floorLayerCount;  ++i)
