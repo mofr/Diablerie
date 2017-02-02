@@ -183,7 +183,7 @@ public class Character : MonoBehaviour {
             float delta = Mathf.Abs(diff);
             direction += Mathf.Clamp(Mathf.Sign(diff) * turnSpeed * Time.deltaTime * directionCount, -delta, delta);
             direction = Tools.Mod(direction + directionCount, directionCount);
-            directionIndex = Mathf.RoundToInt(direction);
+            directionIndex = Mathf.RoundToInt(direction) % directionCount;
         }
     }
 
