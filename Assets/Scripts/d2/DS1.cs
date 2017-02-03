@@ -86,7 +86,7 @@ public class DS1
 
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
 
-    static public ImportResult Import(string ds1Path)
+    static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -198,20 +198,20 @@ public class DS1
                 layout[layerCount++] = 12;    // tag
         }
 
-        GameObject parent = new GameObject(Path.GetFileName(ds1Path));
+        GameObject root = new GameObject(Path.GetFileName(ds1Path));
 
         var floorLayers = new GameObject[floorLayerCount];
         for(int i = 0; i < floorLayerCount;  ++i)
         {
             floorLayers[i] = new GameObject("f" + (i + 1));
-            floorLayers[i].transform.SetParent(parent.transform);
+            floorLayers[i].transform.SetParent(root.transform);
         }
 
         var wallLayers = new GameObject[wallLayerCount];
         for (int i = 0; i < wallLayerCount; ++i)
         {
             wallLayers[i] = new GameObject("w" + (i + 1));
-            wallLayers[i].transform.SetParent(parent.transform);
+            wallLayers[i].transform.SetParent(root.transform);
         }
 
         var importResult = new ImportResult();
@@ -379,6 +379,14 @@ public class DS1
                 {
                     int flags = reader.ReadInt32();
                 }
+
+                if (type == 1 && monsterPrefab != null)
+                {
+                    var pos = MapSubCellToWorld(x, y);
+                    var monster = GameObject.Instantiate(monsterPrefab, pos, Quaternion.identity);
+                    monster.name = monsterPrefab.name;
+                    monster.transform.SetParent(root.transform);
+                }
             }
         }
 
@@ -397,6 +405,13 @@ public class DS1
         return pos;
     }
 
+    static Vector3 MapSubCellToWorld(int x, int y)
+    {
+        var pos = Iso.MapToWorld(new Vector3(x - 2, y - 2));
+        pos.y = -pos.y;
+        return pos;
+    }
+
     static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0)
     {
         var texture = tile.texture;
@@ -411,7 +426,7 @@ public class DS1
         float x0 = tile.textureX;
         float y0 = tile.textureY;
         float w = tile.width / Iso.pixelsPerUnit;
-        float h = -tile.height / Iso.pixelsPerUnit;
+        float h = (-tile.height) / Iso.pixelsPerUnit;
         if(tile.orientation == 0)
         {
             var topLeft = new Vector3(-1f, 0.5f);

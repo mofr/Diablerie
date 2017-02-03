@@ -433,6 +433,8 @@ MonoBehaviour:
   path: act1/tristram/tri_town4.ds1
   playerPrefab: {fileID: 114334101961345146, guid: a17bd8a641fc67b46aa2efba8241b293,
     type: 2}
+  monsterPrefab: {fileID: 1548379781030528, guid: ddebe38050038cf44a043cd9adfb921d,
+    type: 2}
 --- !u!1 &18120891
 GameObject:
   m_ObjectHideFlags: 0
