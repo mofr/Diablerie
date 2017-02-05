@@ -77,8 +77,9 @@ public class DT1
         {
             return cache[dt1Path];
         }
+        
         var importResult = new ImportResult();
-        var stream = new BufferedStream(File.OpenRead(dt1Path));
+        var stream = new MemoryStream(File.ReadAllBytes(dt1Path));
         var reader = new BinaryReader(stream);
         int version1 = reader.ReadInt32();
         int version2 = reader.ReadInt32();
@@ -169,7 +170,6 @@ public class DT1
 
         foreach(var texture in packer.textures)
             texture.Apply();
-        stream.Close();
 
         importResult.tiles = tiles;
         importResult.textures = packer.textures.ToArray();

@@ -90,7 +90,7 @@ public class DS1
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
-        var stream = new BufferedStream(File.OpenRead(ds1Path));
+        var stream = new MemoryStream(File.ReadAllBytes(ds1Path));
         var reader = new BinaryReader(stream);
         int version = reader.ReadInt32();
         int width = reader.ReadInt32() + 1;
@@ -389,8 +389,6 @@ public class DS1
                 }
             }
         }
-
-        stream.Close();
 
         sw.Stop();
         Debug.Log("DS1 loaded in " + sw.Elapsed);
