@@ -3,8 +3,6 @@ using UnityEngine;
 
 class TexturePacker
 {
-    static Color32[] transparentColors = new Color32[2048 * 2048];
-
     public List<Texture2D> textures = new List<Texture2D>();
 
     Texture2D texture;
@@ -14,6 +12,8 @@ class TexturePacker
     int xPos = 0;
     int yPos = 0;
     int rowHeight = 0;
+
+    Color32[] pixels;
 
     public struct PackResult
     {
@@ -27,13 +27,14 @@ class TexturePacker
     {
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
+        this.pixels = new Color32[maxWidth * maxHeight];
     }
 
     private Texture2D CreateTexture()
     {
         var texture = new Texture2D(maxWidth, maxHeight, TextureFormat.ARGB32, false);
         texture.filterMode = FilterMode.Point;
-        texture.SetPixels32(transparentColors);
+        texture.SetPixels32(pixels);
         textures.Add(texture);
         return texture;
     }

@@ -22,7 +22,7 @@ public class EditorTools {
     static public bool LoadDS1Validate()
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-        return assetPath.EndsWith("ds1");
+        return assetPath.ToLower().EndsWith("ds1");
     }
 
     [MenuItem("Assets/Convert DT1 to PNG")]
@@ -36,13 +36,27 @@ public class EditorTools {
     static public bool ConvertDT1ToPNGValidate()
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-        return assetPath.EndsWith("dt1");
+        return assetPath.ToLower().EndsWith("dt1");
     }
 
     [MenuItem("Assets/Reset DT1 cache")]
     static public void ResetDT1()
     {
         DT1.ResetCache();
+    }
+
+    [MenuItem("Assets/Create font from DC6")]
+    static public void CreateFontFromDC6()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        DC6.CreateFontFromDC6(assetPath);
+    }
+
+    [MenuItem("Assets/Create font from DC6", true)]
+    static public bool CreateFontFromDC6Validate()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        return assetPath.ToLower().EndsWith("dc6");
     }
 }
 
