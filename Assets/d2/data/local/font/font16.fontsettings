@@ -799,7 +799,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 49
@@ -815,7 +815,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 5
     flipped: 0
   - serializedVersion: 2
     index: 50
@@ -831,7 +831,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 51
@@ -847,7 +847,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 52
@@ -863,7 +863,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 53
@@ -879,7 +879,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 54
@@ -895,7 +895,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 55
@@ -911,7 +911,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 56
@@ -927,7 +927,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 57
@@ -943,7 +943,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 58
@@ -959,7 +959,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 5
     flipped: 0
   - serializedVersion: 2
     index: 59
@@ -975,7 +975,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 5
     flipped: 0
   - serializedVersion: 2
     index: 60
@@ -1071,7 +1071,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 66
@@ -1087,7 +1087,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 67
@@ -1103,7 +1103,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 68
@@ -1119,7 +1119,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 69
@@ -1135,7 +1135,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 70
@@ -1151,7 +1151,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 71
@@ -1167,7 +1167,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 72
@@ -1183,7 +1183,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 73
@@ -1199,7 +1199,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 5
     flipped: 0
   - serializedVersion: 2
     index: 74
@@ -1215,7 +1215,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 5
     flipped: 0
   - serializedVersion: 2
     index: 75
@@ -1231,7 +1231,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 76
@@ -1247,7 +1247,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 77
@@ -1263,7 +1263,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 78
@@ -1279,7 +1279,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 79
@@ -1295,7 +1295,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 11
     flipped: 0
   - serializedVersion: 2
     index: 80
@@ -1311,7 +1311,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 81
@@ -1327,7 +1327,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 82
@@ -1343,7 +1343,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 83
@@ -1359,7 +1359,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 84
@@ -1375,7 +1375,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 11
     flipped: 0
   - serializedVersion: 2
     index: 85
@@ -1391,7 +1391,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 86
@@ -1407,7 +1407,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 13
     flipped: 0
   - serializedVersion: 2
     index: 87
@@ -1423,7 +1423,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 16
     flipped: 0
   - serializedVersion: 2
     index: 88
@@ -1439,7 +1439,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 89
@@ -1455,7 +1455,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 90
@@ -1471,7 +1471,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 91
@@ -1583,7 +1583,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 98
@@ -1599,7 +1599,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 99
@@ -1615,7 +1615,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 100
@@ -1631,7 +1631,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 101
@@ -1647,7 +1647,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 102
@@ -1663,7 +1663,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 103
@@ -1679,7 +1679,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 104
@@ -1695,7 +1695,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 105
@@ -1711,7 +1711,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 4
     flipped: 0
   - serializedVersion: 2
     index: 106
@@ -1727,7 +1727,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 4
     flipped: 0
   - serializedVersion: 2
     index: 107
@@ -1743,7 +1743,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 8
     flipped: 0
   - serializedVersion: 2
     index: 108
@@ -1759,7 +1759,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 109
@@ -1775,7 +1775,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 110
@@ -1791,7 +1791,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 111
@@ -1807,7 +1807,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 112
@@ -1823,7 +1823,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 113
@@ -1839,7 +1839,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 114
@@ -1855,7 +1855,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 115
@@ -1871,7 +1871,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 116
@@ -1887,7 +1887,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 9
     flipped: 0
   - serializedVersion: 2
     index: 117
@@ -1903,7 +1903,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 118
@@ -1919,7 +1919,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 119
@@ -1935,7 +1935,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 13
     flipped: 0
   - serializedVersion: 2
     index: 120
@@ -1951,7 +1951,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 121
@@ -1967,7 +1967,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 10
     flipped: 0
   - serializedVersion: 2
     index: 122
@@ -1983,7 +1983,7 @@ Font:
       y: 0
       width: 14
       height: -16
-    advance: 14
+    advance: 7
     flipped: 0
   - serializedVersion: 2
     index: 123
