@@ -80,7 +80,8 @@ public class DT1
         }
         
         var importResult = new ImportResult();
-        var stream = new MemoryStream(File.ReadAllBytes(dt1Path));
+        var bytes = File.ReadAllBytes(dt1Path);
+        var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
         int version1 = reader.ReadInt32();
         int version2 = reader.ReadInt32();
@@ -136,7 +137,6 @@ public class DT1
         }
 
         Debug.Log(dt1Path + ", tiles " + tileCount + ", " + textures.Count + " textures");
-        byte[] blockData = new byte[1024];
         for (int i = 0; i < tileCount; ++i)
         {
             var tile = tiles[i];
@@ -161,22 +161,14 @@ public class DT1
                 int fileOffset = reader.ReadInt32();
                 int blockDataPosition = tile.blockHeaderPointer + fileOffset;
 
-                var positionBeforeSeek = stream.Position;
-                stream.Seek(blockDataPosition, SeekOrigin.Begin);
-
-                if (blockData.Length < length)
-                    blockData = new byte[length];
-                reader.Read(blockData, 0, length);
                 if (format == 1)
                 {
-                    drawBlockIsometric(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, blockData, length);
+                    drawBlockIsometric(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
                 }
                 else
                 {
-                    drawBlockNormal(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, blockData, length);
+                    drawBlockNormal(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
                 }
-
-                stream.Seek(positionBeforeSeek, SeekOrigin.Begin);
             }
         }
 
@@ -207,10 +199,9 @@ public class DT1
         }
     }
 
-    static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int length)
+    static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
     {
         int dst = texturePixels.Length - y0 * textureSize - textureSize + x0;
-        int ptr = 0;
         int x = 0;
         int y = 0;
 
@@ -244,10 +235,9 @@ public class DT1
     static int[] xjump = { 14, 12, 10, 8, 6, 4, 2, 0, 2, 4, 6, 8, 10, 12, 14 };
     static int[] nbpix = { 4, 8, 12, 16, 20, 24, 28, 32, 28, 24, 20, 16, 12, 8, 4 };
 
-    static void drawBlockIsometric(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int length)
+    static void drawBlockIsometric(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
     {
         int dst = texturePixels.Length - y0 * textureSize - textureSize + x0;
-        int ptr = 0;
         int x, y = 0, n;
 
         // 3d-isometric subtile is 256 bytes, no more, no less 
