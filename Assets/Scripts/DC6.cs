@@ -27,6 +27,7 @@ class DC6
 
         const int textureSize = 512;
         var texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+        var pixels = new Color32[textureSize * textureSize];
         var packer = new TexturePacker(textureSize, textureSize);
         byte[] data = new byte[1024];
         var characterInfo = new CharacterInfo[dc6_fpd];
@@ -51,7 +52,7 @@ class DC6
             reader.Read(data, 0, f_len);
 
             var pack = packer.put(f_w, f_h);
-            drawFrame(data, f_len, texture, pack.x, pack.y + f_h);
+            drawFrame(data, f_len, pixels, textureSize, pack.x, pack.y + f_h);
 
             characterInfo[i].index = i;
             characterInfo[i].advance = f_w;
@@ -70,6 +71,7 @@ class DC6
         var name = Path.GetFileNameWithoutExtension(filename);
         var filepath = Path.GetDirectoryName(filename) + "/" + name;
 
+        texture.SetPixels32(pixels);
         texture.Apply();
         var pngData = texture.EncodeToPNG();
         Object.DestroyImmediate(texture);
@@ -85,8 +87,9 @@ class DC6
         AssetDatabase.Refresh();
     }
 
-    static void drawFrame(byte[] data, int size, Texture2D texture, int x0, int y0)
+    static void drawFrame(byte[] data, int size, Color32[] pixels, int textureSize, int x0, int y0)
     {
+        int dst = textureSize * textureSize - y0 * textureSize - textureSize;
         int ptr = 0;
         int i2, x = x0, y = y0, c, c2;
 
@@ -99,6 +102,7 @@ class DC6
             {
                 x = x0;
                 y--;
+                dst += textureSize;
             }
             else if ((c & 0x80) != 0)
                 x += c & 0x7F;
@@ -109,7 +113,7 @@ class DC6
                     c2 = data[ptr];
                     ++ptr;
                     i++;
-                    texture.SetPixel(x, -y, Palette.palette[c2]);
+                    pixels[dst + x] = Palette.palette[c2];
                     x++;
                 }
             }
