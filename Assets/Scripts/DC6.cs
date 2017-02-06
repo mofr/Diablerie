@@ -26,6 +26,7 @@ class DC6
         }
 
         const int textureSize = 512;
+        var texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
         var packer = new TexturePacker(textureSize, textureSize);
         byte[] data = new byte[1024];
         var characterInfo = new CharacterInfo[dc6_fpd];
@@ -50,7 +51,7 @@ class DC6
             reader.Read(data, 0, f_len);
 
             var pack = packer.put(f_w, f_h);
-            drawFrame(data, f_len, pack.texture, pack.x, pack.y + f_h);
+            drawFrame(data, f_len, texture, pack.x, pack.y + f_h);
 
             characterInfo[i].index = i;
             characterInfo[i].advance = f_w;
@@ -69,7 +70,6 @@ class DC6
         var name = Path.GetFileNameWithoutExtension(filename);
         var filepath = Path.GetDirectoryName(filename) + "/" + name;
 
-        var texture = packer.textures[0];
         texture.Apply();
         var pngData = texture.EncodeToPNG();
         Object.DestroyImmediate(texture);

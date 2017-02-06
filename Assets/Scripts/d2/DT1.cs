@@ -25,6 +25,7 @@ public class DT1
 
         public Material material;
         public Texture2D texture;
+        public Color32[] texturePixels;
         public int textureX;
         public int textureY;
         public int index;
@@ -93,8 +94,13 @@ public class DT1
         reader.ReadInt32(); //  Pointer in file to Tile Headers (= 276) 
         Tile[] tiles = new Tile[tileCount];
 
-        var packer = new TexturePacker(2048, 2048);
+        const int textureSize = 2048;
+        var textures = new List<Texture2D>();
+        var texturesPixels = new List<Color32[]>();
+        var packer = new TexturePacker(textureSize, textureSize);
         Material material = null;
+        Texture2D texture = null;
+        Color32[] pixels = null;
 
         for (int i = 0; i < tileCount; ++i)
         {
@@ -102,15 +108,21 @@ public class DT1
             var result = packer.put(tiles[i].width, -tiles[i].height);
             if (result.newTexture)
             {
+                texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+                texture.filterMode = FilterMode.Point;
+                textures.Add(texture);
                 material = new Material(Shader.Find("Sprite"));
                 material.name += "(" + dt1Path + ")";
-                material.mainTexture = result.texture;
+                material.mainTexture = texture;
+                pixels = new Color32[textureSize * textureSize];
+                texturesPixels.Add(pixels);
             }
 
             tiles[i].textureX = result.x;
             tiles[i].textureY = result.y;
-            tiles[i].texture = result.texture;
+            tiles[i].texture = texture;
             tiles[i].material = material;
+            tiles[i].texturePixels = pixels;
 
             if ((tiles[i].orientation == 0 || tiles[i].orientation == 15) && tiles[i].height != 0)
             {
@@ -123,7 +135,7 @@ public class DT1
             }
         }
 
-        Debug.Log(dt1Path + ", tiles " + tileCount + ", " + packer.textures.Count + " textures");
+        Debug.Log(dt1Path + ", tiles " + tileCount + ", " + textures.Count + " textures");
         byte[] blockData = new byte[1024];
         for (int i = 0; i < tileCount; ++i)
         {
@@ -157,22 +169,25 @@ public class DT1
                 reader.Read(blockData, 0, length);
                 if (format == 1)
                 {
-                    drawBlockIsometric(tile.texture, tile.textureX + x, tile.textureY + y, blockData, length);
+                    drawBlockIsometric(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, blockData, length);
                 }
                 else
                 {
-                    drawBlockNormal(tile.texture, tile.textureX + x, tile.textureY + y, blockData, length);
+                    drawBlockNormal(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, blockData, length);
                 }
 
                 stream.Seek(positionBeforeSeek, SeekOrigin.Begin);
             }
         }
 
-        foreach(var texture in packer.textures)
-            texture.Apply();
+        for (int i = 0; i < textures.Count; ++i)
+        {
+            textures[i].SetPixels32(texturesPixels[i]);
+            textures[i].Apply();
+        }
 
         importResult.tiles = tiles;
-        importResult.textures = packer.textures.ToArray();
+        importResult.textures = textures.ToArray();
         cache[dt1Path] = importResult;
         return importResult;
     }
@@ -185,14 +200,16 @@ public class DT1
         foreach(var texture in result.textures)
         {
             var pngData = texture.EncodeToPNG();
+            Object.DestroyImmediate(texture);
             var pngPath = assetPath + "." + i + ".png";
             File.WriteAllBytes(pngPath, pngData);
             AssetDatabase.ImportAsset(pngPath);
         }
     }
 
-    static void drawBlockNormal(Texture2D texture, int x0, int y0, byte[] data, int length)
+    static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int length)
     {
+        int dst = texturePixels.Length - y0 * textureSize - textureSize + x0;
         int ptr = 0;
         int x = 0;
         int y = 0;
@@ -209,7 +226,7 @@ public class DT1
                 length -= b2;
                 while (b2 != 0)
                 {
-                    texture.SetPixel(x0 + x, -y0 - y, Palette.palette[data[ptr]]);
+                    texturePixels[dst + x] = Palette.palette[data[ptr]];
                     ptr++;
                     x++;
                     b2--;
@@ -219,6 +236,7 @@ public class DT1
             {
                 x = 0;
                 y++;
+                dst -= textureSize;
             }
         }
     }
@@ -226,8 +244,9 @@ public class DT1
     static int[] xjump = { 14, 12, 10, 8, 6, 4, 2, 0, 2, 4, 6, 8, 10, 12, 14 };
     static int[] nbpix = { 4, 8, 12, 16, 20, 24, 28, 32, 28, 24, 20, 16, 12, 8, 4 };
 
-    static void drawBlockIsometric(Texture2D texture, int x0, int y0, byte[] data, int length)
+    static void drawBlockIsometric(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int length)
     {
+        int dst = texturePixels.Length - y0 * textureSize - textureSize + x0;
         int ptr = 0;
         int x, y = 0, n;
 
@@ -243,12 +262,13 @@ public class DT1
             length -= n;
             while (n != 0)
             {
-                texture.SetPixel(x0 + x, -y0 - y, Palette.palette[data[ptr]]);
+                texturePixels[dst + x] = Palette.palette[data[ptr]];
                 ptr++;
                 x++;
                 n--;
             }
             y++;
+            dst -= textureSize;
         }
     }
 }

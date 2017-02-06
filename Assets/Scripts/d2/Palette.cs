@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Palette
 {
-    static public Color[] palette;
-    static Dictionary<int, Color[]> palettes = new Dictionary<int, Color[]>();
+    static public Color32[] palette;
+    static Dictionary<int, Color32[]> palettes = new Dictionary<int, Color32[]>();
 
-	static public Color[] LoadPalette(int act)
+	static public Color32[] LoadPalette(int act)
     {
         if (palettes.ContainsKey(act))
         {
@@ -16,7 +16,7 @@ public class Palette
             return palette;
         }
 
-        palette = new Color[256];
+        palette = new Color32[256];
         using (var stream = new MemoryStream(File.ReadAllBytes("Assets/d2/data/global/palette/ACT" + act + "/Pal.PL2")))
         using (var reader = new BinaryReader(stream))
         {
@@ -27,7 +27,7 @@ public class Palette
                 byte b = reader.ReadByte();
                 reader.ReadByte();
 
-                palette[i] = new Color(r / 255f, g / 255f, b / 255f);
+                palette[i] = new Color32(r, g, b, 255);
             }
         }
         palettes[act] = palette;
