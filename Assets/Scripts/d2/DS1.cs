@@ -220,7 +220,6 @@ public class DS1
 
         for (int n = 0; n < layerCount; n++)
         {
-            Debug.Log("Read layer " + n + " " + layout[n]);
             int p;
             int i = 0;
             for (int y = 0; y < height; y++)

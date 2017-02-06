@@ -17,18 +17,19 @@ public class Palette
         }
 
         palette = new Color[256];
-        var stream = new BufferedStream(File.OpenRead("Assets/d2/data/global/palette/ACT" + act + "/Pal.PL2"));
-        var reader = new BinaryReader(stream);
-        for (int i = 0; i < 256; ++i)
+        using (var stream = new MemoryStream(File.ReadAllBytes("Assets/d2/data/global/palette/ACT" + act + "/Pal.PL2")))
+        using (var reader = new BinaryReader(stream))
         {
-            byte r = reader.ReadByte();
-            byte g = reader.ReadByte();
-            byte b = reader.ReadByte();
-            reader.ReadByte();
+            for (int i = 0; i < 256; ++i)
+            {
+                byte r = reader.ReadByte();
+                byte g = reader.ReadByte();
+                byte b = reader.ReadByte();
+                reader.ReadByte();
 
-            palette[i] = new Color(r / 255f, g / 255f, b / 255f);
+                palette[i] = new Color(r / 255f, g / 255f, b / 255f);
+            }
         }
-        stream.Close();
         palettes[act] = palette;
         return palette;
     }
