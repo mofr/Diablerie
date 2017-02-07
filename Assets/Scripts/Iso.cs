@@ -45,6 +45,11 @@ public class Iso : MonoBehaviour {
 		Debug.DrawLine(bottomRight, bottomLeft, color, duration);
 	}
 
+    static public void DebugDrawLine(Vector3 from, Vector3 to)
+    {
+        Debug.DrawLine(MapToWorld(from), MapToWorld(to));
+    }
+
     static public void GizmosDrawTile(Vector3 pos, float size = 1.0f)
     {
         float d = 0.5f * size;

@@ -234,14 +234,14 @@ public class Character : MonoBehaviour {
 
         var prevPos = iso.pos;
 
-        bool directlyAccesible = !Tilemap.Raycast(iso.pos, targetPoint, maxRayLength: 2.0f, ignore: gameObject);
-        if (directlyAccesible)
+        var dir = (targetPoint - iso.pos).normalized;
+        float distance = speed * Time.deltaTime;
+
+        var desiredPos = iso.pos + dir * distance;
+        bool passable = Tilemap.Passable(desiredPos, 2);
+        if (passable)
         {
-            var dir = (targetPoint - iso.pos).normalized;
-            float distance = speed * Time.deltaTime;
-
-            iso.pos += dir * distance;
-
+            iso.pos = desiredPos;
             desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
         }
         else
@@ -256,24 +256,6 @@ public class Character : MonoBehaviour {
                 moving = false;
             Pathing.DebugDrawPath(iso.pos, path);
             MoveAlongPath();
-        }
-
-        // free cells which was previously occupied by this object
-        var cell = Tilemap.GetCell(prevPos);
-        if (cell.gameObject == gameObject)
-        {
-            cell.passable = true;
-            cell.gameObject = null;
-            Tilemap.SetCell(prevPos, cell);
-        }
-
-        // occupy cells which are not already occupied by other objects (fully relying on pathfinding)
-        var newCell = Tilemap.GetCell(iso.pos);
-        if (newCell.passable)
-        {
-            newCell.passable = false;
-            newCell.gameObject = gameObject;
-            Tilemap.SetCell(iso.pos, newCell);
         }
     }
 

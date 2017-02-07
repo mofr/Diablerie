@@ -68,7 +68,8 @@ public class Pathing {
 		for (int i = 0; i < directions.Length; ++i) {
 			Vector2 direction = directions[i];
 			Vector2 pos = node.pos + direction;
-			if (Tilemap.Passable(pos)) {
+
+            if (Tilemap.Passable(pos, 2)) {
 				if (newNode == null)
 					newNode = Node.Get();
 				newNode.pos = pos;
@@ -141,7 +142,7 @@ public class Pathing {
 			Node node = openNodes[0];
             if (node.hScore < bestNode.hScore)
                 bestNode = node;
-            if (!Tilemap.Passable(target) && node.parent != null && node.hScore > node.parent.hScore)
+            if (!Tilemap.Passable(target, 2) && node.parent != null && node.hScore > node.parent.hScore)
             {
                 TraverseBack(bestNode.parent);
                 break;

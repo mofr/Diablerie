@@ -92,11 +92,19 @@ public class Tilemap : MonoBehaviour {
         instance.map[index] = cell;
     }
 
-    public static bool Passable(Vector3 pos)
+    public static bool Passable(Vector3 pos, int radius = 0)
     {
         var tilePos = Iso.Snap(pos);
         int index = instance.MapToIndex(tilePos);
-        return instance.map[index].passable;
+        bool passable = instance.map[index].passable;
+        if (radius == 0)
+            return passable;
+
+        passable = passable && instance.map[index - 1].passable;
+        passable = passable && instance.map[index + 1].passable;
+        passable = passable && instance.map[index - instance.width].passable;
+        passable = passable && instance.map[index + instance.width].passable;
+        return passable;
     }
 
     public static bool PassableTile(Vector3 tilePos)
@@ -127,7 +135,7 @@ public class Tilemap : MonoBehaviour {
     {
         var hit = new RaycastHit();
         var diff = to - from;
-        var stepLen = 0.1f;
+        var stepLen = 0.2f;
         if (rayLength == Mathf.Infinity)
             rayLength = Mathf.Min(diff.magnitude, maxRayLength);
         int stepCount = Mathf.RoundToInt(rayLength / stepLen);
@@ -139,9 +147,10 @@ public class Tilemap : MonoBehaviour {
             if (debug)
                 Iso.DebugDrawTile(Iso.Snap(pos), margin: 0.3f, duration: 0.5f);
             Cell cell = GetCell(pos);
-            if (!cell.passable && (ignore == null || ignore != cell.gameObject))
+            bool passable = Passable(pos, 2);
+            if (!passable && (ignore == null || ignore != cell.gameObject))
             {
-                hit.hit = !cell.passable;
+                hit.hit = !passable;
                 hit.gameObject = cell.gameObject;
                 break;
             }
