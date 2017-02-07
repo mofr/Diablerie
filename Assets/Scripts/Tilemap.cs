@@ -92,7 +92,7 @@ public class Tilemap : MonoBehaviour {
         instance.map[index] = cell;
     }
 
-    public static bool Passable(Vector3 pos, int radius = 0)
+    public static bool Passable(Vector3 pos, int radius = 0, bool debug = false)
     {
         var tilePos = Iso.Snap(pos);
         int index = instance.MapToIndex(tilePos);
@@ -104,6 +104,15 @@ public class Tilemap : MonoBehaviour {
         passable = passable && instance.map[index + 1].passable;
         passable = passable && instance.map[index - instance.width].passable;
         passable = passable && instance.map[index + instance.width].passable;
+
+        if (debug)
+        {
+            Iso.DebugDrawTile(tilePos, 0.1f);
+            Iso.DebugDrawTile(tilePos + new Vector3(1, 0), 0.1f);
+            Iso.DebugDrawTile(tilePos + new Vector3(-1, 0), 0.1f);
+            Iso.DebugDrawTile(tilePos + new Vector3(0, 1), 0.1f);
+            Iso.DebugDrawTile(tilePos + new Vector3(0, -1), 0.1f);
+        }
         return passable;
     }
 

@@ -232,31 +232,16 @@ public class Character : MonoBehaviour {
             return;
         }
 
-        var prevPos = iso.pos;
-
-        var dir = (targetPoint - iso.pos).normalized;
-        float distance = speed * Time.deltaTime;
-
-        var desiredPos = iso.pos + dir * distance;
-        bool passable = Tilemap.Passable(desiredPos, 2);
-        if (passable)
+        var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
+        if (path.Count == 0 || newPath.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
         {
-            iso.pos = desiredPos;
-            desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
+            AbortPath();
+            path.AddRange(newPath);
         }
-        else
-        {
-            var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
-            if (path.Count == 0 || newPath.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
-            {
-                AbortPath();
-                path.AddRange(newPath);
-            }
-            if (path.Count == 0)
-                moving = false;
-            Pathing.DebugDrawPath(iso.pos, path);
-            MoveAlongPath();
-        }
+        if (path.Count == 0)
+            moving = false;
+        Pathing.DebugDrawPath(iso.pos, path);
+        MoveAlongPath();
     }
 
     void UpdateAnimation() {

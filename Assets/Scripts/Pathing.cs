@@ -128,6 +128,7 @@ public class Pathing {
 
         directions = directionCount == 8 ? directions8 : directions16;
         Pathing.target = target;
+        bool targetAccessible = Tilemap.Passable(target, 2);
         Node startNode = Node.Get();
 		startNode.parent = null;
 		startNode.pos = from;
@@ -142,7 +143,7 @@ public class Pathing {
 			Node node = openNodes[0];
             if (node.hScore < bestNode.hScore)
                 bestNode = node;
-            if (!Tilemap.Passable(target, 2) && node.parent != null && node.hScore > node.parent.hScore)
+            if (!targetAccessible && node.parent != null && node.hScore > node.parent.hScore)
             {
                 TraverseBack(bestNode.parent);
                 break;
