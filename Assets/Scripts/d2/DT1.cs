@@ -128,7 +128,7 @@ public class DT1
             if ((tiles[i].orientation == 0 || tiles[i].orientation == 15) && tiles[i].height != 0)
             {
                 // floor or roof
-                tiles[i].height = -80;
+                tiles[i].height = -79;
             }
             else if (tiles[i].orientation > 0 && tiles[i].orientation < 15)
             {
