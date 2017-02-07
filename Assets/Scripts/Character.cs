@@ -241,7 +241,16 @@ public class Character : MonoBehaviour {
         if (path.Count == 0)
             moving = false;
         Pathing.DebugDrawPath(iso.pos, path);
-        MoveAlongPath();
+        if (path.Count == 1)
+        {
+            var dir = (targetPoint - iso.pos).normalized;
+            iso.pos += dir * Time.deltaTime * speed;
+            desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
+        }
+        else
+        {
+            MoveAlongPath();
+        }
     }
 
     void UpdateAnimation() {
