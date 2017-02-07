@@ -44,7 +44,7 @@ public class Pathing {
 			}
 		}
 
-		static public void Recycle(List<Node> nodes) {
+		static public void Recycle(ICollection<Node> nodes) {
 			pool.AddRange(nodes);
 			nodes.Clear();
 		}
@@ -56,7 +56,7 @@ public class Pathing {
 		
 	static private Vector2 target;
 	static private List<Node> openNodes = new List<Node>();
-	static private List<Node> closeNodes = new List<Node>();
+	static private HashSet<Node> closeNodes = new HashSet<Node>();
 	static private Vector2[] directions;
 	static private Vector2[] directions8 = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1) };
 	static private Vector2[] directions16 = { new Vector2(-1, -1), new Vector2(-2, -1), new Vector2(-1, 0), new Vector2(-2, 1), new Vector2(-1, 1), new Vector2(-1, 2), new Vector2(0, 1), new Vector2(1, 2), new Vector2(1, 1), new Vector2(2, 1), new Vector2(1, 0), new Vector2(2, -1), new Vector2(1, -1), new Vector2(1, -2), new Vector2(0, -1), new Vector2(-1, -2) };
@@ -139,7 +139,7 @@ public class Pathing {
 		int iterCount = 0;
         Node bestNode = startNode;
 		while (openNodes.Count > 0) {
-			openNodes.Sort();
+            openNodes.Sort();
 			Node node = openNodes[0];
             if (node.hScore < bestNode.hScore)
                 bestNode = node;
