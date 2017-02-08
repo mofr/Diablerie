@@ -32,8 +32,13 @@ public class Pathing {
 		public bool Equals(Node other) {
 			return this.pos == other.pos;
 		}
-			
-		static private List<Node> pool = new List<Node>();
+
+        override public int GetHashCode()
+        {
+            return (int)(pos.x + pos.y * 100);
+        }
+
+        static private List<Node> pool = new List<Node>();
 		static public Node Get() {
 			if (pool.Count > 0) {
 				Node node = pool[0];
@@ -62,7 +67,6 @@ public class Pathing {
 	static private Vector2[] directions16 = { new Vector2(-1, -1), new Vector2(-2, -1), new Vector2(-1, 0), new Vector2(-2, 1), new Vector2(-1, 1), new Vector2(-1, 2), new Vector2(0, 1), new Vector2(1, 2), new Vector2(1, 1), new Vector2(2, 1), new Vector2(1, 0), new Vector2(2, -1), new Vector2(1, -1), new Vector2(1, -2), new Vector2(0, -1), new Vector2(-1, -2) };
 
     static private void StepTo(Node node) {
-		closeNodes.Add(node);
 		Node newNode = null;
 
 		for (int i = 0; i < directions.Length; ++i) {
@@ -70,10 +74,12 @@ public class Pathing {
 			Vector2 pos = node.pos + direction;
 
             if (Tilemap.Passable(pos, 2)) {
-				if (newNode == null)
-					newNode = Node.Get();
-				newNode.pos = pos;
-				if (!closeNodes.Contains(newNode) && !openNodes.Contains(newNode)) {
+                if (newNode == null)
+                    newNode = Node.Get();
+                newNode.pos = pos;
+
+                if (!closeNodes.Contains(newNode))
+                { 
 					newNode.parent = node;
 					newNode.direction = direction;
 					newNode.directionIndex = i;
@@ -81,7 +87,8 @@ public class Pathing {
                     newNode.hScore = Vector2.Distance(target, newNode.pos);
                     newNode.score = newNode.gScore + newNode.hScore;
 					openNodes.Add(newNode);
-					newNode = null;
+                    closeNodes.Add(newNode);
+                    newNode = null;
 				}
 			}
 		}
@@ -123,8 +130,8 @@ public class Pathing {
         path.Clear();
         if (from == target)
             return path;
-		Node.Recycle(openNodes);
-		Node.Recycle(closeNodes);
+        openNodes.Clear();
+        Node.Recycle(closeNodes);
 
         directions = directionCount == 8 ? directions8 : directions16;
         Pathing.target = target;
@@ -136,7 +143,8 @@ public class Pathing {
         startNode.hScore = Mathf.Infinity;
         startNode.score = Mathf.Infinity;
 		openNodes.Add(startNode);
-		int iterCount = 0;
+        closeNodes.Add(startNode);
+        int iterCount = 0;
         Node bestNode = startNode;
 		while (openNodes.Count > 0) {
             openNodes.Sort();
