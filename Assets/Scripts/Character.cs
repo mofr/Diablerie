@@ -226,22 +226,19 @@ public class Character : MonoBehaviour {
         if (!moving)
             return;
 
-        if (Vector2.Distance(iso.pos, targetPoint) < 0.5f)
+        var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
+        if (newPath.Count == 0)
         {
             moving = false;
             return;
         }
-
-        var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
-        if (path.Count == 0 || newPath.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
+        if (path.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
         {
             AbortPath();
             path.AddRange(newPath);
         }
-        if (path.Count == 0)
-            moving = false;
         Pathing.DebugDrawPath(iso.pos, path);
-        if (path.Count == 1)
+        if (path.Count == 1 && Vector2.Distance(path[0].pos, targetPoint) < 1.0f)
         {
             var dir = (targetPoint - iso.pos).normalized;
             iso.pos += dir * Time.deltaTime * speed;
