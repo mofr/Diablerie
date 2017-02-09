@@ -60,7 +60,7 @@ public class Pathing {
 	}
 		
 	static private Vector2 target;
-	static private List<Node> openNodes = new List<Node>();
+	static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
 	static private HashSet<Node> closeNodes = new HashSet<Node>();
 	static private Vector2[] directions;
 	static private Vector2[] directions8 = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1) };
@@ -147,8 +147,7 @@ public class Pathing {
         int iterCount = 0;
         Node bestNode = startNode;
 		while (openNodes.Count > 0) {
-            openNodes.Sort();
-			Node node = openNodes[0];
+			Node node = openNodes.Take();
             if (node.hScore < bestNode.hScore)
                 bestNode = node;
             if (!targetAccessible && node.parent != null && node.hScore > node.parent.hScore)
@@ -160,10 +159,9 @@ public class Pathing {
                 TraverseBack(node);
 				break;
 			}
-			openNodes.RemoveAt(0);
 			StepTo(node);
 			iterCount += 1;
-			if (iterCount > 100) {
+			if (iterCount > 500) {
                 TraverseBack(bestNode.parent);
                 break;
 			}
