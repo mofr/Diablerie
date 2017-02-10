@@ -73,7 +73,7 @@ public class Pathing {
 			Vector2 direction = directions[i];
 			Vector2 pos = node.pos + direction;
 
-            if (Tilemap.Passable(pos, 2)) {
+            if (Tilemap.PassableTile(pos, 2)) {
                 if (newNode == null)
                     newNode = Node.Get();
                 newNode.pos = pos;
@@ -83,8 +83,8 @@ public class Pathing {
 					newNode.parent = node;
 					newNode.direction = direction;
 					newNode.directionIndex = i;
-					newNode.gScore = node.gScore + direction.magnitude;
-                    newNode.hScore = Vector2.Distance(target, newNode.pos);
+                    newNode.gScore = node.gScore + 1;
+                    newNode.hScore = Mathf.Abs(target.x - newNode.pos.x) + Mathf.Abs(target.y - newNode.pos.y);
                     newNode.score = newNode.gScore + newNode.hScore;
 					openNodes.Add(newNode);
                     closeNodes.Add(newNode);
@@ -146,7 +146,8 @@ public class Pathing {
         closeNodes.Add(startNode);
         int iterCount = 0;
         Node bestNode = startNode;
-		while (openNodes.Count > 0) {
+		while (openNodes.Count > 0)
+        {
 			Node node = openNodes.Take();
             if (node.hScore < bestNode.hScore)
                 bestNode = node;
@@ -155,13 +156,15 @@ public class Pathing {
                 TraverseBack(bestNode.parent);
                 break;
             }
-            if (Vector2.Distance(node.pos, target) <= minRange) {
+            if (node.hScore <= minRange)
+            {
                 TraverseBack(node);
 				break;
 			}
 			StepTo(node);
 			iterCount += 1;
-			if (iterCount > 500) {
+			if (iterCount > 500)
+            {
                 TraverseBack(bestNode.parent);
                 break;
 			}

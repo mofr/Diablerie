@@ -95,6 +95,11 @@ public class Tilemap : MonoBehaviour {
     public static bool Passable(Vector3 pos, int radius = 0, bool debug = false)
     {
         var tilePos = Iso.Snap(pos);
+        return PassableTile(tilePos, radius, debug);
+    }
+
+    public static bool PassableTile(Vector3 tilePos, int radius = 0, bool debug = false)
+    {
         int index = instance.MapToIndex(tilePos);
         bool passable = instance.map[index].passable;
         if (radius == 0)
@@ -114,12 +119,6 @@ public class Tilemap : MonoBehaviour {
             Iso.DebugDrawTile(tilePos + new Vector3(0, -1), 0.1f);
         }
         return passable;
-    }
-
-    public static bool PassableTile(Vector3 tilePos)
-    {
-        int index = instance.MapToIndex(tilePos);
-        return instance.map[index].passable;
     }
 
     public static void SetPassable(Vector3 tilePos, bool passable)
