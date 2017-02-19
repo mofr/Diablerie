@@ -460,7 +460,7 @@ public class DS1
                 new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
                 new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
             };
-            meshRenderer.sortingOrder = Iso.SortingOrder(pos);
+            meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 3;
         }
         meshFilter.mesh = mesh;
 

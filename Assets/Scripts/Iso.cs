@@ -26,10 +26,11 @@ public class Iso : MonoBehaviour {
 
     static public int SortingOrder(Vector3 worldPosition)
     {
-        int sortingOrder = -Mathf.RoundToInt(worldPosition.y / tileSizeY);
         var macroTile = MacroTile(MapToIso(worldPosition));
-        int macroTileOrder = -Mathf.RoundToInt((MapToWorld(macroTile)).y / tileSizeY);
-        sortingOrder += macroTileOrder * 1000;
+        var macroY = (MapToWorld(macroTile)).y / tileSizeY;
+        int macroTileOrder = -Mathf.RoundToInt(macroY);
+        int sortingOrder = -Mathf.RoundToInt(worldPosition.y / tileSizeY - macroY);
+        sortingOrder += macroTileOrder * 100;
         return sortingOrder;
     }
 
