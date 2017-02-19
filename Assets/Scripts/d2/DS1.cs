@@ -469,7 +469,7 @@ public class DS1
         {
             for(int dy = 2; dy > -3; --dy)
             {
-                if ((tile.flags[flagIndex] & 1) != 0)
+                if ((tile.flags[flagIndex] & (1 + 8)) != 0)
                 {
                     var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
                     Tilemap.SetPassable(subCellPos, false);
