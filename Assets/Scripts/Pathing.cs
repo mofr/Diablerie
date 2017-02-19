@@ -11,16 +11,12 @@ public class Pathing {
 		public Vector2 pos;
 	}
 
-	static private List<Step> path = new List<Step>();
-
 	class Node : IEquatable<Node>, IComparable<Node> {
 		public float gScore;
         public float hScore;
         public float score;
 		public Vector2 pos;
 		public Node parent;
-		public Vector2 direction;
-		public int directionIndex;
 
 		private Node() {
 		}
@@ -58,22 +54,26 @@ public class Pathing {
 			pool.Add(this);
 		}
 	}
-		
-	static private Vector2 target;
+
+    static private List<Step> path = new List<Step>();
+    static private Vector2 target;
 	static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
 	static private HashSet<Node> closeNodes = new HashSet<Node>();
 	static private Vector2[] directions;
 	static private Vector2[] directions8 = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1) };
 	static private Vector2[] directions16 = { new Vector2(-1, -1), new Vector2(-2, -1), new Vector2(-1, 0), new Vector2(-2, 1), new Vector2(-1, 1), new Vector2(-1, 2), new Vector2(0, 1), new Vector2(1, 2), new Vector2(1, 1), new Vector2(2, 1), new Vector2(1, 0), new Vector2(2, -1), new Vector2(1, -1), new Vector2(1, -2), new Vector2(0, -1), new Vector2(-1, -2) };
+    static private int directionCount;
 
-    static private void StepTo(Node node) {
+    static private void StepTo(Node node)
+    {
 		Node newNode = null;
 
-		for (int i = 0; i < directions.Length; ++i) {
-			Vector2 direction = directions[i];
-			Vector2 pos = node.pos + direction;
+		for (int i = 0; i < directions.Length; ++i)
+        {
+			Vector2 pos = node.pos + directions[i];
 
-            if (Tilemap.PassableTile(pos, 2)) {
+            if (Tilemap.PassableTile(pos, 2))
+            {
                 if (newNode == null)
                     newNode = Node.Get();
                 newNode.pos = pos;
@@ -81,8 +81,6 @@ public class Pathing {
                 if (!closeNodes.Contains(newNode))
                 { 
 					newNode.parent = node;
-					newNode.direction = direction;
-					newNode.directionIndex = i;
                     newNode.gScore = node.gScore + 1;
                     newNode.hScore = Mathf.Abs(target.x - newNode.pos.x) + Mathf.Abs(target.y - newNode.pos.y);
                     newNode.score = newNode.gScore + newNode.hScore;
@@ -107,24 +105,25 @@ public class Pathing {
             }
 
             node.parent = node.parent.parent;
-            node.direction = node.pos - node.parent.pos;
-            node.directionIndex = Iso.Direction(node.parent.pos, node.pos, directions.Length);
         }
     }
 
-	static private void TraverseBack(Node node) {
-        while (node.parent != null) {
+	static private void TraverseBack(Node node)
+    {
+        while (node.parent != null)
+        {
             Collapse(node);
             Step step = new Step();
-			step.direction = node.direction;
-			step.directionIndex = node.directionIndex;
-			step.pos = node.pos;
-			path.Insert(0, step);
-			node = node.parent;
-		}
+            step.direction = node.pos - node.parent.pos;
+            step.directionIndex = Iso.Direction(node.parent.pos, node.pos, directionCount);
+            step.pos = node.pos;
+            path.Insert(0, step);
+            node = node.parent;
+        }
     }
 
-	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8, float minRange = 0.1f) {
+	static public List<Step> BuildPath(Vector2 from, Vector2 target, int directionCount = 8, float minRange = 0.1f)
+    {
         from = Iso.Snap(from);
         target = Iso.Snap(target);
         path.Clear();
@@ -133,7 +132,8 @@ public class Pathing {
         openNodes.Clear();
         Node.Recycle(closeNodes);
 
-        directions = directionCount == 8 ? directions8 : directions16;
+        directions = directions8;
+        Pathing.directionCount = directionCount;
         Pathing.target = target;
         bool targetAccessible = Tilemap.Passable(target, 2);
         Node startNode = Node.Get();
