@@ -271,11 +271,13 @@ public class DS1
                                 {
                                     importResult.entry = MapToWorld(x, y);
                                     Debug.Log("Found map entry at " + x + " " + y);
+                                    break;
                                 }
                                 else if (index == townEntryIndex)
                                 {
                                     importResult.entry = MapToWorld(x, y);
                                     Debug.Log("Found town entry at " + x + " " + y);
+                                    break;
                                 }
 
                                 DT1.Tile tile;
@@ -431,9 +433,11 @@ public class DS1
         float y0 = tile.textureY;
         float w = tile.width / Iso.pixelsPerUnit;
         float h = (-tile.height) / Iso.pixelsPerUnit;
-        if(tile.orientation == 0)
+        if(tile.orientation == 0 || tile.orientation == 15)
         {
             var topLeft = new Vector3(-1f, 0.5f);
+            if (tile.orientation == 15)
+                topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
             mesh.vertices = new Vector3[] {
                 topLeft,
                 topLeft + new Vector3(0, -h),
@@ -448,7 +452,7 @@ public class DS1
                 new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
             };
 
-            meshRenderer.sortingLayerName = "Floor";
+            meshRenderer.sortingLayerName = tile.orientation == 0 ? "Floor" : "Roof";
             meshRenderer.sortingOrder = orderInLayer;
         }
         else
