@@ -85,6 +85,8 @@ public class DS1
                };
 
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
+    static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
+    static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
 
     static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null)
     {
@@ -269,6 +271,11 @@ public class DS1
                                 {
                                     importResult.entry = MapToWorld(x, y);
                                     Debug.Log("Found map entry at " + x + " " + y);
+                                }
+                                else if (index == townEntryIndex)
+                                {
+                                    importResult.entry = MapToWorld(x, y);
+                                    Debug.Log("Found town entry at " + x + " " + y);
                                 }
 
                                 DT1.Tile tile;
@@ -464,17 +471,20 @@ public class DS1
         }
         meshFilter.mesh = mesh;
 
-        int flagIndex = 0;
-        for(int dx = -2; dx < 3; ++dx)
+        if (Application.isPlaying)
         {
-            for(int dy = 2; dy > -3; --dy)
+            int flagIndex = 0;
+            for (int dx = -2; dx < 3; ++dx)
             {
-                if ((tile.flags[flagIndex] & (1 + 8)) != 0)
+                for (int dy = 2; dy > -3; --dy)
                 {
-                    var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
-                    Tilemap.SetPassable(subCellPos, false);
+                    if ((tile.flags[flagIndex] & (1 + 8)) != 0)
+                    {
+                        var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
+                        Tilemap.SetPassable(subCellPos, false);
+                    }
+                    ++flagIndex;
                 }
-                ++flagIndex;
             }
         }
 
