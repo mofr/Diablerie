@@ -11,8 +11,16 @@ public class DCC
         public IsoAnimation anim;
     }
 
-    static public ImportResult Load(string filename)
+    static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
+
+    static public ImportResult Load(string filename, bool ignoreCache = false)
     {
+        filename = filename.ToLower();
+        if (!ignoreCache && cache.ContainsKey(filename))
+        {
+            return cache[filename];
+        }
+
         ImportResult result = new ImportResult();
         result.textures = new List<Texture2D>();
         var sprites = new List<Sprite>();
@@ -139,13 +147,14 @@ public class DCC
         result.anim.states[0].name = "Generated from DCC";
         result.anim.states[0].sprites = sprites.ToArray();
 
+        cache.Add(filename, result);
         return result;
     }
 
     static public void ConvertToPng(string assetPath)
     {
         Palette.LoadPalette(1);
-        ImportResult result = Load(assetPath);
+        ImportResult result = Load(assetPath, ignoreCache: true);
         int i = 0;
         foreach (var texture in result.textures)
         {

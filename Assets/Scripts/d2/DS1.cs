@@ -401,23 +401,29 @@ public class DS1
                 if (type == 2 && objectPrefab != null)
                 {
                     var pos = MapSubCellToWorld(x, y);
-                    GameObject gameObject;
-                    if (act == 1 && type == 2 && id == 2)
+                    try
                     {
-                        var dcc = DCC.Load("Assets/d2/data/global/objects/RB/TR/rbtrlitonhth.dcc");
-                        Debug.Log(obj._base + " " + obj.token + " " + obj.mode + " " + obj._class);
-                        gameObject = new GameObject();
+                        var cof = COF.Load(obj._base, obj.token, obj.mode, obj._class);
+                        var dcc = DCC.Load(cof.layers[0]);
+                        GameObject gameObject = new GameObject();
                         gameObject.transform.position = pos;
-                        gameObject.AddComponent<SpriteRenderer>();
+                        var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
                         var animator = gameObject.AddComponent<IsoAnimator>();
                         animator.anim = dcc.anim;
+                        gameObject.name = obj.description;
+                        gameObject.transform.SetParent(root.transform);
+                        spriteRenderer.sortingOrder = Iso.SortingOrder(pos);
                     }
-                    else
+                    catch (DirectoryNotFoundException e)
                     {
-                        gameObject = GameObject.Instantiate(objectPrefab, pos, Quaternion.identity);
+                        Debug.LogWarning("directory not found (" + obj.description + "): " + e.Message);
+                        continue;
                     }
-                    gameObject.name = obj.description;
-                    gameObject.transform.SetParent(root.transform);
+                    catch (FileNotFoundException e)
+                    {
+                        Debug.LogWarning("file not found (" + obj.description + "): " + e.FileName);
+                        continue;
+                    }
                 }
             }
         }
