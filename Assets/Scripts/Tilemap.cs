@@ -123,8 +123,11 @@ public class Tilemap : MonoBehaviour {
 
     public static void SetPassable(Vector3 tilePos, bool passable)
     {
-        int index = instance.MapToIndex(tilePos);
-        instance.map[index].passable = passable;
+        if (!passable)
+        {
+            int index = instance.MapToIndex(tilePos);
+            instance.map[index].passable = passable;
+        }
     }
 
     public struct RaycastHit

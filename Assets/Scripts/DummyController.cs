@@ -39,7 +39,7 @@ public class DummyController : MonoBehaviour {
     IEnumerator Roam()
     {
         yield return new WaitForEndOfFrame();
-        while (!target)
+        while (!this.target)
         {
             var target = iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
             character.GoTo(target);

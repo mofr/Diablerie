@@ -83,6 +83,11 @@ public class IsoAnimator : MonoBehaviour {
         spriteRenderer.sprite = variation.sprites[spriteIndex];
     }
 
+    public State GetState()
+    {
+        return state;
+    }
+
     public void SetState(string stateName)
     {
         if (stateName == state.name)

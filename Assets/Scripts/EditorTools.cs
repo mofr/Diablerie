@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using UnityEditor;
 
@@ -57,6 +55,13 @@ public class EditorTools {
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         return assetPath.ToLower().EndsWith("dc6");
+    }
+
+    [MenuItem("Assets/Test serialization")]
+    static public void TestSerialization()
+    {
+        var rb = Obj.Find(1, 2, 2);
+        Debug.Log(rb.TR);
     }
 }
 

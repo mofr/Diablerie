@@ -88,7 +88,7 @@ public class DS1
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
     static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
 
-    static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null)
+    static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null, GameObject objectPrefab = null)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -388,11 +388,21 @@ public class DS1
                     int flags = reader.ReadInt32();
                 }
 
+                Obj obj = Obj.Find(act, type, id);
+
                 if (type == 1 && monsterPrefab != null)
                 {
                     var pos = MapSubCellToWorld(x, y);
                     var monster = GameObject.Instantiate(monsterPrefab, pos, Quaternion.identity);
-                    monster.name = monsterPrefab.name;
+                    monster.name = obj.description;
+                    monster.transform.SetParent(root.transform);
+                }
+
+                if (type == 2 && objectPrefab != null)
+                {
+                    var pos = MapSubCellToWorld(x, y);
+                    var monster = GameObject.Instantiate(objectPrefab, pos, Quaternion.identity);
+                    monster.name = obj.description;
                     monster.transform.SetParent(root.transform);
                 }
             }
@@ -471,7 +481,7 @@ public class DS1
                 new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
                 new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
             };
-            meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 3;
+            meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
         }
         meshFilter.mesh = mesh;
 

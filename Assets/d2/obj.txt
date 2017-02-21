@@ -1,0 +1,1051 @@
+Act	Type	Id	Description	Objects.txt_ID	Monstats.txt_ID	Direction	Base	Token	Mode	Class	HD	TR	LG	RA	LA	RH	LH	SH	S1	S2	S3	S4	S5	S6	S7	S8	Colormap	Index	*eol
+1	1	0	Gheed				Data\Global\Monsters	GH	NU	HTH		LIT																	0
+1	1	1	# Deckard Cain				Data\Global\Monsters	DC	NU	HTH		LIT																	0
+1	1	2	Akara				Data\Global\Monsters	PS	NU	HTH		LIT																	0
+1	1	3	Chiken			6	Data\Global\Monsters	CK	NU	HTH		LIT																	0
+1	1	4	Rogue			7	Data\Global\Monsters	RG	NU	HTH	LIT	LIT		LIT	LIT		LBW		LIT	LIT									0
+1	1	5	Kashya				Data\Global\Monsters	RC	NU	HTH		LIT																	0
+1	1	6	# Cow			7	Data\Global\Monsters	CW	NU	HTH		LIT																	0
+1	1	7	Warriv				Data\Global\Monsters	WA	NU	HTH		LIT																	0
+1	1	8	Charsi				Data\Global\Monsters	CI	NU	HTH		LIT																	0
+1	1	9	Andariel				Data\Global\Monsters	AN	NU	HTH		LIT																	0
+1	1	10	Fallens				Data\Global\Monsters	FA	NU	HTH		LIT				CLB		BUC	LIT										0
+1	1	11	Fallen shaman + fallens				Data\Global\Monsters	FS	NU	HTH		LIT																	0
+1	1	12	Blood Raven			7	Data\Global\Monsters	CR	NU	BOW	BRV	HVY	BRV	HVY	HVY	LIT	LBB		HVY	HVY							Data\Global\Monsters\CR\COF\Palshift.dat	3	0
+1	1	13	Cow			1	Data\Global\Monsters	CW	NU	HTH		LIT																	0
+1	1	14	# Camel			7	Data\Global\Monsters	CM	NU	HTH		LIT																	0
+1	1	15	Random Uniques Monsters with minions																										0
+1	1	16	# ?																										0
+1	1	17	?																										0
+1	1	18	# ?																										0
+1	1	19	Champion Fallen shaman + fallens			7	Data\Global\Monsters	FS	NU	HTH		LIT															Data\Global\Monsters\RandTransforms.dat	18	0
+1	1	20	# Flavie			1	Data\Global\Monsters	RG	NU	HTH	LIT	LIT		LIT	LIT		LBW		LIT	LIT									0
+1	1	21	# Rogue			6	Data\Global\Monsters	RG	NU	HTH	LIT	LIT		LIT	LIT		LBW		LIT	LIT									0
+1	1	22	# Rogue			0	Data\Global\Monsters	RG	NU	HTH	LIT	LIT		LIT	LIT		LBW		LIT	LIT									0
+1	1	23	Gargoyle Trap			3	Data\Global\Monsters	GT	A1	HTH		LIT																	0
+1	1	24	?																										0
+1	1	25	# ?																										0
+1	1	26	# 3 fallens			7	Data\Global\Monsters	FA	NU	HTH		LIT				AXE		BUC	MED										0
+1	1	27	Fallen shaman			1	Data\Global\Monsters	FS	NU	HTH		LIT																	0
+1	1	28	a Trap, Charged Bolt																										0
+1	1	29	a Trap, Arrow																										0
+1	1	30	?																										0
+1	1	31	?																										0
+1	1	32	?																										0
+1	1	33	?																										0
+1	1	34	Bishibosh			2	Data\Global\Monsters	FS	NU	HTH		LIT															Data\Global\Monsters\RandTransforms.dat	16	0
+1	1	35	Bonebraker			3	Data\Global\Monsters	SK	NU	1HS	HVY	LIT	MED	LIT	LIT	SCM			MED	MED							Data\Global\Monsters\RandTransforms.dat	3	0
+1	1	36	Coldcrow			7	Data\Global\Monsters	CR	NU	BOW	HVY	LIT	LIT	LIT	LIT	LIT	LBB		LIT	LIT							Data\Global\Monsters\RandTransforms.dat	4	0
+1	1	37	Rakanishu			7	Data\Global\Monsters	FA	NU	HTH		LIT				AXE		TCH	LIT								Data\Global\Monsters\RandTransforms.dat	19	0
+1	1	38	Treehead Woodfist			1	Data\Global\Monsters	YE	NU	HTH		LIT															Data\Global\Monsters\RandTransforms.dat	9	0
+1	1	39	Griswold				Data\Global\Monsters	GZ	NU	HTH		LIT																	0
+1	1	40	Countess			7	Data\Global\Monsters	CR	NU	1HS	MED	LIT	MED	LIT	LIT	WHM			LIT	LIT							Data\Global\Monsters\RandTransforms.dat	26	0
+1	1	41	Pitspawn Fouldog			1	Data\Global\Monsters	BH	NU	HTH		LIT															Data\Global\Monsters\RandTransforms.dat	1	0
+1	1	42	# Flamespike the Crawler			1	Data\Global\Monsters	SI	NU	HTH		LIT															Data\Global\Monsters\RandTransforms.dat	25	0
+1	1	43	Boneash			6	Data\Global\Monsters	SK	NU	HTH	MED	MED	DES	LIT	LIT				LIT			POS	POS				Data\Global\Monsters\RandTransforms.dat	12	0
+1	1	44	The Smith			1	Data\Global\Monsters	5P	NU	HTH		LIT																	0
+1	1	45	The Cowking			1	Data\Global\Monsters	EC	NU	HTH		LIT				HAL													0
+1	1	46	Corpsefire																										0
+1	1	47	?																										0
+1	1	48	?																										0
+1	1	49	?																										0
+1	1	50	?																										0
+1	1	51	?																										0
+1	1	52	?																										0
+1	1	53	?																										0
+1	1	54	?																										0
+1	1	55	?																										0
+1	1	56	?																										0
+1	1	57	?																										0
+1	1	58	?																										0
+1	1	59	# Skeleton enemy																										0
+1	2	0	rogue fountain (12)	12			Data\Global\Objects	FN	NU	HTH		LIT																	0
+1	2	1	torch 1 tiki (37)	37			Data\Global\Objects	TO	ON	HTH		LIT																	0
+1	2	2	Fire, rogue camp (39)	39			Data\Global\Objects	RB	ON	HTH		LIT																	0
+1	2	3	flag 1 (35)	35			Data\Global\Objects	N1	NU	HTH		LIT																	0
+1	2	4	flag 2 (36)	36			Data\Global\Objects	N2	NU	HTH		LIT																	0
+1	2	5	Chest, R Large (5)	5			Data\Global\Objects	L1	NU	HTH		LIT																	0
+1	2	6	Cairn Stone, Alpha (17)	17			Data\Global\Objects	S1	NU	HTH		LIT																	0
+1	2	7	Cairn Stone, Beta (18)	18			Data\Global\Objects	S2	NU	HTH		LIT																	0
+1	2	8	Cairn Stone, Gamma (19)	19			Data\Global\Objects	S3	NU	HTH		LIT																	0
+1	2	9	Cairn Stone, Delta (20)	20			Data\Global\Objects	S4	NU	HTH		LIT																	0
+1	2	10	Cairn Stone, Lambda (21)	21			Data\Global\Objects	S5	NU	HTH		LIT																	0
+1	2	11	Cairn Stone, Theta (inactive) (22)	22			Data\Global\Objects	S6	NU	HTH		LIT																	0
+1	2	12	Tree of Inifuss (30)	30			Data\Global\Objects	IT	NU	HTH		LIT																	0
+1	2	13	water effect 2 (70)	70			Data\Global\Objects	4R	NU	HTH		LIT																	0
+1	2	14	water effect 2 (70)	70			Data\Global\Objects	4R	NU	HTH		LIT																	0
+1	2	15	water effect 1 (69)	69			Data\Global\Objects	3R	NU	HTH		LIT																	0
+1	2	16	water effect 1 (69)	69			Data\Global\Objects	3R	NU	HTH		LIT																	0
+1	2	17	brazier (29)	29			Data\Global\Objects	BR	OP	HTH		LIT							LIT										0
+1	2	18	bloody fountain (31)	31			Data\Global\Objects	BF	NU	HTH		LIT																	0
+1	2	19	candles 1 (33)	33			Data\Global\Objects	A1	NU	HTH		LIT																	0
+1	2	20	candles 2 (34)	34			Data\Global\Objects	A2	NU	HTH		LIT																	0
+1	2	21	torch 1 tiki (37)	37			Data\Global\Objects	TO	ON	HTH		LIT																	0
+1	2	22	Invisible object (61)	61			Data\Global\Objects	SS	NU	HTH		LIT																	0
+1	2	23	Invisible river sound 1 (65)	65			Data\Global\Objects	X1	NU	HTH		LIT																	0
+1	2	24	Invisible river sound 2 (66)	66			Data\Global\Objects	X2	NU	HTH		LIT																	0
+1	2	25	The Moldy Tome (8)	8			Data\Global\Objects	TT	NU	HTH		LIT																	0
+1	2	26	Cain's Gibbet (26)	26			Data\Global\Objects	GI	NU	HTH		LIT																	0
+1	2	27	Undefiled Grave (28)	28			Data\Global\Objects	HI	NU	HTH		LIT																	0
+1	2	28	bubbling pool of blood (82)	82			Data\Global\Objects	B2	NU	HTH		LIT																	0
+1	2	29	Shrine (2)	2			Data\Global\Objects	SF	NU	HTH		LIT																	0
+1	2	30	Shrine, forest altar (81)	81			Data\Global\Objects	AF	NU	HTH		LIT																	0
+1	2	31	Shrine, healing well (84)	84			Data\Global\Objects	HW	NU	HTH		LIT																	0
+1	2	32	Shrine, horn (83)	83			Data\Global\Objects	HS	NU	HTH		LIT																	0
+1	2	33	invisible town sound (78)	78																									0
+1	2	34	invisible object (61)	61			Data\Global\Objects	SS	NU	HTH		LIT																	0
+1	2	35	flies (103)	103			Data\Global\Objects	FL	NU	HTH		LIT																	0
+1	2	36	Horadric Malus (108)	108			Data\Global\Objects	HM	NU	HTH		LIT																	0
+1	2	37	Waypoint (119)	119			Data\Global\Objects	WP	ON	HTH		LIT							LIT										0
+1	2	38	error ? (-580)	580																									0
+1	2	39	Well, pool wilderness (130)	130			Data\Global\Objects	ZW	NU	HTH		LIT																	0
+1	2	40	Hidden Stash, rock wilderness (159)	159			Data\Global\Objects	CQ	OP	HTH		LIT																	0
+1	2	41	Hiding Spot, cliff wilderness (163)	163			Data\Global\Objects	CF	NU	HTH		LIT																	0
+1	2	42	Hollow Log (169)	169			Data\Global\Objects	CZ	NU	HTH		LIT																	0
+1	2	43	Fire, small (160)	160			Data\Global\Objects	FX	OP	HTH		LIT																	0
+1	2	44	Fire, medium (161)	161			Data\Global\Objects	FY	OP	HTH		LIT																	0
+1	2	45	Fire, large (162)	162			Data\Global\Objects	FZ	OP	HTH		LIT																	0
+1	2	46	Armor Stand, 1R (104)	104			Data\Global\Objects	A3	NU	HTH		LIT																	0
+1	2	47	Armor Stand, 2L (105)	105			Data\Global\Objects	A4	NU	HTH		LIT																	0
+1	2	48	Weapon Rack, 1R (106)	106			Data\Global\Objects	W1	NU	HTH		LIT																	0
+1	2	49	Weapon Rack, 2L (107)	107			Data\Global\Objects	W2	NU	HTH		LIT																	0
+1	2	50	Bookshelf L (179)	179			Data\Global\Objects	B4	NU	HTH		LIT																	0
+1	2	51	Bookshelf R (180)	180			Data\Global\Objects	B5	NU	HTH		LIT																	0
+1	2	52	Waypoint (119)	119			Data\Global\Objects	WP	ON	HTH		LIT							LIT										0
+1	2	53	Waypoint, wilderness (157)	157			Data\Global\Objects	WN	ON	HTH		LIT							LIT										0
+1	2	54	Bed R (247)	247			Data\Global\Objects	QA	OP	HTH		LIT																	0
+1	2	55	Bed L (248)	248			Data\Global\Objects	QB	OP	HTH		LIT																	0
+1	2	56	Hidden Stash, rock wilderness (155)	155			Data\Global\Objects	C7	OP	HTH		LIT																	0
+1	2	57	Loose Rock, wilderness (174)	174			Data\Global\Objects	RY	OP	HTH		LIT																	0
+1	2	58	Loose Boulder, wilderness (175)	175			Data\Global\Objects	RZ	OP	HTH		LIT																	0
+1	2	59	Chest, R Large (139)	139			Data\Global\Objects	Q1	OP	HTH		LIT																	0
+1	2	60	Chest, R Tallskinney (140)	140			Data\Global\Objects	Q2	OP	HTH		LIT																	0
+1	2	61	Chest, R Med (141)	141			Data\Global\Objects	Q3	OP	HTH		LIT																	0
+1	2	62	Chest, L (144)	144			Data\Global\Objects	Q6	OP	HTH		LIT																	0
+1	2	63	Chest, L Large (6)	6			Data\Global\Objects	L2	OP	HTH		LIT																	0
+1	2	64	Chest, 1L general (240)	240			Data\Global\Objects	CY	OP	HTH		LIT																	0
+1	2	65	Chest, 2R general (241)	241			Data\Global\Objects	CX	OP	HTH		LIT																	0
+1	2	66	Chest, 3R general (242)	242			Data\Global\Objects	CU	OP	HTH		LIT																	0
+1	2	67	Dead Rogue, 1 (54)	54			Data\Global\Objects	Z1	NU	HTH		LIT																	0
+1	2	68	Dead Rogue, 2 (55)	55			Data\Global\Objects	Z2	NU	HTH		LIT																	0
+1	2	69	Dead Rogue, rolling (56)	56			Data\Global\Objects	Z5	OP	HTH		LIT																	0
+1	2	70	Dead Rogue, on a stick 1 (57)	57			Data\Global\Objects	Z3	OP	HTH		LIT																	0
+1	2	71	Dead Rogue, on a stick 2 (58)	58			Data\Global\Objects	Z4	OP	HTH		LIT																	0
+1	2	72	Skeleton (171)	171			Data\Global\Objects	SX	OP	HTH		LIT																	0
+1	2	73	Guard Corpse, on a stick (178)	178			Data\Global\Objects	GS	OP	HTH		LIT																	0
+1	2	74	Body, burning town 1 (239)	239			Data\Global\Objects	BZ	NU	HTH		LIT																	0
+1	2	75	Body, burning town 2 (245)	245			Data\Global\Objects	BY	NU	HTH		LIT							LIT										0
+1	2	76	A Trap, exploding cow (250)	250			Data\Global\Objects	EW	OP	HTH		LIT																	0
+1	2	77	Well, fountain 1 (111)	111			Data\Global\Objects	F3	NU	HTH		LIT																	0
+1	2	78	Well, cavewell caves (138)	138			Data\Global\Objects	ZY	NU	HTH		LIT																	0
+1	2	79	Well, cathedralwell inside (132)	132			Data\Global\Objects	ZC	NU	HTH		LIT																	0
+1	2	80	Shrine, mana well 1 (164)	164			Data\Global\Objects	MB	OP	HTH		LIT																	0
+1	2	81	Shrine, mana well 2 (165)	165			Data\Global\Objects	MD	OP	HTH		LIT																	0
+1	2	82	Shrine, healthorama (77)	77			Data\Global\Objects	SH	OP	HTH		LIT																	0
+1	2	83	Shrine, bull shrine, health, tombs (85)	85			Data\Global\Objects	BC	OP	HTH		LIT																	0
+1	2	84	stele,magic shrine, stone, desert (86)	86			Data\Global\Objects	SG	OP	HTH		LIT																	0
+1	2	85	Shrine, cathedral (262)	262			Data\Global\Objects	S0	OP	HTH		LIT							LIT										0
+1	2	86	Shrine, jail 1 (263)	263			Data\Global\Objects	JB	OP	HTH		LIT							LIT										0
+1	2	87	Shrine, jail 2 (264)	264			Data\Global\Objects	JD	OP	HTH		LIT							LIT										0
+1	2	88	Shrine, jail 3 (265)	265			Data\Global\Objects	JF	OP	HTH		LIT							LIT										0
+1	2	89	Casket, 1 R (50)	50			Data\Global\Objects	C1	OP	HTH		LIT																	0
+1	2	90	Casket, 2 L (51)	51			Data\Global\Objects	C2	OP	HTH		LIT																	0
+1	2	91	Casket, 3 (79)	79			Data\Global\Objects	C3	OP	HTH		LIT																	0
+1	2	92	Casket, 4 (53)	53			Data\Global\Objects	C4	OP	HTH		LIT																	0
+1	2	93	Casket, 5 (1)	1			Data\Global\Objects	C5	OP	HTH		LIT																	0
+1	2	94	Casket, 6 (3)	3			Data\Global\Objects	C6	OP	HTH		LIT																	0
+1	2	95	Barrel (7)	7			Data\Global\Objects	B1	OP	HTH		LIT																	0
+1	2	96	Crate (46)	46			Data\Global\Objects	CT	OP	HTH		LIT																	0
+1	2	97	torch 2 wall (38)	38			Data\Global\Objects	WT	ON	HTH		LIT																	0
+1	2	98	cabin stool (256)	256			Data\Global\Objects	S9	NU	HTH		LIT																	0
+1	2	99	cabin wood (257)	257			Data\Global\Objects	WG	NU	HTH		LIT																	0
+1	2	100	cabin wood more (258)	258			Data\Global\Objects	WH	NU	HTH		LIT																	0
+1	2	101	Door, secret 1 (129)	129			Data\Global\Objects	H2	OP	HTH		LIT																	0
+1	2	102	Your Private Stash (267)	267			Data\Global\Objects	B6	NU	HTH		LIT																	0
+1	2	103	Wirt's body (268)	268			Data\Global\Objects	BP	NU	HTH		LIT																	0
+1	2	104	gold placeholder (269)	269			Data\Global\Objects	1G																					0
+1	2	105	-581	581																									0
+1	2	106	hell light source 1 (351)	351			Data\Global\Objects	SS																					0
+1	2	107	hell light source 2 (352)	352			Data\Global\Objects	SS																					0
+1	2	108	hell light source 3 (353)	353			Data\Global\Objects	SS																					0
+1	2	109	fog water (374)	374			Data\Global\Objects	UD	NU	HTH		LIT																	0
+1	2	110	cain start position (385)	385		1	Data\Global\Monsters	DC	NU	HTH		LIT																	0
+1	2	111	Chest, sparkly (397)	397			Data\Global\Objects	YF	OP	HTH		LIT																	0
+1	2	112	Red Portal (321)	321			Data\Global\Objects	PP	NU	HTH	LIT	LIT																	0
+1	2	113	0	0																									0
+1	2	114	Myhrginoc's Book of Lore	8			Data\Global\Objects	TT	NU	HTH		LIT																	0
+1	2	115	0	0																									0
+1	2	116	0	0																									0
+1	2	117	0	0																									0
+1	2	118	0	0																									0
+1	2	119	0	0																									0
+1	2	120	0	0																									0
+1	2	121	0	0																									0
+1	2	122	0	0																									0
+1	2	123	0	0																									0
+1	2	124	0	0																									0
+1	2	125	0	0																									0
+1	2	126	0	0																									0
+1	2	127	0	0																									0
+1	2	128	0	0																									0
+1	2	129	0	0																									0
+1	2	130	0	0																									0
+1	2	131	0	0																									0
+1	2	132	0	0																									0
+1	2	133	0	0																									0
+1	2	134	0	0																									0
+1	2	135	0	0																									0
+1	2	136	0	0																									0
+1	2	137	0	0																									0
+1	2	138	0	0																									0
+1	2	139	0	0																									0
+1	2	140	0	0																									0
+1	2	141	0	0																									0
+1	2	142	0	0																									0
+1	2	143	0	0																									0
+1	2	144	0	0																									0
+1	2	145	0	0																									0
+1	2	146	0	0																									0
+1	2	147	0	0																									0
+1	2	148	0	0																									0
+1	2	149	0	0																									0
+2	1	0	Warriv				Data\Global\Monsters	WX	NU	HTH		LIT																	0
+2	1	1	Atma				Data\Global\Monsters	AS	NU	HTH		LIT																	0
+2	1	2	Drognan				Data\Global\Monsters	DR	NU	HTH		LIT																	0
+2	1	3	Farah				Data\Global\Monsters	OF	NU	HTH		LIT																	0
+2	1	4	?																										0
+2	1	5	# ?																										0
+2	1	6	# ?																										0
+2	1	7	# ?																										0
+2	1	8	Greiz				Data\Global\Monsters	GR	NU	HTH		LIT																	0
+2	1	9	Elzix				Data\Global\Monsters	EL	NU	HTH		LIT																	0
+2	1	10	Lysander				Data\Global\Monsters	LY	NU	HTH		LIT																	0
+2	1	11	Meshif				Data\Global\Monsters	MS	NU	HTH		LIT																	0
+2	1	12	Geglash				Data\Global\Monsters	GE	NU	HTH		LIT																	0
+2	1	13	# Jarhyn				Data\Global\Monsters	JE	NU	HTH		LIT																	0
+2	1	14	?																										0
+2	1	15	# ?																										0
+2	1	16	# ?																										0
+2	1	17	Summoner				Data\Global\Monsters	SU	NU	HTH		LIT																	0
+2	1	18	Radament				Data\Global\Monsters	RD	NU	HTH		LIT																	0
+2	1	19	Duriel			6	Data\Global\Monsters	DU	NU	HTH		LIT	LIT	LIT	LIT														0
+2	1	20	Deckard Cain				Data\Global\Monsters	2D	NU	HTH		LIT																	0
+2	1	21	# ?																										0
+2	1	22	townsfolk man				Data\Global\Monsters	2M	NU	HTH	YNG	MED	MED						FEZ										0
+2	1	23	townsfolk woman				Data\Global\Monsters	2F	NU	HTH	MED	MED	HVY																0
+2	1	24	desert mercenary			7	Data\Global\Monsters	GU	NU	HTH	MED	MED	MED	MED	MED	GLV			LIT	LIT	LIT								0
+2	1	25	townsfolk on carpet 1				Data\Global\Monsters	M1	NU	HTH		LIT																	0
+2	1	26	townsfolk on carpet 2				Data\Global\Monsters	M2	NU	HTH		LIT																	0
+2	1	27	# Maggot Queen(Mind Maw the Slasher)				Data\Global\Monsters	MQ	NU	HTH		LIT																	0
+2	1	28	# Fish ?																										0
+2	1	29	?																										0
+2	1	30	?																										0
+2	1	31	# ?																										0
+2	1	32	# ?																										0
+2	1	33	?																										0
+2	1	34	# Gargoyle Trap				Data\Global\Monsters	GT	A1	HTH		LIT																	0
+2	1	35	a Trap, Charged Bolt																										0
+2	1	36	a Trap, Arrow																										0
+2	1	37	# ?																										0
+2	1	38	?																										0
+2	1	39	# ?																										0
+2	1	40	# ?																										0
+2	1	41	Lightning Spire				Data\Global\Monsters	AE	A1	HTH		LIT							LIT										0
+2	1	42	Fire Tower			13	Data\Global\Monsters	PB	A1	HTH		LIT																	0
+2	1	43	# ?																										0
+2	1	44	# ?																										0
+2	1	45	# ?																										0
+2	1	46	Bloodwitch the Wild			7	Data\Global\Monsters	PW	NU	HTH	LIT	MED		MED	MED		WHP	BUC	LIT	LIT	LIT	LIT					Data\Global\Monsters\PW\COF\Palshift.dat	3	0
+2	1	47	Fangskin			7	Data\Global\Monsters	SD	NU	HTH		LIT															Data\Global\Monsters\SD\COF\Palshift.dat	6	0
+2	1	48	BeetleBurst			5	Data\Global\Monsters	SC	NU	HTH	MED	LIT		HVY													Data\Global\Monsters\SC\COF\Palshift.dat	6	0
+2	1	49	Creeping Feature			3	Data\Global\Monsters	MM	NU	HTH		LIT															Data\Global\Monsters\MM\COF\Palshift.dat	7	0
+2	1	50	Cold Worm the Burrower				Data\Global\Monsters	MQ	NU	HTH		LIT																	0
+2	1	51	Fire Eye				Data\Global\Monsters	SR	NU	HTH		LIT															Data\Global\Monsters\SR\COF\Palshift.dat	5	0
+2	1	52	Dark Elder				Data\Global\Monsters	ZM	NU	HTH	MED	MED	MED	MED	MED				MED	MED	BLD						Data\Global\Monsters\ZM\COF\Palshift.dat	6	0
+2	1	53	Ancient Kaa the Soulless			7	Data\Global\Monsters	GY	NU	HTH		LIT															Data\Global\Monsters\GY\COF\Palshift.dat	4	0
+2	1	54	# Guard, Boba Fett			7	Data\Global\Monsters	GU	NU	HTH	MED	MED	MED	MED	MED	GLV			LIT	LIT	LIT								0
+2	1	55	# Guard, Darth Maul			7	Data\Global\Monsters	GU	NU	HTH	MED	MED	MED	MED	MED	SPR			LIT	LIT	LIT								0
+2	1	56	Mummy Generator				Data\Global\Monsters	MG	S1	HTH		LIT																	0
+2	1	57	Tyrael in TalRasha's Chamber				Data\Global\Monsters	TX	NU	HTH		LIT		LIT	LIT														0
+2	1	58	Horror Skeleton			3	Data\Global\Monsters	SK	NU	1HS	DES	HVY	DES	DES	DES	AXE		LRG	DES	DES	LIT						Data\Global\Monsters\SK\COF\Palshift.dat	7	0
+2	1	59	?																										0
+2	2	0	Trap Door (74)	74			Data\Global\Objects	TD	NU	HTH		LIT																	0
+2	2	1	torch 1 tiki (37)	37			Data\Global\Objects	TO	ON	HTH		LIT																	0
+2	2	2	Teleport Pad 1 (192)	192			Data\Global\Objects	7H	NU	HTH		LIT							LIT	LIT									0
+2	2	3	Teleport Pad 2 (304)	304			Data\Global\Objects	7H	NU	HTH		LIT							LIT	LIT									0
+2	2	4	Teleport Pad 3 (305)	305			Data\Global\Objects	AA	NU	HTH		LIT							LIT	LIT									0
+2	2	5	Teleport Pad 4 (306)	306			Data\Global\Objects	AA	NU	HTH		LIT							LIT	LIT									0
+2	2	6	brazier 3 (101)	101			Data\Global\Objects	B3	OP	HTH		LIT							LIT										0
+2	2	7	brazier floor (102)	102			Data\Global\Objects	FB	ON	HTH		LIT							LIT										0
+2	2	8	invisible town sound (78)	78			Data\Global\Objects	TA																					0
+2	2	9	flies (103)	103			Data\Global\Objects	FL	NU	HTH		LIT																	0
+2	2	10	waypoint (156)	156			Data\Global\Objects	WM	ON	HTH		LIT							LIT										0
+2	2	11	-580	580																									0
+2	2	12	Well, cathedralwell inside (132)	132			Data\Global\Objects	ZC	NU	HTH		LIT																	0
+2	2	13	Door, secret 1 (129)	129			Data\Global\Objects	H2	OP	HTH		LIT																	0
+2	2	14	Horazon's Journal (357)	357			Data\Global\Objects	TT	NU	HTH		LIT																	0
+2	2	15	Door, Tyrael's door (153)	153			Data\Global\Objects	DX	OP	HTH		LIT																	0
+2	2	16	Jerhyn, placeholder 1 (121)	121		1	Data\Global\Monsters	JE	NU	HTH		LIT																	0
+2	2	17	Jerhyn, placeholder 2 (122)	122		7	Data\Global\Monsters	JE	NU	HTH		LIT																	0
+2	2	18	Closed Door, slimedoor R (229)	229			Data\Global\Objects	SQ	OP	HTH		LIT																	0
+2	2	19	Closed Door, slimedoor L (230)	230			Data\Global\Objects	SY	OP	HTH		LIT																	0
+2	2	20	a Trap, test data floortrap (196)	196			Data\Global\Objects	A5	OP	HTH		LIT																	0
+2	2	21	Your Private Stash (267)	267			Data\Global\Objects	B6	NU	HTH		LIT																	0
+2	2	22	a Trap, spikes tombs floortrap (261)	261			Data\Global\Objects	A7	OP	HTH		LIT																	0
+2	2	23	Tainted Sun Altar (149)	149			Data\Global\Objects	ZA	OP	HTH		LIT							LIT										0
+2	2	24	gold placeholder (269)	269			Data\Global\Objects	1G																					0
+2	2	25	Large Urn, urn 1 (4)	4			Data\Global\Objects	U1	OP	HTH		LIT																	0
+2	2	26	Corona, urn 2 (9)	9			Data\Global\Objects	U2	OP	HTH		LIT																	0
+2	2	27	Urn, urn 3 (52)	52			Data\Global\Objects	U3	OP	HTH		LIT																	0
+2	2	28	Large Urn, urn 4 (94)	94			Data\Global\Objects	U4	OP	HTH		LIT																	0
+2	2	29	Large Urn, urn 5 (95)	95			Data\Global\Objects	U5	OP	HTH		LIT																	0
+2	2	30	Jug, desert 1 (142)	142			Data\Global\Objects	Q4	OP	HTH		LIT																	0
+2	2	31	Jug, desert 2 (143)	143			Data\Global\Objects	Q5	OP	HTH		LIT																	0
+2	2	32	Chest, R Large (5)	5			Data\Global\Objects	L1	OP	HTH		LIT																	0
+2	2	33	Chest, L Large 1 (6)	6			Data\Global\Objects	L2	OP	HTH		LIT																	0
+2	2	34	Chest, L Large tomb 1 (87)	87			Data\Global\Objects	CA	OP	HTH		LIT																	0
+2	2	35	Chest, R Large tomb 2 (88)	88			Data\Global\Objects	CB	OP	HTH		LIT																	0
+2	2	36	Chest, R Med  (146)	146			Data\Global\Objects	Q9	OP	HTH		LIT																	0
+2	2	37	Chest, R Med  (146)	146			Data\Global\Objects	Q9	OP	HTH		LIT																	0
+2	2	38	Chest, R Large desert tomb (147)	147			Data\Global\Objects	Q7	OP	HTH		LIT																	0
+2	2	39	Chest, L Large desert tomb (148)	148			Data\Global\Objects	Q8	OP	HTH		LIT																	0
+2	2	40	Chest, 1L general (240)	240			Data\Global\Objects	CY	OP	HTH		LIT																	0
+2	2	41	Chest, 2R general (241)	241			Data\Global\Objects	CX	OP	HTH		LIT																	0
+2	2	42	Chest, 3R general (242)	242			Data\Global\Objects	CU	OP	HTH		LIT																	0
+2	2	43	Chest, 3L general (243)	243			Data\Global\Objects	CD	OP	HTH		LIT																	0
+2	2	44	Chest, L Med (176)	176			Data\Global\Objects	C8	OP	HTH		LIT																	0
+2	2	45	Chest, L Large 2 (177)	177			Data\Global\Objects	C9	OP	HTH		LIT																	0
+2	2	46	Chest, L Tallskinney (198)	198			Data\Global\Objects	C0	OP	HTH		LIT																	0
+2	2	47	Rat's Nest (246)	246			Data\Global\Objects	RA	OP	HTH		LIT																	0
+2	2	48	brazier (29)	29			Data\Global\Objects	BR	OP	HTH		LIT							LIT										0
+2	2	49	Flame, fire small (160)	160			Data\Global\Objects	FX	OP	HTH		LIT																	0
+2	2	50	Flame, fire medium (161)	161			Data\Global\Objects	FY	OP	HTH		LIT																	0
+2	2	51	Fire, fire large (162)	162			Data\Global\Objects	FZ	OP	HTH		LIT																	0
+2	2	52	flame, no damage (273)	273			Data\Global\Objects	F8	NU	HTH		LIT																	0
+2	2	53	brazier celler (283)	283			Data\Global\Objects	BI	OP	HTH		LIT																	0
+2	2	54	Shrine, bull health tombs (85)	85			Data\Global\Objects	BC	OP	HTH		LIT																	0
+2	2	55	stele, magic shrine stone desert (86)	86			Data\Global\Objects	SG	OP	HTH		LIT																	0
+2	2	56	Shrine, palace health R harom arcane (109)	109			Data\Global\Objects	P2	OP	HTH		LIT																	0
+2	2	57	Shrine, snake woman magic tomb arcane (116)	116			Data\Global\Objects	SN	OP	HTH		LIT							LIT										0
+2	2	58	Shrine, dshrine2 (134)	134			Data\Global\Objects	ZS	OP	HTH		LIT							LIT										0
+2	2	59	Shrine, desertshrine 3 (135)	135			Data\Global\Objects	ZR	OP	HTH		LIT							LIT										0
+2	2	60	Shrine, dshrine 1 a (136)	136			Data\Global\Objects	ZD	OP	HTH		LIT																	0
+2	2	61	Shrine, dshrine 1 b (150)	150			Data\Global\Objects	ZV	OP	HTH		LIT							LIT	LIT									0
+2	2	62	Shrine, dshrine 4 (151)	151			Data\Global\Objects	ZE	OP	HTH		LIT							LIT										0
+2	2	63	Shrine, health well desert (172)	172			Data\Global\Objects	MK	OP	HTH		LIT																	0
+2	2	64	Shrine, mana well7 desert (173)	173			Data\Global\Objects	MI	OP	HTH		LIT																	0
+2	2	65	Shrine, magic shrine sewers (279)	279			Data\Global\Objects	WJ	OP	HTH		LIT							LIT	LIT									0
+2	2	66	Shrine, healthwell sewers (280)	280			Data\Global\Objects	WK	OP	HTH		LIT																	0
+2	2	67	Shrine, manawell sewers (281)	281			Data\Global\Objects	WL	OP	HTH		LIT																	0
+2	2	68	Shrine, magic shrine sewers dungeon (282)	282			Data\Global\Objects	WS	OP	HTH		LIT							LIT	LIT	LIT								0
+2	2	69	Shrine, mana well3 tomb (166)	166			Data\Global\Objects	MF	OP	HTH		LIT																	0
+2	2	70	Shrine, mana well4 harom (167)	167			Data\Global\Objects	MH	OP	HTH		LIT																	0
+2	2	71	Well, fountain2 desert tomb (113)	113			Data\Global\Objects	F4	NU	HTH		LIT																	0
+2	2	72	Well, desertwell tomb (137)	137			Data\Global\Objects	ZL	NU	HTH		LIT																	0
+2	2	73	Sarcophagus, mummy coffin L tomb (89)	89			Data\Global\Objects	MC	OP	HTH		LIT																	0
+2	2	74	Armor stand, 1 R (104)	104			Data\Global\Objects	A3	NU	HTH		LIT																	0
+2	2	75	Armor stand, 2 L (105)	105			Data\Global\Objects	A4	NU	HTH		LIT																	0
+2	2	76	Weapon Rack, 1 R (106)	106			Data\Global\Objects	W1	NU	HTH		LIT																	0
+2	2	77	Weapon Rack, 2 L (107)	107			Data\Global\Objects	W2	NU	HTH		LIT																	0
+2	2	78	Corpse, guard (154)	154			Data\Global\Objects	GC	OP	HTH		LIT																	0
+2	2	79	Skeleton (171)	171			Data\Global\Objects	SX	OP	HTH		LIT																	0
+2	2	80	Guard Corpse, on stick (178)	178			Data\Global\Objects	GS	OP	HTH		LIT																	0
+2	2	81	Corpse, guard 2 (270)	270			Data\Global\Objects	GF	OP	HTH		LIT																	0
+2	2	82	Corpse, villager 1 (271)	271			Data\Global\Objects	DG	OP	HTH		LIT																	0
+2	2	83	Corpse, villager 2 (272)	272			Data\Global\Objects	DF	OP	HTH		LIT																	0
+2	2	84	Goo Pile, for sand maggot lair (266)	266			Data\Global\Objects	GP	OP	HTH		LIT																	0
+2	2	85	Hidden Stash, tiny pixel shaped (274)	274			Data\Global\Objects	F9	NU	HTH		LIT																	0
+2	2	86	Rat's Nest, sewers (244)	244			Data\Global\Objects	RN	OP	HTH		LIT																	0
+2	2	87	Sarcophagus, anubis coffin tomb (284)	284			Data\Global\Objects	QC	OP	HTH		LIT																	0
+2	2	88	waypoint, celler (288)	288			Data\Global\Objects	W7	ON	HTH		LIT							LIT										0
+2	2	89	Portal to, arcane portal (298)	298			Data\Global\Objects	AY	ON	HTH		LIT							LIT	LIT									0
+2	2	90	Bed, harum (289)	289			Data\Global\Objects	UB	OP	HTH		LIT																	0
+2	2	91	wall torch L for tombs (296)	296			Data\Global\Objects	QD	NU	HTH		LIT							LIT										0
+2	2	92	wall torch R for tombs (297)	297			Data\Global\Objects	QE	NU	HTH		LIT							LIT										0
+2	2	93	brazier small desert town tombs (287)	287			Data\Global\Objects	BQ	NU	HTH		LIT							LIT										0
+2	2	94	brazier tall desert town tombs (286)	286			Data\Global\Objects	BO	NU	HTH		LIT							LIT										0
+2	2	95	brazier general sewers tomb desert (285)	285			Data\Global\Objects	BM	NU	HTH		LIT							LIT										0
+2	2	96	Closed Door, iron grate L (290)	290			Data\Global\Objects	DV	OP	HTH		LIT																	0
+2	2	97	Closed Door, iron grate R (291)	291			Data\Global\Objects	DN	OP	HTH		LIT																	0
+2	2	98	Door, wooden grate L (292)	292			Data\Global\Objects	DP	OP	HTH		LIT																	0
+2	2	99	Door, wooden grate R (293)	293			Data\Global\Objects	DT	OP	HTH		LIT																	0
+2	2	100	Door, wooden L (294)	294			Data\Global\Objects	DK	OP	HTH		LIT																	0
+2	2	101	Closed Door, wooden R (295)	295			Data\Global\Objects	DL	OP	HTH		LIT																	0
+2	2	102	Shrine, arcane (133)	133			Data\Global\Objects	AZ	NU	HTH		LIT							LIT	LIT	LIT								0
+2	2	103	Magic Shrine, arcane (303)	303			Data\Global\Objects	HD	OP	HTH		LIT							LIT										0
+2	2	104	Magic Shrine, haram 1 (299)	299			Data\Global\Objects	HB	OP	HTH		LIT							LIT										0
+2	2	105	Magic Shrine, haram 2 (300)	300			Data\Global\Objects	HC	OP	HTH		LIT							LIT										0
+2	2	106	maggot well health (301)	301			Data\Global\Objects	QF	OP	HTH		LIT																	0
+2	2	107	Shrine, maggot well mana (302)	302			Data\Global\Objects	QG	OP	HTH		LIT																	0
+2	2	108	-581	581																									0
+2	2	109	Chest, horadric cube (354)	354			Data\Global\Objects	XK	OP	HTH		LIT																	0
+2	2	110	Tomb signs in Arcane (582)	582			Data\Global\Objects	7C	NU	HTH		LIT																	0
+2	2	111	Dead Guard, harem 1 (314)	314			Data\Global\Objects	QH	NU	HTH		LIT																	0
+2	2	112	Dead Guard, harem 2 (315)	315			Data\Global\Objects	QI	NU	HTH		LIT																	0
+2	2	113	Dead Guard, harem 3 (316)	316			Data\Global\Objects	QJ	NU	HTH		LIT																	0
+2	2	114	Dead Guard, harem 4 (317)	317			Data\Global\Objects	QK	NU	HTH		LIT																	0
+2	2	115	Waypoint, sewer (323)	323			Data\Global\Objects	QM	ON	HTH		LIT							LIT										0
+2	2	116	Well, tomb (322)	322			Data\Global\Objects	HU	NU	HTH		LIT																	0
+2	2	117	drinker (110)	110			Data\Global\Objects	N5	S1	HTH		LIT																	0
+2	2	118	gesturer (112)	112			Data\Global\Objects	N6	S2	HTH		LIT																	0
+2	2	119	turner (114)	114			Data\Global\Objects	N7	S1	HTH		LIT																	0
+2	2	120	Chest, horadric scroll (355)	355			Data\Global\Objects	XK	OP	HTH		LIT																	0
+2	2	121	Chest, staff of kings (356)	356			Data\Global\Objects	XK	OP	HTH		LIT																	0
+2	2	122	Horazon's Journal (357)	357			Data\Global\Objects	TT	OP	HTH		LIT																	0
+2	2	123	helllight source 1 (351)	351			Data\Global\Objects	SS																					0
+2	2	124	helllight source 2 (352)	352			Data\Global\Objects	SS																					0
+2	2	125	helllight source 3 (353)	353			Data\Global\Objects	SS																					0
+2	2	126	orifice, place Horadric Staff (152)	152			Data\Global\Objects	HA	NU	HTH		LIT																	0
+2	2	127	fog water (374)	374			Data\Global\Objects	UD	NU	HTH		LIT																	0
+2	2	128	Chest, arcane big L (387)	387			Data\Global\Objects	Y7	OP	HTH		LIT																	0
+2	2	129	Chest, arcane big R (389)	389			Data\Global\Objects	Y9	OP	HTH		LIT																	0
+2	2	130	Chest, arcane small L (390)	390			Data\Global\Objects	YA	OP	HTH		LIT																	0
+2	2	131	Chest, arcane small R (391)	391			Data\Global\Objects	YC	OP	HTH		LIT																	0
+2	2	132	Casket, arcane (388)	388			Data\Global\Objects	Y8	OP	HTH		LIT																	0
+2	2	133	Chest, sparkly (397)	397			Data\Global\Objects	YF	OP	HTH		LIT																	0
+2	2	134	Waypoint, valley (402)	402			Data\Global\Objects	YI	ON	HTH		LIT							LIT										0
+2	2	135	0	0																									0
+2	2	136	0	0																									0
+2	2	137	0	0																									0
+2	2	138	0	0																									0
+2	2	139	0	0																									0
+2	2	140	0	0																									0
+2	2	141	0	0																									0
+2	2	142	0	0																									0
+2	2	143	0	0																									0
+2	2	144	0	0																									0
+2	2	145	0	0																									0
+2	2	146	0	0																									0
+2	2	147	0	0																									0
+2	2	148	0	0																									0
+2	2	149	0	0																									0
+3	1	0	Deckard Cain				Data\Global\Monsters	2D	NU	HTH		LIT																	0
+3	1	1	# 2-4 random champions																										0
+3	1	2	man with towel				Data\Global\Monsters	N4	NU	HTH	BRD	HVY	MED	MED	MED	BAN	BUK		HBD										0
+3	1	3	woman in white dress				Data\Global\Monsters	N3	NU	HTH	LIT	BTP	DLN			BSK	BSK												0
+3	1	4	Asheara				Data\Global\Monsters	AH	NU	HTH		LIT																	0
+3	1	5	# Hratli				Data\Global\Monsters	HR	NU	HTH		LIT																	0
+3	1	6	Alkor				Data\Global\Monsters	AL	NU	HTH		LIT																	0
+3	1	7	Ormus				Data\Global\Monsters	OR	NU	HTH		LIT																	0
+3	1	8	Meshif				Data\Global\Monsters	M3	NU	HTH		LIT																	0
+3	1	9	# ?																										0
+3	1	10	Water Watcher (/ direction)			7	Data\Global\Monsters	TE	NU	HTH		LIT							LIT										0
+3	1	11	Water Watcher (\ direction)			5	Data\Global\Monsters	TE	NU	HTH		LIT							LIT										0
+3	1	12	# ?																										0
+3	1	13	a Trap, Charged Bolt																										0
+3	1	14	a Trap, Arrow																										0
+3	1	15	Natalya				Data\Global\Monsters	TZ	NU	HTH		LIT																	0
+3	1	16	# ?																										0
+3	1	17	?																										0
+3	1	18	?																										0
+3	1	19	?																										0
+3	1	20	?																										0
+3	1	21	Compelling Orb				Data\Global\Objects	55	NU	HTH		LIT							LIT	LIT									0
+3	1	22	Mephisto				Data\Global\Monsters	MP	NU	HTH		LIT		LIT	LIT														0
+3	1	23	chest ('a Trap')				Data\Global\Monsters	M4	A1	HTH		LIT																	0
+3	1	24	Evil force(ghosts)			2	Data\Global\Monsters	M6	A1	HTH		LIT																	0
+3	1	25	sorcerer mercenary				Data\Global\Monsters	IW	NU	1HS	LIT	LIT				LSD		KIT											0
+3	1	26	Rat Men				Data\Global\Monsters	FE	NU	HTH		LIT				FBL													0
+3	1	27	RatMan Shaman				Data\Global\Monsters	FW	NU	HTH		LIT																	0
+3	1	28	Sszark the Burning																										0
+3	1	29	Witch Doctor Endugu																										0
+3	1	30	Stormtree																										0
+3	1	31	Battlemaid Sarina																										0
+3	1	32	Icehawk Riftwing																										0
+3	1	33	Ismail Vilehand																										0
+3	1	34	Geleb Flamefinger																										0
+3	1	35	Bremm Sparkfist																										0
+3	1	36	Toorc Icefist																										0
+3	1	37	Wyand Voidbringer																										0
+3	1	38	Maffer Dragonhand																										0
+3	1	39	# Skeleton																										0
+3	1	40	# Skeleton																										0
+3	1	41	# Skeleton																										0
+3	1	42	# Skeleton																										0
+3	1	43	# Skeleton																										0
+3	1	44	# Skeleton																										0
+3	1	45	# Skeleton																										0
+3	1	46	# Skeleton																										0
+3	1	47	# Skeleton																										0
+3	1	48	# Skeleton																										0
+3	1	49	# Skeleton																										0
+3	1	50	# Skeleton																										0
+3	1	51	# Skeleton																										0
+3	1	52	# Skeleton																										0
+3	1	53	# Skeleton																										0
+3	1	54	# Skeleton																										0
+3	1	55	# Skeleton																										0
+3	1	56	# Skeleton																										0
+3	1	57	# Skeleton																										0
+3	1	58	# Skeleton																										0
+3	1	59	# Skeleton																										0
+3	2	0	jungle torch (117)	117			Data\Global\Objects	JT	ON	HTH		LIT							LIT										0
+3	2	1	Waypoint (237)	237			Data\Global\Objects	WZ	ON	HTH		LIT							LIT										0
+3	2	2	-580	580																									0
+3	2	3	Well, pool wilderness (130)	130			Data\Global\Objects	ZW	NU	HTH		LIT																	0
+3	2	4	brazier floor (102)	102			Data\Global\Objects	FB	ON	HTH		LIT							LIT										0
+3	2	5	torch 1 tiki (37)	37			Data\Global\Objects	TO	ON	HTH		LIT																	0
+3	2	6	Fire, small (160)	160			Data\Global\Objects	FX	NU	HTH		LIT																	0
+3	2	7	Fire, medium (161)	161			Data\Global\Objects	FY	NU	HTH		LIT																	0
+3	2	8	Fire, large (162)	162			Data\Global\Objects	FZ	ON	HTH		LIT																	0
+3	2	9	Armor Stand, 1 R (104)	104			Data\Global\Objects	A3	NU	HTH		LIT																	0
+3	2	10	Armor Stand, 2 L (105)	105			Data\Global\Objects	A4	NU	HTH		LIT																	0
+3	2	11	Weapon Rack, 1 R (106)	106			Data\Global\Objects	W1	NU	HTH		LIT																	0
+3	2	12	Weapon Rack, 2 L (107)	107			Data\Global\Objects	W2	NU	HTH		LIT																	0
+3	2	13	Stair, L altar to underground (194)	194			Data\Global\Objects	9C	OP	HTH		LIT																	0
+3	2	14	Stair, R altar to underground (195)	195			Data\Global\Objects	SV	OP	HTH		LIT																	0
+3	2	15	Lam Esen's Tome (193)	193			Data\Global\Objects	AB	NU	HTH		LIT																	0
+3	2	16	water rocks 1 (207)	207			Data\Global\Objects	RW	NU	HTH		LIT																	0
+3	2	17	water rocks girl 1 (211)	211			Data\Global\Objects	WB	NU	HTH		LIT																	0
+3	2	18	water logs 1 (210)	210			Data\Global\Objects	LW	NU	HTH		LIT																	0
+3	2	19	water log bigger 1 (234)	234			Data\Global\Objects	QY	NU	HTH		LIT																	0
+3	2	20	water rocks 2 (214)	214			Data\Global\Objects	WC	NU	HTH		LIT																	0
+3	2	21	water rocks girl 2 (215)	215			Data\Global\Objects	WE	NU	HTH		LIT																	0
+3	2	22	water logs 2 (213)	213			Data\Global\Objects	WD	NU	HTH		LIT																	0
+3	2	23	water log bigger 2 (228)	228			Data\Global\Objects	QW	NU	HTH		LIT																	0
+3	2	24	water rocks 3 (216)	216			Data\Global\Objects	WY	NU	HTH		LIT																	0
+3	2	25	water rocks girl 3 (227)	227			Data\Global\Objects	QX	NU	HTH		LIT																	0
+3	2	26	water logs 3 (217)	217			Data\Global\Objects	LX	NU	HTH		LIT																	0
+3	2	27	water log bigger 3 (235)	235			Data\Global\Objects	QZ	NU	HTH		LIT																	0
+3	2	28	web between 2 trees L (218)	218			Data\Global\Objects	W3	NU	HTH		LIT							LIT										0
+3	2	29	web between 2 trees R (219)	219			Data\Global\Objects	W4	NU	HTH		LIT							LIT										0
+3	2	30	web around 1 tree L (220)	220			Data\Global\Objects	W5	NU	HTH		LIT							LIT										0
+3	2	31	web around 1 tree R (221)	221			Data\Global\Objects	W6	NU	HTH		LIT							LIT										0
+3	2	32	Cocoon, living (223)	223			Data\Global\Objects	CN	NU	HTH		LIT																	0
+3	2	33	Cocoon, static (224)	224			Data\Global\Objects	CC	NU	HTH		LIT																	0
+3	2	34	Your Private Stash (267)	267			Data\Global\Objects	B6	NU	HTH		LIT																	0
+3	2	35	gold placeholder (269)	269			Data\Global\Objects	1G	NU	HTH		LIT																	0
+3	2	36	-581	581																									0
+3	2	37	Shrine, jungle heal well (170)	170			Data\Global\Objects	JH	OP	HTH		LIT																	0
+3	2	38	Magic Shrine, sewer (325)	325			Data\Global\Objects	QN	NU	HTH		LIT							LIT										0
+3	2	39	Shrine, jungle 1 (184)	184			Data\Global\Objects	JY	NU	HTH		LIT							LIT										0
+3	2	40	Shrine, jungle 2 (190)	190			Data\Global\Objects	JS	NU	HTH		LIT							LIT										0
+3	2	41	Shrine, jungle 3 (191)	191			Data\Global\Objects	JR	NU	HTH		LIT							LIT										0
+3	2	42	Shrine, jungle 4 (197)	197			Data\Global\Objects	JQ	NU	HTH		LIT							LIT										0
+3	2	43	Shrine, mephisto 1 (199)	199			Data\Global\Objects	MZ	NU	HTH		LIT							LIT										0
+3	2	44	Shrine, mephisto 2 (200)	200			Data\Global\Objects	MY	NU	HTH		LIT							LIT										0
+3	2	45	Shrine, mephisto 3 (201)	201			Data\Global\Objects	MX	NU	HTH		LIT							LIT										0
+3	2	46	Shrine, mephisto mana (202)	202			Data\Global\Objects	MW	OP	HTH		LIT							LIT										0
+3	2	47	Shrine, mephisto health (206)	206			Data\Global\Objects	MR	OP	HTH		LIT							LIT										0
+3	2	48	Shrine, mana dungeon (278)	278			Data\Global\Objects	DE	OP	HTH		LIT																	0
+3	2	49	dummy shrine health dungeon (120)	120			Data\Global\Objects	DJ	OP	HTH		LIT																	0
+3	2	50	Well, pool wilderness (130)	130			Data\Global\Objects	ZW	NU	HTH		LIT																	0
+3	2	51	Dead Body, sewer (326)	326			Data\Global\Objects	QO	OP	HTH		LIT																	0
+3	2	52	Skeleton (158)	158			Data\Global\Objects	CP	OP	HTH		LIT																	0
+3	2	53	Corpse, villager 1 (271)	271			Data\Global\Objects	DG	OP	HTH		LIT																	0
+3	2	54	Corpse, villager 2 (272)	272			Data\Global\Objects	DF	OP	HTH		LIT																	0
+3	2	55	torch 1 (327)	327			Data\Global\Objects	V1	NU	HTH		LIT							LIT										0
+3	2	56	torch 2 (328)	328			Data\Global\Objects	V2	NU	HTH		LIT							LIT										0
+3	2	57	Chest, Mephisto L Large (329)	329			Data\Global\Objects	XB	OP	HTH		LIT																	0
+3	2	58	Chest, Mephisto R Large (330)	330			Data\Global\Objects	XC	OP	HTH		LIT																	0
+3	2	59	Chest, Mephisto L Med (331)	331			Data\Global\Objects	XD	OP	HTH		LIT																	0
+3	2	60	Chest, Mephisto R Med (332)	332			Data\Global\Objects	XE	OP	HTH		LIT																	0
+3	2	61	Chest, spider lair L Large (333)	333			Data\Global\Objects	XF	OP	HTH		LIT																	0
+3	2	62	Chest, spider lair L Tall (334)	334			Data\Global\Objects	XG	OP	HTH		LIT																	0
+3	2	63	Chest, spider lair R Med (335)	335			Data\Global\Objects	XH	OP	HTH		LIT																	0
+3	2	64	Chest, spider lair R Tall (336)	336			Data\Global\Objects	XI	OP	HTH		LIT																	0
+3	2	65	Chest, R Large (5)	5			Data\Global\Objects	L1	OP	HTH		LIT																	0
+3	2	66	Chest, L Large (6)	6			Data\Global\Objects	L2	OP	HTH		LIT																	0
+3	2	67	Chest, L Med (176)	176			Data\Global\Objects	C8	OP	HTH		LIT																	0
+3	2	68	Chest, general L (240)	240			Data\Global\Objects	CY	OP	HTH		LIT																	0
+3	2	69	Chest, general R (241)	241			Data\Global\Objects	CX	OP	HTH		LIT																	0
+3	2	70	Chest, jungle (181)	181			Data\Global\Objects	JC	OP	HTH		LIT																	0
+3	2	71	Chest, L Med jungle (183)	183			Data\Global\Objects	JZ	OP	HTH		LIT																	0
+3	2	72	Rat's Nest, sewers (246)	246			Data\Global\Objects	RA	OP	HTH		LIT																	0
+3	2	73	Stash, jungle 1 (185)	185			Data\Global\Objects	JX	OP	HTH		LIT																	0
+3	2	74	Stash, jungle 2 (186)	186			Data\Global\Objects	JW	OP	HTH		LIT																	0
+3	2	75	Stash, jungle 3 (187)	187			Data\Global\Objects	JV	OP	HTH		LIT																	0
+3	2	76	Stash, jungle 4 (188)	188			Data\Global\Objects	JU	OP	HTH		LIT																	0
+3	2	77	Stash, Mephisto lair (203)	203			Data\Global\Objects	MV	OP	HTH		LIT																	0
+3	2	78	Stash, box (204)	204			Data\Global\Objects	MU	OP	HTH		LIT																	0
+3	2	79	Stash, altar (205)	205			Data\Global\Objects	MT	OP	HTH		LIT																	0
+3	2	80	Basket, 1 say 'not here' (208)	208			Data\Global\Objects	BD	OP	HTH		LIT																	0
+3	2	81	Basket, 2 say 'not here' (209)	209			Data\Global\Objects	BJ	OP	HTH		LIT																	0
+3	2	82	Hollow Log (169)	169			Data\Global\Objects	CZ	NU	HTH		LIT																	0
+3	2	83	Waypoint, sewer (323)	323			Data\Global\Objects	QM	ON	HTH		LIT							LIT										0
+3	2	84	Waypoint, Travincal (324)	324			Data\Global\Objects	QL	ON	HTH		LIT							LIT										0
+3	2	85	a Trap, test data floortrap (196)	196			Data\Global\Objects	A5	OP	HTH		LIT																	0
+3	2	86	bubbles in water (212)	212			Data\Global\Objects	YB	NU	HTH		LIT																	0
+3	2	87	Skullpile (225)	225			Data\Global\Objects	IB	OP	HTH		LIT																	0
+3	2	88	Rat's Nest, sewers (244)	244			Data\Global\Objects	RN	OP	HTH		LIT																	0
+3	2	89	helllight source 1 (351)	351																									0
+3	2	90	helllight source 2 (352)	352																									0
+3	2	91	helllight source 3 (353)	353																									0
+3	2	92	Rock Pile, dungeon (360)	360			Data\Global\Objects	XN	OP	HTH		LIT																	0
+3	2	93	Magic Shrine, dungeon (361)	361			Data\Global\Objects	XO	OP	HTH		LIT							LIT										0
+3	2	94	Basket, dungeon (362)	362			Data\Global\Objects	XP	OP	HTH		LIT																	0
+3	2	95	Casket, dungeon (365)	365			Data\Global\Objects	VB	OP	HTH		LIT																	0
+3	2	96	Gidbinn Altar (251)	251			Data\Global\Objects	GA	ON	HTH		LIT							LIT										0
+3	2	97	Gidbinn, decoy (252)	252			Data\Global\Objects	GD	ON	HTH		LIT							LIT										0
+3	2	98	Basket, 1 (208)	208			Data\Global\Objects	BD	OP	HTH		LIT																	0
+3	2	99	brazier celler (283)	283			Data\Global\Objects	BI	NU	HTH		LIT							LIT										0
+3	2	100	Sewer Lever (367)	367			Data\Global\Objects	VF	OP	HTH		LIT																	0
+3	2	101	Sewer Stairs (366)	366			Data\Global\Objects	VE	OP	HTH		LIT																	0
+3	2	102	Dark Wanderer (368)	368																									0
+3	2	103	Mephisto bridge (341)	341			Data\Global\Objects	XJ	ON	HTH		LIT																	0
+3	2	104	Portal to hellgate (342)	342			Data\Global\Objects	1Y	ON	HTH		LIT								LIT	LIT								0
+3	2	105	Shrine, mana well kurast (343)	343			Data\Global\Objects	XL	OP	HTH		LIT																	0
+3	2	106	Shrine, health well kurast (344)	344			Data\Global\Objects	XM	OP	HTH		LIT																	0
+3	2	107	fog water (374)	374			Data\Global\Objects	UD	NU	HTH		LIT																	0
+3	2	108	torch town (370)	370			Data\Global\Objects	VG	NU	HTH		LIT							LIT										0
+3	2	109	Hratli start (378)	378		1	Data\Global\Monsters	HR	NU	HTH		LIT																	0
+3	2	110	Hratli end (379)	379		7	Data\Global\Monsters	HR	NU	HTH		LIT																	0
+3	2	111	stairs of Compelling Orb (386)	386			Data\Global\Objects	SV	OP	HTH		LIT																	0
+3	2	112	Chest, sparkly (397)	397			Data\Global\Objects	YF	OP	HTH		LIT																	0
+3	2	113	Chest, Khalim's Heart (405)	405			Data\Global\Objects	XK	OP	HTH		LIT																	0
+3	2	114	Chest, Khalim's Eye (407)	407			Data\Global\Objects	XK	OP	HTH		LIT																	0
+3	2	115	Chest, Khalim's Brain (406)	406			Data\Global\Objects	XK	OP	HTH		LIT																	0
+3	2	116	0	0																									0
+3	2	117	0	0																									0
+3	2	118	0	0																									0
+3	2	119	0	0																									0
+3	2	120	0	0																									0
+3	2	121	0	0																									0
+3	2	122	0	0																									0
+3	2	123	0	0																									0
+3	2	124	0	0																									0
+3	2	125	0	0																									0
+3	2	126	0	0																									0
+3	2	127	0	0																									0
+3	2	128	0	0																									0
+3	2	129	0	0																									0
+3	2	130	0	0																									0
+3	2	131	0	0																									0
+3	2	132	0	0																									0
+3	2	133	0	0																									0
+3	2	134	0	0																									0
+3	2	135	0	0																									0
+3	2	136	0	0																									0
+3	2	137	0	0																									0
+3	2	138	0	0																									0
+3	2	139	0	0																									0
+3	2	140	0	0																									0
+3	2	141	0	0																									0
+3	2	142	0	0																									0
+3	2	143	0	0																									0
+3	2	144	0	0																									0
+3	2	145	0	0																									0
+3	2	146	0	0																									0
+3	2	147	0	0																									0
+3	2	148	0	0																									0
+3	2	149	0	0																									0
+4	1	0	2-4 champion monsters(random)																										0
+4	1	1	# a trap, Charged Bolt																										0
+4	1	2	# a trap, Arrow																										0
+4	1	3	# health shrine																										0
+4	1	4	health shrine																										0
+4	1	5	# health shrine																										0
+4	1	6	# ?																										0
+4	1	7	Tyrael				Data\Global\Monsters	TY	NU	HTH		LIT		LIT	LIT														0
+4	1	8	stained glass 1				Data\Global\Monsters	VJ	DT	HTH		LIT							S1										0
+4	1	9	stained glass 2				Data\Global\Monsters	VH	DT	HTH		LIT							S1										0
+4	1	10	Jamella				Data\Global\Monsters	JA	NU	HTH		LIT																	0
+4	1	11	Halbu				Data\Global\Monsters	20	NU	HTH		LIT																	0
+4	1	12	hellmeteor																										0
+4	1	13	Izual			6	Data\Global\Monsters	22	NU	HTH		LIT																	0
+4	1	14	# Diablo			1	Data\Global\Monsters	DI	NU	HTH		LIT	LIT	LIT	LIT														0
+4	1	15	# Dark Wing																										0
+4	1	16	# The Tormentor																										0
+4	1	17	# Taintbreeder																										0
+4	1	18	# Riftwraith the Cannibal																										0
+4	1	19	# Infector of Souls																										0
+4	1	20	# Lord de Sies																										0
+4	1	21	# Grand Vizier of Chaos																										0
+4	1	22	trapped soul 1				Data\Global\Monsters	10	NU	HTH		LIT																	0
+4	1	23	trapped soul 2				Data\Global\Monsters	13	S1	HTH		LIT																	0
+4	1	24	maw fiend			6	Data\Global\Monsters	CS	NU	HTH		LIT																	0
+4	1	25	Cain				Data\Global\Monsters	4D	NU	HTH		LIT																	0
+4	1	26	Hadriel				Data\Global\Monsters	36	NU	HTH		LIT							LIT										0
+4	1	27	Hephasto																										0
+4	1	28	# skeleton enemy																										0
+4	1	29	?																										0
+4	1	30	?																										0
+4	1	31	?																										0
+4	1	32	?																										0
+4	1	33	?																										0
+4	1	34	?																										0
+4	1	35	?																										0
+4	1	36	?																										0
+4	1	37	?																										0
+4	1	38	?																										0
+4	1	39	?																										0
+4	1	40	?																										0
+4	1	41	?																										0
+4	1	42	?																										0
+4	1	43	?																										0
+4	1	44	?																										0
+4	1	45	?																										0
+4	1	46	?																										0
+4	1	47	?																										0
+4	1	48	?																										0
+4	1	49	?																										0
+4	1	50	?																										0
+4	1	51	?																										0
+4	1	52	?																										0
+4	1	53	?																										0
+4	1	54	?																										0
+4	1	55	?																										0
+4	1	56	?																										0
+4	1	57	?																										0
+4	1	58	?																										0
+4	1	59	?																										0
+4	2	0	Waypoint (238)	238			Data\Global\Objects	WV	ON	HTH		LIT							LIT										0
+4	2	1	-580	580																									0
+4	2	2	Your Private Stash (267)	267			Data\Global\Objects	B6	NU	HTH		LIT																	0
+4	2	3	gold placeholder (269)	269			Data\Global\Objects	1G	NU	HTH		LIT																	0
+4	2	4	-581	581																									0
+4	2	5	-573	573																									0
+4	2	6	-573	573																									0
+4	2	7	-573	573																									0
+4	2	8	hell fire 1 (345)	345			Data\Global\Objects	E3	NU	HTH		LIT																	0
+4	2	9	hell fire 2 (346)	346			Data\Global\Objects	E4	NU	HTH		LIT																	0
+4	2	10	hell fire 3 (347)	347			Data\Global\Objects	E5	NU	HTH		LIT																	0
+4	2	11	hell lava 1 (348)	348			Data\Global\Objects	E6	NU	HTH		LIT																	0
+4	2	12	hell lava 2 (349)	349			Data\Global\Objects	E7	NU	HTH		LIT																	0
+4	2	13	hell lava 3 (350)	350			Data\Global\Objects	E8	NU	HTH		LIT																	0
+4	2	14	hell light source 1 (351)	351																									0
+4	2	15	hell light source 2 (352)	352																									0
+4	2	16	hell light source 3 (353)	353																									0
+4	2	17	Fire, hell brazier 1 (358)	358			Data\Global\Objects	E1	NU	HTH	LIT	LIT																	0
+4	2	18	Fire, hell brazier 2 (359)	359			Data\Global\Objects	E2	NU	HTH	LIT	LIT																	0
+4	2	19	Hung Skeleton (363)	363			Data\Global\Objects	XQ	OP	HTH		LIT																	0
+4	2	20	skeleton rising from lava L (259)	259			Data\Global\Objects	QS	OP	HTH		LIT							LIT										0
+4	2	21	skeleton rising from lava R (373)	373			Data\Global\Objects	QT	OP	HTH		LIT							LIT										0
+4	2	22	Bone Chest (372)	372			Data\Global\Objects	Y1	OP	HTH		LIT																	0
+4	2	23	fog water (374)	374			Data\Global\Objects	UD	NU	HTH		LIT																	0
+4	2	24	Shrine, hell well (236)	236			Data\Global\Objects	HO	OP	HTH		LIT							LIT										0
+4	2	25	Shrine, mana well (249)	249			Data\Global\Objects	HN	OP	HTH		LIT							LIT										0
+4	2	26	Shrine, outer hell 1 (226)	226			Data\Global\Objects	IA	OP	HTH		LIT							LIT										0
+4	2	27	Shrine, outer hell 2 (231)	231			Data\Global\Objects	HT	OP	HTH		LIT							LIT										0
+4	2	28	Shrine, outer hell 3 (232)	232			Data\Global\Objects	HQ	OP	HTH		LIT							LIT										0
+4	2	29	Shrine, mana inner hell (93)	93			Data\Global\Objects	IZ	OP	HTH		LIT							LIT										0
+4	2	30	Shrine, inner hell 1 (97)	97			Data\Global\Objects	IX	OP	HTH		LIT							LIT										0
+4	2	31	Shrine, inner hell 2 (123)	123			Data\Global\Objects	IW	OP	HTH		LIT							LIT										0
+4	2	32	Shrine, inner hell 3 (124)	124			Data\Global\Objects	IV	OP	HTH		LIT							LIT										0
+4	2	33	Shrine, health inner hell (96)	96			Data\Global\Objects	IY	OP	HTH		LIT							LIT										0
+4	2	34	Skullpile (225)	225			Data\Global\Objects	IB	OP	HTH		LIT																	0
+4	2	35	Pillar 1 (233)	233			Data\Global\Objects	HV	OP	HTH		LIT																	0
+4	2	36	Pillar 2 (222)	222			Data\Global\Objects	70	OP	HTH		LIT																	0
+4	2	37	Hidden Stash, inner hell (125)	125			Data\Global\Objects	IU	OP	HTH		LIT																	0
+4	2	38	Skull Pile, inner hell (126)	126			Data\Global\Objects	IS	OP	HTH		LIT																	0
+4	2	39	Hidden Stash, inner hell 1 (127)	127			Data\Global\Objects	IR	OP	HTH		LIT																	0
+4	2	40	Hidden Stash, inner hell 2 (128)	128			Data\Global\Objects	HG	ON	HTH		LIT																	0
+4	2	41	CRASH THE GAME ! (375)	375																									0
+4	2	42	Hellforge (376)	376			Data\Global\Objects	UX	ON	HTH		LIT							LIT	LIT	LIT								0
+4	2	43	ray of light L Diablo (254)	254			Data\Global\Objects	12	NU	HTH		LIT																	0
+4	2	44	ray of light R Diablo (253)	253			Data\Global\Objects	11	NU	HTH		LIT																	0
+4	2	45	Portal to hell (342)	342			Data\Global\Objects	1Y	ON	HTH		LIT								LIT	LIT								0
+4	2	46	Diablo start point (255)	255		7	Data\Global\Monsters	DI	NU	HTH		LIT	LIT	LIT	LIT														0
+4	2	47	Diablo seal 1 (392)	392			Data\Global\Objects	30	ON	HTH		LIT							LIT										0
+4	2	48	Diablo seal 2 (393)	393			Data\Global\Objects	31	ON	HTH		LIT							LIT										0
+4	2	49	Diablo seal 3 (394)	394			Data\Global\Objects	32	ON	HTH		LIT							LIT										0
+4	2	50	Diablo seal 4 (395)	395			Data\Global\Objects	33	ON	HTH		LIT							LIT										0
+4	2	51	Diablo seal 5 (396)	396			Data\Global\Objects	34	ON	HTH		LIT							LIT										0
+4	2	52	Waypoint, fortress (398)	398			Data\Global\Objects	YG	ON	HTH		LIT							LIT										0
+4	2	53	Chest, sparkly (397)	397			Data\Global\Objects	YF	OP	HTH		LIT																	0
+4	2	54	fissure (399)	399			Data\Global\Objects	FH	OP	HTH		LIT							LIT										0
+4	2	55	smoke (401)	401			Data\Global\Objects	35	NU	HTH		LIT																	0
+4	2	56	brazier hell mesa (400)	400			Data\Global\Objects	HE	NU	HTH		LIT							LIT										0
+4	2	57	Trapped Soul, burning guy (380)	380			Data\Global\Objects	UY	ON	HTH		LIT							LIT										0
+4	2	58	Trapped Soul, guy stuck 1 (383)	383			Data\Global\Objects	18	OP	HTH		LIT																	0
+4	2	59	Trapped Soul, guy stuck 2 (384)	384			Data\Global\Objects	19	OP	HTH		LIT																	0
+4	2	60	wall torch L tombs (296)	296			Data\Global\Objects	QD	NU	HTH		LIT							LIT										0
+4	2	61	wall torch R tombs (297)	297			Data\Global\Objects	QE	NU	HTH		LIT							LIT										0
+4	2	62	Fire, hell brazier (403)	403			Data\Global\Objects	9F	NU	HTH		LIT							LIT										0
+4	2	63	floor brazier (102)	102			Data\Global\Objects	FB	ON	HTH		LIT							LIT										0
+4	2	64	fortress brazier (408)	408			Data\Global\Objects	98	NU	HTH		LIT							LIT										0
+4	2	65	Torch Pit (409)	409			Data\Global\Objects	99	NU	HTH		LIT							LIT										0
+4	2	66	0	0																									0
+4	2	67	0	0																									0
+4	2	68	0	0																									0
+4	2	69	0	0																									0
+4	2	70	0	0																									0
+4	2	71	0	0																									0
+4	2	72	0	0																									0
+4	2	73	0	0																									0
+4	2	74	0	0																									0
+4	2	75	0	0																									0
+4	2	76	0	0																									0
+4	2	77	0	0																									0
+4	2	78	0	0																									0
+4	2	79	0	0																									0
+4	2	80	0	0																									0
+4	2	81	0	0																									0
+4	2	82	0	0																									0
+4	2	83	0	0																									0
+4	2	84	0	0																									0
+4	2	85	0	0																									0
+4	2	86	0	0																									0
+4	2	87	0	0																									0
+4	2	88	0	0																									0
+4	2	89	0	0																									0
+4	2	90	0	0																									0
+4	2	91	0	0																									0
+4	2	92	0	0																									0
+4	2	93	0	0																									0
+4	2	94	0	0																									0
+4	2	95	0	0																									0
+4	2	96	0	0																									0
+4	2	97	0	0																									0
+4	2	98	0	0																									0
+4	2	99	0	0																									0
+4	2	100	0	0																									0
+4	2	101	0	0																									0
+4	2	102	0	0																									0
+4	2	103	0	0																									0
+4	2	104	0	0																									0
+4	2	105	0	0																									0
+4	2	106	0	0																									0
+4	2	107	0	0																									0
+4	2	108	0	0																									0
+4	2	109	0	0																									0
+4	2	110	0	0																									0
+4	2	111	0	0																									0
+4	2	112	0	0																									0
+4	2	113	0	0																									0
+4	2	114	0	0																									0
+4	2	115	0	0																									0
+4	2	116	0	0																									0
+4	2	117	0	0																									0
+4	2	118	0	0																									0
+4	2	119	0	0																									0
+4	2	120	0	0																									0
+4	2	121	0	0																									0
+4	2	122	0	0																									0
+4	2	123	0	0																									0
+4	2	124	0	0																									0
+4	2	125	0	0																									0
+4	2	126	0	0																									0
+4	2	127	0	0																									0
+4	2	128	0	0																									0
+4	2	129	0	0																									0
+4	2	130	0	0																									0
+4	2	131	0	0																									0
+4	2	132	0	0																									0
+4	2	133	0	0																									0
+4	2	134	0	0																									0
+4	2	135	0	0																									0
+4	2	136	0	0																									0
+4	2	137	0	0																									0
+4	2	138	0	0																									0
+4	2	139	0	0																									0
+4	2	140	0	0																									0
+4	2	141	0	0																									0
+4	2	142	0	0																									0
+4	2	143	0	0																									0
+4	2	144	0	0																									0
+4	2	145	0	0																									0
+4	2	146	0	0																									0
+4	2	147	0	0																									0
+4	2	148	0	0																									0
+4	2	149	0	0																									0
+5	1	0	# Larzuk			7	Data\Global\Monsters	XR	NU	HTH		LIT																	0
+5	1	1	# Anya				Data\Global\Monsters	XS	NU	HTH		LIT																	0
+5	1	2	Mallah				Data\Global\Monsters	XT	NU	HTH		LIT																	0
+5	1	3	Nihlathak				Data\Global\Monsters	0J	NU	HTH		LIT																	0
+5	1	4	Qual-Kehk				Data\Global\Monsters	XV	NU	HTH		LIT																	0
+5	1	5	Demon Imp - group				Data\Global\Monsters	IP	NU	HTH		LIT																	0
+5	1	6	Shenk the Overseer			1	Data\Global\Monsters	OS	NU	HTH	HVY	HVY		HVY	HVY		HVY	HVY	MED	MED									0
+5	1	7	# Tyrael				Data\Global\Monsters	TY	NU	HTH		LIT		LIT	LIT														0
+5	1	8	# Deckard Cain				Data\Global\Monsters	DC	NU	HTH		LIT																	0
+5	1	9	Demon Imp - single																										0
+5	1	10	Enslaved - single																										0
+5	1	11	Enslaved - group																										0
+5	1	12	Catapult (\ direction)				Data\Global\Monsters	64	NU	HTH	LIT	LIT	LIT	LIT	LIT					LIT									0
+5	1	13	Catapult (/ direction)				Data\Global\Monsters	65	NU	HTH	LIT	LIT	LIT	LIT	LIT					LIT									0
+5	1	14	Moon Lord																										0
+5	1	15	Catapult 3																	LIT									0
+5	1	16	Poison Catapult?																										0
+5	1	17	Barbarian Combatant			3	Data\Global\Monsters	0A	NU	1HS	FHM	LIT				AXE	AXE		MED	MED									0
+5	1	18	Dead Barbarian																										0
+5	1	19	dead enslaved																										0
+5	1	20	burned corpse																										0
+5	1	21	Deckard Cain				Data\Global\Monsters	DC	NU	HTH		LIT																	0
+5	1	22	# Barbarian Combatant - help you in restricted region				Data\Global\Monsters	0A	NU	1HS	FHM	LIT				AXE	AXE		MED	MED									0
+5	1	23	rising prowling dead																										0
+5	1	24	Ancient Statue 1				Data\Global\Monsters	0H	NU	HTH		LIT																	0
+5	1	25	Ancient Statue 2				Data\Global\Monsters	0G	NU	HTH		LIT																	0
+5	1	26	Ancient Statue 3				Data\Global\Monsters	0I	NU	HTH		LIT																	0
+5	1	27	Dac Farren																										0
+5	1	28	Baal - one before throne room				Data\Global\Monsters	41	NU	HTH	LIT	LIT	LIT	LIT	LIT				LIT										0
+5	1	29	?																										0
+5	1	30	Dieing barbarian 1				Data\Global\Monsters	6Z	NU	HTH		LIT																	0
+5	1	31	Dieing barbarian 2				Data\Global\Monsters	7J	NU	HTH		LIT																	0
+5	1	32	Dieing barbarian 3				Data\Global\Monsters	7I	NU	HTH		LIT																	0
+5	1	33	Baal			7	Data\Global\Monsters	42	NU	HTH	LIT	LIT	LIT	LIT	LIT				LIT								Data\Global\Monsters\42\COF\Palshift.dat	5	0
+5	1	34	# Axe Dweller																										0
+5	1	35	Boneaw Breaker																										0
+5	1	36	Edritch the Rectifier																										0
+5	1	37	Eyeback the Unleashed																										0
+5	1	38	Sharptooth Slayer																										0
+5	1	39	Pindleskin																										0
+5	1	40	Snapchip Shatter																										0
+5	1	41	# Hells Belle																										0
+5	1	42	# Vinvear Molech																										0
+5	1	43	Thresh Socket																										0
+5	1	44	# Magma Torquer																										0
+5	1	45	Blaze Ripper																										0
+5	1	46	Frozenstein																										0
+5	1	47	?																										0
+5	1	48	Chicken			2	Data\Global\Monsters	CK	NU	HTH		LIT																	0
+5	1	49	?																										0
+5	1	50	Evil Demon Hut(Demon Sprites)				Data\Global\Monsters	2T	S1	HTH		LIT							LIT	LIT									0
+5	1	51	?																										0
+5	1	52	?																										0
+5	1	53	?																										0
+5	1	54	?																										0
+5	1	55	?																										0
+5	1	56	?																										0
+5	1	57	?																										0
+5	1	58	?																										0
+5	1	59	?																										0
+5	2	0	banner 1  (452)	452			Data\Global\Objects	AO	NU	HTH		LIT																	0
+5	2	1	banner 2  (453)	453			Data\Global\Objects	AP	NU	HTH		LIT																	0
+5	2	2	guild vault  (338)	338			Data\Global\Objects	Y4	NU	HTH		LIT																	0
+5	2	3	steeg stone  (337)	337			Data\Global\Objects	Y6	NU	HTH		LIT							LIT										0
+5	2	4	Your Private Stash  (267)	267			Data\Global\Objects	B6	NU	HTH		LIT																	0
+5	2	5	fog water  (374)	374			Data\Global\Objects	UD	NU	HTH		LIT																	0
+5	2	6	torch, expansion tiki 1 (482)	482			Data\Global\Objects	2P	NU	HTH		LIT							LIT										0
+5	2	7	Fire, Rogue camp (39)	39			Data\Global\Objects	RB	ON	HTH		LIT																	0
+5	2	8	standard \ direction (35)	35			Data\Global\Objects	N1	NU	HTH		LIT																	0
+5	2	9	standard / direction ((36)	36			Data\Global\Objects	N2	NU	HTH		LIT																	0
+5	2	10	candles R (33)	33			Data\Global\Objects	A1	NU	HTH		LIT																	0
+5	2	11	candles L (34)	34			Data\Global\Objects	A2	NU	HTH		LIT																	0
+5	2	12	torch 2 wall  (38)	38			Data\Global\Objects	WT	ON	HTH		LIT																	0
+5	2	13	floor brazier  (102)	102			Data\Global\Objects	FB	ON	HTH		LIT							LIT										0
+5	2	14	Pot O Torch, level 1 (411)	411			Data\Global\Objects	PX	NU	HTH		LIT							LIT	LIT									0
+5	2	15	burning bodies  (438)	438			Data\Global\Objects	6F	NU	HTH		LIT							LIT	LIT	LIT	LIT	LIT	LIT					0
+5	2	16	fire pit, level 1 (412)	412			Data\Global\Objects	PY	NU	HTH		LIT							LIT										0
+5	2	17	camp fire (435)	435			Data\Global\Objects	2W	NU	HTH		LIT							LIT	LIT									0
+5	2	18	town torch  (436)	436			Data\Global\Objects	2X	NU	HTH		LIT							LIT	LIT									0
+5	2	19	Tribal Flag  (440)	440			Data\Global\Objects	6H	NU	HTH		LIT																	0
+5	2	20	Town Flag  (441)	441			Data\Global\Objects	2Y	NU	HTH		LIT																	0
+5	2	21	Town Flag  (441)	441			Data\Global\Objects	2Y	NU	HTH		LIT																	0
+5	2	22	Chandelier  (442)	442			Data\Global\Objects	2Z	NU	HTH		LIT							LIT										0
+5	2	23	Waypoint  (429)	429			Data\Global\Objects	YY	ON	HTH		LIT							LIT										0
+5	2	24	Wooden Chest L  (420)	420			Data\Global\Objects	YP	OP	HTH		LIT																	0
+5	2	25	Wooden Chest R  (431)	431			Data\Global\Objects	6A	OP	HTH		LIT																	0
+5	2	26	Chest L  (430)	430			Data\Global\Objects	YZ	OP	HTH		LIT																	0
+5	2	27	Chest R  (413)	413			Data\Global\Objects	6Q	OP	HTH		LIT																	0
+5	2	28	Chest S L  (432)	432			Data\Global\Objects	6B	OP	HTH		LIT																	0
+5	2	29	Chest S R  (433)	433			Data\Global\Objects	6C	OP	HTH		LIT																	0
+5	2	30	wilderness barrel  (418)	418			Data\Global\Objects	YN	OP	HTH		LIT																	0
+5	2	31	exploding wildernes barrel  (419)	419			Data\Global\Objects	YO	OP	HTH		LIT							LIT										0
+5	2	32	Burial Chest  (424)	424			Data\Global\Objects	YT	OP	HTH		LIT																	0
+5	2	33	Burial Chest R (425)	425			Data\Global\Objects	YU	OP	HTH		LIT																	0
+5	2	34	Hidden Stash  (416)	416			Data\Global\Objects	3W	OP	HTH		LIT																	0
+5	2	35	Shrine 1  (414)	414			Data\Global\Objects	6R	OP	HTH		LIT							LIT										0
+5	2	36	Shrine 2  (415)	415			Data\Global\Objects	6S	NU	HTH		LIT							LIT										0
+5	2	37	Shrine 3  (427)	427			Data\Global\Objects	YW	OP	HTH		LIT							LIT	LIT									0
+5	2	38	Shrine 4  (428)	428			Data\Global\Objects	YX	OP	HTH		LIT							LIT										0
+5	2	39	Shrine 5  (421)	421			Data\Global\Objects	YQ	NU	HTH		LIT							LIT										0
+5	2	40	Shrine, mana  (422)	422			Data\Global\Objects	YR	OP	HTH		LIT							LIT										0
+5	2	41	Health Shrine  (423)	423			Data\Global\Objects	YS	OP	HTH		LIT																	0
+5	2	42	Well  (426)	426			Data\Global\Objects	YV	NU	HTH		LIT																	0
+5	2	43	Hell Gate  (451)	451			Data\Global\Objects	6P	NU	HTH		LIT							LIT	LIT									0
+5	2	44	Your Private Stash  (267)	267			Data\Global\Objects	B6	NU	HTH		LIT																	0
+5	2	45	Jar 1  (443)	443			Data\Global\Objects	6I	OP	HTH		LIT																	0
+5	2	46	Jar 2  (444)	444			Data\Global\Objects	6J	OP	HTH		LIT																	0
+5	2	47	Jar 3  (445)	445			Data\Global\Objects	6K	OP	HTH		LIT																	0
+5	2	48	Swinging Heads  (446)	446			Data\Global\Objects	6L	NU	HTH		LIT																	0
+5	2	49	Pole  (447)	447			Data\Global\Objects	6M	NU	HTH		LIT																	0
+5	2	50	Skulls and Rocks, no snow  (448)	448			Data\Global\Objects	6N	NU	HTH		LIT																	0
+5	2	51	Skulls and Rocks, siege  (450)	450			Data\Global\Objects	6O	NU	HTH		LIT																	0
+5	2	52	Hell Gate  (451)	451			Data\Global\Objects	6P	NU	HTH		LIT							LIT	LIT									0
+5	2	53	Anya start in town  (459)	459		1	Data\Global\Monsters	XS	NU	HTH		LIT																	0
+5	2	54	Anya start outside town  (460)	460			Data\Global\Objects	2N	NU	HTH		LIT																	0
+5	2	55	Nihlathak start in town  (461)	461		1	Data\Global\Monsters	0J	NU	HTH		LIT																	0
+5	2	56	Nihlathak outside in town  (462)	462		7	Data\Global\Monsters	0J	NU	HTH		LIT																	0
+5	2	57	Torch, expansion tiki torch  (482)	482			Data\Global\Objects	2P	NU	HTH		LIT							LIT										0
+5	2	58	Cage, caged fellow  (473)	473																									0
+5	2	59	Chest, specialchest  (455)	455			Data\Global\Objects	6U	OP	HTH		LIT																	0
+5	2	60	Death Pole 1, wilderness (456)	456			Data\Global\Objects	6V	NU	HTH		LIT																	0
+5	2	61	Death Pole 2, wilderness (457)	457			Data\Global\Objects	6W	NU	HTH		LIT																	0
+5	2	62	Altar, inside of temple  (458)	458			Data\Global\Objects	6X	NU	HTH		LIT							LIT										0
+5	2	63	Hidden Stash, icecave  (463)	463			Data\Global\Objects	6Y	OP	HTH		LIT																	0
+5	2	64	Health Shrine, icecave  (464)	464			Data\Global\Objects	8A	OP	HTH		LIT																	0
+5	2	65	Shrine, icecave  (465)	465			Data\Global\Objects	8B	OP	HTH		LIT																	0
+5	2	66	Evil Urn, icecave  (466)	466			Data\Global\Objects	8C	OP	HTH		LIT																	0
+5	2	67	Jar, icecave 1  (467)	467			Data\Global\Objects	8D	OP	HTH		LIT																	0
+5	2	68	Jar, icecave 2  (468)	468			Data\Global\Objects	8E	OP	HTH		LIT																	0
+5	2	69	Jar, icecave 3  (469)	469			Data\Global\Objects	8F	OP	HTH		LIT																	0
+5	2	70	Jar, icecave 4  (470)	470			Data\Global\Objects	8G	OP	HTH		LIT																	0
+5	2	71	Jar, icecave 5  (471)	471			Data\Global\Objects	8H	OP	HTH		LIT																	0
+5	2	72	Shrine, icecave 1  (472)	472			Data\Global\Objects	8I	OP	HTH		LIT							LIT	LIT									0
+5	2	73	Dead Barbarian, seige/wilderness  (477)	477			Data\Global\Objects	8J	OP	HTH		LIT																	0
+5	2	74	Shrine, icecave 2  (479)	479			Data\Global\Objects	8K	OP	HTH		LIT							LIT	LIT									0
+5	2	75	Torch, icecave 1  (480)	480			Data\Global\Objects	8L	NU	HTH		LIT							LIT										0
+5	2	76	Torch, icecave 2  (481)	481			Data\Global\Objects	8M	NU	HTH		LIT							LIT										0
+5	2	77	Shrine, baals  (483)	483			Data\Global\Objects	8N	OP	HTH		LIT																	0
+5	2	78	Health Shrine, baals  (484)	484			Data\Global\Objects	8O	OP	HTH		LIT																	0
+5	2	79	Tomb, baal's lair 1  (485)	485			Data\Global\Objects	8P	OP	HTH		LIT																	0
+5	2	80	Tomb, baal's lair 2  (486)	486			Data\Global\Objects	8Q	OP	HTH		LIT																	0
+5	2	81	Tomb, baal's lair 3  (487)	487			Data\Global\Objects	8R	OP	HTH		LIT																	0
+5	2	82	Chest, wilderness/siege exploding  (454)	454			Data\Global\Objects	6T	OP	HTH		LIT							LIT										0
+5	2	83	Torch, expansion no snow  (437)	437			Data\Global\Objects	6E	NU	HTH		LIT							LIT										0
+5	2	84	Stash, Pen breakable door  (508)	508			Data\Global\Objects	2Q	OP	HTH		LIT																	0
+5	2	85	Magic Shrine, baal's lair  (488)	488			Data\Global\Objects	8S	OP	HTH		LIT							LIT										0
+5	2	86	Well, snowy  (493)	493			Data\Global\Objects	8X	NU	HTH		LIT																	0
+5	2	87	Well, snowy  (493)	493			Data\Global\Objects	8X	NU	HTH		LIT																	0
+5	2	88	Magic Shrine, snowy_shrine3 a  (495)	495			Data\Global\Objects	8Z	OP	HTH		LIT							LIT										0
+5	2	89	Magic Shrine, snowy_shrine3 b  (497)	497			Data\Global\Objects	5B	OP	HTH		LIT							LIT	LIT									0
+5	2	90	Magic Shrine, baal's lair  (499)	499			Data\Global\Objects	5D	OP	HTH		LIT							LIT										0
+5	2	91	Magic Shrine, baals_shrine3  (503)	503			Data\Global\Objects	5H	OP	HTH		LIT							LIT										0
+5	2	92	Magic Shrine, temple 1  (509)	509			Data\Global\Objects	5M	OP	HTH		LIT							LIT										0
+5	2	93	Magic Shrine, temple 2  (512)	512			Data\Global\Objects	5T	OP	HTH		LIT							LIT										0
+5	2	94	Torch, baal's lair 1  (489)	489			Data\Global\Objects	8T	NU	HTH		LIT							LIT										0
+5	2	95	Torch, baal's lair 2  (490)	490			Data\Global\Objects	8U	NU	HTH		LIT							LIT										0
+5	2	96	Torch, temple 1  (514)	514			Data\Global\Objects	5R	NU	HTH		LIT							LIT										0
+5	2	97	Torch, temple 2  (515)	515			Data\Global\Objects	5S	NU	HTH		LIT							LIT										0
+5	2	98	Well, snowy  (493)	493			Data\Global\Objects	8X	NU	HTH		LIT																	0
+5	2	99	Well, baalslair  (498)	498			Data\Global\Objects	5C	NU	HTH		LIT																	0
+5	2	100	Well, temple  (513)	513			Data\Global\Objects	5Q	NU	HTH		LIT																	0
+5	2	101	Waypoint, baals_waypoint  (494)	494			Data\Global\Objects	8Y	ON	HTH		LIT							LIT										0
+5	2	102	Waypoint, wilderness_waypoint  (496)	496			Data\Global\Objects	5A	ON	HTH		LIT							LIT										0
+5	2	103	Waypoint, icecave  (511)	511			Data\Global\Objects	5O	ON	HTH		LIT							LIT										0
+5	2	104	Hidden Stash, snowy  (500)	500			Data\Global\Objects	5E	OP	HTH		LIT																	0
+5	2	105	Wooden Chest, snowy L  (501)	501			Data\Global\Objects	5F	OP	HTH		LIT																	0
+5	2	106	Wooden Chest, snowy R  (502)	502			Data\Global\Objects	5G	OP	HTH		LIT																	0
+5	2	107	Wooden Chest, snowy L 2  (504)	504			Data\Global\Objects	5I	OP	HTH		LIT																	0
+5	2	108	Wooden Chest, snowy R 2  (505)	505			Data\Global\Objects	5J	OP	HTH		LIT																	0
+5	2	109	Swinging Heads, snowy  (506)	506			Data\Global\Objects	5K	NU	HTH		LIT																	0
+5	2	110	Debris, snowy  (507)	507			Data\Global\Objects	5L	NU	HTH		LIT																	0
+5	2	111	Pole, snowy  (510)	510			Data\Global\Objects	5N	NU	HTH		LIT																	0
+5	2	112	Fire, fire small  (160)	160			Data\Global\Objects	FX	NU	HTH		LIT																	0
+5	2	113	Fire, fire medium  (161)	161			Data\Global\Objects	FY	NU	HTH		LIT																	0
+5	2	114	Fire, fire large  (162)	162			Data\Global\Objects	FZ	NU	HTH		LIT																	0
+5	2	115	gold placeholder  (269)	269																									0
+5	2	116	Red Light, (touch me) for blacksmith  (523)	523																									0
+5	2	117	Torch, expansion no snow  (434)	434			Data\Global\Objects	6D	NU	HTH		LIT							LIT										0
+5	2	118	Waypoint, wilderness_waypoint 1  (496)	496			Data\Global\Objects	5A	ON	HTH		LIT							LIT										0
+5	2	119	Waypoint, wilderness_waypoint 2  (496)	496			Data\Global\Objects	5A	ON	HTH		LIT							LIT										0
+5	2	120	Waypoint, wilderness_waypoint 3  (496)	496			Data\Global\Objects	5A	ON	HTH		LIT							LIT										0
+5	2	121	Shrub, Ice cave bubbles 01  (527)	527			Data\Global\Objects	2U	NU	HTH		LIT																	0
+5	2	122	Shrub, Ice cave bubbles 01  (528)	528			Data\Global\Objects	2S	OP	HTH		LIT																	0
+5	2	123	Candles, temple  (538)	538			Data\Global\Objects	3O	NU	HTH		LIT							LIT										0
+5	2	124	Waypoint, temple  (539)	539			Data\Global\Objects	3P	ON	HTH		LIT							LIT										0
+5	2	125	Larzuk Greeting  (542)	542		1	Data\Global\Monsters	XR	NU	HTH		LIT																	0
+5	2	126	Larzuk Standard  (543)	543			Data\Global\Monsters	XR	NU	HTH		LIT																	0
+5	2	127	Altar of the Heavens, ancientsaltar  (546)	546			Data\Global\Objects	4A	OP	HTH		LIT																	0
+5	2	128	door, ancient To Worldstone lev 1  (547)	547			Data\Global\Objects	4B	OP	HTH		LIT																	0
+5	2	129	Weapon Rack, R  (548)	548			Data\Global\Objects	3X	NU	HTH		LIT																	0
+5	2	130	Weapon Rack, L  (549)	549			Data\Global\Objects	3Y	NU	HTH		LIT																	0
+5	2	131	Armor Stand, R  (550)	550			Data\Global\Objects	3Z	NU	HTH		LIT																	0
+5	2	132	Armor Stand, L  (551)	551			Data\Global\Objects	4C	NU	HTH		LIT																	0
+5	2	133	Torch, summit  (552)	552			Data\Global\Objects	9G	NU	HTH		LIT							LIT										0
+5	2	134	Ice cave steam  (555)	555			Data\Global\Objects	2O	NU	HTH		LIT																	0
+5	2	135	funeralpire  (553)	553			Data\Global\Objects	9H	NU	HTH		LIT							LIT										0
+5	2	136	burninglogs  (554)	554			Data\Global\Objects	9I	NU	HTH		LIT							LIT										0
+5	2	137	dummy, Baal's lair  (557)	557																									0
+5	2	138	Tomb, temple ground  (541)	541			Data\Global\Objects	3S	OP	HTH		LIT																	0
+5	2	139	Tomb, temple ground L  (544)	544			Data\Global\Objects	3T	OP	HTH		LIT																	0
+5	2	140	BBQ Bunny  (559)	559			Data\Global\Objects	29	NU	HTH		LIT							LIT	LIT									0
+5	2	141	Baal Torch Big  (560)	560			Data\Global\Objects	25	NU	HTH		LIT							LIT										0
+5	2	142	The Ancients' Way, summit door  (564)	564			Data\Global\Objects	4U	OP	HTH		LIT																	0
+5	2	143	test data, zoo  (567)	567																									0
+5	2	144	test data, keeper  (568)	568			Data\Global\Objects	7Z	NU	HTH		LIT																	0
+5	2	145	Torch, redbaal's lair 1  (536)	536			Data\Global\Objects	3M	NU	HTH		LIT							LIT										0
+5	2	146	Torch, redbaal's lair 2  (537)	537			Data\Global\Objects	3N	NU	HTH		LIT							LIT										0
+5	2	147	The Worldstone Chamber, baals portal  (563)	563			Data\Global\Objects	4X	ON	HTH		LIT							LIT										0
+5	2	148	fire place guy  (570)	570			Data\Global\Objects	7Y	NU	HTH		LIT																	0
+5	2	149	Chest, spark (397)	397			Data\Global\Objects	YF	OP	HTH		LIT																	0
