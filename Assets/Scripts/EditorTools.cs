@@ -37,6 +37,20 @@ public class EditorTools {
         return assetPath.ToLower().EndsWith("dt1");
     }
 
+    [MenuItem("Assets/Convert DCC to PNG")]
+    static public void ConvertDCCToPNG()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        DCC.ConvertToPng(assetPath);
+    }
+
+    [MenuItem("Assets/Convert DCC to PNG", true)]
+    static public bool ConvertDCCToPNGValidate()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        return assetPath.ToLower().EndsWith("dcc");
+    }
+
     [MenuItem("Assets/Reset DT1 cache")]
     static public void ResetDT1()
     {

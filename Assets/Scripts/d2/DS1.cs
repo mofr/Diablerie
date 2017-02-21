@@ -401,9 +401,23 @@ public class DS1
                 if (type == 2 && objectPrefab != null)
                 {
                     var pos = MapSubCellToWorld(x, y);
-                    var monster = GameObject.Instantiate(objectPrefab, pos, Quaternion.identity);
-                    monster.name = obj.description;
-                    monster.transform.SetParent(root.transform);
+                    GameObject gameObject;
+                    if (act == 1 && type == 2 && id == 2)
+                    {
+                        var dcc = DCC.Load("Assets/d2/data/global/objects/RB/TR/rbtrlitonhth.dcc");
+                        Debug.Log(obj._base + " " + obj.token + " " + obj.mode + " " + obj._class);
+                        gameObject = new GameObject();
+                        gameObject.transform.position = pos;
+                        gameObject.AddComponent<SpriteRenderer>();
+                        var animator = gameObject.AddComponent<IsoAnimator>();
+                        animator.anim = dcc.anim;
+                    }
+                    else
+                    {
+                        gameObject = GameObject.Instantiate(objectPrefab, pos, Quaternion.identity);
+                    }
+                    gameObject.name = obj.description;
+                    gameObject.transform.SetParent(root.transform);
                 }
             }
         }
