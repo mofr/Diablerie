@@ -25,7 +25,7 @@ public class DCC
         result.textures = new List<Texture2D>();
         var sprites = new List<Sprite>();
 
-        const int textureSize = 2048;
+        const int textureSize = 256;
         var packer = new TexturePacker(textureSize, textureSize);
         Texture2D texture = null;
         Color32[] pixels = null;
