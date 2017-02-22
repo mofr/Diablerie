@@ -2,20 +2,27 @@
 
 public class BitReader
 {
-    private Stream stream;
+    private Stream _stream;
     private int current;
     private int index = 8;
 
     public BitReader(Stream stream)
     {
-        this.stream = stream;
+        _stream = stream;
+    }
+
+    public BitReader(byte[] bytes, long offset = 0)
+    {
+        _stream = new MemoryStream(bytes);
+        _stream.Seek(offset / 8, SeekOrigin.Begin);
+        index = (int) (offset % 8);
     }
 
     public int ReadBit()
     {
         if (index >= 8)
         {
-            current = stream.ReadByte();
+            current = _stream.ReadByte();
             index = 0;
         }
         int result = (current >> index) & 1;
@@ -47,5 +54,15 @@ public class BitReader
     public void Reset()
     {
         index = 8;
+    }
+
+    public int bitsLeft
+    {
+        get { return 8 - index; }
+    }
+
+    public Stream stream
+    {
+        get { return _stream; }
     }
 }

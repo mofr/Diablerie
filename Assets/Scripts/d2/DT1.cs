@@ -196,6 +196,7 @@ public class DT1
             var pngPath = assetPath + "." + i + ".png";
             File.WriteAllBytes(pngPath, pngData);
             AssetDatabase.ImportAsset(pngPath);
+            ++i;
         }
     }
 
