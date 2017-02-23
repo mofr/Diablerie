@@ -87,6 +87,8 @@ public class DS1
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
     static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
+    static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
+    static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
     static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null)
     {
@@ -277,6 +279,18 @@ public class DS1
                                 {
                                     importResult.entry = MapToWorld(x, y);
                                     Debug.Log("Found town entry at " + x + " " + y);
+                                    break;
+                                }
+                                else if (index == townEntry2Index)
+                                {
+                                    break;
+                                }
+                                else if (index == corpseLocationIndex)
+                                {
+                                    break;
+                                }
+                                else if (index == portalLocationIndex)
+                                {
                                     break;
                                 }
 
