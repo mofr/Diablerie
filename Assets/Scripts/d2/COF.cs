@@ -102,6 +102,16 @@ public class COF
             result.layers[i].presented = true;
         }
 
+        stream.Seek(framesPerDirection, SeekOrigin.Current);
+        int priorityDataSize = directionCount * framesPerDirection * layerCount;
+        stream.Seek(priorityDataSize, SeekOrigin.Current);
+
+        AnimData animData = new AnimData();
+        if (AnimData.Find(token + mode + _class, ref animData))
+        {
+            //Debug.Log(cofFilename + " " + framesPerDirection + " anim data found " + animData.framesPerDir + " " + animData.speed);
+        }
+
         cache.Add(cofFilename, result);
         return result;
     }
