@@ -299,7 +299,6 @@ public class DCC
                 frame.cells[index].y0 = y0;
                 frame.cells[index].w = cell_w[x];
                 frame.cells[index].h = cell_h[y];
-                //cell->bmp = create_sub_bitmap(dir->bmp, x0, y0, cell->w, cell->h);
                 x0 += cell_w[x];
             }
             y0 += cell_h[y];
@@ -473,20 +472,18 @@ public class DCC
                     else
                     {
                         // same sizes
-
-                        // copy the old frame cell into its new position
-                        //blit(dir->bmp, dir->bmp,
-                        //     buff_cell->last_x0, buff_cell->last_y0,
-                        //     cell->x0, cell->y0,
-                        //     cell->w, cell->h
-                        //);
-
-                        // copy it again, into the final frame bitmap
-                        //blit(cell->bmp, frm_bmp,
-                        //     0, 0,
-                        //     cell->x0, cell->y0,
-                        //     cell->w, cell->h
-                        //);
+                        for (int y = 0; y < cell.h; y++)
+                        {
+                            for (int x = 0; x < cell.w; x++)
+                            {
+                                int textureY = dir.frames[f - 1].textureY + dir.box.height - buff_cell.last_y0 - y;
+                                int textureX = dir.frames[f - 1].textureX + buff_cell.last_x0 + x;
+                                Color32 color = frame.texturePixels[frame.texture.width * textureY + textureX];
+                                textureY = frame.textureY + dir.box.height - cell.y0 - y;
+                                textureX = frame.textureX + cell.x0 + x;
+                                frame.texturePixels[frame.texture.width * textureY + textureX] = color;
+                            }
+                        }
                     }
                 }
                 else
@@ -512,8 +509,6 @@ public class DCC
                             for (int x = 0; x < cell.w; x++)
                             {
                                 int pix = streams.pixelCode.ReadBits(nb_bit);
-                                //if (f == 0)
-                                    //Debug.Log(string.Format("putpixel f {0}, {1} {2}, pix {3} (nb_bit {4})\n", f, x, y, pix, nb_bit));
                                 Color32 color = Palette.palette[pbe.val[pix]];
                                 int textureY = frame.textureY + dir.box.height - cell.y0 - y;
                                 int textureX = frame.textureX + cell.x0 + x;
@@ -521,13 +516,6 @@ public class DCC
                             }
                         }
                     }
-
-                    // copy the frame cell into the frame bitmap
-                    //blit(cell->bmp, frm_bmp,
-                    //     0, 0,
-                    //     cell->x0, cell->y0,
-                    //     cell->w, cell->h
-                    //);
 
                     // next pixelbuffer entry
                     pb_idx++;
@@ -636,31 +624,32 @@ public class DCC
                 }
 
                 // debug frame
-                int debugCornerWidth = Mathf.Min(10, w);
-                int debugCornerHeight = Mathf.Min(10, h);
-                for (int i = 0; i < debugCornerWidth; ++i)
-                    pixels[textureSize * (pack.y + h) + pack.x + i] = Color.red;
-                for (int i = 0; i < debugCornerWidth; ++i)
-                    pixels[textureSize * (pack.y + h - 1) + pack.x + i] = Color.red;
-                for (int i = 0; i < debugCornerHeight; ++i)
-                    pixels[textureSize * (pack.y + h - i) + pack.x] = Color.red;
-                for (int i = 0; i < debugCornerHeight; ++i)
-                    pixels[textureSize * (pack.y + h - i) + pack.x + 1] = Color.red;
-                for (int i = 0; i < debugCornerWidth; ++i)
-                    pixels[textureSize * pack.y + pack.x - i + w] = Color.blue;
-                for (int i = 0; i < debugCornerHeight; ++i)
-                    pixels[textureSize * (pack.y + i) + pack.x + w] = Color.blue;
-                for (int i = 0; i < debugCornerWidth; ++i)
-                    pixels[textureSize * (pack.y + 1) + pack.x - i + w] = Color.blue;
-                for (int i = 0; i < debugCornerHeight; ++i)
-                    pixels[textureSize * (pack.y + i) + pack.x + w - 1] = Color.blue;
+                //int debugCornerWidth = Mathf.Min(10, w);
+                //int debugCornerHeight = Mathf.Min(10, h);
+                //for (int i = 0; i < debugCornerWidth; ++i)
+                //    pixels[textureSize * (pack.y + h) + pack.x + i] = Color.red;
+                //for (int i = 0; i < debugCornerWidth; ++i)
+                //    pixels[textureSize * (pack.y + h - 1) + pack.x + i] = Color.red;
+                //for (int i = 0; i < debugCornerHeight; ++i)
+                //    pixels[textureSize * (pack.y + h - i) + pack.x] = Color.red;
+                //for (int i = 0; i < debugCornerHeight; ++i)
+                //    pixels[textureSize * (pack.y + h - i) + pack.x + 1] = Color.red;
+                //for (int i = 0; i < debugCornerWidth; ++i)
+                //    pixels[textureSize * pack.y + pack.x - i + w] = Color.blue;
+                //for (int i = 0; i < debugCornerHeight; ++i)
+                //    pixels[textureSize * (pack.y + i) + pack.x + w] = Color.blue;
+                //for (int i = 0; i < debugCornerWidth; ++i)
+                //    pixels[textureSize * (pack.y + 1) + pack.x - i + w] = Color.blue;
+                //for (int i = 0; i < debugCornerHeight; ++i)
+                //    pixels[textureSize * (pack.y + i) + pack.x + w - 1] = Color.blue;
 
                 frame.texture = texture;
                 frame.texturePixels = pixels;
                 frame.textureX = pack.x;
                 frame.textureY = pack.y;
-                var textureRect = new Rect(pack.x, pack.y, w, h);
-                var pivot = new Vector2(-frame.xoffset / (float)w, frame.yoffset / (float)h);
+
+                var textureRect = new Rect(frame.textureX, frame.textureY, w, h);
+                var pivot = new Vector2(-dir.box.xMin / (float)w, dir.box.yMax / (float)h);
                 Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit);
                 sprites.Add(sprite);
             }

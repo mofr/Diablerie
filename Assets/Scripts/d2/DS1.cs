@@ -88,7 +88,7 @@ public class DS1
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
     static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
 
-    static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null, GameObject objectPrefab = null)
+    static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -398,7 +398,7 @@ public class DS1
                     monster.transform.SetParent(root.transform);
                 }
 
-                if (type == 2 && objectPrefab != null)
+                if (type == 2)
                 {
                     var pos = MapSubCellToWorld(x, y);
                     try
