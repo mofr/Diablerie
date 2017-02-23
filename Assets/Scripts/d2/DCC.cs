@@ -478,26 +478,20 @@ public class DCC
                     // this buffer cell have an equalcell bit set to 1
                     //    so either copy the frame cell or clear it
 
-                    if ((cell.w != buff_cell.last_w) || (cell.h != buff_cell.last_h))
+                    if ((cell.w == buff_cell.last_w) && (cell.h == buff_cell.last_h))
                     {
-                        // different sizes
-                        //clear(cell->bmp); // set all pixels of the frame cell to 0
-                    }
-                    else
-                    {
-                        // same sizes
+                        Frame refFrame = dir.frames[f - 1];
+                        int textureY = refFrame.textureY + dir.box.height - buff_cell.last_y0;
+                        int textureX = refFrame.textureX + buff_cell.last_x0;
+                        int srcOffset = refFrame.texture.width * textureY + textureX;
+                        textureY = frame.textureY + dir.box.height - cell.y0;
+                        textureX = frame.textureX + cell.x0;
+                        int dstOffset = frame.texture.width * textureY + textureX;
                         for (int y = 0; y < cell.h; y++)
                         {
-                            for (int x = 0; x < cell.w; x++)
-                            {
-                                Frame refFrame = dir.frames[f - 1];
-                                int textureY = refFrame.textureY + dir.box.height - buff_cell.last_y0 - y;
-                                int textureX = refFrame.textureX + buff_cell.last_x0 + x;
-                                Color32 color = refFrame.texturePixels[refFrame.texture.width * textureY + textureX];
-                                textureY = frame.textureY + dir.box.height - cell.y0 - y;
-                                textureX = frame.textureX + cell.x0 + x;
-                                frame.texturePixels[frame.texture.width * textureY + textureX] = color;
-                            }
+                            System.Array.Copy(refFrame.texturePixels, srcOffset, frame.texturePixels, dstOffset, cell.w);
+                            srcOffset -= refFrame.texture.width;
+                            dstOffset -= frame.texture.width;
                         }
                     }
                 }
