@@ -166,26 +166,28 @@ public class DCC
             }
         }
 
-        long offset = bitReader.stream.Position * 8 - bitReader.bitsLeft;
+        Debug.Log("bitReader.stream.Position " + bitReader.stream.Position);
+        Debug.Log("bitReader.bitsLeft " + bitReader.bitsLeft);
+
+        long offset = bitReader.stream.Position * 8 - bitReader.bitsLeft + 8;
+        Debug.Log("equalCellSize " + equalCellSize + " offset " + offset);
         if (equalCellSize != 0)
             streams.equalCell = new BitReader(dcc, offset);
         offset += equalCellSize;
+        Debug.Log("pixelMaskSize " + pixelMaskSize + " offset " + offset);
         if (pixelMaskSize != 0)
             streams.pixelMask = new BitReader(dcc, offset);
         offset += pixelMaskSize;
+        Debug.Log("encodingTypeSize " + encodingTypeSize + " offset " + offset);
         if (encodingTypeSize != 0)
             streams.encodingType = new BitReader(dcc, offset);
         offset += encodingTypeSize;
+        Debug.Log("rawPixelSize " + rawPixelSize + " offset " + offset);
         if (rawPixelSize != 0)
             streams.rawPixel = new BitReader(dcc, offset);
         offset += rawPixelSize;
+        Debug.Log("pcd size " + (dcc.Length * 8 - offset) + " offset " + offset);
         streams.pixelCode = new BitReader(dcc, offset);
-
-        Debug.Log("equalCellSize " + equalCellSize);
-        Debug.Log("pixelMaskSize " + pixelMaskSize);
-        Debug.Log("encodingTypeSize " + encodingTypeSize);
-        Debug.Log("rawPixelSize " + rawPixelSize);
-        Debug.Log("pcd size " + (dcc.Length * 8 - offset));
     }
 
     static FrameBuffer CreateFrameBuffer(Direction dir)
@@ -510,11 +512,11 @@ public class DCC
                             for (int x = 0; x < cell.w; x++)
                             {
                                 int pix = streams.pixelCode.ReadBits(nb_bit);
+                                //Debug.Log(string.Format("putpixel f {0}, {1} {2}, pix {3} (nb_bit {4})\n", f, x, y, pix, nb_bit));
                                 Color32 color = Palette.palette[pbe.val[pix]];
-                                int textureY = frame.textureY + dir.box.height - cell.y0 + cell.h - y;
+                                int textureY = frame.textureY + dir.box.height - cell.y0 - y;
                                 int textureX = frame.textureX + cell.x0 + x;
                                 frame.texturePixels[frame.texture.width * textureY + textureX] = color;
-                                //putpixel(cell->bmp, x, y, pbe->val[pix]);
                             }
                         }
                     }
