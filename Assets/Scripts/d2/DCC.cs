@@ -467,9 +467,10 @@ public class DCC
                         {
                             for (int x = 0; x < cell.w; x++)
                             {
-                                int textureY = dir.frames[f - 1].textureY + dir.box.height - buff_cell.last_y0 - y;
-                                int textureX = dir.frames[f - 1].textureX + buff_cell.last_x0 + x;
-                                Color32 color = frame.texturePixels[frame.texture.width * textureY + textureX];
+                                Frame refFrame = dir.frames[f - 1];
+                                int textureY = refFrame.textureY + dir.box.height - buff_cell.last_y0 - y;
+                                int textureX = refFrame.textureX + buff_cell.last_x0 + x;
+                                Color32 color = refFrame.texturePixels[refFrame.texture.width * textureY + textureX];
                                 textureY = frame.textureY + dir.box.height - cell.y0 - y;
                                 textureX = frame.textureX + cell.x0 + x;
                                 frame.texturePixels[frame.texture.width * textureY + textureX] = color;
@@ -560,7 +561,6 @@ public class DCC
 
         for (int d = 0; d < header.directionCount; ++d)
         {
-            Debug.Log("direction " + d);
             stream.Seek(header.dirOffset[d], SeekOrigin.Begin);
             bitReader.Reset();
             Direction dir = new Direction();
