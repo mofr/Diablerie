@@ -16,6 +16,7 @@ public class BitReader
         _stream = new MemoryStream(bytes);
         _stream.Seek(offset / 8, SeekOrigin.Begin);
         index = (int) (offset % 8);
+        current = _stream.ReadByte();
     }
 
     public int ReadBit()

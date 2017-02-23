@@ -169,7 +169,7 @@ public class DCC
         Debug.Log("bitReader.stream.Position " + bitReader.stream.Position);
         Debug.Log("bitReader.bitsLeft " + bitReader.bitsLeft);
 
-        long offset = bitReader.stream.Position * 8 - bitReader.bitsLeft + 8;
+        long offset = bitReader.stream.Position * 8 - bitReader.bitsLeft;
         Debug.Log("equalCellSize " + equalCellSize + " offset " + offset);
         if (equalCellSize != 0)
             streams.equalCell = new BitReader(dcc, offset);
@@ -512,7 +512,8 @@ public class DCC
                             for (int x = 0; x < cell.w; x++)
                             {
                                 int pix = streams.pixelCode.ReadBits(nb_bit);
-                                //Debug.Log(string.Format("putpixel f {0}, {1} {2}, pix {3} (nb_bit {4})\n", f, x, y, pix, nb_bit));
+                                //if (f == 0)
+                                    //Debug.Log(string.Format("putpixel f {0}, {1} {2}, pix {3} (nb_bit {4})\n", f, x, y, pix, nb_bit));
                                 Color32 color = Palette.palette[pbe.val[pix]];
                                 int textureY = frame.textureY + dir.box.height - cell.y0 - y;
                                 int textureX = frame.textureX + cell.x0 + x;
