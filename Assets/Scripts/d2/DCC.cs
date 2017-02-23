@@ -423,8 +423,13 @@ public class DCC
         return frameBuffer;
     }
 
-    static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams)
+    static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, List<Sprite> sprites)
     {
+        const int textureSize = 256;
+        var packer = new TexturePacker(textureSize, textureSize);
+        Texture2D texture = null;
+        Color32[] pixels = null;
+
         for (int c = 0; c < frameBuffer.cells.Length; c++)
         {
             frameBuffer.cells[c].last_w = -1;
@@ -437,6 +442,29 @@ public class DCC
         {
             Frame frame = dir.frames[f];
             int nb_cell = frame.nb_cell_w * frame.nb_cell_h;
+
+            int padding = 2;
+            var pack = packer.put(dir.box.width + padding, dir.box.height + padding);
+            if (pack.newTexture)
+            {
+                if (texture != null)
+                {
+                    texture.SetPixels32(pixels);
+                    texture.Apply();
+                }
+                texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+                pixels = new Color32[textureSize * textureSize];
+                textures.Add(texture);
+            }
+            frame.texture = texture;
+            frame.texturePixels = pixels;
+            frame.textureX = pack.x;
+            frame.textureY = pack.y;
+
+            var textureRect = new Rect(frame.textureX, frame.textureY, dir.box.width, dir.box.height);
+            var pivot = new Vector2(-dir.box.xMin / (float)dir.box.width, dir.box.yMax / (float)dir.box.height);
+            Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit);
+            sprites.Add(sprite);
 
             for (int c = 0; c < nb_cell; c++)
             {
@@ -526,6 +554,12 @@ public class DCC
                 frameBuffer.cells[cell_idx] = buff_cell;
             }
         }
+
+        if (texture != null)
+        {
+            texture.SetPixels32(pixels);
+            texture.Apply();
+        }
     }
 
     static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
@@ -545,11 +579,6 @@ public class DCC
         ImportResult result = new ImportResult();
         result.textures = new List<Texture2D>();
         var sprites = new List<Sprite>();
-
-        const int textureSize = 512;
-        var packer = new TexturePacker(textureSize, textureSize);
-        Texture2D texture = null;
-        Color32[] pixels = null;
 
         byte[] dcc = File.ReadAllBytes(filename);
         var stream = new MemoryStream(dcc);
@@ -596,25 +625,6 @@ public class DCC
 
             for (int f = 0; f < header.framesPerDir; ++f)
             {
-                Frame frame = dir.frames[f];
-
-                int w = dir.box.width;
-                int h = dir.box.height;
-
-                int padding = 2;
-                var pack = packer.put(w + padding, h + padding);
-                if (pack.newTexture)
-                {
-                    if (texture != null)
-                    {
-                        texture.SetPixels32(pixels);
-                        texture.Apply();
-                    }
-                    texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
-                    pixels = new Color32[textureSize * textureSize];
-                    result.textures.Add(texture);
-                }
-
                 // debug frame
                 //int debugCornerWidth = Mathf.Min(10, w);
                 //int debugCornerHeight = Mathf.Min(10, h);
@@ -634,16 +644,6 @@ public class DCC
                 //    pixels[textureSize * (pack.y + 1) + pack.x - i + w] = Color.blue;
                 //for (int i = 0; i < debugCornerHeight; ++i)
                 //    pixels[textureSize * (pack.y + i) + pack.x + w - 1] = Color.blue;
-
-                frame.texture = texture;
-                frame.texturePixels = pixels;
-                frame.textureX = pack.x;
-                frame.textureY = pack.y;
-
-                var textureRect = new Rect(frame.textureX, frame.textureY, w, h);
-                var pivot = new Vector2(-dir.box.xMin / (float)w, dir.box.yMax / (float)h);
-                Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit);
-                sprites.Add(sprite);
             }
 
             if (optionalBytesSum != 0)
@@ -654,13 +654,7 @@ public class DCC
             ReadStreamsInfo(bitReader, dir, dcc, streams);
 
             var frameBuffer = FillPixelBuffer(header, dir, streams); // dcc_fill_pixel_buffer
-            MakeFrames(header, dir, frameBuffer, streams); // dcc_make_frames
-        }
-
-        if (texture != null)
-        {
-            texture.SetPixels32(pixels);
-            texture.Apply();
+            MakeFrames(header, dir, frameBuffer, streams, result.textures, sprites); // dcc_make_frames
         }
 
         result.anim = ScriptableObject.CreateInstance<IsoAnimation>();
