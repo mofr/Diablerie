@@ -166,27 +166,19 @@ public class DCC
             }
         }
 
-        Debug.Log("bitReader.stream.Position " + bitReader.stream.Position);
-        Debug.Log("bitReader.bitsLeft " + bitReader.bitsLeft);
-
         long offset = bitReader.stream.Position * 8 - bitReader.bitsLeft;
-        Debug.Log("equalCellSize " + equalCellSize + " offset " + offset);
         if (equalCellSize != 0)
             streams.equalCell = new BitReader(dcc, offset);
         offset += equalCellSize;
-        Debug.Log("pixelMaskSize " + pixelMaskSize + " offset " + offset);
         if (pixelMaskSize != 0)
             streams.pixelMask = new BitReader(dcc, offset);
         offset += pixelMaskSize;
-        Debug.Log("encodingTypeSize " + encodingTypeSize + " offset " + offset);
         if (encodingTypeSize != 0)
             streams.encodingType = new BitReader(dcc, offset);
         offset += encodingTypeSize;
-        Debug.Log("rawPixelSize " + rawPixelSize + " offset " + offset);
         if (rawPixelSize != 0)
             streams.rawPixel = new BitReader(dcc, offset);
         offset += rawPixelSize;
-        Debug.Log("pcd size " + (dcc.Length * 8 - offset) + " offset " + offset);
         streams.pixelCode = new BitReader(dcc, offset);
     }
 
@@ -308,7 +300,6 @@ public class DCC
     static FrameBuffer FillPixelBuffer(Header header, Direction dir, Streams streams)
     {
         FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
-        Debug.Log("cells " + frameBuffer.nb_cell_w + "x" + frameBuffer.nb_cell_h);
 
         dir.pixelBuffer = new PixelBufferEntry[DCC_MAX_PB_ENTRY];
         for(int i = 0; i < dir.pixelBuffer.Length; ++i)
@@ -542,12 +533,13 @@ public class DCC
 
     static public ImportResult Load(string filename, bool ignoreCache = false)
     {
-        Debug.Log("Loading " + filename);
         filename = filename.ToLower();
         if (!ignoreCache && cache.ContainsKey(filename))
         {
             return cache[filename];
         }
+
+        Debug.Log("Loading " + filename);
 
         ImportResult result = new ImportResult();
         result.textures = new List<Texture2D>();
@@ -660,8 +652,6 @@ public class DCC
 
             Streams streams = new Streams();
             ReadStreamsInfo(bitReader, dir, dcc, streams);
-
-            Debug.Log("box " + dir.box.AsString());
 
             var frameBuffer = FillPixelBuffer(header, dir, streams); // dcc_fill_pixel_buffer
             MakeFrames(header, dir, frameBuffer, streams); // dcc_make_frames

@@ -388,43 +388,10 @@ public class DS1
                     int flags = reader.ReadInt32();
                 }
 
+                var pos = MapSubCellToWorld(x, y);
                 Obj obj = Obj.Find(act, type, id);
-
-                if (type == 1 && monsterPrefab != null)
-                {
-                    var pos = MapSubCellToWorld(x, y);
-                    var monster = GameObject.Instantiate(monsterPrefab, pos, Quaternion.identity);
-                    monster.name = obj.description;
-                    monster.transform.SetParent(root.transform);
-                }
-
-                if (type == 2)
-                {
-                    var pos = MapSubCellToWorld(x, y);
-                    try
-                    {
-                        var cof = COF.Load(obj._base, obj.token, obj.mode, obj._class);
-                        var dcc = DCC.Load(cof.layers[0]);
-                        GameObject gameObject = new GameObject();
-                        gameObject.transform.position = pos;
-                        var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-                        var animator = gameObject.AddComponent<IsoAnimator>();
-                        animator.anim = dcc.anim;
-                        gameObject.name = obj.description;
-                        gameObject.transform.SetParent(root.transform);
-                        spriteRenderer.sortingOrder = Iso.SortingOrder(pos);
-                    }
-                    catch (DirectoryNotFoundException e)
-                    {
-                        Debug.LogWarning("directory not found (" + obj.description + "): " + e.Message);
-                        continue;
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        Debug.LogWarning("file not found (" + obj.description + "): " + e.FileName);
-                        continue;
-                    }
-                }
+                var gameObject = CreateObject(obj, pos);
+                gameObject.transform.SetParent(root.transform);
             }
         }
 
@@ -523,6 +490,40 @@ public class DS1
         }
 
         meshRenderer.material = tile.material;
+        return gameObject;
+    }
+
+    static GameObject CreateObject(Obj obj, Vector3 pos)
+    {
+        GameObject gameObject = new GameObject();
+        gameObject.transform.position = pos;
+        gameObject.name = obj.description;
+        try
+        {
+            var cof = COF.Load(obj);
+            foreach (var layer in cof.layers)
+            {
+                if (!layer.presented)
+                    continue;
+                var dcc = DCC.Load(layer.dccFilename);
+                GameObject layerObject = new GameObject();
+                var spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
+                var animator = layerObject.AddComponent<IsoAnimator>();
+                animator.anim = dcc.anim;
+                layerObject.name = layer.name;
+                layerObject.transform.SetParent(gameObject.transform, false);
+                spriteRenderer.sortingOrder = Iso.SortingOrder(pos);
+            }
+        }
+        catch (DirectoryNotFoundException e)
+        {
+            Debug.LogWarning("directory not found (" + obj.description + "): " + e.Message);
+        }
+        catch (FileNotFoundException e)
+        {
+            Debug.LogWarning("file not found (" + obj.description + "): " + e.FileName);
+        }
+
         return gameObject;
     }
 }
