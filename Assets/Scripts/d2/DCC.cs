@@ -297,15 +297,9 @@ public class DCC
         }
     }
 
-    static FrameBuffer FillPixelBuffer(Header header, Direction dir, Streams streams)
+    static void FillPixelBuffer(Header header, FrameBuffer frameBuffer, Direction dir, Streams streams)
     {
-        FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
-
         dir.pixelBuffer = new PixelBufferEntry[DCC_MAX_PB_ENTRY];
-        for(int i = 0; i < dir.pixelBuffer.Length; ++i)
-        {
-            dir.pixelBuffer[i].val = new byte[4];
-        }
         PixelBufferEntry[] cellBuffer = new PixelBufferEntry[frameBuffer.cells.Length];
         int pixelMask = 0;
         int[] read_pixel = new int[4];
@@ -385,7 +379,8 @@ public class DCC
                         PixelBufferEntry old_entry = cellBuffer[curr_cell];
                         pb_idx++;
                         Debug.Assert(pb_idx < DCC_MAX_PB_ENTRY);
-                        var newEntry = dir.pixelBuffer[pb_idx];
+                        var newEntry = new PixelBufferEntry();
+                        newEntry.val = new byte[4];
                         int curr_idx = decoded_pix - 1;
 
                         for (int i = 0; i < 4; i++)
@@ -419,14 +414,15 @@ public class DCC
         }
 
         dir.pb_nb_entry = pb_idx + 1;
-
-        return frameBuffer;
     }
 
     static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, List<Sprite> sprites)
     {
-        const int textureSize = 256;
-        var packer = new TexturePacker(textureSize, textureSize);
+        const int padding = 2;
+        int textureWidth = Mathf.NextPowerOfTwo((dir.box.width + padding) * header.framesPerDir);
+        int textureHeight = Mathf.NextPowerOfTwo(dir.box.height + padding);
+
+        var packer = new TexturePacker(textureWidth, textureHeight);
         Texture2D texture = null;
         Color32[] pixels = null;
 
@@ -443,7 +439,6 @@ public class DCC
             Frame frame = dir.frames[f];
             int nb_cell = frame.nb_cell_w * frame.nb_cell_h;
 
-            int padding = 2;
             var pack = packer.put(dir.box.width + padding, dir.box.height + padding);
             if (pack.newTexture)
             {
@@ -452,8 +447,8 @@ public class DCC
                     texture.SetPixels32(pixels);
                     texture.Apply();
                 }
-                texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
-                pixels = new Color32[textureSize * textureSize];
+                texture = new Texture2D(textureWidth, textureHeight, TextureFormat.ARGB32, false);
+                pixels = new Color32[textureWidth * textureHeight];
                 textures.Add(texture);
             }
             frame.texture = texture;
@@ -653,7 +648,8 @@ public class DCC
             Streams streams = new Streams();
             ReadStreamsInfo(bitReader, dir, dcc, streams);
 
-            var frameBuffer = FillPixelBuffer(header, dir, streams); // dcc_fill_pixel_buffer
+            FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
+            FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
             MakeFrames(header, dir, frameBuffer, streams, result.textures, sprites); // dcc_make_frames
         }
 
