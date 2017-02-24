@@ -75,7 +75,7 @@ public class EditorTools {
     static public void TestSerialization()
     {
         var rb = Obj.Find(1, 2, 2);
-        Debug.Log(rb.TR);
+        Debug.Log(rb.description);
     }
 }
 

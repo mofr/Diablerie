@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Reflection;
 using System.IO;
+using UnityEngine;
 
 
 public struct Datasheet<T> where T : new()
@@ -12,6 +13,20 @@ public struct Datasheet<T> where T : new()
     {
         string csv = File.ReadAllText(filename);
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
+        int expectedFieldCount = 0;
+        T dummy = new T();
+        foreach (MemberInfo member in members)
+        {
+            FieldInfo fi = (FieldInfo)member;
+            if (fi.FieldType.IsArray)
+            {
+                expectedFieldCount += ((System.Collections.IList)fi.GetValue(dummy)).Count;
+            }
+            else
+            {
+                expectedFieldCount += 1;
+            }
+        }
         Datasheet<T> sheet = new Datasheet<T>();
         sheet.rows = new List<T>();
         var lines = csv.Split('\n');
@@ -22,18 +37,32 @@ public struct Datasheet<T> where T : new()
                 continue;
 
             var fields = line.Split('\t');
-            if (fields.Length != members.Length)
-                throw new System.Exception("Field count mismatch " + typeof(T) + " (" + members.Length + " members) at " + filename + ":" + (lineIndex + 1) + " (" + fields.Length + " fields)");
+            if (fields.Length != expectedFieldCount)
+                throw new System.Exception("Field count mismatch " + typeof(T) + " (" + expectedFieldCount + " expected) at " + filename + ":" + (lineIndex + 1) + " (" + fields.Length + " fields)");
 
             if (lineIndex == 0)
                 continue;
 
             T obj = new T();
-            for (int fieldIndex = 0; fieldIndex < fields.Length; ++fieldIndex)
+            int memberIndex = 0;
+            for (int fieldIndex = 0; fieldIndex < fields.Length; ++fieldIndex, ++memberIndex)
             {
-                FieldInfo fi = (FieldInfo)members[fieldIndex];
-                var value = System.Convert.ChangeType(fields[fieldIndex], fi.FieldType);
-                fi.SetValue(obj, value);
+                FieldInfo fi = (FieldInfo)members[memberIndex];
+                if (fi.FieldType.IsArray)
+                {
+                    var elementType = fi.FieldType.GetElementType();
+                    var array = (System.Collections.IList)fi.GetValue(obj);
+                    for (int i = 0; i < array.Count; ++i)
+                    {
+                        array[i] = System.Convert.ChangeType(fields[fieldIndex], elementType);
+                        ++fieldIndex;
+                    }
+                }
+                else
+                {
+                    var value = System.Convert.ChangeType(fields[fieldIndex], fi.FieldType);
+                    fi.SetValue(obj, value);
+                }
             }
             sheet.rows.Add(obj);
         }
@@ -55,22 +84,7 @@ public class Obj
     public string token;
     public string mode;
     public string _class;
-    public string HD;
-    public string TR;
-    public string LG;
-    public string RA;
-    public string LA;
-    public string RH;
-    public string LH;
-    public string SH;
-    public string S1;
-    public string S2;
-    public string S3;
-    public string S4;
-    public string S5;
-    public string S6;
-    public string S7;
-    public string S8;
+    public string[] layers = new string[16];
     public string colormap;
     public string index;
     public string eol;

@@ -62,41 +62,7 @@ public class COF
 
             string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
             reader.ReadByte(); // zero byte from zero-terminated weapon class string
-            string sptr;
-            if (compositIndex == 0)
-                sptr = obj.HD;
-            else if (compositIndex == 1)
-                sptr = obj.TR;
-            else if (compositIndex == 2)
-                sptr = obj.LG;
-            else if (compositIndex == 3)
-                sptr = obj.RA;
-            else if (compositIndex == 4)
-                sptr = obj.LA;
-            else if (compositIndex == 5)
-                sptr = obj.RH;
-            else if (compositIndex == 6)
-                sptr = obj.LH;
-            else if (compositIndex == 7)
-                sptr = obj.SH;
-            else if (compositIndex == 8)
-                sptr = obj.S1;
-            else if (compositIndex == 9)
-                sptr = obj.S2;
-            else if (compositIndex == 10)
-                sptr = obj.S3;
-            else if (compositIndex == 11)
-                sptr = obj.S4;
-            else if (compositIndex == 12)
-                sptr = obj.S5;
-            else if (compositIndex == 13)
-                sptr = obj.S6;
-            else if (compositIndex == 14)
-                sptr = obj.S7;
-            else if (compositIndex == 15)
-                sptr = obj.S8;
-            else
-                continue;
+            string sptr = obj.layers[compositIndex];
             result.layers[i].dccFilename = "Assets/d2/" + _base + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
             result.layers[i].name = compositName + " " + sptr;
             result.layers[i].presented = true;
