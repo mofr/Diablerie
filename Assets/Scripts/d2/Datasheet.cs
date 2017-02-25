@@ -9,6 +9,23 @@ public struct Datasheet<T> where T : new()
 {
     public List<T> rows;
 
+    static object CastValue(string value, System.Type type)
+    {
+        if (type == typeof(bool))
+        {
+            if (value == "1")
+                return true;
+            else if (value == "0")
+                return false;
+            else
+                throw new System.FormatException("Unable to cast '" + value + "' to bool");
+        }
+        else
+        {
+            return System.Convert.ChangeType(value, type);
+        }
+    }
+
     public static Datasheet<T> Load(string filename)
     {
         string csv = File.ReadAllText(filename);
@@ -45,23 +62,32 @@ public struct Datasheet<T> where T : new()
 
             T obj = new T();
             int memberIndex = 0;
-            for (int fieldIndex = 0; fieldIndex < fields.Length; ++fieldIndex, ++memberIndex)
+            for (int fieldIndex = 0; fieldIndex < fields.Length; ++memberIndex)
             {
-                FieldInfo fi = (FieldInfo)members[memberIndex];
-                if (fi.FieldType.IsArray)
+                MemberInfo member = members[memberIndex];
+                FieldInfo fi = (FieldInfo)member;
+                try
                 {
-                    var elementType = fi.FieldType.GetElementType();
-                    var array = (System.Collections.IList)fi.GetValue(obj);
-                    for (int i = 0; i < array.Count; ++i)
+                    if (fi.FieldType.IsArray)
                     {
-                        array[i] = System.Convert.ChangeType(fields[fieldIndex], elementType);
+                        var elementType = fi.FieldType.GetElementType();
+                        var array = (System.Collections.IList)fi.GetValue(obj);
+                        for (int i = 0; i < array.Count; ++i)
+                        {
+                            array[i] = CastValue(fields[fieldIndex], elementType);
+                            ++fieldIndex;
+                        }
+                    }
+                    else
+                    {
+                        var value = CastValue(fields[fieldIndex], fi.FieldType);
+                        fi.SetValue(obj, value);
                         ++fieldIndex;
                     }
                 }
-                else
+                catch (System.Exception e)
                 {
-                    var value = System.Convert.ChangeType(fields[fieldIndex], fi.FieldType);
-                    fi.SetValue(obj, value);
+                    throw new System.Exception("Datasheet parsing error at " + filename + ":" + (lineIndex + 1) + " column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member);
                 }
             }
             sheet.rows.Add(obj);
@@ -117,4 +143,79 @@ public class Obj
         lookup.TryGetValue(Key(act, type, id), out obj);
         return obj;
     }
+}
+
+[System.Serializable]
+public class ObjectInfo
+{
+    public string name;
+    public string description;
+    public int id;
+    public string token;
+    public int spawnMax;
+    public bool[] selectable = new bool[8];
+    public int trapProb;
+    public int sizeX;
+    public int sizeY;
+    public int nTgtFX;
+    public int nTgtFY;
+    public int nTgtBX;
+    public int nTgtBY;
+    public int[] frameCount = new int[8];
+    public int[] frameDelta = new int[8];
+    public bool[] cycleAnim = new bool[8];
+    public int[] lit = new int[8];
+    public bool[] blocksLight = new bool[8];
+    public bool[] hasCollision = new bool[8];
+    public int isAttackable;
+    public int[] start = new int[8];
+    public int envEffect;
+    public bool isDoor;
+    public bool blocksVis;
+    public int orientation;
+    public int trans;
+    public int[] orderFlag = new int[8];
+    public int preOperate;
+    public string[] mode = new string[8];
+    public int yOffset;
+    public int xOffset;
+    public bool draw;
+    public int red;
+    public int blue;
+    public int green;
+    public string[] layers = new string[16];
+    public int totalPieces;
+    public int subClass;
+    public int xSpace;
+    public int ySpace;
+    public int nameOffset;
+    public string monsterOk;
+    public int operateRange;
+    public string shrineFunction;
+    public string restore;
+    public int[] parm = new int[8];
+    public int act;
+    public int lockable;
+    public int gore;
+    public int sync;
+    public int flicker;
+    public int damage;
+    public int beta;
+    public int overlay;
+    public int collisionSubst;
+    public int left;
+    public int top;
+    public int width;
+    public int height;
+    public int operateFn;
+    public int populateFn;
+    public int initFn;
+    public int clientFn;
+    public int restoreVirgins;
+    public int blocksMissile;
+    public int drawUnder;
+    public int openWarp;
+    public int autoMap;
+
+    public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load("Assets/d2/data/global/excel/objects.txt");
 }
