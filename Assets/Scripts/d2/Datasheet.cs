@@ -115,13 +115,21 @@ public class Obj
     public string index;
     public string eol;
 
+    [System.NonSerialized]
+    public int modeIndex;
+
     public static Datasheet<Obj> sheet = Datasheet<Obj>.Load("Assets/d2/obj.txt");
     static Dictionary<long, Obj> lookup = new Dictionary<long, Obj>();
 
+    public static readonly string[] ShortModeNames = { "NU", "OP", "ON", "S1", "S2", "S3", "S4", "S5" };
+
     static Obj()
     {
-        foreach(Obj obj in sheet.rows)
+        foreach (Obj obj in sheet.rows)
+        {
+            obj.modeIndex = System.Array.IndexOf(ShortModeNames, obj.mode);
             lookup.Add(Key(obj.act, obj.type, obj.id), obj);
+        }
     }
 
     static long Key(int act, int type, int id)
@@ -176,14 +184,14 @@ public class ObjectInfo
     public int trans;
     public int[] orderFlag = new int[8];
     public int preOperate;
-    public string[] mode = new string[8];
+    public bool[] mode = new bool[8];
     public int yOffset;
     public int xOffset;
     public bool draw;
     public int red;
     public int blue;
     public int green;
-    public string[] layers = new string[16];
+    public bool[] layersSelectable = new bool[16];
     public int totalPieces;
     public int subClass;
     public int xSpace;

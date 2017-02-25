@@ -15,6 +15,8 @@ public class COF
     public struct ImportResult
     {
         public Layer[] layers;
+        public int framesPerDirection;
+        public int directionCount;
     }
 
     static readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
@@ -41,8 +43,8 @@ public class COF
         var reader = new BinaryReader(stream);
 
         byte layerCount = reader.ReadByte();
-        byte framesPerDirection = reader.ReadByte();
-        byte directionCount = reader.ReadByte();
+        result.framesPerDirection = reader.ReadByte();
+        result.directionCount = reader.ReadByte();
         stream.Seek(25, SeekOrigin.Current);
 
         result.layers = new Layer[layerCount];
@@ -68,8 +70,8 @@ public class COF
             result.layers[i].presented = true;
         }
 
-        stream.Seek(framesPerDirection, SeekOrigin.Current);
-        int priorityDataSize = directionCount * framesPerDirection * layerCount;
+        stream.Seek(result.framesPerDirection, SeekOrigin.Current);
+        int priorityDataSize = result.directionCount * result.framesPerDirection * layerCount;
         stream.Seek(priorityDataSize, SeekOrigin.Current);
 
         AnimData animData = new AnimData();

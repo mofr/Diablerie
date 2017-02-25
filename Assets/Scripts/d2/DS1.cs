@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -512,6 +513,18 @@ public class DS1
         GameObject gameObject = new GameObject();
         gameObject.transform.position = pos;
         gameObject.name = obj.description;
+
+        ObjectInfo objectInfo = null;
+        int objectId;
+        if (int.TryParse(obj.objectId, out objectId))
+        {
+            objectInfo = ObjectInfo.sheet.rows[objectId];
+            gameObject.name += " " + objectInfo.description;
+
+            if (!objectInfo.draw)
+                return gameObject;
+        }
+
         try
         {
             var cof = COF.Load(obj);
@@ -520,10 +533,29 @@ public class DS1
                 if (!layer.presented)
                     continue;
                 var dcc = DCC.Load(layer.dccFilename);
+
+                IsoAnimation anim = ScriptableObject.CreateInstance<IsoAnimation>();
+                anim.directionCount = cof.directionCount;
+                anim.states = new IsoAnimation.State[1];
+                IsoAnimation.State animState = new IsoAnimation.State();
+                anim.states[0] = animState;
+                animState.name = layer.name;
+                if (objectInfo != null)
+                {
+                    var sprites = dcc.sprites.Skip(objectInfo.start[obj.modeIndex]);
+                    int frameCount = objectInfo.frameCount[obj.modeIndex];
+                    if (frameCount != 0)
+                        sprites = sprites.Take(frameCount);
+                    animState.sprites = sprites.ToArray();
+                    animState.loop = objectInfo.cycleAnim[obj.modeIndex];
+                }
+                else
+                    animState.sprites = dcc.sprites.ToArray();
+
                 GameObject layerObject = new GameObject();
                 var spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
                 var animator = layerObject.AddComponent<IsoAnimator>();
-                animator.anim = dcc.anim;
+                animator.anim = anim;
                 layerObject.name = layer.name;
                 layerObject.transform.SetParent(gameObject.transform, false);
                 spriteRenderer.sortingOrder = Iso.SortingOrder(pos);

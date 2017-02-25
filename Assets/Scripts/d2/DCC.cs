@@ -8,7 +8,8 @@ public class DCC
     public struct ImportResult
     {
         public List<Texture2D> textures;
-        public IsoAnimation anim;
+        public List<Sprite> sprites;
+        public int directionCount;
     }
 
     const int DCC_MAX_PB_ENTRY = 85000;
@@ -567,7 +568,7 @@ public class DCC
 
         ImportResult result = new ImportResult();
         result.textures = new List<Texture2D>();
-        var sprites = new List<Sprite>();
+        result.sprites = new List<Sprite>();
 
         byte[] dcc = File.ReadAllBytes(filename);
         var stream = new MemoryStream(dcc);
@@ -644,16 +645,10 @@ public class DCC
 
             FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
             FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
-            MakeFrames(header, dir, frameBuffer, streams, result.textures, sprites); // dcc_make_frames
+            MakeFrames(header, dir, frameBuffer, streams, result.textures, result.sprites); // dcc_make_frames
         }
 
-        result.anim = ScriptableObject.CreateInstance<IsoAnimation>();
-        result.anim.directionCount = header.directionCount;
-        result.anim.states = new IsoAnimation.State[1];
-        result.anim.states[0] = new IsoAnimation.State();
-        result.anim.states[0].name = "Generated from DCC";
-        result.anim.states[0].sprites = sprites.ToArray();
-
+        result.directionCount = header.directionCount;
         if (!ignoreCache)
             cache.Add(filename, result);
         return result;
