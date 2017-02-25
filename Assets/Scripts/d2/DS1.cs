@@ -528,10 +528,12 @@ public class DS1
         try
         {
             var cof = COF.Load(obj);
-            foreach (var layer in cof.layers)
+            for (int i = 0; i < cof.layerCount; ++i)
             {
-                if (!layer.presented)
-                    continue;
+                int direction = 0;
+                int frameIndex = 0;
+                int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
+                var layer = cof.layers[layerIndex];
                 var dcc = DCC.Load(layer.dccFilename);
 
                 IsoAnimation anim = ScriptableObject.CreateInstance<IsoAnimation>();
@@ -557,6 +559,7 @@ public class DS1
                 var animator = layerObject.AddComponent<IsoAnimator>();
                 animator.anim = anim;
                 layerObject.name = layer.name;
+                layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
                 layerObject.transform.SetParent(gameObject.transform, false);
                 spriteRenderer.sortingOrder = Iso.SortingOrder(pos);
             }

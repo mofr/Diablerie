@@ -9,7 +9,6 @@ public class COF
     {
         public string dccFilename;
         public string name;
-        public bool presented;
     }
 
     public struct ImportResult
@@ -17,9 +16,11 @@ public class COF
         public Layer[] layers;
         public int framesPerDirection;
         public int directionCount;
+        public int layerCount;
+        public byte[] priority;
     }
 
-    static readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
+    static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
     static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
 
     static public ImportResult Load(Obj obj)
@@ -42,14 +43,14 @@ public class COF
         var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
 
-        byte layerCount = reader.ReadByte();
+        result.layerCount = reader.ReadByte();
         result.framesPerDirection = reader.ReadByte();
         result.directionCount = reader.ReadByte();
         stream.Seek(25, SeekOrigin.Current);
 
-        result.layers = new Layer[layerCount];
+        result.layers = new Layer[16];
 
-        for (int i = 0; i < layerCount; ++i)
+        for (int i = 0; i < result.layerCount; ++i)
         {
             int compositIndex = reader.ReadByte();
             string compositName = layerNames[compositIndex];
@@ -65,14 +66,12 @@ public class COF
             string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
             reader.ReadByte(); // zero byte from zero-terminated weapon class string
             string sptr = obj.layers[compositIndex];
-            result.layers[i].dccFilename = "Assets/d2/" + _base + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
-            result.layers[i].name = compositName + " " + sptr;
-            result.layers[i].presented = true;
+            result.layers[compositIndex].dccFilename = "Assets/d2/" + _base + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
+            result.layers[compositIndex].name = compositName + " " + sptr;
         }
 
         stream.Seek(result.framesPerDirection, SeekOrigin.Current);
-        int priorityDataSize = result.directionCount * result.framesPerDirection * layerCount;
-        stream.Seek(priorityDataSize, SeekOrigin.Current);
+        result.priority = reader.ReadBytes(result.directionCount * result.framesPerDirection * result.layerCount);
 
         AnimData animData = new AnimData();
         if (AnimData.Find(token + mode + _class, ref animData))
