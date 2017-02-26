@@ -8,6 +8,7 @@ public class DCC
     public List<Texture2D> textures;
     public List<Sprite> sprites;
     public int directionCount;
+    public int framesPerDirection;
 
     const int DCC_MAX_PB_ENTRY = 85000;
 
@@ -659,6 +660,7 @@ public class DCC
         }
 
         dcc.directionCount = header.directionCount;
+        dcc.framesPerDirection = header.framesPerDir;
         if (!ignoreCache)
             cache.Add(filename, dcc);
         return dcc;

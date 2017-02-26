@@ -96,7 +96,7 @@ class COFAnimator : MonoBehaviour
             var cofLayer = cof.layers[layerIndex];
             var dcc = DCC.Load(cofLayer.dccFilename);
 
-            int spriteIndex = frameStart + direction * frameCount + frameIndex;
+            int spriteIndex = direction * dcc.framesPerDirection + frameStart + frameIndex;
             layer.spriteRenderer.sprite = dcc.sprites[spriteIndex];
         }
     }
