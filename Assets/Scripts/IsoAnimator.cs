@@ -5,6 +5,7 @@ using UnityEngine;
 public class IsoAnimator : MonoBehaviour {
 
     public IsoAnimation anim;
+    public int direction = 0;
     [HideInInspector]
     public float speed = 1.0f;
 
@@ -76,7 +77,7 @@ public class IsoAnimator : MonoBehaviour {
 
     void UpdateAnimation()
     {
-        int direction = 0;
+        int direction = this.direction;
         if (character)
             direction = (character.directionIndex + anim.directionOffset) % anim.directionCount;
         int spriteIndex = direction * spritesPerDirection + Mathf.Min(frameIndex, spritesPerDirection - 1);

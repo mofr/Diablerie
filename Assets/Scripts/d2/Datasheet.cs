@@ -9,8 +9,11 @@ public struct Datasheet<T> where T : new()
 {
     public List<T> rows;
 
-    static object CastValue(string value, System.Type type)
+    static object CastValue(string value, System.Type type, object defaultValue)
     {
+        if (value == "" || value == "xxx")
+            return defaultValue;
+
         if (type == typeof(bool))
         {
             if (value == "1")
@@ -74,13 +77,13 @@ public struct Datasheet<T> where T : new()
                         var array = (System.Collections.IList)fi.GetValue(obj);
                         for (int i = 0; i < array.Count; ++i)
                         {
-                            array[i] = CastValue(fields[fieldIndex], elementType);
+                            array[i] = CastValue(fields[fieldIndex], elementType, array[i]);
                             ++fieldIndex;
                         }
                     }
                     else
                     {
-                        var value = CastValue(fields[fieldIndex], fi.FieldType);
+                        var value = CastValue(fields[fieldIndex], fi.FieldType, fi.GetValue(obj));
                         fi.SetValue(obj, value);
                         ++fieldIndex;
                     }
@@ -105,7 +108,7 @@ public class Obj
     public string description;
     public string objectId;
     public string monstatId;
-    public string direction;
+    public int direction = 0;
     public string _base;
     public string token;
     public string mode;

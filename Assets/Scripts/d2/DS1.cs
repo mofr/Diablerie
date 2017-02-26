@@ -530,7 +530,7 @@ public class DS1
             var cof = COF.Load(obj);
             for (int i = 0; i < cof.layerCount; ++i)
             {
-                int direction = 0;
+                int direction = obj.direction;
                 int frameIndex = 0;
                 int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
                 var layer = cof.layers[layerIndex];
@@ -557,6 +557,7 @@ public class DS1
                 GameObject layerObject = new GameObject();
                 var spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
                 var animator = layerObject.AddComponent<IsoAnimator>();
+                animator.direction = obj.direction;
                 animator.anim = anim;
                 layerObject.name = layer.name;
                 layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
