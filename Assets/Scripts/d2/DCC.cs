@@ -5,12 +5,9 @@ using UnityEditor;
 
 public class DCC
 {
-    public struct ImportResult
-    {
-        public List<Texture2D> textures;
-        public List<Sprite> sprites;
-        public int directionCount;
-    }
+    public List<Texture2D> textures;
+    public List<Sprite> sprites;
+    public int directionCount;
 
     const int DCC_MAX_PB_ENTRY = 85000;
 
@@ -552,7 +549,7 @@ public class DCC
         }
     }
 
-    static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
+    static Dictionary<string, DCC> cache = new Dictionary<string, DCC>();
     static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
     static int[] nb_pix_table = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
     static int[] dirs1 = new int[] { 0 };
@@ -560,7 +557,7 @@ public class DCC
     static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
     static int[] dirs16 = new int[] { 4,  8,  0,  9,  5, 10,  1, 11, 6, 12,  2, 13,  7, 14,  3, 15};
 
-    static public ImportResult Load(string filename, bool ignoreCache = false)
+    static public DCC Load(string filename, bool ignoreCache = false)
     {
         filename = filename.ToLower();
         if (!ignoreCache && cache.ContainsKey(filename))
@@ -570,12 +567,12 @@ public class DCC
 
         Debug.Log("Loading " + filename);
 
-        ImportResult result = new ImportResult();
-        result.textures = new List<Texture2D>();
-        result.sprites = new List<Sprite>();
+        DCC dcc = new DCC();
+        dcc.textures = new List<Texture2D>();
+        dcc.sprites = new List<Sprite>();
 
-        byte[] dcc = File.ReadAllBytes(filename);
-        var stream = new MemoryStream(dcc);
+        byte[] bytes = File.ReadAllBytes(filename);
+        var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
         var bitReader = new BitReader(stream);
 
@@ -654,25 +651,25 @@ public class DCC
             stream.Seek(optionalBytesSum, SeekOrigin.Current);
 
             Streams streams = new Streams();
-            ReadStreamsInfo(bitReader, dir, dcc, streams);
+            ReadStreamsInfo(bitReader, dir, bytes, streams);
 
             FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
             FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
-            MakeFrames(header, dir, frameBuffer, streams, result.textures, result.sprites); // dcc_make_frames
+            MakeFrames(header, dir, frameBuffer, streams, dcc.textures, dcc.sprites); // dcc_make_frames
         }
 
-        result.directionCount = header.directionCount;
+        dcc.directionCount = header.directionCount;
         if (!ignoreCache)
-            cache.Add(filename, result);
-        return result;
+            cache.Add(filename, dcc);
+        return dcc;
     }
 
     static public void ConvertToPng(string assetPath)
     {
         Palette.LoadPalette(1);
-        ImportResult result = Load(assetPath, ignoreCache: true);
+        DCC dcc = Load(assetPath, ignoreCache: true);
         int i = 0;
-        foreach (var texture in result.textures)
+        foreach (var texture in dcc.textures)
         {
             var pngData = texture.EncodeToPNG();
             Object.DestroyImmediate(texture);

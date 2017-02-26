@@ -514,65 +514,74 @@ public class DS1
         gameObject.transform.position = pos;
         gameObject.name = obj.description;
 
+        if (obj._base == null)
+            return gameObject;
+
         ObjectInfo objectInfo = null;
-        int objectId;
-        if (int.TryParse(obj.objectId, out objectId))
+        if (obj.objectId != -1)
         {
-            objectInfo = ObjectInfo.sheet.rows[objectId];
+            objectInfo = ObjectInfo.sheet.rows[obj.objectId];
             gameObject.name += " " + objectInfo.description;
 
             if (!objectInfo.draw)
                 return gameObject;
         }
 
-        try
-        {
-            var cof = COF.Load(obj);
-            for (int i = 0; i < cof.layerCount; ++i)
-            {
-                int direction = obj.direction;
-                int frameIndex = 0;
-                int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
-                var layer = cof.layers[layerIndex];
-                var dcc = DCC.Load(layer.dccFilename);
+        var cof = COF.Load(obj);
+        var animator = gameObject.AddComponent<COFAnimator>();
+        animator.objectInfo = objectInfo;
+        animator.cof = cof;
+        animator.modeIndex = obj.modeIndex;
+        animator.direction = obj.direction;
 
-                IsoAnimation anim = ScriptableObject.CreateInstance<IsoAnimation>();
-                anim.directionCount = cof.directionCount;
-                anim.states = new IsoAnimation.State[1];
-                IsoAnimation.State animState = new IsoAnimation.State();
-                anim.states[0] = animState;
-                animState.name = layer.name;
-                if (objectInfo != null)
-                {
-                    var sprites = dcc.sprites.Skip(objectInfo.start[obj.modeIndex]);
-                    int frameCount = objectInfo.frameCount[obj.modeIndex];
-                    if (frameCount != 0)
-                        sprites = sprites.Take(frameCount);
-                    animState.sprites = sprites.ToArray();
-                    animState.loop = objectInfo.cycleAnim[obj.modeIndex];
-                }
-                else
-                    animState.sprites = dcc.sprites.ToArray();
+        //try
+        //{
+        //    var cof = COF.Load(obj);
+        //    for (int i = 0; i < cof.layerCount; ++i)
+        //    {
+        //        int direction = obj.direction;
+        //        int frameIndex = 0;
+        //        int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
+        //        var layer = cof.layers[layerIndex];
+        //        var dcc = DCC.Load(layer.dccFilename);
 
-                GameObject layerObject = new GameObject();
-                var spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
-                var animator = layerObject.AddComponent<IsoAnimator>();
-                animator.direction = obj.direction;
-                animator.anim = anim;
-                layerObject.name = layer.name;
-                layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
-                layerObject.transform.SetParent(gameObject.transform, false);
-                spriteRenderer.sortingOrder = Iso.SortingOrder(pos);
-            }
-        }
-        catch (DirectoryNotFoundException e)
-        {
-            Debug.LogWarning("directory not found (" + obj.description + "): " + e.Message);
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.LogWarning("file not found (" + obj.description + "): " + e.FileName);
-        }
+        //        IsoAnimation anim = ScriptableObject.CreateInstance<IsoAnimation>();
+        //        anim.directionCount = cof.directionCount;
+        //        anim.states = new IsoAnimation.State[1];
+        //        IsoAnimation.State animState = new IsoAnimation.State();
+        //        anim.states[0] = animState;
+        //        animState.name = layer.name;
+        //        if (objectInfo != null)
+        //        {
+        //            var sprites = dcc.sprites.Skip(objectInfo.start[obj.modeIndex]);
+        //            int frameCount = objectInfo.frameCount[obj.modeIndex];
+        //            if (frameCount != 0)
+        //                sprites = sprites.Take(frameCount);
+        //            animState.sprites = sprites.ToArray();
+        //            animState.loop = objectInfo.cycleAnim[obj.modeIndex];
+        //        }
+        //        else
+        //            animState.sprites = dcc.sprites.ToArray();
+
+        //        GameObject layerObject = new GameObject();
+        //        var spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
+        //        var animator = layerObject.AddComponent<IsoAnimator>();
+        //        animator.direction = obj.direction;
+        //        animator.anim = anim;
+        //        layerObject.name = layer.name;
+        //        layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
+        //        layerObject.transform.SetParent(gameObject.transform, false);
+        //        spriteRenderer.sortingOrder = Iso.SortingOrder(pos);
+        //    }
+        //}
+        //catch (DirectoryNotFoundException e)
+        //{
+        //    Debug.LogWarning("directory not found (" + obj.description + "): " + e.Message);
+        //}
+        //catch (FileNotFoundException e)
+        //{
+        //    Debug.LogWarning("file not found (" + obj.description + "): " + e.FileName);
+        //}
 
         return gameObject;
     }

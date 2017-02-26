@@ -106,8 +106,8 @@ public class Obj
     public int type;
     public int id;
     public string description;
-    public string objectId;
-    public string monstatId;
+    public int objectId = -1;
+    public int monstatId = -1;
     public int direction = 0;
     public string _base;
     public string token;
