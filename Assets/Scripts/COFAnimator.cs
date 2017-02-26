@@ -3,15 +3,15 @@ using UnityEngine;
 
 class COFAnimator : MonoBehaviour
 {
-    public COF cof;
+    COF cof;
+    int mode = 0;
     public ObjectInfo objectInfo;
-    public int modeIndex = 0;
     public int direction = 0;
 
     float time = 0;
     float speed = 1.0f;
     float frameDuration = 1.0f / 12.0f;
-    int frameIndex = 0;
+    int frameCounter = 0;
     int frameCount = 0;
     int frameStart = 0;
     bool loop = true;
@@ -19,60 +19,68 @@ class COFAnimator : MonoBehaviour
 
     struct Layer
     {
-        public DCC dcc;
         public SpriteRenderer spriteRenderer;
-        public Transform transform;
     }
 
     void Start()
     {
+        UpdateConfiguration();
+    }
+
+    public void SetMode(COF cof, int mode)
+    {
+        this.cof = cof;
+        this.mode = mode;
+        UpdateConfiguration();
+    }
+
+    void UpdateConfiguration()
+    {
+        if (cof == null)
+            return;
+
+        time = 0;
+        frameCounter = 0;
         frameCount = cof.framesPerDirection;
 
         if (objectInfo != null)
         {
-            frameStart = objectInfo.start[modeIndex];
-            int modeFrameCount = objectInfo.frameCount[modeIndex];
+            frameStart = objectInfo.start[mode];
+            int modeFrameCount = objectInfo.frameCount[mode];
             if (modeFrameCount != 0)
                 frameCount = modeFrameCount;
-            loop = objectInfo.cycleAnim[modeIndex];
+            loop = objectInfo.cycleAnim[mode];
         }
 
-        for (int i = 0; i < cof.layerCount; ++i)
+        for (int i = layers.Count; i < cof.layerCount; ++i)
         {
             Layer layer = new Layer();
-            int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
-            var cofLayer = cof.layers[layerIndex];
-            layer.dcc = DCC.Load(cofLayer.dccFilename);
-
             GameObject layerObject = new GameObject();
-            layer.spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
-            layerObject.name = cofLayer.name;
             layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
             layerObject.transform.SetParent(gameObject.transform, false);
+            layer.spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
             layer.spriteRenderer.sortingOrder = Iso.SortingOrder(gameObject.transform.position);
-            layer.transform = layerObject.transform;
-
             layers.Add(layer);
         }
     }
 
     void Update()
     {
-        if (!loop && frameIndex >= frameCount)
+        if (!loop && frameCounter >= frameCount)
             return;
         time += Time.deltaTime * speed;
         while (time >= frameDuration)
         {
             time -= frameDuration;
-            if (frameIndex < frameCount)
-                frameIndex += 1;
-            if (frameIndex == frameCount / 2)
+            if (frameCounter < frameCount)
+                frameCounter += 1;
+            if (frameCounter == frameCount / 2)
                 SendMessage("OnAnimationMiddle", SendMessageOptions.DontRequireReceiver);
-            if (frameIndex == frameCount)
+            if (frameCounter == frameCount)
             {
                 SendMessage("OnAnimationFinish", SendMessageOptions.DontRequireReceiver);
                 if (loop)
-                    frameIndex = 0;
+                    frameCounter = 0;
             }
         }
     }
@@ -82,8 +90,14 @@ class COFAnimator : MonoBehaviour
         for(int i = 0; i < cof.layerCount; ++i)
         {
             Layer layer = layers[i];
-            int spriteIndex = frameStart + direction * frameCount + Mathf.Min(frameIndex, frameCount - 1);
-            layer.spriteRenderer.sprite = layer.dcc.sprites[spriteIndex];
+
+            int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
+            int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
+            var cofLayer = cof.layers[layerIndex];
+            var dcc = DCC.Load(cofLayer.dccFilename);
+
+            int spriteIndex = frameStart + direction * frameCount + frameIndex;
+            layer.spriteRenderer.sprite = dcc.sprites[spriteIndex];
         }
     }
 }
