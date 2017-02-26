@@ -555,6 +555,10 @@ public class DCC
     static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
     static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
     static int[] nb_pix_table = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+    static int[] dirs1 = new int[] { 0 };
+    static int[] dirs4 = new int[] { 0, 1, 2, 3 };
+    static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
+    static int[] dirs16 = new int[] { 4,  8,  0,  9,  5, 10,  1, 11, 6, 12,  2, 13,  7, 14,  3, 15};
 
     static public ImportResult Load(string filename, bool ignoreCache = false)
     {
@@ -578,9 +582,18 @@ public class DCC
         Header header = new Header();
         ReadHeader(reader, header);
 
+        int[] dirs = null;
+        switch(header.directionCount)
+        {
+            case 1: dirs = dirs1; break;
+            case 4: dirs = dirs4; break;
+            case 8: dirs = dirs8; break;
+            case 16: dirs = dirs16; break;
+        }
+
         for (int d = 0; d < header.directionCount; ++d)
         {
-            stream.Seek(header.dirOffset[d], SeekOrigin.Begin);
+            stream.Seek(header.dirOffset[dirs[d]], SeekOrigin.Begin);
             bitReader.Reset();
             Direction dir = new Direction();
             ReadDirection(bitReader, dir);
