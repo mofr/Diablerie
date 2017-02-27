@@ -517,21 +517,24 @@ public class DS1
         if (obj._base == null)
             return gameObject;
 
-        ObjectInfo objectInfo = null;
-        if (obj.objectId != -1)
+        var animator = gameObject.AddComponent<COFAnimator>();
+        
+        if (obj.type == 2)
         {
-            objectInfo = ObjectInfo.sheet.rows[obj.objectId];
+            ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
             gameObject.name += " " + objectInfo.description;
 
-            if (!objectInfo.draw)
-                return gameObject;
+            var staticObject = gameObject.AddComponent<StaticObject>();
+            staticObject.obj = obj;
+            staticObject.objectInfo = objectInfo;
+            staticObject.direction = obj.direction;
         }
-
-        var cof = COF.Load(obj);
-        var animator = gameObject.AddComponent<COFAnimator>();
-        animator.objectInfo = objectInfo;
-        animator.direction = obj.direction;
-        animator.SetCof(cof);
+        else
+        {
+            var cof = COF.Load(obj, obj.mode);
+            animator.SetCof(cof);
+            animator.direction = obj.direction;
+        }
 
         return gameObject;
     }

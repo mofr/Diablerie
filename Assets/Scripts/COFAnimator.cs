@@ -4,8 +4,8 @@ using UnityEngine;
 class COFAnimator : MonoBehaviour
 {
     COF cof;
-    public ObjectInfo objectInfo;
     public int direction = 0;
+    public bool loop = true;
 
     float time = 0;
     float speed = 1.0f;
@@ -13,7 +13,6 @@ class COFAnimator : MonoBehaviour
     int frameCounter = 0;
     int frameCount = 0;
     int frameStart = 0;
-    bool loop = true;
     List<Layer> layers = new List<Layer>();
 
     struct Layer
@@ -32,6 +31,13 @@ class COFAnimator : MonoBehaviour
         UpdateConfiguration();
     }
 
+    public void SetFrameRange(int start, int count)
+    {
+        frameStart = start;
+        frameCount = count != 0 ? count : cof.framesPerDirection;
+        UpdateConfiguration();
+    }
+
     void UpdateConfiguration()
     {
         if (cof == null)
@@ -39,16 +45,8 @@ class COFAnimator : MonoBehaviour
 
         time = 0;
         frameCounter = 0;
-        frameCount = cof.framesPerDirection;
-
-        if (objectInfo != null)
-        {
-            frameStart = objectInfo.start[cof.mode];
-            int modeFrameCount = objectInfo.frameCount[cof.mode];
-            if (modeFrameCount != 0)
-                frameCount = modeFrameCount;
-            loop = objectInfo.cycleAnim[cof.mode];
-        }
+        if (frameCount == 0)
+            frameCount = cof.framesPerDirection;
 
         for (int i = layers.Count; i < cof.layerCount; ++i)
         {
@@ -85,6 +83,8 @@ class COFAnimator : MonoBehaviour
 
     void LateUpdate()
     {
+        if (cof == null)
+            return;
         for(int i = 0; i < cof.layerCount; ++i)
         {
             Layer layer = layers[i];

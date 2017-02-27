@@ -24,14 +24,13 @@ public class COF
     static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
     static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
-    static public COF Load(Obj obj)
+    static public COF Load(Obj obj, string mode)
     {
-        string _base = obj._base.Replace('\\', '/');
+        string basePath = obj._base;
         string token = obj.token;
-        string mode = obj.mode;
         string _class = obj._class;
         
-        string cofFilename = "Assets/d2/" + _base + "/" + token + "/cof/" + token + mode + _class + ".cof";
+        string cofFilename = "Assets/d2/" + basePath + "/" + token + "/cof/" + token + mode + _class + ".cof";
         cofFilename.ToLower();
         if (cache.ContainsKey(cofFilename))
         {
@@ -68,7 +67,7 @@ public class COF
             string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
             reader.ReadByte(); // zero byte from zero-terminated weapon class string
             string sptr = obj.layers[compositIndex];
-            cof.layers[compositIndex].dccFilename = "Assets/d2/" + _base + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
+            cof.layers[compositIndex].dccFilename = "Assets/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
             cof.layers[compositIndex].name = compositName + " " + sptr;
         }
 
