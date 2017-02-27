@@ -458,7 +458,7 @@ public class DCC
 
             var textureRect = new Rect(frame.textureX, frame.textureY, dir.box.width, dir.box.height);
             var pivot = new Vector2(-dir.box.xMin / (float)dir.box.width, dir.box.yMax / (float)dir.box.height);
-            Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit);
+            Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit, extrude: 0, meshType: SpriteMeshType.FullRect);
             sprites.Add(sprite);
 
             for (int c = 0; c < nb_cell; c++)
