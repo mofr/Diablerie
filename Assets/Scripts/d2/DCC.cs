@@ -420,6 +420,7 @@ public class DCC
         const int padding = 2;
         int textureWidth = Mathf.NextPowerOfTwo((dir.box.width + padding) * header.framesPerDir);
         int textureHeight = Mathf.NextPowerOfTwo(dir.box.height + padding);
+        textureWidth = Mathf.Min(1024, textureWidth);
 
         var packer = new TexturePacker(textureWidth, textureHeight);
         Texture2D texture = null;
@@ -567,6 +568,7 @@ public class DCC
         }
 
         Debug.Log("Loading " + filename);
+        var sw = System.Diagnostics.Stopwatch.StartNew();
 
         DCC dcc = new DCC();
         dcc.textures = new List<Texture2D>();
@@ -663,6 +665,9 @@ public class DCC
         dcc.framesPerDirection = header.framesPerDir;
         if (!ignoreCache)
             cache.Add(filename, dcc);
+
+        Debug.Log("Loaded in " + sw.Elapsed + " (" + dcc.sprites.Count + " sprites)");
+
         return dcc;
     }
 
