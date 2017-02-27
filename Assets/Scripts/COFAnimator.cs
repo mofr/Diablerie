@@ -4,7 +4,6 @@ using UnityEngine;
 class COFAnimator : MonoBehaviour
 {
     COF cof;
-    int mode = 0;
     public ObjectInfo objectInfo;
     public int direction = 0;
 
@@ -27,10 +26,9 @@ class COFAnimator : MonoBehaviour
         UpdateConfiguration();
     }
 
-    public void SetMode(COF cof, int mode)
+    public void SetCof(COF cof)
     {
         this.cof = cof;
-        this.mode = mode;
         UpdateConfiguration();
     }
 
@@ -45,11 +43,11 @@ class COFAnimator : MonoBehaviour
 
         if (objectInfo != null)
         {
-            frameStart = objectInfo.start[mode];
-            int modeFrameCount = objectInfo.frameCount[mode];
+            frameStart = objectInfo.start[cof.mode];
+            int modeFrameCount = objectInfo.frameCount[cof.mode];
             if (modeFrameCount != 0)
                 frameCount = modeFrameCount;
-            loop = objectInfo.cycleAnim[mode];
+            loop = objectInfo.cycleAnim[cof.mode];
         }
 
         for (int i = layers.Count; i < cof.layerCount; ++i)

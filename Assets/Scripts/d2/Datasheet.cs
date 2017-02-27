@@ -118,19 +118,13 @@ public class Obj
     public string index;
     public string eol;
 
-    [System.NonSerialized]
-    public int modeIndex;
-
     public static Datasheet<Obj> sheet = Datasheet<Obj>.Load("Assets/d2/obj.txt");
     static Dictionary<long, Obj> lookup = new Dictionary<long, Obj>();
-
-    public static readonly string[] ShortModeNames = { "NU", "OP", "ON", "S1", "S2", "S3", "S4", "S5" };
 
     static Obj()
     {
         foreach (Obj obj in sheet.rows)
         {
-            obj.modeIndex = System.Array.IndexOf(ShortModeNames, obj.mode);
             lookup.Add(Key(obj.act, obj.type, obj.id), obj);
         }
     }

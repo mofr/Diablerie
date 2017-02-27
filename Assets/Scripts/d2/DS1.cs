@@ -531,7 +531,7 @@ public class DS1
         var animator = gameObject.AddComponent<COFAnimator>();
         animator.objectInfo = objectInfo;
         animator.direction = obj.direction;
-        animator.SetMode(cof, obj.modeIndex);
+        animator.SetCof(cof);
 
         return gameObject;
     }

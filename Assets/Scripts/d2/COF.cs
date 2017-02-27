@@ -7,6 +7,7 @@ public class COF
     public int framesPerDirection;
     public int directionCount;
     public int layerCount;
+    public int mode;
     public byte[] priority;
 
     public struct Layer
@@ -15,6 +16,11 @@ public class COF
         public string name;
     }
 
+    public static readonly string[][] ModeNames = {
+        new string[] { "DT", "NU", "WL", "RN", "GH", "TN", "TW", "A1", "A2", "BL", "SC", "TH", "KK", "S1", "S2", "S3", "S4", "DD", "GH", "GH" }, // player (plrmode.txt)
+        new string[] { "DT", "NU", "WL", "GH", "A1", "A2", "BL", "SC", "S1", "S2", "S3", "S4", "DD", "GH", "xx", "RN" }, // monsters (monmode.txt)
+        new string[] { "NU", "OP", "ON", "S1", "S2", "S3", "S4", "S5" } // objects (objmode.txt)
+    };
     static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
     static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
@@ -41,6 +47,7 @@ public class COF
         cof.layerCount = reader.ReadByte();
         cof.framesPerDirection = reader.ReadByte();
         cof.directionCount = reader.ReadByte();
+        cof.mode = System.Array.IndexOf(ModeNames[obj.type], mode);
         stream.Seek(25, SeekOrigin.Current);
 
         cof.layers = new Layer[16];
