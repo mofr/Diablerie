@@ -14,12 +14,8 @@ public class DCC
 
     struct Cell
     {
-        public int x0, y0;  // for frame cells in stage 2
+        public int x0, y0;
         public int w, h;
-
-        public int last_w, last_h;   // width & size of the last frame cell that used
-                                     // this buffer cell (for stage 2)
-        public int last_x0, last_y0;
     }
 
     class Header
@@ -165,7 +161,7 @@ public class DCC
             }
         }
 
-        long offset = bitReader.stream.Position * 8 - bitReader.bitsLeft;
+        long offset = bitReader.offset;
         if (equalCellSize != 0)
             streams.equalCell = new BitReader(dcc, offset);
         offset += equalCellSize;
@@ -428,8 +424,8 @@ public class DCC
 
         for (int c = 0; c < frameBuffer.cells.Length; c++)
         {
-            frameBuffer.cells[c].last_w = -1;
-            frameBuffer.cells[c].last_h = -1;
+            frameBuffer.cells[c].w = -1;
+            frameBuffer.cells[c].h = -1;
         }
 
         int pb_idx = 0;
@@ -478,11 +474,11 @@ public class DCC
                     // this buffer cell have an equalcell bit set to 1
                     //    so either copy the frame cell or clear it
 
-                    if ((cell.w == buff_cell.last_w) && (cell.h == buff_cell.last_h))
+                    if ((cell.w == buff_cell.w) && (cell.h == buff_cell.h))
                     {
                         Frame refFrame = dir.frames[f - 1];
-                        int textureY = refFrame.textureY + dir.box.height - buff_cell.last_y0;
-                        int textureX = refFrame.textureX + buff_cell.last_x0;
+                        int textureY = refFrame.textureY + dir.box.height - buff_cell.y0;
+                        int textureX = refFrame.textureX + buff_cell.x0;
                         int srcOffset = refFrame.texture.width * textureY + textureX;
                         textureY = frame.textureY + dir.box.height - cell.y0;
                         textureX = frame.textureX + cell.x0;
@@ -535,14 +531,8 @@ public class DCC
                 // for the buffer cell that was used by this frame cell,
                 // save the width & size of the current frame cell
                 // (needed for further tests about equalcell)
-                buff_cell.last_w = cell.w;
-                buff_cell.last_h = cell.h;
-
                 // and save its origin, for further copy when equalcell
-                buff_cell.last_x0 = cell.x0;
-                buff_cell.last_y0 = cell.y0;
-
-                frameBuffer.cells[cell_idx] = buff_cell;
+                frameBuffer.cells[cell_idx] = cell;
             }
         }
 
@@ -579,7 +569,6 @@ public class DCC
         byte[] bytes = File.ReadAllBytes(filename);
         var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
-        var bitReader = new BitReader(stream);
 
         Header header = new Header();
         ReadHeader(reader, header);
@@ -595,8 +584,7 @@ public class DCC
 
         for (int d = 0; d < header.directionCount; ++d)
         {
-            stream.Seek(header.dirOffset[dirs[d]], SeekOrigin.Begin);
-            bitReader.Reset();
+            var bitReader = new BitReader(bytes, header.dirOffset[dirs[d]] * 8);
             Direction dir = new Direction();
             ReadDirection(bitReader, dir);
 
@@ -630,7 +618,7 @@ public class DCC
 
             if (optionalBytesSum != 0)
                 Debug.LogWarning("optionalBytesSum != 0, not tested");
-            stream.Seek(optionalBytesSum, SeekOrigin.Current);
+            bitReader.ReadBits(optionalBytesSum * 8);
 
             Streams streams = new Streams();
             ReadStreamsInfo(bitReader, dir, bytes, streams);
