@@ -513,16 +513,18 @@ public class DCC
                             nb_bit = 2;
 
                         // fill FRAME cell with pixels
-                        for (int y = 0; y < cell.h; y++)
+                        int textureY = frame.textureY + dir.box.height - cell.y0;
+                        int textureX = frame.textureX + cell.x0;
+                        int offset = frame.texture.width * textureY + textureX;
+                        for (int y = 0; y < cell.h; ++y)
                         {
-                            for (int x = 0; x < cell.w; x++)
+                            for (int x = 0; x < cell.w; ++x)
                             {
                                 int pix = streams.pixelCode.ReadBits(nb_bit);
                                 Color32 color = Palette.palette[pbe.val[pix]];
-                                int textureY = frame.textureY + dir.box.height - cell.y0 - y;
-                                int textureX = frame.textureX + cell.x0 + x;
-                                frame.texturePixels[frame.texture.width * textureY + textureX] = color;
+                                frame.texturePixels[offset + x] = color;
                             }
+                            offset -= frame.texture.width;
                         }
                     }
 
@@ -624,29 +626,6 @@ public class DCC
                     dir.box.xMax = Mathf.Max(dir.box.xMax, frame.box.xMax);
                     dir.box.yMax = Mathf.Max(dir.box.yMax, frame.box.yMax);
                 }
-            }
-
-            for (int f = 0; f < header.framesPerDir; ++f)
-            {
-                // debug frame
-                //int debugCornerWidth = Mathf.Min(10, w);
-                //int debugCornerHeight = Mathf.Min(10, h);
-                //for (int i = 0; i < debugCornerWidth; ++i)
-                //    pixels[textureSize * (pack.y + h) + pack.x + i] = Color.red;
-                //for (int i = 0; i < debugCornerWidth; ++i)
-                //    pixels[textureSize * (pack.y + h - 1) + pack.x + i] = Color.red;
-                //for (int i = 0; i < debugCornerHeight; ++i)
-                //    pixels[textureSize * (pack.y + h - i) + pack.x] = Color.red;
-                //for (int i = 0; i < debugCornerHeight; ++i)
-                //    pixels[textureSize * (pack.y + h - i) + pack.x + 1] = Color.red;
-                //for (int i = 0; i < debugCornerWidth; ++i)
-                //    pixels[textureSize * pack.y + pack.x - i + w] = Color.blue;
-                //for (int i = 0; i < debugCornerHeight; ++i)
-                //    pixels[textureSize * (pack.y + i) + pack.x + w] = Color.blue;
-                //for (int i = 0; i < debugCornerWidth; ++i)
-                //    pixels[textureSize * (pack.y + 1) + pack.x - i + w] = Color.blue;
-                //for (int i = 0; i < debugCornerHeight; ++i)
-                //    pixels[textureSize * (pack.y + i) + pack.x + w - 1] = Color.blue;
             }
 
             if (optionalBytesSum != 0)
