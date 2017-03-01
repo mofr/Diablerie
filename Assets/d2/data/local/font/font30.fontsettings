@@ -541,9 +541,9 @@ Font:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 29
+      width: 12
       height: -30
-    advance: 29
+    advance: 12
     flipped: 0
   - serializedVersion: 2
     index: 33
