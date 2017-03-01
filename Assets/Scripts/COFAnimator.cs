@@ -27,8 +27,14 @@ class COFAnimator : MonoBehaviour
         get
         {
             Bounds bounds = new Bounds();
-            foreach (var layer in layers)
-                bounds.Encapsulate(layer.spriteRenderer.bounds);
+            for(int i = 0; i < layers.Count; ++i)
+            {
+                var layer = layers[i];
+                if (i == 0)
+                    bounds = layer.spriteRenderer.bounds;
+                else
+                    bounds.Encapsulate(layer.spriteRenderer.bounds);
+            }
             return bounds;
         }
     }

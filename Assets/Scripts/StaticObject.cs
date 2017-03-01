@@ -11,6 +11,11 @@ class StaticObject : MonoBehaviour
     int mode;
     COFAnimator animator;
 
+    public ObjectInfo info
+    {
+        get { return objectInfo; }
+    }
+
     void Awake()
     {
         animator = GetComponent<COFAnimator>();
@@ -44,7 +49,7 @@ class StaticObject : MonoBehaviour
 
     void OnRenderObject()
     {
-        if (objectInfo.draw)
+        if (objectInfo.draw && objectInfo.selectable[mode])
             MouseSelection.Submit(this, animator.bounds);
     }
 
