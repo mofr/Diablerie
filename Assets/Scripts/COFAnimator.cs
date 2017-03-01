@@ -14,10 +14,42 @@ class COFAnimator : MonoBehaviour
     int frameCount = 0;
     int frameStart = 0;
     List<Layer> layers = new List<Layer>();
+    bool _selected = false;
+    Material material;
 
     struct Layer
     {
         public SpriteRenderer spriteRenderer;
+    }
+
+    public Bounds bounds
+    {
+        get
+        {
+            Bounds bounds = new Bounds();
+            foreach (var layer in layers)
+                bounds.Encapsulate(layer.spriteRenderer.bounds);
+            return bounds;
+        }
+    }
+
+    public bool selected
+    {
+        get { return _selected; }
+
+        set
+        {
+            if (_selected != value)
+            {
+                _selected = value;
+                material.SetFloat("_SelfIllum", _selected ? 2.0f : 1.0f);
+            }
+        }
+    }
+
+    void Awake()
+    {
+        material = new Material(Shader.Find("Sprite"));
     }
 
     void Start()
@@ -55,6 +87,7 @@ class COFAnimator : MonoBehaviour
             layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
             layerObject.transform.SetParent(gameObject.transform, false);
             layer.spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
+            layer.spriteRenderer.material = material;
             layer.spriteRenderer.sortingOrder = Iso.SortingOrder(gameObject.transform.position);
             layers.Add(layer);
         }
