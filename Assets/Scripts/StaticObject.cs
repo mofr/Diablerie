@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [System.Diagnostics.DebuggerDisplay("{name}")]
-class StaticObject : MonoBehaviour
+class StaticObject : Entity
 {
     public int direction = 0;
     public Obj obj;
@@ -16,6 +16,16 @@ class StaticObject : MonoBehaviour
         get { return objectInfo; }
     }
 
+    public override string name
+    {
+        get { return objectInfo.name; }
+    }
+
+    public override int nameOffset
+    {
+        get { return objectInfo.nameOffset; }
+    }
+
     void Awake()
     {
         animator = GetComponent<COFAnimator>();
@@ -23,6 +33,7 @@ class StaticObject : MonoBehaviour
 
     void Start()
     {
+        base.Start();
         SetMode(obj.mode);
     }
 
@@ -50,13 +61,7 @@ class StaticObject : MonoBehaviour
     void OnRenderObject()
     {
         if (objectInfo.draw && objectInfo.selectable[mode])
-            MouseSelection.Submit(this, animator.bounds);
-    }
-
-    public bool selected
-    {
-        get { return animator.selected; }
-        set { animator.selected = value; }
+            MouseSelection.Submit(this);
     }
 }
 
