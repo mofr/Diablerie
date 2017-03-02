@@ -1,0 +1,230 @@
+Act	Place
+1	gheed
+1	cain1
+1	akara
+1	chicken
+1	rogue1
+1	kashya
+1	cow
+1	warriv1
+1	charsi
+1	andariel
+1	place_fallen
+1	place_fallenshaman
+1	place_bloodraven
+1	cow
+1	camel
+1	place_unique_pack
+1	place_npc_pack
+1	place_nothing
+1	place_nothing
+1	place_champion
+1	navi
+1	rogue1
+1	rogue3
+1	gargoyletrap
+1	place_fallennest
+1	place_talkingrogue
+1	place_fallen
+1	place_fallenshaman
+1	trap-horzmissile
+1	trap-vertmissile
+1	place_group25
+1	place_group50
+1	place_group75
+1	place_group100
+1	Bishibosh
+1	Bonebreak
+1	Coldcrow
+1	Rakanishu
+1	Treehead WoodFist
+1	Griswold
+1	The Countess
+1	Pitspawn Fouldog
+1	Flamespike the Crawler
+1	Boneash
+1	The Smith
+1	The Cow King
+1	Corpsefire
+2	warriv2
+2	atma
+2	drognan
+2	fara
+2	place_nothing
+2	place_nothing
+2	place_nothing
+2	place_nothing
+2	greiz
+2	elzix
+2	lysander
+2	meshif1
+2	geglash
+2	jerhyn
+2	place_unique_pack
+2	place_npc_pack
+2	place_nothing
+2	summoner
+2	Radament
+2	duriel
+2	cain2
+2	place_champion
+2	act2male
+2	act2female
+2	act2guard1
+2	act2vendor1
+2	act2vendor2
+2	place_tightspotboss
+2	fish
+2	place_talkingguard
+2	place_dumbguard
+2	place_maggot
+2	place_maggotegg
+2	place_nothing
+2	gargoyletrap
+2	trap-horzmissile
+2	trap-vertmissile
+2	place_group25
+2	place_group50
+2	place_group75
+2	place_group100
+2	lightningspire
+2	firetower
+2	place_nothing
+2	place_nothing
+2	place_nothing
+2	Bloodwitch the Wild
+2	Fangskin
+2	Beetleburst
+2	Leatherarm
+2	Coldworm the Burrower
+2	Fire Eye
+2	Dark Elder
+2	Ancient Kaa the Soulless
+2	act2guard4
+2	act2guard5
+2	sarcophagus
+2	tyrael1
+2	skeleton5
+3	cain3
+3	place_champion
+3	act3male
+3	act3female
+3	asheara
+3	hratli
+3	alkor
+3	ormus
+3	meshif2
+3	place_amphibian
+3	place_tentacle_ns
+3	place_tentacle_ew
+3	place_fetishnest
+3	trap-horzmissile
+3	trap-vertmissile
+3	natalya
+3	place_mosquitonest
+3	place_group25
+3	place_group50
+3	place_group75
+3	place_group100
+3	compellingorb
+3	mephisto
+3	trap-melee
+3	mephistospirit
+3	act3hire
+3	place_fetish
+3	place_fetishshaman
+3	Web Mage the Burning
+3	Witch Doctor Endugu
+3	Stormtree
+3	Sarina the Battlemaid
+3	Icehawk Riftwing
+3	Ismail Vilehand
+3	Geleb Flamefinger
+3	Bremm Sparkfist
+3	Toorc Icefist
+3	Wyand Voidfinger
+3	Maffer Dragonhand
+4	place_champion
+4	trap-horzmissile
+4	trap-vertmissile
+4	place_group25
+4	place_group50
+4	place_group75
+4	place_group100
+4	tyrael2
+4	window2
+4	window1
+4	jamella
+4	halbu
+4	hellmeteor
+4	izual
+4	diablo
+4	Winged Death
+4	The Tormentor
+4	Taintbreeder
+4	Riftwraith the Cannibal
+4	Infector of Souls
+4	Lord De Seis
+4	Grand Vizier of Chaos
+4	trappedsoul1
+4	trappedsoul2
+4	regurgitator3
+4	cain4
+4	malachai
+4	The Feature Creep
+5	larzuk
+5	drehya
+5	malah
+5	nihlathak
+5	qual-kehk
+5	place_impgroup
+5	Siege Boss
+5	tyrael3
+5	cain6
+5	place_imp
+5	place_minion
+5	place_miniongroup
+5	catapult2
+5	catapult1
+5	place_bloodlord
+5	catapultspotter2
+5	catapultspotter1
+5	act5barb1
+5	place_deadbarb
+5	place_deadminion
+5	place_deadimp
+5	cain6
+5	act5barb3
+5	place_reanimateddead
+5	ancientstatue1
+5	ancientstatue2
+5	ancientstatue3
+5	Dac Farren
+5	baalthrone
+5	baaltaunt
+5	injuredbarb1
+5	injuredbarb2
+5	injuredbarb3
+5	baalcrab
+5	Axe Dweller
+5	Bonesaw Breaker
+5	Megaflow Rectifier
+5	Eyeback Unleashed
+5	Threash Socket
+5	Pindleskin
+5	Snapchip Shatter
+5	Anodized Elite
+5	Vinvear Molech
+5	Sharp Tooth Sayer
+5	Magma Torquer
+5	Blaze Ripper
+5	Frozenstein
+5	worldstoneeffect
+5	chicken
+5	place_champion
+5	evilhut
+5	place_nothing
+5	place_nothing
+5	place_nothing
+5	place_nothing
+5	place_nothing
