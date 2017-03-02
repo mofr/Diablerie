@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c5e9be2dfab9644a8a14b4a88109f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionFont: {fileID: 12800000, guid: 1f4ed3b918a4a9c4eb213d3a50427325, type: 2}
+  selectionFont: {fileID: 12800000, guid: d41fa005433f43f49b16712044e461e0, type: 3}
 --- !u!124 &124507744562351734
 Behaviour:
   m_ObjectHideFlags: 1

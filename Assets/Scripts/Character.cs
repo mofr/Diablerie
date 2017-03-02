@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
-
+public class Character : MonoBehaviour
+{
 	public int directionCount = 8;
 	public float speed = 3.5f;
 	public float attackSpeed = 1.0f;
@@ -11,6 +11,11 @@ public class Character : MonoBehaviour {
     public float attackRange = 1f;
     public float diameter = 1f;
     public bool run = false;
+
+    public string basePath;
+    public string token;
+    public string weaponClass;
+    public string[] gear;
 
     static float turnSpeed = 4f; // full rotations per second
 
@@ -51,8 +56,7 @@ public class Character : MonoBehaviour {
     float direction = 0;
 
     Iso iso;
-	IsoAnimator animator;
-    SpriteRenderer spriteRenderer;
+	COFAnimator animator;
     List<Pathing.Step> path = new List<Pathing.Step>();
 	float traveled = 0;
 	int desiredDirection = 0;
@@ -72,8 +76,7 @@ public class Character : MonoBehaviour {
     void Awake()
     {
 		iso = GetComponent<Iso>();
-		animator = GetComponent<IsoAnimator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponent<COFAnimator>();
     }
 
 	public void Use(Usable usable) {
@@ -251,31 +254,32 @@ public class Character : MonoBehaviour {
     }
 
     void UpdateAnimation() {
-        string animation;
-		animator.speed = 1.0f;
+        string mode;
+        animator.speed = 1.0f;
         if (dying || dead)
         {
-            animation = "Death";
+            mode = "DT";
         }
         else if (attack)
         {
-            animation = "Attack";
-			animator.speed = attackSpeed;
+            mode = "A1";
+            animator.speed = attackSpeed;
         }
         else if (takingDamage)
         {
-            animation = "TakeDamage";
+            mode = "GH";
         }
         else if (moving)
         {
-            animation = run ? "Run" : "Walk";
+            mode = run ? "RN" : "WL";
         }
         else
         {
-            animation = "Idle";
+            mode = "NU";
         }
 
-        animator.SetState(animation);
+        animator.cof = COF.Load(basePath, token, weaponClass, gear, mode);
+        animator.direction = directionIndex;
     }
 
 	public void LookAt(Vector3 target)
@@ -333,14 +337,10 @@ public class Character : MonoBehaviour {
                 m_Target = null;
             }
         }
-
-        if (dying)
-        {
-            spriteRenderer.sortingLayerName = "OnFloor";
-        }
     }
 
-    void OnAnimationFinish() {
+    void OnAnimationFinish()
+    {
         attack = false;
         takingDamage = false;
         if (dying)

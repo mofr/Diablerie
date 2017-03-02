@@ -7,7 +7,6 @@ public class COF
     public int framesPerDirection;
     public int directionCount;
     public int layerCount;
-    public int mode;
     public byte[] priority;
 
     public struct Layer
@@ -24,12 +23,8 @@ public class COF
     static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
     static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
-    static public COF Load(Obj obj, string mode)
+    static public COF Load(string basePath, string token, string _class, string[] gear, string mode)
     {
-        string basePath = obj._base;
-        string token = obj.token;
-        string _class = obj._class;
-        
         string cofFilename = "Assets/d2/" + basePath + "/" + token + "/cof/" + token + mode + _class + ".cof";
         cofFilename.ToLower();
         if (cache.ContainsKey(cofFilename))
@@ -46,7 +41,6 @@ public class COF
         cof.layerCount = reader.ReadByte();
         cof.framesPerDirection = reader.ReadByte();
         cof.directionCount = reader.ReadByte();
-        cof.mode = System.Array.IndexOf(ModeNames[obj.type], mode);
         stream.Seek(25, SeekOrigin.Current);
 
         cof.layers = new Layer[16];
@@ -66,7 +60,9 @@ public class COF
 
             string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
             reader.ReadByte(); // zero byte from zero-terminated weapon class string
-            string sptr = obj.layers[compositIndex];
+            string sptr = gear[compositIndex];
+            if (sptr == "")
+                continue;
             cof.layers[compositIndex].dccFilename = "Assets/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
             cof.layers[compositIndex].name = compositName + " " + sptr;
         }

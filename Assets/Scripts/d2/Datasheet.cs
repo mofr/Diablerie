@@ -115,10 +115,10 @@ public class Obj
     public string token;
     public string mode;
     public string _class;
-    public string[] layers = new string[16];
+    public string[] gear = new string[16];
     public string colormap;
     public string index;
-    public string eol;
+    string eol;
 
     public static Datasheet<Obj> sheet = Datasheet<Obj>.Load("Assets/d2/obj.txt");
     static Dictionary<long, Obj> lookup = new Dictionary<long, Obj>();
@@ -281,7 +281,7 @@ public class MonStat
     public string Align;
     public string isSpawn;
     public string isMelee;
-    public string npc;
+    public bool npc;
     public string interact;
     public string inventory;
     public string inTown;

@@ -16,7 +16,7 @@ class Creature : Entity
     override protected void Start()
     {
         base.Start();
-        var cof = COF.Load(obj, obj.mode);
+        var cof = COF.Load(obj._base, obj.token, obj._class, obj.gear, obj.mode);
         animator.cof = cof;
         animator.direction = obj.direction;
         monStat = MonStat.Find(obj.act, obj.id);

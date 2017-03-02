@@ -6,9 +6,9 @@ class COFAnimator : MonoBehaviour
     COF _cof;
     public int direction = 0;
     public bool loop = true;
+    public float speed = 1.0f;
 
     float time = 0;
-    float speed = 1.0f;
     float frameDuration = 1.0f / 12.0f;
     int frameCounter = 0;
     int frameCount = 0;
@@ -68,8 +68,12 @@ class COFAnimator : MonoBehaviour
         get { return _cof; }
         set
         {
-            _cof = value;
-            UpdateConfiguration();
+            if (_cof != value)
+            {
+                _cof = value;
+                frameCount = 0;
+                UpdateConfiguration();
+            }
         }
     }
 
@@ -95,10 +99,9 @@ class COFAnimator : MonoBehaviour
             Layer layer = new Layer();
             GameObject layerObject = new GameObject();
             layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
-            layerObject.transform.SetParent(gameObject.transform, false);
+            layerObject.transform.SetParent(transform, false);
             layer.spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
             layer.spriteRenderer.material = material;
-            layer.spriteRenderer.sortingOrder = Iso.SortingOrder(gameObject.transform.position);
             layers.Add(layer);
         }
     }
@@ -128,17 +131,21 @@ class COFAnimator : MonoBehaviour
     {
         if (_cof == null)
             return;
-        for(int i = 0; i < _cof.layerCount; ++i)
+        int sortingOrder = Iso.SortingOrder(transform.position);
+        for (int i = 0; i < _cof.layerCount; ++i)
         {
             Layer layer = layers[i];
 
             int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
             int layerIndex = _cof.priority[(direction * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount) + i];
             var cofLayer = _cof.layers[layerIndex];
+            if (cofLayer.dccFilename == null)
+                continue;
             var dcc = DCC.Load(cofLayer.dccFilename);
 
             int spriteIndex = direction * dcc.framesPerDirection + frameStart + frameIndex;
             layer.spriteRenderer.sprite = dcc.sprites[spriteIndex];
+            layer.spriteRenderer.sortingOrder = sortingOrder;
         }
     }
 }
