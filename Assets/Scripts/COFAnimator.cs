@@ -3,7 +3,7 @@ using UnityEngine;
 
 class COFAnimator : MonoBehaviour
 {
-    COF cof;
+    COF _cof;
     public int direction = 0;
     public bool loop = true;
 
@@ -63,30 +63,34 @@ class COFAnimator : MonoBehaviour
         UpdateConfiguration();
     }
 
-    public void SetCof(COF cof)
+    public COF cof
     {
-        this.cof = cof;
-        UpdateConfiguration();
+        get { return _cof; }
+        set
+        {
+            _cof = value;
+            UpdateConfiguration();
+        }
     }
 
     public void SetFrameRange(int start, int count)
     {
         frameStart = start;
-        frameCount = count != 0 ? count : cof.framesPerDirection;
+        frameCount = count != 0 ? count : _cof.framesPerDirection;
         UpdateConfiguration();
     }
 
     void UpdateConfiguration()
     {
-        if (cof == null)
+        if (_cof == null)
             return;
 
         time = 0;
         frameCounter = 0;
         if (frameCount == 0)
-            frameCount = cof.framesPerDirection;
+            frameCount = _cof.framesPerDirection;
 
-        for (int i = layers.Count; i < cof.layerCount; ++i)
+        for (int i = layers.Count; i < _cof.layerCount; ++i)
         {
             Layer layer = new Layer();
             GameObject layerObject = new GameObject();
@@ -122,15 +126,15 @@ class COFAnimator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (cof == null)
+        if (_cof == null)
             return;
-        for(int i = 0; i < cof.layerCount; ++i)
+        for(int i = 0; i < _cof.layerCount; ++i)
         {
             Layer layer = layers[i];
 
             int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
-            int layerIndex = cof.priority[(direction * cof.framesPerDirection * cof.layerCount) + (frameIndex * cof.layerCount) + i];
-            var cofLayer = cof.layers[layerIndex];
+            int layerIndex = _cof.priority[(direction * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount) + i];
+            var cofLayer = _cof.layers[layerIndex];
             var dcc = DCC.Load(cofLayer.dccFilename);
 
             int spriteIndex = direction * dcc.framesPerDirection + frameStart + frameIndex;

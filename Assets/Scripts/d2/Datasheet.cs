@@ -31,6 +31,7 @@ public struct Datasheet<T> where T : new()
 
     public static Datasheet<T> Load(string filename)
     {
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
         string csv = File.ReadAllText(filename);
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
         int expectedFieldCount = 0;
@@ -95,6 +96,7 @@ public struct Datasheet<T> where T : new()
             }
             sheet.rows.Add(obj);
         }
+        Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed + ")");
         return sheet;
     }
 }
@@ -223,4 +225,196 @@ public class ObjectInfo
     public int autoMap;
 
     public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load("Assets/d2/data/global/excel/objects.txt");
+}
+
+[System.Serializable]
+public class MonStat
+{
+    const int DifficultyCount = 3;
+
+    public string id;
+    public int hcIndex;
+    public string baseId;
+    public string nextInClass;
+    public string transLvl;
+    public string nameStr;
+    public string monStatEx;
+    public string monProp;
+    public string monType;
+    public string ai;
+    public string descStr;
+    public string code;
+    public bool enabled;
+    public string rangedType;
+    public string placeSpawn;
+    public string spawn;
+    public string spawnX;
+    public string spawnY;
+    public string spawnMode;
+    public string minion1;
+    public string minion2;
+    public string SetBoss;
+    public string BossXfer;
+    public string PartyMin;
+    public string PartyMax;
+    public string MinGrp;
+    public string MaxGrp;
+    public string sparsePopulate;
+    public int speed;
+    public int runSpeed;
+    public string Rarity;
+    public string[] level = new string[DifficultyCount];
+    public string MonSound;
+    public string UMonSound;
+    public string threat;
+    public string[] aidel = new string[DifficultyCount];
+    public string[] aidist = new string[DifficultyCount];
+    public string[] aip1 = new string[8 * DifficultyCount];
+    public string MissA1;
+    public string MissA2;
+    public string MissS1;
+    public string MissS2;
+    public string MissS3;
+    public string MissS4;
+    public string MissC;
+    public string MissSQ;
+    public string Align;
+    public string isSpawn;
+    public string isMelee;
+    public string npc;
+    public string interact;
+    public string inventory;
+    public string inTown;
+    public string lUndead;
+    public string hUndead;
+    public string demon;
+    public string flying;
+    public string opendoors;
+    public string boss;
+    public string primeevil;
+    public string killable;
+    public string switchai;
+    public string noAura;
+    public string nomultishot;
+    public string neverCount;
+    public string petIgnore;
+    public string deathDmg;
+    public string genericSpawn;
+    public string zoo;
+    public string SendSkills;
+
+    public string Skill1;
+    public string Sk1mode;
+    public string Sk1lvl;
+    public string[] remainingSkillsInfo = new string[3 * 7];
+
+    public string[] drain = new string[DifficultyCount];
+    public string[] coldEffect = new string[DifficultyCount];
+
+    public string ResDm;
+    public string ResMa;
+    public string ResFi;
+    public string ResLi;
+    public string ResCo;
+    public string ResPo;
+    public string[] remainingResInfo = new string[6 * (DifficultyCount - 1)];
+
+    public string DamageRegen;
+    public string skillDamage;
+    public string noRatio;
+    public string NoShldBlock;
+    public string[] toBlock = new string[DifficultyCount];
+    public string Crit;
+
+    public string minHP;
+    public string maxHP;
+    public string AC;
+    public string Exp;
+    public string A1MinD;
+    public string A1MaxD;
+    public string A1TH;
+    public string A2MinD;
+    public string A2MaxD;
+    public string A2TH;
+    public string S1MinD;
+    public string S1MaxD;
+    public string S1TH;
+    public string[] repeatedStruct = new string[13 * (DifficultyCount - 1)];
+
+    public string[] elementalDamage = new string[3 * (2 + 4 * DifficultyCount)];
+    public string[] treasureClass = new string[4 * 3];
+    public string TCQuestId;
+    public string TCQuestCP;
+    public string SplEndDeath;
+    public string SplGetModeChart;
+    public string SplEndGeneric;
+    public string SplClientEnd;
+    string eol;
+
+    public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load("Assets/d2/data/global/excel/monstats.txt");
+    static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
+
+    static MonStat()
+    {
+        foreach(MonStat stat in sheet.rows)
+        {
+            if (stats.ContainsKey(stat.id))
+            {
+                stats.Remove(stat.id);
+            }
+            stats.Add(stat.id, stat);
+        }
+    }
+
+    public static MonStat Find(int act, int id)
+    {
+        MonPreset preset = MonPreset.Find(act, id);
+        if (preset != null)
+        {
+            if (stats.ContainsKey(preset.place))
+                return stats[preset.place];
+            else
+                return null;
+        }
+        else
+        {
+            return sheet.rows[id];
+        }
+    }
+}
+
+[System.Serializable]
+public class MonPreset
+{
+    const int ActCount = 5;
+
+    public int act;
+    public string place;
+
+    public static Datasheet<MonPreset> sheet = Datasheet<MonPreset>.Load("Assets/d2/data/global/excel/MonPreset.txt");
+    static List<MonPreset>[] presets = new List<MonPreset>[ActCount + 1];
+
+    static MonPreset()
+    {
+        for(int act = 0; act < presets.Length; ++act)
+        {
+            presets[act] = new List<MonPreset>();
+        }
+
+        for(int i = 0; i < sheet.rows.Count; ++i)
+        {
+            MonPreset preset = sheet.rows[i];
+            presets[preset.act].Add(preset);
+        }
+    }
+
+    public static MonPreset Find(int act, int id)
+    {
+        var actPresets = presets[act];
+        if (id < actPresets.Count)
+        {
+            return actPresets[id];
+        }
+        return null;
+    }
 }

@@ -31,7 +31,7 @@ class StaticObject : Entity
         animator = GetComponent<COFAnimator>();
     }
 
-    void Start()
+    override protected void Start()
     {
         base.Start();
         SetMode(obj.mode);
@@ -51,7 +51,7 @@ class StaticObject : Entity
         if (objectInfo.draw)
         {
             var cof = COF.Load(obj, modeName);
-            animator.SetCof(cof);
+            animator.cof = cof;
             animator.direction = direction;
             animator.loop = objectInfo.cycleAnim[mode];
             animator.SetFrameRange(objectInfo.start[mode], objectInfo.frameCount[mode]);

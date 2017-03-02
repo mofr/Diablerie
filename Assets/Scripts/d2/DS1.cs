@@ -532,9 +532,7 @@ public class DS1
         else
         {
             var creature = gameObject.AddComponent<Creature>();
-            var cof = COF.Load(obj, obj.mode);
-            animator.SetCof(cof);
-            animator.direction = obj.direction;
+            creature.obj = obj;
         }
 
         return gameObject;
