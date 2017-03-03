@@ -479,15 +479,15 @@ public class DCC
                         Frame refFrame = dir.frames[f - 1];
                         int textureY = refFrame.textureY + dir.box.height - buff_cell.y0;
                         int textureX = refFrame.textureX + buff_cell.x0;
-                        int srcOffset = refFrame.texture.width * textureY + textureX;
+                        int srcOffset = textureWidth * textureY + textureX;
                         textureY = frame.textureY + dir.box.height - cell.y0;
                         textureX = frame.textureX + cell.x0;
-                        int dstOffset = frame.texture.width * textureY + textureX;
+                        int dstOffset = textureWidth * textureY + textureX;
                         for (int y = 0; y < cell.h; y++)
                         {
                             System.Array.Copy(refFrame.texturePixels, srcOffset, frame.texturePixels, dstOffset, cell.w);
-                            srcOffset -= refFrame.texture.width;
-                            dstOffset -= frame.texture.width;
+                            srcOffset -= textureWidth;
+                            dstOffset -= textureWidth;
                         }
                     }
                 }
@@ -511,7 +511,7 @@ public class DCC
                         // fill FRAME cell with pixels
                         int textureY = frame.textureY + dir.box.height - cell.y0;
                         int textureX = frame.textureX + cell.x0;
-                        int offset = frame.texture.width * textureY + textureX;
+                        int offset = textureWidth * textureY + textureX;
                         for (int y = 0; y < cell.h; ++y)
                         {
                             for (int x = 0; x < cell.w; ++x)
@@ -520,7 +520,7 @@ public class DCC
                                 Color32 color = Palette.palette[pbe.val[pix]];
                                 frame.texturePixels[offset + x] = color;
                             }
-                            offset -= frame.texture.width;
+                            offset -= textureWidth;
                         }
                     }
 
