@@ -44,7 +44,6 @@ public class DCC
         public IntRect box = IntRect.zero;
         public Frame[] frames;
         public byte[] pixel_values = new byte[256];
-        public PixelBufferEntry[] pixelBuffer;
         public int pb_nb_entry;
     }
 
@@ -292,9 +291,10 @@ public class DCC
         }
     }
 
+    static PixelBufferEntry[] pixelBuffer = new PixelBufferEntry[DCC_MAX_PB_ENTRY];
+
     static void FillPixelBuffer(Header header, FrameBuffer frameBuffer, Direction dir, Streams streams)
     {
-        dir.pixelBuffer = new PixelBufferEntry[DCC_MAX_PB_ENTRY];
         PixelBufferEntry[] cellBuffer = new PixelBufferEntry[frameBuffer.cells.Length];
         int pixelMask = 0;
         int[] read_pixel = new int[4];
@@ -392,7 +392,7 @@ public class DCC
                         }
                         newEntry.frame = f;
                         newEntry.frameCellIndex = x + (y * frame.nb_cell_w);
-                        dir.pixelBuffer[pb_idx] = newEntry;
+                        pixelBuffer[pb_idx] = newEntry;
                         cellBuffer[curr_cell] = newEntry;
                     }
                 }
@@ -403,12 +403,12 @@ public class DCC
         {
             for (int x = 0; x < 4; x++)
             {
-                int y = dir.pixelBuffer[i].val[x];
-                dir.pixelBuffer[i].val[x] = dir.pixel_values[y];
+                int y = pixelBuffer[i].val[x];
+                pixelBuffer[i].val[x] = dir.pixel_values[y];
             }
         }
 
-        dir.pb_nb_entry = pb_idx + 1;
+        int pixelBufferSize = pb_idx + 1;
     }
 
     static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, List<Sprite> sprites)
@@ -433,7 +433,6 @@ public class DCC
         for (int f = 0; f < header.framesPerDir; f++)
         {
             Frame frame = dir.frames[f];
-            int nb_cell = frame.nb_cell_w * frame.nb_cell_h;
 
             var pack = packer.put(dir.box.width + padding, dir.box.height + padding);
             if (pack.newTexture)
@@ -457,24 +456,23 @@ public class DCC
             Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit, extrude: 0, meshType: SpriteMeshType.FullRect);
             sprites.Add(sprite);
 
+            int nb_cell = frame.nb_cell_w * frame.nb_cell_h;
             for (int c = 0; c < nb_cell; c++)
             {
                 Cell cell = frame.cells[c];
 
                 // buffer cell
-                int cell_x = cell.x0 / 4;
-                int cell_y = cell.y0 / 4;
+                int cell_x = cell.x0 >> 2;
+                int cell_y = cell.y0 >> 2;
                 int cell_idx = cell_x + (cell_y * frameBuffer.nb_cell_w);
-                Cell buff_cell = frameBuffer.cells[cell_idx];
-                PixelBufferEntry pbe = dir.pixelBuffer[pb_idx];
+                PixelBufferEntry pbe = pixelBuffer[pb_idx];
 
                 // equal cell checks
                 if ((pbe.frame != f) || (pbe.frameCellIndex != c))
                 {
-                    // this buffer cell have an equalcell bit set to 1
-                    //    so either copy the frame cell or clear it
-
-                    if ((cell.w == buff_cell.w) && (cell.h == buff_cell.h))
+                    // this buffer cell have an equalcell bit set to 1 so copy the frame cell
+                    Cell buff_cell = frameBuffer.cells[cell_idx];
+                    if (cell.w == buff_cell.w && cell.h == buff_cell.h)
                     {
                         Frame refFrame = dir.frames[f - 1];
                         int textureY = refFrame.textureY + dir.box.height - buff_cell.y0;
@@ -544,12 +542,12 @@ public class DCC
     }
 
     static Dictionary<string, DCC> cache = new Dictionary<string, DCC>();
-    static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
-    static int[] nb_pix_table = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
-    static int[] dirs1 = new int[] { 0 };
-    static int[] dirs4 = new int[] { 0, 1, 2, 3 };
-    static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
-    static int[] dirs16 = new int[] { 4,  8,  0,  9,  5, 10,  1, 11, 6, 12,  2, 13,  7, 14,  3, 15};
+    readonly static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
+    readonly static int[] nb_pix_table = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+    readonly static int[] dirs1 = new int[] { 0 };
+    readonly static int[] dirs4 = new int[] { 0, 1, 2, 3 };
+    readonly static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
+    readonly static int[] dirs16 = new int[] { 4,  8,  0,  9,  5, 10,  1, 11, 6, 12,  2, 13,  7, 14,  3, 15};
 
     static public DCC Load(string filename, bool ignoreCache = false)
     {
