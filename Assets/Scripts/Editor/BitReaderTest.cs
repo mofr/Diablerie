@@ -7,26 +7,32 @@ class BitReaderTest
     public void ReadByteTest()
     {
         byte[] data = { 105, 210, 210, 210, 45, 150, 75, 165, 210, 210, 210, 210, 210 };
-        var reader = new BitReader(data);
 
         const int trial_count = 10;
-        
+
         int[] result = { 105, 52, 154, 77, 38, 147, 73, 164, 210, 105 };
 
         for (int i = 0; i < trial_count; ++i)
         {
-            reader.offset = i;
-            Assert.AreEqual(i, reader.offset);
+            var reader = new BitReader(data, i);
             Assert.AreEqual(result[i], reader.ReadByte());
-            Assert.AreEqual(i + 8, reader.offset);
         }
 
-        reader.offset = 0;
-        for (int i = 0; i < trial_count; ++i)
         {
-            Assert.AreEqual(i * 8, reader.offset);
-            Assert.AreEqual(data[i], reader.ReadByte());
-            Assert.AreEqual(i * 8 + 8, reader.offset);
+            var reader = new BitReader(data);
+            for (int i = 0; i < trial_count; ++i)
+            {
+                reader.offset = i;
+                Assert.AreEqual(result[i], reader.ReadByte());
+            }
+        }
+
+        {
+            var reader = new BitReader(data);
+            for (int i = 0; i < trial_count; ++i)
+            {
+                Assert.AreEqual(data[i], reader.ReadByte());
+            }
         }
     }
 

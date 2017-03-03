@@ -11,12 +11,14 @@
         this.offset = offset;
     }
 
+    readonly static int[] bitmask = { 1, 2, 4, 8, 16, 32, 64, 128 };
+
     public int ReadBit()
     {
         if (bitIndex >= 8)
         {
             currentByte = bytes[byteIndex++];
-            bitIndex %= 8;
+            bitIndex &= 7;
         }
         int result = (currentByte >> bitIndex) & 1;
         ++bitIndex;
@@ -28,7 +30,7 @@
         int result = 0;
         for (int i = 0; i < count; ++i)
         {
-            result += ReadBit() << i;
+            result |= ReadBit() << i;
         }
         return result;
     }
@@ -38,28 +40,19 @@
 
     public int ReadByte()
     {
-        return ReadBits(8);
-        //int result = currentByte & revMask[bitIndex];
-        //if (bitIndex > 0)
-        //{
-        //    currentByte = bytes[byteIndex++];
-        //    result += currentByte & mask[bitIndex];
-        //}
-        //return result;
-
         if (bitIndex >= 8)
         {
             currentByte = bytes[byteIndex++];
             bitIndex %= 8;
         }
 
-        int result = currentByte >> bitIndex;
+        int result = currentByte;
         if (bitIndex > 0)
         {
+            result >>= bitIndex;
             currentByte = bytes[byteIndex++];
-            result += (currentByte & mask[bitIndex]) << bitIndex;
+            result += (currentByte & mask[bitIndex]) << (8 - bitIndex);
         }
-        bitIndex += 8;
         return result;
     }
 
