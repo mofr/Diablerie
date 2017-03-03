@@ -44,7 +44,6 @@ public class DCC
         public IntRect box = IntRect.zero;
         public Frame[] frames;
         public byte[] pixel_values = new byte[256];
-        public int pb_nb_entry;
     }
 
     struct FrameBuffer
@@ -321,7 +320,7 @@ public class DCC
                             tmp = streams.equalCell.ReadBit();
 
                         if (tmp == 0)
-                            pixelMask = streams.pixelMask.ReadBits(4);
+                            pixelMask = streams.pixelMask.ReadBits4();
                         else
                             nextCell = true;
                     }
@@ -349,11 +348,11 @@ public class DCC
                             else
                             {
                                 read_pixel[i] = last_pixel;
-                                int pix_displ = streams.pixelCode.ReadBits(4);
+                                int pix_displ = streams.pixelCode.ReadBits4();
                                 read_pixel[i] += pix_displ;
                                 while (pix_displ == 15)
                                 {
-                                    pix_displ = streams.pixelCode.ReadBits(4);
+                                    pix_displ = streams.pixelCode.ReadBits4();
                                     read_pixel[i] += pix_displ;
                                 }
                             }
