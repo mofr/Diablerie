@@ -9,6 +9,10 @@ public class DCC
     public int directionCount;
     public int framesPerDirection;
 
+    string filename;
+    byte[] bytes;
+    Header header;
+
     const int DCC_MAX_PB_ENTRY = 85000;
 
     struct Cell
@@ -440,7 +444,7 @@ public class DCC
                     texture.SetPixels32(pixels);
                     texture.Apply();
                 }
-                texture = new Texture2D(textureWidth, textureHeight, TextureFormat.ARGB32, false);
+                texture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGBA32, false);
                 pixels = new Color32[textureWidth * textureHeight];
                 textures.Add(texture);
             }
@@ -545,7 +549,62 @@ public class DCC
     readonly static int[] dirs1 = new int[] { 0 };
     readonly static int[] dirs4 = new int[] { 0, 1, 2, 3 };
     readonly static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
-    readonly static int[] dirs16 = new int[] { 4,  8,  0,  9,  5, 10,  1, 11, 6, 12,  2, 13,  7, 14,  3, 15};
+    readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15};
+
+    void DecodeDirection(int d)
+    {
+        int[] dirs = null;
+        switch (header.directionCount)
+        {
+            case 1: dirs = dirs1; break;
+            case 4: dirs = dirs4; break;
+            case 8: dirs = dirs8; break;
+            case 16: dirs = dirs16; break;
+        }
+
+        var bitReader = new BitReader(bytes, header.dirOffset[dirs[d]] * 8);
+        Direction dir = new Direction();
+        ReadDirection(bitReader, dir);
+
+        int optionalBytesSum = 0;
+        dir.frames = new Frame[header.framesPerDir];
+
+        for (int f = 0; f < header.framesPerDir; ++f)
+        {
+            Frame frame = new Frame();
+            dir.frames[f] = frame;
+            ReadFrame(bitReader, dir, frame);
+
+            optionalBytesSum += frame.optionalBytes;
+
+            if (frame.bottomUp != 0)
+            {
+                Debug.LogWarning("BottomUp frames are not implemented yet (" + filename + ")");
+                continue;
+            }
+
+            if (f == 0)
+                dir.box = frame.box;
+            else
+            {
+                dir.box.xMin = Mathf.Min(dir.box.xMin, frame.box.xMin);
+                dir.box.yMin = Mathf.Min(dir.box.yMin, frame.box.yMin);
+                dir.box.xMax = Mathf.Max(dir.box.xMax, frame.box.xMax);
+                dir.box.yMax = Mathf.Max(dir.box.yMax, frame.box.yMax);
+            }
+        }
+
+        if (optionalBytesSum != 0)
+            Debug.LogWarning("optionalBytesSum != 0, not tested");
+        bitReader.ReadBits(optionalBytesSum * 8);
+
+        Streams streams = new Streams();
+        ReadStreamsInfo(bitReader, dir, bytes, streams);
+
+        FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
+        FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
+        MakeFrames(header, dir, frameBuffer, streams, textures, sprites); // dcc_make_frames
+    }
 
     static public DCC Load(string filename, bool ignoreCache = false)
     {
@@ -559,73 +618,23 @@ public class DCC
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
         DCC dcc = new DCC();
+        dcc.header = new Header();
         dcc.textures = new List<Texture2D>();
         dcc.sprites = new List<Sprite>();
+        dcc.filename = filename;
+        dcc.bytes = File.ReadAllBytes(filename);
 
-        byte[] bytes = File.ReadAllBytes(filename);
-        var stream = new MemoryStream(bytes);
+        var stream = new MemoryStream(dcc.bytes);
         var reader = new BinaryReader(stream);
 
-        Header header = new Header();
-        ReadHeader(reader, header);
+        ReadHeader(reader, dcc.header);
 
-        int[] dirs = null;
-        switch(header.directionCount)
+        for (int d = 0; d < dcc.header.directionCount; ++d)
         {
-            case 1: dirs = dirs1; break;
-            case 4: dirs = dirs4; break;
-            case 8: dirs = dirs8; break;
-            case 16: dirs = dirs16; break;
+            dcc.DecodeDirection(d);
         }
 
-        for (int d = 0; d < header.directionCount; ++d)
-        {
-            var bitReader = new BitReader(bytes, header.dirOffset[dirs[d]] * 8);
-            Direction dir = new Direction();
-            ReadDirection(bitReader, dir);
-
-            int optionalBytesSum = 0;
-            dir.frames = new Frame[header.framesPerDir];
-
-            for (int f = 0; f < header.framesPerDir; ++f)
-            {
-                Frame frame = new Frame();
-                dir.frames[f] = frame;
-                ReadFrame(bitReader, dir, frame);
-
-                optionalBytesSum += frame.optionalBytes;
-
-                if (frame.bottomUp != 0)
-                {
-                    Debug.LogWarning("BottomUp frames are not implemented yet (" + filename + ")");
-                    continue;
-                }
-
-                if (f == 0)
-                    dir.box = frame.box;
-                else
-                {
-                    dir.box.xMin = Mathf.Min(dir.box.xMin, frame.box.xMin);
-                    dir.box.yMin = Mathf.Min(dir.box.yMin, frame.box.yMin);
-                    dir.box.xMax = Mathf.Max(dir.box.xMax, frame.box.xMax);
-                    dir.box.yMax = Mathf.Max(dir.box.yMax, frame.box.yMax);
-                }
-            }
-
-            if (optionalBytesSum != 0)
-                Debug.LogWarning("optionalBytesSum != 0, not tested");
-            bitReader.ReadBits(optionalBytesSum * 8);
-
-            Streams streams = new Streams();
-            ReadStreamsInfo(bitReader, dir, bytes, streams);
-
-            FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
-            FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
-            MakeFrames(header, dir, frameBuffer, streams, dcc.textures, dcc.sprites); // dcc_make_frames
-        }
-
-        dcc.directionCount = header.directionCount;
-        dcc.framesPerDirection = header.framesPerDir;
+        dcc.framesPerDirection = dcc.header.framesPerDir;
         if (!ignoreCache)
             cache.Add(filename, dcc);
 
