@@ -5,13 +5,13 @@ using UnityEngine;
 public class DCC
 {
     public List<Texture2D> textures;
-    public List<Sprite> sprites;
     public int directionCount;
     public int framesPerDirection;
 
     string filename;
     byte[] bytes;
     Header header;
+    List<Sprite>[] sprites;
 
     const int DCC_MAX_PB_ENTRY = 85000;
 
@@ -551,8 +551,18 @@ public class DCC
     readonly static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
     readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15};
 
+    public List<Sprite> GetSprites(int d)
+    {
+        if (sprites[d] != null)
+            return sprites[d];
+
+        DecodeDirection(d);
+        return sprites[d];
+    }
+
     void DecodeDirection(int d)
     {
+        sprites[d] = new List<Sprite>();
         int[] dirs = null;
         switch (header.directionCount)
         {
@@ -603,10 +613,10 @@ public class DCC
 
         FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
         FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
-        MakeFrames(header, dir, frameBuffer, streams, textures, sprites); // dcc_make_frames
+        MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
     }
 
-    static public DCC Load(string filename, bool ignoreCache = false)
+    static public DCC Load(string filename, bool loadAllDirections = false, bool ignoreCache = false)
     {
         filename = filename.ToLower();
         if (!ignoreCache && cache.ContainsKey(filename))
@@ -614,13 +624,9 @@ public class DCC
             return cache[filename];
         }
 
-        Debug.Log("Loading " + filename);
-        var sw = System.Diagnostics.Stopwatch.StartNew();
-
         DCC dcc = new DCC();
         dcc.header = new Header();
         dcc.textures = new List<Texture2D>();
-        dcc.sprites = new List<Sprite>();
         dcc.filename = filename;
         dcc.bytes = File.ReadAllBytes(filename);
 
@@ -628,17 +634,15 @@ public class DCC
         var reader = new BinaryReader(stream);
 
         ReadHeader(reader, dcc.header);
-
-        for (int d = 0; d < dcc.header.directionCount; ++d)
-        {
-            dcc.DecodeDirection(d);
-        }
-
         dcc.framesPerDirection = dcc.header.framesPerDir;
+        dcc.sprites = new List<Sprite>[dcc.header.directionCount];
+
+        if (loadAllDirections)
+            for (int d = 0; d < dcc.header.directionCount; ++d)
+                dcc.DecodeDirection(d);
+
         if (!ignoreCache)
             cache.Add(filename, dcc);
-
-        Debug.Log("Loaded in " + sw.Elapsed + " (" + dcc.sprites.Count + " sprites)");
 
         return dcc;
     }

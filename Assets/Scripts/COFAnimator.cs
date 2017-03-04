@@ -143,8 +143,8 @@ class COFAnimator : MonoBehaviour
                 continue;
             var dcc = DCC.Load(cofLayer.dccFilename);
 
-            int spriteIndex = direction * dcc.framesPerDirection + frameStart + frameIndex;
-            layer.spriteRenderer.sprite = dcc.sprites[spriteIndex];
+            int spriteIndex = frameStart + frameIndex;
+            layer.spriteRenderer.sprite = dcc.GetSprites(direction)[spriteIndex];
             layer.spriteRenderer.sortingOrder = sortingOrder;
         }
     }

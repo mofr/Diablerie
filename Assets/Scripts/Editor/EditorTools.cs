@@ -55,7 +55,7 @@ public class EditorTools {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
         Palette.LoadPalette(1);
-        DCC dcc = DCC.Load(assetPath, ignoreCache: true);
+        DCC dcc = DCC.Load(assetPath, loadAllDirections: true, ignoreCache: true);
         int i = 0;
         foreach (var texture in dcc.textures)
         {

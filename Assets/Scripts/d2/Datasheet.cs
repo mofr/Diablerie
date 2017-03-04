@@ -96,7 +96,7 @@ public struct Datasheet<T> where T : new()
             }
             sheet.rows.Add(obj);
         }
-        Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed + ")");
+        Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
         return sheet;
     }
 }
