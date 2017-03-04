@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-class TexturePacker
+public class TexturePacker
 {
     int maxWidth;
     int maxHeight;

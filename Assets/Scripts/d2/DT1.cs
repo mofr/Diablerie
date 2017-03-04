@@ -1,8 +1,6 @@
 ﻿using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class DT1
 {
@@ -182,22 +180,6 @@ public class DT1
         importResult.textures = textures.ToArray();
         cache[dt1Path] = importResult;
         return importResult;
-    }
-
-    static public void ConvertToPng(string assetPath)
-    {
-        Palette.LoadPalette(1);
-        ImportResult result = Import(assetPath);
-        int i = 0;
-        foreach(var texture in result.textures)
-        {
-            var pngData = texture.EncodeToPNG();
-            Object.DestroyImmediate(texture);
-            var pngPath = assetPath + "." + i + ".png";
-            File.WriteAllBytes(pngPath, pngData);
-            AssetDatabase.ImportAsset(pngPath);
-            ++i;
-        }
     }
 
     static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)

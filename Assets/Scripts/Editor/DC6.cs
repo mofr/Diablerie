@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using UnityEditor;
 
-class DC6
+public class DC6
 {
     static public void CreateFontFromDC6(string filename)
     {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEditor;
 
 public class DCC
 {
@@ -633,21 +632,5 @@ public class DCC
         Debug.Log("Loaded in " + sw.Elapsed + " (" + dcc.sprites.Count + " sprites)");
 
         return dcc;
-    }
-
-    static public void ConvertToPng(string assetPath)
-    {
-        Palette.LoadPalette(1);
-        DCC dcc = Load(assetPath, ignoreCache: true);
-        int i = 0;
-        foreach (var texture in dcc.textures)
-        {
-            var pngData = texture.EncodeToPNG();
-            Object.DestroyImmediate(texture);
-            var pngPath = assetPath + "." + i + ".png";
-            File.WriteAllBytes(pngPath, pngData);
-            AssetDatabase.ImportAsset(pngPath);
-            ++i;
-        }
     }
 }
