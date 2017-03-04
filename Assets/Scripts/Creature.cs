@@ -33,6 +33,14 @@ class Creature : Entity
         }
     }
 
+    public override int nameOffset
+    {
+        get
+        {
+            return -(int) (bounds.extents.y * Iso.pixelsPerUnit) - 12;
+        }
+    }
+
     void OnRenderObject()
     {
         MouseSelection.Submit(this);
