@@ -152,7 +152,7 @@ public class DCC
 
         for (int i = 0, idx = 0; i < 256; ++i)
         {
-            if (bitReader.ReadBit() != 0)
+            if (bitReader.ReadBool() != 0)
             {
                 dir.pixel_values[idx] = (byte)i;
                 ++idx;
@@ -317,10 +317,10 @@ public class DCC
                     {
                         int tmp = 0;
                         if (streams.equalCell != null)
-                            tmp = streams.equalCell.ReadBit();
+                            tmp = streams.equalCell.ReadBool();
 
                         if (tmp == 0)
-                            pixelMask = streams.pixelMask.ReadBits4();
+                            pixelMask = streams.pixelMask.ReadLessThanByte(4);
                         else
                             nextCell = true;
                     }
@@ -335,7 +335,7 @@ public class DCC
                         int encodingType = 0;
                         if (nb_pix != 0 && streams.encodingType != null)
                         {
-                            encodingType = streams.encodingType.ReadBit();
+                            encodingType = streams.encodingType.ReadBool();
                         }
 
                         int decoded_pix = 0;
@@ -343,16 +343,16 @@ public class DCC
                         {
                             if (encodingType != 0)
                             {
-                                read_pixel[i] = streams.rawPixel.ReadBits(8);
+                                read_pixel[i] = streams.rawPixel.ReadByte();
                             }
                             else
                             {
                                 read_pixel[i] = last_pixel;
-                                int pix_displ = streams.pixelCode.ReadBits4();
+                                int pix_displ = streams.pixelCode.ReadLessThanByte(4);
                                 read_pixel[i] += pix_displ;
                                 while (pix_displ == 15)
                                 {
-                                    pix_displ = streams.pixelCode.ReadBits4();
+                                    pix_displ = streams.pixelCode.ReadLessThanByte(4);
                                     read_pixel[i] += pix_displ;
                                 }
                             }
@@ -360,7 +360,7 @@ public class DCC
                             if (read_pixel[i] == last_pixel)
                             {
                                 read_pixel[i] = 0; // discard this pixel
-                                i = nb_pix;        // stop the decoding of pixels
+                                break; // stop the decoding of pixels
                             }
                             else
                             {
@@ -513,7 +513,7 @@ public class DCC
                         {
                             for (int x = 0; x < cell.w; ++x)
                             {
-                                int pix = streams.pixelCode.ReadBits(nb_bit);
+                                int pix = streams.pixelCode.ReadLessThanByte(nb_bit);
                                 Color32 color = Palette.palette[pbe.val[pix]];
                                 frame.texturePixels[offset + x] = color;
                             }

@@ -1,80 +1,107 @@
 ﻿public class BitReader
 {
-    private byte[] bytes;
-    private int byteIndex = 0;
-    private int currentByte;
-    public int bitIndex = 8;
+    private byte[] data;
+    private int bytesRead = 0;
+    private int bitsRead = 0;
 
-    public BitReader(byte[] bytes, long offset = 0)
+    public BitReader(byte[] data, long offset = 0)
     {
-        this.bytes = bytes;
+        this.data = data;
         this.offset = offset;
     }
 
-    readonly static int[] bitmask = { 1, 2, 4, 8, 16, 32, 64, 128 };
-
-    public int ReadBit()
+    public void Skip(int bits)
     {
-        if (bitIndex >= 8)
-        {
-            currentByte = bytes[byteIndex++];
-            bitIndex &= 7;
-        }
-        int result = (currentByte >> bitIndex) & 1;
-        ++bitIndex;
+        var bitsRead = this.bitsRead + bits;
+        bytesRead += bitsRead >> 3;
+        this.bitsRead = bitsRead & 7;
+    }
+
+    public int ReadBool()
+    {
+        int result = data[bytesRead];
+        result &= 1 << bitsRead;
+        Skip(1);
+        return result;
+    }
+
+    public int ReadBitsUnaligned(int bits)
+    {
+        int result = data[bytesRead];
+        result >>= bitsRead;
+        result &= (1 << bits) - 1;
+        Skip(bits);
         return result;
     }
 
     public int ReadBits(int count)
     {
         int result = 0;
-        for (int i = 0; i < count; ++i)
+        int cursor = 0;
+
+        if (bitsRead != 0)
         {
-            result |= ReadBit() << i;
+            int remains = 8 - bitsRead;
+            int toRead = count > remains ? remains : count;
+            result = ReadBitsUnaligned(toRead);
+            count -= toRead;
+            cursor += toRead;
+        }
+
+        while (bitsRead == 0 && count >= 8)
+        {
+            result |= data[bytesRead] << cursor;
+            ++bytesRead;
+            count -= 8;
+            cursor += 8;
+        }
+
+        if (count > 0)
+        {
+            int tmp = ReadBitsUnaligned(count);
+            result |= tmp << cursor;
         }
         return result;
     }
-
-    readonly static int[] mask = { 0, 1, 3, 7, 15, 31, 63, 127, 255 };
-    readonly static int[] revMask = { 255, 254, 252, 248, 240, 224, 192, 128 };
 
     public int ReadByte()
     {
-        if (bitIndex >= 8)
+        if (bitsRead == 0)
         {
-            currentByte = bytes[byteIndex++];
-            bitIndex %= 8;
-        }
-
-        int result = currentByte;
-        if (bitIndex > 0)
-        {
-            result >>= bitIndex;
-            currentByte = bytes[byteIndex++];
-            result += (currentByte & mask[bitIndex]) << (8 - bitIndex);
-        }
-        return result;
-    }
-
-    readonly static int[] revMask4 = { 15, 30, 60, 120, 240, 224, 192, 128 };
-
-    public int ReadBits4()
-    {
-        if (bitIndex >= 8)
-        {
-            currentByte = bytes[byteIndex++];
-            bitIndex %= 8;
-        }
-
-        int result = (currentByte & revMask4[bitIndex]) >> bitIndex;
-        if (bitIndex > 4)
-        {
-            currentByte = bytes[byteIndex++];
-            bitIndex -= 4;
-            result += (currentByte & mask[bitIndex]) << (4 - bitIndex);
+            return data[bytesRead++];
         }
         else
-            bitIndex += 4;
+        {
+            int result = (data[bytesRead++]) | (data[bytesRead] << 8);
+            result >>= bitsRead;
+            result &= 255;
+            return result;
+        }
+    }
+
+    public int ReadLessThanByte(int count)
+    {
+        int result;
+        int newBitsRead = bitsRead + count;
+        if (bitsRead + count > 8)
+        {
+            result = (data[bytesRead]) | (data[bytesRead + 1] << 8);
+        }
+        else
+        {
+            result = data[bytesRead];
+        }
+        result >>= bitsRead;
+        result &= (1 << count) - 1;
+        if (newBitsRead > 7)
+        {
+            bitsRead = newBitsRead & 7;
+            ++bytesRead;
+        }
+        else
+        {
+            bitsRead = newBitsRead;
+        }
         return result;
     }
 
@@ -89,24 +116,13 @@
         return result;
     }
 
-    public void Reset()
-    {
-        bitIndex = 8;
-    }
-
-    public int bitsLeft
-    {
-        get { return 8 - bitIndex; }
-    }
-
     public long offset
     {
-        get { return byteIndex * 8 - bitsLeft; }
+        get { return bytesRead * 8 + bitsRead; }
         set
         {
-            byteIndex = (int)value / 8;
-            bitIndex = (int)(value % 8);
-            currentByte = bytes[byteIndex++];
+            bytesRead = (int)value / 8;
+            bitsRead = (int)(value % 8);
         }
     }
 }
