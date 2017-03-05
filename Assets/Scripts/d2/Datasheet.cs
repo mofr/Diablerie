@@ -363,7 +363,7 @@ public class MonStat
             {
                 stats.Remove(stat.id);
             }
-            stats.Add(stat.id, stat);
+            stats.Add(stat.id.ToLower(), stat);
         }
     }
 
@@ -405,6 +405,7 @@ public class MonPreset
         for(int i = 0; i < sheet.rows.Count; ++i)
         {
             MonPreset preset = sheet.rows[i];
+            preset.place = preset.place.ToLower();
             presets[preset.act].Add(preset);
         }
     }

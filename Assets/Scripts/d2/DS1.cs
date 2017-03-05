@@ -528,6 +528,7 @@ public class DS1
         }
         else
         {
+            gameObject.AddComponent<Iso>();
             var creature = gameObject.AddComponent<Creature>();
             creature.obj = obj;
         }
