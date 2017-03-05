@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
 	public float speed = 3.5f;
 	public float attackSpeed = 1.0f;
     public float useRange = 1f;
-    public float attackRange = 1f;
+    public float attackRange = 2.5f;
     public float diameter = 1f;
     public bool run = false;
 
@@ -255,10 +255,14 @@ public class Character : MonoBehaviour
 
     void UpdateAnimation() {
         string mode;
+        string weaponClass = this.weaponClass;
         animator.speed = 1.0f;
+        animator.loop = true;
         if (dying || dead)
         {
             mode = "DT";
+            weaponClass = "HTH";
+            animator.loop = false;
         }
         else if (attack)
         {
@@ -268,6 +272,7 @@ public class Character : MonoBehaviour
         else if (takingDamage)
         {
             mode = "GH";
+            animator.loop = false;
         }
         else if (moving)
         {

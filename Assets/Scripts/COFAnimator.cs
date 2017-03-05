@@ -19,6 +19,7 @@ class COFAnimator : MonoBehaviour
 
     struct Layer
     {
+        public GameObject gameObject;
         public SpriteRenderer spriteRenderer;
     }
 
@@ -97,12 +98,18 @@ class COFAnimator : MonoBehaviour
         for (int i = layers.Count; i < _cof.layerCount; ++i)
         {
             Layer layer = new Layer();
-            GameObject layerObject = new GameObject();
-            layerObject.transform.position = new Vector3(0, 0, -i * 0.1f);
-            layerObject.transform.SetParent(transform, false);
-            layer.spriteRenderer = layerObject.AddComponent<SpriteRenderer>();
+            layer.gameObject = new GameObject();
+            layer.gameObject.transform.position = new Vector3(0, 0, -i * 0.1f);
+            layer.gameObject.transform.SetParent(transform, false);
+            layer.spriteRenderer = layer.gameObject.AddComponent<SpriteRenderer>();
             layer.spriteRenderer.material = material;
             layers.Add(layer);
+        }
+
+        for (int i = 0; i < layers.Count; ++i)
+        {
+            var layer = layers[i];
+            layer.gameObject.SetActive(i < _cof.layerCount);
         }
     }
 

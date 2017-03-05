@@ -88,7 +88,7 @@ public class DS1
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
-    static public ImportResult Import(string ds1Path, GameObject monsterPrefab = null)
+    static public ImportResult Import(string ds1Path)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 

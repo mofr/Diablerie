@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
 	public Character character;
     static public PlayerController instance;
 
-    [HideInInspector]
-    static public GameObject hover;
-
     Iso iso;
-    Collider2D[] hoverColliders = new Collider2D[4];
 
-
-    void Awake() {
+    void Awake()
+    {
         instance = this;
 
         if (character == null)
@@ -26,65 +19,31 @@ public class PlayerController : MonoBehaviour {
         }   
 	}
 
-	void Start () {
-	}
-
-	public void SetCharacter (Character character) {
+	public void SetCharacter (Character character)
+    {
 		this.character = character;
 		iso = character.GetComponent<Iso>();
 	}
 
-    void UpdateHover()
+    void DrawDebugPath()
     {
-        if (Input.GetMouseButton(0))
+        Vector3 targetPosition;
+        if (MouseSelection.current != null)
         {
-            return;
+            targetPosition = Iso.MapToIso(MouseSelection.current.transform.position);
         }
-
-        GameObject newHover = null;
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        int overlapCount = Physics2D.OverlapPointNonAlloc(mousePos, hoverColliders);
-        if (overlapCount > 0)
-        {
-            newHover = hoverColliders[0].gameObject;
+        else {
+            targetPosition = IsoInput.mousePosition;
         }
-
-        if (newHover != hover)
-        {
-            if (hover != null)
-            {
-                var spriteRenderer = hover.GetComponent<SpriteRenderer>();
-                spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
-            }
-            hover = newHover;
-            if (hover != null)
-            {
-                var spriteRenderer = hover.GetComponent<SpriteRenderer>();
-                spriteRenderer.material.SetFloat("_SelfIllum", 1.75f);
-
-                EnemyBar.instance.character = hover.GetComponent<Character>();
-            }
-            else
-            {
-                EnemyBar.instance.character = null;
-            }
-        }
+        var path = Pathing.BuildPath(iso.pos, targetPosition, character.directionCount);
+        Pathing.DebugDrawPath(iso.pos, path);
     }
 
 	void Update () {
         if (character == null)
             return;
 
-        UpdateHover();
-
-        Vector3 targetPosition;
-		if (hover != null) {
-			targetPosition = Iso.MapToIso(hover.transform.position);
-		} else {
-			targetPosition = IsoInput.mousePosition;
-		}
-        var path = Pathing.BuildPath(iso.pos, targetPosition, character.directionCount);
-        Pathing.DebugDrawPath(iso.pos, path);
+        DrawDebugPath();
 
         character.LookAt(IsoInput.mousePosition);
 
@@ -98,9 +57,9 @@ public class PlayerController : MonoBehaviour {
         }
         else if (Input.GetMouseButton(0))
         {
-            if (hover != null)
+            if (MouseSelection.current != null)
             {
-                character.target = hover;
+                character.target = MouseSelection.current.gameObject;
             }
             else {
                 character.GoTo(IsoInput.mousePosition);
