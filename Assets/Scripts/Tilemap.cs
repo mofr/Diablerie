@@ -15,7 +15,8 @@ public class Tilemap : MonoBehaviour {
     private int origin;
     private Cell[] map;
 
-    void Awake() {
+    void Awake()
+    {
         map = new Cell[width * height];
         origin = map.Length / 2;
         instance = this;
@@ -23,7 +24,8 @@ public class Tilemap : MonoBehaviour {
             map[i].passable = true;
     }
 
-    void Update() {
+    void DrawDebugCellGrid()
+    {
         Color color = new Color(1, 0, 0, 0.3f);
         Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
         int debugWidth = 100;
@@ -42,7 +44,8 @@ public class Tilemap : MonoBehaviour {
         }
     }
 
-    private int MapToIndex(Vector3 tilePos) {
+    private int MapToIndex(Vector3 tilePos)
+    {
 		return origin + Mathf.RoundToInt(tilePos.x + tilePos.y * width);
 	}
 
