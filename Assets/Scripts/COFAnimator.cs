@@ -132,18 +132,18 @@ class COFAnimator : MonoBehaviour
         if (_cof == null)
             return;
         int sortingOrder = Iso.SortingOrder(transform.position);
+        int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
+        int spriteIndex = frameStart + frameIndex;
+        int priority = (direction * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
         for (int i = 0; i < _cof.layerCount; ++i)
         {
             Layer layer = layers[i];
-
-            int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
-            int layerIndex = _cof.priority[(direction * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount) + i];
+            int layerIndex = _cof.priority[priority + i];
             var cofLayer = _cof.layers[layerIndex];
             if (cofLayer.dccFilename == null)
                 continue;
-            var dcc = DCC.Load(cofLayer.dccFilename);
 
-            int spriteIndex = frameStart + frameIndex;
+            var dcc = DCC.Load(cofLayer.dccFilename);
             layer.spriteRenderer.sprite = dcc.GetSprites(direction)[spriteIndex];
             layer.spriteRenderer.sortingOrder = sortingOrder;
         }

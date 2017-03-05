@@ -553,10 +553,9 @@ public class DCC
 
     public List<Sprite> GetSprites(int d)
     {
-        if (sprites[d] != null)
-            return sprites[d];
-
-        DecodeDirection(d);
+        if (sprites[d] == null)
+            DecodeDirection(d);
+        
         return sprites[d];
     }
 
@@ -618,7 +617,6 @@ public class DCC
 
     static public DCC Load(string filename, bool loadAllDirections = false, bool ignoreCache = false)
     {
-        filename = filename.ToLower();
         if (!ignoreCache && cache.ContainsKey(filename))
         {
             return cache[filename];

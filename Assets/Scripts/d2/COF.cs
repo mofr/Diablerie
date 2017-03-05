@@ -64,7 +64,7 @@ public class COF
             string sptr = gear[compositIndex];
             if (sptr == "")
                 continue;
-            cof.layers[compositIndex].dccFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
+            cof.layers[compositIndex].dccFilename = (Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc").ToLower();
             cof.layers[compositIndex].name = compositName + " " + sptr;
         }
 
