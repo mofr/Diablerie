@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tilemap : MonoBehaviour {
 
@@ -24,35 +21,6 @@ public class Tilemap : MonoBehaviour {
         instance = this;
         for (int i = 0; i < map.Length; ++i)
             map[i].passable = true;
-    }
-
-    class TileOrderComparer : IComparer<Tile> {
-        public int Compare(Tile a, Tile b) {
-            bool floor1 = a.GetComponent<SpriteRenderer>().sortingLayerName == "Floor";
-            bool floor2 = b.GetComponent<SpriteRenderer>().sortingLayerName == "Floor";
-            return -floor1.CompareTo(floor2);
-        }
-    }
-
-    void Start() {
-        Tile[] tiles = GameObject.FindObjectsOfType<Tile>();
-        //Array.Sort(tiles, new TileOrderComparer());
-        foreach (Tile tile in tiles) {
-            if (tile.passable)
-                continue;
-            Vector3 pos = Iso.MapToIso(tile.transform.position);
-            pos.x -= tile.width / 2;
-            pos.y -= tile.height / 2;
-            pos.x += tile.offsetX;
-            pos.y += tile.offsetY;
-            for (int x = 0; x < tile.width; ++x) {
-                for (int y = 0; y < tile.height; ++y) {
-                    int index = MapToIndex(pos + new Vector3(x, y));
-                    map[index].passable = tile.passable;
-                    map[index].gameObject = tile.gameObject;
-                }
-            }
-        }
     }
 
     void Update() {
