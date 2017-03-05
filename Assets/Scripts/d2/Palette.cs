@@ -17,7 +17,7 @@ public class Palette
         }
 
         palette = new Color32[256];
-        using (var stream = new MemoryStream(File.ReadAllBytes("Assets/d2/data/global/palette/ACT" + act + "/Pal.PL2")))
+        using (var stream = new MemoryStream(File.ReadAllBytes(Application.streamingAssetsPath + "/d2/data/global/palette/ACT" + act + "/Pal.PL2")))
         using (var reader = new BinaryReader(stream))
         {
             for (int i = 0; i < 256; ++i)

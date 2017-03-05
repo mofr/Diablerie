@@ -51,7 +51,7 @@ public struct AnimData
 
     static AnimData()
     {
-        byte[] bytes = File.ReadAllBytes("Assets/d2/data/global/animdata.d2");
+        byte[] bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/d2/data/global/animdata.d2");
         var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
         while (stream.Position < stream.Length)

@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Reflection;
 using System.IO;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 
 public struct Datasheet<T> where T : new()
@@ -120,7 +121,7 @@ public class Obj
     public string index;
     string eol;
 
-    public static Datasheet<Obj> sheet = Datasheet<Obj>.Load("Assets/d2/obj.txt");
+    public static Datasheet<Obj> sheet = Datasheet<Obj>.Load(Application.streamingAssetsPath + "/d2/obj.txt");
     static Dictionary<long, Obj> lookup = new Dictionary<long, Obj>();
 
     static Obj()
@@ -224,7 +225,7 @@ public class ObjectInfo
     public int openWarp;
     public int autoMap;
 
-    public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load("Assets/d2/data/global/excel/objects.txt");
+    public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/objects.txt");
 }
 
 [System.Serializable]
@@ -351,7 +352,7 @@ public class MonStat
     public string SplClientEnd;
     string eol;
 
-    public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load("Assets/d2/data/global/excel/monstats.txt");
+    public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/monstats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
     static MonStat()
@@ -391,7 +392,7 @@ public class MonPreset
     public int act;
     public string place;
 
-    public static Datasheet<MonPreset> sheet = Datasheet<MonPreset>.Load("Assets/d2/data/global/excel/MonPreset.txt");
+    public static Datasheet<MonPreset> sheet = Datasheet<MonPreset>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/MonPreset.txt");
     static List<MonPreset>[] presets = new List<MonPreset>[ActCount + 1];
 
     static MonPreset()

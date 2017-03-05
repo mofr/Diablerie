@@ -133,7 +133,7 @@ public class DS1
                     filename += c;
                 }
                 filename = filename.Replace(".tg1", ".dt1");
-                var imported = DT1.Import("Assets" + filename);
+                var imported = DT1.Import(Application.streamingAssetsPath + filename);
                 totalTiles += imported.tiles.Length;
                 dt1Index.Add(imported.tiles);
             }

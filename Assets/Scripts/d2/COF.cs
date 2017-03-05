@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 public class COF
 {
@@ -25,7 +26,7 @@ public class COF
 
     static public COF Load(string basePath, string token, string _class, string[] gear, string mode)
     {
-        string cofFilename = "Assets/d2/" + basePath + "/" + token + "/cof/" + token + mode + _class + ".cof";
+        string cofFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/cof/" + token + mode + _class + ".cof";
         cofFilename.ToLower();
         if (cache.ContainsKey(cofFilename))
         {
@@ -63,7 +64,7 @@ public class COF
             string sptr = gear[compositIndex];
             if (sptr == "")
                 continue;
-            cof.layers[compositIndex].dccFilename = "Assets/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
+            cof.layers[compositIndex].dccFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc";
             cof.layers[compositIndex].name = compositName + " " + sptr;
         }
 
