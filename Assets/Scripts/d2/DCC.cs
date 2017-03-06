@@ -178,31 +178,31 @@ public class DCC
         streams.pixelCode = new BitReader(dcc, offset);
     }
 
-    static FrameBuffer CreateFrameBuffer(Direction dir)
+    static FrameBuffer CreateFrameBuffer(IntRect box)
     {
         FrameBuffer frameBuffer = new FrameBuffer();
-        frameBuffer.nb_cell_w = 1 + ((dir.box.width - 1) / 4);
-        frameBuffer.nb_cell_h = 1 + ((dir.box.height - 1) / 4);
+        frameBuffer.nb_cell_w = 1 + ((box.width - 1) / 4);
+        frameBuffer.nb_cell_h = 1 + ((box.height - 1) / 4);
         frameBuffer.cells = new Cell[frameBuffer.nb_cell_w * frameBuffer.nb_cell_h];
         int[] cell_w = new int[frameBuffer.nb_cell_w];
         int[] cell_h = new int[frameBuffer.nb_cell_h];
 
         if (frameBuffer.nb_cell_w == 1)
-            cell_w[0] = dir.box.width;
+            cell_w[0] = box.width;
         else
         {
             for (int i = 0; i < (frameBuffer.nb_cell_w - 1); i++)
                 cell_w[i] = 4;
-            cell_w[frameBuffer.nb_cell_w - 1] = dir.box.width - (4 * (frameBuffer.nb_cell_w - 1));
+            cell_w[frameBuffer.nb_cell_w - 1] = box.width - (4 * (frameBuffer.nb_cell_w - 1));
         }
 
         if (frameBuffer.nb_cell_h == 1)
-            cell_h[0] = dir.box.height;
+            cell_h[0] = box.height;
         else
         {
             for (int i = 0; i < (frameBuffer.nb_cell_h - 1); i++)
                 cell_h[i] = 4;
-            cell_h[frameBuffer.nb_cell_h - 1] = dir.box.height - (4 * (frameBuffer.nb_cell_h - 1));
+            cell_h[frameBuffer.nb_cell_h - 1] = box.height - (4 * (frameBuffer.nb_cell_h - 1));
         }
 
         int y0 = 0;
@@ -308,96 +308,87 @@ public class DCC
             int cell0_x = (frame.box.xMin - dir.box.xMin) / 4;
             int cell0_y = (frame.box.yMin - dir.box.yMin) / 4;
             CreateFrameCells(dir.box, frame); // dcc_prepare_frame_cells
-            for (int y = 0; y < frame.nb_cell_h; y++)
+            int buffCellIndex = cell0_x + cell0_y * frameBuffer.nb_cell_w;
+            int frameCellIndex = 0;
+            for (int y = 0; y < frame.nb_cell_h; ++y)
             {
-                int curr_cell_y = cell0_y + y;
-                for (int x = 0; x < frame.nb_cell_w; x++)
+                for (int x = 0; x < frame.nb_cell_w; ++x, ++frameCellIndex)
                 {
-                    int curr_cell_x = cell0_x + x;
-                    int curr_cell = curr_cell_x + (curr_cell_y * frameBuffer.nb_cell_w);
-                    bool nextCell = false;
+                    int curr_cell = buffCellIndex + x;
                     if (cellBuffer[curr_cell].val != null)
                     {
-                        int tmp = 0;
-                        if (streams.equalCell != null)
-                            tmp = streams.equalCell.ReadBool();
-
-                        if (tmp == 0)
-                            pixelMask = streams.pixelMask.ReadLessThanByte(4);
-                        else
-                            nextCell = true;
+                        if (streams.equalCell != null && streams.equalCell.ReadBool() != 0)
+                            continue;
+                        
+                        pixelMask = streams.pixelMask.ReadLessThanByte(4);
                     }
                     else
                         pixelMask = 0x0f;
 
-                    if (!nextCell)
+                    read_pixel[0] = read_pixel[1] = read_pixel[2] = read_pixel[3] = 0;
+                    int last_pixel = 0;
+                    int nb_pix = nb_pix_table[pixelMask];
+                    int encodingType = 0;
+                    if (nb_pix != 0 && streams.encodingType != null)
                     {
-                        read_pixel[0] = read_pixel[1] = read_pixel[2] = read_pixel[3] = 0;
-                        int last_pixel = 0;
-                        int nb_pix = nb_pix_table[pixelMask];
-                        int encodingType = 0;
-                        if (nb_pix != 0 && streams.encodingType != null)
-                        {
-                            encodingType = streams.encodingType.ReadBool();
-                        }
-
-                        int decoded_pix = 0;
-                        for (int i = 0; i < nb_pix; i++)
-                        {
-                            if (encodingType != 0)
-                            {
-                                read_pixel[i] = streams.rawPixel.ReadByte();
-                            }
-                            else
-                            {
-                                read_pixel[i] = last_pixel;
-                                int pix_displ = streams.pixelCode.ReadLessThanByte(4);
-                                read_pixel[i] += pix_displ;
-                                while (pix_displ == 15)
-                                {
-                                    pix_displ = streams.pixelCode.ReadLessThanByte(4);
-                                    read_pixel[i] += pix_displ;
-                                }
-                            }
-
-                            if (read_pixel[i] == last_pixel)
-                            {
-                                read_pixel[i] = 0; // discard this pixel
-                                break; // stop the decoding of pixels
-                            }
-                            else
-                            {
-                                last_pixel = read_pixel[i];
-                                decoded_pix++;
-                            }
-                        }
-
-                        // we have the 4 pixels code for the new entry in pixel_buffer
-                        PixelBufferEntry old_entry = cellBuffer[curr_cell];
-                        pb_idx++;
-                        Debug.Assert(pb_idx < DCC_MAX_PB_ENTRY);
-                        var newEntry = new PixelBufferEntry();
-                        newEntry.val = new byte[4];
-                        int curr_idx = decoded_pix - 1;
-
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if ((pixelMask & (1 << i)) != 0)
-                            {
-                                if (curr_idx >= 0) // if stack is not empty, pop it
-                                    newEntry.val[i] = (byte)read_pixel[curr_idx--];
-                                else // else pop a 0
-                                    newEntry.val[i] = 0;
-                            }
-                            else
-                                newEntry.val[i] = old_entry.val[i];
-                        }
-                        newEntry.frame = f;
-                        newEntry.frameCellIndex = x + (y * frame.nb_cell_w);
-                        pixelBuffer[pb_idx] = newEntry;
-                        cellBuffer[curr_cell] = newEntry;
+                        encodingType = streams.encodingType.ReadBool();
                     }
+
+                    int decoded_pix = 0;
+                    for (int i = 0; i < nb_pix; i++)
+                    {
+                        if (encodingType != 0)
+                        {
+                            read_pixel[i] = streams.rawPixel.ReadByte();
+                        }
+                        else
+                        {
+                            read_pixel[i] = last_pixel;
+                            int pix_displ = streams.pixelCode.ReadLessThanByte(4);
+                            read_pixel[i] += pix_displ;
+                            while (pix_displ == 15)
+                            {
+                                pix_displ = streams.pixelCode.ReadLessThanByte(4);
+                                read_pixel[i] += pix_displ;
+                            }
+                        }
+
+                        if (read_pixel[i] == last_pixel)
+                        {
+                            read_pixel[i] = 0; // discard this pixel
+                            break; // stop the decoding of pixels
+                        }
+                        else
+                        {
+                            last_pixel = read_pixel[i];
+                            decoded_pix++;
+                        }
+                    }
+
+                    // we have the 4 pixels code for the new entry in pixel_buffer
+                    PixelBufferEntry old_entry = cellBuffer[curr_cell];
+                    pb_idx++;
+                    var newEntry = new PixelBufferEntry();
+                    newEntry.val = new byte[4];
+                    int curr_idx = decoded_pix - 1;
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if ((pixelMask & (1 << i)) != 0)
+                        {
+                            if (curr_idx >= 0) // if stack is not empty, pop it
+                                newEntry.val[i] = (byte)read_pixel[curr_idx--];
+                        }
+                        else
+                            newEntry.val[i] = old_entry.val[i];
+                    }
+                    newEntry.frame = f;
+                    newEntry.frameCellIndex = frameCellIndex;
+                    pixelBuffer[pb_idx] = newEntry;
+                    cellBuffer[curr_cell] = newEntry;
                 }
+
+                buffCellIndex += frameBuffer.nb_cell_w;
             }
         }
 
@@ -610,7 +601,7 @@ public class DCC
         Streams streams = new Streams();
         ReadStreamsInfo(bitReader, dir, bytes, streams);
 
-        FrameBuffer frameBuffer = CreateFrameBuffer(dir); // dcc_prepare_buffer_cells
+        FrameBuffer frameBuffer = CreateFrameBuffer(dir.box); // dcc_prepare_buffer_cells
         FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
         MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
     }
