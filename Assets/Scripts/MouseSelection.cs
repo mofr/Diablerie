@@ -2,13 +2,14 @@
 
 class MouseSelection : MonoBehaviour
 {
+    static readonly Vector3 Expand = new Vector3(25, 20) / Iso.pixelsPerUnit;
     public Font selectionFont;
 
     [HideInInspector]
     static public Entity current;
     static Entity previous;
     static Vector3 mousePos;
-    static Bounds bounds;
+    static Vector3 currentPosition;
 
     void Update()
     {
@@ -37,7 +38,7 @@ class MouseSelection : MonoBehaviour
         {
             GUI.skin.label.alignment = TextAnchor.LowerCenter;
             GUI.skin.font = selectionFont;
-            var pos = Camera.main.WorldToScreenPoint(bounds.center);
+            var pos = Camera.main.WorldToScreenPoint(currentPosition);
             pos.y = Camera.main.pixelHeight - pos.y + current.nameOffset;
             const int width = 500;
             const int height = 100;
@@ -52,21 +53,27 @@ class MouseSelection : MonoBehaviour
 
     static public void Submit(Entity entity)
     {
+        var position = entity.transform.position;
+
         if (Input.GetMouseButton(0))
         {
             if(entity == current)
             {
-                MouseSelection.bounds = entity.bounds;
+                currentPosition = position;
             }
             return;
         }
 
-        Bounds bounds = entity.bounds;
-        bool betterMatch = current == null || bounds.center.y < MouseSelection.bounds.center.y;
-        if (betterMatch && bounds.Contains(mousePos))
+        bool betterMatch = current == null || position.y < currentPosition.y;
+        if (betterMatch)
         {
-            current = entity;
-            MouseSelection.bounds = bounds;
+            Bounds bounds = entity.bounds;
+            bounds.Expand(Expand);
+            if (bounds.Contains(mousePos))
+            {
+                current = entity;
+                currentPosition = position;
+            }
         }
     }
 }

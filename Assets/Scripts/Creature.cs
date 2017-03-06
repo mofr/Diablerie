@@ -51,7 +51,7 @@ class Creature : Entity
     {
         get
         {
-            return -(int) (bounds.extents.y * Iso.pixelsPerUnit) - 12;
+            return -(int) (bounds.size.y * Iso.pixelsPerUnit) - 10;
         }
     }
 
