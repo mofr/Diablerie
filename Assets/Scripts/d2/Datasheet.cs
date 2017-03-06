@@ -225,7 +225,21 @@ public class ObjectInfo
     public int openWarp;
     public int autoMap;
 
+    [System.NonSerialized]
+    public float[] frameDuration = new float[8];
+
     public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/objects.txt");
+
+    static ObjectInfo()
+    {
+        foreach(var info in sheet.rows)
+        {
+            for(int i = 0; i < 8; ++i)
+            {
+                info.frameDuration[i] = 256.0f / 25 / info.frameDelta[i];
+            }
+        }
+    }
 }
 
 [System.Serializable]

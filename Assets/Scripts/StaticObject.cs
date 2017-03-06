@@ -55,6 +55,7 @@ class StaticObject : Entity
             animator.direction = direction;
             animator.loop = objectInfo.cycleAnim[mode];
             animator.SetFrameRange(objectInfo.start[mode], objectInfo.frameCount[mode]);
+            animator.frameDuration = objectInfo.frameDuration[mode];
         }
     }
 

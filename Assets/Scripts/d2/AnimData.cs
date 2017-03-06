@@ -8,6 +8,7 @@ public struct AnimData
     public int framesPerDir;
     public int speed;
     public byte[] flags;
+    public float frameDuration;
 
     public static bool Find(string name, ref AnimData animData)
     {
@@ -68,6 +69,7 @@ public struct AnimData
                 animData.framesPerDir = reader.ReadInt32();
                 animData.speed = reader.ReadInt32();
                 animData.flags = reader.ReadBytes(144);
+                animData.frameDuration = 256.0f / 25.0f / animData.speed;
                 bucket.data[i] = animData;
                 if (i == 0)
                     hash = Hash(animData.cofName);

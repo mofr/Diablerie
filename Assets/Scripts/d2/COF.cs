@@ -9,6 +9,7 @@ public class COF
     public int directionCount;
     public int layerCount;
     public byte[] priority;
+    public float frameDuration = 1.0f / 12.0f;
 
     public struct Layer
     {
@@ -74,7 +75,7 @@ public class COF
         AnimData animData = new AnimData();
         if (AnimData.Find(token + mode + _class, ref animData))
         {
-            //Debug.Log(cofFilename + " " + framesPerDirection + " anim data found " + animData.framesPerDir + " " + animData.speed);
+            cof.frameDuration = animData.frameDuration;
         }
 
         cache.Add(cofFilename, cof);

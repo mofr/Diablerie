@@ -7,9 +7,9 @@ class COFAnimator : MonoBehaviour
     public int direction = 0;
     public bool loop = true;
     public float speed = 1.0f;
+    public float frameDuration = 1.0f / 12.0f;
 
     float time = 0;
-    float frameDuration = 1.0f / 12.0f;
     int frameCounter = 0;
     int frameCount = 0;
     int frameStart = 0;
@@ -92,6 +92,7 @@ class COFAnimator : MonoBehaviour
 
         time = 0;
         frameCounter = 0;
+        frameDuration = _cof.frameDuration;
         if (frameCount == 0)
             frameCount = _cof.framesPerDirection;
 
@@ -115,6 +116,8 @@ class COFAnimator : MonoBehaviour
 
     void Update()
     {
+        if (_cof == null)
+            return;
         if (!loop && frameCounter >= frameCount)
             return;
         time += Time.deltaTime * speed;

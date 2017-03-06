@@ -21,7 +21,6 @@ public class MapBuilder : MonoBehaviour
         character.directionCount = 16;
         character.run = true;
         character.speed = 14;
-        character.attackSpeed = 2.2f;
         PlayerController.instance.SetCharacter(character);
     }
 }
