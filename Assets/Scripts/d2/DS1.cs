@@ -146,7 +146,7 @@ public class DS1
 
         // skip 2 dwords ?
         if ((version >= 9) && (version <= 13))
-            reader.ReadBytes(2);
+            stream.Seek(8, SeekOrigin.Current);
 
         int wallLayerCount = 1;
         int floorLayerCount = 1;
