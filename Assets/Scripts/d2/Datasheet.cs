@@ -59,6 +59,9 @@ public struct Datasheet<T> where T : new()
                 continue;
 
             var fields = line.Split('\t');
+            if (fields.Length == 1 && fields[0] == "Expansion")
+                continue;
+
             if (fields.Length != expectedFieldCount)
                 throw new System.Exception("Field count mismatch " + typeof(T) + " (" + expectedFieldCount + " expected) at " + filename + ":" + (lineIndex + 1) + " (" + fields.Length + " fields)");
 
@@ -433,4 +436,124 @@ public class MonPreset
         }
         return null;
     }
+}
+
+[System.Serializable]
+public class LevelType
+{
+    public string name;
+    public int id;
+    public string[] dt1Files = new string[32];
+    public bool beta;
+    public int act;
+
+    public static Datasheet<LevelType> sheet = Datasheet<LevelType>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/LvlTypes.txt");
+}
+
+[System.Serializable]
+public class LevelPreset
+{
+    public string name;
+    public int def;
+    public int levelId;
+    public bool populate;
+    public bool logicals;
+    public bool outdoors;
+    public bool animate;
+    public bool killEdge;
+    public bool fillBlanks;
+    public int sizeX;
+    public int sizeY;
+    public int autoMap;
+    public bool scan;
+    public string pops;
+    public string popPad;
+    public int fileCount;
+    public string[] files = new string[6];
+    public int dt1Mask;
+    public bool beta;
+
+    public static Datasheet<LevelPreset> sheet = Datasheet<LevelPreset>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/LvlPrest.txt");
+    static Dictionary<int, LevelPreset> levelIdMap = new Dictionary<int, LevelPreset>();
+
+    static LevelPreset()
+    {
+        foreach(var preset in sheet.rows)
+        {
+            if (preset.levelId != 0)
+                levelIdMap.Add(preset.levelId, preset);
+        }
+    }
+
+    static public LevelPreset Find(int levelId)
+    {
+        return levelIdMap.GetValueOrDefault(levelId);
+    }
+}
+
+[System.Serializable]
+public class LevelInfo
+{
+    public string name;
+    public int id;
+    public int pal;
+    public int act;
+    public int layer;
+    public int sizeX;
+    public int sizeY;
+    public int offsetX;
+    public int offsetY;
+    public int depend;
+    public int rain;
+    public int mud;
+    public int noPer;
+    public int LOSDraw;
+    public int floorFilter;
+    public int blankScreen;
+    public int drawEdges;
+    public int isInside;
+    public int drlgType;
+    public int levelType;
+    public int subType;
+    public int subTheme;
+    public int subWaypoint;
+    public int subShrine;
+    public int[] vis = new int[8];
+    public int[] warp = new int[8];
+    public int intensity;
+    public int red;
+    public int green;
+    public int blue;
+    public int portal;
+    public int position;
+    public bool saveMonsters;
+    public int quest;
+    public int warpDist;
+    public int monLvl1;
+    public int monLvl2;
+    public int monLvl3;
+    public int monDen;
+    public int monUMin;
+    public int monUMax;
+    public int monWndr;
+    public int monSpcWalk;
+    public int mtot;
+    public int[] M = new int[25];
+    public int[] S = new int[25];
+    public int Utot;
+    public int[] U = new int[25];
+    public int[] C = new int[5];
+    public int[] CA = new int[5];
+    public int[] CD = new int[5];
+    public int themes;
+    public int soundEnv;
+    public int waypoint;
+    public string levelName;
+    public string levelWarp;
+    public string entryFile;
+    public int[] objGrp = new int[8];
+    public int[] objPrb = new int[8];
+    public bool beta;
+
+    public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/Levels.txt");
 }

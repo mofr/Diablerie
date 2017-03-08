@@ -1,0 +1,1092 @@
+Name	Def	LevelId	Populate	Logicals	Outdoors	Animate	KillEdge	FillBlanks	SizeX	SizeY	AutoMap	Scan	Pops	PopPad	Files	File1	File2	File3	File4	File5	File6	Dt1Mask	Beta
+None	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Act 1 - Town 1	1	1	1	0	1	0	0	1	0	0	1	1	0	0	0	Act1/Town/TownN1.ds1	Act1/Town/TownE1.ds1	Act1/Town/TownS1.ds1	Act1/Town/TownW1.ds1	0	0	959	1
+Act 1 - Town 1 Transition E	2	0	1	0	1	0	1	1	8	40	0	0	0	0	0	0	Act1/Town/TownETrans.ds1	0	0	0	0	16765	1
+Act 1 - Town 1 Transition S	3	0	1	0	1	0	1	1	56	8	0	0	0	0	0	0	Act1/Town/TownSTrans.ds1	Act1/Town/TownSTrans2.ds1	0	0	0	8405373	1
+Act 1 - Wild Border 1	4	0	0	0	1	0	1	1	8	8	0	0	0	0	3	Act1/Outdoors/Bord1.ds1	Act1/Outdoors/Bord1b.ds1	Act1/Outdoors/Bord1c.ds1	Act1/Outdoors/Bord1o.ds1	Act1/Outdoors/Bord1oe.ds1	0	16405	1
+Act 1 - Wild Border 2	5	0	1	0	1	0	1	1	8	8	0	0	0	0	3	Act1/Outdoors/Bord2.ds1	Act1/Outdoors/Bord2b.ds1	Act1/Outdoors/Bord2c.ds1	Act1/Outdoors/Bord2o.ds1	Act1/Outdoors/Bord2oe.ds1	0	16405	1
+Act 1 - Wild Border 3	6	0	1	0	1	0	1	1	8	8	0	0	0	0	3	Act1/Outdoors/Bord3.ds1	Act1/Outdoors/Bord3b.ds1	Act1/Outdoors/Bord3c.ds1	Act1/Outdoors/Bord3o.ds1	Act1/Outdoors/Bord3oe.ds1	0	16405	1
+Act 1 - Wild Border 4	7	0	0	0	1	0	1	1	8	8	0	0	0	0	3	Act1/Outdoors/Bord4.ds1	Act1/Outdoors/Bord4b.ds1	Act1/Outdoors/Bord4c.ds1	Act1/Outdoors/Bord4o.ds1	Act1/Outdoors/Bord4oe.ds1	0	16405	1
+Act 1 - Wild Border 5	8	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord5.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 6	9	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord6.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 7	10	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord7.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 8	11	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord8.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 9	12	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord9.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 10	13	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord10.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 11	14	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord11.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Border 12	15	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Bord12.ds1	0	0	0	0	0	16405	1
+Act 1 - Wild Cliff Border 2	16	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf2.ds1	0	0	0	0	0	1025	1
+Act 1 - Wild Cliff Border 3	17	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf3.ds1	0	0	0	0	0	513	1
+Act 1 - Wild Cliff Border 5	18	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf5.ds1	0	0	0	0	0	1029	1
+Act 1 - Wild Cliff Border 6A	19	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf6a.ds1	0	0	0	0	0	5633	1
+Act 1 - Wild Cliff Border 6B	20	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf6b.ds1	0	0	0	0	0	1029	1
+Act 1 - Wild Cliff Border 6C	21	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf6c.ds1	0	0	0	0	0	517	1
+Act 1 - Wild Cliff Border 7	22	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf7.ds1	0	0	0	0	0	517	1
+Act 1 - Wild Cliff Border 10	23	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/StnClf10.ds1	0	0	0	0	0	5633	1
+Act 1 - Wild Cliff Cave Right	24	0	0	0	1	0	1	1	8	8	0	1	0	0	1	Act1/Caves/clfcave2.ds1	0	0	0	0	0	513	1
+Act 1 - Wild Cliff Cave Left	25	0	0	0	1	0	1	1	8	8	0	1	0	0	1	Act1/Caves/clfcave.ds1	0	0	0	0	0	1025	1
+Act 1 - River Upper	26	0	0	0	1	0	1	1	8	8	0	0	0	0	0	Act1/Outdoors/URiverC.ds1	Act1/Outdoors/URiverN.ds1	Act1/Outdoors/URiverS.ds1	Act1/Outdoors/URiver.ds1	0	0	53	1
+Act 1 - River Lower	27	0	0	0	1	0	1	1	8	8	0	0	0	0	0	Act1/Outdoors/LRiverC.ds1	Act1/Outdoors/LRiverN.ds1	Act1/Outdoors/LRiverS.ds1	Act1/Outdoors/LRiver.ds1	0	0	53	1
+Act 1 - Bridge	28	0	1	0	1	0	1	1	8	8	0	0	0	0	0	0	Act1/Outdoors/BridgeU.ds1	Act1/Outdoors/BridgeL.ds1	Act1/Outdoors/BridgeS.ds1	0	0	101	1
+Act 1 - Stone Fill 1	29	0	1	0	1	0	1	1	8	8	0	0	0	0	3	Act1/Outdoors/Circle.ds1	Act1/Outdoors/XRock.ds1	Act1/Outdoors/6Rock.ds1	0	0	0	278529	1
+Act 1 - Stone Fill 2	30	0	1	0	1	0	1	1	8	8	0	0	0	0	3	Act1/Outdoors/Clover.ds1	Act1/Outdoors/Arrow.ds1	Act1/Outdoors/4Rock.ds1	0	0	0	278529	1
+Act 1 - Corral Fill	31	0	1	0	1	0	1	1	8	8	0	0	0	0	2	Act1/Outdoors/Corral1.ds1	Act1/Outdoors/Corral2.ds1	0	0	0	0	262153	1
+Act 1 - Fence Fill 1	32	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Act1/Outdoors/Wild1.ds1	Act1/Outdoors/Wild2.ds1	0	0	0	0	16405	1
+Act 1 - Fence Fill 2	33	0	1	0	1	0	1	1	8	16	0	0	0	0	2	Act1/Outdoors/Wild8.ds1	Act1/Outdoors/Wild9.ds1	0	0	0	0	16405	1
+Act 1 - Fence Fill 3	34	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Act1/Outdoors/Wild3.ds1	Act1/Outdoors/Wild4.ds1	0	0	0	0	16409	1
+Act 1 - Fence Fill 4	35	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Wild5.ds1	0	0	0	0	0	16409	1
+Act 1 - Fence Fill 5	36	0	1	0	1	0	1	1	16	8	0	0	0	0	1	Act1/Outdoors/Wild6.ds1	0	0	0	0	0	16409	1
+Act 1 - Fence Fill 6	37	0	1	0	1	0	1	1	8	16	0	0	0	0	1	Act1/Outdoors/Wild7.ds1	0	0	0	0	0	16409	1
+Act 1 - Swamp Fill 1	38	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Swamp3.ds1	Act1/Outdoors/Swamp4.ds1	0	0	0	0	4194305	1
+Act 1 - Swamp Fill 2	39	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Act1/Outdoors/Swamp5.ds1	0	0	0	0	0	4194305	1
+Act 1 - Tree Fill	40	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Act1/Outdoors/Trees2.ds1	Act1/Outdoors/Trees3.ds1	0	0	0	0	3	1
+Act 1 - Ruin	41	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Act1/Outdoors/Ruin2.ds1	0	0	0	0	0	286991	1
+Act 1 - Fallen Camp 1	42	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Act1/Outdoors/FallCmp.ds1	Act1/Outdoors/FallCmp2.ds1	Act1/Outdoors/FallCmp3.ds1	Act1/Outdoors/FallCmp4.ds1	0	0	344323	1
+Act 1 - Fallen Camp 2	43	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Act1/Outdoors/FallCmp5.ds1	Act1/Outdoors/FallCmp6.ds1	Act1/Outdoors/FallCmp7.ds1	Act1/Outdoors/FallCmp8.ds1	0	0	344323	1
+Act 1 - Fallen Camp Bishibosh	44	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/FallCmpBish.ds1	0	0	0	0	0	344323	1
+Act 1 - Camp	45	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Camp.ds1	0	0	0	0	0	278787	1
+Act 1 - Pond	46	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/Pond1.ds1	0	0	0	0	0	410371	1
+Act 1 - Cottages 1	47	0	1	1	1	0	1	1	8	8	0	0	2	-4	6	Act1/Outdoors/Cott1.ds1	Act1/Outdoors/Cott2.ds1	Act1/Outdoors/Cott3.ds1	Act1/Outdoors/Cott4.ds1	Act1/Outdoors/Cott5.ds1	Act1/Outdoors/Cott6.ds1	16777217	1
+Act 1 - Cottages 2	48	0	1	1	1	0	1	1	8	8	0	0	2	-4	6	Act1/Outdoors/Cott1A.ds1	Act1/Outdoors/Cott2A.ds1	Act1/Outdoors/Cott3A.ds1	Act1/Outdoors/Cott4A.ds1	Act1/Outdoors/Cott5A.ds1	Act1/Outdoors/Cott6A.ds1	16777217	1
+Act 1 - Cottages 3	49	0	1	1	1	0	1	1	8	8	0	0	2	-4	1	Act1/Outdoors/Cott7.ds1	0	0	0	0	0	16777217	1
+Act 1 - Bivouac	50	0	1	1	1	0	1	1	16	16	0	0	0	0	1	Act1/Outdoors/Bivouac.ds1	0	0	0	0	0	41943297	1
+Act 1 - Cave Entrance	51	0	1	0	1	0	1	1	8	8	0	1	0	0	2	Act1/Caves/CaveDr1.ds1	Act1/Caves/CaveDr2.ds1	0	0	0	0	1048835	1
+Act 1 - DOE Entrance	52	0	1	0	1	0	1	1	8	8	0	1	0	0	2	Act1/Caves/DenEnt.ds1	Act1/Caves/DenEnt2.ds1	0	0	0	0	1048835	1
+Act 1 - Cave W	53	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveW.ds1	Act1/Caves/CaveW2.ds1	0	0	0	0	1	1
+Act 1 - Cave E	54	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveE.ds1	Act1/Caves/CaveE2.ds1	0	0	0	0	1	1
+Act 1 - Cave EW	55	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveEW.ds1	Act1/Caves/CaveEW2.ds1	0	0	0	0	1	1
+Act 1 - Cave S	56	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveS.ds1	Act1/Caves/CaveS2.ds1	0	0	0	0	1	1
+Act 1 - Cave SW	57	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveSW.ds1	Act1/Caves/CaveSW2.ds1	0	0	0	0	1	1
+Act 1 - Cave SE	58	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveSE.ds1	Act1/Caves/CaveSE2.ds1	0	0	0	0	1	1
+Act 1 - Cave SEW	59	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveSEW.ds1	Act1/Caves/CaveSEW2.ds1	0	0	0	0	1	1
+Act 1 - Cave N	60	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveN.ds1	Act1/Caves/CaveN2.ds1	0	0	0	0	1	1
+Act 1 - Cave NW	61	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNW.ds1	Act1/Caves/CaveNW2.ds1	0	0	0	0	1	1
+Act 1 - Cave NE	62	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNE.ds1	Act1/Caves/CaveNE2.ds1	0	0	0	0	1	1
+Act 1 - Cave NEW	63	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNEW.ds1	Act1/Caves/CaveNEW2.ds1	0	0	0	0	1	1
+Act 1 - Cave NS	64	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNS.ds1	Act1/Caves/CaveNS2.ds1	0	0	0	0	1	1
+Act 1 - Cave NSW	65	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNSW.ds1	Act1/Caves/CaveNSW2.ds1	0	0	0	0	1	1
+Act 1 - Cave NSE	66	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNSE.ds1	Act1/Caves/CaveNSE2.ds1	0	0	0	0	1	1
+Act 1 - Cave NSEW	67	0	1	0	0	0	1	1	24	24	0	0	0	0	2	Act1/Caves/CaveNSEW.ds1	Act1/Caves/CaveNSEW2.ds1	0	0	0	0	1	1
+Act 1 - Cave Theme W	68	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme E	69	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveETheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme EW	70	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveEWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme S	71	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveSTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme SW	72	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveSWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme SE	73	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveSETheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme SEW	74	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveSEWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme N	75	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NW	76	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NE	77	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNETheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NEW	78	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNEWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NS	79	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNSTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NSW	80	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNSWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NSE	81	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNSETheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Theme NSEW	82	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNSEWTheme1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Prev W	83	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveWPre1.ds1	Act1/Caves/CaveWPre2.ds1	0	0	0	0	1	1
+Act 1 - Cave Prev E	84	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveEPre1.ds1	Act1/Caves/CaveEPre2.ds1	0	0	0	0	1	1
+Act 1 - Cave Prev S	85	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveSPre1.ds1	Act1/Caves/CaveSPre2.ds1	0	0	0	0	1	1
+Act 1 - Cave Prev N	86	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveNPre1.ds1	Act1/Caves/CaveNPre2.ds1	0	0	0	0	1	1
+Act 1 - Cave Next W	87	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveWNext1.ds1	Act1/Caves/CaveWNext2.ds1	0	0	0	0	1	1
+Act 1 - Cave Next E	88	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveENext1.ds1	Act1/Caves/CaveENext2.ds1	0	0	0	0	1	1
+Act 1 - Cave Next S	89	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveSNext1.ds1	Act1/Caves/CaveSNext2.ds1	0	0	0	0	1	1
+Act 1 - Cave Next N	90	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveNNext1.ds1	Act1/Caves/CaveNNext2.ds1	0	0	0	0	1	1
+Act 1 - Cave Down W	91	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveWDown1.ds1	Act1/Caves/CaveWDown2.ds1	0	0	0	0	1	1
+Act 1 - Cave Down E	92	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveEDown1.ds1	Act1/Caves/CaveEDown2.ds1	0	0	0	0	1	1
+Act 1 - Cave Down S	93	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveSDown1.ds1	Act1/Caves/CaveSDown2.ds1	0	0	0	0	1	1
+Act 1 - Cave Down N	94	0	1	0	0	0	1	1	24	24	0	1	0	0	2	Act1/Caves/CaveNDown1.ds1	Act1/Caves/CaveNDown2.ds1	0	0	0	0	1	1
+Act 1 - Cave Den Of Evil W	95	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveWSpec.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Den Of Evil E	96	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveESpec.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Den Of Evil S	97	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveSSpec.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Den Of Evil N	98	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNSpec.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Coldcrow W	99	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveWCrow.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Coldcrow E	100	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveECrow.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Coldcrow S	101	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveSCrow.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Coldcrow N	102	0	1	0	0	0	1	1	24	24	0	0	0	0	1	Act1/Caves/CaveNCrow.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Treasure 1	103	0	1	0	0	0	1	1	0	0	0	1	0	0	1	Act1/Caves/CaveRoom1.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Treasure 2	104	13	1	0	0	0	1	1	0	0	0	1	0	0	1	Act1/Caves/CaveRoom2.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Treasure 3	105	14	1	0	0	0	1	1	0	0	0	1	0	0	1	Act1/Caves/CaveRoom3.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Treasure 4	106	15	1	0	0	0	1	1	0	0	0	1	0	0	1	Act1/Caves/CaveRoom4.ds1	0	0	0	0	0	1	1
+Act 1 - Cave Treasure 5	107	16	1	0	0	0	1	1	0	0	0	1	0	0	1	Act1/Caves/CaveRoom5.ds1	0	0	0	0	0	1	1
+Act 1 - Graveyard	108	0	1	0	1	0	1	1	24	32	0	1	0	0	1	Act1/Graveyard/gravey.ds1	0	0	0	0	0	2319	1
+Act 1 - Crypt W	109	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptW.ds1	Act1/Crypt/CryptW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt E	110	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptE.ds1	Act1/Crypt/CryptE2.ds1	0	0	0	0	3	1
+Act 1 - Crypt EW	111	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptEW.ds1	Act1/Crypt/CryptEW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt S	112	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptS.ds1	Act1/Crypt/CryptS2.ds1	0	0	0	0	3	1
+Act 1 - Crypt SW	113	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptSW.ds1	Act1/Crypt/CryptSW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt SE	114	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptSE.ds1	Act1/Crypt/CryptSE2.ds1	0	0	0	0	3	1
+Act 1 - Crypt SEW	115	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptSEW.ds1	Act1/Crypt/CryptSEW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt N	116	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptN.ds1	Act1/Crypt/CryptN2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NW	117	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNW.ds1	Act1/Crypt/CryptNW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NE	118	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNE.ds1	Act1/Crypt/CryptNE2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NEW	119	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNEW.ds1	Act1/Crypt/CryptNEW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NS	120	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNS.ds1	Act1/Crypt/CryptNS2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NSW	121	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNSW.ds1	Act1/Crypt/CryptNSW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NSE	122	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNSE.ds1	Act1/Crypt/CryptNSE2.ds1	0	0	0	0	3	1
+Act 1 - Crypt NSEW	123	0	1	1	0	0	0	1	8	8	0	0	0	0	2	Act1/Crypt/CryptNSEW.ds1	Act1/Crypt/CryptNSEW2.ds1	0	0	0	0	3	1
+Act 1 - Crypt Theme W	124	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme E	125	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptETheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme EW	126	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptEWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme S	127	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme SW	128	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme SE	129	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSETheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme SEW	130	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSEWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme N	131	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NW	132	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NE	133	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNETheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NEW	134	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNEWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NS	135	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNSTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NSW	136	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNSWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NSE	137	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNSETheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Theme NSEW	138	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNSEWTheme.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Prev W	139	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptWWarpPrev.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Prev E	140	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptEWarpPrev.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Prev S	141	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptSWarpPrev.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Prev N	142	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptNWarpPrev.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Next W	143	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptWWarpNext.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Next E	144	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptEWarpNext.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Next S	145	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptSWarpNext.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Next N	146	0	1	1	0	0	0	1	8	8	0	1	0	0	1	Act1/Crypt/CryptNWarpNext.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Bonebreak W	147	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptWBonebreak.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Bonebreak E	148	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptEBonebreak.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Bonebreak S	149	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSBonebreak.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Bonebreak N	150	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNBonebreak.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Chest W	151	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptWConsol.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Chest E	152	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptEConsol.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Chest S	153	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSConsol.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Chest N	154	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNConsol.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Portal W	155	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptWPortal.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Portal E	156	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptEPortal.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Portal S	157	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptSPortal.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Portal N	158	0	1	1	0	0	0	1	8	8	0	0	0	0	1	Act1/Crypt/CryptNPortal.ds1	0	0	0	0	0	3	1
+Act 1 - Crypt Countess X	159	25	1	1	0	0	0	1	0	0	0	1	0	0	2	Act1/Crypt/CryptCountess1.ds1	Act1/Crypt/CryptCountess2.ds1	0	0	0	0	3	0
+Act 1 - Cairn Stones	160	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/cairn2.ds1	0	0	0	0	0	278915	0
+Act 1 - Inifus	161	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/funktree.ds1	0	0	0	0	0	278787	0
+Act 1 - Tower Tome	162	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act1/Outdoors/tome.ds1	0	0	0	0	0	2375939	0
+Act 1 - Tower 1	163	0	1	0	1	0	1	1	8	8	0	1	1	0	1	Act1/Outdoors/Tower1.ds1	0	0	0	0	0	32769	0
+Act 1 - Tower 2	164	20	1	0	0	0	0	1	0	0	0	1	0	0	1	Act1/Outdoors/Tower2.ds1	0	0	0	0	0	524288	0
+Act 1 - Mon Front	165	26	1	1	1	0	0	1	0	0	0	0	0	0	1	Act1/Monastry/facade1.ds1	0	0	0	0	0	383	0
+Act 1 - Courtyard 1	166	27	1	1	1	0	0	1	0	0	0	1	0	0	3	Act1/Court/CourtW.ds1	Act1/Court/CourtN.ds1	Act1/Court/CourtE.ds1	0	0	0	127	0
+Act 1 - Barracks Court Connect	167	0	1	1	0	0	0	1	10	14	0	0	0	0	0	Act1/Barracks/CourtWb.ds1	Act1/Barracks/CourtNb.ds1	Act1/Barracks/CourtEb.ds1	0	0	0	219	0
+Act 1 - Barracks W	168	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarW.ds1	Act1/Barracks/BarW2.ds1	Act1/Barracks/BarW3.ds1	Act1/Barracks/BarW4.ds1	0	0	75	0
+Act 1 - Barracks E	169	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarE.ds1	Act1/Barracks/BarE2.ds1	Act1/Barracks/BarE3.ds1	Act1/Barracks/BarE4.ds1	0	0	75	0
+Act 1 - Barracks EW	170	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarEW.ds1	Act1/Barracks/BarEW2.ds1	Act1/Barracks/BarEW3.ds1	Act1/Barracks/BarEW4.ds1	0	0	75	0
+Act 1 - Barracks S	171	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarS.ds1	Act1/Barracks/BarS2.ds1	Act1/Barracks/BarS3.ds1	Act1/Barracks/BarS4.ds1	0	0	75	0
+Act 1 - Barracks SW	172	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarSW.ds1	Act1/Barracks/BarSW2.ds1	Act1/Barracks/BarSW3.ds1	Act1/Barracks/BarSW4.ds1	0	0	75	0
+Act 1 - Barracks SE	173	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarSE.ds1	Act1/Barracks/BarSE2.ds1	Act1/Barracks/BarSE3.ds1	Act1/Barracks/BarSE4.ds1	0	0	75	0
+Act 1 - Barracks SEW	174	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarSEW.ds1	Act1/Barracks/BarSEW2.ds1	Act1/Barracks/BarSEW3.ds1	Act1/Barracks/BarSEW4.ds1	0	0	75	0
+Act 1 - Barracks N	175	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarN.ds1	Act1/Barracks/BarN2.ds1	Act1/Barracks/BarN3.ds1	Act1/Barracks/BarN4.ds1	0	0	75	0
+Act 1 - Barracks NW	176	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNW.ds1	Act1/Barracks/BarNW2.ds1	Act1/Barracks/BarNW3.ds1	Act1/Barracks/BarNW4.ds1	0	0	75	0
+Act 1 - Barracks NE	177	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNE.ds1	Act1/Barracks/BarNE2.ds1	Act1/Barracks/BarNE3.ds1	Act1/Barracks/BarNE4.ds1	0	0	75	0
+Act 1 - Barracks NEW	178	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNEW.ds1	Act1/Barracks/BarNEW2.ds1	Act1/Barracks/BarNEW3.ds1	Act1/Barracks/BarNEW4.ds1	0	0	75	0
+Act 1 - Barracks NS	179	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNS.ds1	Act1/Barracks/BarNS2.ds1	Act1/Barracks/BarNS3.ds1	Act1/Barracks/BarNS4.ds1	0	0	75	0
+Act 1 - Barracks NSW	180	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNSW.ds1	Act1/Barracks/BarNSW2.ds1	Act1/Barracks/BarNSW3.ds1	Act1/Barracks/BarNSW4.ds1	0	0	75	0
+Act 1 - Barracks NSE	181	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNSE.ds1	Act1/Barracks/BarNSE2.ds1	Act1/Barracks/BarNSE3.ds1	Act1/Barracks/BarNSE4.ds1	0	0	75	0
+Act 1 - Barracks NSEW	182	0	1	1	0	0	0	1	10	14	0	0	0	0	4	Act1/Barracks/BarNSEW.ds1	Act1/Barracks/BarNSEW2.ds1	Act1/Barracks/BarNSEW3.ds1	Act1/Barracks/BarNSEW4.ds1	0	0	75	0
+Act 1 - Barracks Theme W	183	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme E	184	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarETheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme EW	185	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarEWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme S	186	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarSTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme SW	187	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarSWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme SE	188	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarSETheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme SEW	189	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarSEWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme N	190	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NW	191	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NE	192	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNETheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NEW	193	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNEWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NS	194	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNSTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NSW	195	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNSWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NSE	196	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNSETheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Theme NSEW	197	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNSEWTheme1.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Next W	198	0	1	1	0	0	0	1	10	14	0	1	0	0	1	Act1/Barracks/BarWWarp.ds1	0	0	0	0	0	79	0
+Act 1 - Barracks Next E	199	0	1	1	0	0	0	1	10	14	0	1	0	0	1	Act1/Barracks/BarEWarp.ds1	0	0	0	0	0	79	0
+Act 1 - Barracks Next S	200	0	1	1	0	0	0	1	10	14	0	1	0	0	1	Act1/Barracks/BarSWarp.ds1	0	0	0	0	0	79	0
+Act 1 - Barracks Next N	201	0	1	1	0	0	0	1	10	14	0	1	0	0	1	Act1/Barracks/BarNWarp.ds1	0	0	0	0	0	79	0
+Act 1 - Barracks Forge W	202	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarWForge.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Forge E	203	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarEForge.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Forge S	204	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarSForge.ds1	0	0	0	0	0	75	0
+Act 1 - Barracks Forge N	205	0	1	1	0	0	0	1	10	14	0	0	0	0	1	Act1/Barracks/BarNForge.ds1	0	0	0	0	0	75	0
+Act 1 - Jail W	206	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailW.ds1	Act1/Barracks/JailW2.ds1	Act1/Barracks/JailW3.ds1	Act1/Barracks/JailW4.ds1	0	0	107	0
+Act 1 - Jail E	207	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailE.ds1	Act1/Barracks/JailE2.ds1	Act1/Barracks/JailE3.ds1	Act1/Barracks/JailE4.ds1	0	0	107	0
+Act 1 - Jail EW	208	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailEW.ds1	Act1/Barracks/JailEW2.ds1	Act1/Barracks/JailEW3.ds1	Act1/Barracks/JailEW4.ds1	0	0	107	0
+Act 1 - Jail S	209	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailS.ds1	Act1/Barracks/JailS2.ds1	Act1/Barracks/JailS3.ds1	Act1/Barracks/JailS4.ds1	0	0	107	0
+Act 1 - Jail SW	210	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailSW.ds1	Act1/Barracks/JailSW2.ds1	Act1/Barracks/JailSW3.ds1	Act1/Barracks/JailSW4.ds1	0	0	107	0
+Act 1 - Jail SE	211	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailSE.ds1	Act1/Barracks/JailSE2.ds1	Act1/Barracks/JailSE3.ds1	Act1/Barracks/JailSE4.ds1	0	0	107	0
+Act 1 - Jail SEW	212	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailSEW.ds1	Act1/Barracks/JailSEW2.ds1	Act1/Barracks/JailSEW3.ds1	Act1/Barracks/JailSEW4.ds1	0	0	107	0
+Act 1 - Jail N	213	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailN.ds1	Act1/Barracks/JailN2.ds1	Act1/Barracks/JailN3.ds1	Act1/Barracks/JailN4.ds1	0	0	107	0
+Act 1 - Jail NW	214	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailNW.ds1	Act1/Barracks/JailNW2.ds1	Act1/Barracks/JailNW3.ds1	Act1/Barracks/JailNW4.ds1	0	0	107	0
+Act 1 - Jail NE	215	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailNE.ds1	Act1/Barracks/JailNE2.ds1	Act1/Barracks/JailNE3.ds1	Act1/Barracks/JailNE4.ds1	0	0	107	0
+Act 1 - Jail NEW	216	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailNEW.ds1	Act1/Barracks/JailNEW2.ds1	Act1/Barracks/JailNEW3.ds1	Act1/Barracks/JailNEW4.ds1	0	0	107	0
+Act 1 - Jail NS	217	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailNS.ds1	Act1/Barracks/JailNS2.ds1	Act1/Barracks/JailNS3.ds1	Act1/Barracks/JailNS4.ds1	0	0	107	0
+Act 1 - Jail NSW	218	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailNSW.ds1	Act1/Barracks/JailNSW2.ds1	Act1/Barracks/JailNSW3.ds1	Act1/Barracks/JailNSW4.ds1	0	0	107	0
+Act 1 - Jail NSE	219	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Barracks/JailNSE.ds1	Act1/Barracks/JailNSE2.ds1	Act1/Barracks/JailNSE3.ds1	Act1/Barracks/JailNSE4.ds1	0	0	107	0
+Act 1 - Jail NSEW	220	0	1	1	0	0	0	1	12	12	0	0	0	0	5	Act1/Barracks/JailNSEW.ds1	Act1/Barracks/JailNSEW2.ds1	Act1/Barracks/JailNSEW3.ds1	Act1/Barracks/JailNSEW4.ds1	Act1/Barracks/JailNSEWSecret.ds1	0	107	0
+Act 1 - Jail Theme W	221	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme E	222	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailETheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme EW	223	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailEWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme S	224	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailSTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme SW	225	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailSWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme SE	226	0	1	1	0	0	0	1	12	12	0	0	1	0	1	Act1/Barracks/JailSETheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme SEW	227	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailSEWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme N	228	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NW	229	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NE	230	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNETheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NEW	231	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNEWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NS	232	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNSTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NSW	233	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNSWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NSE	234	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNSETheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Theme NSEW	235	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Barracks/JailNSEWTheme.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Prev W	236	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailWWarpPrev.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Prev E	237	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailEWarpPrev.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Prev S	238	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailSWarpPrev.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Prev N	239	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailNWarpPrev.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Next W	240	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailWWarpNext.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Next E	241	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailEWarpNext.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Next S	242	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailSWarpNext.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Next N	243	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailNWarpNext.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Cath W	244	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailWWarpCath.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Cath E	245	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailEWarpCath.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Cath S	246	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailSWarpCath.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Cath N	247	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailNWarpCath.ds1	0	0	0	0	0	367	0
+Act 1 - Jail Waypoint W	248	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailWWay.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Waypoint E	249	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailEWay.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Waypoint S	250	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailSWay.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Waypoint N	251	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailNWay.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Pitspawn W	252	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailWPitspawn.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Pitspawn E	253	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailEPitspawn.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Pitspawn S	254	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailSPitspawn.ds1	0	0	0	0	0	107	0
+Act 1 - Jail Pitspawn N	255	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Barracks/JailNPitspawn.ds1	0	0	0	0	0	107	0
+Act 1 - Courtyard 2	256	32	1	1	1	0	0	1	0	0	0	1	0	0	1	Act1/Court/Cat_Court.ds1	0	0	0	0	0	783	0
+Act 1 - Cathedral	257	33	1	1	0	0	0	1	0	0	0	1	0	0	1	Act1/Cathedrl/Cathy3.ds1	0	0	0	0	0	511	0
+Act 1 - Catacombs W	258	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatW.ds1	Act1/Catacomb/CatW2.ds1	Act1/Catacomb/CatW3.ds1	Act1/Catacomb/CatW4.ds1	0	0	17	0
+Act 1 - Catacombs E	259	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatE.ds1	Act1/Catacomb/CatE2.ds1	Act1/Catacomb/CatE3.ds1	Act1/Catacomb/CatE4.ds1	0	0	17	0
+Act 1 - Catacombs EW	260	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatEW.ds1	Act1/Catacomb/CatEW2.ds1	Act1/Catacomb/CatEW3.ds1	Act1/Catacomb/CatEW4.ds1	0	0	17	0
+Act 1 - Catacombs S	261	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatS.ds1	Act1/Catacomb/CatS2.ds1	Act1/Catacomb/CatS3.ds1	Act1/Catacomb/CatS4.ds1	0	0	17	0
+Act 1 - Catacombs SW	262	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatSW.ds1	Act1/Catacomb/CatSW2.ds1	Act1/Catacomb/CatSW3.ds1	Act1/Catacomb/CatSW4.ds1	0	0	17	0
+Act 1 - Catacombs SE	263	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatSE.ds1	Act1/Catacomb/CatSE2.ds1	Act1/Catacomb/CatSE3.ds1	Act1/Catacomb/CatSE4.ds1	0	0	17	0
+Act 1 - Catacombs SEW	264	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatSEW.ds1	Act1/Catacomb/CatSEW2.ds1	Act1/Catacomb/CatSEW3.ds1	Act1/Catacomb/CatSEW4.ds1	0	0	17	0
+Act 1 - Catacombs N	265	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatN.ds1	Act1/Catacomb/CatN2.ds1	Act1/Catacomb/CatN3.ds1	Act1/Catacomb/CatN4.ds1	0	0	17	0
+Act 1 - Catacombs NW	266	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNW.ds1	Act1/Catacomb/CatNW2.ds1	Act1/Catacomb/CatNW3.ds1	Act1/Catacomb/CatNW4.ds1	0	0	17	0
+Act 1 - Catacombs NE	267	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNE.ds1	Act1/Catacomb/CatNE2.ds1	Act1/Catacomb/CatNE3.ds1	Act1/Catacomb/CatNE4.ds1	0	0	17	0
+Act 1 - Catacombs NEW	268	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNEW.ds1	Act1/Catacomb/CatNEW2.ds1	Act1/Catacomb/CatNEW3.ds1	Act1/Catacomb/CatNEW4.ds1	0	0	17	0
+Act 1 - Catacombs NS	269	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNS.ds1	Act1/Catacomb/CatNS2.ds1	Act1/Catacomb/CatNS3.ds1	Act1/Catacomb/CatNS4.ds1	0	0	17	0
+Act 1 - Catacombs NSW	270	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNSW.ds1	Act1/Catacomb/CatNSW2.ds1	Act1/Catacomb/CatNSW3.ds1	Act1/Catacomb/CatNSW4.ds1	0	0	17	0
+Act 1 - Catacombs NSE	271	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNSE.ds1	Act1/Catacomb/CatNSE2.ds1	Act1/Catacomb/CatNSE3.ds1	Act1/Catacomb/CatNSE4.ds1	0	0	17	0
+Act 1 - Catacombs NSEW	272	0	1	1	0	0	0	1	12	12	0	0	0	0	4	Act1/Catacomb/CatNSEW.ds1	Act1/Catacomb/CatNSEW2.ds1	Act1/Catacomb/CatNSEW3.ds1	Act1/Catacomb/CatNSEW4.ds1	0	0	17	0
+Act 1 - Catacombs Theme W	273	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme E	274	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatETheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme EW	275	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatEWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme S	276	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatSTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme SW	277	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatSWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme SE	278	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatSETheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme SEW	279	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatSEWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme N	280	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NW	281	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NE	282	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNETheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NEW	283	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNEWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NS	284	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNSTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NSW	285	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNSWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NSE	286	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNSETheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Theme NSEW	287	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act1/Catacomb/CatNSEWTheme1.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Prev EW	288	0	1	1	0	0	0	1	12	12	0	1	0	0	4	Act1/Catacomb/CatEWUp.ds1	Act1/Catacomb/CatEWUp2.ds1	Act1/Catacomb/CatEWUp3.ds1	Act1/Catacomb/CatEWUp4.ds1	0	0	25	0
+Act 1 - Catacombs Prev NS	289	0	1	1	0	0	0	1	12	12	0	1	0	0	4	Act1/Catacomb/CatNSUp.ds1	Act1/Catacomb/CatNSUp2.ds1	Act1/Catacomb/CatNSUp3.ds1	Act1/Catacomb/CatNSUp4.ds1	0	0	25	0
+Act 1 - Catacombs Prev NSEW	290	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Catacomb/CatNSEWExit.ds1	0	0	0	0	0	19	0
+Act 1 - Catacombs Next W	291	0	1	1	0	0	0	1	12	12	0	1	0	0	2	Act1/Catacomb/CatWDown.ds1	Act1/Catacomb/CatWDown2.ds1	0	0	0	0	21	0
+Act 1 - Catacombs Next E	292	0	1	1	0	0	0	1	12	12	0	1	0	0	2	Act1/Catacomb/CatEDown.ds1	Act1/Catacomb/CatEDown2.ds1	0	0	0	0	21	0
+Act 1 - Catacombs Next S	293	0	1	1	0	0	0	1	12	12	0	1	0	0	2	Act1/Catacomb/CatSDown.ds1	Act1/Catacomb/CatSDown2.ds1	0	0	0	0	21	0
+Act 1 - Catacombs Next N	294	0	1	1	0	0	0	1	12	12	0	1	0	0	2	Act1/Catacomb/CatNDown.ds1	Act1/Catacomb/CatNDown2.ds1	0	0	0	0	21	0
+Act 1 - Catacombs Waypoint W	295	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Catacomb/CatWWay.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Waypoint E	296	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Catacomb/CatEWay.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Waypoint S	297	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Catacomb/CatSWay.ds1	0	0	0	0	0	17	0
+Act 1 - Catacombs Waypoint N	298	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act1/Catacomb/CatNWay.ds1	0	0	0	0	0	17	0
+Act 1 - Andariel	299	37	1	1	0	0	0	1	0	0	0	1	0	0	1	Act1/Catacomb/Andy3.ds1	0	0	0	0	0	57	0
+Act 1 - Tristram	300	38	1	0	1	0	0	1	0	0	0	1	0	0	1	Act1/Tristram/Tri_Town4.ds1	0	0	0	0	0	63	0
+Act 2 - Town 	301	40	1	0	1	0	0	1	0	0	1	1	3	0	0	0	Act2/Town/LutW.ds1	Act2/Town/LutN.ds1	0	0	0	8191	0
+Act 2 - Sewer W	302	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewW.ds1	Act2/Sewer/SewW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer E 	303	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewE.ds1	Act2/Sewer/SewE2.ds1	0	0	0	0	3	0
+Act 2 - Sewer EW	304	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewEW.ds1	Act2/Sewer/SewEW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer S	305	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewS.ds1	Act2/Sewer/SewS2.ds1	0	0	0	0	3	0
+Act 2 - Sewer SW	306	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewSW.ds1	Act2/Sewer/SewSW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer SE	307	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewSE.ds1	Act2/Sewer/SewSE2.ds1	0	0	0	0	3	0
+Act 2 - Sewer SEW	308	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewSEW.ds1	Act2/Sewer/SewSEW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer N	309	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewN.ds1	Act2/Sewer/SewN2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NW	310	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNW.ds1	Act2/Sewer/SewNW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NE	311	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNE.ds1	Act2/Sewer/SewNE2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NEW	312	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNEW.ds1	Act2/Sewer/SewNEW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NS	313	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNS.ds1	Act2/Sewer/SewNS2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NSW	314	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNSW.ds1	Act2/Sewer/SewNSW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NSE	315	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNSE.ds1	Act2/Sewer/SewNSE2.ds1	0	0	0	0	3	0
+Act 2 - Sewer NSEW	316	0	1	0	0	0	1	1	12	12	0	0	0	0	2	Act2/Sewer/SewNSEW.ds1	Act2/Sewer/SewNSEW2.ds1	0	0	0	0	3	0
+Act 2 - Sewer Theme W	317	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme E 	318	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewETheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme EW	319	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewEWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme S	320	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewSTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme SW	321	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewSWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme SE	322	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewSETheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme SEW	323	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewSEWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme N	324	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NW	325	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NE	326	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNETheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NEW	327	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNEWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NS	328	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNSTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NSW	329	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNSWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NSE	330	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNSETheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Theme NSEW	331	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNSEWTheme.ds1	0	0	0	0	0	11	0
+Act 2 - Sewer Prev W	332	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewWUp.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Prev E	333	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewEUp.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Prev S	334	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewSUp.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Prev N	335	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewNUp.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Prev NS	336	0	1	0	0	0	1	1	12	12	0	1	0	0	2	Act2/Sewer/SewNSDock.ds1	Act2/Sewer/SewNSDock2.ds1	0	0	0	0	3	0
+Act 2 - Sewer Next W	337	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewWDown.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Next E	338	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewEDown.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Next S	339	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewSDown.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Next N	340	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewNDown.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Radament's Lair W	341	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewWRad.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Radament's Lair E	342	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewERad.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Radament's Lair S	343	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewSRad.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Radament's Lair N	344	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Sewer/SewNRad.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Waypoint W	345	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewWWaypoint.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Waypoint E	346	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewEWaypoint.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Waypoint S	347	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewSWaypoint.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Waypoint N	348	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewNWaypoint.ds1	0	0	0	0	0	15	0
+Act 2 - Sewer Chest W	349	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewWCon.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Chest E	350	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewECon.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Chest S	351	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewSCon.ds1	0	0	0	0	0	3	0
+Act 2 - Sewer Chest N	352	0	1	0	0	0	1	1	12	12	0	1	0	0	1	Act2/Sewer/SewNCon.ds1	0	0	0	0	0	3	0
+Act 2 - Harem	353	50	1	1	0	0	0	1	0	0	0	1	0	0	1	Act2/Palace/Harem2.ds1	0	0	0	0	0	79	0
+Act 2 - Corrupt Harem NE	354	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/SubNE.ds1	Act2/Palace/SubNE2.ds1	0	0	0	0	121	0
+Act 2 - Corrupt Harem SE	355	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/SubSE.ds1	Act2/Palace/SubSE2.ds1	0	0	0	0	121	0
+Act 2 - Corrupt Harem SW	356	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/SubSW.ds1	Act2/Palace/SubSW2.ds1	0	0	0	0	121	0
+Act 2 - Corrupt Harem NW	357	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/SubNW.ds1	Act2/Palace/SubNW2.ds1	0	0	0	0	121	0
+Act 2 - Basement NE	358	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/CelNE.ds1	Act2/Palace/CelNE2.ds1	Act2/Palace/CelNEWaypoint.ds1	0	0	0	67	0
+Act 2 - Basement SE	359	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/CelSE.ds1	Act2/Palace/CelSE2.ds1	Act2/Palace/CelSEWaypoint.ds1	Act2/Palace/CelSE3.ds1	0	0	67	0
+Act 2 - Basement SW	360	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/CelSW.ds1	Act2/Palace/CelSW2.ds1	Act2/Palace/CelSWWaypoint.ds1	0	0	0	67	0
+Act 2 - Basement NW	361	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Palace/CelNW.ds1	Act2/Palace/CelNW2.ds1	Act2/Palace/CelNWWaypoint.ds1	Act2/Palace/CelNW3.ds1	0	0	67	0
+Act 2 - Desert Transition W	362	0	1	0	1	0	1	1	8	56	0	0	0	0	1	Act2/Town/TransW2.ds1	0	0	0	0	0	1577217	0
+Act 2 - Desert Transition N	363	0	1	0	1	0	1	1	56	8	0	0	0	0	1	Act2/Town/TransN1.ds1	0	0	0	0	0	1577217	0
+Act 2 - Desert Border 1	364	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge1.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 2	365	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge2.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 3	366	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge3.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 4	367	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge4.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 5	368	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge5.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 6	369	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge6.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 7	370	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge7.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 8	371	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge8.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 9	372	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge9.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 10	373	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge10.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 11	374	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge11.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Border 12	375	0	0	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/edge12.ds1	0	0	0	0	0	1573123	0
+Act 2 - Desert Cliff Right Ends	376	0	0	0	1	0	1	1	16	8	0	0	0	0	0	0	Act2/BigCliff/CliffRU.ds1	Act2/BigCliff/CliffRL.ds1	0	0	0	43	0
+Act 2 - Desert Cliff Right Wall	377	0	0	0	1	0	1	1	16	8	0	0	0	0	2	Act2/BigCliff/CliffRght1.ds1	Act2/BigCliff/CliffRght2.ds1	0	0	0	0	11	0
+Act 2 - Desert Cliff Right Path	378	0	0	0	1	0	1	1	16	8	0	0	0	0	1	Act2/BigCliff/CliffRP.ds1	0	0	0	0	0	523	0
+Act 2 - Desert Cliff Left Ends	379	0	0	0	1	0	1	1	8	16	0	0	0	0	0	0	Act2/BigCliff/CliffLU.ds1	Act2/BigCliff/CliffLL.ds1	0	0	0	51	0
+Act 2 - Desert Cliff Left Wall	380	0	0	0	1	0	1	1	8	16	0	0	0	0	3	Act2/BigCliff/CliffLeft1.ds1	Act2/BigCliff/CliffLeft2.ds1	Act2/BigCliff/CliffLeft3.ds1	0	0	0	19	0
+Act 2 - Desert Cliff Left Path	381	0	0	0	1	0	1	1	8	16	0	0	0	0	1	Act2/BigCliff/CliffLP.ds1	0	0	0	0	0	531	0
+Act 2 - Desert Cliff Top	382	0	0	0	1	0	1	1	16	16	0	0	0	0	1	Act2/BigCliff/Cor.ds1	0	0	0	0	0	131099	0
+Act 2 - Desert Cliff Right King Tomb	383	0	0	0	1	0	1	1	16	8	0	1	0	0	0	Act2/BigCliff/TalRght1.ds1	Act2/BigCliff/TalRght2.ds1	Act2/BigCliff/TalRght3.ds1	0	0	0	2059	0
+Act 2 - Desert Cliff Right King Ends	384	0	0	0	1	0	1	1	16	8	0	0	0	0	1	Act2/BigCliff/KingRghtMesa.ds1	0	0	0	0	0	43	0
+Act 2 - Desert Cliff Left King Tomb	385	0	0	0	1	0	1	1	8	16	0	1	0	0	0	Act2/BigCliff/TalLeft1.ds1	Act2/BigCliff/TalLeft2.ds1	Act2/BigCliff/TalLeft3.ds1	0	0	0	8211	0
+Act 2 - Desert Cliff Left King Ends	386	0	0	0	1	0	1	1	8	16	0	0	0	0	1	Act2/BigCliff/KingLftMesa.ds1	0	0	0	0	0	51	0
+Act 2 - Desert Cliff Top King Tomb	387	0	0	0	1	0	1	1	16	16	0	1	0	0	0	Act2/BigCliff/TalCor.ds1	0	0	0	0	0	32799	0
+Act 2 - Desert Tomb 1	388	0	0	0	1	0	1	1	8	8	0	1	0	0	4	Act2/Outdoors/TombEnt1.ds1	Act2/Outdoors/TombEnt2.ds1	Act2/Outdoors/TombEnt3.ds1	Act2/Outdoors/TombEnt4.ds1	0	0	67108871	0
+Act 2 - Desert Tomb 2	389	0	0	0	1	0	1	1	16	16	0	1	0	0	1	Act2/Outdoors/Viper1.ds1	0	0	0	0	0	151322631	0
+Act 2 - Desert Lair 1	390	0	0	0	1	0	1	1	8	8	0	1	0	0	1	Act2/Maggot/Hole1.ds1	0	0	0	0	0	6291457	0
+Act 2 - Desert Lair 2	391	0	0	0	1	0	1	1	8	8	0	1	0	0	1	Act2/Maggot/Tight.ds1	0	0	0	0	0	6291457	0
+Act 2 - Desert Valley Ruin 1	392	0	1	0	1	0	1	1	8	8	0	0	0	0	6	Act2/Ruin/Ruin1.ds1	Act2/Ruin/Ruin2.ds1	Act2/Ruin/Ruin3.ds1	Act2/Ruin/Ruin4.ds1	Act2/Ruin/Ruin5.ds1	Act2/Ruin/Ruin6.ds1	16842753	0
+Act 2 - Desert Valley Ruin 2	393	0	1	0	1	0	1	1	8	8	0	0	0	0	5	Act2/Ruin/Ruin7.ds1	Act2/Ruin/Ruin8.ds1	Act2/Ruin/Ruin9.ds1	Act2/Ruin/Ruin10.ds1	Act2/Ruin/Head3.ds1	0	16842753	0
+Act 2 - Desert Valley Warp	394	0	1	0	1	0	1	1	8	8	0	1	0	0	1	Act2/Outdoors/KingWarp.ds1	0	0	0	0	0	268435456	0
+Act 2 - Desert Oasis 1	395	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Act2/Outdoors/Oasis1.ds1	Act2/Outdoors/Oasis2.ds1	Act2/Outdoors/Oasis3.ds1	Act2/Outdoors/Oasis4.ds1	0	0	278529	0
+Act 2 - Desert Oasis 2	396	0	1	0	1	0	1	1	16	16	0	0	0	0	4	Act2/Outdoors/Oasis5.ds1	Act2/Outdoors/Oasis6.ds1	Act2/Outdoors/Oasis7.ds1	Act2/Outdoors/Oasis8.ds1	0	0	33832965	0
+Act 2 - Desert Oasis 3	397	0	1	0	1	0	1	1	16	16	0	0	0	0	4	Act2/Outdoors/Oasis9.ds1	Act2/Outdoors/Oasis10.ds1	Act2/Outdoors/Oasis11.ds1	Act2/Outdoors/Oasis12.ds1	0	0	33832965	0
+Act 2 - Desert Fill Mesa 1	398	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/mesarm.ds1	0	0	0	0	0	257	0
+Act 2 - Desert Fill Head 1	399	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/Head1.ds1	0	0	0	0	0	69	0
+Act 2 - Desert Fill Head 2	400	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/Head2.ds1	0	0	0	0	0	69	0
+Act 2 - Desert Fill Bone 1	401	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/Bone1.ds1	0	0	0	0	0	129	0
+Act 2 - Desert Fill Bone 2	402	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/Bone2.ds1	0	0	0	0	0	129	0
+Act 2 - Desert Fill Wagon 1	403	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Act2/Outdoors/Wagon2.ds1	0	0	0	0	0	8388609	0
+Act 2 - Desert Fill Berms 1	404	0	1	0	1	0	1	1	8	8	0	0	0	0	5	Act2/Outdoors/Desert1.ds1	Act2/Outdoors/Desert2.ds1	Act2/Outdoors/Desert3.ds1	Act2/Outdoors/Desert4.ds1	Act2/Outdoors/Desert5.ds1	0	263169	0
+Act 2 - Desert Fill Berms 2	405	0	1	0	1	0	1	1	8	8	0	0	0	0	5	Act2/Outdoors/Desert6.ds1	Act2/Outdoors/Desert7.ds1	Act2/Outdoors/Desert8.ds1	Act2/Outdoors/Desert9.ds1	Act2/Outdoors/Desert10.ds1	0	263169	0
+Act 2 - Desert Fill Berms 3	406	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Act2/Outdoors/Burm1.ds1	Act2/Outdoors/Burm2.ds1	Act2/Outdoors/Burm3.ds1	Act2/Outdoors/Burm4.ds1	0	0	787459	0
+Act 2 - Desert Fill Berms 4	407	0	1	0	1	0	1	1	8	8	0	0	0	0	3	Act2/Outdoors/Burm5.ds1	Act2/Outdoors/Burm6.ds1	Act2/Outdoors/Burm7.ds1	0	0	0	787459	0
+Act 2 - Desert Ruins 16X16	408	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Act2/Outdoors/Ruin1.ds1	0	0	0	0	0	51975171	0
+Act 2 - Desert Ruins 16X08	409	0	1	0	1	0	1	1	16	8	0	0	0	0	1	Act2/Outdoors/Ruin3.ds1	0	0	0	0	0	51975171	0
+Act 2 - Desert Ruins 08X16	410	0	1	0	1	0	1	1	8	16	0	0	0	0	1	Act2/Outdoors/Ruin2.ds1	0	0	0	0	0	51975171	0
+Act 2 - Desert Ruins 08X08	411	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Act2/Outdoors/Ruin4.ds1	Act2/Outdoors/Ruin5.ds1	Act2/Outdoors/Ruin6.ds1	Act2/Outdoors/Ruin7.ds1	0	0	51975171	0
+Act 2 - Desert Ruins Sewer	412	0	1	0	1	0	1	1	8	8	0	1	0	0	1	Act2/Outdoors/RuinSewr.ds1	0	0	0	0	0	51975171	0
+Act 2 - Desert Ruins Elder	413	0	1	0	1	0	1	1	16	16	0	1	0	0	1	Act2/Outdoors/RuinDarkElder.ds1	0	0	0	0	0	51975171	0
+Act 2 - Tomb W	414	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombW.ds1	Act2/Tomb/TombW2.ds1	Act2/Tomb/TombW3.ds1	0	0	0	191	0
+Act 2 - Tomb E	415	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombE.ds1	Act2/Tomb/TombE2.ds1	Act2/Tomb/TombE3.ds1	0	0	0	191	0
+Act 2 - Tomb EW	416	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombEW.ds1	Act2/Tomb/TombEW2.ds1	Act2/Tomb/TombEW3.ds1	0	0	0	191	0
+Act 2 - Tomb S	417	0	1	1	0	0	0	1	16	16	0	0	0	0	4	Act2/Tomb/TombS.ds1	Act2/Tomb/TombS2.ds1	Act2/Tomb/TombS3.ds1	Act2/Tomb/TombSx.ds1	0	0	191	0
+Act 2 - Tomb SW	418	0	1	1	0	0	0	1	16	16	0	0	0	0	4	Act2/Tomb/TombSW.ds1	Act2/Tomb/TombSW2.ds1	Act2/Tomb/TombSW3.ds1	Act2/Tomb/TombSW4.ds1	0	0	191	0
+Act 2 - Tomb SE	419	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombSE.ds1	Act2/Tomb/TombSE2.ds1	Act2/Tomb/TombSE3.ds1	0	0	0	191	0
+Act 2 - Tomb SEW	420	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombSEW.ds1	Act2/Tomb/TombSEW2.ds1	Act2/Tomb/TombSEW3.ds1	0	0	0	191	0
+Act 2 - Tomb N	421	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombN.ds1	Act2/Tomb/TombN2.ds1	Act2/Tomb/TombN3.ds1	0	0	0	191	0
+Act 2 - Tomb NW	422	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombNW.ds1	Act2/Tomb/TombNW2.ds1	Act2/Tomb/TombNW3.ds1	0	0	0	191	0
+Act 2 - Tomb NE	423	0	1	1	0	0	0	1	16	16	0	0	0	0	4	Act2/Tomb/TombNE.ds1	Act2/Tomb/TombNE2.ds1	Act2/Tomb/TombNE3.ds1	Act2/Tomb/TombNE4.ds1	0	0	191	0
+Act 2 - Tomb NEW	424	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombNEW.ds1	Act2/Tomb/TombNEW2.ds1	Act2/Tomb/TombNEW3.ds1	0	0	0	191	0
+Act 2 - Tomb NS	425	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombNS.ds1	Act2/Tomb/TombNS2.ds1	Act2/Tomb/TombNS3.ds1	0	0	0	191	0
+Act 2 - Tomb NSW	426	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombNSW.ds1	Act2/Tomb/TombNSW2.ds1	Act2/Tomb/TombNSW3.ds1	0	0	0	191	0
+Act 2 - Tomb NSE	427	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombNSE.ds1	Act2/Tomb/TombNSE2.ds1	Act2/Tomb/TombNSE3.ds1	0	0	0	191	0
+Act 2 - Tomb NSEW	428	0	1	1	0	0	0	1	16	16	0	0	0	0	3	Act2/Tomb/TombNSEW.ds1	Act2/Tomb/TombNSEW2.ds1	Act2/Tomb/TombNSEW3.ds1	0	0	0	191	0
+Act 2 - Tomb Theme W	429	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme E	430	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombETheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme EW	431	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombEWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme S	432	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme SW	433	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme SE	434	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSETheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme SEW	435	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSEWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme N	436	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NW	437	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NE	438	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNETheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NEW	439	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNEWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NS	440	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNSTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NSW	441	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNSWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NSE	442	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNSETheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Theme NSEW	443	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNSEWTheme.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Prev SEW	444	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombSEWWarpPrev.ds1	Act2/Tomb/TombSEWWarpPrev2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Prev NEW	445	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombNEWWarpPrev.ds1	Act2/Tomb/TombNEWWarpPrev2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Prev NSW	446	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombNSWWarpPrev.ds1	Act2/Tomb/TombNSWWarpPrev2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Prev NSE	447	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombNSEWarpPrev.ds1	Act2/Tomb/TombNSEWarpPrev2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Next W	448	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombWWarpNext.ds1	Act2/Tomb/TombWWarpNext2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Next E	449	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombEWarpNext.ds1	Act2/Tomb/TombEWarpNext2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Next S	450	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombSWarpNext.ds1	Act2/Tomb/TombSWarpNext2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Next N	451	0	1	1	0	0	0	1	16	16	0	1	0	0	2	Act2/Tomb/TombNWarpNext.ds1	Act2/Tomb/TombNWarpNext2.ds1	0	0	0	0	191	0
+Act 2 - Tomb Treasure W	452	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombWTreasure.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Treasure E	453	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombETreasure.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Treasure S	454	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSTreasure.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Treasure N	455	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNTreasure.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Cube W	456	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombCubeW.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Cube E	457	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombCubeE.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Cube S	458	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombCubeS.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Cube N	459	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombCubeN.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Talrasha W	460	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombWTalrasha.ds1	0	0	0	0	0	447	0
+Act 2 - Tomb Talrasha E	461	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombETalrasha.ds1	0	0	0	0	0	447	0
+Act 2 - Tomb Talrasha S	462	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombSTalrasha.ds1	0	0	0	0	0	447	0
+Act 2 - Tomb Talrasha N	463	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombNTalrasha.ds1	0	0	0	0	0	447	0
+Act 2 - Tomb Leatherarm W	464	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombWLeatherarm.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Leatherarm E	465	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombELeatherarm.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Leatherarm S	466	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSLeatherarm.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Leatherarm N	467	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNLeatherarm.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Kaa W	468	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombWKaa.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Kaa E	469	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombEKaa.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Kaa S	470	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSKaa.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Kaa N	471	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNKaa.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Chest W	472	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombWConsol.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Chest E	473	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombEConsol.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Chest S	474	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombSConsol.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Chest N	475	0	1	1	0	0	0	1	16	16	0	0	0	0	1	Act2/Tomb/TombNConsol.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Waypoint W	476	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombWWaypoint.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Waypoint E	477	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombEWaypoint.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Waypoint S	478	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombSWaypoint.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Waypoint N	479	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/TombNWaypoint.ds1	0	0	0	0	0	191	0
+Act 2 - Tomb Tainted Sun X	480	0	1	1	0	0	0	1	16	16	0	1	0	0	1	Act2/Tomb/Serpent1.ds1	0	0	0	0	0	1057	0
+Act 2 - Duriel's Lair	481	73	0	0	0	0	0	1	0	0	0	1	0	0	1	Act2/Tomb/Duriel.ds1	0	0	0	0	0	639	0
+Act 2 - Lair W	482	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagW.ds1	0	0	0	0	0	3	0
+Act 2 - Lair E	483	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagE.ds1	0	0	0	0	0	3	0
+Act 2 - Lair EW	484	0	1	0	0	0	1	1	10	10	0	0	0	0	6	Act2/Maggot/MagEW.ds1	Act2/Maggot/MagEW2.ds1	Act2/Maggot/MagEW3.ds1	Act2/Maggot/MagEW4.ds1	Act2/Maggot/MagEW5.ds1	Act2/Maggot/MagEW6.ds1	3	0
+Act 2 - Lair S	485	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagS.ds1	0	0	0	0	0	3	0
+Act 2 - Lair SW	486	0	1	0	0	0	1	1	10	10	0	0	0	0	3	Act2/Maggot/MagSW.ds1	Act2/Maggot/MagSW2.ds1	Act2/Maggot/MagSW3.ds1	0	0	0	3	0
+Act 2 - Lair SE	487	0	1	0	0	0	1	1	10	10	0	0	0	0	3	Act2/Maggot/MagSE.ds1	Act2/Maggot/MagSE2.ds1	Act2/Maggot/MagSE3.ds1	0	0	0	3	0
+Act 2 - Lair SEW	488	0	1	0	0	0	1	1	10	10	0	0	0	0	6	Act2/Maggot/MagSEW.ds1	Act2/Maggot/MagSEW2.ds1	Act2/Maggot/MagSEW3.ds1	Act2/Maggot/MagSEW3.ds1	Act2/Maggot/MagSEW4.ds1	Act2/Maggot/MagSEW4.ds1	3	0
+Act 2 - Lair N	489	0	1	0	0	0	1	1	10	10	0	0	0	0	2	Act2/Maggot/MagN.ds1	Act2/Maggot/MagN2.ds1	0	0	0	0	3	0
+Act 2 - Lair NW	490	0	1	0	0	0	1	1	10	10	0	0	0	0	3	Act2/Maggot/MagNW.ds1	Act2/Maggot/MagNW2.ds1	Act2/Maggot/MagNW3.ds1	0	0	0	3	0
+Act 2 - Lair NE	491	0	1	0	0	0	1	1	10	10	0	0	0	0	3	Act2/Maggot/MagNE.ds1	Act2/Maggot/MagNE2.ds1	Act2/Maggot/MagNE3.ds1	0	0	0	3	0
+Act 2 - Lair NEW	492	0	1	0	0	0	1	1	10	10	0	0	0	0	6	Act2/Maggot/MagNEW.ds1	Act2/Maggot/MagNEW2.ds1	Act2/Maggot/MagNEW3.ds1	Act2/Maggot/MagNEW3.ds1	Act2/Maggot/MagNEW4.ds1	Act2/Maggot/MagNEW4.ds1	3	0
+Act 2 - Lair NS	493	0	1	0	0	0	1	1	10	10	0	0	0	0	5	Act2/Maggot/MagNS.ds1	Act2/Maggot/MagNS2.ds1	Act2/Maggot/MagNS3.ds1	Act2/Maggot/MagNS4.ds1	Act2/Maggot/MagNS5.ds1	Act2/Maggot/MagNS6.ds1	3	0
+Act 2 - Lair NSW	494	0	1	0	0	0	1	1	10	10	0	0	0	0	6	Act2/Maggot/MagNSW.ds1	Act2/Maggot/MagNSW2.ds1	Act2/Maggot/MagNSW3.ds1	Act2/Maggot/MagNSW3.ds1	Act2/Maggot/MagNSW4.ds1	Act2/Maggot/MagNSW4.ds1	3	0
+Act 2 - Lair NSE	495	0	1	0	0	0	1	1	10	10	0	0	0	0	6	Act2/Maggot/MagNSE.ds1	Act2/Maggot/MagNSE2.ds1	Act2/Maggot/MagNSE3.ds1	Act2/Maggot/MagNSE3.ds1	Act2/Maggot/MagNSE4.ds1	Act2/Maggot/MagNSE4.ds1	3	0
+Act 2 - Lair NSEW	496	0	1	0	0	0	1	1	10	10	0	0	0	0	4	Act2/Maggot/MagNSEW.ds1	Act2/Maggot/MagNSEW2.ds1	Act2/Maggot/MagNSEW3.ds1	Act2/Maggot/MagNSEW4.ds1	0	0	3	0
+Act 2 - Lair Prev W	497	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagWWarpPrev.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Prev E	498	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagEWarpPrev.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Prev S	499	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagSWarpPrev.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Prev N	500	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagNWarpPrev.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Next W	501	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagWWarpNext.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Next E	502	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagEWarpNext.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Next S	503	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagSWarpNext.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Next N	504	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagNWarpNext.ds1	0	0	0	0	0	7	0
+Act 2 - Lair Treasure W	505	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagW.ds1	0	0	0	0	0	3	0
+Act 2 - Lair Treasure E	506	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagE.ds1	0	0	0	0	0	3	0
+Act 2 - Lair Treasure S	507	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagS.ds1	0	0	0	0	0	3	0
+Act 2 - Lair Treasure N	508	0	1	0	0	0	1	1	10	10	0	0	0	0	1	Act2/Maggot/MagN.ds1	0	0	0	0	0	3	0
+Act 2 - Lair Tight Spot S	509	0	1	0	0	0	1	1	10	10	0	1	0	0	1	Act2/Maggot/MagQueen.ds1	0	0	0	0	0	7	0
+Act 2 - Arcane W	510	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SanctW.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane E	511	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SanctE.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane EW	512	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctEW.ds1	Act2/Arcane/SanctEW1.ds1	Act2/Arcane/SanctEW2.ds1	Act2/Arcane/SanctEW3.ds1	0	0	1	0
+Act 2 - Arcane S	513	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SanctS.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane SW	514	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctSW.ds1	Act2/Arcane/SanctSW1.ds1	Act2/Arcane/SanctSW2.ds1	Act2/Arcane/SanctSW3.ds1	0	0	1	0
+Act 2 - Arcane SE	515	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctSE.ds1	Act2/Arcane/SanctSE1.ds1	Act2/Arcane/SanctSE2.ds1	Act2/Arcane/SanctSE3.ds1	0	0	1	0
+Act 2 - Arcane SEW	516	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctSEW.ds1	Act2/Arcane/SanctSEW1.ds1	Act2/Arcane/SanctSEW2.ds1	Act2/Arcane/SanctSEW3.ds1	0	0	1	0
+Act 2 - Arcane N	517	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SanctN.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane NW	518	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctNW.ds1	Act2/Arcane/SanctNW1.ds1	Act2/Arcane/SanctNW2.ds1	Act2/Arcane/SanctNW3.ds1	0	0	1	0
+Act 2 - Arcane NE	519	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctNE.ds1	Act2/Arcane/SanctNE1.ds1	Act2/Arcane/SanctNE2.ds1	Act2/Arcane/SanctNE3.ds1	0	0	1	0
+Act 2 - Arcane NEW	520	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctNEW.ds1	Act2/Arcane/SanctNEW1.ds1	Act2/Arcane/SanctNEW2.ds1	Act2/Arcane/SanctNEW3.ds1	0	0	1	0
+Act 2 - Arcane NS	521	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctNS.ds1	Act2/Arcane/SanctNS1.ds1	Act2/Arcane/SanctNS2.ds1	Act2/Arcane/SanctNS3.ds1	0	0	1	0
+Act 2 - Arcane NSW	522	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctNSW.ds1	Act2/Arcane/SanctNSW1.ds1	Act2/Arcane/SanctNSW2.ds1	Act2/Arcane/SanctNSW3.ds1	0	0	1	0
+Act 2 - Arcane NSE	523	0	1	0	0	0	1	1	12	12	0	0	0	0	0	Act2/Arcane/SanctNSE.ds1	Act2/Arcane/SanctNSE1.ds1	Act2/Arcane/SanctNSE2.ds1	Act2/Arcane/SanctNSE3.ds1	0	0	1	0
+Act 2 - Arcane NSEW	524	0	1	0	0	0	1	1	12	12	0	1	0	0	0	Act2/Arcane/SanctNSEW.ds1	Act2/Arcane/SanctNSEW1.ds1	Act2/Arcane/SanctNSEW2.ds1	Act2/Arcane/SanctNSEW3.ds1	Act2/Arcane/SanctNSEW4.ds1	0	1	0
+Act 2 - Arcane Summoner W	525	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SummW.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane Summoner E	526	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SummE.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane Summoner S	527	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SummS.ds1	0	0	0	0	0	1	0
+Act 2 - Arcane Summoner N	528	0	1	0	0	0	1	1	12	12	0	0	0	0	1	Act2/Arcane/SummN.ds1	0	0	0	0	0	1	0
+Act 3 - Town	529	75	1	0	1	0	0	1	0	0	1	1	2	0	1	Act3/Docktown/DockTown3.ds1	0	0	0	0	0	1023	0
+Act 3 - Jungle W	530	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivW.ds1	Act3/Jungle/RivW2.ds1	Act3/Jungle/RivW3.ds1	0	0	0	255	0
+Act 3 - Jungle E	531	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivE.ds1	Act3/Jungle/RivE2.ds1	Act3/Jungle/RivE3.ds1	0	0	0	255	0
+Act 3 - Jungle EW	532	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivEW.ds1	Act3/Jungle/RivEW2.ds1	Act3/Jungle/RivEW3.ds1	0	0	0	255	0
+Act 3 - Jungle S	533	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivS.ds1	Act3/Jungle/RivS2.ds1	Act3/Jungle/RivS3.ds1	0	0	0	255	0
+Act 3 - Jungle SW	534	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivSW.ds1	Act3/Jungle/RivSW2.ds1	Act3/Jungle/RivSW3.ds1	0	0	0	255	0
+Act 3 - Jungle SE	535	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivSE.ds1	Act3/Jungle/RivSE2.ds1	Act3/Jungle/RivSE3.ds1	0	0	0	255	0
+Act 3 - Jungle SEW	536	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivSEW.ds1	Act3/Jungle/RivSEW2.ds1	Act3/Jungle/RivSEW3.ds1	0	0	0	255	0
+Act 3 - Jungle N	537	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivN.ds1	Act3/Jungle/RivN2.ds1	Act3/Jungle/RivN3.ds1	0	0	0	255	0
+Act 3 - Jungle NW	538	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivNW.ds1	Act3/Jungle/RivNW2.ds1	Act3/Jungle/RivNW3.ds1	0	0	0	255	0
+Act 3 - Jungle NE	539	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivNE.ds1	Act3/Jungle/RivNE2.ds1	Act3/Jungle/RivNE3.ds1	0	0	0	255	0
+Act 3 - Jungle NEW	540	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivNEW.ds1	Act3/Jungle/RivNEW2.ds1	Act3/Jungle/RivNEW3.ds1	0	0	0	255	0
+Act 3 - Jungle NS	541	0	1	0	1	0	1	1	32	32	0	0	0	0	5	Act3/Jungle/RivNS.ds1	Act3/Jungle/RivNS2.ds1	Act3/Jungle/RivNS3.ds1	Act3/Jungle/RivNS4.ds1	Act3/Jungle/RivNS5.ds1	0	255	0
+Act 3 - Jungle NSW	542	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivNSW.ds1	Act3/Jungle/RivNSW2.ds1	Act3/Jungle/RivNSW3.ds1	0	0	0	255	0
+Act 3 - Jungle NSE	543	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivNSE.ds1	Act3/Jungle/RivNSE2.ds1	Act3/Jungle/RivNSE3.ds1	0	0	0	255	0
+Act 3 - Jungle NSEW	544	0	1	0	1	0	1	1	32	32	0	0	0	0	3	Act3/Jungle/RivNSEW.ds1	Act3/Jungle/RivNSEW2.ds1	Act3/Jungle/RivNSEW3.ds1	0	0	0	255	0
+Act 3 - Jungle W E	545	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivWoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle W S	546	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivWoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle W N	547	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivWoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle E W	548	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivEoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle E S	549	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivEoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle E N	550	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivEoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle EW S	551	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivEWoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle EW N	552	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivEWoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle S W	553	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle S E	554	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle S N	555	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle SW E	556	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSWoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle SW N	557	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSWoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle SE W	558	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSEoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle SE N	559	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSEoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle SEW N	560	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivSEWoN.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle N W	561	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle N E	562	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle N S	563	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NW E	564	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNWoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NW S	565	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNWoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NE W	566	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNEoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NE S	567	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNEoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NEW S	568	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNEWoS.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NS W	569	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNSoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NS E	570	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNSoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NSW E	571	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNSWoE.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle NSE W	572	0	1	0	1	0	1	1	32	32	0	0	0	0	1	Act3/Jungle/RivNSEoW.ds1	0	0	0	0	0	255	0
+Act 3 - Jungle Head	573	0	0	0	1	0	1	1	64	32	0	0	0	0	0	Act3/Jungle/TransL.ds1	Act3/Jungle/TransU.ds1	0	0	0	0	1023	0
+Act 3 - Jungle Tail	574	0	0	0	1	0	1	1	64	32	0	0	0	0	0	Act3/Jungle/TravL.ds1	Act3/Jungle/TravU.ds1	0	0	0	0	1023	0
+Act 3 - Clearing Webby W	575	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidW.ds1	Act3/Jungle/SpidW2.ds1	Act3/Jungle/SpidW3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby E	576	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidE.ds1	Act3/Jungle/SpidE2.ds1	Act3/Jungle/SpidE3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby EW	577	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidEW.ds1	Act3/Jungle/SpidEW2.ds1	Act3/Jungle/SpidEW3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby S	578	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidS.ds1	Act3/Jungle/SpidS2.ds1	Act3/Jungle/SpidS3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby SW	579	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidSW.ds1	Act3/Jungle/SpidSW2.ds1	Act3/Jungle/SpidSW3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby SE	580	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidSE.ds1	Act3/Jungle/SpidSE2.ds1	Act3/Jungle/SpidSE3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby N	581	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidN.ds1	Act3/Jungle/SpidN2.ds1	Act3/Jungle/SpidN3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby NW	582	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidNW.ds1	Act3/Jungle/SpidNW2.ds1	Act3/Jungle/SpidNW3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby NE	583	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidNE.ds1	Act3/Jungle/SpidNE2.ds1	Act3/Jungle/SpidNE3.ds1	0	0	0	1636	0
+Act 3 - Clearing Webby NS	584	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/SpidNS.ds1	Act3/Jungle/SpidNS2.ds1	Act3/Jungle/SpidNS3.ds1	0	0	0	1636	0
+Act 3 - Clearing Boggy W	585	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogW.ds1	Act3/Jungle/BogW2.ds1	Act3/Jungle/BogW3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy E	586	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogE.ds1	Act3/Jungle/BogE2.ds1	Act3/Jungle/BogE3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy EW	587	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogEW.ds1	Act3/Jungle/BogEW2.ds1	Act3/Jungle/BogEW3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy S	588	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogS.ds1	Act3/Jungle/BogS2.ds1	Act3/Jungle/BogS3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy SW	589	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogSW.ds1	Act3/Jungle/BogSW2.ds1	Act3/Jungle/BogSW3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy SE	590	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogSE.ds1	Act3/Jungle/BogSE2.ds1	Act3/Jungle/BogSE3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy N	591	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogN.ds1	Act3/Jungle/BogN2.ds1	Act3/Jungle/BogN3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy NW	592	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogNW.ds1	Act3/Jungle/BogNW2.ds1	Act3/Jungle/BogNW3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy NE	593	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogNE.ds1	Act3/Jungle/BogNE2.ds1	Act3/Jungle/BogNE3.ds1	0	0	0	4838	0
+Act 3 - Clearing Boggy NS	594	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/BogNS.ds1	Act3/Jungle/BogNS2.ds1	Act3/Jungle/BogNS3.ds1	0	0	0	4838	0
+Act 3 - Clearing Pygmy W	595	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygW.ds1	Act3/Jungle/PygW2.ds1	Act3/Jungle/PygW3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy E	596	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygE.ds1	Act3/Jungle/PygE2.ds1	Act3/Jungle/PygE3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy EW	597	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygEW.ds1	Act3/Jungle/PygEW2.ds1	Act3/Jungle/PygEW3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy S	598	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygS.ds1	Act3/Jungle/PygS2.ds1	Act3/Jungle/PygS3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy SW	599	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygSW.ds1	Act3/Jungle/PygSW2.ds1	Act3/Jungle/PygSW3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy SE	600	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygSE.ds1	Act3/Jungle/PygSE2.ds1	Act3/Jungle/PygSE3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy N	601	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygN.ds1	Act3/Jungle/PygN2.ds1	Act3/Jungle/PygN3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy NW	602	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygNW.ds1	Act3/Jungle/PygNW2.ds1	Act3/Jungle/PygNW3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy NE	603	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygNE.ds1	Act3/Jungle/PygNE2.ds1	Act3/Jungle/PygNE3.ds1	0	0	0	15078	0
+Act 3 - Clearing Pygmy NS	604	0	1	0	1	0	1	1	32	32	0	1	0	0	1	Act3/Jungle/PygNS.ds1	Act3/Jungle/PygNS2.ds1	Act3/Jungle/PygNS3.ds1	0	0	0	15078	0
+Act 3 - Slums Border N	605	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderSlumsN1.ds1	Act3/Kurast/BorderSlumsN2.ds1	0	0	0	0	4095	0
+Act 3 - Slums Border S	606	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderSlumsS1.ds1	Act3/Kurast/BorderSlumsS2.ds1	0	0	0	0	4095	0
+Act 3 - Slums Border E	607	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderSlumsE1.ds1	Act3/Kurast/BorderSlumsE2.ds1	0	0	0	0	4095	0
+Act 3 - Slums Border W	608	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderSlumsW1.ds1	Act3/Kurast/BorderSlumsW2.ds1	0	0	0	0	4095	0
+Act 3 - Slums Border NE	609	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderSlumsNE.ds1	0	0	0	0	0	4095	0
+Act 3 - Slums Border NW	610	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderSlumsNW.ds1	0	0	0	0	0	4095	0
+Act 3 - Slums Border SE	611	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderSlumsSE.ds1	0	0	0	0	0	4095	0
+Act 3 - Slums Border SW	612	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderSlumsSW.ds1	0	0	0	0	0	4095	0
+Act 3 - Slums Gate N	613	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/SlumsGateN.ds1	0	0	0	0	0	4095	0
+Act 3 - Slums Gate S	614	0	1	0	1	0	1	1	16	8	0	0	0	-4	1	Act3/Kurast/SlumsGateS.ds1	0	0	0	0	0	4095	0
+Act 3 - Slums 08x08	615	0	1	1	1	0	1	1	8	8	0	0	2	-4	4	Act3/Kurast/Slums08x08_0.ds1	Act3/Kurast/Slums08x08_1.ds1	Act3/Kurast/Slums08x08_2.ds1	Act3/Kurast/Slums08x08_3.ds1	0	0	4095	0
+Act 3 - Slums 08x16	616	0	1	1	1	0	1	1	8	16	0	0	4	-4	2	Act3/Kurast/Slums08x16_0.ds1	Act3/Kurast/Slums08x16_1.ds1	0	0	0	0	4095	0
+Act 3 - Slums 16x08	617	0	1	1	1	0	1	1	16	8	0	0	4	-4	3	Act3/Kurast/Slums16x08_0.ds1	Act3/Kurast/Slums16x08_1.ds1	Act3/Kurast/Slums16x08_2.ds1	0	0	0	4095	0
+Act 3 - Slums 16x16	618	0	1	1	1	0	1	1	16	16	0	0	4	-4	3	Act3/Kurast/Slums16x16_0.ds1	Act3/Kurast/Slums16x16_1.ds1	Act3/Kurast/Slums16x16_2.ds1	0	0	0	4095	0
+Act 3 - Burbs Border N	619	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderBurbsN1.ds1	Act3/Kurast/BorderBurbsN2.ds1	0	0	0	0	4095	0
+Act 3 - Burbs Border S	620	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderBurbsS1.ds1	Act3/Kurast/BorderBurbsS2.ds1	0	0	0	0	4095	0
+Act 3 - Burbs Border E	621	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderBurbsE1.ds1	Act3/Kurast/BorderBurbsE2.ds1	0	0	0	0	4095	0
+Act 3 - Burbs Border W	622	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderBurbsW1.ds1	Act3/Kurast/BorderBurbsW2.ds1	0	0	0	0	4095	0
+Act 3 - Burbs Border NE	623	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderBurbsNE.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs Border NW	624	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderBurbsNW.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs Border SE	625	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderBurbsSE.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs Border SW	626	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderBurbsSW.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs Gate N	627	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BurbsGateN.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs Gate S	628	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BurbsGateS.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs Sewer	629	0	1	1	1	0	1	1	8	8	0	1	0	-4	0	Act3/Kurast/BurbsSewer0.ds1	Act3/Kurast/BurbsSewer1.ds1	0	0	0	0	4095	0
+Act 3 - Burbs Temple	630	0	1	1	1	0	1	1	16	16	0	1	4	-4	0	Act3/Kurast/BurbsTemple2.ds1	Act3/Kurast/BurbsTemple3.ds1	0	0	0	0	4095	0
+Act 3 - Burbs Waypoint	631	0	1	1	1	0	1	1	8	8	0	1	4	-4	0	Act3/Kurast/Burbs08x08_Waypoint.ds1	0	0	0	0	0	4095	0
+Act 3 - Burbs 08x08	632	0	1	1	1	0	1	1	8	8	0	0	2	-4	5	Act3/Kurast/Burbs08x08_0.ds1	Act3/Kurast/Burbs08x08_1.ds1	Act3/Kurast/Burbs08x08_2.ds1	Act3/Kurast/Burbs08x08_3.ds1	Act3/Kurast/Burbs08x08_4.ds1	0	4095	0
+Act 3 - Burbs 08x16	633	0	1	1	1	0	1	1	8	16	0	0	4	-4	4	Act3/Kurast/Burbs08x16_0.ds1	Act3/Kurast/Burbs08x16_1.ds1	Act3/Kurast/Burbs08x16_2.ds1	Act3/Kurast/Burbs08x16_3.ds1	0	0	4095	0
+Act 3 - Burbs 16x08	634	0	1	1	1	0	1	1	16	8	0	0	4	-4	4	Act3/Kurast/Burbs16x08_0.ds1	Act3/Kurast/Burbs16x08_1.ds1	Act3/Kurast/Burbs16x08_2.ds1	Act3/Kurast/Burbs16x08_3.ds1	0	0	4095	0
+Act 3 - Burbs 16x16	635	0	1	1	1	0	1	1	16	16	0	0	4	-4	4	Act3/Kurast/Burbs16x16_0.ds1	Act3/Kurast/Burbs16x16_1.ds1	Act3/Kurast/Burbs16x16_2.ds1	Act3/Kurast/Burbs16x16_3.ds1	0	0	4095	0
+Act 3 - Metro Border N	636	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderMetroN1.ds1	Act3/Kurast/BorderMetroN2.ds1	0	0	0	0	4095	0
+Act 3 - Metro Border S	637	0	1	0	1	0	1	1	8	8	0	0	0	-4	3	Act3/Kurast/BorderMetroS1.ds1	Act3/Kurast/BorderMetroS2.ds1	Act3/Kurast/BorderMetroS3.ds1	0	0	0	4095	0
+Act 3 - Metro Border E	638	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderMetroE1.ds1	Act3/Kurast/BorderMetroE2.ds1	0	0	0	0	4095	0
+Act 3 - Metro Border W	639	0	1	0	1	0	1	1	8	8	0	0	0	-4	2	Act3/Kurast/BorderMetroW1.ds1	Act3/Kurast/BorderMetroW2.ds1	0	0	0	0	4095	0
+Act 3 - Metro Border NE	640	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderMetroNE.ds1	0	0	0	0	0	4095	0
+Act 3 - Metro Border NW	641	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderMetroNW.ds1	0	0	0	0	0	4095	0
+Act 3 - Metro Border SE	642	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderMetroSE.ds1	0	0	0	0	0	4095	0
+Act 3 - Metro Border SW	643	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/BorderMetroSW.ds1	0	0	0	0	0	4095	0
+Act 3 - Metro Gate N	644	0	1	0	1	0	1	1	16	16	0	0	0	-4	1	Act3/Kurast/MetroGateN.ds1	0	0	0	0	0	12287	0
+Act 3 - Metro Gate S	645	0	1	0	1	0	1	1	8	8	0	0	0	-4	1	Act3/Kurast/MetroGateS.ds1	0	0	0	0	0	4095	0
+Act 3 - Metro Sewer	646	0	1	1	1	0	1	1	8	8	0	1	0	-4	0	Act3/Kurast/MetroSewer0.ds1	Act3/Kurast/MetroSewer1.ds1	0	0	0	0	4095	0
+Act 3 - MetroTemple	647	0	1	1	1	0	1	1	16	16	0	1	4	-4	0	Act3/Kurast/MetroTemple2.ds1	Act3/Kurast/MetroTemple3.ds1	0	0	0	0	4095	0
+Act 3 - Metro 08x08	648	0	1	1	1	0	1	1	8	8	0	0	2	-4	5	Act3/Kurast/Metro08x08_0.ds1	Act3/Kurast/Metro08x08_1.ds1	Act3/Kurast/Metro08x08_2.ds1	Act3/Kurast/Metro08x08_3.ds1	Act3/Kurast/Metro08x08_4.ds1	0	4095	0
+Act 3 - Metro 08x16	649	0	1	1	1	0	1	1	8	16	0	0	4	-4	3	Act3/Kurast/Metro08x16_0.ds1	Act3/Kurast/Metro08x16_1.ds1	Act3/Kurast/Metro08x16_2.ds1	0	0	0	4095	0
+Act 3 - Metro 16x08	650	0	1	1	1	0	1	1	16	8	0	0	4	-4	2	Act3/Kurast/Metro16x08_0.ds1	Act3/Kurast/Metro16x08_1.ds1	0	0	0	0	4095	0
+Act 3 - Metro 16x16	651	0	1	1	1	0	1	1	16	16	0	0	4	-4	4	Act3/Kurast/Metro16x16_0.ds1	Act3/Kurast/Metro16x16_1.ds1	Act3/Kurast/Metro16x16_2.ds1	Act3/Kurast/Metro16x16_3.ds1	0	0	4095	0
+Act 3 - Bridge	652	0	1	1	1	0	1	1	48	16	0	1	2	-4	1	Act3/Kurast/Bridge.ds1	0	0	0	0	0	18415	0
+Act 3 - Travincal NW	653	0	1	1	1	0	0	1	16	32	0	0	3	-4	1	Act3/Travincal/TravNW.ds1	0	0	0	0	0	65513	0
+Act 3 - Travincal N 	654	0	1	1	1	0	0	1	32	32	0	1	3	-4	1	Act3/Travincal/TravN.ds1	0	0	0	0	0	65513	0
+Act 3 - Travincal NE	655	0	1	1	1	0	0	1	16	32	0	0	3	-4	1	Act3/Travincal/TravNE.ds1	0	0	0	0	0	65513	0
+Act 3 - Travincal SW	656	0	1	1	1	0	0	1	16	32	0	1	3	-4	1	Act3/Travincal/TravSW.ds1	0	0	0	0	0	65515	0
+Act 3 - Travincal S 	657	0	1	1	1	0	0	1	32	32	0	0	3	-4	1	Act3/Travincal/TravS.ds1	0	0	0	0	0	65513	0
+Act 3 - Travincal SE	658	0	1	1	1	0	0	1	16	32	0	0	3	-4	1	Act3/Travincal/TravSE.ds1	0	0	0	0	0	65513	0
+Act 3 - Spider SW	659	0	1	0	0	0	0	1	16	16	0	1	0	0	3	Act3/Spider/LairSW.ds1	Act3/Spider/LairSW2.ds1	Act3/Spider/LairSW3.ds1	0	0	0	1	0
+Act 3 - Spider SE	660	0	1	0	0	0	0	1	16	16	0	0	0	0	3	Act3/Spider/LairSE.ds1	Act3/Spider/LairSE2.ds1	Act3/Spider/LairSE3.ds1	0	0	0	1	0
+Act 3 - Spider NW	661	0	1	0	0	0	0	1	16	16	0	0	0	0	3	Act3/Spider/LairNW.ds1	Act3/Spider/LairNW2.ds1	Act3/Spider/LairNW3.ds1	0	0	0	1	0
+Act 3 - Spider NE	662	0	1	0	0	0	0	1	16	16	0	0	0	0	3	Act3/Spider/LairNE.ds1	Act3/Spider/LairNE2.ds1	Act3/Spider/LairNE3.ds1	0	0	0	1	0
+Act 3 - Spider Chest NW	663	0	1	0	0	0	0	1	16	16	0	0	0	0	3	Act3/Spider/LairNWMage.ds1	Act3/Spider/LairNW2Mage.ds1	Act3/Spider/LairNW3Mage.ds1	0	0	0	1	0
+Act 3 - Spider Chest NE	664	0	1	0	0	0	0	1	16	16	0	0	0	0	3	Act3/Spider/LairNECon.ds1	Act3/Spider/LairNE2Con.ds1	Act3/Spider/LairNE3Con.ds1	0	0	0	1	0
+Act 3 - Dungeon W	665	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungW.ds1	Act3/Jungle/DungW2.ds1	Act3/Jungle/DungW3.ds1	0	0	0	1	0
+Act 3 - Dungeon E	666	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungE.ds1	Act3/Jungle/DungE2.ds1	Act3/Jungle/DungE3.ds1	0	0	0	1	0
+Act 3 - Dungeon EW	667	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungEW.ds1	Act3/Jungle/DungEW2.ds1	Act3/Jungle/DungEW3.ds1	0	0	0	1	0
+Act 3 - Dungeon S	668	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungS.ds1	Act3/Jungle/DungS2.ds1	Act3/Jungle/DungS3.ds1	0	0	0	1	0
+Act 3 - Dungeon SW	669	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungSW.ds1	Act3/Jungle/DungSW2.ds1	Act3/Jungle/DungSW3.ds1	0	0	0	1	0
+Act 3 - Dungeon SE	670	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungSE.ds1	Act3/Jungle/DungSE2.ds1	Act3/Jungle/DungSE3.ds1	0	0	0	1	0
+Act 3 - Dungeon SEW	671	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungSEW.ds1	Act3/Jungle/DungSEW2.ds1	Act3/Jungle/DungSEW3.ds1	0	0	0	1	0
+Act 3 - Dungeon N	672	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungN.ds1	Act3/Jungle/DungN2.ds1	Act3/Jungle/DungN3.ds1	0	0	0	1	0
+Act 3 - Dungeon NW	673	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNW.ds1	Act3/Jungle/DungNW2.ds1	Act3/Jungle/DungNW3.ds1	0	0	0	1	0
+Act 3 - Dungeon NE	674	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNE.ds1	Act3/Jungle/DungNE2.ds1	Act3/Jungle/DungNE3.ds1	0	0	0	1	0
+Act 3 - Dungeon NEW	675	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNEW.ds1	Act3/Jungle/DungNEW2.ds1	Act3/Jungle/DungNEW3.ds1	0	0	0	1	0
+Act 3 - Dungeon NS	676	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNS.ds1	Act3/Jungle/DungNS2.ds1	Act3/Jungle/DungNS3.ds1	0	0	0	1	0
+Act 3 - Dungeon NSW	677	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNSW.ds1	Act3/Jungle/DungNSW2.ds1	Act3/Jungle/DungNSW3.ds1	0	0	0	1	0
+Act 3 - Dungeon NSE	678	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNSE.ds1	Act3/Jungle/DungNSE2.ds1	Act3/Jungle/DungNSE3.ds1	0	0	0	1	0
+Act 3 - Dungeon NSEW	679	0	1	0	0	0	0	1	14	14	0	0	0	0	3	Act3/Jungle/DungNSEW.ds1	Act3/Jungle/DungNSEW2.ds1	Act3/Jungle/DungNSEW3.ds1	0	0	0	1	0
+Act 3 - Dungeon Theme W	680	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme E	681	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungET.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme EW	682	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungEWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme S	683	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungST.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme SW	684	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungSWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme SE	685	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungSET.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme SEW	686	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungSEWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme N	687	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NW	688	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NE	689	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNET.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NEW	690	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNEWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NS	691	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNST.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NSW	692	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNSWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NSE	693	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNSET.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Theme NSEW	694	0	1	0	0	0	0	1	14	14	0	0	0	0	1	Act3/Jungle/DungNSEWT.ds1	0	0	0	0	0	1	0
+Act 3 - Dungeon Prev W	695	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitWU1.ds1	Act3/Jungle/DExitWU2.ds1	Act3/Jungle/DExitWU3.ds1	0	0	0	1	0
+Act 3 - Dungeon Prev E	696	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitEU1.ds1	Act3/Jungle/DExitEU2.ds1	Act3/Jungle/DExitEU3.ds1	0	0	0	1	0
+Act 3 - Dungeon Prev S	697	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitSU1.ds1	Act3/Jungle/DExitSU2.ds1	Act3/Jungle/DExitSU3.ds1	0	0	0	1	0
+Act 3 - Dungeon Prev N	698	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitNU1.ds1	Act3/Jungle/DExitNU2.ds1	Act3/Jungle/DExitNU3.ds1	0	0	0	1	0
+Act 3 - Dungeon Next W	699	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitWD1.ds1	Act3/Jungle/DExitWD2.ds1	Act3/Jungle/DExitWD3.ds1	0	0	0	1	0
+Act 3 - Dungeon Next E	700	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitED1.ds1	Act3/Jungle/DExitED2.ds1	Act3/Jungle/DExitED3.ds1	0	0	0	1	0
+Act 3 - Dungeon Next S	701	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitSD1.ds1	Act3/Jungle/DExitSD2.ds1	Act3/Jungle/DExitSD3.ds1	0	0	0	1	0
+Act 3 - Dungeon Next N	702	0	0	0	0	0	0	1	14	14	0	1	0	0	3	Act3/Jungle/DExitND1.ds1	Act3/Jungle/DExitND2.ds1	Act3/Jungle/DExitND3.ds1	0	0	0	1	0
+Act 3 - Dungeon Treasure 1	703	90	0	0	0	0	0	1	0	0	0	1	0	0	6	Act3/Jungle/DungRm1A.ds1	Act3/Jungle/DungRm2A.ds1	Act3/Jungle/DungRm3A.ds1	Act3/Jungle/DungRm4A.ds1	Act3/Jungle/DungRm5A.ds1	Act3/Jungle/DungRm6A.ds1	1	0
+Act 3 - Dungeon Treasure 2	704	91	0	0	0	0	0	1	0	0	0	1	0	0	6	Act3/Jungle/DungRm1B.ds1	Act3/Jungle/DungRm2B.ds1	Act3/Jungle/DungRm3B.ds1	Act3/Jungle/DungRm4B.ds1	Act3/Jungle/DungRm5B.ds1	Act3/Jungle/DungRm6B.ds1	1	0
+Act 3 - Sewer W	705	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerW.ds1	Act3/Sewer/SewerW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer E	706	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerE.ds1	Act3/Sewer/SewerE2.ds1	0	0	0	0	7	0
+Act 3 - Sewer EW	707	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerEW.ds1	Act3/Sewer/SewerEW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer S	708	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerS.ds1	Act3/Sewer/SewerS2.ds1	0	0	0	0	7	0
+Act 3 - Sewer SW	709	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerSW.ds1	Act3/Sewer/SewerSW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer SE	710	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerSE.ds1	Act3/Sewer/SewerSE2.ds1	0	0	0	0	7	0
+Act 3 - Sewer SEW	711	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerSEW.ds1	Act3/Sewer/SewerSEW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer N	712	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerN.ds1	Act3/Sewer/SewerN2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NW	713	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNW.ds1	Act3/Sewer/SewerNW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NE	714	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNE.ds1	Act3/Sewer/SewerNE2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NEW	715	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNEW.ds1	Act3/Sewer/SewerNEW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NS	716	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNS.ds1	Act3/Sewer/SewerNS2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NSW	717	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNSW.ds1	Act3/Sewer/SewerNSW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NSE	718	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNSE.ds1	Act3/Sewer/SewerNSE2.ds1	0	0	0	0	7	0
+Act 3 - Sewer NSEW	719	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Sewer/SewerNSEW.ds1	Act3/Sewer/SewerNSEW2.ds1	0	0	0	0	7	0
+Act 3 - Sewer Theme W	720	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme E	721	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerETheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme EW	722	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerEWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme S	723	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerSTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme SW	724	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerSWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme SE	725	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerSETheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme SEW	726	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerSEWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme N	727	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NW	728	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NE	729	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNETheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NEW	730	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNEWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NS	731	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNSTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NSW	732	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNSWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NSE	733	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNSETheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Theme NSEW	734	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNSEWTheme.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Prev SW	735	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerSW_Warp.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Prev SE	736	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerSE_Warp.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Prev NW	737	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerNW_Warp.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Prev NE	738	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerNE_Warp.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Drain W	739	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerWDrain.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Drain E	740	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerEDrain.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Drain S	741	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerSDrain.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Drain N	742	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Sewer/SewerNDrain.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Chest W	743	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerWTreas.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Chest E	744	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerETreas.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Chest S	745	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerSTreas.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Chest N	746	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Sewer/SewerNTreas.ds1	0	0	0	0	0	7	0
+Act 3 - Sewer Treasure X	747	93	1	1	0	0	0	1	0	0	0	1	0	0	1	Act3/Sewer/SewerTreasure1.ds1	0	0	0	0	0	7	0
+Act 3 - Temple 1	748	94	1	1	0	0	0	1	0	0	0	1	0	0	3	Act3/Temple/Temple0.ds1	Act3/Temple/Temple1.ds1	Act3/Temple/Temple2.ds1	0	0	0	4136	0
+Act 3 - Temple 2	749	95	1	1	0	0	0	1	0	0	0	1	0	0	2	Act3/Temple/Temple3.ds1	Act3/Temple/Temple4.ds1	0	0	0	0	4136	0
+Act 3 - Temple 3	750	96	1	1	0	0	0	1	0	0	0	1	0	0	2	Act3/Temple/Temple5.ds1	Act3/Temple/Temple6.ds1	0	0	0	0	4136	0
+Act 3 - Temple 4	751	97	1	1	0	0	0	1	0	0	0	1	0	0	2	Act3/Temple/Temple7.ds1	Act3/Temple/Temple8.ds1	0	0	0	0	4136	0
+Act 3 - Temple 5	752	98	1	1	0	0	0	1	0	0	0	1	0	0	2	Act3/Temple/Temple9.ds1	Act3/Temple/Temple10.ds1	0	0	0	0	4136	0
+Act 3 - Temple 6	753	99	1	1	0	0	0	1	0	0	0	1	0	0	2	Act3/Temple/Temple11.ds1	Act3/Temple/Temple12.ds1	0	0	0	0	4136	0
+Act 3 - Mephisto W	754	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephW.ds1	Act3/Travincal/MephW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto E	755	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephE.ds1	Act3/Travincal/MephE2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto EW	756	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephEW.ds1	Act3/Travincal/MephEW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto S	757	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephS.ds1	Act3/Travincal/MephS2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto SW	758	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephSW.ds1	Act3/Travincal/MephSW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto SE	759	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephSE.ds1	Act3/Travincal/MephSE2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto SEW	760	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephSEW.ds1	Act3/Travincal/MephSEW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto N	761	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephN.ds1	Act3/Travincal/MephN2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NW	762	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNW.ds1	Act3/Travincal/MephNW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NE	763	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNE.ds1	Act3/Travincal/MephNE2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NEW	764	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNEW.ds1	Act3/Travincal/MephNEW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NS	765	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNS.ds1	Act3/Travincal/MephNS2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NSW	766	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNSW.ds1	Act3/Travincal/MephNSW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NSE	767	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNSE.ds1	Act3/Travincal/MephNSE2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto NSEW	768	0	1	1	0	0	0	1	12	12	0	0	0	0	2	Act3/Travincal/MephNSEW.ds1	Act3/Travincal/MephNSEW2.ds1	0	0	0	0	53256	0
+Act 3 - Mephisto Theme W	769	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme E	770	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephETheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme EW	771	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephEWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme S	772	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephSTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme SW	773	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephSWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme SE	774	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephSETheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme SEW	775	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephSEWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme N	776	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NW	777	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NE	778	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNETheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NEW	779	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNEWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NS	780	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNSTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NSW	781	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNSWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NSE	782	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNSETheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Theme NSEW	783	0	1	1	0	0	0	1	12	12	0	0	0	0	1	Act3/Travincal/MephNSEWTheme.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Prev W	784	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephWWarpU.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Prev E	785	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephEWarpU.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Prev S	786	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephSWarpU.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Prev N	787	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephNWarpU.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Next W	788	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephWWarpD.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Next E	789	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephEWarpD.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Next S	790	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephSWarpD.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Next N	791	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephNWarpD.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Waypoint W	792	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephWWarp.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Waypoint E	793	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephEWarp.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Waypoint S	794	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephSWarp.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Waypoint N	795	0	1	1	0	0	0	1	12	12	0	1	0	0	1	Act3/Travincal/MephNWarp.ds1	0	0	0	0	0	53256	0
+Act 3 - Mephisto Complex	796	102	1	1	0	0	0	1	0	0	0	1	0	0	1	Act3/Travincal/MephComp.ds1	0	0	0	0	0	53256	0
+Act 4 - Fortress	797	103	0	1	1	0	1	1	0	0	1	1	1	-5	1	Act4/Fort/Fortress.ds1	0	0	0	0	0	127	0
+Act 4 - Fortress Transition	798	0	1	1	1	0	1	1	8	24	0	1	0	-4	1	Act4/Mesa/FortMesa.ds1	0	0	0	0	0	511	0
+Act 4 - Mesa Border 1	799	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border1a.ds1	Act4/Mesa/Border1b.ds1	Act4/Mesa/Border1c.ds1	Act4/Mesa/Border1o.ds1	0	0	511	0
+Act 4 - Mesa Border 2	800	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border2a.ds1	Act4/Mesa/Border2b.ds1	Act4/Mesa/Border2c.ds1	Act4/Mesa/Border2o.ds1	0	0	511	0
+Act 4 - Mesa Border 3	801	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border3a.ds1	Act4/Mesa/Border3b.ds1	Act4/Mesa/Border3c.ds1	Act4/Mesa/Border3o.ds1	0	0	511	0
+Act 4 - Mesa Border 4	802	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border4a.ds1	Act4/Mesa/Border4b.ds1	Act4/Mesa/Border4c.ds1	Act4/Mesa/Border4o.ds1	0	0	511	0
+Act 4 - Mesa Border 5	803	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border5a.ds1	Act4/Mesa/Border5b.ds1	Act4/Mesa/Border5c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 6	804	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border6a.ds1	Act4/Mesa/Border6b.ds1	Act4/Mesa/Border6c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 7	805	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border7a.ds1	Act4/Mesa/Border7b.ds1	Act4/Mesa/Border7c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 8	806	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border8a.ds1	Act4/Mesa/Border8b.ds1	Act4/Mesa/Border8c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 9	807	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border9a.ds1	Act4/Mesa/Border9b.ds1	Act4/Mesa/Border9c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 10	808	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border10a.ds1	Act4/Mesa/Border10b.ds1	Act4/Mesa/Border10c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 11	809	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border11a.ds1	Act4/Mesa/Border11b.ds1	Act4/Mesa/Border11c.ds1	0	0	0	511	0
+Act 4 - Mesa Border 12	810	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/Border12a.ds1	Act4/Mesa/Border12b.ds1	Act4/Mesa/Border12c.ds1	0	0	0	511	0
+Act 4 - Mesa Warp	811	0	1	1	1	0	1	1	8	8	0	1	0	-4	2	Act4/Mesa/WarpLava.ds1	Act4/Mesa/WarpLava1.ds1	0	0	0	0	511	0
+Act 4 - Mesa 1 24X24	812	0	1	1	1	0	1	1	24	24	0	0	0	-4	5	Act4/Mesa/Outer24X24_0.ds1	Act4/Mesa/Outer24X24_1.ds1	Act4/Mesa/Outer24X24_2.ds1	Act4/Mesa/Outer24X24_3.ds1	Act4/Mesa/Outer24X24_4.ds1	0	511	0
+Act 4 - Mesa 1 16X16	813	0	1	1	1	0	1	1	16	16	0	0	0	-4	5	Act4/Mesa/Outer16X16_0.ds1	Act4/Mesa/Outer16X16_1.ds1	Act4/Mesa/Outer16X16_2.ds1	Act4/Mesa/Outer16X16_3.ds1	Act4/Mesa/Outer16X16_4.ds1	0	511	0
+Act 4 - Mesa 1 16X08	814	0	1	1	1	0	1	1	16	8	0	0	0	-4	5	Act4/Mesa/Outer16X08_0.ds1	Act4/Mesa/Outer16X08_1.ds1	Act4/Mesa/Outer16X08_2.ds1	Act4/Mesa/Outer16X08_3.ds1	Act4/Mesa/Outer16X08_4.ds1	0	511	0
+Act 4 - Mesa 1 08X16	815	0	1	1	1	0	1	1	8	16	0	0	0	-4	5	Act4/Mesa/Outer08X16_0.ds1	Act4/Mesa/Outer08X16_1.ds1	Act4/Mesa/Outer08X16_2.ds1	Act4/Mesa/Outer08X16_3.ds1	Act4/Mesa/Outer08X16_4.ds1	0	511	0
+Act 4 - Mesa 1 08X08	816	0	1	1	1	0	1	1	8	8	0	0	0	-4	5	Act4/Mesa/Outer08X08_0.ds1	Act4/Mesa/Outer08X08_1.ds1	Act4/Mesa/Outer08X08_2.ds1	Act4/Mesa/Outer08X08_3.ds1	Act4/Mesa/Outer08X08_4.ds1	0	511	0
+Act 4 - Mesa 2 24X24	817	0	1	1	1	0	1	1	24	24	0	0	0	-4	5	Act4/Mesa/Mid24X24_0.ds1	Act4/Mesa/Mid24X24_1.ds1	Act4/Mesa/Mid24X24_2.ds1	Act4/Mesa/Mid24X24_3.ds1	Act4/Mesa/Mid24X24_4.ds1	0	511	0
+Act 4 - Mesa 2 16X16	818	0	1	1	1	0	1	1	16	16	0	0	0	-4	5	Act4/Mesa/Mid16X16_0.ds1	Act4/Mesa/Mid16X16_1.ds1	Act4/Mesa/Mid16X16_2.ds1	Act4/Mesa/Mid16X16_3.ds1	Act4/Mesa/Mid16X16_4.ds1	0	511	0
+Act 4 - Mesa 2 16X08	819	0	1	1	1	0	1	1	16	8	0	0	0	-4	5	Act4/Mesa/Mid16X08_0.ds1	Act4/Mesa/Mid16X08_1.ds1	Act4/Mesa/Mid16X08_2.ds1	Act4/Mesa/Mid16X08_3.ds1	Act4/Mesa/Mid16X08_4.ds1	0	511	0
+Act 4 - Mesa 2 08X16	820	0	1	1	1	0	1	1	8	16	0	0	0	-4	5	Act4/Mesa/Mid08X16_0.ds1	Act4/Mesa/Mid08X16_1.ds1	Act4/Mesa/Mid08X16_2.ds1	Act4/Mesa/Mid08X16_3.ds1	Act4/Mesa/Mid08X16_4.ds1	0	511	0
+Act 4 - Mesa 2 08X08	821	0	1	1	1	0	1	1	8	8	0	0	0	-4	5	Act4/Mesa/Mid08X08_0.ds1	Act4/Mesa/Mid08X08_1.ds1	Act4/Mesa/Mid08X08_2.ds1	Act4/Mesa/Mid08X08_3.ds1	Act4/Mesa/Mid08X08_4.ds1	0	511	0
+Act 4 - Mesa 2 Izual	822	0	1	1	1	0	1	1	8	8	0	0	0	-4	1	Act4/Mesa/Mid08X08Izual.ds1	0	0	0	0	0	511	0
+Act 4 - Mesa 3 24X24	823	0	1	1	1	0	1	1	24	24	0	0	0	-4	4	Act4/Mesa/Chaos24X24_0.ds1	Act4/Mesa/Chaos24X24_1.ds1	Act4/Mesa/Chaos24X24_2.ds1	Act4/Mesa/Chaos24X24_3.ds1	0	0	511	0
+Act 4 - Mesa 3 16X16	824	0	1	1	1	0	1	1	16	16	0	0	0	-4	4	Act4/Mesa/Chaos16X16_0.ds1	Act4/Mesa/Chaos16X16_1.ds1	Act4/Mesa/Chaos16X16_2.ds1	Act4/Mesa/Chaos16X16_3.ds1	0	0	511	0
+Act 4 - Mesa 3 16X08	825	0	1	1	1	0	1	1	16	8	0	0	0	-4	4	Act4/Mesa/Chaos16X08_0.ds1	Act4/Mesa/Chaos16X08_1.ds1	Act4/Mesa/Chaos16X08_2.ds1	Act4/Mesa/Chaos16X08_3.ds1	0	0	511	0
+Act 4 - Mesa 3 08X16	826	0	1	1	1	0	1	1	8	16	0	0	0	-4	4	Act4/Mesa/Chaos08X16_0.ds1	Act4/Mesa/Chaos08X16_1.ds1	Act4/Mesa/Chaos08X16_2.ds1	Act4/Mesa/Chaos08X16_3.ds1	0	0	511	0
+Act 4 - Mesa 3 08X08	827	0	1	1	1	0	1	1	8	8	0	0	0	-4	5	Act4/Mesa/Chaos08X08_0.ds1	Act4/Mesa/Chaos08X08_1.ds1	Act4/Mesa/Chaos08X08_2.ds1	Act4/Mesa/Chaos08X08_3.ds1	Act4/Mesa/Chaos08X08_4.ds1	0	511	0
+Act 4 - Pits 1 16X16	828	0	1	1	1	0	1	1	16	16	0	0	0	-4	3	Act4/Mesa/OutPit16X16_0.ds1	Act4/Mesa/OutPit16X16_1.ds1	Act4/Mesa/OutPit16X16_2.ds1	0	0	0	511	0
+Act 4 - Pits 1 16X08	829	0	1	1	1	0	1	1	16	8	0	0	0	-4	3	Act4/Mesa/OutPit16X08_0.ds1	Act4/Mesa/OutPit16X08_1.ds1	Act4/Mesa/OutPit16X08_2.ds1	0	0	0	511	0
+Act 4 - Pits 1 08X16	830	0	1	1	1	0	1	1	8	16	0	0	0	-4	3	Act4/Mesa/OutPit08X16_0.ds1	Act4/Mesa/OutPit08X16_1.ds1	Act4/Mesa/OutPit08X16_2.ds1	0	0	0	511	0
+Act 4 - Pits 1 08X08	831	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/OutPit08X08_0.ds1	Act4/Mesa/OutPit08X08_1.ds1	Act4/Mesa/OutPit08X08_2.ds1	0	0	0	511	0
+Act 4 - Pits 2 16X16	832	0	1	1	1	0	1	1	16	16	0	0	0	-4	3	Act4/Mesa/MidPit16X16_0.ds1	Act4/Mesa/MidPit16X16_1.ds1	Act4/Mesa/MidPit16X16_2.ds1	0	0	0	511	0
+Act 4 - Pits 2 16X08	833	0	1	1	1	0	1	1	16	8	0	0	0	-4	3	Act4/Mesa/MidPit16X08_0.ds1	Act4/Mesa/MidPit16X08_1.ds1	Act4/Mesa/MidPit16X08_2.ds1	0	0	0	511	0
+Act 4 - Pits 2 08X16	834	0	1	1	1	0	1	1	8	16	0	0	0	-4	3	Act4/Mesa/MidPit08X16_0.ds1	Act4/Mesa/MidPit08X16_1.ds1	Act4/Mesa/MidPit08X16_2.ds1	0	0	0	511	0
+Act 4 - Pits 2 08X08	835	0	1	1	1	0	1	1	8	8	0	0	0	-4	3	Act4/Mesa/MidPit08X08_0.ds1	Act4/Mesa/MidPit08X08_1.ds1	Act4/Mesa/MidPit08X08_2.ds1	0	0	0	511	0
+Act 4 - Lava X	836	0	1	1	1	1	0	0	24	24	0	0	0	-4	1	Act4/Lava/LavaX.ds1	0	0	0	0	0	2047	0
+Act 4 - Lava W	837	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaW.ds1	Act4/Lava/LavaW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava E	838	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaE.ds1	Act4/Lava/LavaE2.ds1	0	0	0	0	2047	0
+Act 4 - Lava EW	839	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaEW.ds1	Act4/Lava/LavaEW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava S	840	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaS.ds1	Act4/Lava/LavaS2.ds1	0	0	0	0	2047	0
+Act 4 - Lava SW	841	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaSW.ds1	Act4/Lava/LavaSW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava SE	842	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaSE.ds1	Act4/Lava/LavaSE2.ds1	0	0	0	0	2047	0
+Act 4 - Lava SEW	843	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaSEW.ds1	Act4/Lava/LavaSEW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava N	844	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaN.ds1	Act4/Lava/LavaN2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NW	845	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNW.ds1	Act4/Lava/LavaNW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NE	846	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNE.ds1	Act4/Lava/LavaNE2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NEW	847	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNEW.ds1	Act4/Lava/LavaNEW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NS	848	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNS.ds1	Act4/Lava/LavaNS2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NSW	849	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNSW.ds1	Act4/Lava/LavaNSW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NSE	850	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNSE.ds1	Act4/Lava/LavaNSE2.ds1	0	0	0	0	2047	0
+Act 4 - Lava NSEW	851	0	1	1	1	1	0	0	24	24	0	0	0	-4	2	Act4/Lava/LavaNSEW.ds1	Act4/Lava/LavaNSEW2.ds1	0	0	0	0	2047	0
+Act 4 - Lava Warp N	852	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Lava/WarpMesa.ds1	Act4/Lava/WarpMesa1.ds1	0	0	0	0	2047	0
+Act 4 - Lava Forge W	853	0	1	1	1	1	0	0	24	24	0	0	0	-4	1	Act4/Lava/ForgeW.ds1	0	0	0	0	0	2047	0
+Act 4 - Lava Forge E	854	0	1	1	1	1	0	0	24	24	0	0	0	-4	1	Act4/Lava/ForgeE.ds1	0	0	0	0	0	2047	0
+Act 4 - Bridge 1	855	0	1	0	1	1	0	0	24	24	0	1	4	0	1	Act4/Diab/BridgeLava.ds1	0	0	0	0	0	2047	0
+Act 4 - Bridge 2	856	0	1	0	1	1	0	0	24	24	0	0	0	-4	4	Act4/Diab/Bridge1.ds1	Act4/Diab/Bridge2.ds1	Act4/Diab/Bridge3.ds1	Act4/Diab/Bridge4.ds1	0	0	2047	0
+Act 4 - Diablo Entry	857	0	1	0	1	1	0	0	24	24	0	0	1	-4	1	Act4/Diab/Entry1.ds1	0	0	0	0	0	1567	0
+Act 4 - Diablo Arm W	858	0	1	0	1	1	0	0	24	24	0	0	0	-4	2	Act4/Diab/WingW1.ds1	Act4/Diab/WingW2.ds1	0	0	0	0	1567	0
+Act 4 - Diablo Arm E	859	0	1	0	1	1	0	0	24	24	0	0	0	-4	2	Act4/Diab/WingE1.ds1	Act4/Diab/WingE2.ds1	0	0	0	0	1567	0
+Act 4 - Diablo Arm S	860	0	1	0	1	1	0	0	24	24	0	0	0	-4	2	Act4/Diab/WingS1.ds1	Act4/Diab/WingS2.ds1	0	0	0	0	1567	0
+Act 4 - Diablo Arm N	861	0	1	0	1	1	0	0	24	24	0	0	0	-4	2	Act4/Diab/WingN1.ds1	Act4/Diab/WingN2.ds1	0	0	0	0	1567	0
+Act 4 - Diablo Heart	862	0	1	0	1	1	0	0	24	24	0	0	0	-4	1	Act4/Diab/Heart.ds1	0	0	0	0	0	1567	0
+Expansion																							
+Act 5 - Town	863	109	0	0	1	0	1	1	0	0	1	1	1	-4	1	Expansion/Town/townWest.ds1	0	0	0	0	0	1048575	0
+Act 5 - Temple Final Room	864	124	1	0	1	0	1	1	0	0	0	1	0	0	4	Expansion/wildtemple/NihlE.ds1	Expansion/wildtemple/NihlN.ds1	Expansion/wildtemple/NihlS.ds1	Expansion/wildtemple/NihlW.ds1	0	0	1	0
+Act 5 - Siege To Town	865	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/striptownsiege.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 1	866	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip01.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 2	867	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip02.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 3	868	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip03.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 4	869	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip04.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 5	870	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip05.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 6	871	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip06.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 7	872	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip07.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 8	873	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip08.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 9	874	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip09.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 10	875	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip10.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 11	876	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip11.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 12	877	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip12.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege Strip 13	878	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/strip13.ds1	0	0	0	0	0	2047	0
+Act 5 - Siege To Barricade	879	0	1	0	1	0	1	1	16	48	0	0	0	0	1	Expansion/Siege/stripseigebar.ds1	0	0	0	0	0	2047	0
+Act 5 - Barricade To Siege	880	0	1	0	1	0	1	1	16	32	0	1	0	0	1	Expansion/Siege/siege2barricade.ds1	0	0	0	0	0	1679925	0
+Act 5 - Barricade Cliff Border 1	881	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr01c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 2	882	0	1	0	1	0	1	1	16	16	0	0	0	0	3	Expansion/Siege/Brdr02c.ds1	Expansion/Siege/Brdr02c1.ds1	Expansion/Siege/Brdr02c2.ds1	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 3	883	0	1	0	1	0	1	1	16	16	0	0	0	0	3	Expansion/Siege/Brdr03c.ds1	Expansion/Siege/Brdr03c1.ds1	Expansion/Siege/Brdr03c2.ds1	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 4	884	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr04c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 5	885	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr05c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 6	886	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr06c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 7	887	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr07c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 8	888	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr08c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 9	889	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr09c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 10	890	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr10c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 11	891	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr11c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 12	892	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr12c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 1	893	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/Brdr01r.ds1	Expansion/Siege/Brdr01r1.ds1	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 2	894	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr02r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 3	895	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr03r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 4	896	0	1	0	1	0	1	1	16	16	0	0	0	0	3	Expansion/Siege/Brdr04r.ds1	Expansion/Siege/Brdr04r1.ds1	Expansion/Siege/Brdr04r2.ds1	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 5	897	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr05r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 6	898	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr06r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 7	899	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr07r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 8	900	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/Brdr08r.ds1	Expansion/Siege/Brdr08r1.ds1	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 9	901	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr09r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 10	902	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr10r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 11	903	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr11r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 12	904	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr12r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine-Cliff Border 5	905	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr05t.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Ravine Border 7	906	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr07t.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Entrance 16x32	907	0	1	0	1	0	1	1	16	32	0	0	0	0	1	Expansion/Siege/Brdr16x32btm.ds1	0	0	0	0	0	1943603	0
+Act 5 - Barricade Entrance 32x16	908	0	1	0	1	0	1	1	32	16	0	0	0	0	1	Expansion/Siege/Brdr32x16btm.ds1	0	0	0	0	0	1948727	0
+Act 5 - Barricade Exit 32x16	909	0	1	0	1	0	1	1	32	16	0	0	0	0	1	Expansion/Siege/Brdr32x16top.ds1	0	0	0	0	0	1965111	0
+Act 5 - Barricade Exit 16x32	910	0	1	0	1	0	1	1	16	32	0	0	0	0	1	Expansion/Siege/Brdr16x32top.ds1	0	0	0	0	0	1965111	0
+Act 5 - Barricade From Cave 32x16	911	0	1	0	1	0	1	1	32	16	0	1	0	0	1	Expansion/IceCave/NorthExit_Dirt.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade From Cave 16x32	912	0	1	0	1	0	1	1	16	32	0	1	0	0	1	Expansion/IceCave/WestExit_Dirt.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade To Cave 32x16	913	0	1	0	1	0	1	1	32	16	0	1	0	0	1	Expansion/IceCave/NorthEntrance_Dirt.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade To Cave 16x32	914	0	1	0	1	0	1	1	16	32	0	1	0	0	1	Expansion/IceCave/WestEntrance_Dirt.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade 1	915	0	1	0	1	0	1	1	16	16	0	0	0	0	3	Expansion/Siege/newbarrAA1.ds1	Expansion/Siege/newbarrAA2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 2	916	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrBB1.ds1	Expansion/Siege/newbarrBB2.ds1	Expansion/Siege/newbarrBB3.ds1	0	0	0	2079795	0
+Act 5 - Barricade 3	917	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrCC1.ds1	Expansion/Siege/newbarrCC2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 4	918	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrDD1.ds1	Expansion/Siege/newbarrDD2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 5	919	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrAB1.ds1	Expansion/Siege/newbarrAB2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 6	920	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrBA1.ds1	Expansion/Siege/newbarrBA2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 7	921	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrCD1.ds1	Expansion/Siege/newbarrCD2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 8	922	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrDC1.ds1	Expansion/Siege/newbarrDC2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 9	923	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrBR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 10	924	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/newbarrAR1.ds1	Expansion/Siege/newbarrAR2.ds1	0	0	0	0	2079799	0
+Act 5 - Barricade 11	925	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrFB1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 12	926	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrFA1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 13	927	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrCR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 14	928	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrDR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 15	929	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrFC1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 16	930	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/newbarrFD1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade Prison 1	931	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothAA.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 2	932	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothBB.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 3	933	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothCC.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 4	934	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothDD.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 5	935	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothAB.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 6	936	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothBA.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 7	937	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothCD.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Prison 8	938	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/SharpToothDC.ds1	0	0	0	0	0	538950707	0
+Act 5 - Barricade Building	939	0	1	0	1	0	1	1	8	8	0	0	1	-4	4	Expansion/Siege/farm1.ds1	Expansion/Siege/farm2.ds1	Expansion/Siege/farm1a.ds1	Expansion/Siege/farm2a.ds1	0	0	2080119	0
+Act 5 - Barricade Filler 	940	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Siege/farm3.ds1	Expansion/Siege/farm4.ds1	Expansion/Siege/farm5.ds1	Expansion/Siege/farm6.ds1	0	0	2080119	0
+Act 5 - Barricade Filler Treasure	941	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Siege/farm3a.ds1	Expansion/Siege/farm4a.ds1	Expansion/Siege/farm5a.ds1	Expansion/Siege/farm6a.ds1	0	0	2080119	0
+Act 5 - Barricade Ruins N	942	0	1	0	1	0	1	1	8	8	0	0	0	0	5	Expansion/Ruins/NorthHouse1.ds1	Expansion/Ruins/NorthHouse2.ds1	Expansion/Ruins/NorthHouse3.ds1	Expansion/Ruins/NorthHouse4.ds1	Expansion/Ruins/NorthHouse5.ds1	0	404596787	0
+Act 5 - Barricade Ruins N	943	0	1	0	1	0	1	1	8	8	0	0	0	0	5	Expansion/Ruins/NorthHouse6.ds1	Expansion/Ruins/NorthHouse7.ds1	Expansion/Ruins/NorthHouse8.ds1	Expansion/Ruins/NorthHouse9.ds1	Expansion/Ruins/NorthHouse10.ds1	0	404596787	0
+Act 5 - Barricade Ruins N Treasure	944	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Ruins/NorthHouse2a.ds1	Expansion/Ruins/NorthHouse3a.ds1	Expansion/Ruins/NorthHouse5a.ds1	Expansion/Ruins/NorthHouse7a.ds1	0	0	404596787	0
+Act 5 - Barricade Ruins W	945	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Ruins/WestHouse1.ds1	Expansion/Ruins/WestHouse2.ds1	Expansion/Ruins/WestHouse3.ds1	Expansion/Ruins/WestHouse4.ds1	0	0	404596787	0
+Act 5 - Barricade Ruins W	946	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Ruins/WestHouse5.ds1	Expansion/Ruins/WestHouse6.ds1	Expansion/Ruins/WestHouse7.ds1	Expansion/Ruins/WestHouse8.ds1	0	0	404596787	0
+Act 5 - Barricade Ruins W Treasure	947	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Ruins/WestHouse1a.ds1	Expansion/Ruins/WestHouse3a.ds1	Expansion/Ruins/WestHouse4a.ds1	Expansion/Ruins/WestHouse5a.ds1	0	0	404596787	0
+Act 5 - Barricade Snow Lake  1	948	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Siege/lake1.ds1	Expansion/Siege/lake2.ds1	Expansion/Siege/lake3.ds1	Expansion/Siege/lake4.ds1	0	0	787474	0
+Act 5 - Barricade Snow Lake  2	949	0	1	0	1	0	1	1	8	8	0	0	0	0	4	Expansion/Siege/lake5.ds1	Expansion/Siege/lake6.ds1	Expansion/Siege/lake7.ds1	Expansion/Siege/lake8.ds1	0	0	787474	0
+Act 5 - Barricade Snow Other 	950	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Expansion/Siege/lake1.ds1	0	0	0	0	0	787474	0
+Act 5 - Barricade Snow Treasure 	951	0	1	0	1	0	1	1	8	8	0	0	0	0	1	Expansion/Siege/lake1.ds1	0	0	0	0	0	787474	0
+Act 5 - Barricade Snow Unique	952	0	1	0	1	0	1	1	16	16	0	0	0	0	0	Expansion/Siege/BlazeRipperABR.ds1	Expansion/Siege/BlazeRipperCDR.ds1	0	0	0	0	1944631	0
+Act 5 - Barricade Waypoint Dirt	953	0	1	0	1	0	1	1	8	8	0	1	0	0	2	Expansion/Siege/SiegeWaypoint1.ds1	Expansion/Siege/SiegeWaypoint2.ds1	0	0	0	0	789011	0
+Act 5 - Barricade Waypoint Snow	954	0	1	0	1	0	1	1	8	8	0	1	0	0	2	Expansion/Siege/SnowWaypoint1.ds1	Expansion/Siege/SnowWaypoint2.ds1	0	0	0	0	789011	0
+Act 5 - Barricade Hell Portal N	955	0	1	0	1	0	1	1	16	16	0	1	0	0	0	Expansion/Siege/hellwrpN.ds1	Expansion/Siege/hellwrpNsnow.ds1	0	0	0	0	1074003987	0
+Act 5 - Barricade Hell Portal W	956	0	1	0	1	0	1	1	16	16	0	1	0	0	0	Expansion/Siege/hellwrpW.ds1	Expansion/Siege/hellwrpWsnow.ds1	0	0	0	0	1074003987	0
+Act 5 - Barricade Cliff Border 1 Snow	957	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow01c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 2 Snow	958	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow02c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 3 Snow	959	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow03c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 4 Snow	960	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow04c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 5 Snow	961	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow05c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 6 Snow	962	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow06c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 7 Snow	963	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow07c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 8 Snow	964	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow08c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 9 Snow	965	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow09c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 10 Snow	966	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow10c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 11 Snow	967	0	1	0	1	0	1	1	16	16	0	0	0	0	0	0	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Border 12 Snow	968	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow12c.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 1 Snow	969	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow01r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 2 Snow	970	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow02r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 3 Snow	971	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow03r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 4 Snow	972	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow04r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 5 Snow	973	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow05r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 6 Snow	974	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow06r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 7 Snow	975	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow07r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 8 Snow	976	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow08r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 9 Snow	977	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow09r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 10 Snow	978	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow10r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 11 Snow	979	0	1	0	1	0	1	1	16	16	0	0	0	0	0	0	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine Border 12 Snow	980	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow12r.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Ravine-Cliff Border 5 Snow	981	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow05t.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade Cliff Ravine Border 7 Snow	982	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/Brdr_snow07t.ds1	0	0	0	0	0	1944631	0
+Act 5 - Barricade From Cave 32x16 Snow	983	0	1	0	1	0	1	1	32	16	0	1	0	0	1	Expansion/IceCave/NorthExit_Snow.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade From Cave 16x32 Snow	984	0	1	0	1	0	1	1	16	32	0	1	0	0	1	Expansion/IceCave/WestExit_Snow.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade To Cave 32x16 Snow	985	0	1	0	1	0	1	1	32	16	0	1	0	0	1	Expansion/IceCave/NorthEntrance_Snow.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade To Cave 16x32 Snow	986	0	1	0	1	0	1	1	16	32	0	1	0	0	1	Expansion/IceCave/WestEntrance_Snow.ds1	0	0	0	0	0	102607927	0
+Act 5 - Barricade 1 Snow	987	0	1	0	1	0	1	1	16	16	0	0	0	0	2	Expansion/Siege/snowbarrAA1.ds1	Expansion/Siege/snowbarrAA2.ds1	0	0	0	0	2079795	0
+Act 5 - Barricade 2 Snow	988	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrBB1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 3 Snow	989	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrCC1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 4 Snow	990	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrDD1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 5 Snow	991	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrAB1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 6 Snow	992	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrBA1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 7 Snow	993	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrCD1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 8 Snow	994	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrDC1.ds1	0	0	0	0	0	2079795	0
+Act 5 - Barricade 9 Snow	995	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrBR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 10 Snow	996	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrAR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 11 Snow	997	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrFB1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 12 Snow	998	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrFA1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 13 Snow	999	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrCR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 14 Snow	1000	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrDR1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 15 Snow	1001	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrFC1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Barricade 16 Snow	1002	0	1	0	1	0	1	1	16	16	0	0	0	0	1	Expansion/Siege/snowbarrFD1.ds1	0	0	0	0	0	2079799	0
+Act 5 - Ice W	1003	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceW01.ds1	Expansion/icecave/IceW02.ds1	Expansion/icecave/IceW03.ds1	0	0	0	1	0
+Act 5 - Ice E	1004	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceE01.ds1	Expansion/icecave/IceE02.ds1	Expansion/icecave/IceE03.ds1	0	0	0	1	0
+Act 5 - Ice EW	1005	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceEW01.ds1	Expansion/icecave/IceEW02.ds1	Expansion/icecave/IceEW03.ds1	0	0	0	1	0
+Act 5 - Ice S	1006	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceS01.ds1	Expansion/icecave/IceS02.ds1	Expansion/icecave/IceS03.ds1	0	0	0	1	0
+Act 5 - Ice SW	1007	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceSW01.ds1	Expansion/icecave/IceSW02.ds1	Expansion/icecave/IceSW03.ds1	0	0	0	1	0
+Act 5 - Ice SE	1008	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceSE01.ds1	Expansion/icecave/IceSE02.ds1	Expansion/icecave/IceSE03.ds1	0	0	0	1	0
+Act 5 - Ice SEW	1009	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceSEW01.ds1	Expansion/icecave/IceSEW02.ds1	Expansion/icecave/IceSEW03.ds1	0	0	0	1	0
+Act 5 - Ice N	1010	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceN01.ds1	Expansion/icecave/IceN02.ds1	Expansion/icecave/IceN03.ds1	0	0	0	1	0
+Act 5 - Ice NW	1011	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNW01.ds1	Expansion/icecave/IceNW02.ds1	Expansion/icecave/IceNW03.ds1	0	0	0	1	0
+Act 5 - Ice NE	1012	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNE01.ds1	Expansion/icecave/IceNE02.ds1	Expansion/icecave/IceNE03.ds1	0	0	0	1	0
+Act 5 - Ice NEW	1013	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNEW01.ds1	Expansion/icecave/IceNEW02.ds1	Expansion/icecave/IceNEW03.ds1	0	0	0	1	0
+Act 5 - Ice NS	1014	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNS01.ds1	Expansion/icecave/IceNS02.ds1	Expansion/icecave/IceNS03.ds1	0	0	0	1	0
+Act 5 - Ice NSW	1015	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNSW01.ds1	Expansion/icecave/IceNSW02.ds1	Expansion/icecave/IceNSW03.ds1	0	0	0	1	0
+Act 5 - Ice NSE	1016	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNSE01.ds1	Expansion/icecave/IceNSE02.ds1	Expansion/icecave/IceNSE03.ds1	0	0	0	1	0
+Act 5 - Ice NSEW	1017	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/icecave/IceNSEW01.ds1	Expansion/icecave/IceNSEW02.ds1	Expansion/icecave/IceNSEW03.ds1	0	0	0	1	0
+Act 5 - Ice Prev W	1018	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceWback01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Prev E	1019	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceEback01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Prev S	1020	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceSback01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Prev N	1021	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceNback01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Next W	1022	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceWahead01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Next E	1023	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceEahead01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Next S	1024	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceSahead01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Next N	1025	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceNahead01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Down W	1026	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceWdown01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Down E	1027	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceEdown01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Down S	1028	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceSdown01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Down N	1029	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceNdown01.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Theme W	1030	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceWtheme.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Theme E	1031	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceEtheme.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Theme S	1032	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceStheme.ds1	0	0	0	0	0	1	0
+Act 5 - Ice Theme N	1033	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceNtheme.ds1	0	0	0	0	0	1	0
+Act 5 - Ice waypoint N	1034	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceNway.ds1	0	0	0	0	0	1	0
+Act 5 - Ice waypoint S	1035	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceSway.ds1	0	0	0	0	0	1	0
+Act 5 - Ice waypoint E	1036	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceEway.ds1	0	0	0	0	0	1	0
+Act 5 - Ice waypoint W	1037	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/icecave/IceWway.ds1	0	0	0	0	0	1	0
+Act 5 - Ice River A	1038	0	1	0	0	0	1	1	64	64	0	1	0	0	4	Expansion/icecave/RiverIce01.ds1	Expansion/icecave/RiverIce02.ds1	Expansion/icecave/RiverIce03.ds1	Expansion/icecave/RiverIce04.ds1	0	0	1	0
+Act 5 - Ice River B	1039	0	1	0	0	0	1	1	64	64	0	1	0	0	4	Expansion/icecave/RiverIce05.ds1	Expansion/icecave/RiverIce06.ds1	Expansion/icecave/RiverIce07.ds1	Expansion/icecave/RiverIce08.ds1	0	0	1	0
+Act 5 - Ice Pool A	1040	0	1	0	0	0	1	1	32	32	0	1	0	0	6	Expansion/icecave/poolroom01a.ds1	Expansion/icecave/poolroom02a.ds1	Expansion/icecave/poolroom03a.ds1	Expansion/icecave/poolroom04a.ds1	Expansion/icecave/poolroom05a.ds1	Expansion/icecave/poolroom06a.ds1	1	0
+Act 5 - Ice Pool B	1041	0	1	0	0	0	1	1	32	32	0	1	0	0	6	Expansion/icecave/poolroom01.ds1	Expansion/icecave/poolroom02.ds1	Expansion/icecave/poolroom03.ds1	Expansion/icecave/poolroom04.ds1	Expansion/icecave/poolroom05.ds1	Expansion/icecave/poolroom06.ds1	1	0
+Act 5 - Temple NE	1042	0	1	0	0	0	1	1	40	40	0	0	0	0	2	Expansion/wildtemple/tempNE01.ds1	Expansion/wildtemple/tempNE02.ds1	0	0	0	0	1	0
+Act 5 - Temple NW	1043	0	1	0	0	0	1	1	40	40	0	0	0	0	2	Expansion/wildtemple/tempNW01.ds1	Expansion/wildtemple/tempNW02.ds1	0	0	0	0	1	0
+Act 5 - Temple SE up	1044	0	1	0	0	0	1	1	40	40	0	1	0	0	2	Expansion/wildtemple/tempSE01.ds1	Expansion/wildtemple/tempSE02.ds1	0	0	0	0	1	0
+Act 5 - Temple SW	1045	0	1	0	0	0	1	1	40	40	0	0	0	0	2	Expansion/wildtemple/tempSW01.ds1	Expansion/wildtemple/tempSW02.ds1	0	0	0	0	1	0
+Act 5 - Temple NE Down	1046	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempNEdown.ds1	0	0	0	0	0	1	0
+Act 5 - Temple NW Down	1047	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempNWdown.ds1	0	0	0	0	0	1	0
+Act 5 - Temple SW Down	1048	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempSWdown.ds1	0	0	0	0	0	1	0
+Act 5 - Temple NE Waypoint	1049	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempNEWay.ds1	0	0	0	0	0	1	0
+Act 5 - Temple NW Waypoint	1050	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempNWWay.ds1	0	0	0	0	0	1	0
+Act 5 - Temple SE Waypoint	1051	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempSEWay.ds1	0	0	0	0	0	1	0
+Act 5 - Temple SW Waypoint	1052	0	1	0	0	0	1	1	40	40	0	1	0	0	1	Expansion/wildtemple/tempSWWay.ds1	0	0	0	0	0	1	0
+Act 5 - Lava N	1053	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Expansion/LavaN.ds1	Act4/Expansion/LavaN2.ds1	0	0	0	0	4095	0
+Act 5 - Lava S	1054	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Expansion/LavaS.ds1	Act4/Expansion/LavaS2.ds1	0	0	0	0	4095	0
+Act 5 - Lava E	1055	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Expansion/LavaE.ds1	Act4/Expansion/LavaE2.ds1	0	0	0	0	4095	0
+Act 5 - Lava W	1056	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Expansion/LavaW.ds1	Act4/Expansion/LavaW2.ds1	0	0	0	0	4095	0
+Act 5 - Lava EW	1057	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Expansion/LavaEW.ds1	Act4/Expansion/LavaEW2.ds1	0	0	0	0	4095	0
+Act 5 - Lava NS	1058	0	1	1	1	1	0	0	24	24	0	1	0	-4	2	Act4/Expansion/LavaNS.ds1	Act4/Expansion/LavaNS2.ds1	0	0	0	0	4095	0
+Act 5 - Baal W	1059	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalW01.ds1	Expansion/BaalLair/baalW02.ds1	Expansion/BaalLair/baalW03.ds1	0	0	0	3	0
+Act 5 - Baal E	1060	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalE01.ds1	Expansion/BaalLair/baalE02.ds1	Expansion/BaalLair/baalE03.ds1	0	0	0	3	0
+Act 5 - Baal EW	1061	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalEW01.ds1	Expansion/BaalLair/baalEW02.ds1	Expansion/BaalLair/baalEW03.ds1	0	0	0	3	0
+Act 5 - Baal S	1062	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalS01.ds1	Expansion/BaalLair/baalS02.ds1	Expansion/BaalLair/baalS03.ds1	0	0	0	3	0
+Act 5 - Baal SW	1063	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalSW01.ds1	Expansion/BaalLair/baalSW02.ds1	Expansion/BaalLair/baalSW03.ds1	0	0	0	3	0
+Act 5 - Baal SE	1064	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalSE01.ds1	Expansion/BaalLair/baalSE02.ds1	Expansion/BaalLair/baalSE03.ds1	0	0	0	3	0
+Act 5 - Baal SEW	1065	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalSEW01.ds1	Expansion/BaalLair/baalSEW02.ds1	Expansion/BaalLair/baalSEW03.ds1	0	0	0	3	0
+Act 5 - Baal N	1066	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalN01.ds1	Expansion/BaalLair/baalN02.ds1	Expansion/BaalLair/baalN03.ds1	0	0	0	3	0
+Act 5 - Baal NW	1067	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNW01.ds1	Expansion/BaalLair/baalNW02.ds1	Expansion/BaalLair/baalNW03.ds1	0	0	0	3	0
+Act 5 - Baal NE	1068	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNE01.ds1	Expansion/BaalLair/baalNE02.ds1	Expansion/BaalLair/baalNE03.ds1	0	0	0	3	0
+Act 5 - Baal NEW	1069	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNEW01.ds1	Expansion/BaalLair/baalNEW02.ds1	Expansion/BaalLair/baalNEW03.ds1	0	0	0	3	0
+Act 5 - Baal NS	1070	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNS01.ds1	Expansion/BaalLair/baalNS02.ds1	Expansion/BaalLair/baalNS03.ds1	0	0	0	3	0
+Act 5 - Baal NSW	1071	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNSW01.ds1	Expansion/BaalLair/baalNSW02.ds1	Expansion/BaalLair/baalNSW03.ds1	0	0	0	3	0
+Act 5 - Baal NSE	1072	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNSE01.ds1	Expansion/BaalLair/baalNSE02.ds1	Expansion/BaalLair/baalNSE03.ds1	0	0	0	3	0
+Act 5 - Baal NSEW	1073	0	1	0	0	0	1	1	16	16	0	0	0	0	3	Expansion/BaalLair/baalNSEW01.ds1	Expansion/BaalLair/baalNSEW02.ds1	Expansion/BaalLair/baalNSEW03.ds1	0	0	0	3	0
+Act 5 - Baal Prev NEW	1074	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalNEWup01.ds1	Expansion/BaalLair/baalNEWup02.ds1	0	0	0	0	3	0
+Act 5 - Baal Prev NSE	1075	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalNSEup01.ds1	Expansion/BaalLair/baalNSEup02.ds1	0	0	0	0	3	0
+Act 5 - Baal Prev NSW	1076	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalNSWup01.ds1	Expansion/BaalLair/baalNSWup02.ds1	0	0	0	0	3	0
+Act 5 - Baal Prev SEW	1077	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalSEWup01.ds1	Expansion/BaalLair/baalSEWup02.ds1	0	0	0	0	3	0
+Act 5 - Baal Next N	1078	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalNdown01.ds1	Expansion/BaalLair/baalNdown02.ds1	0	0	0	0	3	0
+Act 5 - Baal Next S	1079	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalSdown01.ds1	Expansion/BaalLair/baalSdown02.ds1	0	0	0	0	3	0
+Act 5 - Baal Next E	1080	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalEdown01.ds1	Expansion/BaalLair/baalEdown02.ds1	0	0	0	0	3	0
+Act 5 - Baal Next W	1081	0	1	0	0	0	1	1	16	16	0	1	0	0	2	Expansion/BaalLair/baalWdown01.ds1	Expansion/BaalLair/baalWdown02.ds1	0	0	0	0	3	0
+Act 5 - Baal Waypoint N	1082	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/BaalLair/baalNway.ds1	0	0	0	0	0	3	0
+Act 5 - Baal Waypoint S	1083	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/BaalLair/baalSway.ds1	0	0	0	0	0	3	0
+Act 5 - Baal Waypoint E	1084	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/BaalLair/baalEway.ds1	0	0	0	0	0	3	0
+Act 5 - Baal Waypoint W	1085	0	1	0	0	0	1	1	16	16	0	1	0	0	1	Expansion/BaalLair/baalWway.ds1	0	0	0	0	0	3	0
+Act 5 - ThroneRoom	1086	131	1	0	0	0	1	1	0	0	0	1	0	0	1	Expansion/baalLair/wthrone.ds1	0	0	0	0	0	44	0
+Act 5 - WorldStone	1087	132	1	0	0	0	1	1	0	0	0	1	0	0	1	Expansion/baalLair/wstone01.ds1	0	0	0	0	0	60	0
+Act 5 - Temple Entrance	1088	121	1	0	0	0	1	1	0	0	0	1	1	-4	1	Expansion/wildtemple/tempEnter.ds1	0	0	0	0	0	3711029	0
+Act 5 - Baal Entrance	1089	120	1	0	0	0	1	1	0	0	0	1	0	0	1	Expansion/mountaintop/MtnTop.ds1	0	0	0	0	0	29360148	0
