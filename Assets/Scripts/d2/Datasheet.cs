@@ -93,7 +93,7 @@ public struct Datasheet<T> where T : new()
                         ++fieldIndex;
                     }
                 }
-                catch (System.Exception e)
+                catch (System.Exception)
                 {
                     throw new System.Exception("Datasheet parsing error at " + filename + ":" + (lineIndex + 1) + " column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member);
                 }
@@ -131,7 +131,7 @@ public class Obj
     {
         foreach (Obj obj in sheet.rows)
         {
-            lookup.Add(Key(obj.act, obj.type, obj.id), obj);
+            lookup.Add(Key(obj.act - 1, obj.type, obj.id), obj);
         }
     }
 
@@ -538,7 +538,7 @@ public class LevelInfo
     public int drawEdges;
     public int isInside;
     public int drlgType;
-    int levelTypeIndex;
+    public int levelTypeIndex;
     public int subType;
     public int subTheme;
     public int subWaypoint;

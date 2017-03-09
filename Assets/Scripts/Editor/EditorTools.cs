@@ -8,6 +8,7 @@ public class EditorTools
     static public void LoadDS1()
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        DT1.ResetCache();
         DS1.Load(assetPath);
     }
 
@@ -23,7 +24,7 @@ public class EditorTools
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
-        Palette.LoadPalette(1);
+        Palette.LoadPalette(0);
         var dt1 = DT1.Load(assetPath);
         int i = 0;
         foreach (var texture in dt1.textures)
@@ -49,7 +50,7 @@ public class EditorTools
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
-        Palette.LoadPalette(1);
+        Palette.LoadPalette(0);
         DCC dcc = DCC.Load(assetPath, loadAllDirections: true, ignoreCache: true);
         int i = 0;
         foreach (var texture in dcc.textures)

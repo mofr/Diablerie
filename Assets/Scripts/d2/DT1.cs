@@ -14,6 +14,13 @@ public class DT1
         Dictionary<int, int> rarities = new Dictionary<int, int>();
         int dt1Count = 0;
 
+        internal void Clear()
+        {
+            tiles.Clear();
+            rarities.Clear();
+            dt1Count = 0;
+        }
+
         internal void Add(Tile[] newTiles)
         {
             foreach (var tile in newTiles)
@@ -129,6 +136,7 @@ public class DT1
     static public void ResetCache()
     {
         cache.Clear();
+        registry.Clear();
     }
 
     static public DT1 Load(string dt1Path)

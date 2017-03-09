@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Character : MonoBehaviour
 {
 	public int directionCount = 8;

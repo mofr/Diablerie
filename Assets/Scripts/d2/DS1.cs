@@ -37,19 +37,18 @@ public class DS1
         int width = reader.ReadInt32() + 1;
         int height = reader.ReadInt32() + 1;
 
-        int act = 1;
+        int act = 0;
         if (version >= 8)
         {
-            act = reader.ReadInt32() + 1;
-            act = Mathf.Min(act, 5);
+            act = reader.ReadInt32();
+            act = Mathf.Min(act, 4);
         }
 
         Palette.LoadPalette(act);
 
-        int tagType = 0;
         if (version >= 10)
         {
-            tagType = reader.ReadInt32();
+            reader.ReadInt32(); // tagType
 
             //// adjust eventually the # of tag layer
             //if ((tagType == 1) || (tagType == 2))
@@ -68,6 +67,9 @@ public class DS1
                 {
                     filename += c;
                 }
+                filename = filename.Replace("tg1", "dt1");
+                filename = filename.Replace("C:", "");
+                DT1.Load(Application.streamingAssetsPath + filename);
             }
         }
 
@@ -324,7 +326,7 @@ public class DS1
 
                 if (version > 5)
                 {
-                    int flags = reader.ReadInt32();
+                    reader.ReadInt32(); // flags
                 }
 
                 var pos = MapSubCellToWorld(x, y);
@@ -453,7 +455,6 @@ public class DS1
         }
         else
         {
-            gameObject.AddComponent<Iso>();
             var creature = gameObject.AddComponent<Creature>();
             creature.obj = obj;
         }

@@ -59,9 +59,7 @@ public class Pathing {
     static private Vector2 target;
 	static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
 	static private HashSet<Node> closeNodes = new HashSet<Node>();
-	static private Vector2[] directions;
-	static private Vector2[] directions8 = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1) };
-	static private Vector2[] directions16 = { new Vector2(-1, -1), new Vector2(-2, -1), new Vector2(-1, 0), new Vector2(-2, 1), new Vector2(-1, 1), new Vector2(-1, 2), new Vector2(0, 1), new Vector2(1, 2), new Vector2(1, 1), new Vector2(2, 1), new Vector2(1, 0), new Vector2(2, -1), new Vector2(1, -1), new Vector2(1, -2), new Vector2(0, -1), new Vector2(-1, -2) };
+	static private Vector2[] directions = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1), new Vector2(1, -2), new Vector2(-1, -2), new Vector2(-2, -1), new Vector2(2, -1), new Vector2(2, 1), new Vector2(-2, 1), new Vector2(-1, 2), new Vector2(1, 2) };
     static private int directionCount;
 
     static private void StepTo(Node node)
@@ -132,7 +130,6 @@ public class Pathing {
         openNodes.Clear();
         Node.Recycle(closeNodes);
 
-        directions = directions8;
         Pathing.directionCount = directionCount;
         Pathing.target = target;
         bool targetAccessible = Tilemap.Passable(target, 2);

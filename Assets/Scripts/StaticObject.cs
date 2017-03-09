@@ -2,6 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(COFAnimator))]
+[ExecuteInEditMode]
 [System.Diagnostics.DebuggerDisplay("{name}")]
 class StaticObject : Entity
 {

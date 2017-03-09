@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 class COFAnimator : MonoBehaviour
 {
     COF _cof;

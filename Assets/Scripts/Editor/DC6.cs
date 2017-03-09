@@ -6,7 +6,7 @@ public class DC6
 {
     static public void CreateFontFromDC6(string filename)
     {
-        Palette.LoadPalette(1);
+        Palette.LoadPalette(0);
 
         var stream = File.OpenRead(filename);
         var reader = new BinaryReader(stream);
@@ -15,7 +15,7 @@ public class DC6
         var dc6_ver2 = reader.ReadInt32();
         var dc6_ver3 = reader.ReadInt32();
         reader.ReadInt32();
-        var dc6_dir = reader.ReadInt32();
+        reader.ReadInt32(); // dc6_dir
         var dc6_fpd = reader.ReadInt32();
         var dc6_fptr = stream.Position;
         if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
@@ -41,8 +41,8 @@ public class DC6
             reader.ReadInt32();
             int f_w = reader.ReadInt32();
             int f_h = reader.ReadInt32();
-            int f_offx = reader.ReadInt32();
-            int f_offy = reader.ReadInt32();
+            reader.ReadInt32(); // f_offx
+            reader.ReadInt32(); // f_offy
             reader.ReadInt32();
             reader.ReadInt32();
             int f_len = reader.ReadInt32();

@@ -400,8 +400,6 @@ public class DCC
                 pixelBuffer[i].val[x] = dir.pixel_values[y];
             }
         }
-
-        int pixelBufferSize = pb_idx + 1;
     }
 
     static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, List<Sprite> sprites)
