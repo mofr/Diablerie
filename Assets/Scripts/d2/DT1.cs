@@ -4,6 +4,73 @@ using UnityEngine;
 
 public class DT1
 {
+    public Tile[] tiles;
+    public Texture2D[] textures;
+    static Registry registry = new Registry();
+
+    public class Registry
+    {
+        Dictionary<int, List<Tile>> tiles = new Dictionary<int, List<Tile>>();
+        Dictionary<int, int> rarities = new Dictionary<int, int>();
+        int dt1Count = 0;
+
+        internal void Add(Tile[] newTiles)
+        {
+            foreach (var tile in newTiles)
+            {
+                List<Tile> list = tiles.GetValueOrDefault(tile.index, null);
+                if (list == null)
+                {
+                    list = new List<Tile>();
+                    tiles[tile.index] = list;
+                }
+
+                if (dt1Count == 0)
+                    list.Insert(0, tile);
+                else
+                    list.Add(tile);
+
+                if (!rarities.ContainsKey(tile.index))
+                    rarities[tile.index] = tile.rarity;
+                else
+                    rarities[tile.index] += tile.rarity;
+            }
+            dt1Count += 1;
+        }
+
+        public bool Find(int index, out Tile tile)
+        {
+            List<Tile> tileList;
+            if (!tiles.TryGetValue(index, out tileList))
+            {
+                tile = new Tile();
+                return false;
+            }
+
+            int raritySum = rarities[index];
+            if (raritySum == 0)
+            {
+                tile = tileList[0];
+            }
+            else
+            {
+                int randomIndex = Random.Range(0, tileList.Count - 1);
+                while (tileList[randomIndex].rarity == 0)
+                {
+                    randomIndex = (randomIndex + 1) % tileList.Count;
+                }
+                tile = tileList[randomIndex];
+            }
+
+            return true;
+        }
+    }
+
+    public static bool Find(int index, out Tile tile)
+    {
+        return registry.Find(index, out tile);
+    }
+
     public struct Tile
     {
         public int direction;
@@ -57,27 +124,21 @@ public class DT1
         }
     }
 
-    public struct ImportResult
-    {
-        public Tile[] tiles;
-        public Texture2D[] textures;
-    }
-
-    static Dictionary<string, ImportResult> cache = new Dictionary<string, ImportResult>();
+    static Dictionary<string, DT1> cache = new Dictionary<string, DT1>();
 
     static public void ResetCache()
     {
         cache.Clear();
     }
 
-    static public ImportResult Import(string dt1Path)
+    static public DT1 Load(string dt1Path)
     {
         if(cache.ContainsKey(dt1Path))
         {
             return cache[dt1Path];
         }
         
-        var importResult = new ImportResult();
+        var result = new DT1();
         var bytes = File.ReadAllBytes(dt1Path);
         var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
@@ -86,7 +147,7 @@ public class DT1
         if (version1 != 7 || version2 != 6)
         {
             Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
-            return importResult;
+            return result;
         }
         reader.ReadBytes(260);
         int tileCount = reader.ReadInt32();
@@ -104,8 +165,8 @@ public class DT1
         for (int i = 0; i < tileCount; ++i)
         {
             tiles[i].Read(reader);
-            var result = packer.put(tiles[i].width, -tiles[i].height);
-            if (result.newTexture)
+            var pack = packer.put(tiles[i].width, -tiles[i].height);
+            if (pack.newTexture)
             {
                 texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
                 texture.filterMode = FilterMode.Point;
@@ -117,8 +178,8 @@ public class DT1
                 texturesPixels.Add(pixels);
             }
 
-            tiles[i].textureX = result.x;
-            tiles[i].textureY = result.y;
+            tiles[i].textureX = pack.x;
+            tiles[i].textureY = pack.y;
             tiles[i].texture = texture;
             tiles[i].material = material;
             tiles[i].texturePixels = pixels;
@@ -176,10 +237,12 @@ public class DT1
             textures[i].Apply();
         }
 
-        importResult.tiles = tiles;
-        importResult.textures = textures.ToArray();
-        cache[dt1Path] = importResult;
-        return importResult;
+        registry.Add(tiles);
+
+        result.tiles = tiles;
+        result.textures = textures.ToArray();
+        cache[dt1Path] = result;
+        return result;
     }
 
     static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)

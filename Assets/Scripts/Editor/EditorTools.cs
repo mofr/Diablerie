@@ -8,7 +8,7 @@ public class EditorTools
     static public void LoadDS1()
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-        DS1.Import(assetPath);
+        DS1.Load(assetPath);
     }
 
     [MenuItem("Assets/Load DS1", true)]
@@ -24,9 +24,9 @@ public class EditorTools
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
         Palette.LoadPalette(1);
-        var result = DT1.Import(assetPath);
+        var dt1 = DT1.Load(assetPath);
         int i = 0;
-        foreach (var texture in result.textures)
+        foreach (var texture in dt1.textures)
         {
             var pngData = texture.EncodeToPNG();
             Object.DestroyImmediate(texture);

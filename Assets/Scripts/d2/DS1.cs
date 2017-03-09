@@ -2,66 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class DT1Index
-{
-    Dictionary<int, List<DT1.Tile>> tiles = new Dictionary<int, List<DT1.Tile>>();
-    new Dictionary<int, int> rarities = new Dictionary<int, int>();
-    int dt1Count = 0;
-
-    public void Add(DT1.Tile[] newTiles)
-    {
-        foreach (var tile in newTiles)
-        {
-            List<DT1.Tile> list = tiles.GetValueOrDefault(tile.index, null);
-            if (list == null)
-            {
-                list = new List<DT1.Tile>();
-                tiles[tile.index] = list;
-            }
-
-            if (dt1Count == 0)
-                list.Insert(0, tile);
-            else
-                list.Add(tile);
-
-            if (!rarities.ContainsKey(tile.index))
-                rarities[tile.index] = tile.rarity;
-            else
-                rarities[tile.index] += tile.rarity;
-        }
-        dt1Count += 1;
-    }
-
-    public bool Find(int index, out DT1.Tile tile)
-    {
-        List<DT1.Tile> tileList;
-        if (!tiles.TryGetValue(index, out tileList))
-        {
-            tile = new DT1.Tile();
-            return false;
-        }
-
-        int raritySum = rarities[index];
-        if (raritySum == 0)
-        {
-            tile = tileList[0];
-        }
-        else
-        {
-            int randomIndex = Random.Range(0, tileList.Count - 1);
-            while (tileList[randomIndex].rarity == 0)
-            {
-                randomIndex = (randomIndex + 1) % tileList.Count;
-            }
-            tile = tileList[randomIndex];
-        }
-        
-        return true;
-    }
-}
-
 public class DS1
 {
+    public Vector3 center;
+    public Vector3 entry;
+
     struct Cell
     {
         public byte prop1;
@@ -69,12 +14,6 @@ public class DS1
         public byte prop3;
         public byte prop4;
     };
-
-    public struct ImportResult
-    {
-        public Vector3 center;
-        public Vector3 entry;
-    }
 
     static byte[] dirLookup = {
                   0x00, 0x01, 0x02, 0x01, 0x02, 0x03, 0x03, 0x05, 0x05, 0x06,
@@ -88,7 +27,7 @@ public class DS1
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
-    static public ImportResult Import(string ds1Path)
+    static public DS1 Load(string ds1Path)
     {
         var sw = System.Diagnostics.Stopwatch.StartNew();
 
@@ -117,9 +56,6 @@ public class DS1
             //    t_num = 1;
         }
 
-        var dt1Index = new DT1Index();
-
-        int totalTiles = 0;
         if (version >= 3)
         {
             int fileCount = reader.ReadInt32();
@@ -132,17 +68,8 @@ public class DS1
                 {
                     filename += c;
                 }
-                filename = filename.Replace(".tg1", ".dt1");
-                var imported = DT1.Import(Application.streamingAssetsPath + filename);
-                totalTiles += imported.tiles.Length;
-                dt1Index.Add(imported.tiles);
             }
         }
-
-        sw.Stop();
-        Debug.Log("DT1 loaded in " + sw.Elapsed + " (" + totalTiles + " tiles)");
-        sw.Reset();
-        sw.Start();
 
         // skip 2 dwords ?
         if ((version >= 9) && (version <= 13))
@@ -216,9 +143,9 @@ public class DS1
             wallLayers[i].transform.SetParent(root.transform);
         }
 
-        var importResult = new ImportResult();
-        importResult.center = MapToWorld(width, height) / 2;
-        importResult.entry = importResult.center;
+        var result = new DS1();
+        result.center = MapToWorld(width, height) / 2;
+        result.entry = result.center;
 
         for (int n = 0; n < layerCount; n++)
         {
@@ -269,13 +196,13 @@ public class DS1
                                 int index = DT1.Tile.Index(mainIndex, subIndex, orientation);
                                 if (index == mapEntryIndex)
                                 {
-                                    importResult.entry = MapToWorld(x, y);
+                                    result.entry = MapToWorld(x, y);
                                     Debug.Log("Found map entry at " + x + " " + y);
                                     break;
                                 }
                                 else if (index == townEntryIndex)
                                 {
-                                    importResult.entry = MapToWorld(x, y);
+                                    result.entry = MapToWorld(x, y);
                                     Debug.Log("Found town entry at " + x + " " + y);
                                     break;
                                 }
@@ -293,7 +220,7 @@ public class DS1
                                 }
 
                                 DT1.Tile tile;
-                                if (dt1Index.Find(index, out tile))
+                                if (DT1.Find(index, out tile))
                                 {
                                     var tileObject = CreateTile(tile, x, y);
                                     tileObject.transform.SetParent(wallLayers[p].transform);
@@ -306,7 +233,7 @@ public class DS1
                                 if (orientation == 3)
                                 {
                                     index = DT1.Tile.Index(mainIndex, subIndex, 4);
-                                    if (dt1Index.Find(index, out tile))
+                                    if (DT1.Find(index, out tile))
                                     {
                                         var tileObject = CreateTile(tile, x, y);
                                         tileObject.transform.SetParent(wallLayers[p].transform);
@@ -338,7 +265,7 @@ public class DS1
                                 int orientation = 0;
                                 int index = DT1.Tile.Index(mainIndex, subIndex, orientation);
                                 DT1.Tile tile;
-                                if (dt1Index.Find(index, out tile))
+                                if (DT1.Find(index, out tile))
                                 {
                                     var tileObject = CreateTile(tile, x, y, orderInLayer: p);
                                     tileObject.transform.SetParent(floorLayers[p].transform);
@@ -410,7 +337,7 @@ public class DS1
         sw.Stop();
         Debug.Log("DS1 loaded in " + sw.Elapsed);
 
-        return importResult;
+        return result;
     }
 
     static Vector3 MapToWorld(int x, int y)
@@ -513,8 +440,6 @@ public class DS1
 
         if (obj._base == null)
             return gameObject;
-
-        var animator = gameObject.AddComponent<COFAnimator>();
         
         if (obj.type == 2)
         {

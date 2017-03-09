@@ -2,12 +2,22 @@
 
 public class MapBuilder : MonoBehaviour
 {
-    public string path;
+    public string levelName;
 
     void Start ()
     {
-        var result = DS1.Import(Application.streamingAssetsPath + "/d2/data/global/tiles/" + path);
-        var playerPos = result.entry;
+        LevelInfo levelInfo = LevelInfo.Find(levelName);
+
+        Palette.LoadPalette(levelInfo.pal + 1);
+
+        foreach(var dt1Filename in levelInfo.type.dt1Files)
+        {
+            DT1.Load(dt1Filename);
+        }
+
+        var ds1Filename = levelInfo.preset.ds1Files[Random.Range(0, levelInfo.preset.ds1Files.Count)];
+        var ds1 = DS1.Load(ds1Filename);
+        var playerPos = ds1.entry;
 
         var player = new GameObject("Player");
         player.transform.position = playerPos;

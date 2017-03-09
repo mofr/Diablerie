@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(COFAnimator))]
 [System.Diagnostics.DebuggerDisplay("{name}")]
 class StaticObject : Entity
 {

@@ -443,11 +443,28 @@ public class LevelType
 {
     public string name;
     public int id;
-    public string[] dt1Files = new string[32];
+    public string[] files = new string[32];
     public bool beta;
     public int act;
 
+    [System.NonSerialized]
+    public List<string> dt1Files = new List<string>();
+
     public static Datasheet<LevelType> sheet = Datasheet<LevelType>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/LvlTypes.txt");
+
+    static LevelType()
+    {
+        foreach(var levelType in sheet.rows)
+        {
+            foreach(var file in levelType.files)
+            {
+                if (file == "0")
+                    continue;
+
+                levelType.dt1Files.Add(Application.streamingAssetsPath + "/d2/data/global/tiles/" + file);
+            }
+        }
+    }
 }
 
 [System.Serializable]
@@ -473,6 +490,9 @@ public class LevelPreset
     public int dt1Mask;
     public bool beta;
 
+    [System.NonSerialized]
+    public List<string> ds1Files = new List<string>();
+
     public static Datasheet<LevelPreset> sheet = Datasheet<LevelPreset>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/LvlPrest.txt");
     static Dictionary<int, LevelPreset> levelIdMap = new Dictionary<int, LevelPreset>();
 
@@ -482,6 +502,11 @@ public class LevelPreset
         {
             if (preset.levelId != 0)
                 levelIdMap.Add(preset.levelId, preset);
+            foreach(var filename in preset.files)
+            {
+                if (filename != "0")
+                    preset.ds1Files.Add(Application.streamingAssetsPath + "/d2/data/global/tiles/" + filename);
+            }
         }
     }
 
@@ -513,7 +538,7 @@ public class LevelInfo
     public int drawEdges;
     public int isInside;
     public int drlgType;
-    public int levelType;
+    int levelTypeIndex;
     public int subType;
     public int subTheme;
     public int subWaypoint;
@@ -555,5 +580,27 @@ public class LevelInfo
     public int[] objPrb = new int[8];
     public bool beta;
 
+    [System.NonSerialized]
+    public LevelType type;
+
+    [System.NonSerialized]
+    public LevelPreset preset;
+
     public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/Levels.txt");
+    static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
+
+    static LevelInfo()
+    {
+        foreach(var levelInfo in sheet.rows)
+        {
+            levelInfo.type = LevelType.sheet.rows[levelInfo.levelTypeIndex];
+            levelInfo.preset = LevelPreset.Find(levelInfo.id);
+            nameIndex.Add(levelInfo.name, levelInfo);
+        }
+    }
+
+    public static LevelInfo Find(string name)
+    {
+        return nameIndex.GetValueOrDefault(name, null);
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(COFAnimator))]
 class Creature : Entity
 {
     public Obj obj;
