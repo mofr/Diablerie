@@ -451,7 +451,12 @@ Prefab:
     - target: {fileID: 114074608161891162, guid: 2246277530e674f49a6dcd68b85cd59c,
         type: 2}
       propertyPath: path
-      value: act1/tristram/tri_town4.ds1
+      value: act1/outdoors/stnclf2.ds1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114074608161891162, guid: 2246277530e674f49a6dcd68b85cd59c,
+        type: 2}
+      propertyPath: levelName
+      value: Act 1 - Town
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2246277530e674f49a6dcd68b85cd59c, type: 2}
