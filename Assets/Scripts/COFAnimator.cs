@@ -15,12 +15,13 @@ class COFAnimator : MonoBehaviour
     int frameStart = 0;
     List<Layer> layers = new List<Layer>();
     bool _selected = false;
-    Material material;
 
     struct Layer
     {
         public GameObject gameObject;
-        public SpriteRenderer spriteRenderer;
+        public SpriteRenderer renderer;
+        public Transform transform;
+        public DCC dcc;
     }
 
     public Bounds bounds
@@ -32,9 +33,9 @@ class COFAnimator : MonoBehaviour
             {
                 var layer = layers[i];
                 if (i == 0)
-                    bounds = layer.spriteRenderer.bounds;
+                    bounds = layer.renderer.bounds;
                 else
-                    bounds.Encapsulate(layer.spriteRenderer.bounds);
+                    bounds.Encapsulate(layer.renderer.bounds);
             }
             return bounds;
         }
@@ -49,14 +50,10 @@ class COFAnimator : MonoBehaviour
             if (_selected != value)
             {
                 _selected = value;
-                material.SetFloat("_SelfIllum", _selected ? 2.0f : 1.0f);
+                foreach(var layer in layers)
+                    layer.renderer.material.SetFloat("_SelfIllum", _selected ? 2.0f : 1.0f);
             }
         }
-    }
-
-    void Awake()
-    {
-        material = new Material(Shader.Find("Sprite"));
     }
 
     void Start()
@@ -100,17 +97,24 @@ class COFAnimator : MonoBehaviour
         {
             Layer layer = new Layer();
             layer.gameObject = new GameObject();
-            layer.gameObject.transform.position = new Vector3(0, 0, -i * 0.1f);
-            layer.gameObject.transform.SetParent(transform, false);
-            layer.spriteRenderer = layer.gameObject.AddComponent<SpriteRenderer>();
-            layer.spriteRenderer.material = material;
+            layer.transform = layer.gameObject.transform;
+            layer.transform.SetParent(transform, false);
+            layer.renderer = layer.gameObject.AddComponent<SpriteRenderer>();
             layers.Add(layer);
         }
 
         for (int i = 0; i < layers.Count; ++i)
         {
             var layer = layers[i];
-            layer.gameObject.SetActive(i < _cof.layerCount);
+            bool active = i < _cof.layerCount;
+            layer.gameObject.SetActive(active);
+            if (active)
+            {
+                var cofLayer = _cof.layers[i];
+                layer.dcc = DCC.Load(cofLayer.dccFilename);
+                layer.renderer.material = new Material(cofLayer.material);
+                layers[i] = layer;
+            }
         }
     }
 
@@ -147,15 +151,14 @@ class COFAnimator : MonoBehaviour
         int priority = (direction * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
         for (int i = 0; i < _cof.layerCount; ++i)
         {
-            Layer layer = layers[i];
             int layerIndex = _cof.priority[priority + i];
-            var cofLayer = _cof.layers[layerIndex];
-            if (cofLayer.dccFilename == null)
-                continue;
-
-            var dcc = DCC.Load(cofLayer.dccFilename);
-            layer.spriteRenderer.sprite = dcc.GetSprites(direction)[spriteIndex];
-            layer.spriteRenderer.sortingOrder = sortingOrder;
+            var cofLayer = _cof.compositLayers[layerIndex];
+            Layer layer = layers[cofLayer.index];
+            layer.renderer.sprite = layer.dcc.GetSprites(direction)[spriteIndex];
+            layer.renderer.sortingOrder = sortingOrder;
+            var pos = layer.transform.position;
+            pos.z = -i * 0.1f;
+            layer.transform.position = pos;
         }
     }
 }

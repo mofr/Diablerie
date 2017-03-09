@@ -5,6 +5,7 @@ using UnityEngine;
 public class COF
 {
     public Layer[] layers;
+    public Layer[] compositLayers;
     public int framesPerDirection;
     public int directionCount;
     public int layerCount;
@@ -13,8 +14,10 @@ public class COF
 
     public struct Layer
     {
+        public int index;
         public string dccFilename;
         public string name;
+        public Material material;
     }
 
     public static readonly string[][] ModeNames = {
@@ -45,7 +48,8 @@ public class COF
         cof.directionCount = reader.ReadByte();
         stream.Seek(25, SeekOrigin.Current);
 
-        cof.layers = new Layer[16];
+        cof.compositLayers = new Layer[16];
+        cof.layers = new Layer[cof.layerCount];
 
         for (int i = 0; i < cof.layerCount; ++i)
         {
@@ -56,17 +60,28 @@ public class COF
             reader.ReadByte();
             reader.ReadByte();
 
-            // transparency
-            reader.ReadByte();
-            reader.ReadByte();
+            bool transparent = reader.ReadByte() != 0;
+            int blendMode = reader.ReadByte();
 
             string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
             reader.ReadByte(); // zero byte from zero-terminated weapon class string
             string sptr = gear[compositIndex];
             if (sptr == "")
                 continue;
-            cof.layers[compositIndex].dccFilename = (Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc").ToLower();
-            cof.layers[compositIndex].name = compositName + " " + sptr;
+            cof.compositLayers[compositIndex].dccFilename = (Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc").ToLower();
+            cof.compositLayers[compositIndex].name = compositName + " " + sptr;
+            cof.compositLayers[compositIndex].index = i;
+
+            if (transparent)
+            {
+                cof.compositLayers[compositIndex].material = Materials.softAdditive;
+            }
+            else
+            {
+                cof.compositLayers[compositIndex].material = Materials.normal;
+            }
+
+            cof.layers[i] = cof.compositLayers[compositIndex];
         }
 
         stream.Seek(cof.framesPerDirection, SeekOrigin.Current);
