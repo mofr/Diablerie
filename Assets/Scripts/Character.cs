@@ -82,6 +82,12 @@ public class Character : Entity
 		animator = GetComponent<COFAnimator>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        animator.gear = gear;
+    }
+
 	public void Use(Usable usable) {
         if (attack || takingDamage || dying || dead)
             return;
@@ -94,6 +100,9 @@ public class Character : Entity
     public void GoTo(Vector2 target)
     {
         if (attack || takingDamage || dying || dead)
+            return;
+
+        if (monStat != null && !monStat.ext.hasMode[2])
             return;
 
         moving = true;
@@ -292,7 +301,7 @@ public class Character : Entity
             mode = "NU";
         }
 
-        animator.cof = COF.Load(basePath, token, weaponClass, gear, mode);
+        animator.cof = COF.Load(basePath, token, weaponClass, mode);
         animator.direction = directionIndex;
     }
 
@@ -386,6 +395,7 @@ public class Character : Entity
 
     void OnRenderObject()
     {
-        MouseSelection.Submit(this);
+        if (!dead && !dying)
+            MouseSelection.Submit(this);
     }
 }

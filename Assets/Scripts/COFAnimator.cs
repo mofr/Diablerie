@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -9,6 +10,7 @@ class COFAnimator : MonoBehaviour
     public bool loop = true;
     public float speed = 1.0f;
     public float frameDuration = 1.0f / 12.0f;
+    string[] _gear;
 
     float time = 0;
     int frameCounter = 0;
@@ -78,6 +80,15 @@ class COFAnimator : MonoBehaviour
         }
     }
 
+    public string[] gear
+    {
+        get { return _gear; }
+        set
+        {
+            _gear = value;
+        }
+    }
+
     public void SetFrameRange(int start, int count)
     {
         frameStart = start;
@@ -87,7 +98,7 @@ class COFAnimator : MonoBehaviour
 
     void UpdateConfiguration()
     {
-        if (_cof == null)
+        if (_cof == null || _gear == null)
             return;
 
         time = 0;
@@ -106,26 +117,37 @@ class COFAnimator : MonoBehaviour
             layer.renderer = layer.gameObject.AddComponent<SpriteRenderer>();
             layers.Add(layer);
         }
-
+        
         for (int i = 0; i < layers.Count; ++i)
         {
             var layer = layers[i];
-            bool active = i < _cof.layerCount;
-            if (active)
+            if (i >= _cof.layerCount)
             {
-                var cofLayer = _cof.layers[i];
-                if (cofLayer.dccFilename != null)
-                {
-                    layer.dcc = DCC.Load(cofLayer.dccFilename);
-                    layer.renderer.material = new Material(cofLayer.material);
-                    layers[i] = layer;
-                }
-                else
-                {
-                    active = false;
-                }
+                layer.gameObject.SetActive(false);
+                continue;
             }
-            layer.gameObject.SetActive(active);
+
+            var cofLayer = _cof.layers[i];
+            string equip = gear[cofLayer.compositIndex];
+            if (equip == null || equip == "")
+            {
+                layer.gameObject.SetActive(false);
+                continue;
+            }
+
+            var dccFilename = _cof.DccFilename(cofLayer, equip);
+            try
+            {
+                layer.dcc = DCC.Load(dccFilename);
+                layer.renderer.material = new Material(cofLayer.material);
+                layers[i] = layer;
+                layer.gameObject.SetActive(true);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Debug.LogWarning("File not found " + dccFilename);
+                layer.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -165,6 +187,8 @@ class COFAnimator : MonoBehaviour
             int layerIndex = _cof.priority[priority + i];
             var cofLayer = _cof.compositLayers[layerIndex];
             Layer layer = layers[cofLayer.index];
+            if (!layer.gameObject.activeSelf)
+                continue;
             layer.renderer.sprite = layer.dcc.GetSprites(direction)[spriteIndex];
             layer.renderer.sortingOrder = sortingOrder;
             var pos = layer.transform.position;

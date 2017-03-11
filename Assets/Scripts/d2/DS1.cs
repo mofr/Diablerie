@@ -332,7 +332,10 @@ public class DS1
                 var pos = MapSubCellToWorld(x, y);
                 Obj obj = Obj.Find(act, type, id);
                 var gameObject = CreateObject(obj, pos);
-                gameObject.transform.SetParent(root.transform);
+                if (gameObject != null)
+                    gameObject.transform.SetParent(root.transform);
+                else
+                    Debug.LogWarning("Object not instantiated " + obj.description);
             }
         }
 

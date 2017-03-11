@@ -36,6 +36,7 @@ class StaticObject : Entity
     override protected void Start()
     {
         base.Start();
+        animator.gear = obj.gear;
         SetMode(obj.mode);
     }
 
@@ -52,7 +53,7 @@ class StaticObject : Entity
         mode = System.Array.IndexOf(COF.ModeNames[2], modeName);
         if (objectInfo.draw)
         {
-            var cof = COF.Load(obj._base, obj.token, obj.weaponClass, obj.gear, modeName);
+            var cof = COF.Load(obj._base, obj.token, obj.weaponClass, modeName);
             animator.cof = cof;
             animator.direction = direction;
             animator.loop = objectInfo.cycleAnim[mode];

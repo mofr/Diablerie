@@ -11,12 +11,16 @@ public class COF
     public int layerCount;
     public byte[] priority;
     public float frameDuration = 1.0f / 12.0f;
+    public string basePath;
+    public string token;
+    public string mode;
 
     public struct Layer
     {
         public int index;
-        public string dccFilename;
+        public int compositIndex;
         public string name;
+        public string weaponClass;
         public Material material;
     }
 
@@ -28,9 +32,9 @@ public class COF
     static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
     static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
-    static public COF Load(string basePath, string token, string _class, string[] gear, string mode)
+    static public COF Load(string basePath, string token, string weaponClass, string mode)
     {
-        string cofFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/cof/" + token + mode + _class + ".cof";
+        string cofFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/cof/" + token + mode + weaponClass + ".cof";
         cofFilename.ToLower();
         if (cache.ContainsKey(cofFilename))
         {
@@ -38,6 +42,9 @@ public class COF
         }
 
         COF cof = new COF();
+        cof.basePath = basePath;
+        cof.token = token;
+        cof.mode = mode;
 
         byte[] bytes = File.ReadAllBytes(cofFilename);
         var stream = new MemoryStream(bytes);
@@ -53,8 +60,10 @@ public class COF
 
         for (int i = 0; i < cof.layerCount; ++i)
         {
-            int compositIndex = reader.ReadByte();
-            string compositName = layerNames[compositIndex];
+            Layer layer = new Layer();
+            layer.index = i;
+            layer.compositIndex = reader.ReadByte();
+            layer.name = layerNames[layer.compositIndex];
 
             // shadows
             reader.ReadByte();
@@ -62,38 +71,37 @@ public class COF
 
             bool transparent = reader.ReadByte() != 0;
             int blendMode = reader.ReadByte();
-
-            string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
-            reader.ReadByte(); // zero byte from zero-terminated weapon class string
-            string sptr = gear[compositIndex];
-            if (sptr == null || sptr == "")
-                continue;
-            cof.compositLayers[compositIndex].dccFilename = (Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc").ToLower();
-            cof.compositLayers[compositIndex].name = compositName;
-            cof.compositLayers[compositIndex].index = i;
-
             if (transparent)
             {
-                cof.compositLayers[compositIndex].material = Materials.softAdditive;
+                layer.material = Materials.softAdditive;
             }
             else
             {
-                cof.compositLayers[compositIndex].material = Materials.normal;
+                layer.material = Materials.normal;
             }
 
-            cof.layers[i] = cof.compositLayers[compositIndex];
+            layer.weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(4), 0, 3);
+
+            cof.layers[i] = layer;
+            cof.compositLayers[layer.compositIndex] = layer;
         }
 
         stream.Seek(cof.framesPerDirection, SeekOrigin.Current);
         cof.priority = reader.ReadBytes(cof.directionCount * cof.framesPerDirection * cof.layerCount);
 
         AnimData animData = new AnimData();
-        if (AnimData.Find(token + mode + _class, ref animData))
+        if (AnimData.Find(token + mode + weaponClass, ref animData))
         {
             cof.frameDuration = animData.frameDuration;
         }
 
         cache.Add(cofFilename, cof);
         return cof;
+    }
+
+    public string DccFilename(Layer layer, string equip)
+    {
+        string filename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + layer.name + "/" + token + layer.name + equip + mode + layer.weaponClass + ".dcc";
+        return filename.ToLower();
     }
 }
