@@ -33,6 +33,8 @@ class COFAnimator : MonoBehaviour
             for(int i = 0; i < layers.Count; ++i)
             {
                 var layer = layers[i];
+                if (!layer.gameObject.activeSelf)
+                    continue;
                 if (i == 0)
                     bounds = layer.renderer.bounds;
                 else
@@ -96,8 +98,9 @@ class COFAnimator : MonoBehaviour
 
         for (int i = layers.Count; i < _cof.layerCount; ++i)
         {
+            var cofLayer = _cof.layers[i];
             Layer layer = new Layer();
-            layer.gameObject = new GameObject();
+            layer.gameObject = new GameObject(cofLayer.name);
             layer.transform = layer.gameObject.transform;
             layer.transform.SetParent(transform, false);
             layer.renderer = layer.gameObject.AddComponent<SpriteRenderer>();
@@ -108,14 +111,21 @@ class COFAnimator : MonoBehaviour
         {
             var layer = layers[i];
             bool active = i < _cof.layerCount;
-            layer.gameObject.SetActive(active);
             if (active)
             {
                 var cofLayer = _cof.layers[i];
-                layer.dcc = DCC.Load(cofLayer.dccFilename);
-                layer.renderer.material = new Material(cofLayer.material);
-                layers[i] = layer;
+                if (cofLayer.dccFilename != null)
+                {
+                    layer.dcc = DCC.Load(cofLayer.dccFilename);
+                    layer.renderer.material = new Material(cofLayer.material);
+                    layers[i] = layer;
+                }
+                else
+                {
+                    active = false;
+                }
             }
+            layer.gameObject.SetActive(active);
         }
     }
 

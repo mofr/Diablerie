@@ -11,12 +11,12 @@ public class DummyController : MonoBehaviour {
     static GameObject[] siblings = new GameObject[1024];
 
 	void Awake() {
-        character = GetComponent<Character>();
         iso = GetComponent<Iso>();
     }
 
     void Start()
     {
+        character = GetComponent<Character>();
         character.OnTakeDamage += OnTakeDamage;
         StartCoroutine(Roam());
     }
@@ -58,7 +58,7 @@ public class DummyController : MonoBehaviour {
         while (true)
         {
             character.Attack(target);
-            yield return new WaitForSeconds(Random.Range(0.15f, 1f));
+            yield return new WaitForSeconds(Random.Range(0.65f, 1f));
         }
     }
 }

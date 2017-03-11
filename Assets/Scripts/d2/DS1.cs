@@ -436,15 +436,14 @@ public class DS1
 
     static GameObject CreateObject(Obj obj, Vector3 pos)
     {
-        GameObject gameObject = new GameObject();
-        gameObject.transform.position = pos;
-        gameObject.name = obj.description;
+        GameObject gameObject = null;
 
-        if (obj._base == null)
-            return gameObject;
-        
         if (obj.type == 2)
         {
+            gameObject = new GameObject();
+            gameObject.transform.position = pos;
+            gameObject.name = obj.description;
+
             ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
             gameObject.name += " " + objectInfo.description;
 
@@ -455,8 +454,12 @@ public class DS1
         }
         else
         {
-            var creature = gameObject.AddComponent<Creature>();
-            creature.obj = obj;
+            var monStat = MonStat.Find(obj.act, obj.id);
+            if (monStat != null)
+            {
+                gameObject = World.SpawnMonster(monStat, pos);
+                gameObject.AddComponent<DummyController>();
+            }
         }
 
         return gameObject;

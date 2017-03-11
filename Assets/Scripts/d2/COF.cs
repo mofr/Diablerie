@@ -66,10 +66,10 @@ public class COF
             string weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(3));
             reader.ReadByte(); // zero byte from zero-terminated weapon class string
             string sptr = gear[compositIndex];
-            if (sptr == "")
+            if (sptr == null || sptr == "")
                 continue;
             cof.compositLayers[compositIndex].dccFilename = (Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + compositName + "/" + token + compositName + sptr + mode + weaponClass + ".dcc").ToLower();
-            cof.compositLayers[compositIndex].name = compositName + " " + sptr;
+            cof.compositLayers[compositIndex].name = compositName;
             cof.compositLayers[compositIndex].index = i;
 
             if (transparent)

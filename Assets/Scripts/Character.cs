@@ -2,9 +2,12 @@
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class Character : MonoBehaviour
+[RequireComponent(typeof(Iso))]
+[RequireComponent(typeof(COFAnimator))]
+public class Character : Entity
 {
-	public int directionCount = 8;
+    public MonStat monStat;
+    public int directionCount = 8;
 	public float speed = 3.5f;
 	public float attackSpeed = 1.0f;
     public float useRange = 1f;
@@ -258,9 +261,15 @@ public class Character : MonoBehaviour
         string weaponClass = this.weaponClass;
         animator.speed = 1.0f;
         animator.loop = true;
-        if (dying || dead)
+        if (dying)
         {
             mode = "DT";
+            weaponClass = "HTH";
+            animator.loop = false;
+        }
+        else if (dead)
+        {
+            mode = "DD";
             weaponClass = "HTH";
             animator.loop = false;
         }
@@ -354,5 +363,29 @@ public class Character : MonoBehaviour
             dead = true;
         }
         UpdateAnimation();
+    }
+
+    public override string name
+    {
+        get
+        {
+            if (monStat != null)
+                return monStat.nameStr;
+            else
+                return "monStat null";
+        }
+    }
+
+    public override int nameOffset
+    {
+        get
+        {
+            return -(int)(bounds.size.y * Iso.pixelsPerUnit) - 10;
+        }
+    }
+
+    void OnRenderObject()
+    {
+        MouseSelection.Submit(this);
     }
 }

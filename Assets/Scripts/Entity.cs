@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class Entity : MonoBehaviour
+public class Entity : MonoBehaviour
 {
     COFAnimator animator;
 

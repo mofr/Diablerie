@@ -52,7 +52,7 @@ class StaticObject : Entity
         mode = System.Array.IndexOf(COF.ModeNames[2], modeName);
         if (objectInfo.draw)
         {
-            var cof = COF.Load(obj._base, obj.token, obj._class, obj.gear, modeName);
+            var cof = COF.Load(obj._base, obj.token, obj.weaponClass, obj.gear, modeName);
             animator.cof = cof;
             animator.direction = direction;
             animator.loop = objectInfo.cycleAnim[mode];
