@@ -21,6 +21,7 @@ public class COF
         public int compositIndex;
         public string name;
         public string weaponClass;
+        public bool shadow;
         public Material material;
     }
 
@@ -65,8 +66,7 @@ public class COF
             layer.compositIndex = reader.ReadByte();
             layer.name = layerNames[layer.compositIndex];
 
-            // shadows
-            reader.ReadByte();
+            layer.shadow = reader.ReadByte() != 0;
             reader.ReadByte();
 
             bool transparent = reader.ReadByte() != 0;

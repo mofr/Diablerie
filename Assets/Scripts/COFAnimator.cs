@@ -18,6 +18,7 @@ class COFAnimator : MonoBehaviour
     int frameStart = 0;
     List<Layer> layers = new List<Layer>();
     bool _selected = false;
+    Material shadowMaterial = new Material(Materials.shadow);
 
     struct Layer
     {
@@ -25,6 +26,7 @@ class COFAnimator : MonoBehaviour
         public SpriteRenderer renderer;
         public Transform transform;
         public DCC dcc;
+        public SpriteRenderer shadow;
     }
 
     public Bounds bounds
@@ -115,6 +117,11 @@ class COFAnimator : MonoBehaviour
             layer.transform = layer.gameObject.transform;
             layer.transform.SetParent(transform, false);
             layer.renderer = layer.gameObject.AddComponent<SpriteRenderer>();
+            var shadowObject = new GameObject("shadow");
+            shadowObject.transform.SetParent(layer.transform, false);
+            shadowObject.transform.localScale = new Vector3(1, 0.5f);
+            layer.shadow = shadowObject.AddComponent<SpriteRenderer>();
+            layer.shadow.material = shadowMaterial;
             layers.Add(layer);
         }
         
@@ -142,6 +149,7 @@ class COFAnimator : MonoBehaviour
                 layer.renderer.material = new Material(cofLayer.material);
                 layers[i] = layer;
                 layer.gameObject.SetActive(true);
+                layer.shadow.gameObject.SetActive(cofLayer.shadow);
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -191,6 +199,7 @@ class COFAnimator : MonoBehaviour
                 continue;
             layer.renderer.sprite = layer.dcc.GetSprites(direction)[spriteIndex];
             layer.renderer.sortingOrder = sortingOrder;
+            layer.shadow.sprite = layer.renderer.sprite;
             var pos = layer.transform.position;
             pos.z = -i * 0.1f;
             layer.transform.position = pos;
