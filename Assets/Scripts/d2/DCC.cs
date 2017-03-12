@@ -420,6 +420,7 @@ public class DCC
         }
 
         int pb_idx = 0;
+        PixelBufferEntry pbe = pixelBuffer[pb_idx];
 
         for (int f = 0; f < header.framesPerDir; f++)
         {
@@ -456,7 +457,6 @@ public class DCC
                 int cell_x = cell.x0 >> 2;
                 int cell_y = cell.y0 >> 2;
                 int cell_idx = cell_x + (cell_y * frameBuffer.nb_cell_w);
-                PixelBufferEntry pbe = pixelBuffer[pb_idx];
 
                 // equal cell checks
                 if ((pbe.frame != f) || (pbe.frameCellIndex != c))
@@ -515,6 +515,7 @@ public class DCC
 
                     // next pixelbuffer entry
                     pb_idx++;
+                    pbe = pixelBuffer[pb_idx];
                 }
 
                 // for the buffer cell that was used by this frame cell,
