@@ -53,6 +53,9 @@ class MouseSelection : MonoBehaviour
 
     static public void Submit(Entity entity)
     {
+        if (entity == PlayerController.instance.character)
+            return;
+
         var position = entity.transform.position;
 
         if (Input.GetMouseButton(0))
