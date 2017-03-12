@@ -12,6 +12,7 @@ public struct AnimData
 
     public static bool Find(string name, ref AnimData animData)
     {
+        name = name.ToUpper();
         byte hash = Hash(name);
         if (buckets[hash].data == null)
             return false;
