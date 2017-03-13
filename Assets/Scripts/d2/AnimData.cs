@@ -39,16 +39,10 @@ public struct AnimData
     {
         string upperName = name.ToUpper();
         int nb = name.Length;
-        byte hash = 0;
-
-        for (int i = 0; i < name.Length; ++i)
-        {
-            if (name[i] == '.')
-                nb = i;
-        }
+        int hash = 0;
         for (int i = 0; i < nb; i++)
-            hash += (byte) upperName[i];
-        return hash;
+            hash += upperName[i];
+        return (byte)(hash & 0xff);
     }
 
     static AnimData()
@@ -61,21 +55,21 @@ public struct AnimData
             int count = reader.ReadInt32();
             var bucket = new Bucket();
             bucket.data = new AnimData[count];
-            byte hash = 0;
             for (int i = 0; i < count; ++i)
             {
                 var animData = new AnimData();
-                animData.cofName = System.Text.Encoding.Default.GetString(reader.ReadBytes(7));
-                reader.ReadByte(); // zero byte from zero-terminated string
+                animData.cofName = System.Text.Encoding.Default.GetString(reader.ReadBytes(8), 0, 7);
                 animData.framesPerDir = reader.ReadInt32();
                 animData.speed = reader.ReadInt32();
                 animData.flags = reader.ReadBytes(144);
                 animData.frameDuration = 256.0f / 25.0f / animData.speed;
                 bucket.data[i] = animData;
-                if (i == 0)
-                    hash = Hash(animData.cofName);
             }
-            buckets[hash] = bucket;
+            if (count > 0)
+            {
+                byte hash = Hash(bucket.data[0].cofName);
+                buckets[hash] = bucket;
+            }
         }
     }
 }
