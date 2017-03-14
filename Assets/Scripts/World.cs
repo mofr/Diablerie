@@ -72,7 +72,10 @@ public class World : MonoBehaviour
                 continue;
             character.gear[i] = variants[Random.Range(0, variants.Length)];
         }
-        monster.AddComponent<DummyController>();
+        if (monStat.ai == "Npc")
+            monster.AddComponent<NpcController>();
+        else if (monStat.ai != "Idle")
+            monster.AddComponent<MonsterController>();
         return monster;
     }
 }
