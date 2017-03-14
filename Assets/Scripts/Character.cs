@@ -6,10 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(COFAnimator))]
 public class Character : Entity
 {
+    [System.NonSerialized]
     public MonStat monStat;
     public int directionCount = 8;
-	public float speed = 3.5f;
-	public float attackSpeed = 1.0f;
+	public float walkSpeed = 3.5f;
+    public float runSpeed = 6f;
+    public float attackSpeed = 1.0f;
     public float useRange = 1f;
     public float attackRange = 2.5f;
     public float diameter = 1f;
@@ -209,6 +211,7 @@ public class Character : Entity
 		Vector2 step = path[0].direction;
 		float stepLen = step.magnitude;
 
+        float speed = run ? runSpeed : walkSpeed;
         float distance = speed * Time.deltaTime;
 		while (traveled + distance >= stepLen) {
 			float firstPart = stepLen - traveled;
@@ -256,6 +259,7 @@ public class Character : Entity
         if (path.Count == 1 && Vector2.Distance(path[0].pos, targetPoint) < 1.0f)
         {
             var dir = (targetPoint - iso.pos).normalized;
+            float speed = run ? runSpeed : walkSpeed;
             iso.pos += dir * Time.deltaTime * speed;
             desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
         }

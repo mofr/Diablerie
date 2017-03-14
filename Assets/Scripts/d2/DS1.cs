@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class DS1
 {
+    public GameObject root;
     public Vector3 center;
     public Vector3 entry;
+    public int width;
+    public int height;
 
     struct Cell
     {
@@ -129,25 +132,26 @@ public class DS1
                 layout[layerCount++] = 12;    // tag
         }
 
-        GameObject root = new GameObject(Path.GetFileName(ds1Path));
+        var result = new DS1();
+        result.center = MapToWorld(width, height) / 2;
+        result.entry = result.center;
+        result.root = new GameObject(Path.GetFileName(ds1Path));
+        result.width = width;
+        result.height = height;
 
         var floorLayers = new GameObject[floorLayerCount];
-        for(int i = 0; i < floorLayerCount;  ++i)
+        for (int i = 0; i < floorLayerCount; ++i)
         {
             floorLayers[i] = new GameObject("f" + (i + 1));
-            floorLayers[i].transform.SetParent(root.transform);
+            floorLayers[i].transform.SetParent(result.root.transform);
         }
 
         var wallLayers = new GameObject[wallLayerCount];
         for (int i = 0; i < wallLayerCount; ++i)
         {
             wallLayers[i] = new GameObject("w" + (i + 1));
-            wallLayers[i].transform.SetParent(root.transform);
+            wallLayers[i].transform.SetParent(result.root.transform);
         }
-
-        var result = new DS1();
-        result.center = MapToWorld(width, height) / 2;
-        result.entry = result.center;
 
         for (int n = 0; n < layerCount; n++)
         {
@@ -333,7 +337,7 @@ public class DS1
                 Obj obj = Obj.Find(act, type, id);
                 var gameObject = CreateObject(obj, pos);
                 if (gameObject != null)
-                    gameObject.transform.SetParent(root.transform);
+                    gameObject.transform.SetParent(result.root.transform);
                 else
                     Debug.LogWarning("Object not instantiated " + obj.description);
             }
@@ -461,7 +465,6 @@ public class DS1
             if (monStat != null)
             {
                 gameObject = World.SpawnMonster(monStat, pos);
-                gameObject.AddComponent<DummyController>();
             }
         }
 
