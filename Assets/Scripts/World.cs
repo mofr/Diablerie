@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class World : MonoBehaviour
 {
     public string levelName;
+    Vector3 entrance;
 
     void Start ()
     {
@@ -12,7 +14,7 @@ public class World : MonoBehaviour
         //SpawnPlayer(ds1.entry);
 
         var town = DS1.Load(Application.streamingAssetsPath + "/d2/data/global/tiles/act1/town/townN1.ds1");
-        var entrance = new Vector3(30, -15);
+        entrance = new Vector3(30, -15);
         for (int i = 0; i < 5; ++i)
         {
             SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
@@ -23,6 +25,7 @@ public class World : MonoBehaviour
         }
 
         SpawnPlayer(town.entry);
+        StartCoroutine(SpawnMonsters());
     }
 
     static void SpawnPlayer(Vector3 pos)
@@ -41,7 +44,14 @@ public class World : MonoBehaviour
         character.run = true;
         character.walkSpeed = 7;
         character.runSpeed = 13;
+        character.maxHealth = 10000;
+        character.health = 10000;
         PlayerController.instance.SetCharacter(character);
+
+        var body = player.AddComponent<Rigidbody2D>();
+        body.isKinematic = true;
+        var collider = player.AddComponent<CircleCollider2D>();
+        collider.radius = Iso.tileSizeY;
     }
 
     public static GameObject SpawnMonster(string id, Vector3 pos)
@@ -64,6 +74,7 @@ public class World : MonoBehaviour
         character.runSpeed = monStat.runSpeed;
         character.health = monStat.minHP;
         character.maxHealth = monStat.minHP;
+
         character.gear = new string[monStat.ext.gearVariants.Length];
         for (int i = 0; i < character.gear.Length; ++i)
         {
@@ -72,10 +83,26 @@ public class World : MonoBehaviour
                 continue;
             character.gear[i] = variants[Random.Range(0, variants.Length)];
         }
+
         if (monStat.ai == "Npc")
             monster.AddComponent<NpcController>();
         else if (monStat.ai != "Idle")
             monster.AddComponent<MonsterController>();
+
+        var body = monster.AddComponent<Rigidbody2D>();
+        body.isKinematic = true;
+        var collider = monster.AddComponent<CircleCollider2D>();
+        collider.radius = monStat.ext.sizeX * Iso.tileSizeY;
+
         return monster;
+    }
+
+    IEnumerator SpawnMonsters()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
+        }
     }
 }

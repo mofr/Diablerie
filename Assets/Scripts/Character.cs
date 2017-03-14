@@ -180,6 +180,10 @@ public class Character : Entity
                     attack = true;
                     LookAtImmidietly(target);
                 }
+                else
+                {
+                    targetPoint = target;
+                }
             }
         }
 
@@ -322,22 +326,30 @@ public class Character : Entity
 
     public void TakeDamage(Character originator, int damage)
     {
+        if (dead)
+            return;
+
         health -= damage;
         if (health > 0)
         {
             if (OnTakeDamage != null)
                 OnTakeDamage(originator, damage);
-            takingDamage = true;
-            attack = false;
+            if (damage > maxHealth * 0.3f)
+            {
+                takingDamage = true;
+                attack = false;
+                moving = false;
+                targetCharacter = null;
+            }
         }
         else
         {
             LookAtImmidietly(originator.iso.pos);
             dying = true;
             attack = false;
+            moving = false;
+            targetCharacter = null;
         }
-        moving = false;
-        targetCharacter = null;
     }
 
     void OnAnimationMiddle()

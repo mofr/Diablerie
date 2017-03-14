@@ -6,6 +6,10 @@ public class MonsterController : MonoBehaviour
     Character character;
     Iso iso;
     Character target;
+    readonly float viewRadius = 3f;
+    readonly float maxAgroDistance = 10f;
+
+    static Collider2D[] visibleColliders = new Collider2D[100];
 
 	void Awake() {
         iso = GetComponent<Iso>();
@@ -32,6 +36,19 @@ public class MonsterController : MonoBehaviour
             character.GoTo(target);
             yield return new WaitForSeconds(Random.Range(1f, 3f));
             while (!isActiveAndEnabled) yield return null;
+
+            int visibleCount = Physics2D.OverlapCircleNonAlloc(transform.position, viewRadius, visibleColliders);
+            for (int i = 0; i < visibleCount; ++i)
+            {
+                var collider = visibleColliders[i];
+                var visibleCharacter = collider.GetComponent<Character>();
+                if (visibleCharacter == null)
+                    continue;
+                if (visibleCharacter.gameObject.name == "Player")
+                {
+                    Attack(visibleCharacter);
+                }
+            }
         }
     }
 
@@ -45,8 +62,23 @@ public class MonsterController : MonoBehaviour
     {
         while (true)
         {
+            if (Random.Range(0, 100) > 50)
+            {
+                character.GoTo(iso.pos);
+                yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+            }
+
             character.Attack(target);
-            yield return new WaitForSeconds(Random.Range(0.65f, 1f));
+            yield return new WaitForSeconds(Random.Range(1.65f, 5f));
+
+            Iso targetIso = target.GetComponent<Iso>();
+            if (Vector2.Distance(targetIso.pos, iso.pos) > maxAgroDistance)
+            {
+                yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+                target = null;
+                StartCoroutine(Roam());
+                break;
+            }
         }
     }
 }
