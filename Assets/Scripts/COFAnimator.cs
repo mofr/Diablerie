@@ -18,7 +18,7 @@ class COFAnimator : MonoBehaviour
     int frameStart = 0;
     List<Layer> layers = new List<Layer>();
     bool _selected = false;
-    Material shadowMaterial = new Material(Materials.shadow);
+    Material shadowMaterial;
 
     struct Layer
     {
@@ -157,6 +157,11 @@ class COFAnimator : MonoBehaviour
                 layer.gameObject.SetActive(false);
             }
         }
+    }
+
+    void Awake()
+    {
+        shadowMaterial = new Material(Materials.shadow);
     }
 
     void Update()

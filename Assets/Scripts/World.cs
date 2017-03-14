@@ -6,22 +6,23 @@ public class World : MonoBehaviour
 
     void Start ()
     {
-        LevelInfo levelInfo = LevelInfo.Find(levelName);
-        var ds1Filename = levelInfo.preset.ds1Files[Random.Range(0, levelInfo.preset.ds1Files.Count)];
-        var ds1 = DS1.Load(ds1Filename);
-        SpawnPlayer(ds1.entry);
+        //LevelInfo levelInfo = LevelInfo.Find(levelName);
+        //var ds1Filename = levelInfo.preset.ds1Files[Random.Range(0, levelInfo.preset.ds1Files.Count)];
+        //var ds1 = DS1.Load(ds1Filename);
+        //SpawnPlayer(ds1.entry);
 
-        //var town = DS1.Load(Application.streamingAssetsPath + "/d2/data/global/tiles/act1/town/townN1.ds1");
-        //var entrance = new Vector3(30, -15);
-        //for(int i = 0; i < 5; ++i)
-        //{
+        var town = DS1.Load(Application.streamingAssetsPath + "/d2/data/global/tiles/act1/town/townN1.ds1");
+        var entrance = new Vector3(30, -15);
+        for (int i = 0; i < 5; ++i)
+        {
+            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
             //SpawnMonster("corruptrogue1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
             //SpawnMonster("skeleton1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
             //SpawnMonster("zombie1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
             //SpawnMonster("wraith1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
-        //}
+        }
 
-        //SpawnPlayer(town.entry);
+        SpawnPlayer(town.entry);
     }
 
     static void SpawnPlayer(Vector3 pos)
