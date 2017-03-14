@@ -10,7 +10,7 @@ public class COF
     public int directionCount;
     public int layerCount;
     public byte[] priority;
-    public float frameDuration = 1.0f / 12.0f;
+    public float frameDuration = 1.0f / 25.0f;
     public string basePath;
     public string token;
     public string mode;
@@ -93,6 +93,14 @@ public class COF
         if (AnimData.Find(token + mode + weaponClass, ref animData))
         {
             cof.frameDuration = animData.frameDuration;
+            if (mode == "RN")
+                cof.frameDuration *= 1.8f;
+            if (mode == "WL")
+                cof.frameDuration *= 1.5f;
+        }
+        else
+        {
+            Debug.LogWarning("animdata not found " + (token + mode + weaponClass));
         }
 
         cache.Add(cofFilename, cof);
