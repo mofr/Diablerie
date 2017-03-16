@@ -214,15 +214,15 @@ public class Character : Entity
 
 		Vector2 step = path[0].direction;
 		float stepLen = step.magnitude;
-
+        Vector2 movement = new Vector3();
         float speed = run ? runSpeed : walkSpeed;
         float distance = speed * Time.deltaTime;
+
 		while (traveled + distance >= stepLen) {
-			float firstPart = stepLen - traveled;
-            Vector2 newPos = iso.pos + step.normalized * firstPart;
-            iso.pos = newPos;
-			distance -= firstPart;
-			traveled += firstPart - stepLen;
+			float part = stepLen - traveled;
+            movement += step.normalized * part;
+            distance -= part;
+            traveled = 0;
 			path.RemoveAt(0);
             if (path.Count > 0)
             {
@@ -231,8 +231,10 @@ public class Character : Entity
 		}
 		if (path.Count > 0) {
 			traveled += distance;
-			iso.pos += step.normalized * distance;
-		}
+            movement += step.normalized * distance;
+        }
+
+        iso.pos += movement;
 
         if (path.Count == 0) {
 			traveled = 0;
@@ -264,7 +266,8 @@ public class Character : Entity
         {
             var dir = (targetPoint - iso.pos).normalized;
             float speed = run ? runSpeed : walkSpeed;
-            iso.pos += dir * Time.deltaTime * speed;
+            var velocity = dir * speed;
+            iso.pos += velocity * Time.deltaTime;
             desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
         }
         else
