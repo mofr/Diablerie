@@ -4,11 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(COFAnimator))]
 [ExecuteInEditMode]
 [System.Diagnostics.DebuggerDisplay("{name}")]
-class StaticObject : Entity
+public class StaticObject : Entity
 {
-    public int direction = 0;
-    public Obj obj;
+    public string modeName = "NU";
     public ObjectInfo objectInfo;
+
+    readonly static string[] gear = { "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT" };
 
     int mode;
     COFAnimator animator;
@@ -31,13 +32,13 @@ class StaticObject : Entity
     void Awake()
     {
         animator = GetComponent<COFAnimator>();
+        animator.gear = gear;
     }
 
     override protected void Start()
     {
         base.Start();
-        animator.gear = obj.gear;
-        SetMode(obj.mode);
+        SetMode(modeName);
     }
 
     void OnAnimationFinish()
@@ -53,9 +54,9 @@ class StaticObject : Entity
         mode = System.Array.IndexOf(COF.ModeNames[2], modeName);
         if (objectInfo.draw)
         {
-            var cof = COF.Load(obj._base, obj.token, obj.weaponClass, modeName);
+            var cof = COF.Load("/data/global/objects", objectInfo.token, "HTH", modeName);
+            animator.shadow = objectInfo.blocksLight[mode];
             animator.cof = cof;
-            animator.direction = direction;
             animator.loop = objectInfo.cycleAnim[mode];
             animator.SetFrameRange(objectInfo.start[mode], objectInfo.frameCount[mode]);
             animator.frameDuration = objectInfo.frameDuration[mode];

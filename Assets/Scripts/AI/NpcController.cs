@@ -5,7 +5,6 @@ public class NpcController : MonoBehaviour
 {
     Character character;
     Iso iso;
-    Character target;
     Vector2 initialPosition;
 
     void Awake()
@@ -23,7 +22,7 @@ public class NpcController : MonoBehaviour
     IEnumerator WalkAround()
     {
         yield return new WaitForEndOfFrame();
-        while (!this.target)
+        while (true)
         {
             var target = initialPosition + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
             character.GoTo(target);

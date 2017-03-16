@@ -97,6 +97,23 @@ public class World : MonoBehaviour
         return monster;
     }
 
+    public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos)
+    {
+        var gameObject = new GameObject();
+        gameObject.transform.position = pos;
+        gameObject.name = objectInfo.description;
+
+        var staticObject = gameObject.AddComponent<StaticObject>();
+        staticObject.objectInfo = objectInfo;
+        return staticObject;
+    }
+
+    public static StaticObject SpawnObject(string token, Vector3 pos)
+    {
+        ObjectInfo objectInfo = ObjectInfo.Find(token);
+        return SpawnObject(objectInfo, pos);
+    }
+
     IEnumerator SpawnMonsters()
     {
         while (true)

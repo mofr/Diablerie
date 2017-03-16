@@ -79,5 +79,12 @@ public class PlayerController : MonoBehaviour {
         {
             character.run ^= true;
         }
+
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            var pos = Iso.MapToWorld(IsoInput.mousePosition);
+            var teleport = World.SpawnObject("TP", pos);
+            teleport.modeName = "OP";
+        }
 	}
 }

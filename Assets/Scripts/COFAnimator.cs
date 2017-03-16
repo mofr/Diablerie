@@ -10,6 +10,7 @@ class COFAnimator : MonoBehaviour
     public bool loop = true;
     public float speed = 1.0f;
     public float frameDuration = 1.0f / 12.0f;
+    public bool shadow = true;
     string[] _gear;
 
     float time = 0;
@@ -149,7 +150,7 @@ class COFAnimator : MonoBehaviour
                 layer.renderer.material = new Material(cofLayer.material);
                 layers[i] = layer;
                 layer.gameObject.SetActive(true);
-                layer.shadow.gameObject.SetActive(cofLayer.shadow);
+                layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
             }
             catch (System.IO.FileNotFoundException)
             {

@@ -443,31 +443,19 @@ public class DS1
 
     static GameObject CreateObject(Obj obj, Vector3 pos)
     {
-        GameObject gameObject = null;
-
         if (obj.type == 2)
         {
-            gameObject = new GameObject();
-            gameObject.transform.position = pos;
-            gameObject.name = obj.description;
-
             ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
-            gameObject.name += " " + objectInfo.description;
-
-            var staticObject = gameObject.AddComponent<StaticObject>();
-            staticObject.obj = obj;
-            staticObject.objectInfo = objectInfo;
-            staticObject.direction = obj.direction;
+            var staticObject = World.SpawnObject(objectInfo, pos);
+            staticObject.modeName = obj.mode;
+            return staticObject.gameObject;
         }
         else
         {
             var monStat = MonStat.Find(obj.act, obj.id);
-            if (monStat != null)
-            {
-                gameObject = World.SpawnMonster(monStat, pos);
-            }
+            if (monStat == null)
+                return null;
+            return World.SpawnMonster(monStat, pos);
         }
-
-        return gameObject;
     }
 }

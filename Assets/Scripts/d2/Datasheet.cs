@@ -232,6 +232,7 @@ public class ObjectInfo
     public float[] frameDuration = new float[8];
 
     public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/objects.txt");
+    static Dictionary<string, ObjectInfo> byToken = new Dictionary<string, ObjectInfo>();
 
     static ObjectInfo()
     {
@@ -241,7 +242,17 @@ public class ObjectInfo
             {
                 info.frameDuration[i] = 256.0f / 25 / info.frameDelta[i];
             }
+
+            if (byToken.ContainsKey(info.token))
+                byToken.Remove(info.token);
+            byToken.Add(info.token, info);
         }
+    }
+
+    // Warning: token is not a unique identifier
+    public static ObjectInfo Find(string token)
+    {
+        return byToken.GetValueOrDefault(token);
     }
 }
 
