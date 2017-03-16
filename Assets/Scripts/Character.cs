@@ -77,6 +77,7 @@ public class Character : Entity
     public int health = 100;
     public int maxHealth = 100;
     Vector2 targetPoint;
+    bool hasMoved = false;
 
     void Awake()
     {
@@ -187,6 +188,7 @@ public class Character : Entity
             }
         }
 
+        hasMoved = false;
         MoveToTargetPoint();
         Turn();
 	}
@@ -234,12 +236,12 @@ public class Character : Entity
             movement += step.normalized * distance;
         }
 
-        iso.pos += movement;
+        Move(movement);
 
         if (path.Count == 0) {
 			traveled = 0;
 		}
-        else
+        else if (moving)
         {
             desiredDirection = path[0].directionIndex;
         }
@@ -266,14 +268,22 @@ public class Character : Entity
         {
             var dir = (targetPoint - iso.pos).normalized;
             float speed = run ? runSpeed : walkSpeed;
-            var velocity = dir * speed;
-            iso.pos += velocity * Time.deltaTime;
-            desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
+            var movement = dir * speed * Time.deltaTime;
+
+            if (Move(movement))
+                desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
         }
         else
         {
             MoveAlongPath();
         }
+    }
+
+    bool Move(Vector2 movement)
+    {
+        iso.pos += movement;
+        hasMoved = true;
+        return true;
     }
 
     void UpdateAnimation() {
@@ -303,7 +313,7 @@ public class Character : Entity
             mode = "GH";
             animator.loop = false;
         }
-        else if (moving)
+        else if (hasMoved)
         {
             mode = run ? "RN" : "WL";
         }
