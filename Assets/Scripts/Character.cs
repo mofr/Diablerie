@@ -77,6 +77,7 @@ public class Character : Entity
     public int health = 100;
     public int maxHealth = 100;
     Vector2 targetPoint;
+    bool hasMoved = false;
 
     void Awake()
     {
@@ -187,6 +188,7 @@ public class Character : Entity
             }
         }
 
+        hasMoved = false;
         MoveToTargetPoint();
         Turn();
 	}
@@ -214,15 +216,15 @@ public class Character : Entity
 
 		Vector2 step = path[0].direction;
 		float stepLen = step.magnitude;
-
+        Vector2 movement = new Vector3();
         float speed = run ? runSpeed : walkSpeed;
         float distance = speed * Time.deltaTime;
+
 		while (traveled + distance >= stepLen) {
-			float firstPart = stepLen - traveled;
-            Vector2 newPos = iso.pos + step.normalized * firstPart;
-            iso.pos = newPos;
-			distance -= firstPart;
-			traveled += firstPart - stepLen;
+			float part = stepLen - traveled;
+            movement += step.normalized * part;
+            distance -= part;
+            traveled = 0;
 			path.RemoveAt(0);
             if (path.Count > 0)
             {
@@ -231,13 +233,15 @@ public class Character : Entity
 		}
 		if (path.Count > 0) {
 			traveled += distance;
-			iso.pos += step.normalized * distance;
-		}
+            movement += step.normalized * distance;
+        }
+
+        Move(movement);
 
         if (path.Count == 0) {
 			traveled = 0;
 		}
-        else
+        else if (moving)
         {
             desiredDirection = Iso.Direction(iso.pos, iso.pos + step, directionCount);
         }
@@ -264,13 +268,22 @@ public class Character : Entity
         {
             var dir = (targetPoint - iso.pos).normalized;
             float speed = run ? runSpeed : walkSpeed;
-            iso.pos += dir * Time.deltaTime * speed;
-            desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
+            var movement = dir * speed * Time.deltaTime;
+
+            if (Move(movement))
+                desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
         }
         else
         {
             MoveAlongPath();
         }
+    }
+
+    bool Move(Vector2 movement)
+    {
+        iso.pos += movement;
+        hasMoved = true;
+        return true;
     }
 
     void UpdateAnimation() {
@@ -300,7 +313,7 @@ public class Character : Entity
             mode = "GH";
             animator.loop = false;
         }
-        else if (moving)
+        else if (hasMoved)
         {
             mode = run ? "RN" : "WL";
         }
