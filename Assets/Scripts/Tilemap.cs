@@ -27,6 +27,7 @@ public class Tilemap : MonoBehaviour {
     void DrawDebugCellGrid()
     {
         Color color = new Color(1, 0, 0, 0.3f);
+        Color freeColor = new Color(1, 1, 1, 0.03f);
         Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
         int debugWidth = 100;
         int debugHeight = 100;
@@ -39,6 +40,8 @@ public class Tilemap : MonoBehaviour {
             {
                 if (!instance.map[index + x].passable)
                     Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
+                else
+                    Iso.DebugDrawTile(pos + new Vector3(x, y), freeColor, 0.9f);
             }
             index += width;
         }

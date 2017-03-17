@@ -22,7 +22,7 @@ public class Character : Entity
     public string weaponClass;
     public string[] gear;
 
-    static float turnSpeed = 4f; // full rotations per second
+    static float turnSpeed = 3.5f; // full rotations per second
 
     public delegate void TakeDamageHandler(Character originator, int damage);
     public event TakeDamageHandler OnTakeDamage;
@@ -120,7 +120,7 @@ public class Character : Entity
 		if (Tilemap.Passable(target)) {
 			iso.pos = target;
 		} else {
-			var pathToTarget = Pathing.BuildPath(iso.pos, target, directionCount);
+			var pathToTarget = Pathing.BuildPath(iso.pos, target);
 			if (pathToTarget.Count == 0)
 				return;
 			iso.pos = pathToTarget[pathToTarget.Count - 1].pos;
@@ -239,7 +239,7 @@ public class Character : Entity
 		}
         else
         {
-            desiredDirection = path[0].directionIndex;
+            desiredDirection = Iso.Direction(iso.pos, iso.pos + step, directionCount);
         }
     }
 
@@ -248,7 +248,7 @@ public class Character : Entity
         if (!moving)
             return;
 
-        var newPath = Pathing.BuildPath(iso.pos, targetPoint, directionCount);
+        var newPath = Pathing.BuildPath(iso.pos, targetPoint);
         if (newPath.Count == 0)
         {
             moving = false;

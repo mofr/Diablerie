@@ -7,7 +7,6 @@ public class Pathing {
 
 	public struct Step {
 		public Vector2 direction;
-		public int directionIndex;
 		public Vector2 pos;
 	}
 
@@ -59,14 +58,19 @@ public class Pathing {
     static private Vector2 target;
 	static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
 	static private HashSet<Node> closeNodes = new HashSet<Node>();
-	static private Vector2[] directions = { new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1), new Vector2(1, -2), new Vector2(-1, -2), new Vector2(-2, -1), new Vector2(2, -1), new Vector2(2, 1), new Vector2(-2, 1), new Vector2(-1, 2), new Vector2(1, 2) };
+	static private Vector2[] directions = {
+        new Vector2(-1, -1), new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 1),
+        new Vector2(1, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1),
+        new Vector2(1, -2), new Vector2(-1, -2), new Vector2(-2, -1), new Vector2(2, -1),
+        new Vector2(2, 1), new Vector2(-2, 1), new Vector2(-1, 2), new Vector2(1, 2)
+    };
     static private int directionCount;
 
     static private void StepTo(Node node)
     {
 		Node newNode = null;
 
-		for (int i = 0; i < directions.Length; ++i)
+		for (int i = 0; i < directionCount; ++i)
         {
 			Vector2 pos = node.pos + directions[i];
 
@@ -113,7 +117,6 @@ public class Pathing {
             Collapse(node);
             Step step = new Step();
             step.direction = node.pos - node.parent.pos;
-            step.directionIndex = Iso.Direction(node.parent.pos, node.pos, directionCount);
             step.pos = node.pos;
             path.Insert(0, step);
             node = node.parent;
