@@ -17,7 +17,7 @@ public class World : MonoBehaviour
         entrance = new Vector3(30, -15);
         for (int i = 0; i < 5; ++i)
         {
-            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
+            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
             //SpawnMonster("corruptrogue1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
             //SpawnMonster("skeleton1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
             //SpawnMonster("zombie1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
@@ -111,6 +111,11 @@ public class World : MonoBehaviour
     public static StaticObject SpawnObject(string token, Vector3 pos)
     {
         ObjectInfo objectInfo = ObjectInfo.Find(token);
+        if (objectInfo == null)
+        {
+            Debug.LogWarning("ObjectInfo with token'" + token + "' not found");
+            return null;
+        }
         return SpawnObject(objectInfo, pos);
     }
 
@@ -119,7 +124,7 @@ public class World : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(3);
-            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
+            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
         }
     }
 }

@@ -47,9 +47,9 @@ public class Tilemap : MonoBehaviour {
         }
     }
 
-    private int MapToIndex(Vector3 tilePos)
+    private int MapToIndex(Vector3 pos)
     {
-		return origin + Mathf.RoundToInt(tilePos.x + tilePos.y * width);
+		return origin + Mathf.RoundToInt(pos.x + pos.y * width);
 	}
 
     public static Cell GetCell(Vector3 pos)
@@ -66,23 +66,32 @@ public class Tilemap : MonoBehaviour {
         instance.map[index] = cell;
     }
 
-    public static bool Passable(Vector3 pos, int radius = 0, bool debug = false)
+    public static bool Passable(Vector3 pos, int radius = 0, bool debug = false, GameObject ignore = null)
     {
         var tilePos = Iso.Snap(pos);
-        return PassableTile(tilePos, radius, debug);
+        return PassableTile(tilePos, radius, debug, ignore);
     }
 
-    public static bool PassableTile(Vector3 tilePos, int radius = 0, bool debug = false)
+    public static bool PassableTile(Vector3 tilePos, int radius = 0, bool debug = false, GameObject ignore = null)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
         int index = instance.MapToIndex(tilePos);
-        bool passable = instance.map[index].passable;
-        if (radius == 0)
-            return passable;
+        var c0 = instance.map[index];
+        bool passable = c0.passable || (ignore != null && ignore == c0.gameObject);
+        if (radius > 0)
+        {
+            var c1 = instance.map[index - 1];
+            var c2 = instance.map[index + 1];
+            var c3 = instance.map[index - instance.width];
+            var c4 = instance.map[index + instance.width];
 
-        passable = passable && instance.map[index - 1].passable;
-        passable = passable && instance.map[index + 1].passable;
-        passable = passable && instance.map[index - instance.width].passable;
-        passable = passable && instance.map[index + instance.width].passable;
+            passable = passable && (c1.passable || (ignore != null && ignore == c1.gameObject));
+            passable = passable && (c2.passable || (ignore != null && ignore == c2.gameObject));
+            passable = passable && (c3.passable || (ignore != null && ignore == c3.gameObject));
+            passable = passable && (c4.passable || (ignore != null && ignore == c4.gameObject));
+        }
+
+        UnityEngine.Profiling.Profiler.EndSample();
 
         if (debug)
         {
@@ -97,11 +106,8 @@ public class Tilemap : MonoBehaviour {
 
     public static void SetPassable(Vector3 tilePos, bool passable)
     {
-        if (!passable)
-        {
-            int index = instance.MapToIndex(tilePos);
-            instance.map[index].passable = passable;
-        }
+        int index = instance.MapToIndex(tilePos);
+        instance.map[index].passable = passable;
     }
 
     public struct RaycastHit
@@ -132,8 +138,8 @@ public class Tilemap : MonoBehaviour {
             if (debug)
                 Iso.DebugDrawTile(Iso.Snap(pos), margin: 0.3f, duration: 0.5f);
             Cell cell = GetCell(pos);
-            bool passable = Passable(pos, 2);
-            if (!passable && (ignore == null || ignore != cell.gameObject))
+            bool passable = Passable(pos, 2, debug, ignore);
+            if (!passable)
             {
                 hit.hit = !passable;
                 hit.gameObject = cell.gameObject;
@@ -167,6 +173,21 @@ public class Tilemap : MonoBehaviour {
             index += instance.width;
         }
         return count;
+    }
+
+    static public void Move(Vector2 from, Vector2 to, GameObject gameObject)
+    {
+        from = Iso.Snap(from);
+        to = Iso.Snap(to);
+
+        int indexFrom = instance.MapToIndex(from);
+        int indexTo = instance.MapToIndex(to);
+
+        instance.map[indexFrom].passable = true;
+        instance.map[indexFrom].gameObject = null;
+
+        instance.map[indexTo].passable = false;
+        instance.map[indexTo].gameObject = gameObject;
     }
 
     void OnDrawGizmos()

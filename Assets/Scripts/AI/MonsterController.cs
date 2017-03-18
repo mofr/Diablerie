@@ -62,14 +62,14 @@ public class MonsterController : MonoBehaviour
     {
         while (true)
         {
-            if (Random.Range(0, 100) > 50)
+            if (Random.Range(0, 100) > 60)
             {
                 character.GoTo(iso.pos);
-                yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+                yield return new WaitForSeconds(Random.Range(0.5f, 0.7f));
             }
 
             character.Attack(target);
-            yield return new WaitForSeconds(Random.Range(1.65f, 5f));
+            yield return new WaitForSeconds(Random.Range(1.5f, 2f));
 
             Iso targetIso = target.GetComponent<Iso>();
             if (Vector2.Distance(targetIso.pos, iso.pos) > maxAgroDistance)

@@ -89,6 +89,7 @@ public class Character : Entity
     {
         base.Start();
         animator.gear = gear;
+        Tilemap.SetPassable(Iso.Snap(iso.pos), false);
     }
 
 	public void Use(Usable usable) {
@@ -252,7 +253,7 @@ public class Character : Entity
         if (!moving)
             return;
 
-        var newPath = Pathing.BuildPath(iso.pos, targetPoint);
+        var newPath = Pathing.BuildPath(iso.pos, targetPoint, self: gameObject);
         if (newPath.Count == 0)
         {
             moving = false;
@@ -281,7 +282,9 @@ public class Character : Entity
 
     bool Move(Vector2 movement)
     {
-        iso.pos += movement;
+        var newPos = iso.pos + movement;
+        Tilemap.Move(iso.pos, newPos, gameObject);
+        iso.pos = newPos;
         hasMoved = true;
         return true;
     }
@@ -337,7 +340,7 @@ public class Character : Entity
         directionIndex = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
     }
 
-    public void TakeDamage(Character originator, int damage)
+    public void TakeDamage(int damage, Character originator = null)
     {
         if (dead)
             return;
@@ -357,7 +360,8 @@ public class Character : Entity
         }
         else
         {
-            LookAtImmidietly(originator.iso.pos);
+            if (originator)
+                LookAtImmidietly(originator.iso.pos);
             dying = true;
             attack = false;
             moving = false;
@@ -383,7 +387,7 @@ public class Character : Entity
                 Vector2 target = targetCharacter.GetComponent<Iso>().pos;
                 if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + targetCharacter.diameter / 2)
                 {
-                    targetCharacter.TakeDamage(this, attackDamage);
+                    targetCharacter.TakeDamage(attackDamage, this);
                 }
                 targetCharacter = null;
                 m_Target = null;
@@ -399,6 +403,7 @@ public class Character : Entity
         {
             dying = false;
             dead = true;
+            Tilemap.SetPassable(Iso.Snap(iso.pos), true);
         }
         UpdateAnimation();
     }
