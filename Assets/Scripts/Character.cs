@@ -70,6 +70,7 @@ public class Character : Entity
     bool takingDamage = false;
     bool dying = false;
     bool dead = false;
+    public bool ressurecting = false;
     GameObject m_Target;
     Usable usable;
     Character targetCharacter;
@@ -93,7 +94,7 @@ public class Character : Entity
     }
 
 	public void Use(Usable usable) {
-        if (attack || takingDamage || dying || dead)
+        if (attack || takingDamage || dying || dead || ressurecting)
             return;
         targetPoint = usable.GetComponent<Iso>().pos;
 		this.usable = usable;
@@ -103,7 +104,7 @@ public class Character : Entity
 
     public void GoTo(Vector2 target)
     {
-        if (attack || takingDamage || dying || dead)
+        if (attack || takingDamage || dying || dead || ressurecting)
             return;
 
         if (monStat != null && !monStat.ext.hasMode[2])
@@ -116,7 +117,7 @@ public class Character : Entity
     }
 
     public void Teleport(Vector2 target) {
-		if (attack || takingDamage)
+		if (attack || takingDamage || ressurecting)
 			return;
 
 		if (Tilemap.Passable(target)) {
@@ -134,7 +135,7 @@ public class Character : Entity
 
     public void Attack(Vector3 target)
     {
-        if (!dead && !dying && !attack && !takingDamage && directionIndex == desiredDirection && !moving)
+        if (!dead && !dying && !attack && !takingDamage && directionIndex == desiredDirection && !moving && !ressurecting)
         {
             attack = true;
             targetPoint = target;
@@ -143,7 +144,7 @@ public class Character : Entity
 
     public void Attack(Character targetCharacter)
     {
-        if (attack || takingDamage || dead || dying)
+        if (attack || takingDamage || dead || dying || ressurecting)
             return;
 
         Iso targetIso = targetCharacter.GetComponent<Iso>();
@@ -161,7 +162,7 @@ public class Character : Entity
     }
 
 	void Update() {
-        if (!takingDamage && !dead && !dying) {
+        if (!takingDamage && !dead && !dying && !ressurecting) {
             if (usable)
             {
                 var hit = Tilemap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2, ignore: gameObject);
@@ -201,7 +202,7 @@ public class Character : Entity
 
     void Turn()
     {
-        if (!dead && !dying && !attack && !takingDamage && directionIndex != desiredDirection)
+        if (!dead && !dying && !attack && !takingDamage && directionIndex != desiredDirection && !ressurecting)
         {
             float diff = Tools.ShortestDelta(directionIndex, desiredDirection, directionCount);
             float delta = Mathf.Abs(diff);
@@ -212,7 +213,7 @@ public class Character : Entity
     }
 
 	void MoveAlongPath() {
-		if (path.Count == 0 || !moving || attack || takingDamage || dead || dying)
+		if (path.Count == 0 || !moving || attack || takingDamage || dead || dying || ressurecting)
 			return;
 
 		Vector2 step = path[0].direction;
@@ -294,7 +295,11 @@ public class Character : Entity
         string weaponClass = this.weaponClass;
         animator.speed = 1.0f;
         animator.loop = true;
-        if (dying)
+        if (ressurecting && monStat != null)
+        {
+            mode = monStat.ext.resurrectMode;
+        }
+        else if (dying)
         {
             mode = "DT";
             weaponClass = "HTH";
@@ -342,7 +347,7 @@ public class Character : Entity
 
     public void TakeDamage(int damage, Character originator = null)
     {
-        if (dead)
+        if (dead || ressurecting)
             return;
 
         health -= damage;
@@ -399,6 +404,7 @@ public class Character : Entity
     {
         attack = false;
         takingDamage = false;
+        ressurecting = false;
         if (dying)
         {
             dying = false;

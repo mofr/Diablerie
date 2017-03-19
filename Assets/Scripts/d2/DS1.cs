@@ -455,7 +455,7 @@ public class DS1
             var monStat = MonStat.Find(obj.act, obj.id);
             if (monStat == null)
                 return null;
-            return World.SpawnMonster(monStat, pos);
+            return World.SpawnMonster(monStat, pos).gameObject;
         }
     }
 }

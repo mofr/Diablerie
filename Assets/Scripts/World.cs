@@ -54,13 +54,13 @@ public class World : MonoBehaviour
         collider.radius = Iso.tileSizeY;
     }
 
-    public static GameObject SpawnMonster(string id, Vector3 pos)
+    public static Character SpawnMonster(string id, Vector3 pos)
     {
         MonStat monStat = MonStat.Find(id);
         return SpawnMonster(monStat, pos);
     }
 
-    public static GameObject SpawnMonster(MonStat monStat, Vector3 pos)
+    public static Character SpawnMonster(MonStat monStat, Vector3 pos)
     {
         var monster = new GameObject(monStat.nameStr);
         monster.transform.position = pos;
@@ -94,7 +94,7 @@ public class World : MonoBehaviour
         var collider = monster.AddComponent<CircleCollider2D>();
         collider.radius = monStat.ext.sizeX * Iso.tileSizeY;
 
-        return monster;
+        return character;
     }
 
     public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos)
@@ -123,8 +123,13 @@ public class World : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3);
-            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
+            yield return new WaitForSeconds(10);
+            for (int i = 0; i < 5; ++i)
+            {
+                var monster = SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
+                monster.ressurecting = true;
+                yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
+            }
         }
     }
 }
