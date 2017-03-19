@@ -81,7 +81,63 @@ public class EditorTools
     static public void CreateFontFromDC6()
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-        DC6.CreateFontFromDC6(assetPath);
+        var name = Path.GetFileNameWithoutExtension(assetPath);
+
+        int textureSize = 1024;
+        if (name.Contains("font16") || name.Contains("font24") || name.Contains("font30"))
+            textureSize = 512;
+
+        var dc6 = DC6.Load(assetPath, textureSize);
+        var metrics = File.ReadAllText(Path.GetDirectoryName(assetPath) + "/" + name + ".txt").Split(',');
+
+        var characterInfo = new CharacterInfo[dc6.framesPerDirection];
+        for (int i = 0; i < dc6.framesPerDirection; i++)
+        {
+            int charWidth = int.Parse(metrics[i * 2 + 1].Trim());
+            var frame = dc6.frames[i];
+            characterInfo[i].index = i;
+            characterInfo[i].advance = charWidth;
+            characterInfo[i].minX = 0;
+            characterInfo[i].maxX = frame.width;
+            characterInfo[i].minY = -frame.height;
+            characterInfo[i].maxY = 0;
+
+            var uv = new Rect(
+                frame.textureX / (float)textureSize,
+                (textureSize - (frame.textureY + frame.height)) / (float)textureSize,
+                frame.width / (float)textureSize,
+                frame.height / (float)textureSize);
+            characterInfo[i].uvBottomLeft = new Vector2(uv.xMin, uv.yMin);
+            characterInfo[i].uvBottomRight = new Vector2(uv.xMax, uv.yMin);
+            characterInfo[i].uvTopLeft = new Vector2(uv.xMin, uv.yMax);
+            characterInfo[i].uvTopRight = new Vector2(uv.xMax, uv.yMax);
+        }
+
+        
+        var filepath = "Assets/Fonts/" + name;
+
+        var pngData = dc6.texture.EncodeToPNG();
+        Object.DestroyImmediate(dc6.texture);
+        var texturePath = filepath + ".png";
+        File.WriteAllBytes(texturePath, pngData);
+        AssetDatabase.ImportAsset(texturePath);
+
+        var fontPath = filepath + ".fontsettings";
+
+        var font = AssetDatabase.LoadAssetAtPath<Font>(fontPath);
+        if (font)
+        {
+            font.characterInfo = characterInfo;
+            EditorUtility.SetDirty(font);
+            AssetDatabase.SaveAssets();
+        }
+        else
+        {
+            font = new Font(name);
+            font.characterInfo = characterInfo;
+            AssetDatabase.CreateAsset(font, fontPath);
+            AssetDatabase.ImportAsset(fontPath);
+        }
     }
 
     [MenuItem("Assets/Create font from DC6", true)]

@@ -5,6 +5,7 @@ public class TexturePacker
 {
     int maxWidth;
     int maxHeight;
+    int padding = 0;
 
     int xPos = 0;
     int yPos = 0;
@@ -17,14 +18,17 @@ public class TexturePacker
         public bool newTexture;
     }
 
-    public TexturePacker(int maxWidth, int maxHeight)
+    public TexturePacker(int maxWidth, int maxHeight, int padding = 0)
     {
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
+        this.padding = padding;
     }
 
     public PackResult put(int width, int height)
-    {   
+    {
+        width += padding;
+        height += padding;
         rowHeight = Mathf.Max(height, rowHeight);
         if (xPos + width > maxWidth)
         {

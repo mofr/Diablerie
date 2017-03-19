@@ -1,10 +1,23 @@
 ﻿using System.IO;
 using UnityEngine;
-using UnityEditor;
 
 public class DC6
 {
-    static public void CreateFontFromDC6(string filename)
+    public struct Frame
+    {
+        public int width;
+        public int height;
+        public Texture2D texture;
+        public int textureX;
+        public int textureY;
+    }
+
+    public int directionCount;
+    public int framesPerDirection;
+    public Frame[] frames;
+    public Texture2D texture;
+
+    static public DC6 Load(string filename, int textureSize = 512)
     {
         Palette.LoadPalette(0);
 
@@ -14,33 +27,37 @@ public class DC6
         int dc6_ver1 = reader.ReadInt32();
         var dc6_ver2 = reader.ReadInt32();
         var dc6_ver3 = reader.ReadInt32();
-        reader.ReadInt32();
-        reader.ReadInt32(); // dc6_dir
-        var dc6_fpd = reader.ReadInt32();
-        var dc6_fptr = stream.Position;
         if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
         {
             Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
-            return;
+            return null;
         }
 
-        const int textureSize = 512;
-        var texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+        var dc6 = new DC6();
+        reader.ReadInt32();
+        dc6.directionCount = reader.ReadInt32();
+        dc6.framesPerDirection = reader.ReadInt32();
+        dc6.frames = new Frame[dc6.framesPerDirection];
+        var fptr = stream.Position;
+
+        dc6.texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+        dc6.texture.alphaIsTransparency = false;
         var pixels = new Color32[textureSize * textureSize];
-        var packer = new TexturePacker(textureSize, textureSize);
+        var packer = new TexturePacker(textureSize, textureSize, padding: 1);
         byte[] data = new byte[1024];
-        var characterInfo = new CharacterInfo[dc6_fpd];
 
         int dir = 0;
-        for (int i = 0; i < dc6_fpd; i++)
+        for (int i = 0; i < dc6.framesPerDirection; i++)
         {
-            stream.Seek(dc6_fptr + (dir * dc6_fpd + i) * 4, SeekOrigin.Begin);
+            stream.Seek(fptr + (dir * dc6.framesPerDirection + i) * 4, SeekOrigin.Begin);
             long offset = reader.ReadInt32();
             stream.Seek(offset, SeekOrigin.Begin);
 
+            var frame = new Frame();
+
             reader.ReadInt32();
-            int f_w = reader.ReadInt32();
-            int f_h = reader.ReadInt32();
+            frame.width = reader.ReadInt32();
+            frame.height = reader.ReadInt32();
             reader.ReadInt32(); // f_offx
             reader.ReadInt32(); // f_offy
             reader.ReadInt32();
@@ -50,40 +67,21 @@ public class DC6
                 data = new byte[f_len];
             reader.Read(data, 0, f_len);
 
-            var pack = packer.put(f_w, f_h);
-            drawFrame(data, f_len, pixels, textureSize, pack.x, pack.y + f_h);
+            var pack = packer.put(frame.width, frame.height);
+            drawFrame(data, f_len, pixels, textureSize, pack.x, pack.y + frame.height);
 
-            characterInfo[i].index = i;
-            characterInfo[i].advance = f_w;
-
-            characterInfo[i].minX = 0;
-            characterInfo[i].maxX = f_w;
-            characterInfo[i].minY = -f_h;
-            characterInfo[i].maxY = 0;
-
-            characterInfo[i].uv = new Rect(pack.x / (float)textureSize, (textureSize - (pack.y + f_h)) / (float)textureSize,
-                f_w / (float)textureSize, f_h / (float)textureSize);
+            frame.texture = dc6.texture;
+            frame.textureX = pack.x;
+            frame.textureY = pack.y;
+            dc6.frames[i] = frame;
         }
 
         stream.Close();
 
-        var name = Path.GetFileNameWithoutExtension(filename);
-        var filepath = Path.GetDirectoryName(filename) + "/" + name;
+        dc6.texture.SetPixels32(pixels);
+        dc6.texture.Apply();
 
-        texture.SetPixels32(pixels);
-        texture.Apply();
-        var pngData = texture.EncodeToPNG();
-        Object.DestroyImmediate(texture);
-        var texturePath = filepath + ".png";
-        File.WriteAllBytes(texturePath, pngData);
-
-        var fontPath = filepath + ".fontsettings";
-        AssetDatabase.CreateAsset(new Font(name), fontPath);
-        var font = AssetDatabase.LoadAssetAtPath<Font>(fontPath);
-        font.characterInfo = characterInfo;
-        EditorUtility.SetDirty(font);
-
-        AssetDatabase.Refresh();
+        return dc6;
     }
 
     static void drawFrame(byte[] data, int size, Color32[] pixels, int textureSize, int x0, int y0)
