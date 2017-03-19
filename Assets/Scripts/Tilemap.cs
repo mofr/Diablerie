@@ -110,6 +110,21 @@ public class Tilemap : MonoBehaviour {
         instance.map[index].passable = passable;
     }
 
+    public static void SetPassable(Vector3 tilePos, int sizeX, int sizeY, bool passable)
+    {
+        int index = instance.MapToIndex(tilePos) - sizeX / 2 - sizeY / 2 * instance.height;
+        int step = instance.width - sizeX;
+        for (int y = 0; y < sizeY; ++y)
+        {
+            int end = index + sizeX;
+            while (index < end)
+            {
+                instance.map[index++].passable = passable;
+            }
+            index += step;
+        }
+    }
+
     public struct RaycastHit
     {
         public bool hit;

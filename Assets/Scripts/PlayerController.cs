@@ -86,5 +86,5 @@ public class PlayerController : MonoBehaviour {
             var teleport = World.SpawnObject("TP", pos);
             teleport.modeName = "OP";
         }
-	}
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Iso))]
 [RequireComponent(typeof(COFAnimator))]
 [ExecuteInEditMode]
 [System.Diagnostics.DebuggerDisplay("{name}")]
@@ -13,6 +14,7 @@ public class StaticObject : Entity
 
     int mode;
     COFAnimator animator;
+    Iso iso;
 
     public ObjectInfo info
     {
@@ -31,6 +33,7 @@ public class StaticObject : Entity
 
     void Awake()
     {
+        iso = GetComponent<Iso>();
         animator = GetComponent<COFAnimator>();
         animator.gear = gear;
     }
@@ -60,6 +63,9 @@ public class StaticObject : Entity
             animator.loop = objectInfo.cycleAnim[mode];
             animator.SetFrameRange(objectInfo.start[mode], objectInfo.frameCount[mode]);
             animator.frameDuration = objectInfo.frameDuration[mode];
+
+            if (objectInfo.hasCollision[mode])
+                Tilemap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false);
         }
     }
 
