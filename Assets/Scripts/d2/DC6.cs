@@ -43,7 +43,7 @@ public class DC6
         dc6.texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
         dc6.texture.alphaIsTransparency = false;
         var pixels = new Color32[textureSize * textureSize];
-        var packer = new TexturePacker(textureSize, textureSize, padding: 1);
+        var packer = new TexturePacker(textureSize, textureSize, padding: 2);
         byte[] data = new byte[1024];
 
         int dir = 0;

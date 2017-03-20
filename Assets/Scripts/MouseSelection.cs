@@ -13,6 +13,20 @@ class MouseSelection : MonoBehaviour
 
     void Update()
     {
+        if (current != null)
+        {
+            var character = current.GetComponent<Character>();
+            if (character && character.monStat != null && character.monStat.ai != "Npc")
+                EnemyBar.instance.character = character;
+            else
+                UI.ShowLabel(current.transform, current.nameOffset, current.name);
+        }
+        else
+        {
+            EnemyBar.instance.character = null;
+            UI.HideLabel();
+        }
+
         if (Input.GetMouseButton(0))
         {
             return;
@@ -30,25 +44,6 @@ class MouseSelection : MonoBehaviour
         current = null;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
-    }
-
-    void OnGUI()
-    {
-        if (current != null)
-        {
-            GUI.skin.label.alignment = TextAnchor.LowerCenter;
-            GUI.skin.font = selectionFont;
-            var pos = Camera.main.WorldToScreenPoint(currentPosition);
-            pos.y = Camera.main.pixelHeight - pos.y + current.nameOffset;
-            const int width = 500;
-            const int height = 100;
-            GUI.Label(new Rect(pos - new Vector3(width / 2, height), new Vector2(width, height)), current.name);
-            EnemyBar.instance.character = current.GetComponent<Character>();
-        }
-        else
-        {
-            EnemyBar.instance.character = null;
-        }
     }
 
     static public void Submit(Entity entity)

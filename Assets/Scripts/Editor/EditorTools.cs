@@ -93,20 +93,23 @@ public class EditorTools
         var characterInfo = new CharacterInfo[dc6.framesPerDirection];
         for (int i = 0; i < dc6.framesPerDirection; i++)
         {
-            int charWidth = int.Parse(metrics[i * 2 + 1].Trim());
+            int glyphHeight = int.Parse(metrics[i * 2].Trim());
+            int glyphWidth = int.Parse(metrics[i * 2 + 1].Trim());
             var frame = dc6.frames[i];
             characterInfo[i].index = i;
-            characterInfo[i].advance = charWidth;
+            characterInfo[i].advance = glyphWidth;
             characterInfo[i].minX = 0;
-            characterInfo[i].maxX = frame.width;
-            characterInfo[i].minY = -frame.height;
+            characterInfo[i].maxX = glyphWidth;
+            characterInfo[i].minY = -glyphHeight;
             characterInfo[i].maxY = 0;
+            characterInfo[i].glyphWidth = glyphWidth;
+            characterInfo[i].glyphHeight = glyphHeight;
 
             var uv = new Rect(
                 frame.textureX / (float)textureSize,
                 (textureSize - (frame.textureY + frame.height)) / (float)textureSize,
-                frame.width / (float)textureSize,
-                frame.height / (float)textureSize);
+                glyphWidth / (float)textureSize,
+                glyphHeight / (float)textureSize);
             characterInfo[i].uvBottomLeft = new Vector2(uv.xMin, uv.yMin);
             characterInfo[i].uvBottomRight = new Vector2(uv.xMax, uv.yMin);
             characterInfo[i].uvTopLeft = new Vector2(uv.xMin, uv.yMax);

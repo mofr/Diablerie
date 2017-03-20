@@ -429,7 +429,10 @@ public class Character : Entity
     {
         get
         {
-            return -(int)(bounds.size.y * Iso.pixelsPerUnit) - 10;
+            if (monStat != null)
+                return monStat.ext.pixHeight;
+            else
+                return (int)(bounds.size.y * Iso.pixelsPerUnit) + 10;
         }
     }
 
