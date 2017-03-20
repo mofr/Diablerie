@@ -30,7 +30,7 @@ public struct Datasheet<T> where T : new()
         }
     }
 
-    public static Datasheet<T> Load(string filename)
+    public static Datasheet<T> Load(string filename, int headerLines = 1)
     {
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
         string csv = File.ReadAllText(filename);
@@ -54,18 +54,17 @@ public struct Datasheet<T> where T : new()
         var lines = csv.Split('\n');
         for (int lineIndex = 0; lineIndex < lines.Length; ++lineIndex)
         {
-            string line = lines[lineIndex].Trim();
+            string line = lines[lineIndex];
+            line = line.Replace("\r", "");
             if (line.Length == 0)
                 continue;
 
             var fields = line.Split('\t');
-            if (fields.Length == 1 && fields[0] == "Expansion")
-                continue;
 
             if (fields.Length != expectedFieldCount)
                 throw new System.Exception("Field count mismatch " + typeof(T) + " (" + expectedFieldCount + " expected) at " + filename + ":" + (lineIndex + 1) + " (" + fields.Length + " fields)");
 
-            if (lineIndex == 0)
+            if (lineIndex < headerLines)
                 continue;
 
             T obj = new T();
@@ -159,7 +158,7 @@ public class Obj
 [System.Serializable]
 public class ObjectInfo
 {
-    public string name;
+    public string nameStr;
     public string description;
     public int id;
     public string token;
@@ -231,6 +230,9 @@ public class ObjectInfo
     [System.NonSerialized]
     public float[] frameDuration = new float[8];
 
+    [System.NonSerialized]
+    public string name;
+
     public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/objects.txt");
     static Dictionary<string, ObjectInfo> byToken = new Dictionary<string, ObjectInfo>();
 
@@ -242,6 +244,8 @@ public class ObjectInfo
             {
                 info.frameDuration[i] = 256.0f / 25 / info.frameDelta[i];
             }
+
+            info.name = Translation.Find(info.nameStr, info.nameStr);
 
             if (byToken.ContainsKey(info.token))
                 byToken.Remove(info.token);
@@ -390,11 +394,12 @@ public class MonStat
     {
         foreach(MonStat stat in sheet.rows)
         {
-            if (stats.ContainsKey(stat.id))
+            var key = stat.id.ToLower();
+            if (stats.ContainsKey(key))
             {
-                stats.Remove(stat.id);
+                stats.Remove(key);
             }
-            stats.Add(stat.id.ToLower(), stat);
+            stats.Add(key, stat);
             stat.ext = MonStatsExtended.Find(stat.id);
         }
     }
@@ -723,5 +728,29 @@ public class LevelInfo
     public static LevelInfo Find(string name)
     {
         return nameIndex.GetValueOrDefault(name, null);
+    }
+}
+
+[System.Serializable]
+public class Translation
+{
+    public string key;
+    public string value;
+
+    static Dictionary<string, string> map = new Dictionary<string, string>();
+    public static Datasheet<Translation> sheet = Datasheet<Translation>.Load(Application.streamingAssetsPath + "/d2/data/local/string.txt", headerLines: 0);
+
+    public static string Find(string key, string defaultValue = null)
+    {
+        return map.GetValueOrDefault(key, defaultValue);
+    }
+
+    static Translation()
+    {
+        foreach (var translation in sheet.rows)
+        {
+            if (!map.ContainsKey(translation.key))
+                map.Add(translation.key, translation.value);
+        }
     }
 }
