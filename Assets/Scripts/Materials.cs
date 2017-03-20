@@ -11,7 +11,7 @@ public class Materials : MonoBehaviour
         normal = new Material(Shader.Find("Sprite"));
         softAdditive = new Material(Shader.Find("Particles/Additive (Soft)"));
         shadow = new Material(Shader.Find("Skew"));
-        shadow.color = new Color(0, 0, 0, 0.8f);
+        shadow.color = new Color(0, 0, 0, 0.85f);
         shadow.SetFloat("_HorizontalSkew", -0.33f);
     }
 }

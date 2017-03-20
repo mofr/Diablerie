@@ -5,7 +5,8 @@ Shader "Sprite"
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
         _Color("Tint", Color) = (1,1,1,1)
         [MaterialToggle] PixelSnap("Pixel snap", Float) = 0
-        _SelfIllum("Self Illumination", Float) = 1.0
+		_Brightness("Brightness", Float) = 1.0
+        _Contrast("Contrast", Float) = 1.0
     }
 
         SubShader
@@ -55,7 +56,8 @@ Shader "Sprite"
         };
 
         fixed4 _Color;
-        float _SelfIllum;
+		float _Brightness;
+		float _Contrast;
 
         v2f vert(appdata_t IN)
         {
@@ -91,7 +93,8 @@ Shader "Sprite"
         {
             fragmentOutput o;
             o.color = SampleSpriteTexture(IN.texcoord) * IN.color;
-            o.color.rgb *= o.color.a * _SelfIllum;
+            o.color.rgb *= o.color.a * _Brightness;
+			o.color.rgb = (o.color.rgb - 0.5) * _Contrast + 0.5;
             return o;
         }
             ENDCG

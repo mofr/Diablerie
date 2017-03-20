@@ -58,8 +58,11 @@ class COFAnimator : MonoBehaviour
             if (_selected != value)
             {
                 _selected = value;
-                foreach(var layer in layers)
-                    layer.renderer.material.SetFloat("_SelfIllum", _selected ? 2.0f : 1.0f);
+                foreach (var layer in layers)
+                {
+                    layer.renderer.material.SetFloat("_Brightness", _selected ? 3.0f : 1.0f);
+                    layer.renderer.material.SetFloat("_Contrast", _selected ? 1.01f : 1.0f);
+                }
             }
         }
     }
