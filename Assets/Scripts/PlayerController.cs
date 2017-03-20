@@ -86,5 +86,12 @@ public class PlayerController : MonoBehaviour {
             var teleport = World.SpawnObject("TP", pos);
             teleport.modeName = "OP";
         }
+
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift))
+        {
+            UnityEditor.EditorWindow.focusedWindow.maximized ^= true;
+        }
+#endif
     }
 }
