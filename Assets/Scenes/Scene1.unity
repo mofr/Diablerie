@@ -91,6 +91,11 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!20 &271667243 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20951117858165692, guid: e09a00a9e3e049345b196facb5f4b5bc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1569485585}
 --- !u!1 &1040459780
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,15 +159,15 @@ Canvas:
   m_GameObject: {fileID: 1040459780}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 271667243}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -852684417
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1040459784
@@ -177,7 +182,7 @@ RectTransform:
   m_Children:
   - {fileID: 1562927628}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -288,7 +293,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4013927119787720, guid: e09a00a9e3e049345b196facb5f4b5bc, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e09a00a9e3e049345b196facb5f4b5bc, type: 2}
