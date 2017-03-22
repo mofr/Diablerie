@@ -32,8 +32,6 @@ public class DS1
 
     static public DS1 Load(string ds1Path)
     {
-        var sw = System.Diagnostics.Stopwatch.StartNew();
-
         var stream = new MemoryStream(File.ReadAllBytes(ds1Path));
         var reader = new BinaryReader(stream);
         int version = reader.ReadInt32();
@@ -49,14 +47,13 @@ public class DS1
 
         Palette.LoadPalette(act);
 
+        int tagType = 0;
         if (version >= 10)
         {
-            reader.ReadInt32(); // tagType
-
-            //// adjust eventually the # of tag layer
-            //if ((tagType == 1) || (tagType == 2))
-            //    t_num = 1;
+            tagType = reader.ReadInt32();
         }
+
+        var sw = System.Diagnostics.Stopwatch.StartNew();
 
         if (version >= 3)
         {
@@ -75,6 +72,10 @@ public class DS1
                 DT1.Load(Application.streamingAssetsPath + filename);
             }
         }
+
+        Debug.Log("Linked DT1 files loaded in " + sw.ElapsedMilliseconds + " ms");
+        sw.Reset();
+        sw.Start();
 
         // skip 2 dwords ?
         if ((version >= 9) && (version <= 13))
@@ -98,6 +99,9 @@ public class DS1
         {
             tagLayerCount = 1;
         }
+
+        if ((tagType == 1) || (tagType == 2))
+            tagLayerCount = 1;
 
         Debug.Log("layers : (2 * " + wallLayerCount + " walls) + " + floorLayerCount + " floors + " + shadowLayerCount + " shadow + " + tagLayerCount + " tag");
 
@@ -343,8 +347,30 @@ public class DS1
             }
         }
 
+        if (version >= 12 && (tagType == 1 || tagType == 2))
+        {
+            if (version >= 18)
+                reader.ReadInt32();
+
+            int groupCount = reader.ReadInt32();
+
+            Debug.Log("Groups " + groupCount);
+
+            for (int i = 0; i < groupCount; i++)
+            {
+                int x = reader.ReadInt32();
+                int y = reader.ReadInt32();
+                int groupWidth = reader.ReadInt32();
+                int groupHeight = reader.ReadInt32();
+                if (version >= 13)
+                {
+                    int unknown = reader.ReadInt32();
+                }
+            }
+        }
+
         sw.Stop();
-        Debug.Log("DS1 loaded in " + sw.Elapsed);
+        Debug.Log("DS1 loaded in " + sw.ElapsedMilliseconds + " ms");
 
         return result;
     }
