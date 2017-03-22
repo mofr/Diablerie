@@ -33,6 +33,24 @@ public class COF
     static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
     static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
+    // values from charstats.txt
+    static Dictionary<string, float> referenceFrameCount = new Dictionary<string, float>() {
+        {"AMWL", 6},
+        {"AMRN", 4},
+        {"SOWL", 8},
+        {"SORN", 5},
+        {"NEWL", 9},
+        {"NERN", 5},
+        {"PAWL", 8},
+        {"PARN", 5},
+        {"BAWL", 7},
+        {"BARN", 4},
+        {"DZWL", 9},
+        {"DZRN", 5},
+        {"AIWL", 6},
+        {"AIRN", 4},
+    };
+
     static public COF Load(string basePath, string token, string weaponClass, string mode)
     {
         string cofFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/cof/" + token + mode + weaponClass + ".cof";
@@ -93,10 +111,8 @@ public class COF
         if (AnimData.Find(token + mode + weaponClass, ref animData))
         {
             cof.frameDuration = animData.frameDuration;
-            if (mode == "RN")
-                cof.frameDuration *= 1.8f;
-            if (mode == "WL")
-                cof.frameDuration *= 1.5f;
+            float refFrameCount = referenceFrameCount.GetValueOrDefault(token + mode, animData.framesPerDir);
+            cof.frameDuration *= animData.framesPerDir / refFrameCount;
         }
         else
         {
