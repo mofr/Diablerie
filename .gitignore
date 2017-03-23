@@ -33,3 +33,6 @@ sysinfo.txt
 # Visual Studio upgrade files
 Backup*/
 UpgradeLog*
+
+# Diablo 2 resources
+*.mpq
