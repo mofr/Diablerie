@@ -1,5 +1,7 @@
 # Diablerie
 
+![alt tag](https://raw.github.com/mofr/Diablerie/master/Screenshots/rogue_camp.png)
+
 This is a recreation of Diablo 2 game from Blizzard.
 
 The game is at a very early stage of development - work in progress.
