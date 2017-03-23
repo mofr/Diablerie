@@ -100,14 +100,14 @@ public class EditorTools
             characterInfo[i].advance = glyphWidth;
             characterInfo[i].minX = 0;
             characterInfo[i].maxX = glyphWidth;
-            characterInfo[i].minY = -glyphHeight;
-            characterInfo[i].maxY = 0;
+            characterInfo[i].minY = 0;
+            characterInfo[i].maxY = frame.height;
             characterInfo[i].glyphWidth = glyphWidth;
             characterInfo[i].glyphHeight = glyphHeight;
 
             var uv = new Rect(
                 frame.textureX / (float)textureSize,
-                (textureSize - (frame.textureY + frame.height)) / (float)textureSize,
+                (textureSize - frame.textureY - frame.height) / (float)textureSize,
                 glyphWidth / (float)textureSize,
                 glyphHeight / (float)textureSize);
             characterInfo[i].uvBottomLeft = new Vector2(uv.xMin, uv.yMin);
@@ -141,6 +141,11 @@ public class EditorTools
             AssetDatabase.CreateAsset(font, fontPath);
             AssetDatabase.ImportAsset(fontPath);
         }
+
+        var serializedFont = File.ReadAllBytes(fontPath);
+        File.WriteAllText(fontPath, "");
+        AssetDatabase.ImportAsset(fontPath);
+        File.WriteAllBytes(fontPath, serializedFont);
     }
 
     [MenuItem("Assets/Create font from DC6", true)]
