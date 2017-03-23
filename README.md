@@ -9,6 +9,9 @@ No commercial use is intended. All images and sounds used are from Diablo 2 and 
 # Credits
 
 Paul Siramy - ds1edit editor, great thanks for source code. Very helpful and detailed tutorials related to diablo 2 internals.
+
 Bilian Belichev - DCC file format documentation and sample decoder.
+
 Fabien BARBIER - CrystalMpq.
+
 [Phrozen Keep](http://d2mods.info) - A lot of various information about diablo 2 files.
