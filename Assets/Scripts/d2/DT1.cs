@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DT1
 {
+    public string filename;
     public Tile[] tiles;
-    public Texture2D[] textures;
+    public List<Texture2D> textures = new List<Texture2D>();
     static Registry registry = new Registry();
 
     public class Registry
@@ -139,31 +140,13 @@ public class DT1
         registry.Clear();
     }
 
-    static public DT1 Load(string dt1Path)
+    static void ReadTiles(DT1 dt1, Stream stream, BinaryReader reader, byte[] bytes)
     {
-        if(cache.ContainsKey(dt1Path))
-        {
-            return cache[dt1Path];
-        }
-        
-        var result = new DT1();
-        var bytes = Mpq.ReadAllBytes(dt1Path);
-        var stream = new MemoryStream(bytes);
-        var reader = new BinaryReader(stream);
-        int version1 = reader.ReadInt32();
-        int version2 = reader.ReadInt32();
-        if (version1 != 7 || version2 != 6)
-        {
-            Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
-            return result;
-        }
-        reader.ReadBytes(260);
         int tileCount = reader.ReadInt32();
         reader.ReadInt32(); //  Pointer in file to Tile Headers (= 276) 
-        Tile[] tiles = new Tile[tileCount];
+        dt1.tiles = new Tile[tileCount];
 
         const int textureSize = 2048;
-        var textures = new List<Texture2D>();
         var texturesPixels = new List<Color32[]>();
         var packer = new TexturePacker(textureSize, textureSize);
         Material material = null;
@@ -172,41 +155,40 @@ public class DT1
 
         for (int i = 0; i < tileCount; ++i)
         {
-            tiles[i].Read(reader);
-            var pack = packer.put(tiles[i].width, -tiles[i].height);
+            dt1.tiles[i].Read(reader);
+            var pack = packer.put(dt1.tiles[i].width, -dt1.tiles[i].height);
             if (pack.newTexture)
             {
                 texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
                 texture.filterMode = FilterMode.Point;
-                textures.Add(texture);
+                dt1.textures.Add(texture);
                 material = new Material(Shader.Find("Sprite"));
-                material.name += "(" + dt1Path + ")";
                 material.mainTexture = texture;
                 pixels = new Color32[textureSize * textureSize];
                 texturesPixels.Add(pixels);
             }
 
-            tiles[i].textureX = pack.x;
-            tiles[i].textureY = pack.y;
-            tiles[i].texture = texture;
-            tiles[i].material = material;
-            tiles[i].texturePixels = pixels;
+            dt1.tiles[i].textureX = pack.x;
+            dt1.tiles[i].textureY = pack.y;
+            dt1.tiles[i].texture = texture;
+            dt1.tiles[i].material = material;
+            dt1.tiles[i].texturePixels = pixels;
 
-            if ((tiles[i].orientation == 0 || tiles[i].orientation == 15) && tiles[i].height != 0)
+            if ((dt1.tiles[i].orientation == 0 || dt1.tiles[i].orientation == 15) && dt1.tiles[i].height != 0)
             {
                 // floor or roof
-                tiles[i].height = -79;
+                dt1.tiles[i].height = -79;
             }
-            else if (tiles[i].orientation > 0 && tiles[i].orientation < 15)
+            else if (dt1.tiles[i].orientation > 0 && dt1.tiles[i].orientation < 15)
             {
-                tiles[i].textureY += (-tiles[i].height);
+                dt1.tiles[i].textureY += (-dt1.tiles[i].height);
             }
         }
 
-        Debug.Log(dt1Path + ", tiles " + tileCount + ", " + textures.Count + " textures");
+        Debug.Log(dt1.filename + ", tiles " + tileCount + ", " + dt1.textures.Count + " textures");
         for (int i = 0; i < tileCount; ++i)
         {
-            var tile = tiles[i];
+            var tile = dt1.tiles[i];
 
             if (tile.width == 0 || tile.height == 0)
             {
@@ -239,18 +221,38 @@ public class DT1
             }
         }
 
-        for (int i = 0; i < textures.Count; ++i)
+        for (int i = 0; i < dt1.textures.Count; ++i)
         {
-            textures[i].SetPixels32(texturesPixels[i]);
-            textures[i].Apply();
+            dt1.textures[i].SetPixels32(texturesPixels[i]);
+            dt1.textures[i].Apply();
         }
+    }
 
-        registry.Add(tiles);
-
-        result.tiles = tiles;
-        result.textures = textures.ToArray();
-        cache[dt1Path] = result;
-        return result;
+    static public DT1 Load(string dt1Path)
+    {
+        if(cache.ContainsKey(dt1Path))
+        {
+            return cache[dt1Path];
+        }
+        
+        var dt1 = new DT1();
+        var bytes = Mpq.ReadAllBytes(dt1Path);
+        using (var stream = new MemoryStream(bytes))
+        using (var reader = new BinaryReader(stream))
+        {
+            int version1 = reader.ReadInt32();
+            int version2 = reader.ReadInt32();
+            if (version1 != 7 || version2 != 6)
+            {
+                Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
+                return dt1;
+            }
+            stream.Seek(260, SeekOrigin.Current);
+            ReadTiles(dt1, stream, reader, bytes);
+        }
+        registry.Add(dt1.tiles);
+        cache[dt1Path] = dt1;
+        return dt1;
     }
 
     static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
