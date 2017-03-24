@@ -15,4 +15,29 @@ public class Mpq
         fs.Archives.Add(d2data);
         fs.Archives.Add(d2char);
     }
+
+    public static byte[] ReadAllBytes(string filename)
+    {
+        //UnityEngine.Profiling.Profiler.BeginSample("File.ReadAllBytes");
+        //var bytes = System.IO.File.ReadAllBytes(UnityEngine.Application.streamingAssetsPath + "/d2/" + filename);
+        //UnityEngine.Profiling.Profiler.EndSample();
+        //return bytes;
+
+        UnityEngine.Profiling.Profiler.BeginSample("Mpq.FindFile");
+        var file = fs.FindFile(filename);
+        UnityEngine.Profiling.Profiler.EndSample();
+        return ReadAllBytes(file);
+    }
+
+    public static byte[] ReadAllBytes(MpqFile file)
+    {
+        UnityEngine.Profiling.Profiler.BeginSample("Mpq.ReadAllBytes");
+        using (var stream = file.Open())
+        {
+            byte[] bytes = new byte[file.Size];
+            stream.Read(bytes, 0, bytes.Length);
+            UnityEngine.Profiling.Profiler.EndSample();
+            return bytes;
+        }
+    }
 }

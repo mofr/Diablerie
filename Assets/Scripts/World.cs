@@ -33,7 +33,7 @@ public class World : MonoBehaviour
         var player = new GameObject("Player");
         player.transform.position = pos;
         var character = player.AddComponent<Character>();
-        character.basePath = "data/global/chars";
+        character.basePath = @"data\global\chars";
         character.token = "BA";
         character.weaponClass = "1SS";
         character.gear = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "AXE", "AXE", "", "LIT", "LIT", "", "", "", "", "", "" };
@@ -66,7 +66,7 @@ public class World : MonoBehaviour
         monster.transform.position = pos;
         var character = monster.AddComponent<Character>();
         character.monStat = monStat;
-        character.basePath = "data/global/monsters";
+        character.basePath = @"data\global\monsters";
         character.token = monStat.code;
         character.weaponClass = monStat.ext.baseWeaponClass;
         character.run = false;

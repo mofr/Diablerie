@@ -47,28 +47,30 @@ public struct AnimData
 
     static AnimData()
     {
-        byte[] bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/d2/data/global/animdata.d2");
-        var stream = new MemoryStream(bytes);
-        var reader = new BinaryReader(stream);
-        while (stream.Position < stream.Length)
+        var file = Mpq.fs.FindFile(@"data\global\animdata.d2");
+        using (var stream = file.Open())
+        using (var reader = new BinaryReader(stream))
         {
-            int count = reader.ReadInt32();
-            var bucket = new Bucket();
-            bucket.data = new AnimData[count];
-            for (int i = 0; i < count; ++i)
+            while (stream.Position < stream.Length)
             {
-                var animData = new AnimData();
-                animData.cofName = System.Text.Encoding.Default.GetString(reader.ReadBytes(8), 0, 7);
-                animData.framesPerDir = reader.ReadInt32();
-                animData.speed = reader.ReadInt32();
-                animData.flags = reader.ReadBytes(144);
-                animData.frameDuration = 256.0f / 25.0f / animData.speed;
-                bucket.data[i] = animData;
-            }
-            if (count > 0)
-            {
-                byte hash = Hash(bucket.data[0].cofName);
-                buckets[hash] = bucket;
+                int count = reader.ReadInt32();
+                var bucket = new Bucket();
+                bucket.data = new AnimData[count];
+                for (int i = 0; i < count; ++i)
+                {
+                    var animData = new AnimData();
+                    animData.cofName = System.Text.Encoding.Default.GetString(reader.ReadBytes(8), 0, 7);
+                    animData.framesPerDir = reader.ReadInt32();
+                    animData.speed = reader.ReadInt32();
+                    animData.flags = reader.ReadBytes(144);
+                    animData.frameDuration = 256.0f / 25.0f / animData.speed;
+                    bucket.data[i] = animData;
+                }
+                if (count > 0)
+                {
+                    byte hash = Hash(bucket.data[0].cofName);
+                    buckets[hash] = bucket;
+                }
             }
         }
     }

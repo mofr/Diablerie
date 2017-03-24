@@ -147,7 +147,7 @@ public class DT1
         }
         
         var result = new DT1();
-        var bytes = File.ReadAllBytes(dt1Path);
+        var bytes = Mpq.ReadAllBytes(dt1Path);
         var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
         int version1 = reader.ReadInt32();

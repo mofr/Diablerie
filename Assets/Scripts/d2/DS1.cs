@@ -68,8 +68,11 @@ public class DS1
                     filename += c;
                 }
                 filename = filename.Replace("tg1", "dt1");
-                filename = filename.Replace("C:", "");
-                DT1.Load(Application.streamingAssetsPath + filename);
+                filename = filename.Replace(@"C:\D2\", "");
+                filename = filename.Replace(@"\d2\", "");
+                //filename = filename.Replace("C:", "");
+                //filename = Application.streamingAssetsPath + filename;
+                DT1.Load(filename);
             }
         }
 

@@ -613,24 +613,25 @@ public class DCC
         }
 
         DCC dcc = new DCC();
+        dcc.bytes = Mpq.ReadAllBytes(filename);
         dcc.header = new Header();
         dcc.textures = new List<Texture2D>();
         dcc.filename = filename;
-        dcc.bytes = File.ReadAllBytes(filename);
 
-        var stream = new MemoryStream(dcc.bytes);
-        var reader = new BinaryReader(stream);
+        using (var stream = new MemoryStream(dcc.bytes))
+        using (var reader = new BinaryReader(stream))
+        {
+            ReadHeader(reader, dcc.header);
+            dcc.framesPerDirection = dcc.header.framesPerDir;
+            dcc.sprites = new List<Sprite>[dcc.header.directionCount];
 
-        ReadHeader(reader, dcc.header);
-        dcc.framesPerDirection = dcc.header.framesPerDir;
-        dcc.sprites = new List<Sprite>[dcc.header.directionCount];
+            if (loadAllDirections)
+                for (int d = 0; d < dcc.header.directionCount; ++d)
+                    dcc.DecodeDirection(d);
 
-        if (loadAllDirections)
-            for (int d = 0; d < dcc.header.directionCount; ++d)
-                dcc.DecodeDirection(d);
-
-        if (!ignoreCache)
-            cache.Add(filename, dcc);
+            if (!ignoreCache)
+                cache.Add(filename, dcc);
+        }
 
         return dcc;
     }

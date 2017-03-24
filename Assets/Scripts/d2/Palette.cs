@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Palette
@@ -17,18 +15,14 @@ public class Palette
         }
 
         palette = new Color32[256];
-        using (var stream = new MemoryStream(File.ReadAllBytes(Application.streamingAssetsPath + "/d2/data/global/palette/ACT" + (act + 1) + "/Pal.PL2")))
-        using (var reader = new BinaryReader(stream))
+        var bytes = Mpq.ReadAllBytes(@"data\global\palette\ACT" + (act + 1) + @"\Pal.PL2");
+        for (int i = 0; i < 256; ++i)
         {
-            for (int i = 0; i < 256; ++i)
-            {
-                byte r = reader.ReadByte();
-                byte g = reader.ReadByte();
-                byte b = reader.ReadByte();
-                reader.ReadByte();
-
-                palette[i] = new Color32(r, g, b, 255);
-            }
+            int offset = i * 4;
+            byte r = bytes[offset];
+            byte g = bytes[offset + 1];
+            byte b = bytes[offset + 2];
+            palette[i] = new Color32(r, g, b, 255);
         }
         palette[0] = new Color(0, 0, 0, 0);
         palettes[act] = palette;

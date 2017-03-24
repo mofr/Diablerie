@@ -471,8 +471,10 @@ namespace CrystalMpq
 				{
 					if (readBufferOffset >= blockBuffer.Length)
 					{
+                        UnityEngine.Profiling.Profiler.BeginSample("UpdateBuffer " + blockBuffer.Length);
 						UpdateBuffer();
-						sourcePointer = readBufferPointer + readBufferOffset;
+                        UnityEngine.Profiling.Profiler.EndSample();
+                        sourcePointer = readBufferPointer + readBufferOffset;
 					}
 					*destinationPointer++ = *sourcePointer++;
 				}

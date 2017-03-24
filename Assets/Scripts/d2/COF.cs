@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using CrystalMpq;
 
 public class COF
 {
@@ -53,11 +54,10 @@ public class COF
 
     static public COF Load(string basePath, string token, string weaponClass, string mode)
     {
-        string cofFilename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/cof/" + token + mode + weaponClass + ".cof";
-        cofFilename.ToLower();
-        if (cache.ContainsKey(cofFilename))
+        var filename = basePath + @"\" + token + @"\cof\" + token + mode + weaponClass + ".cof";
+        if (cache.ContainsKey(filename))
         {
-            return cache[cofFilename];
+            return cache[filename];
         }
 
         COF cof = new COF();
@@ -65,47 +65,48 @@ public class COF
         cof.token = token;
         cof.mode = mode;
 
-        byte[] bytes = File.ReadAllBytes(cofFilename);
-        var stream = new MemoryStream(bytes);
-        var reader = new BinaryReader(stream);
-
-        cof.layerCount = reader.ReadByte();
-        cof.framesPerDirection = reader.ReadByte();
-        cof.directionCount = reader.ReadByte();
-        stream.Seek(25, SeekOrigin.Current);
-
-        cof.compositLayers = new Layer[16];
-        cof.layers = new Layer[cof.layerCount];
-
-        for (int i = 0; i < cof.layerCount; ++i)
+        byte[] bytes = Mpq.ReadAllBytes(filename);
+        using (var stream = new MemoryStream(bytes))
+        using (var reader = new BinaryReader(stream))
         {
-            Layer layer = new Layer();
-            layer.index = i;
-            layer.compositIndex = reader.ReadByte();
-            layer.name = layerNames[layer.compositIndex];
+            cof.layerCount = reader.ReadByte();
+            cof.framesPerDirection = reader.ReadByte();
+            cof.directionCount = reader.ReadByte();
+            stream.Seek(25, SeekOrigin.Current);
 
-            layer.shadow = reader.ReadByte() != 0;
-            reader.ReadByte();
+            cof.compositLayers = new Layer[16];
+            cof.layers = new Layer[cof.layerCount];
 
-            bool transparent = reader.ReadByte() != 0;
-            int blendMode = reader.ReadByte();
-            if (transparent)
+            for (int i = 0; i < cof.layerCount; ++i)
             {
-                layer.material = Materials.softAdditive;
-            }
-            else
-            {
-                layer.material = Materials.normal;
+                Layer layer = new Layer();
+                layer.index = i;
+                layer.compositIndex = reader.ReadByte();
+                layer.name = layerNames[layer.compositIndex];
+
+                layer.shadow = reader.ReadByte() != 0;
+                reader.ReadByte();
+
+                bool transparent = reader.ReadByte() != 0;
+                int blendMode = reader.ReadByte();
+                if (transparent)
+                {
+                    layer.material = Materials.softAdditive;
+                }
+                else
+                {
+                    layer.material = Materials.normal;
+                }
+
+                layer.weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(4), 0, 3);
+
+                cof.layers[i] = layer;
+                cof.compositLayers[layer.compositIndex] = layer;
             }
 
-            layer.weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(4), 0, 3);
-
-            cof.layers[i] = layer;
-            cof.compositLayers[layer.compositIndex] = layer;
+            stream.Seek(cof.framesPerDirection, SeekOrigin.Current);
+            cof.priority = reader.ReadBytes(cof.directionCount * cof.framesPerDirection * cof.layerCount);
         }
-
-        stream.Seek(cof.framesPerDirection, SeekOrigin.Current);
-        cof.priority = reader.ReadBytes(cof.directionCount * cof.framesPerDirection * cof.layerCount);
 
         AnimData animData = new AnimData();
         if (AnimData.Find(token + mode + weaponClass, ref animData))
@@ -119,13 +120,13 @@ public class COF
             Debug.LogWarning("animdata not found " + (token + mode + weaponClass));
         }
 
-        cache.Add(cofFilename, cof);
+        cache.Add(filename, cof);
         return cof;
     }
 
     public string DccFilename(Layer layer, string equip)
     {
-        string filename = Application.streamingAssetsPath + "/d2/" + basePath + "/" + token + "/" + layer.name + "/" + token + layer.name + equip + mode + layer.weaponClass + ".dcc";
+        string filename = basePath + @"\" + token + @"\" + layer.name + @"\" + token + layer.name + equip + mode + layer.weaponClass + ".dcc";
         return filename.ToLower();
     }
 }

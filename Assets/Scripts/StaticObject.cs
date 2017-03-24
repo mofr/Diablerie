@@ -57,7 +57,7 @@ public class StaticObject : Entity
         mode = System.Array.IndexOf(COF.ModeNames[2], modeName);
         if (objectInfo.draw)
         {
-            var cof = COF.Load("/data/global/objects", objectInfo.token, "HTH", modeName);
+            var cof = COF.Load(@"data\global\objects", objectInfo.token, "HTH", modeName);
             animator.shadow = objectInfo.blocksLight[mode];
             animator.cof = cof;
             animator.loop = objectInfo.cycleAnim[mode];
