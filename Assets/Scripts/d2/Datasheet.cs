@@ -33,7 +33,7 @@ public struct Datasheet<T> where T : new()
     public static Datasheet<T> Load(string filename, int headerLines = 1)
     {
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-        string csv = File.ReadAllText(filename);
+        string csv = File.ReadAllText(Application.streamingAssetsPath + "/" + filename);
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
         int expectedFieldCount = 0;
         T dummy = new T();
@@ -123,7 +123,7 @@ public class Obj
     public string index;
     string eol;
 
-    public static Datasheet<Obj> sheet = Datasheet<Obj>.Load(Application.streamingAssetsPath + "/d2/obj.txt");
+    public static Datasheet<Obj> sheet = Datasheet<Obj>.Load("/obj.txt");
     static Dictionary<long, Obj> lookup = new Dictionary<long, Obj>();
 
     static Obj()
@@ -233,7 +233,7 @@ public class ObjectInfo
     [System.NonSerialized]
     public string name;
 
-    public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/objects.txt");
+    public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load("data/global/excel/objects.txt");
     static Dictionary<string, ObjectInfo> byToken = new Dictionary<string, ObjectInfo>();
 
     static ObjectInfo()
@@ -246,6 +246,9 @@ public class ObjectInfo
             }
 
             info.name = Translation.Find(info.nameStr, info.nameStr);
+
+            if (info.token == null)
+                continue;
 
             if (byToken.ContainsKey(info.token))
                 byToken.Remove(info.token);
@@ -387,7 +390,7 @@ public class MonStat
     [System.NonSerialized]
     public MonStatsExtended ext;
 
-    public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/monstats.txt");
+    public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load("data/global/excel/monstats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
     static MonStat()
@@ -497,7 +500,7 @@ public class MonStatsExtended
     [System.NonSerialized]
     public string[][] gearVariants = new string[16][];
 
-    public static Datasheet<MonStatsExtended> sheet = Datasheet<MonStatsExtended>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/MonStats2.txt");
+    public static Datasheet<MonStatsExtended> sheet = Datasheet<MonStatsExtended>.Load("data/global/excel/MonStats2.txt");
     static Dictionary<string, MonStatsExtended> stats = new Dictionary<string, MonStatsExtended>();
 
     static MonStatsExtended()
@@ -535,7 +538,7 @@ public class MonPreset
     public int act;
     public string place;
 
-    public static Datasheet<MonPreset> sheet = Datasheet<MonPreset>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/MonPreset.txt");
+    public static Datasheet<MonPreset> sheet = Datasheet<MonPreset>.Load("data/global/excel/MonPreset.txt");
     static List<MonPreset>[] presets = new List<MonPreset>[ActCount + 1];
 
     static MonPreset()
@@ -576,7 +579,7 @@ public class LevelType
     [System.NonSerialized]
     public List<string> dt1Files = new List<string>();
 
-    public static Datasheet<LevelType> sheet = Datasheet<LevelType>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/LvlTypes.txt");
+    public static Datasheet<LevelType> sheet = Datasheet<LevelType>.Load("data/global/excel/LvlTypes.txt");
 
     static LevelType()
     {
@@ -587,7 +590,7 @@ public class LevelType
                 if (file == "0")
                     continue;
 
-                levelType.dt1Files.Add(Application.streamingAssetsPath + "/d2/data/global/tiles/" + file);
+                levelType.dt1Files.Add("data/global/tiles/" + file);
             }
         }
     }
@@ -619,7 +622,7 @@ public class LevelPreset
     [System.NonSerialized]
     public List<string> ds1Files = new List<string>();
 
-    public static Datasheet<LevelPreset> sheet = Datasheet<LevelPreset>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/LvlPrest.txt");
+    public static Datasheet<LevelPreset> sheet = Datasheet<LevelPreset>.Load("data/global/excel/LvlPrest.txt");
     static Dictionary<int, LevelPreset> levelIdMap = new Dictionary<int, LevelPreset>();
 
     static LevelPreset()
@@ -631,7 +634,7 @@ public class LevelPreset
             foreach(var filename in preset.files)
             {
                 if (filename != "0")
-                    preset.ds1Files.Add(Application.streamingAssetsPath + "/d2/data/global/tiles/" + filename);
+                    preset.ds1Files.Add("data/global/tiles/" + filename);
             }
         }
     }
@@ -712,7 +715,7 @@ public class LevelInfo
     [System.NonSerialized]
     public LevelPreset preset;
 
-    public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load(Application.streamingAssetsPath + "/d2/data/global/excel/Levels.txt");
+    public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
 
     static LevelInfo()
@@ -738,7 +741,7 @@ public class Translation
     public string value;
 
     static Dictionary<string, string> map = new Dictionary<string, string>();
-    public static Datasheet<Translation> sheet = Datasheet<Translation>.Load(Application.streamingAssetsPath + "/d2/data/local/string.txt", headerLines: 0);
+    public static Datasheet<Translation> sheet = Datasheet<Translation>.Load("data/local/string.txt", headerLines: 0);
 
     public static string Find(string key, string defaultValue = null)
     {

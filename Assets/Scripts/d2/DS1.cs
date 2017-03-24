@@ -32,7 +32,7 @@ public class DS1
 
     static public DS1 Load(string ds1Path)
     {
-        var stream = new MemoryStream(File.ReadAllBytes(ds1Path));
+        var stream = new MemoryStream(Mpq.ReadAllBytes(ds1Path));
         var reader = new BinaryReader(stream);
         int version = reader.ReadInt32();
         int width = reader.ReadInt32() + 1;
@@ -70,8 +70,6 @@ public class DS1
                 filename = filename.Replace("tg1", "dt1");
                 filename = filename.Replace(@"C:\D2\", "");
                 filename = filename.Replace(@"\d2\", "");
-                //filename = filename.Replace("C:", "");
-                //filename = Application.streamingAssetsPath + filename;
                 DT1.Load(filename);
             }
         }

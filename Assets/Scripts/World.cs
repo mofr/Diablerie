@@ -13,7 +13,7 @@ public class World : MonoBehaviour
         //var ds1 = DS1.Load(ds1Filename);
         //SpawnPlayer(ds1.entry);
 
-        var town = DS1.Load(Application.streamingAssetsPath + "/d2/data/global/tiles/act1/town/townN1.ds1");
+        var town = DS1.Load(@"data\global\tiles\act1\town\townN1.ds1");
         entrance = new Vector3(30, -15);
         for (int i = 0; i < 5; ++i)
         {
