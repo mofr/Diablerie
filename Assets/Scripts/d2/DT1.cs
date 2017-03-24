@@ -228,15 +228,16 @@ public class DT1
         }
     }
 
-    static public DT1 Load(string dt1Path)
+    static public DT1 Load(string filename)
     {
-        if(cache.ContainsKey(dt1Path))
+        if(cache.ContainsKey(filename))
         {
-            return cache[dt1Path];
+            return cache[filename];
         }
         
         var dt1 = new DT1();
-        var bytes = Mpq.ReadAllBytes(dt1Path);
+        dt1.filename = filename;
+        var bytes = Mpq.ReadAllBytes(filename);
         using (var stream = new MemoryStream(bytes))
         using (var reader = new BinaryReader(stream))
         {
@@ -251,7 +252,7 @@ public class DT1
             ReadTiles(dt1, stream, reader, bytes);
         }
         registry.Add(dt1.tiles);
-        cache[dt1Path] = dt1;
+        cache[filename] = dt1;
         return dt1;
     }
 

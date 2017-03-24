@@ -8,6 +8,7 @@ public class World : MonoBehaviour
 
     void Start ()
     {
+        Debug.Log("World Start");
         //LevelInfo levelInfo = LevelInfo.Find(levelName);
         //var ds1Filename = levelInfo.preset.ds1Files[Random.Range(0, levelInfo.preset.ds1Files.Count)];
         //var ds1 = DS1.Load(ds1Filename);

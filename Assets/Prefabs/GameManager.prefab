@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4976439689071052}
+  - component: {fileID: 114071120733895052}
   - component: {fileID: 114846714760764304}
   - component: {fileID: 114524355520886124}
   - component: {fileID: 114153361697340630}
   - component: {fileID: 114225344187329616}
-  - component: {fileID: 114071120733895052}
   - component: {fileID: 114958092872097694}
   m_Layer: 0
   m_Name: GameManager
@@ -56,6 +56,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b65060a73a7ba346a81f7f144995436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _normal: {fileID: 2100000, guid: 3332d649ebabc1f42b2bf16f9cbe4ed9, type: 2}
+  _softAdditive: {fileID: 2100000, guid: d5767dcaf02a457499515abc02d7551e, type: 2}
+  _shadow: {fileID: 2100000, guid: 172dfb9b8910ab442a82817345f242ba, type: 2}
 --- !u!114 &114153361697340630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1392b4ed09b443f4097f97491ff767ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
   labelPrefab: {fileID: 114686259536176770, guid: c92188f0b754df944a85e32e98ed01ec,
     type: 2}
   enemyBarPrefab: {fileID: 114263015362939446, guid: 4768d32ab650c0a418b60f7b9883889a,
