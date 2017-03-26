@@ -4,11 +4,30 @@ using UnityEngine;
 
 public class DS1
 {
-    public GameObject root;
+    public string filename;
     public Vector3 center;
     public Vector3 entry;
     public int width;
     public int height;
+    Cell[][] walls;
+    Cell[][] floors;
+    ObjectSpawnInfo[] objects;
+    Group[] groups;
+
+    struct ObjectSpawnInfo
+    {
+        public int x;
+        public int y;
+        public Obj obj;
+    }
+
+    struct Group
+    {
+        public int x;
+        public int y;
+        public int width;
+        public int height;
+    }
 
     struct Cell
     {
@@ -16,6 +35,10 @@ public class DS1
         public byte prop2;
         public byte prop3;
         public byte prop4;
+        public byte orientation;
+        public int mainIndex;
+        public int subIndex;
+        public int tileIndex;
     };
 
     static byte[] dirLookup = {
@@ -30,25 +53,29 @@ public class DS1
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
-    static public DS1 LoadFile(string ds1Path)
+    static public DS1 LoadFile(string filename)
     {
-        var bytes = File.ReadAllBytes(ds1Path);
-        return Load(ds1Path, bytes);
+        var bytes = File.ReadAllBytes(filename);
+        return Load(filename, bytes);
     }
 
-    static public DS1 Load(string ds1Path)
+    static public DS1 Load(string filename)
     {
-        var bytes = Mpq.ReadAllBytes(ds1Path);
-        return Load(ds1Path, bytes);
+        var bytes = Mpq.ReadAllBytes(filename);
+        return Load(filename, bytes);
     }
 
-    static DS1 Load(string ds1Path, byte[] bytes)
+    static DS1 Load(string filename, byte[] bytes)
     {
         var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
+        DS1 ds1 = new DS1();
+        ds1.filename = filename;
         int version = reader.ReadInt32();
-        int width = reader.ReadInt32() + 1;
-        int height = reader.ReadInt32() + 1;
+        ds1.width = reader.ReadInt32() + 1;
+        ds1.height = reader.ReadInt32() + 1;
+        ds1.center = MapToWorld(ds1.width, ds1.height) / 2;
+        ds1.entry = ds1.center;
 
         int act = 0;
         if (version >= 8)
@@ -69,22 +96,7 @@ public class DS1
 
         if (version >= 3)
         {
-            int fileCount = reader.ReadInt32();
-
-            for (int i = 0; i < fileCount; i++)
-            {
-                string filename = "";
-                char c;
-                while ((c = reader.ReadChar()) != 0)
-                {
-                    filename += c;
-                }
-                filename = filename.ToLower();
-                filename = filename.Replace(".tg1", ".dt1");
-                filename = filename.Replace(@"c:\d2\", "");
-                filename = filename.Replace(@"\d2\", "");
-                DT1.Load(filename);
-            }
+            ReadDependencies(reader);
         }
 
         Debug.Log("Linked DT1 files loaded in " + sw.ElapsedMilliseconds + " ms");
@@ -119,10 +131,6 @@ public class DS1
 
         Debug.Log("layers : (2 * " + wallLayerCount + " walls) + " + floorLayerCount + " floors + " + shadowLayerCount + " shadow + " + tagLayerCount + " tag");
 
-        Cell[][] walls = new Cell[wallLayerCount][];
-        for (int i = 0; i < wallLayerCount; ++i)
-            walls[i] = new Cell[width * height];
-
         int layerCount = 0;
         int[] layout = new int[14];
         if (version < 4)
@@ -149,35 +157,26 @@ public class DS1
             if (tagLayerCount != 0)
                 layout[layerCount++] = 12;    // tag
         }
-
-        var result = new DS1();
-        result.center = MapToWorld(width, height) / 2;
-        result.entry = result.center;
-        result.root = new GameObject(Path.GetFileName(ds1Path));
-        result.width = width;
-        result.height = height;
-
-        var floorLayers = new GameObject[floorLayerCount];
+        
+        ds1.floors = new Cell[floorLayerCount][];
         for (int i = 0; i < floorLayerCount; ++i)
         {
-            floorLayers[i] = new GameObject("f" + (i + 1));
-            floorLayers[i].transform.SetParent(result.root.transform);
+            ds1.floors[i] = new Cell[ds1.width * ds1.height];
         }
 
-        var wallLayers = new GameObject[wallLayerCount];
+        ds1.walls = new Cell[wallLayerCount][];
         for (int i = 0; i < wallLayerCount; ++i)
         {
-            wallLayers[i] = new GameObject("w" + (i + 1));
-            wallLayers[i].transform.SetParent(result.root.transform);
+            ds1.walls[i] = new Cell[ds1.width * ds1.height];
         }
 
         for (int n = 0; n < layerCount; n++)
         {
             int p;
             int i = 0;
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < ds1.height; y++)
             {
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < ds1.width; x++)
                 {
                     switch (layout[n])
                     {
@@ -188,10 +187,10 @@ public class DS1
                         case 4:
                             {
                                 p = layout[n] - 1;
-                                walls[p][i].prop1 = reader.ReadByte();
-                                walls[p][i].prop2 = reader.ReadByte();
-                                walls[p][i].prop3 = reader.ReadByte();
-                                walls[p][i].prop4 = reader.ReadByte();
+                                ds1.walls[p][i].prop1 = reader.ReadByte();
+                                ds1.walls[p][i].prop2 = reader.ReadByte();
+                                ds1.walls[p][i].prop3 = reader.ReadByte();
+                                ds1.walls[p][i].prop4 = reader.ReadByte();
                                 break;
                             }
 
@@ -202,72 +201,43 @@ public class DS1
                         case 8:
                             {
                                 p = layout[n] - 5;
-                                int orientation = reader.ReadByte();
+                                var cell = ds1.walls[p][i];
+                                cell.orientation = reader.ReadByte();
                                 if (version < 7)
-                                    orientation = dirLookup[orientation];
+                                    cell.orientation = dirLookup[cell.orientation];
 
-                                reader.ReadBytes(3);
+                                stream.Seek(3, SeekOrigin.Current);
 
-                                if (walls[p][i].prop1 == 0)
+                                if (cell.prop1 == 0)
                                     break;
 
-                                int prop2 = walls[p][i].prop2;
-                                int prop3 = walls[p][i].prop3;
-                                int prop4 = walls[p][i].prop4;
-
-                                int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
-                                int subIndex = prop2;
-                                int index = DT1.Tile.Index(mainIndex, subIndex, orientation);
-                                if (index == mapEntryIndex)
+                                cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
+                                cell.subIndex = cell.prop2;
+                                cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
+                                if (cell.tileIndex == mapEntryIndex)
                                 {
-                                    result.entry = MapToWorld(x, y);
-                                    Debug.Log("Found map entry at " + x + " " + y);
+                                    ds1.entry = MapToWorld(x, y);
                                     break;
                                 }
-                                else if (index == townEntryIndex)
+                                else if (cell.tileIndex == townEntryIndex)
                                 {
-                                    result.entry = MapToWorld(x, y);
-                                    Debug.Log("Found town entry at " + x + " " + y);
+                                    ds1.entry = MapToWorld(x, y);
                                     break;
                                 }
-                                else if (index == townEntry2Index)
+                                else if (cell.tileIndex == townEntry2Index)
                                 {
                                     break;
                                 }
-                                else if (index == corpseLocationIndex)
+                                else if (cell.tileIndex == corpseLocationIndex)
                                 {
                                     break;
                                 }
-                                else if (index == portalLocationIndex)
+                                else if (cell.tileIndex == portalLocationIndex)
                                 {
                                     break;
                                 }
 
-                                DT1.Tile tile;
-                                if (DT1.Find(index, out tile))
-                                {
-                                    var tileObject = CreateTile(tile, x, y);
-                                    tileObject.transform.SetParent(wallLayers[p].transform);
-                                }
-                                else
-                                {
-                                    Debug.LogWarning("wall tile not found (index " + mainIndex + " " + subIndex + " " + orientation + ") at " + x + ", " + y);
-                                }
-
-                                if (orientation == 3)
-                                {
-                                    index = DT1.Tile.Index(mainIndex, subIndex, 4);
-                                    if (DT1.Find(index, out tile))
-                                    {
-                                        var tileObject = CreateTile(tile, x, y);
-                                        tileObject.transform.SetParent(wallLayers[p].transform);
-                                    }
-                                    else
-                                    {
-                                        Debug.LogWarning("wall tile not found (index " + mainIndex + " " + subIndex + " " + orientation + ") at " + x + ", " + y);
-                                    }
-                                }
-
+                                ds1.walls[p][i] = cell;
                                 break;
                             }
 
@@ -276,57 +246,29 @@ public class DS1
                         case 10:
                             {
                                 p = layout[n] - 9;
-                                int prop1 = reader.ReadByte();
-                                int prop2 = reader.ReadByte();
-                                int prop3 = reader.ReadByte();
-                                int prop4 = reader.ReadByte();
+                                var cell = ds1.floors[p][i];
+                                cell.prop1 = reader.ReadByte();
+                                cell.prop2 = reader.ReadByte();
+                                cell.prop3 = reader.ReadByte();
+                                cell.prop4 = reader.ReadByte();
 
-                                if (prop1 == 0) // no tile here
-                                    break;
+                                cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
+                                cell.subIndex = cell.prop2;
+                                cell.orientation = 0;
+                                cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
 
-                                int mainIndex = (prop3 >> 4) + ((prop4 & 0x03) << 4);
-                                int subIndex = prop2;
-                                int orientation = 0;
-                                int index = DT1.Tile.Index(mainIndex, subIndex, orientation);
-                                DT1.Tile tile;
-                                if (DT1.Find(index, out tile))
-                                {
-                                    var tileObject = CreateTile(tile, x, y, orderInLayer: p);
-                                    tileObject.transform.SetParent(floorLayers[p].transform);
-                                }
+                                ds1.floors[p][i] = cell;
                                 break;
                             }
 
                         // shadow
                         case 11:
-                            reader.ReadBytes(4);
-                            //if ((x < new_width) && (y < new_height))
-                            //{
-                            //    p = layout[n] - 11;
-                            //    s_ptr[p]->prop1 = *bptr;
-                            //    bptr++;
-                            //    s_ptr[p]->prop2 = *bptr;
-                            //    bptr++;
-                            //    s_ptr[p]->prop3 = *bptr;
-                            //    bptr++;
-                            //    s_ptr[p]->prop4 = *bptr;
-                            //    bptr++;
-                            //    s_ptr[p] += s_num;
-                            //}
-                            //else
-                            //    bptr += 4;
+                            reader.ReadInt32();
                             break;
 
                         // tag
                         case 12:
-                            reader.ReadBytes(4);
-                            //if ((x < new_width) && (y < new_height))
-                            //{
-                            //    p = layout[n] - 12;
-                            //    t_ptr[p]->num = (UDWORD) * ((UDWORD*)bptr);
-                            //    t_ptr[p] += t_num;
-                            //}
-                            //bptr += 4;
+                            reader.ReadInt32();
                             break;
                     }
                     ++i;
@@ -338,26 +280,23 @@ public class DS1
         {
             int objectCount = reader.ReadInt32();
             Debug.Log("Objects " + objectCount);
+            ds1.objects = new ObjectSpawnInfo[objectCount];
 
-            for (int n = 0; n < objectCount; n++)
+            for (int i = 0; i < objectCount; i++)
             {
+                var info = new ObjectSpawnInfo();
                 int type = reader.ReadInt32();
                 int id = reader.ReadInt32();
-                int x = reader.ReadInt32();
-                int y = reader.ReadInt32();
+                info.x = reader.ReadInt32();
+                info.y = reader.ReadInt32();
 
                 if (version > 5)
                 {
                     reader.ReadInt32(); // flags
                 }
 
-                var pos = MapSubCellToWorld(x, y);
-                Obj obj = Obj.Find(act, type, id);
-                var gameObject = CreateObject(obj, pos);
-                if (gameObject != null)
-                    gameObject.transform.SetParent(result.root.transform);
-                else
-                    Debug.LogWarning("Object not instantiated " + obj.description);
+                info.obj = Obj.Find(act, type, id);
+                ds1.objects[i] = info;
             }
         }
 
@@ -367,26 +306,138 @@ public class DS1
                 reader.ReadInt32();
 
             int groupCount = reader.ReadInt32();
-
             Debug.Log("Groups " + groupCount);
+            ds1.groups = new Group[groupCount];
 
             for (int i = 0; i < groupCount; i++)
             {
-                int x = reader.ReadInt32();
-                int y = reader.ReadInt32();
-                int groupWidth = reader.ReadInt32();
-                int groupHeight = reader.ReadInt32();
+                var group = new Group();
+                group.x = reader.ReadInt32();
+                group.y = reader.ReadInt32();
+                group.width = reader.ReadInt32();
+                group.height = reader.ReadInt32();
                 if (version >= 13)
                 {
-                    int unknown = reader.ReadInt32();
+                    reader.ReadInt32(); // unknown
                 }
+                ds1.groups[i] = group;
             }
         }
 
         sw.Stop();
         Debug.Log("DS1 loaded in " + sw.ElapsedMilliseconds + " ms");
 
-        return result;
+        return ds1;
+    }
+
+    static void ReadDependencies(BinaryReader reader)
+    {
+        int fileCount = reader.ReadInt32();
+
+        for (int i = 0; i < fileCount; i++)
+        {
+            string dependency = "";
+            char c;
+            while ((c = reader.ReadChar()) != 0)
+            {
+                dependency += c;
+            }
+            dependency = dependency.ToLower();
+            dependency = dependency.Replace(".tg1", ".dt1");
+            dependency = dependency.Replace(@"c:\d2\", "");
+            dependency = dependency.Replace(@"\d2\", "");
+            DT1.Load(dependency);
+        }
+    }
+
+    public GameObject Instantiate()
+    {
+        var root = new GameObject(Path.GetFileName(filename));
+
+        for (int f = 0; f < floors.Length; ++f)
+        {
+            var layerObject = new GameObject("f" + (f + 1));
+            var layerTransform = layerObject.transform;
+            layerTransform.SetParent(root.transform);
+
+            var cells = floors[f];
+            int i = 0;
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x, ++i)
+                {
+                    int prop1 = cells[i].prop1;
+                    if (prop1 == 0) // no tile here
+                        continue;
+
+                    var cell = cells[i];
+                    DT1.Tile tile;
+                    if (DT1.Find(cell.tileIndex, out tile))
+                    {
+                        var tileObject = CreateTile(tile, x, y, orderInLayer: f);
+                        tileObject.transform.SetParent(layerTransform);
+                    }
+                }
+            }
+        }
+
+        for (int w = 0; w < walls.Length; ++w)
+        {
+            var layerObject = new GameObject("w" + (w + 1));
+            var layerTransform = layerObject.transform;
+            layerTransform.SetParent(root.transform);
+
+            var cells = walls[w];
+            int i = 0;
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x, ++i)
+                {
+                    int prop1 = cells[i].prop1;
+                    if (prop1 == 0) // no tile here
+                        continue;
+
+                    var cell = cells[i];
+
+                    DT1.Tile tile;
+                    if (DT1.Find(cell.tileIndex, out tile))
+                    {
+                        var tileObject = CreateTile(tile, x, y);
+                        tileObject.transform.SetParent(layerTransform);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("wall tile not found (index " + cell.mainIndex + " " + cell.subIndex + " " + cell.orientation + ") at " + x + ", " + y);
+                    }
+
+                    if (cell.orientation == 3)
+                    {
+                        int orientation = 4;
+                        int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
+                        if (DT1.Find(index, out tile))
+                        {
+                            var tileObject = CreateTile(tile, x, y);
+                            tileObject.transform.SetParent(layerTransform);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("wall tile not found (index " + cell.mainIndex + " " + cell.subIndex + " " + orientation + ") at " + x + ", " + y);
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach (var info in objects)
+        {
+            var gameObject = CreateObject(info);
+            if (gameObject != null)
+                gameObject.transform.SetParent(root.transform);
+            else
+                Debug.LogWarning("Object not instantiated " + info.obj.description);
+        }
+
+        return root;
     }
 
     static Vector3 MapToWorld(int x, int y)
@@ -481,8 +532,10 @@ public class DS1
         return gameObject;
     }
 
-    static GameObject CreateObject(Obj obj, Vector3 pos)
+    static GameObject CreateObject(ObjectSpawnInfo info)
     {
+        var pos = MapSubCellToWorld(info.x, info.y);
+        var obj = info.obj;
         if (obj.type == 2)
         {
             ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];

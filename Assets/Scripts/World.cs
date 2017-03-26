@@ -8,13 +8,13 @@ public class World : MonoBehaviour
 
     void Start ()
     {
-        Debug.Log("World Start");
         //LevelInfo levelInfo = LevelInfo.Find(levelName);
         //var ds1Filename = levelInfo.preset.ds1Files[Random.Range(0, levelInfo.preset.ds1Files.Count)];
         //var ds1 = DS1.Load(ds1Filename);
         //SpawnPlayer(ds1.entry);
 
         var town = DS1.Load(@"data\global\tiles\act1\town\townN1.ds1");
+        town.Instantiate();
         entrance = new Vector3(30, -15);
         for (int i = 0; i < 5; ++i)
         {

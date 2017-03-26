@@ -8,8 +8,10 @@ public class EditorTools
     static public void LoadDS1()
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-        DT1.ResetCache();
-        DS1.LoadFile(assetPath);
+        if (!Application.isPlaying)
+            DT1.ResetCache();
+        var ds1 = DS1.LoadFile(assetPath);
+        ds1.Instantiate();
     }
 
     [MenuItem("Assets/Load DS1", true)]
@@ -69,12 +71,6 @@ public class EditorTools
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         return assetPath.ToLower().EndsWith("dcc");
-    }
-
-    [MenuItem("Assets/Reset DT1 cache")]
-    static public void ResetDT1()
-    {
-        DT1.ResetCache();
     }
 
     [MenuItem("Assets/Create font from DC6")]
