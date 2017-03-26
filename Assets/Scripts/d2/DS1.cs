@@ -30,9 +30,21 @@ public class DS1
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
+    static public DS1 LoadFile(string ds1Path)
+    {
+        var bytes = File.ReadAllBytes(ds1Path);
+        return Load(ds1Path, bytes);
+    }
+
     static public DS1 Load(string ds1Path)
     {
-        var stream = new MemoryStream(Mpq.ReadAllBytes(ds1Path));
+        var bytes = Mpq.ReadAllBytes(ds1Path);
+        return Load(ds1Path, bytes);
+    }
+
+    static DS1 Load(string ds1Path, byte[] bytes)
+    {
+        var stream = new MemoryStream(bytes);
         var reader = new BinaryReader(stream);
         int version = reader.ReadInt32();
         int width = reader.ReadInt32() + 1;
@@ -67,8 +79,9 @@ public class DS1
                 {
                     filename += c;
                 }
-                filename = filename.Replace("tg1", "dt1");
-                filename = filename.Replace(@"C:\D2\", "");
+                filename = filename.ToLower();
+                filename = filename.Replace(".tg1", ".dt1");
+                filename = filename.Replace(@"c:\d2\", "");
                 filename = filename.Replace(@"\d2\", "");
                 DT1.Load(filename);
             }

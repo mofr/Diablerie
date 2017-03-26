@@ -605,6 +605,20 @@ public class DCC
         MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
     }
 
+    static public DCC LoadFile(string filename, bool loadAllDirections = false, bool ignoreCache = false)
+    {
+        if (!ignoreCache && cache.ContainsKey(filename))
+        {
+            return cache[filename];
+        }
+
+        var bytes = File.ReadAllBytes(filename);
+        var dcc = Load(filename, bytes, loadAllDirections);
+        if (!ignoreCache)
+            cache.Add(filename, dcc);
+        return dcc;
+    }
+
     static public DCC Load(string filename, bool loadAllDirections = false, bool ignoreCache = false)
     {
         if (!ignoreCache && cache.ContainsKey(filename))
@@ -612,8 +626,17 @@ public class DCC
             return cache[filename];
         }
 
+        var bytes = Mpq.ReadAllBytes(filename);
+        var dcc = Load(filename, bytes, loadAllDirections);
+        if (!ignoreCache)
+            cache.Add(filename, dcc);
+        return dcc;
+    }
+
+    static DCC Load(string filename, byte[] bytes, bool loadAllDirections = false)
+    {
         DCC dcc = new DCC();
-        dcc.bytes = Mpq.ReadAllBytes(filename);
+        dcc.bytes = bytes;
         dcc.header = new Header();
         dcc.textures = new List<Texture2D>();
         dcc.filename = filename;
@@ -628,9 +651,6 @@ public class DCC
             if (loadAllDirections)
                 for (int d = 0; d < dcc.header.directionCount; ++d)
                     dcc.DecodeDirection(d);
-
-            if (!ignoreCache)
-                cache.Add(filename, dcc);
         }
 
         return dcc;
