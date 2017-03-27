@@ -32,6 +32,7 @@ public struct Datasheet<T> where T : new()
 
     public static Datasheet<T> Load(string filename, int headerLines = 1)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("Datasheet.Load");
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
         string csv = File.ReadAllText(Application.streamingAssetsPath + "/" + filename);
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
@@ -100,6 +101,7 @@ public struct Datasheet<T> where T : new()
             sheet.rows.Add(obj);
         }
         Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
+        UnityEngine.Profiling.Profiler.EndSample();
         return sheet;
     }
 }

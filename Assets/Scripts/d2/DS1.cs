@@ -131,33 +131,6 @@ public class DS1
 
         Debug.Log("layers : (2 * " + wallLayerCount + " walls) + " + floorLayerCount + " floors + " + shadowLayerCount + " shadow + " + tagLayerCount + " tag");
 
-        int layerCount = 0;
-        int[] layout = new int[14];
-        if (version < 4)
-        {
-            layout[0] = 1; // wall 1
-            layout[1] = 9; // floor 1
-            layout[2] = 5; // orientation 1
-            layout[3] = 12; // tag
-            layout[4] = 11; // shadow
-            layerCount = 5;
-        }
-        else
-        {
-            layerCount = 0;
-            for (int x = 0; x < wallLayerCount; x++)
-            {
-                layout[layerCount++] = 1 + x; // wall x
-                layout[layerCount++] = 5 + x; // orientation x
-            }
-            for (int x = 0; x < floorLayerCount; x++)
-                layout[layerCount++] = 9 + x; // floor x
-            if (shadowLayerCount != 0)
-                layout[layerCount++] = 11;    // shadow
-            if (tagLayerCount != 0)
-                layout[layerCount++] = 12;    // tag
-        }
-        
         ds1.floors = new Cell[floorLayerCount][];
         for (int i = 0; i < floorLayerCount; ++i)
         {
@@ -170,109 +143,91 @@ public class DS1
             ds1.walls[i] = new Cell[ds1.width * ds1.height];
         }
 
-        for (int n = 0; n < layerCount; n++)
+        if (version < 4)
         {
-            int p;
+            ReadCells(ds1.walls[0], bytes, stream);
+            ReadCells(ds1.floors[0], bytes, stream);
+            ReadOrientations(ds1.walls[0], bytes, stream);
+            stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // tag
+            stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // shadow
+        }
+        else
+        {
+            for (int i = 0; i < wallLayerCount; i++)
+            {
+                ReadCells(ds1.walls[i], bytes, stream);
+                ReadOrientations(ds1.walls[i], bytes, stream);
+            }
+            for (int i = 0; i < floorLayerCount; i++)
+                ReadCells(ds1.floors[i], bytes, stream);
+            if (shadowLayerCount != 0)
+                stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // shadow
+            if (tagLayerCount != 0)
+                stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // tag
+        }
+
+        for (int w = 0; w < wallLayerCount; w++)
+        {
+            var cells = ds1.walls[w];
             int i = 0;
             for (int y = 0; y < ds1.height; y++)
             {
-                for (int x = 0; x < ds1.width; x++)
+                for (int x = 0; x < ds1.width; x++, i++)
                 {
-                    switch (layout[n])
+                    var cell = cells[i];
+                    if (cell.prop1 == 0)
+                        continue;
+
+                    if (version < 7)
+                        cell.orientation = dirLookup[cell.orientation];
+
+                    cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
+                    cell.subIndex = cell.prop2;
+                    cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
+                    if (cell.tileIndex == mapEntryIndex)
                     {
-                        // walls
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                            {
-                                p = layout[n] - 1;
-                                ds1.walls[p][i].prop1 = reader.ReadByte();
-                                ds1.walls[p][i].prop2 = reader.ReadByte();
-                                ds1.walls[p][i].prop3 = reader.ReadByte();
-                                ds1.walls[p][i].prop4 = reader.ReadByte();
-                                break;
-                            }
-
-                        // orientations
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                            {
-                                p = layout[n] - 5;
-                                var cell = ds1.walls[p][i];
-                                cell.orientation = reader.ReadByte();
-                                if (version < 7)
-                                    cell.orientation = dirLookup[cell.orientation];
-
-                                stream.Seek(3, SeekOrigin.Current);
-
-                                if (cell.prop1 == 0)
-                                    break;
-
-                                cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
-                                cell.subIndex = cell.prop2;
-                                cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
-                                if (cell.tileIndex == mapEntryIndex)
-                                {
-                                    ds1.entry = MapToWorld(x, y);
-                                    break;
-                                }
-                                else if (cell.tileIndex == townEntryIndex)
-                                {
-                                    ds1.entry = MapToWorld(x, y);
-                                    break;
-                                }
-                                else if (cell.tileIndex == townEntry2Index)
-                                {
-                                    break;
-                                }
-                                else if (cell.tileIndex == corpseLocationIndex)
-                                {
-                                    break;
-                                }
-                                else if (cell.tileIndex == portalLocationIndex)
-                                {
-                                    break;
-                                }
-
-                                ds1.walls[p][i] = cell;
-                                break;
-                            }
-
-                        // floors
-                        case 9:
-                        case 10:
-                            {
-                                p = layout[n] - 9;
-                                var cell = ds1.floors[p][i];
-                                cell.prop1 = reader.ReadByte();
-                                cell.prop2 = reader.ReadByte();
-                                cell.prop3 = reader.ReadByte();
-                                cell.prop4 = reader.ReadByte();
-
-                                cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
-                                cell.subIndex = cell.prop2;
-                                cell.orientation = 0;
-                                cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
-
-                                ds1.floors[p][i] = cell;
-                                break;
-                            }
-
-                        // shadow
-                        case 11:
-                            reader.ReadInt32();
-                            break;
-
-                        // tag
-                        case 12:
-                            reader.ReadInt32();
-                            break;
+                        ds1.entry = MapToWorld(x, y);
+                        continue;
                     }
-                    ++i;
+                    else if (cell.tileIndex == townEntryIndex)
+                    {
+                        ds1.entry = MapToWorld(x, y);
+                        continue;
+                    }
+                    else if (cell.tileIndex == townEntry2Index)
+                    {
+                        continue;
+                    }
+                    else if (cell.tileIndex == corpseLocationIndex)
+                    {
+                        continue;
+                    }
+                    else if (cell.tileIndex == portalLocationIndex)
+                    {
+                        continue;
+                    }
+
+                    cells[i] = cell;
                 }
+            }
+        }
+
+        for (int f = 0; f < floorLayerCount; f++)
+        {
+            var cells = ds1.floors[f];
+            for (int i = 0; i < cells.Length; i++)
+            {
+                var cell = cells[i];
+
+                if (cell.prop1 == 0)
+                    continue;
+
+                cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
+                cell.subIndex = cell.prop2;
+                cell.orientation = 0;
+                cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
+
+                cells[i] = cell;
             }
         }
 
@@ -328,6 +283,47 @@ public class DS1
         Debug.Log("DS1 loaded in " + sw.ElapsedMilliseconds + " ms");
 
         return ds1;
+    }
+
+    static unsafe void ReadCells(Cell[] cells, byte[] bytes, Stream stream)
+    {
+        long position = stream.Position;
+
+        fixed (Cell* fixedCells = cells)
+        fixed (byte* fixedBytes = bytes)
+        {
+            byte* src = fixedBytes + position;
+            Cell* cell = fixedCells;
+            for (int i = 0; i < cells.Length; ++i)
+            {
+                cell->prop1 = *(src++);
+                cell->prop2 = *(src++);
+                cell->prop3 = *(src++);
+                cell->prop4 = *(src++);
+                ++cell;
+            }
+        }
+
+        stream.Seek(4 * cells.Length, SeekOrigin.Current);
+    }
+
+    static unsafe void ReadOrientations(Cell[] cells, byte[] bytes, Stream stream)
+    {
+        long position = stream.Position;
+        fixed (Cell* fixedCells = cells)
+        fixed (byte* fixedBytes = bytes)
+        {
+            byte* src = fixedBytes + position;
+            Cell* cell = fixedCells;
+            for (int i = 0; i < cells.Length; ++i)
+            {
+                cell->orientation = *src;
+                src += 4;
+                ++cell;
+            }
+        }
+
+        stream.Seek(4 * cells.Length, SeekOrigin.Current);
     }
 
     static void ReadDependencies(BinaryReader reader)
