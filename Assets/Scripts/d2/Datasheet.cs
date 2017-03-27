@@ -167,8 +167,8 @@ public class ObjectInfo
     public int spawnMax;
     public bool[] selectable = new bool[8];
     public int trapProb;
-    public int sizeY; // sizeX and sizeY are switched here because of different axes in the original game
     public int sizeX;
+    public int sizeY;
     public int nTgtFX;
     public int nTgtFY;
     public int nTgtBX;

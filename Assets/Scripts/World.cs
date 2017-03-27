@@ -25,6 +25,14 @@ public class World : MonoBehaviour
             //SpawnMonster("wraith1", entrance + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)));
         }
 
+        var ruin1 = DS1.Load(@"data\global\tiles\act1\outdoors\ruin1.ds1");
+        for (int i = 0; i < 4; ++i)
+            ruin1.Instantiate(new Vector2i(i * ruin1.width, -ruin1.height));
+
+        var river = DS1.Load(@"data\global\tiles\act1\outdoors\river.ds1");
+        for (int i = 0; i < 3; ++i)
+            river.Instantiate(new Vector2i(town.width - river.width, -(i + 1) * river.height));
+
         SpawnPlayer(town.entry);
         StartCoroutine(SpawnMonsters());
     }

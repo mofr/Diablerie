@@ -16,12 +16,17 @@ public class Iso : MonoBehaviour {
 
 	SpriteRenderer spriteRenderer;
 
-	static public Vector3 MapToWorld(Vector3 iso) {
-		return new Vector3(iso.x - iso.y, (iso.x + iso.y) / 2) * tileSize;
+    static public Vector3 MapToWorld(float x, float y)
+    {
+        return new Vector3(x - y, -(x + y) / 2) * tileSize;
+    }
+
+    static public Vector3 MapToWorld(Vector3 iso) {
+        return MapToWorld(iso.x, iso.y);
 	}
 
 	static public Vector3 MapToIso(Vector3 world) {
-		return new Vector3(world.y + world.x / 2, world.y - world.x / 2) / tileSize;
+		return new Vector3(-world.y + world.x / 2, -world.y - world.x / 2) / tileSize;
 	}
 
     static public int SortingOrder(Vector3 worldPosition)
@@ -85,7 +90,7 @@ public class Iso : MonoBehaviour {
     static public int Direction(Vector2 from, Vector3 target, int directionCount)
     {
         var dir = target - (Vector3)from;
-        var angle = Vector3.Angle(new Vector3(-1, -1), dir) * Mathf.Sign(dir.y - dir.x);
+        var angle = Vector3.Angle(new Vector3(1, 1), dir) * Mathf.Sign(dir.y - dir.x);
         var directionDegrees = 360.0f / directionCount;
         return Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
     }

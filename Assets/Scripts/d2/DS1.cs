@@ -387,7 +387,7 @@ public class DS1
                     DT1.Tile tile;
                     if (DT1.Find(cell.tileIndex, out tile))
                     {
-                        var tileObject = CreateTile(tile, x, y, orderInLayer: f);
+                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y, orderInLayer: f);
                         tileObject.transform.SetParent(layerTransform);
                     }
                 }
@@ -415,7 +415,7 @@ public class DS1
                     DT1.Tile tile;
                     if (DT1.Find(cell.tileIndex, out tile))
                     {
-                        var tileObject = CreateTile(tile, x, y);
+                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
                         tileObject.transform.SetParent(layerTransform);
                     }
                     else
@@ -429,7 +429,7 @@ public class DS1
                         int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
                         if (DT1.Find(index, out tile))
                         {
-                            var tileObject = CreateTile(tile, x, y);
+                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
                             tileObject.transform.SetParent(layerTransform);
                         }
                         else
@@ -443,7 +443,7 @@ public class DS1
 
         foreach (var info in objects)
         {
-            var gameObject = CreateObject(info);
+            var gameObject = CreateObject(info.obj, offset.x + info.x, offset.y + info.y);
             if (gameObject != null)
                 gameObject.transform.SetParent(root.transform);
             else
@@ -455,16 +455,7 @@ public class DS1
 
     static Vector3 MapToWorld(int x, int y)
     {
-        var pos = Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
-        pos.y = -pos.y;
-        return pos;
-    }
-
-    static Vector3 MapSubCellToWorld(int x, int y)
-    {
-        var pos = Iso.MapToWorld(new Vector3(x - 2, y - 2));
-        pos.y = -pos.y;
-        return pos;
+        return Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
     }
 
     static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0)
@@ -527,9 +518,9 @@ public class DS1
         if (Application.isPlaying)
         {
             int flagIndex = 0;
-            for (int dx = -2; dx < 3; ++dx)
+            for (int dy = 2; dy > -3; --dy)
             {
-                for (int dy = 2; dy > -3; --dy)
+                for (int dx = -2; dx < 3; ++dx)
                 {
                     if ((tile.flags[flagIndex] & (1 + 8)) != 0)
                     {
@@ -545,10 +536,9 @@ public class DS1
         return gameObject;
     }
 
-    static GameObject CreateObject(ObjectSpawnInfo info)
+    static GameObject CreateObject(Obj obj, int x, int y)
     {
-        var pos = MapSubCellToWorld(info.x, info.y);
-        var obj = info.obj;
+        var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)
         {
             ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
