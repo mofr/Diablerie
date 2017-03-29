@@ -90,7 +90,7 @@ public class Character : Entity
     {
         base.Start();
         animator.gear = gear;
-        Tilemap.SetPassable(Iso.Snap(iso.pos), false);
+        CollisionMap.SetPassable(Iso.Snap(iso.pos), false);
     }
 
 	public void Use(Usable usable) {
@@ -120,7 +120,7 @@ public class Character : Entity
 		if (attack || takingDamage || ressurecting)
 			return;
 
-		if (Tilemap.Passable(target)) {
+		if (CollisionMap.Passable(target)) {
 			iso.pos = target;
 		} else {
 			var pathToTarget = Pathing.BuildPath(iso.pos, target);
@@ -165,7 +165,7 @@ public class Character : Entity
         if (!takingDamage && !dead && !dying && !ressurecting) {
             if (usable)
             {
-                var hit = Tilemap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2, ignore: gameObject);
+                var hit = CollisionMap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2, ignore: gameObject);
                 if (hit.gameObject == usable.gameObject)
                 {
                     usable.Use();
@@ -284,7 +284,7 @@ public class Character : Entity
     bool Move(Vector2 movement)
     {
         var newPos = iso.pos + movement;
-        Tilemap.Move(iso.pos, newPos, gameObject);
+        CollisionMap.Move(iso.pos, newPos, gameObject);
         iso.pos = newPos;
         hasMoved = true;
         return true;
@@ -380,7 +380,7 @@ public class Character : Entity
         {
             if (targetCharacter == null)
             {
-                var hit = Tilemap.Raycast(iso.pos, targetPoint, rayLength: diameter / 2 + attackRange, ignore: gameObject, debug: true);
+                var hit = CollisionMap.Raycast(iso.pos, targetPoint, rayLength: diameter / 2 + attackRange, ignore: gameObject, debug: true);
                 if (hit.gameObject != null)
                 {
                     targetCharacter = hit.gameObject.GetComponent<Character>();
@@ -409,7 +409,7 @@ public class Character : Entity
         {
             dying = false;
             dead = true;
-            Tilemap.SetPassable(Iso.Snap(iso.pos), true);
+            CollisionMap.SetPassable(Iso.Snap(iso.pos), true);
         }
         UpdateAnimation();
     }

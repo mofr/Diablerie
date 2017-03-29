@@ -65,7 +65,7 @@ public class StaticObject : Entity
             animator.frameDuration = objectInfo.frameDuration[mode];
 
             if (objectInfo.hasCollision[mode])
-                Tilemap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false);
+                CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false);
         }
     }
 

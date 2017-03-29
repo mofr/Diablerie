@@ -525,7 +525,7 @@ public class DS1
                     if ((tile.flags[flagIndex] & (1 + 8)) != 0)
                     {
                         var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
-                        Tilemap.SetPassable(subCellPos, false);
+                        CollisionMap.SetPassable(subCellPos, false);
                     }
                     ++flagIndex;
                 }
