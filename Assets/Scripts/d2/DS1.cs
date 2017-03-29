@@ -5,24 +5,23 @@ using UnityEngine;
 public class DS1
 {
     public string filename;
-    public Vector3 center;
-    public Vector3 entry;
+    public Vector2i entry;
     public int width;
     public int height;
     int version;
-    Cell[][] walls;
-    Cell[][] floors;
-    ObjectSpawnInfo[] objects;
-    Group[] groups;
+    public Cell[][] walls;
+    public Cell[][] floors;
+    public ObjectSpawnInfo[] objects;
+    public Group[] groups;
 
-    struct ObjectSpawnInfo
+    public struct ObjectSpawnInfo
     {
         public int x;
         public int y;
         public Obj obj;
     }
 
-    struct Group
+    public struct Group
     {
         public int x;
         public int y;
@@ -30,7 +29,7 @@ public class DS1
         public int height;
     }
 
-    struct Cell
+    public struct Cell
     {
         public byte prop1;
         public byte prop2;
@@ -76,8 +75,7 @@ public class DS1
             ds1.version = reader.ReadInt32();
             ds1.width = reader.ReadInt32() + 1;
             ds1.height = reader.ReadInt32() + 1;
-            ds1.center = MapToWorld(ds1.width, ds1.height) / 2;
-            ds1.entry = ds1.center;
+            ds1.entry = new Vector2i(ds1.width, ds1.height) / 2;
 
             int act = 0;
             if (ds1.version >= 8)
@@ -251,12 +249,12 @@ public class DS1
                     cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
                     if (cell.tileIndex == mapEntryIndex)
                     {
-                        ds1.entry = MapToWorld(x, y);
+                        ds1.entry = new Vector2i(x, y);
                         continue;
                     }
                     else if (cell.tileIndex == townEntryIndex)
                     {
-                        ds1.entry = MapToWorld(x, y);
+                        ds1.entry = new Vector2i(x, y);
                         continue;
                     }
                     else if (cell.tileIndex == townEntry2Index)
@@ -355,203 +353,6 @@ public class DS1
             dependency = dependency.Replace(@"c:\d2\", "");
             dependency = dependency.Replace(@"\d2\", "");
             DT1.Load(dependency);
-        }
-    }
-
-    public GameObject Instantiate()
-    {
-        return Instantiate(new Vector2i(0, 0));
-    }
-
-    public GameObject Instantiate(Vector2i offset)
-    {
-        var root = new GameObject(Path.GetFileName(filename));
-
-        for (int f = 0; f < floors.Length; ++f)
-        {
-            var layerObject = new GameObject("f" + (f + 1));
-            var layerTransform = layerObject.transform;
-            layerTransform.SetParent(root.transform);
-
-            var cells = floors[f];
-            int i = 0;
-            for (int y = 0; y < height; ++y)
-            {
-                for (int x = 0; x < width; ++x, ++i)
-                {
-                    int prop1 = cells[i].prop1;
-                    if (prop1 == 0) // no tile here
-                        continue;
-
-                    var cell = cells[i];
-                    DT1.Tile tile;
-                    if (DT1.Find(cell.tileIndex, out tile))
-                    {
-                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y, orderInLayer: f);
-                        tileObject.transform.SetParent(layerTransform);
-                    }
-                }
-            }
-        }
-
-        for (int w = 0; w < walls.Length; ++w)
-        {
-            var layerObject = new GameObject("w" + (w + 1));
-            var layerTransform = layerObject.transform;
-            layerTransform.SetParent(root.transform);
-
-            var cells = walls[w];
-            int i = 0;
-            for (int y = 0; y < height; ++y)
-            {
-                for (int x = 0; x < width; ++x, ++i)
-                {
-                    int prop1 = cells[i].prop1;
-                    if (prop1 == 0) // no tile here
-                        continue;
-
-                    var cell = cells[i];
-
-                    DT1.Tile tile;
-                    if (DT1.Find(cell.tileIndex, out tile))
-                    {
-                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
-                        tileObject.transform.SetParent(layerTransform);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("wall tile not found (index " + cell.mainIndex + " " + cell.subIndex + " " + cell.orientation + ") at " + x + ", " + y);
-                    }
-
-                    if (cell.orientation == 3)
-                    {
-                        int orientation = 4;
-                        int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
-                        if (DT1.Find(index, out tile))
-                        {
-                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
-                            tileObject.transform.SetParent(layerTransform);
-                        }
-                        else
-                        {
-                            Debug.LogWarning("wall tile not found (index " + cell.mainIndex + " " + cell.subIndex + " " + orientation + ") at " + x + ", " + y);
-                        }
-                    }
-                }
-            }
-        }
-
-        foreach (var info in objects)
-        {
-            var gameObject = CreateObject(info.obj, offset.x + info.x, offset.y + info.y);
-            if (gameObject != null)
-                gameObject.transform.SetParent(root.transform);
-            else
-                Debug.LogWarning("Object not instantiated " + info.obj.description);
-        }
-
-        return root;
-    }
-
-    static Vector3 MapToWorld(int x, int y)
-    {
-        return Iso.MapToWorld(new Vector3(x, y)) / Iso.tileSize;
-    }
-
-    static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0)
-    {
-        var texture = tile.texture;
-        var pos = MapToWorld(x, y);
-
-        GameObject gameObject = new GameObject();
-        gameObject.name = tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
-        gameObject.transform.position = pos;
-        var meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        var meshFilter = gameObject.AddComponent<MeshFilter>();
-        Mesh mesh = new Mesh();
-        float x0 = tile.textureX;
-        float y0 = tile.textureY;
-        float w = tile.width / Iso.pixelsPerUnit;
-        float h = (-tile.height) / Iso.pixelsPerUnit;
-        if(tile.orientation == 0 || tile.orientation == 15)
-        {
-            var topLeft = new Vector3(-1f, 0.5f);
-            if (tile.orientation == 15)
-                topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
-            mesh.vertices = new Vector3[] {
-                topLeft,
-                topLeft + new Vector3(0, -h),
-                topLeft + new Vector3(w, -h),
-                topLeft + new Vector3(w, 0)
-            };
-            mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
-            mesh.uv = new Vector2[] {
-                new Vector2 (x0 / texture.width, -y0 / texture.height),
-                new Vector2 (x0 / texture.width, (-y0 +tile.height) / texture.height),
-                new Vector2 ((x0 + tile.width) / texture.width, (-y0 +tile.height) / texture.height),
-                new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
-            };
-
-            meshRenderer.sortingLayerName = tile.orientation == 0 ? "Floor" : "Roof";
-            meshRenderer.sortingOrder = orderInLayer;
-        }
-        else
-        {
-            var topLeft = new Vector3(-1f, h - 0.5f);
-            mesh.vertices = new Vector3[] {
-                topLeft,
-                topLeft + new Vector3(0, -h),
-                topLeft + new Vector3(w, -h),
-                topLeft + new Vector3(w, 0)
-            };
-            mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
-            mesh.uv = new Vector2[] {
-                new Vector2 (x0 / texture.width, (-y0 - tile.height) / texture.height),
-                new Vector2 (x0 / texture.width, -y0 / texture.height),
-                new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
-                new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
-            };
-            meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
-        }
-        meshFilter.mesh = mesh;
-
-        if (Application.isPlaying)
-        {
-            int flagIndex = 0;
-            for (int dy = 2; dy > -3; --dy)
-            {
-                for (int dx = -2; dx < 3; ++dx)
-                {
-                    if ((tile.flags[flagIndex] & (1 + 8)) != 0)
-                    {
-                        var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
-                        CollisionMap.SetPassable(subCellPos, false);
-                    }
-                    ++flagIndex;
-                }
-            }
-        }
-
-        meshRenderer.material = tile.material;
-        return gameObject;
-    }
-
-    static GameObject CreateObject(Obj obj, int x, int y)
-    {
-        var pos = Iso.MapToWorld(x - 2, y - 2);
-        if (obj.type == 2)
-        {
-            ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
-            var staticObject = World.SpawnObject(objectInfo, pos);
-            staticObject.modeName = obj.mode;
-            return staticObject.gameObject;
-        }
-        else
-        {
-            var monStat = MonStat.Find(obj.act, obj.id);
-            if (monStat == null)
-                return null;
-            return World.SpawnMonster(monStat, pos).gameObject;
         }
     }
 }

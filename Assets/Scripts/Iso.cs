@@ -5,8 +5,9 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [RequireComponent (typeof(SpriteRenderer))]
-public class Iso : MonoBehaviour {
-
+public class Iso : MonoBehaviour
+{
+    public const int SubTileCount = 5;
     public const float pixelsPerUnit = 80;
     public const float tileSize = 0.2f;
     public const float tileSizeY = tileSize / 2;
@@ -25,7 +26,17 @@ public class Iso : MonoBehaviour {
         return MapToWorld(iso.x, iso.y);
 	}
 
-	static public Vector3 MapToIso(Vector3 world) {
+    static public Vector3 MapTileToWorld(Vector2 iso)
+    {
+        return MapToWorld(iso) / tileSize;
+    }
+
+    static public Vector3 MapTileToWorld(int x, int y)
+    {
+        return MapTileToWorld(new Vector3(x, y));
+    }
+
+    static public Vector3 MapToIso(Vector3 world) {
 		return new Vector3(-world.y + world.x / 2, -world.y - world.x / 2) / tileSize;
 	}
 
