@@ -126,11 +126,12 @@ public class Level
             {
                 for (int x = 0; x < width; ++x, ++i)
                 {
-                    int prop1 = cells[i].prop1;
-                    if (prop1 == 0) // no tile here
+                    var cell = cells[i];
+                    if (cell.prop1 == 0) // no tile here
                         continue;
 
-                    var cell = cells[i];
+                    if (cell.orientation == 10 || cell.orientation == 11)
+                        continue; // special tile
 
                     DT1.Tile tile;
                     if (DT1.Find(cell.tileIndex, out tile))
@@ -258,6 +259,10 @@ public class Level
         var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)
         {
+            if (obj.objectId >= ObjectInfo.sheet.rows.Count)
+            {
+                return null;
+            }
             ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
             var staticObject = World.SpawnObject(objectInfo, pos);
             staticObject.modeName = obj.mode;
