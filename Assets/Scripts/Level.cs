@@ -5,12 +5,35 @@ public class Level
 {
     public readonly int width;
     public readonly int height;
+    LevelInfo info;
+    string name;
     DS1.Cell[] floors;
     List<DS1.Cell[]> walls = new List<DS1.Cell[]>();
     List<DS1.ObjectSpawnInfo> objects = new List<DS1.ObjectSpawnInfo>();
 
-    public Level(int width, int height)
+    static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
+    static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
+    static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
+    static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
+    static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
+
+    public Level(string name)
     {
+        info = LevelInfo.Find(name);
+        this.name = info.levelName;
+        width = info.sizeX + 1;
+        height = info.sizeY + 1;
+        floors = new DS1.Cell[width * height];
+        if (info.preset != null)
+        {
+            var ds1 = DS1.Load(info.preset.ds1Files[0]);
+            Place(ds1);
+        }
+    }
+
+    public Level(string name, int width, int height)
+    {
+        this.name = name;
         this.width = width;
         this.height = height;
         floors = new DS1.Cell[width * height];
@@ -21,11 +44,28 @@ public class Level
         Place(ds1, new Vector2i());
     }
 
-    public void Place(DS1 ds1, Vector2i pos)
+    public void Place(LevelPreset preset, Vector2i pos)
     {
+        var ds1Filename = preset.ds1Files[Random.Range(0, preset.ds1Files.Count)];
+        var ds1 = DS1.Load(ds1Filename);
+        Place(ds1, pos, preset.killEdge);
+    }
+
+    public void Place(DS1 ds1, Vector2i pos, bool killEdge = false)
+    {
+        int stride = ds1.width;
+        int srcWidth = ds1.width;
+        int srcHeight = ds1.height;
+
+        if (killEdge)
+        {
+            srcWidth -= 1;
+            srcHeight -= 1;
+        }
+
         for (int i = 0; i < ds1.floors.Length; ++i)
         {
-            Blit(floors, ds1.floors[i], pos.x, pos.y, ds1.width, ds1.height);
+            Blit(floors, ds1.floors[i], pos.x, pos.y, srcWidth, srcHeight, stride);
         }
 
         while (walls.Count < ds1.walls.Length)
@@ -33,12 +73,12 @@ public class Level
 
         for (int i = 0; i < ds1.walls.Length; ++i)
         {
-            Blit(walls[i], ds1.walls[i], pos.x, pos.y, ds1.width, ds1.height);
+            Blit(walls[i], ds1.walls[i], pos.x, pos.y, srcWidth, srcHeight, stride);
         }
 
         for(int i = ds1.walls.Length; i < walls.Count; ++i)
         {
-            Fill(walls[i], new DS1.Cell(), pos.x, pos.y, ds1.width, ds1.height);
+            Fill(walls[i], new DS1.Cell(), pos.x, pos.y, srcWidth, srcHeight);
         }
 
         for(int i = 0; i < ds1.objects.Length; ++i)
@@ -50,9 +90,12 @@ public class Level
         }
     }
 
-    void Blit(DS1.Cell[] dst, DS1.Cell[] src, int offsetX, int offsetY, int srcWidth, int srcHeight)
+    void Blit(DS1.Cell[] dst, DS1.Cell[] src, int offsetX, int offsetY, int srcWidth, int srcHeight, int stride)
     {
         int dstIndex = offsetX + offsetY * width;
+
+        srcWidth = Mathf.Min(srcWidth, width - offsetX);
+        srcHeight = Mathf.Min(srcHeight, height - offsetY);
 
         int i = 0;
         for (int y = 0; y < srcHeight; ++y)
@@ -61,6 +104,7 @@ public class Level
             {
                 dst[dstIndex + x] = src[i];
             }
+            i += (stride - srcWidth);
             dstIndex += width;
         }
     }
@@ -79,7 +123,7 @@ public class Level
         }
     }
 
-    public GameObject Instantiate(string name, Vector2i offset)
+    public GameObject Instantiate(Vector2i offset)
     {
         var root = new GameObject(name);
 
@@ -275,5 +319,34 @@ public class Level
                 return null;
             return World.SpawnMonster(monStat, pos).gameObject;
         }
+    }
+
+    public Vector2i FindEntry()
+    {
+        foreach(var cells in walls)
+        {
+            int i = 0;
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x, ++i)
+                {
+                    var cell = cells[i];
+                    if (cell.tileIndex == mapEntryIndex)
+                    {
+                        return new Vector2i(x, y);
+                    }
+                    else if (cell.tileIndex == townEntryIndex)
+                    {
+                        return new Vector2i(x, y);
+                    }
+                    else if (cell.tileIndex == townEntry2Index)
+                    {
+                        return new Vector2i(x, y);
+                    }
+                }
+            }
+        }
+
+        return new Vector2i(width, height) / 2;
     }
 }

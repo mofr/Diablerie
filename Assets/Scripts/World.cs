@@ -8,40 +8,38 @@ public class World : MonoBehaviour
 
     void Start ()
     {
-        var town = DS1.Load(@"data\global\tiles\act1\town\townN1.ds1");
-        var townLevel = new Level(town.width, town.height);
-        townLevel.Place(town);
-        townLevel.Instantiate("Town 1", new Vector2i(0, 0));
+        var town = new Level("Act 1 - Town");
+        town.Instantiate(new Vector2i(0, 0));
         entrance = new Vector3(30, -15);
-        for (int i = 0; i < 5; ++i)
-        {
-            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
-        }
 
-        var bloodMoor = new Level(town.width, 80);
+        var bloodMoor = new Level("Act 1 - Wilderness 1");
         var river = DS1.Load(@"data\global\tiles\act1\outdoors\river.ds1");
-        var bord2 = DS1.Load(@"data\global\tiles\act1\outdoors\bord2.ds1");
-        var bord3 = DS1.Load(@"data\global\tiles\act1\outdoors\bord3.ds1");
-        var bord6 = DS1.Load(@"data\global\tiles\act1\outdoors\bord6.ds1");
-        var bord2oe = DS1.Load(@"data\global\tiles\act1\outdoors\bord2oe.ds1");
+        var bord2 = LevelPreset.Find("Act 1 - Wild Border 2");
+        var bord3 = LevelPreset.Find("Act 1 - Wild Border 3");
+        var bord6 = LevelPreset.Find("Act 1 - Wild Border 6");
         var cottage = DS1.Load(@"data\global\tiles\act1\outdoors\cott1a.ds1");
 
         for (int i = 0; i < bloodMoor.height / river.height; ++i)
             bloodMoor.Place(river, new Vector2i(bloodMoor.width - river.width, bloodMoor.height - (i + 1) * river.height));
         
-        for (int i = 0; i < bloodMoor.height / bord2.height; ++i)
-            bloodMoor.Place(bord2, new Vector2i(0, bloodMoor.height - (i + 1) * bord2.height));
+        for (int i = 0; i < bloodMoor.height / bord2.sizeY; ++i)
+            bloodMoor.Place(bord2, new Vector2i(0, bloodMoor.height - (i + 1) * bord2.sizeY));
         
-        for (int i = 0; i < (bloodMoor.width - river.width) / bord3.width; ++i)
-            bloodMoor.Place(bord3, new Vector2i(i * bord3.width, 0));
-        
-        bloodMoor.Place(bord6, new Vector2i(0, 0));
-        bloodMoor.Place(bord2oe, new Vector2i(0, bloodMoor.height - 2 * bord2oe.height));
-        bloodMoor.Place(cottage, new Vector2i(15, 10));
-        bloodMoor.Instantiate("Blood moor", new Vector2i(0, -bloodMoor.height));
+        for (int i = 0; i < (bloodMoor.width - river.width) / bord3.sizeX; ++i)
+            bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0));
 
-        SpawnPlayer(Iso.MapTileToWorld(town.entry));
+        bloodMoor.Place(bord6, new Vector2i(0, 0));
+        bloodMoor.Place(cottage, new Vector2i(15, 10));
+        bloodMoor.Instantiate(new Vector2i(0, -bloodMoor.height));
+        
+        var entry = town.FindEntry();
+        SpawnPlayer(Iso.MapTileToWorld(entry));
         StartCoroutine(SpawnMonsters());
+
+        for (int i = 0; i < 5; ++i)
+        {
+            SpawnMonster("fallen1", entrance + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
+        }
     }
 
     static void SpawnPlayer(Vector3 pos)

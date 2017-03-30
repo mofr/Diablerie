@@ -5,7 +5,6 @@ using UnityEngine;
 public class DS1
 {
     public string filename;
-    public Vector2i entry;
     public int width;
     public int height;
     int version;
@@ -47,12 +46,6 @@ public class DS1
                   0x0F, 0x10, 0x11, 0x12, 0x14
                };
 
-    static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
-    static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
-    static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
-    static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
-    static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
-
     static public DS1 LoadFile(string filename)
     {
         var bytes = File.ReadAllBytes(filename);
@@ -75,7 +68,6 @@ public class DS1
             ds1.version = reader.ReadInt32();
             ds1.width = reader.ReadInt32() + 1;
             ds1.height = reader.ReadInt32() + 1;
-            ds1.entry = new Vector2i(ds1.width, ds1.height) / 2;
 
             int act = 0;
             if (ds1.version >= 8)
@@ -247,28 +239,6 @@ public class DS1
                     cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
                     cell.subIndex = cell.prop2;
                     cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
-                    if (cell.tileIndex == mapEntryIndex)
-                    {
-                        ds1.entry = new Vector2i(x, y);
-                        continue;
-                    }
-                    else if (cell.tileIndex == townEntryIndex)
-                    {
-                        ds1.entry = new Vector2i(x, y);
-                        continue;
-                    }
-                    else if (cell.tileIndex == townEntry2Index)
-                    {
-                        continue;
-                    }
-                    else if (cell.tileIndex == corpseLocationIndex)
-                    {
-                        continue;
-                    }
-                    else if (cell.tileIndex == portalLocationIndex)
-                    {
-                        continue;
-                    }
 
                     cells[i] = cell;
                 }

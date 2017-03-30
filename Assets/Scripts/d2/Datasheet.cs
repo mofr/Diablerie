@@ -626,6 +626,7 @@ public class LevelPreset
 
     public static Datasheet<LevelPreset> sheet = Datasheet<LevelPreset>.Load("data/global/excel/LvlPrest.txt");
     static Dictionary<int, LevelPreset> levelIdMap = new Dictionary<int, LevelPreset>();
+    static Dictionary<string, LevelPreset> nameMap = new Dictionary<string, LevelPreset>();
 
     static LevelPreset()
     {
@@ -633,10 +634,12 @@ public class LevelPreset
         {
             if (preset.levelId != 0)
                 levelIdMap.Add(preset.levelId, preset);
+            if (!nameMap.ContainsKey(preset.name))
+                nameMap.Add(preset.name, preset);
             foreach(var filename in preset.files)
             {
-                if (filename != "0")
-                    preset.ds1Files.Add("data/global/tiles/" + filename);
+                if (filename != "0" && filename != null)
+                    preset.ds1Files.Add(@"data\global\tiles\" + filename.Replace("/", @"\"));
             }
         }
     }
@@ -644,6 +647,11 @@ public class LevelPreset
     static public LevelPreset Find(int levelId)
     {
         return levelIdMap.GetValueOrDefault(levelId);
+    }
+
+    static public LevelPreset Find(string name)
+    {
+        return nameMap.GetValueOrDefault(name);
     }
 }
 

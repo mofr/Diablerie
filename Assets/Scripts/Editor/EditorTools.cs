@@ -11,9 +11,9 @@ public class EditorTools
         if (!Application.isPlaying)
             DT1.ResetCache();
         var ds1 = DS1.LoadFile(assetPath);
-        var level = new Level(ds1.width, ds1.height);
+        var level = new Level(Path.GetFileName(ds1.filename), ds1.width, ds1.height);
         level.Place(ds1);
-        level.Instantiate(Path.GetFileName(ds1.filename), new Vector2i(0, 0));
+        level.Instantiate(new Vector2i(0, 0));
     }
 
     [MenuItem("Assets/Load DS1", true)]
