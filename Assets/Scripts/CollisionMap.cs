@@ -204,21 +204,4 @@ public class CollisionMap : MonoBehaviour {
         instance.map[indexTo].passable = false;
         instance.map[indexTo].gameObject = gameObject;
     }
-
-    void OnDrawGizmos()
-    {
-        var cameraTile = Iso.MacroTile(Iso.MapToIso(Camera.current.transform.position));
-        Gizmos.color = new Color(0.35f, 0.35f, 0.35f);
-        for (int x = -10; x < 10; ++x)
-        {
-            var pos = Iso.MapToWorld(cameraTile + new Vector3(x, 10) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
-            Gizmos.DrawRay(pos, new Vector3(20, -10f));
-        }
-
-        for (int y = -10; y < 10; ++y)
-        {
-            var pos = Iso.MapToWorld(cameraTile + new Vector3(-10, y) - new Vector3(0.5f, 0.5f)) / Iso.tileSize;
-            Gizmos.DrawRay(pos, new Vector3(20, 10f));
-        }
-    }
 }
