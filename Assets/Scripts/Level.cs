@@ -17,6 +17,14 @@ public class Level
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
+    static DT1.Registry specialTiles = new DT1.Registry();
+    static Level()
+    {
+        Palette.LoadPalette(0);
+        var dt1 = DT1.Load(Application.streamingAssetsPath + "/ds1edit.dt1", mpq: false);
+        specialTiles.Add(dt1.tiles);
+    }
+
     public Level(string name)
     {
         info = LevelInfo.Find(name);
@@ -174,10 +182,19 @@ public class Level
                     if (cell.prop1 == 0) // no tile here
                         continue;
 
-                    if (cell.orientation == 10 || cell.orientation == 11)
-                        continue; // special tile
-
                     DT1.Tile tile;
+
+                    if (cell.orientation == 10 || cell.orientation == 11)
+                    {
+                        if (specialTiles.Find(cell.tileIndex, out tile))
+                        {
+                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
+                            tileObject.transform.SetParent(layerTransform);
+                            tileObject.layer = UnityLayers.SpecialTiles;
+                        }
+                        continue;
+                    }
+                    
                     if (DT1.Find(cell.tileIndex, out tile))
                     {
                         var tileObject = CreateTile(tile, offset.x + x, offset.y + y);

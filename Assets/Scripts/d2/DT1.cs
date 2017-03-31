@@ -238,16 +238,17 @@ public class DT1
         }
     }
 
-    static public DT1 Load(string filename)
+    static public DT1 Load(string filename, bool mpq = true)
     {
         if(cache.ContainsKey(filename))
         {
             return cache[filename];
         }
-        
+
+        var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
+
         var dt1 = new DT1();
         dt1.filename = filename;
-        var bytes = Mpq.ReadAllBytes(filename);
         using (var stream = new MemoryStream(bytes))
         using (var reader = new BinaryReader(stream))
         {
