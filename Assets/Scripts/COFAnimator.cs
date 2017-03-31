@@ -126,6 +126,7 @@ class COFAnimator : MonoBehaviour
             shadowObject.transform.localScale = new Vector3(1, 0.5f);
             layer.shadow = shadowObject.AddComponent<SpriteRenderer>();
             layer.shadow.material = shadowMaterial;
+            layer.shadow.sortingLayerName = "Shadow";
             layers.Add(layer);
         }
         
