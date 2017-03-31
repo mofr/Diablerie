@@ -589,10 +589,10 @@ public class LevelType
         {
             foreach(var file in levelType.files)
             {
-                if (file == "0")
+                if (file == "0" || file == null)
                     continue;
 
-                levelType.dt1Files.Add("data/global/tiles/" + file);
+                levelType.dt1Files.Add(@"data\global\tiles\" + file.Replace("/", @"\"));
             }
         }
     }

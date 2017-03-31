@@ -17,7 +17,8 @@ public class World : MonoBehaviour
         var bord2 = LevelPreset.Find("Act 1 - Wild Border 2");
         var bord3 = LevelPreset.Find("Act 1 - Wild Border 3");
         var bord6 = LevelPreset.Find("Act 1 - Wild Border 6");
-        var cottage = DS1.Load(@"data\global\tiles\act1\outdoors\cott1a.ds1");
+        var cottage = LevelPreset.Find("Act 1 - Cottages 1");
+        var denEntrance = LevelPreset.Find("Act 1 - DOE Entrance");
 
         for (int i = 0; i < bloodMoor.height / river.height; ++i)
             bloodMoor.Place(river, new Vector2i(bloodMoor.width - river.width, bloodMoor.height - (i + 1) * river.height));
@@ -29,7 +30,9 @@ public class World : MonoBehaviour
             bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0));
 
         bloodMoor.Place(bord6, new Vector2i(0, 0));
-        bloodMoor.Place(cottage, new Vector2i(15, 10));
+        for (int i = 0; i < 5; ++i)
+            bloodMoor.Place(cottage, new Vector2i(10 + i * 9, 30 + Random.Range(-5, 5)));
+        bloodMoor.Place(denEntrance, new Vector2i(20, 50));
         bloodMoor.Instantiate(new Vector2i(0, -bloodMoor.height));
         
         var entry = town.FindEntry();

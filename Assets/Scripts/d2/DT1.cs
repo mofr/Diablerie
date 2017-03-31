@@ -15,14 +15,24 @@ public class DT1
         Dictionary<int, int> rarities = new Dictionary<int, int>();
         int dt1Count = 0;
 
-        internal void Clear()
+        public void Clear()
         {
             tiles.Clear();
             rarities.Clear();
             dt1Count = 0;
         }
 
-        internal void Add(Tile[] newTiles)
+        public int Count()
+        {
+            int count = 0;
+            foreach(var tileList in tiles.Values)
+            {
+                count += tileList.Count;
+            }
+            return count;
+        }
+
+        public void Add(Tile[] newTiles)
         {
             foreach (var tile in newTiles)
             {

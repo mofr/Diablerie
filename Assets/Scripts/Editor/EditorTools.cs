@@ -10,7 +10,7 @@ public class EditorTools
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         if (!Application.isPlaying)
             DT1.ResetCache();
-        var ds1 = DS1.LoadFile(assetPath);
+        var ds1 = DS1.Load(assetPath, mpq: false);
         var level = new Level(Path.GetFileName(ds1.filename), ds1.width, ds1.height);
         level.Place(ds1);
         level.Instantiate(new Vector2i(0, 0));

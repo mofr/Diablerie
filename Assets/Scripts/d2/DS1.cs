@@ -46,25 +46,37 @@ public class DS1
                   0x0F, 0x10, 0x11, 0x12, 0x14
                };
 
-    static public DS1 LoadFile(string filename)
+    static Dictionary<string, DS1> cache = new Dictionary<string, DS1>();
+
+    static public DS1 Load(string filename, bool mpq = true)
     {
-        var bytes = File.ReadAllBytes(filename);
-        return Load(filename, bytes);
+        if (cache.ContainsKey(filename))
+        {
+            return cache[filename];
+        }
+
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+
+        byte[] bytes;
+        if (mpq)
+            bytes = Mpq.ReadAllBytes(filename);
+        else
+            bytes = File.ReadAllBytes(filename);
+        var ds1 = Load(bytes);
+        ds1.filename = filename;
+
+        Debug.Log(Path.GetFileName(filename) + " loaded in " + sw.ElapsedMilliseconds + " ms");
+
+        cache[filename] = ds1;
+        return ds1;
     }
 
-    static public DS1 Load(string filename)
-    {
-        var bytes = Mpq.ReadAllBytes(filename);
-        return Load(filename, bytes);
-    }
-
-    static DS1 Load(string filename, byte[] bytes)
+    static DS1 Load(byte[] bytes)
     {
         using (var stream = new MemoryStream(bytes))
         using (var reader = new BinaryReader(stream))
         {
             DS1 ds1 = new DS1();
-            ds1.filename = filename;
             ds1.version = reader.ReadInt32();
             ds1.width = reader.ReadInt32() + 1;
             ds1.height = reader.ReadInt32() + 1;
@@ -82,17 +94,11 @@ public class DS1
                 tagType = reader.ReadInt32();
             }
 
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-
             if (ds1.version >= 3)
             {
                 Palette.LoadPalette(act);
                 ReadDependencies(reader);
             }
-
-            Debug.Log("Linked DT1 files loaded in " + sw.ElapsedMilliseconds + " ms");
-            sw.Reset();
-            sw.Start();
 
             if ((ds1.version >= 9) && (ds1.version <= 13))
                 stream.Seek(8, SeekOrigin.Current);
@@ -100,9 +106,6 @@ public class DS1
             ReadLayers(ds1, bytes, reader, stream, tagType);
             ReadObjects(ds1, reader, act);
             ReadGroups(ds1, reader, tagType);
-
-            sw.Stop();
-            Debug.Log("DS1 loaded in " + sw.ElapsedMilliseconds + " ms");
 
             return ds1;
         }
@@ -115,7 +118,7 @@ public class DS1
             if (ds1.version >= 18)
                 reader.ReadInt32();
             int groupCount = reader.ReadInt32();
-            Debug.Log("Groups " + groupCount);
+            //Debug.Log("Groups " + groupCount);
             ds1.groups = new Group[groupCount];
 
             for (int i = 0; i < groupCount; i++)
@@ -139,7 +142,7 @@ public class DS1
         if (ds1.version < 2)
             return;
         int objectCount = reader.ReadInt32();
-        Debug.Log("Objects " + objectCount);
+        //Debug.Log("Objects " + objectCount);
         ds1.objects = new ObjectSpawnInfo[objectCount];
 
         for (int i = 0; i < objectCount; i++)
@@ -184,7 +187,7 @@ public class DS1
         if ((tagType == 1) || (tagType == 2))
             tagLayerCount = 1;
 
-        Debug.Log("layers : (2 * " + wallLayerCount + " walls) + " + floorLayerCount + " floors + " + shadowLayerCount + " shadow + " + tagLayerCount + " tag");
+        //Debug.Log("layers : (2 * " + wallLayerCount + " walls) + " + floorLayerCount + " floors + " + shadowLayerCount + " shadow + " + tagLayerCount + " tag");
 
         ds1.floors = new Cell[floorLayerCount][];
         for (int i = 0; i < floorLayerCount; ++i)
