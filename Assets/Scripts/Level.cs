@@ -10,6 +10,8 @@ public class Level
     DS1.Cell[] floors;
     List<DS1.Cell[]> walls = new List<DS1.Cell[]>();
     List<DS1.ObjectSpawnInfo> objects = new List<DS1.ObjectSpawnInfo>();
+    DT1.Sampler[] samplers;
+    DT1.Sampler tileSampler = new DT1.Sampler();
 
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
@@ -17,7 +19,7 @@ public class Level
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
 
-    static DT1.Registry specialTiles = new DT1.Registry();
+    static DT1.Sampler specialTiles = new DT1.Sampler();
     static Level()
     {
         Palette.LoadPalette(0);
@@ -32,6 +34,7 @@ public class Level
         width = info.sizeX + 1;
         height = info.sizeY + 1;
         floors = new DS1.Cell[width * height];
+        InitSamplers();
         if (info.preset != null)
         {
             var ds1 = DS1.Load(info.preset.ds1Files[0]);
@@ -39,12 +42,32 @@ public class Level
         }
     }
 
-    public Level(string name, int width, int height)
+    public Level(DS1 ds1)
     {
-        this.name = name;
-        this.width = width;
-        this.height = height;
+        name = System.IO.Path.GetFileName(ds1.filename);
+        width = ds1.width;
+        height = ds1.height;
         floors = new DS1.Cell[width * height];
+        InitSamplers();
+        Place(ds1);
+    }
+
+    private void InitSamplers()
+    {
+        samplers = new DT1.Sampler[width * height];
+        tileSampler = new DT1.Sampler();
+        if (info != null)
+        {
+            foreach (var dt1Filename in info.type.dt1Files)
+            {
+                var dt1 = DT1.Load(dt1Filename);
+                tileSampler.Add(dt1.tiles);
+            }
+            for (int i = 0; i < samplers.Length; ++i)
+            {
+                samplers[i] = tileSampler;
+            }
+        }
     }
 
     public void Place(DS1 ds1)
@@ -84,12 +107,14 @@ public class Level
             Blit(walls[i], ds1.walls[i], pos.x, pos.y, srcWidth, srcHeight, stride);
         }
 
-        for(int i = ds1.walls.Length; i < walls.Count; ++i)
+        for (int i = ds1.walls.Length; i < walls.Count; ++i)
         {
             Fill(walls[i], new DS1.Cell(), pos.x, pos.y, srcWidth, srcHeight);
         }
 
-        for(int i = 0; i < ds1.objects.Length; ++i)
+        Fill(samplers, ds1.tileSampler, pos.x, pos.y, srcWidth, srcHeight);
+
+        for (int i = 0; i < ds1.objects.Length; ++i)
         {
             var obj = ds1.objects[i];
             obj.x += pos.x * Iso.SubTileCount;
@@ -117,7 +142,7 @@ public class Level
         }
     }
 
-    void Fill(DS1.Cell[] dst, DS1.Cell filler, int offsetX, int offsetY, int rectWidth, int rectHeight)
+    void Fill<T>(T[] dst, T filler, int offsetX, int offsetY, int rectWidth, int rectHeight)
     {
         int dstIndex = offsetX + offsetY * width;
 
@@ -154,8 +179,9 @@ public class Level
             for (int x = 0; x < width; ++x, ++i)
             {
                 var cell = floors[i];
+                var sampler = samplers[i];
                 DT1.Tile tile;
-                if (DT1.Find(cell.tileIndex, out tile))
+                if (sampler.Sample(cell.tileIndex, out tile))
                 {
                     var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
                     tileObject.transform.SetParent(layerTransform);
@@ -182,11 +208,13 @@ public class Level
                     if (cell.prop1 == 0) // no tile here
                         continue;
 
+                    var sampler = samplers[i];
+
                     DT1.Tile tile;
 
                     if (cell.orientation == 10 || cell.orientation == 11)
                     {
-                        if (specialTiles.Find(cell.tileIndex, out tile))
+                        if (specialTiles.Sample(cell.tileIndex, out tile))
                         {
                             var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
                             tileObject.transform.SetParent(layerTransform);
@@ -195,7 +223,7 @@ public class Level
                         continue;
                     }
                     
-                    if (DT1.Find(cell.tileIndex, out tile))
+                    if (sampler.Sample(cell.tileIndex, out tile))
                     {
                         var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
                         tileObject.transform.SetParent(layerTransform);
@@ -209,7 +237,7 @@ public class Level
                     {
                         int orientation = 4;
                         int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
-                        if (DT1.Find(index, out tile))
+                        if (sampler.Sample(index, out tile))
                         {
                             var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
                             tileObject.transform.SetParent(layerTransform);

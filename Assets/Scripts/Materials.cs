@@ -11,7 +11,7 @@ public class Materials : MonoBehaviour
     public static Material softAdditive;
     public static Material shadow;
 
-    void Awake()
+    private void OnEnable()
     {
         normal = _normal;
         softAdditive = _softAdditive;

@@ -438,6 +438,9 @@ public class Character : Entity
 
     void OnRenderObject()
     {
+        if (!Application.isPlaying)
+            return;
+
         if (!dead && !dying)
             MouseSelection.Submit(this);
     }

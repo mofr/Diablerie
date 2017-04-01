@@ -112,6 +112,8 @@ public class CollisionMap : MonoBehaviour {
 
     public static void SetPassable(Vector3 tilePos, int sizeX, int sizeY, bool passable)
     {
+        if (!Application.isPlaying)
+            return;
         int index = instance.MapToIndex(tilePos) - sizeX / 2 - sizeY / 2 * instance.height;
         int step = instance.width - sizeX;
         for (int y = 0; y < sizeY; ++y)

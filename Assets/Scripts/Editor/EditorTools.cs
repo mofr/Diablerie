@@ -9,10 +9,12 @@ public class EditorTools
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         if (!Application.isPlaying)
+        {
             DT1.ResetCache();
+            DS1.ResetCache();
+        }
         var ds1 = DS1.Load(assetPath, mpq: false);
-        var level = new Level(Path.GetFileName(ds1.filename), ds1.width, ds1.height);
-        level.Place(ds1);
+        var level = new Level(ds1);
         level.Instantiate(new Vector2i(0, 0));
     }
 
@@ -55,7 +57,7 @@ public class EditorTools
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
         Palette.LoadPalette(0);
-        DCC dcc = DCC.LoadFile(assetPath, loadAllDirections: true, ignoreCache: true);
+        DCC dcc = DCC.Load(assetPath, loadAllDirections: true, ignoreCache: true, mpq: false);
         int i = 0;
         foreach (var texture in dcc.textures)
         {

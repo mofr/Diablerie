@@ -7,9 +7,8 @@ public class DT1
     public string filename;
     public Tile[] tiles;
     public List<Texture2D> textures = new List<Texture2D>();
-    static Registry registry = new Registry();
 
-    public class Registry
+    public class Sampler
     {
         Dictionary<int, List<Tile>> tiles = new Dictionary<int, List<Tile>>();
         Dictionary<int, int> rarities = new Dictionary<int, int>();
@@ -20,16 +19,6 @@ public class DT1
             tiles.Clear();
             rarities.Clear();
             dt1Count = 0;
-        }
-
-        public int Count()
-        {
-            int count = 0;
-            foreach(var tileList in tiles.Values)
-            {
-                count += tileList.Count;
-            }
-            return count;
         }
 
         public void Add(Tile[] newTiles)
@@ -56,7 +45,7 @@ public class DT1
             dt1Count += 1;
         }
 
-        public bool Find(int index, out Tile tile)
+        public bool Sample(int index, out Tile tile)
         {
             List<Tile> tileList;
             if (!tiles.TryGetValue(index, out tileList))
@@ -73,20 +62,21 @@ public class DT1
             else
             {
                 int randomIndex = Random.Range(0, tileList.Count - 1);
-                while (tileList[randomIndex].rarity == 0)
+                int trialCount = 0;
+                while (tileList[randomIndex].rarity == 0 && trialCount < 100)
                 {
                     randomIndex = (randomIndex + 1) % tileList.Count;
+                    ++trialCount;
+                }
+                if (trialCount >= 100)
+                {
+                    Debug.LogError("infinite tile sample loop");
                 }
                 tile = tileList[randomIndex];
             }
 
             return true;
         }
-    }
-
-    public static bool Find(int index, out Tile tile)
-    {
-        return registry.Find(index, out tile);
     }
 
     public struct Tile
@@ -147,7 +137,6 @@ public class DT1
     static public void ResetCache()
     {
         cache.Clear();
-        registry.Clear();
     }
 
     static void ReadTiles(DT1 dt1, Stream stream, BinaryReader reader, byte[] bytes)
@@ -194,8 +183,7 @@ public class DT1
                 dt1.tiles[i].textureY += (-dt1.tiles[i].height);
             }
         }
-
-        Debug.Log(dt1.filename + ", tiles " + tileCount + ", " + dt1.textures.Count + " textures");
+        
         for (int i = 0; i < tileCount; ++i)
         {
             var tile = dt1.tiles[i];
@@ -240,15 +228,20 @@ public class DT1
 
     static public DT1 Load(string filename, bool mpq = true)
     {
-        if(cache.ContainsKey(filename))
+        UnityEngine.Profiling.Profiler.BeginSample("DT1.Load");
+
+        string lowerFilename = filename.ToLower();
+        if(cache.ContainsKey(lowerFilename))
         {
-            return cache[filename];
+            UnityEngine.Profiling.Profiler.EndSample();
+            return cache[lowerFilename];
         }
 
+        var sw = System.Diagnostics.Stopwatch.StartNew();
         var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-
         var dt1 = new DT1();
         dt1.filename = filename;
+
         using (var stream = new MemoryStream(bytes))
         using (var reader = new BinaryReader(stream))
         {
@@ -257,13 +250,16 @@ public class DT1
             if (version1 != 7 || version2 != 6)
             {
                 Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
+                UnityEngine.Profiling.Profiler.EndSample();
                 return dt1;
             }
             stream.Seek(260, SeekOrigin.Current);
             ReadTiles(dt1, stream, reader, bytes);
         }
-        registry.Add(dt1.tiles);
-        cache[filename] = dt1;
+
+        cache[lowerFilename] = dt1;
+        Debug.Log(dt1.filename + ", tiles " + dt1.tiles.Length + ", " + dt1.textures.Count + " textures, " + sw.ElapsedMilliseconds + " ms");
+        UnityEngine.Profiling.Profiler.EndSample();
         return dt1;
     }
 

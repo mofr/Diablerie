@@ -12,6 +12,8 @@ public class DS1
     public Cell[][] floors;
     public ObjectSpawnInfo[] objects;
     public Group[] groups;
+    public string[] dt1Files;
+    public DT1.Sampler tileSampler;
 
     public struct ObjectSpawnInfo
     {
@@ -48,26 +50,29 @@ public class DS1
 
     static Dictionary<string, DS1> cache = new Dictionary<string, DS1>();
 
+    static public void ResetCache()
+    {
+        cache.Clear();
+    }
+
     static public DS1 Load(string filename, bool mpq = true)
     {
-        if (cache.ContainsKey(filename))
+        UnityEngine.Profiling.Profiler.BeginSample("DS1.Load");
+
+        string lowerFilename = filename.ToLower();
+        if (cache.ContainsKey(lowerFilename))
         {
-            return cache[filename];
+            UnityEngine.Profiling.Profiler.EndSample();
+            return cache[lowerFilename];
         }
 
         var sw = System.Diagnostics.Stopwatch.StartNew();
-
-        byte[] bytes;
-        if (mpq)
-            bytes = Mpq.ReadAllBytes(filename);
-        else
-            bytes = File.ReadAllBytes(filename);
+        byte[] bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
         var ds1 = Load(bytes);
         ds1.filename = filename;
-
         Debug.Log(Path.GetFileName(filename) + " loaded in " + sw.ElapsedMilliseconds + " ms");
-
-        cache[filename] = ds1;
+        cache[lowerFilename] = ds1;
+        UnityEngine.Profiling.Profiler.EndSample();
         return ds1;
     }
 
@@ -97,7 +102,13 @@ public class DS1
             if (ds1.version >= 3)
             {
                 Palette.LoadPalette(act);
-                ReadDependencies(reader);
+                ds1.dt1Files = ReadDependencies(reader);
+                ds1.tileSampler = new DT1.Sampler();
+                foreach (var dt1Filename in ds1.dt1Files)
+                {
+                    var dt1 = DT1.Load(dt1Filename);
+                    ds1.tileSampler.Add(dt1.tiles);
+                }
             }
 
             if ((ds1.version >= 9) && (ds1.version <= 13))
@@ -309,9 +320,10 @@ public class DS1
         stream.Seek(4 * cells.Length, SeekOrigin.Current);
     }
 
-    static void ReadDependencies(BinaryReader reader)
+    static string[] ReadDependencies(BinaryReader reader)
     {
         int fileCount = reader.ReadInt32();
+        var filenames = new string[fileCount];
 
         for (int i = 0; i < fileCount; i++)
         {
@@ -325,7 +337,9 @@ public class DS1
             dependency = dependency.Replace(".tg1", ".dt1");
             dependency = dependency.Replace(@"c:\d2\", "");
             dependency = dependency.Replace(@"\d2\", "");
-            DT1.Load(dependency);
+            filenames[i] = dependency;
         }
+
+        return filenames;
     }
 }

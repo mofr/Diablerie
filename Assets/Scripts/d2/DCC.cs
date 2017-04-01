@@ -605,31 +605,18 @@ public class DCC
         MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
     }
 
-    static public DCC LoadFile(string filename, bool loadAllDirections = false, bool ignoreCache = false)
+    static public DCC Load(string filename, bool loadAllDirections = false, bool ignoreCache = false, bool mpq = true)
     {
-        if (!ignoreCache && cache.ContainsKey(filename))
+        string lowerFilename = filename.ToLower();
+        if (!ignoreCache && cache.ContainsKey(lowerFilename))
         {
-            return cache[filename];
+            return cache[lowerFilename];
         }
 
-        var bytes = File.ReadAllBytes(filename);
+        var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
         var dcc = Load(filename, bytes, loadAllDirections);
         if (!ignoreCache)
-            cache.Add(filename, dcc);
-        return dcc;
-    }
-
-    static public DCC Load(string filename, bool loadAllDirections = false, bool ignoreCache = false)
-    {
-        if (!ignoreCache && cache.ContainsKey(filename))
-        {
-            return cache[filename];
-        }
-
-        var bytes = Mpq.ReadAllBytes(filename);
-        var dcc = Load(filename, bytes, loadAllDirections);
-        if (!ignoreCache)
-            cache.Add(filename, dcc);
+            cache.Add(lowerFilename, dcc);
         return dcc;
     }
 
