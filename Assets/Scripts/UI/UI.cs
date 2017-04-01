@@ -15,10 +15,10 @@ public class UI : MonoBehaviour
         label = Instantiate(UI.instance.labelPrefab, transform);
     }
 
-    static public void ShowLabel(Transform parent, float offset, string text)
+    static public void ShowLabel(Vector2 position, string text)
     {
         instance.label.text.text = text;
-        instance.label.transform.position = parent.position + new Vector3(0, offset / Iso.pixelsPerUnit);
+        instance.label.transform.position = position;
         instance.label.gameObject.SetActive(true);
     }
 

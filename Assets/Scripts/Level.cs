@@ -183,8 +183,7 @@ public class Level
                 DT1.Tile tile;
                 if (sampler.Sample(cell.tileIndex, out tile))
                 {
-                    var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
-                    tileObject.transform.SetParent(layerTransform);
+                    var tileObject = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
                 }
             }
         }
@@ -214,19 +213,13 @@ public class Level
 
                     if (cell.orientation == 10 || cell.orientation == 11)
                     {
-                        if (specialTiles.Sample(cell.tileIndex, out tile))
-                        {
-                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
-                            tileObject.transform.SetParent(layerTransform);
-                            tileObject.layer = UnityLayers.SpecialTiles;
-                        }
+                        CreateSpecialTile(cell, offset.x + x, offset.y + y, parent: root.transform);
                         continue;
                     }
-                    
+
                     if (sampler.Sample(cell.tileIndex, out tile))
                     {
-                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
-                        tileObject.transform.SetParent(layerTransform);
+                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
                     }
                     else
                     {
@@ -239,8 +232,7 @@ public class Level
                         int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
                         if (sampler.Sample(index, out tile))
                         {
-                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y);
-                            tileObject.transform.SetParent(layerTransform);
+                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
                         }
                         else
                         {
@@ -249,6 +241,29 @@ public class Level
                     }
                 }
             }
+        }
+    }
+
+    private void CreateSpecialTile(DS1.Cell cell, int x, int y, Transform parent)
+    {
+        // debug visualization
+        DT1.Tile tile;
+        if (specialTiles.Sample(cell.tileIndex, out tile))
+        {
+            var tileObject = CreateTile(tile, x, y, parent: parent);
+            tileObject.layer = UnityLayers.SpecialTiles;
+        }
+
+        if (info == null)
+            return;
+
+        if (cell.mainIndex < 8)
+        {
+            int targetLevelId = info.vis[cell.mainIndex];
+            int warpId = info.warp[cell.mainIndex];
+            var targetLevel = LevelInfo.Find(targetLevelId);
+            var levelWarpInfo = LevelWarpInfo.Find(warpId);
+            Warp.Create(x, y, levelWarpInfo, targetLevel, parent);
         }
     }
 
@@ -265,7 +280,7 @@ public class Level
         }
     }
 
-    static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0)
+    static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0, Transform parent = null)
     {
         var texture = tile.texture;
         var pos = Iso.MapTileToWorld(x, y);
@@ -273,6 +288,8 @@ public class Level
         GameObject gameObject = new GameObject();
         gameObject.name = tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
         gameObject.transform.position = pos;
+        if (parent)
+            gameObject.transform.SetParent(parent);
         var meshRenderer = gameObject.AddComponent<MeshRenderer>();
         var meshFilter = gameObject.AddComponent<MeshFilter>();
         Mesh mesh = new Mesh();

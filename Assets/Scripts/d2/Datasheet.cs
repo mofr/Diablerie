@@ -727,20 +727,64 @@ public class LevelInfo
 
     public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
+    static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
 
     static LevelInfo()
     {
         foreach(var levelInfo in sheet.rows)
         {
+            if (levelInfo.id == 0)
+                continue;
             levelInfo.type = LevelType.sheet.rows[levelInfo.levelTypeIndex];
             levelInfo.preset = LevelPreset.Find(levelInfo.id);
             nameIndex.Add(levelInfo.name, levelInfo);
+            idMap.Add(levelInfo.id, levelInfo);
         }
     }
 
     public static LevelInfo Find(string name)
     {
         return nameIndex.GetValueOrDefault(name, null);
+    }
+
+    public static LevelInfo Find(int id)
+    {
+        return idMap.GetValueOrDefault(id, null);
+    }
+}
+
+[System.Serializable]
+public class LevelWarpInfo
+{
+    public string name;
+    public int id;
+    public int selectX;
+    public int selectY;
+    public int selectDX;
+    public int selectDY;
+    public int exitWalkX;
+    public int exitWalkY;
+    public int offsetX;
+    public int offsetY;
+    public int litVersion;
+    public int tiles;
+    public string direction;
+    public int beta;
+
+    public static Datasheet<LevelWarpInfo> sheet = Datasheet<LevelWarpInfo>.Load("data/global/excel/LvlWarp.txt");
+    static Dictionary<int, LevelWarpInfo> idMap = new Dictionary<int, LevelWarpInfo>();
+
+    static LevelWarpInfo()
+    {
+        foreach(var warpInfo in sheet.rows)
+        {
+            idMap[warpInfo.id] = warpInfo;
+        }
+    }
+
+    static public LevelWarpInfo Find(int id)
+    {
+        return idMap[id];
     }
 }
 

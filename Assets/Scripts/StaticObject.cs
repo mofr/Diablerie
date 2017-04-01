@@ -26,9 +26,9 @@ public class StaticObject : Entity
         get { return objectInfo.name; }
     }
 
-    public override int nameOffset
+    public override Vector2 nameOffset
     {
-        get { return -objectInfo.nameOffset; }
+        get { return new Vector2(0, -objectInfo.nameOffset); }
     }
 
     void Awake()

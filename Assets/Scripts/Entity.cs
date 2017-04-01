@@ -9,12 +9,12 @@ public class Entity : MonoBehaviour
         animator = GetComponent<COFAnimator>();
     }
 
-    public Bounds bounds
+    public virtual Bounds bounds
     {
         get { return animator.bounds; }
     }
 
-    public bool selected
+    public virtual bool selected
     {
         get { return animator.selected; }
         set { animator.selected = value; }
@@ -25,8 +25,8 @@ public class Entity : MonoBehaviour
         get { return base.name; }
     }
 
-    public virtual int nameOffset
+    public virtual Vector2 nameOffset
     {
-        get { return 0; }
+        get { return new Vector2(0, 0); }
     }
 }

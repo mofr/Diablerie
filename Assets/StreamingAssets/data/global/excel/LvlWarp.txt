@@ -1,0 +1,90 @@
+Name	Id	SelectX	SelectY	SelectDX	SelectDY	ExitWalkX	ExitWalkY	OffsetX	OffsetY	LitVersion	Tiles	Direction	Beta
+Act 1 Wilderness to Cave Cliff L	0	-90	-100	90	110	5	0	1	-1	1	2	b	1
+Act 1 Wilderness to Cave Cliff R	1	-15	-90	90	110	0	5	3	1	1	2	b	1
+Act 1 Wilderness to Cave Floor L	2	-60	-60	85	100	5	0	-1	1	1	2	b	1
+Act 1 Wilderness to Cave Floor R	3	-25	-60	85	100	0	5	1	-1	1	2	b	1
+Act 1 Cave Up	4	-30	-120	120	150	3	5	2	5	1	2	b	1
+Act 1 Cave Down	5	-25	-75	80	100	3	5	1	3	1	2	b	1
+Act 1 Graveyard to Crypt 1	6	-90	-110	110	140	5	0	5	0	0	2	b	1
+Act 1 Graveyard to Crypt 2	7	-70	-90	90	120	5	0	5	2	0	2	b	1
+Act 1 Crypt Up	8	-10	-90	60	110	0	5	5	1	1	2	b	1
+Act 1 Crypt Down	9	-30	-90	60	110	5	0	1	1	1	2	b	1
+Act 1 Wilderness to Tower	10	-10	-50	150	80	3	5	-4	0	1	2	b	1
+Act 1 Tower to Wilderness	11	-50	-130	60	140	5	3	4	-2	0	2	b	1
+Act 1 Tower to Crypt	12	-50	-90	80	110	5	0	2	3	1	2	b	1
+Act 1 Jail Up	13	-50	-110	110	150	0	5	5	1	1	2	b	1
+Act 1 Jail Down	14	-40	-80	210	110	0	5	-1	3	1	2	b	1
+Act 1 Cathedral To Catacombs	15	-30	-110	85	130	0	5	3	1	1	2	b	1
+Act 1 Catacombs to Cathedral	16	-35	-130	90	150	0	5	7	1	1	2	b	1
+Act 1 Catacombs Up	17	-50	-110	110	150	0	5	5	1	1	2	b	1
+Act 1 Catacombs Down	18	-60	-80	210	110	0	5	-1	3	1	2	b	1
+Act 2 Town to Sewer Trap	19	-10	-10	0	0	5	5	0	0	0	2	b	0
+Act 2 Town to Sewer Dock	20	-25	-95	70	130	5	0	-2	0	0	2	b	0
+Act 2 Sewer Dock to Town	21	20	-80	65	140	-5	0	10	-2	0	2	b	0
+Act 2 Sewer Up	22	-25	-160	100	180	2	5	5	3	1	2	b	0
+Act 2 Sewer Down	23	-65	-55	150	110	0	-5	0	0	1	2	b	0
+Act 2 Town to Harem	24	-120	-20	150	130	5	0	5	2	0	2	b	0
+Act 2 Harem to Town	25	-35	-70	95	130	5	2	0	-2	0	2	b	0
+Act 2 Harem Up 1	26	-25	-150	80	180	0	5	4	0	1	2	b	0
+Act 2 Harem Up 2	27	-40	-160	80	180	5	0	0	5	1	2	b	0
+Act 2 Harem Down 1	28	-20	-40	170	100	-5	5	-3	1	1	2	b	0
+Act 2 Harem Down 2	29	-50	-20	160	85	-5	0	-1	-3	1	2	b	0
+Act 2 Basement Up 1	30	-25	-100	60	125	0	5	2	0	1	2	b	0
+Act 2 Basement Up 2	31	-40	-100	60	125	5	0	0	2	1	2	b	0
+Act 2 Basement Down	32	-30	-30	170	90	-5	5	-3	0	1	2	b	0
+Act 2 Desert to Tomb L 1	33	-70	-140	80	160	5	0	1	1	0	2	b	0
+Act 2 Desert to Tomb L 2	34	-50	-120	90	150	5	0	1	1	0	2	b	0
+Act 2 Desert to Tomb R 1	35	-30	-140	80	160	0	5	6	2	0	2	b	0
+Act 2 Desert to Tomb R 2	36	0	-140	100	150	0	5	1	2	0	2	b	0
+Act 2 Desert to Tomb Viper	37	-30	-140	80	160	0	5	4	1	0	2	b	0
+Act 2 Desert to Tomb Tal 1	38	-40	-190	90	210	5	5	0	0	0	2	b	0
+Act 2 Desert to Tomb Tal 2	39	-40	-210	50	230	5	0	-1	1	0	2	b	0
+Act 2 Desert to Tomb Tal 3	40	-30	-100	60	140	5	0	0	1	0	2	b	0
+Act 2 Desert to Tomb Tal 4	41	-90	-140	70	160	5	0	-1	-5	0	2	b	0
+Act 2 Desert to Tomb Tal 5	42	-10	-110	60	150	0	5	-2	-3	0	2	b	0
+Act 2 Desert to Tomb Tal 6	43	0	-130	90	150	0	5	-1	0	0	2	b	0
+Act 2 Desert to Tomb Tal 7	44	-10	-210	70	240	0	5	0	-3	0	2	b	0
+Act 2 Tomb Up	45	-30	-115	75	145	0	5	2	0	1	2	b	0
+Act 2 Tomb Down	46	-45	-120	85	145	5	0	0	2	1	2	b	0
+Act 2 Desert to Lair	47	-10	-60	90	90	5	5	-2	2	1	2	b	0
+Act 2 Lair Up	48	-20	-70	80	85	0	5	1	0	1	2	b	0
+Act 2 Lair Down	49	-115	-10	160	70	0	-5	-3	-5	1	2	b	0
+Act 2 Desert to Sewer Trap	50	-10	-10	0	0	5	5	0	0	0	2	b	0
+Act 3 Jungle to Spider	51	-60	-70	70	90	5	0	0	1	0	2	b	0
+Act 3 Spider to Jungle	52	10	-100	80	110	0	5	4	1	1	2	b	0
+Act 3 Jungle to Dungeon Fort	53	-15	-70	70	110	0	5	0	0	0	2	b	0
+Act 3 Jungle to Dungeon Hole	54	-130	-10	170	100	0	-5	-4	-6	0	2	b	0
+Act 3 Dungeon Up	55	-10	-100	90	130	0	5	3	1	1	2	b	0
+Act 3 Dungeon Down	56	-40	-20	170	100	-5	0	-4	-1	1	2	b	0
+Act 3 Kurast to Sewer	57	-60	-40	120	90	0	5	0	0	1	2	b	0
+Act 3 Sewer Up L	58	-75	-110	100	150	5	0	1	1	1	2	b	0
+Act 3 Sewer Up R	59	-25	-110	100	150	0	5	6	1	1	2	b	0
+Act 3 Sewer Down	60	-10	-10	0	0	5	5	0	0	0	2	b	0
+Act 3 Kurast to Temple	61	-10	-10	0	0	5	5	0	0	0	2	b	0
+Act 3 Temple Up L	62	-50	-110	80	140	5	0	1	2	1	2	b	0
+Act 3 Temple Up R	63	-30	-110	80	140	0	5	2	1	1	2	b	0
+Act 3 Travincal to Mephisto	64	-10	-10	0	0	5	5	0	0	0	2	b	0
+Act 3 Mephisto Up L	65	-65	-150	125	180	5	0	1	0	1	2	b	0
+Act 3 Mephisto Up R	66	-60	-150	125	180	0	5	5	1	1	2	b	0
+Act 3 Mephisto Down L	67	-65	-150	125	180	5	0	1	0	1	2	b	0
+Act 3 Mephisto Down R	68	-60	-150	125	180	0	5	5	1	1	2	b	0
+Act 4 Mesa to Lava	69	-60	-40	150	160	-5	0	2	2	0	2	b	0
+Act 4 Lava to Mesa	70	-90	-50	160	120	5	2	0	0	0	2	b	0
+Expansion													
+Act 5 Barricade Down Wall	71	-70	-80	80	100	5	2	2	6	1	4	l	0
+Act 5 Barricade Down Wall	71	-15	-90	70	100	-1	5	6	2	1	4	r	0
+Act 5 Barricade Down Floor	72	-20	-120	75	100	5	2	2	2	1	4	b	0
+Act 5 Ice Caves Up	73	-60	-110	90	115	5	2	0	5	1	2	l	0
+Act 5 Ice Caves Up	73	-10	-120	100	120	2	5	5	1	1	2	r	0
+Act 5 Ice Caves Down	74	-60	-110	90	115	5	2	0	5	1	2	l	0
+Act 5 Ice Caves Down	74	-20	-110	90	115	2	5	4	0	1	2	r	0
+Act 5 Ice Caves Down Floor	75	-5	-110	80	110	2	5	6	3	1	2	b	0
+Act 5 Temple Entrance	76	0	-110	95	100	2	5	2	0	1	2	b	0
+Act 5 Temple Down	77	0	-70	140	80	5	2	-2	3	1	2	b	0
+Act 5 Temple Up	78	-20	-110	100	110	5	2	3	0	1	2	b	0
+Act 5 Mountain Top To Ice	79	-40	-110	0	0	2	5	2	1	0	2	b	0
+Act 5 Mountain Top To Baal	80	-20	-110	0	0	2	5	2	1	0	2	b	0
+Act 5 Baal Temple Up	81	-70	-110	95	115	5	2	1	4	1	2	l	0
+Act 5 Baal Temple Up	81	-20	-110	80	115	2	5	4	1	1	2	r	0
+Act 5 Baal Temple Down	82	-70	-110	95	115	5	2	1	4	1	2	l	0
+Act 5 Baal Temple Down	82	-20	-110	80	115	2	5	4	1	1	2	r	0

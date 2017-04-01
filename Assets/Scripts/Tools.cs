@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tools {
 	static public float Mod(float a, float b) {
@@ -14,5 +12,13 @@ public class Tools {
     static public float manhattanDistance(Vector2 a, Vector2 b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
+    static public void DebugDrawBounds(Bounds bounds)
+    {
+        Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y), new Vector3(bounds.max.x, bounds.min.y));
+        Debug.DrawLine(new Vector3(bounds.max.x, bounds.max.y), new Vector3(bounds.max.x, bounds.min.y));
+        Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y), new Vector3(bounds.max.x, bounds.max.y));
+        Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y), new Vector3(bounds.min.x, bounds.min.y));
     }
 }

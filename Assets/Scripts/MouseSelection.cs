@@ -17,9 +17,14 @@ class MouseSelection : MonoBehaviour
         {
             var character = current.GetComponent<Character>();
             if (character && character.monStat != null && character.monStat.ai != "Npc")
+            {
                 EnemyBar.instance.character = character;
+            }
             else
-                UI.ShowLabel(current.transform, current.nameOffset, current.name);
+            {
+                var labelPosition = current.transform.position + (Vector3)current.nameOffset / Iso.pixelsPerUnit;
+                UI.ShowLabel(labelPosition, current.name);
+            }
         }
         else
         {

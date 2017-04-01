@@ -425,14 +425,14 @@ public class Character : Entity
         }
     }
 
-    public override int nameOffset
+    public override Vector2 nameOffset
     {
         get
         {
             if (monStat != null)
-                return monStat.ext.pixHeight;
+                return new Vector2(0, monStat.ext.pixHeight);
             else
-                return (int)(bounds.size.y * Iso.pixelsPerUnit) + 10;
+                return new Vector2(0, (int)(bounds.size.y * Iso.pixelsPerUnit) + 10);
         }
     }
 
