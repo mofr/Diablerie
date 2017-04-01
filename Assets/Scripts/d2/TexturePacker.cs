@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TexturePacker
+public struct TexturePacker
 {
     int maxWidth;
     int maxHeight;
-    int padding = 0;
+    int padding;
 
-    int xPos = 0;
-    int yPos = 0;
-    int rowHeight = 0;
+    int xPos;
+    int yPos;
+    int rowHeight;
 
     public struct PackResult
     {
@@ -23,6 +22,9 @@ public class TexturePacker
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         this.padding = padding;
+        xPos = 0;
+        yPos = 0;
+        rowHeight = 0;
     }
 
     public PackResult put(int width, int height)

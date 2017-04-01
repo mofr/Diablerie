@@ -30,8 +30,13 @@ public class EditorTools
     {
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
+        if (!Application.isPlaying)
+        {
+            DT1.ResetCache();
+        }
+
         Palette.LoadPalette(0);
-        var dt1 = DT1.Load(assetPath);
+        var dt1 = DT1.Load(assetPath, mpq: false);
         int i = 0;
         foreach (var texture in dt1.textures)
         {

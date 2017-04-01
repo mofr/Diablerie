@@ -99,7 +99,6 @@ public class DT1
 
         public Material material;
         public Texture2D texture;
-        public Color32[] texturePixels;
         public int textureX;
         public int textureY;
         public int index;
@@ -146,45 +145,17 @@ public class DT1
         reader.ReadInt32(); //  Pointer in file to Tile Headers (= 276) 
         dt1.tiles = new Tile[tileCount];
 
-        const int textureSize = 2048;
-        var texturesPixels = new List<Color32[]>();
+        for (int i = 0; i < tileCount; ++i)
+        {
+            dt1.tiles[i].Read(reader);
+        }
+
+        int textureSize = CalcTextureSize(dt1.tiles);
         var packer = new TexturePacker(textureSize, textureSize);
         Material material = null;
         Texture2D texture = null;
         Color32[] pixels = null;
 
-        for (int i = 0; i < tileCount; ++i)
-        {
-            dt1.tiles[i].Read(reader);
-            var pack = packer.put(dt1.tiles[i].width, -dt1.tiles[i].height);
-            if (pack.newTexture)
-            {
-                texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
-                texture.filterMode = FilterMode.Point;
-                dt1.textures.Add(texture);
-                material = new Material(Shader.Find("Sprite"));
-                material.mainTexture = texture;
-                pixels = new Color32[textureSize * textureSize];
-                texturesPixels.Add(pixels);
-            }
-
-            dt1.tiles[i].textureX = pack.x;
-            dt1.tiles[i].textureY = pack.y;
-            dt1.tiles[i].texture = texture;
-            dt1.tiles[i].material = material;
-            dt1.tiles[i].texturePixels = pixels;
-
-            if ((dt1.tiles[i].orientation == 0 || dt1.tiles[i].orientation == 15) && dt1.tiles[i].height != 0)
-            {
-                // floor or roof
-                dt1.tiles[i].height = -79;
-            }
-            else if (dt1.tiles[i].orientation > 0 && dt1.tiles[i].orientation < 15)
-            {
-                dt1.tiles[i].textureY += (-dt1.tiles[i].height);
-            }
-        }
-        
         for (int i = 0; i < tileCount; ++i)
         {
             var tile = dt1.tiles[i];
@@ -194,6 +165,40 @@ public class DT1
                 Debug.Log(string.Format("Zero size {0}x{1}", tile.width, tile.height));
                 continue;
             }
+
+            var pack = packer.put(tile.width, -tile.height);
+            if (pack.newTexture)
+            {
+                if (texture != null)
+                {
+                    texture.SetPixels32(pixels);
+                    texture.Apply();
+                }
+
+                texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+                texture.filterMode = FilterMode.Point;
+                dt1.textures.Add(texture);
+                material = new Material(Shader.Find("Sprite"));
+                material.mainTexture = texture;
+                pixels = new Color32[textureSize * textureSize];
+            }
+
+            tile.textureX = pack.x;
+            tile.textureY = pack.y;
+            tile.texture = texture;
+            tile.material = material;
+
+            if ((tile.orientation == 0 || tile.orientation == 15) && tile.height != 0)
+            {
+                // floor or roof
+                tile.height = -79;
+            }
+            else if (tile.orientation > 0 && tile.orientation < 15)
+            {
+                tile.textureY += (-tile.height);
+            }
+
+            dt1.tiles[i] = tile;
 
             stream.Seek(tile.blockHeaderPointer, SeekOrigin.Begin);
             for (int block = 0; block < tile.blockCount; ++block)
@@ -211,19 +216,19 @@ public class DT1
 
                 if (format == 1)
                 {
-                    drawBlockIsometric(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
+                    drawBlockIsometric(pixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
                 }
                 else
                 {
-                    drawBlockNormal(tile.texturePixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
+                    drawBlockNormal(pixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
                 }
             }
         }
 
-        for (int i = 0; i < dt1.textures.Count; ++i)
+        if (texture != null)
         {
-            dt1.textures[i].SetPixels32(texturesPixels[i]);
-            dt1.textures[i].Apply();
+            texture.SetPixels32(pixels);
+            texture.Apply();
         }
     }
 
@@ -325,5 +330,29 @@ public class DT1
             y++;
             dst -= textureSize;
         }
+    }
+
+    static int CalcTextureSize(IList<Tile> tiles, int minSize = 128, int maxSize = 2048, int padding = 0)
+    {
+        int size = minSize;
+        while(size < maxSize)
+        {
+            var packer = new TexturePacker(size, size, padding);
+            int textureCount = 0;
+            foreach(var tile in tiles)
+            {
+                var pack = packer.put(tile.width, -tile.height);
+                if (pack.newTexture)
+                    ++textureCount;
+                if (textureCount > 1)
+                    break;
+            }
+
+            if (textureCount == 1)
+                break;
+
+            size *= 2;
+        }
+        return size;
     }
 }
