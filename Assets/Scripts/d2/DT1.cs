@@ -61,18 +61,19 @@ public class DT1
             }
             else
             {
-                int randomIndex = Random.Range(0, tileList.Count - 1);
-                int trialCount = 0;
-                while (tileList[randomIndex].rarity == 0 && trialCount < 100)
+                int randomValue = Random.Range(0, raritySum);
+                for(int i = 0; i < tileList.Count; ++i)
                 {
-                    randomIndex = (randomIndex + 1) % tileList.Count;
-                    ++trialCount;
+                    if (randomValue < tileList[i].rarity)
+                    {
+                        tile = tileList[i];
+                        return true;
+                    }
+                    randomValue -= tileList[i].rarity;
                 }
-                if (trialCount >= 100)
-                {
-                    Debug.LogError("infinite tile sample loop");
-                }
-                tile = tileList[randomIndex];
+                
+                Debug.LogError("Failed to sample tile");
+                tile = tileList[0];
             }
 
             return true;
