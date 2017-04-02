@@ -20,8 +20,8 @@ public class World : MonoBehaviour
         var cottage = LevelPreset.Find("Act 1 - Cottages 1");
         var denEntrance = LevelPreset.Find("Act 1 - DOE Entrance");
 
-        for (int i = 0; i < bloodMoor.height / river.height; ++i)
-            bloodMoor.Place(river, new Vector2i(bloodMoor.width - river.width, bloodMoor.height - (i + 1) * river.height));
+        for (int i = 0; i < bloodMoor.height / (river.height - 1); ++i)
+            bloodMoor.Place(river, new Vector2i(bloodMoor.width - (river.width - 1), bloodMoor.height - (i + 1) * (river.height - 1)));
         
         for (int i = 0; i < bloodMoor.height / bord2.sizeY; ++i)
             bloodMoor.Place(bord2, new Vector2i(0, bloodMoor.height - (i + 1) * bord2.sizeY));

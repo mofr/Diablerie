@@ -31,14 +31,14 @@ public class Level
     {
         info = LevelInfo.Find(name);
         this.name = info.levelName;
-        width = info.sizeX + 1;
-        height = info.sizeY + 1;
+        width = info.sizeX;
+        height = info.sizeY;
         floors = new DS1.Cell[width * height];
         InitSamplers();
         if (info.preset != null)
         {
             var ds1 = DS1.Load(info.preset.ds1Files[0]);
-            Place(ds1);
+            Place(ds1, new Vector2i());
         }
     }
 
@@ -49,7 +49,7 @@ public class Level
         height = ds1.height;
         floors = new DS1.Cell[width * height];
         InitSamplers();
-        Place(ds1);
+        Place(ds1, new Vector2i(), killEdge: false);
     }
 
     private void InitSamplers()
@@ -70,19 +70,14 @@ public class Level
         }
     }
 
-    public void Place(DS1 ds1)
-    {
-        Place(ds1, new Vector2i());
-    }
-
     public void Place(LevelPreset preset, Vector2i pos)
     {
         var ds1Filename = preset.ds1Files[Random.Range(0, preset.ds1Files.Count)];
         var ds1 = DS1.Load(ds1Filename);
-        Place(ds1, pos, preset.killEdge);
+        Place(ds1, pos);
     }
 
-    public void Place(DS1 ds1, Vector2i pos, bool killEdge = false)
+    public void Place(DS1 ds1, Vector2i pos, bool killEdge = true)
     {
         int stride = ds1.width;
         int srcWidth = ds1.width;
@@ -163,8 +158,41 @@ public class Level
         InstantiateFloors(offset, root);
         InstantiateWalls(offset, root);
         InstantiateObjects(offset, root);
+        InstantiateDebugGrid(offset, root, gridSize: 8);
 
         return root;
+    }
+
+    private void InstantiateDebugGrid(Vector2i offset, GameObject root, int gridSize)
+    {
+        var grid = new GameObject();
+        grid.transform.SetParent(root.transform);
+
+        for (int y = 0; y < height / gridSize; ++y)
+        {
+            for (int x = 0; x < width / gridSize; ++x)
+            {
+                var cellObject = new GameObject(x + ", " + y);
+                cellObject.transform.position = Iso.MapToWorld(
+                    (x * gridSize + offset.x) * Iso.SubTileCount - 2,
+                    (y * gridSize + offset.y) * Iso.SubTileCount - 2);
+                cellObject.transform.SetParent(grid.transform);
+                var line = cellObject.AddComponent<LineRenderer>();
+                line.startWidth = 0.1f;
+                line.endWidth = 0.1f;
+                line.material = Materials.normal;
+                line.useWorldSpace = false;
+                var corners = new Vector3[] {
+                    Iso.MapTileToWorld(0, 0) * gridSize,
+                    Iso.MapTileToWorld(0 + 1, 0) * gridSize,
+                    Iso.MapTileToWorld(0 + 1, 0 + 1) * gridSize,
+                    Iso.MapTileToWorld(0, 0 + 1) * gridSize,
+                    Iso.MapTileToWorld(0, 0) * gridSize
+                };
+                line.numPositions = corners.Length;
+                line.SetPositions(corners);
+            }
+        }
     }
 
     private void InstantiateFloors(Vector2i offset, GameObject root)
