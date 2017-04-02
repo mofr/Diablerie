@@ -271,6 +271,12 @@ public class DT1
 
     static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
     {
+        if(y0 < 0)
+        {
+            Debug.LogError("DT1 drawBlockNormal y0 < 0");
+            return;
+        }
+
         int dst = texturePixels.Length - y0 * textureSize - textureSize + x0;
         int x = 0;
         int y = 0;

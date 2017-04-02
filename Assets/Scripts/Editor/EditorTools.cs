@@ -35,7 +35,17 @@ public class EditorTools
             DT1.ResetCache();
         }
 
-        Palette.LoadPalette(0);
+        var lowerPath = assetPath.ToLower();
+        if (lowerPath.Contains("act2"))
+            Palette.LoadPalette(1);
+        else if (lowerPath.Contains("act3"))
+            Palette.LoadPalette(2);
+        else if (lowerPath.Contains("act4"))
+            Palette.LoadPalette(3);
+        else if (lowerPath.Contains("act5"))
+            Palette.LoadPalette(4);
+        else
+            Palette.LoadPalette(0);
         var dt1 = DT1.Load(assetPath, mpq: false);
         int i = 0;
         foreach (var texture in dt1.textures)
