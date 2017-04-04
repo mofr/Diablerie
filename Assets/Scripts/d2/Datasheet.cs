@@ -3,32 +3,11 @@ using System.Runtime.Serialization;
 using System.Reflection;
 using System.IO;
 using UnityEngine;
-using System.Runtime.InteropServices;
 
 
 public struct Datasheet<T> where T : new()
 {
     public List<T> rows;
-
-    static object CastValue(string value, System.Type type, object defaultValue)
-    {
-        if (value == "" || value == "xxx")
-            return defaultValue;
-
-        if (type == typeof(bool))
-        {
-            if (value == "1")
-                return true;
-            else if (value == "0")
-                return false;
-            else
-                throw new System.FormatException("Unable to cast '" + value + "' to bool");
-        }
-        else
-        {
-            return System.Convert.ChangeType(value, type);
-        }
-    }
 
     public static Datasheet<T> Load(string filename, int headerLines = 1)
     {
@@ -68,41 +47,82 @@ public struct Datasheet<T> where T : new()
             if (lineIndex < headerLines)
                 continue;
 
-            T obj = new T();
-            int memberIndex = 0;
-            for (int fieldIndex = 0; fieldIndex < fields.Length; ++memberIndex)
+            try
             {
-                MemberInfo member = members[memberIndex];
-                FieldInfo fi = (FieldInfo)member;
-                try
-                {
-                    if (fi.FieldType.IsArray)
-                    {
-                        var elementType = fi.FieldType.GetElementType();
-                        var array = (System.Collections.IList)fi.GetValue(obj);
-                        for (int i = 0; i < array.Count; ++i)
-                        {
-                            array[i] = CastValue(fields[fieldIndex], elementType, array[i]);
-                            ++fieldIndex;
-                        }
-                    }
-                    else
-                    {
-                        var value = CastValue(fields[fieldIndex], fi.FieldType, fi.GetValue(obj));
-                        fi.SetValue(obj, value);
-                        ++fieldIndex;
-                    }
-                }
-                catch (System.Exception)
-                {
-                    throw new System.Exception("Datasheet parsing error at " + filename + ":" + (lineIndex + 1) + " column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member);
-                }
+                T obj = ReadLine(fields, members);
+                sheet.rows.Add(obj);
             }
-            sheet.rows.Add(obj);
+            catch (System.Exception)
+            {
+                throw new System.Exception("Datasheet parsing error at " + filename + ":" + (lineIndex + 1));
+            }
         }
         Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
         UnityEngine.Profiling.Profiler.EndSample();
         return sheet;
+    }
+
+    static T ReadLine(string[] fields, MemberInfo[] members)
+    {
+        T obj = new T();
+        int fieldIndex = 0;
+        for (int memberIndex = 0; memberIndex < members.Length; ++memberIndex)
+        {
+            MemberInfo member = members[memberIndex];
+            try
+            {
+                FieldInfo fi = (FieldInfo)member;
+                fieldIndex = ReadMember(obj, fi, fields, fieldIndex);
+            }
+            catch (System.Exception)
+            {
+                throw new System.Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member);
+            }
+        }
+
+        return obj;
+    }
+
+    static int ReadMember(T obj, FieldInfo fi, string[] fields, int fieldIndex)
+    {
+        if (fi.FieldType.IsArray)
+        {
+            var elementType = fi.FieldType.GetElementType();
+            var array = (System.Collections.IList)fi.GetValue(obj);
+            for (int i = 0; i < array.Count; ++i)
+            {
+                array[i] = CastValue(fields[fieldIndex], elementType, array[i]);
+                ++fieldIndex;
+            }
+        }
+        else
+        {
+            var value = CastValue(fields[fieldIndex], fi.FieldType, fi.GetValue(obj));
+            fi.SetValue(obj, value);
+            ++fieldIndex;
+        }
+
+        return fieldIndex;
+    }
+
+    static object CastValue(string value, System.Type type, object defaultValue)
+    {
+        if (value == "" || value == "xxx")
+            return defaultValue;
+
+        if (type == typeof(bool))
+        {
+            if (value == "1")
+                return true;
+            else if (value == "0")
+                return false;
+            else
+                throw new System.FormatException("Unable to cast '" + value + "' to bool");
+        }
+        else
+        {
+            return System.Convert.ChangeType(value, type);
+        }
     }
 }
 
