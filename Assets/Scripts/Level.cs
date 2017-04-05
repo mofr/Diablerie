@@ -167,6 +167,7 @@ public class Level
     {
         var grid = new GameObject();
         grid.transform.SetParent(root.transform);
+        grid.layer = UnityLayers.SpecialTiles;
 
         for (int y = 0; y < height / gridSize; ++y)
         {
@@ -177,6 +178,7 @@ public class Level
                     (x * gridSize + offset.x) * Iso.SubTileCount - 2,
                     (y * gridSize + offset.y) * Iso.SubTileCount - 2);
                 cellObject.transform.SetParent(grid.transform);
+                cellObject.layer = UnityLayers.SpecialTiles;
                 var line = cellObject.AddComponent<LineRenderer>();
                 line.startWidth = 0.1f;
                 line.endWidth = 0.1f;

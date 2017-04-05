@@ -3,16 +3,17 @@
 public class UI : MonoBehaviour
 {
     static public UI instance;
-
+    
     public Label labelPrefab;
     public EnemyBar enemyBarPrefab;
 
-    Label label;
+    [HideInInspector]
+    public Label label;
 
     void Awake()
     {
         instance = this;
-        label = Instantiate(UI.instance.labelPrefab, transform);
+        label = Instantiate(instance.labelPrefab, transform);
     }
 
     static public void ShowLabel(Vector2 position, string text)

@@ -120,3 +120,4 @@ MonoBehaviour:
     type: 2}
   enemyBarPrefab: {fileID: 114263015362939446, guid: 4768d32ab650c0a418b60f7b9883889a,
     type: 2}
+  label: {fileID: 0}
