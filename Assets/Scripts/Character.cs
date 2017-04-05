@@ -116,22 +116,14 @@ public class Character : Entity
         targetCharacter = null;
     }
 
-    public void Teleport(Vector2 target) {
-		if (attack || takingDamage || ressurecting)
-			return;
+    public void Teleport(Vector2 target)
+    {
+        if (attack || takingDamage || ressurecting)
+            return;
 
-		if (CollisionMap.Passable(target)) {
-			iso.pos = target;
-		} else {
-			var pathToTarget = Pathing.BuildPath(iso.pos, target);
-			if (pathToTarget.Count == 0)
-				return;
-			iso.pos = pathToTarget[pathToTarget.Count - 1].pos;
-		}
-		path.Clear();
-		traveled = 0;
+        iso.pos = CollisionMap.Fit(target, (int)diameter);
         moving = false;
-	}
+    }
 
     public void Attack(Vector3 target)
     {
