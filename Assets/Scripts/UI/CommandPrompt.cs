@@ -82,7 +82,7 @@ public class CommandPrompt : MonoBehaviour
             var objectInfo = ObjectInfo.Find(id);
             if (objectInfo != null)
             {
-                var obj = World.SpawnObject(objectInfo, pos);
+                var obj = World.SpawnObject(objectInfo, pos, fit: true);
                 if (parts.Length > 2)
                     obj.modeName = parts[2];
                 return;

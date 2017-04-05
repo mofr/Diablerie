@@ -18,7 +18,7 @@ public class CollisionMap : MonoBehaviour {
     void Awake()
     {
         map = new Cell[width * height];
-        origin = map.Length / 2;
+        origin = width * 3;
         instance = this;
         for (int i = 0; i < map.Length; ++i)
             map[i].passable = true;
@@ -52,6 +52,17 @@ public class CollisionMap : MonoBehaviour {
 		return origin + Mathf.RoundToInt(pos.x + pos.y * width);
 	}
 
+    private int MapToIndex(Vector2i pos)
+    {
+        return origin + Mathf.RoundToInt(pos.x + pos.y * width);
+    }
+
+    private Vector3 MapToIso(int index)
+    {
+        index -= origin;
+        return new Vector3(index % width, index / width);
+    }
+
     public static Cell GetCell(Vector3 pos)
     {
         var tilePos = Iso.Snap(pos);
@@ -74,8 +85,13 @@ public class CollisionMap : MonoBehaviour {
 
     public static bool PassableTile(Vector3 tilePos, int radius = 0, bool debug = false, GameObject ignore = null)
     {
-        UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
         int index = instance.MapToIndex(tilePos);
+        return PassableTile(index, radius, debug, ignore);
+    }
+
+    public static bool PassableTile(int index, int radius = 0, bool debug = false, GameObject ignore = null)
+    {
+        UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
         var c0 = instance.map[index];
         bool passable = c0.passable || (ignore != null && ignore == c0.gameObject);
         if (radius > 0)
@@ -95,6 +111,7 @@ public class CollisionMap : MonoBehaviour {
 
         if (debug)
         {
+            var tilePos = instance.MapToIso(index);
             Iso.DebugDrawTile(tilePos, 0.1f);
             Iso.DebugDrawTile(tilePos + new Vector3(1, 0), 0.1f);
             Iso.DebugDrawTile(tilePos + new Vector3(-1, 0), 0.1f);
@@ -205,5 +222,32 @@ public class CollisionMap : MonoBehaviour {
 
         instance.map[indexTo].passable = false;
         instance.map[indexTo].gameObject = gameObject;
+    }
+
+    static public Vector3 Fit(Vector3 pos, int size = 1)
+    {
+        int index = instance.MapToIndex(Iso.Snap(pos));
+
+        if (PassableTile(index, size))
+        {
+            return instance.MapToIso(index);
+        }
+
+        int maxIterations = 1000;
+        int sign = 1;
+        for(int i = 1; i < maxIterations; ++i, sign=-sign)
+        {
+            int end = index + sign * i;
+            for(; index != end; index += sign)
+                if (PassableTile(index, size))
+                    return instance.MapToIso(index);
+
+            end = index - sign * i * instance.width;
+            int step = -sign * instance.width;
+            for (; index != end; index += step)
+                if (PassableTile(index, size))
+                    return instance.MapToIso(index);
+        }
+        return instance.MapToIso(index);
     }
 }
