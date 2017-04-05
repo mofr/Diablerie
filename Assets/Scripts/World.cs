@@ -23,17 +23,17 @@ public class World : MonoBehaviour
         for (int i = 0; i < bloodMoor.height / (river.height - 1); ++i)
             bloodMoor.Place(river, new Vector2i(bloodMoor.width - (river.width - 1), bloodMoor.height - (i + 1) * (river.height - 1)));
         
-        for (int i = 0; i < bloodMoor.height / bord2.sizeY; ++i)
-            bloodMoor.Place(bord2, new Vector2i(0, bloodMoor.height - (i + 1) * bord2.sizeY));
-        
-        for (int i = 0; i < (bloodMoor.width - river.width) / bord3.sizeX; ++i)
+        for (int i = 1; i < bloodMoor.height / bord2.sizeY; ++i)
+            bloodMoor.Place(bord2, new Vector2i(0, i * bord2.sizeY));
+
+        for (int i = 1; i < (bloodMoor.width - river.width + 1) / bord3.sizeX; ++i)
             bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0));
 
         bloodMoor.Place(bord6, new Vector2i(0, 0));
         for (int i = 0; i < 5; ++i)
-            bloodMoor.Place(cottage, new Vector2i(10 + i * 9, 30 + Random.Range(-5, 5)));
-        bloodMoor.Place(denEntrance, new Vector2i(20, 50));
-        bloodMoor.Instantiate(new Vector2i(0, -bloodMoor.height));
+            bloodMoor.Place(cottage, new Vector2i(8 + i * 8, 32 + 8 * Random.Range(-1, 1)));
+        bloodMoor.Place(denEntrance, new Vector2i(40, 56));
+        bloodMoor.Instantiate(new Vector2i(town.width - bloodMoor.width, -bloodMoor.height));
         
         var entry = town.FindEntry();
         SpawnPlayer(Iso.MapTileToWorld(entry));
