@@ -97,6 +97,11 @@
         }
     }
 
+    public bool Contains(int x, int y)
+    {
+        return x >= _x && y >= _y && x < _x + _width && y < _y + _height;
+    }
+
     public string AsString()
     {
         return string.Format("({0}, {1})  --->  ({2}, {3})  =  {4} * {5}", xMin, yMin, xMax, yMax, width, height);

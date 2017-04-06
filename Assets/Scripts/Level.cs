@@ -12,12 +12,14 @@ public class Level
     List<DS1.ObjectSpawnInfo> objects = new List<DS1.ObjectSpawnInfo>();
     DT1.Sampler[] samplers;
     DT1.Sampler tileSampler = new DT1.Sampler();
+    List<Popup> popups = new List<Popup>();
 
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
     static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
+    static readonly int padTileIndex = DT1.Tile.Index(8, 46, 10);
 
     static DT1.Sampler specialTiles = new DT1.Sampler();
     static Level()
@@ -116,6 +118,8 @@ public class Level
             obj.y += pos.y * Iso.SubTileCount;
             objects.Add(obj);
         }
+
+        CreatePopups(ds1, pos);
     }
 
     void Blit(DS1.Cell[] dst, DS1.Cell[] src, int offsetX, int offsetY, int srcWidth, int srcHeight, int stride)
@@ -148,6 +152,40 @@ public class Level
                 dst[dstIndex + x] = filler;
             }
             dstIndex += width;
+        }
+    }
+
+    void CreatePopups(DS1 ds1, Vector2i pos, Transform parent = null)
+    {
+        bool firstFound = false;
+        int x1 = 0;
+        int y1 = 0;
+
+        for (int layerIndex = 0; layerIndex < ds1.walls.Length; ++layerIndex)
+        {
+            var walls = ds1.walls[layerIndex];
+            int i = 0;
+            for (int y = 0; y < ds1.height; ++y)
+            {
+                for (int x = 0; x < ds1.width; ++x, ++i)
+                {
+                    if (walls[i].tileIndex == padTileIndex)
+                    {
+                        if (firstFound)
+                        {
+                            var rect = new IntRect(x1 + pos.x, y1 + pos.y, x - x1 + 1, y - y1 + 1);
+                            var popup = Popup.Create(rect);
+                            popup.transform.SetParent(parent);
+                            popups.Add(popup);
+                            return;
+                        }
+
+                        x1 = x;
+                        y1 = y;
+                        firstFound = true;
+                    }
+                }
+            }
         }
     }
 
@@ -213,7 +251,7 @@ public class Level
                 DT1.Tile tile;
                 if (sampler.Sample(cell.tileIndex, out tile))
                 {
-                    var tileObject = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                    CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
                 }
             }
         }
@@ -247,9 +285,21 @@ public class Level
                         continue;
                     }
 
+                    Popup popup = null;
+                    foreach(Popup iter in popups)
+                    {
+                        if (iter.rect.Contains(offset.x + x, offset.y + y))
+                        {
+                            popup = iter;
+                            break;
+                        }
+                    }
+
                     if (sampler.Sample(cell.tileIndex, out tile))
                     {
-                        var tileObject = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                        var renderer = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                        if (popup != null)
+                            popup.renderers.Add(renderer);
                     }
                     else
                     {
@@ -262,7 +312,9 @@ public class Level
                         int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
                         if (sampler.Sample(index, out tile))
                         {
-                            var tileObject = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                            var renderer = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                            if (popup != null)
+                                popup.renderers.Add(renderer);
                         }
                         else
                         {
@@ -280,8 +332,8 @@ public class Level
         DT1.Tile tile;
         if (specialTiles.Sample(cell.tileIndex, out tile))
         {
-            var tileObject = CreateTile(tile, x, y, parent: parent);
-            tileObject.layer = UnityLayers.SpecialTiles;
+            var renderer = CreateTile(tile, x, y, parent: parent);
+            renderer.gameObject.layer = UnityLayers.SpecialTiles;
         }
 
         if (info == null)
@@ -310,7 +362,7 @@ public class Level
         }
     }
 
-    static GameObject CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0, Transform parent = null)
+    static Renderer CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0, Transform parent = null)
     {
         var texture = tile.texture;
         var pos = Iso.MapTileToWorld(x, y);
@@ -387,7 +439,7 @@ public class Level
         }
 
         meshRenderer.material = tile.material;
-        return gameObject;
+        return meshRenderer;
     }
 
     static GameObject CreateObject(Obj obj, int x, int y)

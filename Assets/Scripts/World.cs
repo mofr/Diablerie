@@ -49,6 +49,7 @@ public class World : MonoBehaviour
     static void SpawnPlayer(Vector3 pos)
     {
         var player = new GameObject("Player");
+        player.tag = "Player";
         player.transform.position = pos;
         var character = player.AddComponent<Character>();
         character.basePath = @"data\global\chars";
