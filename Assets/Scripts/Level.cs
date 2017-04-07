@@ -19,7 +19,6 @@ public class Level
     static readonly int townEntry2Index = DT1.Tile.Index(31, 0, 10);
     static readonly int corpseLocationIndex = DT1.Tile.Index(32, 0, 10);
     static readonly int portalLocationIndex = DT1.Tile.Index(33, 0, 10);
-    static readonly int padTileIndex = DT1.Tile.Index(8, 46, 10);
 
     static DT1.Sampler specialTiles = new DT1.Sampler();
     static Level()
@@ -169,12 +168,12 @@ public class Level
             {
                 for (int x = 0; x < ds1.width; ++x, ++i)
                 {
-                    if (walls[i].tileIndex == padTileIndex)
+                    if (walls[i].mainIndex == 8 && walls[i].orientation == 10)
                     {
                         if (firstFound)
                         {
                             var rect = new IntRect(x1 + pos.x, y1 + pos.y, x - x1 + 1, y - y1 + 1);
-                            var popup = Popup.Create(rect);
+                            var popup = Popup.Create(rect, walls[i].subIndex);
                             popup.transform.SetParent(parent);
                             popups.Add(popup);
                             return;
@@ -285,21 +284,10 @@ public class Level
                         continue;
                     }
 
-                    Popup popup = null;
-                    foreach(Popup iter in popups)
-                    {
-                        if (iter.rect.Contains(offset.x + x, offset.y + y))
-                        {
-                            popup = iter;
-                            break;
-                        }
-                    }
-
                     if (sampler.Sample(cell.tileIndex, out tile))
                     {
                         var renderer = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
-                        if (popup != null)
-                            popup.renderers.Add(renderer);
+                        PutToPopup(cell, renderer, offset.x + x, offset.y + y);
                     }
                     else
                     {
@@ -313,8 +301,6 @@ public class Level
                         if (sampler.Sample(index, out tile))
                         {
                             var renderer = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
-                            if (popup != null)
-                                popup.renderers.Add(renderer);
                         }
                         else
                         {
@@ -324,6 +310,30 @@ public class Level
                 }
             }
         }
+    }
+
+    private void PutToPopup(DS1.Cell cell, Renderer renderer, int x, int y)
+    {
+        Popup popup = null;
+        foreach (Popup iter in popups)
+        {
+            if (iter.rect.Contains(x, y))
+            {
+                popup = iter;
+                break;
+            }
+        }
+
+        if (popup == null)
+            return;
+
+        if (cell.orientation == 15)
+            popup.roofs.Add(renderer);
+        else if (
+            cell.orientation == 5 || cell.orientation == 6 ||
+            (x != popup.rect.xMin && y != popup.rect.yMax)
+            )
+            popup.walls.Add(renderer);
     }
 
     private void CreateSpecialTile(DS1.Cell cell, int x, int y, Transform parent)
