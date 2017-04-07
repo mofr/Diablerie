@@ -54,9 +54,20 @@ public class StaticObject : Entity
 
     void SetMode(string modeName)
     {
-        mode = System.Array.IndexOf(COF.ModeNames[2], modeName);
         if (objectInfo.draw)
         {
+            int newMode = System.Array.IndexOf(COF.ModeNames[2], modeName);
+            if (newMode == -1 || !objectInfo.mode[newMode])
+            {
+                Debug.LogWarning("Failed to set mode '" + modeName + "' of object " + name);
+                return;
+            }
+
+            if (objectInfo.hasCollision[mode])
+                CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, true);
+
+            mode = newMode;
+
             var cof = COF.Load(@"data\global\objects", objectInfo.token, "HTH", modeName);
             animator.shadow = objectInfo.blocksLight[mode];
             animator.cof = cof;
@@ -67,6 +78,12 @@ public class StaticObject : Entity
             if (objectInfo.hasCollision[mode])
                 CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false);
         }
+    }
+
+    public void Use()
+    {
+        Debug.Log("Use " + name);
+        SetMode("OP");
     }
 
     void OnRenderObject()

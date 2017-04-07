@@ -12,7 +12,7 @@ public class Character : Entity
 	public float walkSpeed = 3.5f;
     public float runSpeed = 6f;
     public float attackSpeed = 1.0f;
-    public float useRange = 1f;
+    public float useRange = 2.5f;
     public float attackRange = 2.5f;
     public float diameter = 1f;
     public bool run = false;
@@ -37,9 +37,9 @@ public class Character : Entity
 
         set
         {
-            var usable = value.GetComponent<Usable>();
-            if (usable != null)
-                Use(usable);
+            var staticObject = value.GetComponent<StaticObject>();
+            if (staticObject != null)
+                Use(staticObject);
             else
             {
                 var targetCharacter = value.GetComponent<Character>();
@@ -72,7 +72,7 @@ public class Character : Entity
     bool dead = false;
     public bool ressurecting = false;
     GameObject m_Target;
-    Usable usable;
+    StaticObject targetStaticObject;
     Character targetCharacter;
     public int attackDamage = 30;
     public int health = 100;
@@ -93,11 +93,12 @@ public class Character : Entity
         CollisionMap.SetPassable(Iso.Snap(iso.pos), false);
     }
 
-	public void Use(Usable usable) {
+	public void Use(StaticObject staticObject)
+    {
         if (attack || takingDamage || dying || dead || ressurecting)
             return;
-        targetPoint = usable.GetComponent<Iso>().pos;
-		this.usable = usable;
+        targetPoint = staticObject.GetComponent<Iso>().pos;
+		targetStaticObject = staticObject;
         targetCharacter = null;
         moving = true;
     }
@@ -112,7 +113,7 @@ public class Character : Entity
 
         moving = true;
         targetPoint = target;
-        usable = null;
+        targetStaticObject = null;
         targetCharacter = null;
     }
 
@@ -142,7 +143,7 @@ public class Character : Entity
         Iso targetIso = targetCharacter.GetComponent<Iso>();
         targetPoint = targetIso.pos;
         this.targetCharacter = targetCharacter;
-        usable = null;
+        targetStaticObject = null;
         moving = true;
     }
 
@@ -155,14 +156,14 @@ public class Character : Entity
 
 	void Update() {
         if (!takingDamage && !dead && !dying && !ressurecting) {
-            if (usable)
+            if (targetStaticObject)
             {
-                var hit = CollisionMap.Raycast(iso.pos, usable.GetComponent<Iso>().pos, maxRayLength: useRange + diameter / 2, ignore: gameObject);
-                if (hit.gameObject == usable.gameObject)
+                var distance = Vector2.Distance(iso.pos, targetStaticObject.GetComponent<Iso>().pos);
+                if (distance <= diameter + useRange)
                 {
-                    usable.Use();
+                    targetStaticObject.Use();
                     moving = false;
-                    usable = null;
+                    targetStaticObject = null;
                     m_Target = null;
                 }
             }
