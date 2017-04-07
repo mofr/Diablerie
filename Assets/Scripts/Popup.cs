@@ -4,7 +4,8 @@ using UnityEngine;
 public class Popup : MonoBehaviour
 {
     public int tileIndex;
-    public IntRect rect;
+    public IntRect triggerArea;
+    public IntRect scanArea;
     public List<Renderer> walls = new List<Renderer>();
     public List<Renderer> roofs = new List<Renderer>();
 
@@ -14,19 +15,20 @@ public class Popup : MonoBehaviour
     bool revealing = false;
     bool hiding = false;
 
-    public static Popup Create(IntRect rect, int tileIndex)
+    public static Popup Create(IntRect triggerArea, IntRect scanArea, int tileIndex)
     {
         var gameObject = new GameObject("Popup");
-        gameObject.transform.position = Iso.MapTileToWorld(rect.xMin, rect.yMax);
+        gameObject.transform.position = Iso.MapTileToWorld(triggerArea.xMin, triggerArea.yMax);
         var popup = gameObject.AddComponent<Popup>();
-        popup.rect = rect;
+        popup.triggerArea = triggerArea;
+        popup.scanArea = scanArea;
         popup.tileIndex = tileIndex;
         var collider = gameObject.AddComponent<PolygonCollider2D>();
         var points = new Vector2[] {
             Iso.MapTileToWorld(0, 0),
-            Iso.MapTileToWorld(rect.width - 1, 0),
-            Iso.MapTileToWorld(rect.width - 1, rect.height - 1),
-            Iso.MapTileToWorld(0, rect.height - 1)
+            Iso.MapTileToWorld(triggerArea.width, 0),
+            Iso.MapTileToWorld(triggerArea.width, triggerArea.height),
+            Iso.MapTileToWorld(0, triggerArea.height)
         };
         collider.points = points;
         collider.isTrigger = true;

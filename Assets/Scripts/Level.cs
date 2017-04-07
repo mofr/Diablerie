@@ -172,8 +172,9 @@ public class Level
                     {
                         if (firstFound)
                         {
-                            var rect = new IntRect(x1 + pos.x, y1 + pos.y, x - x1 + 1, y - y1 + 1);
-                            var popup = Popup.Create(rect, walls[i].subIndex);
+                            var scanArea = new IntRect(pos.x, pos.y, ds1.width, ds1.height);
+                            var triggerArea = new IntRect(x1 + pos.x, y1 + pos.y, x - x1, y - y1);
+                            var popup = Popup.Create(triggerArea, scanArea, walls[i].subIndex);
                             popup.transform.SetParent(parent);
                             popups.Add(popup);
                             return;
@@ -317,7 +318,7 @@ public class Level
         Popup popup = null;
         foreach (Popup iter in popups)
         {
-            if (iter.rect.Contains(x, y))
+            if ((cell.orientation != 15 || iter.tileIndex == cell.mainIndex) && iter.scanArea.Contains(x, y))
             {
                 popup = iter;
                 break;
@@ -329,10 +330,8 @@ public class Level
 
         if (cell.orientation == 15)
             popup.roofs.Add(renderer);
-        else if (
-            cell.orientation == 5 || cell.orientation == 6 ||
-            (x != popup.rect.xMin && y != popup.rect.yMax)
-            )
+        else if (cell.orientation == 5 || cell.orientation == 6 || 
+            (x != popup.triggerArea.xMin && y != popup.triggerArea.yMax))
             popup.walls.Add(renderer);
     }
 
