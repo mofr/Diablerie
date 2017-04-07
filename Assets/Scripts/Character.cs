@@ -159,7 +159,7 @@ public class Character : Entity
             if (targetStaticObject)
             {
                 var distance = Vector2.Distance(iso.pos, targetStaticObject.GetComponent<Iso>().pos);
-                if (distance <= diameter + useRange)
+                if (distance <= diameter + useRange + targetStaticObject.objectInfo.sizeX / 2)
                 {
                     targetStaticObject.Use();
                     moving = false;
