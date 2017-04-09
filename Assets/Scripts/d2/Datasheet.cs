@@ -267,7 +267,7 @@ public class ObjectInfo
                 info.frameDuration[i] = 256.0f / 25 / info.frameDelta[i];
             }
 
-            info.name = Translation.Find(info.nameStr, info.nameStr);
+            info.name = Translation.Find(info.nameStr);
 
             if (info.token == null)
                 continue;
@@ -412,6 +412,9 @@ public class MonStat
     [System.NonSerialized]
     public MonStatsExtended ext;
 
+    [System.NonSerialized]
+    public string name;
+
     public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load("data/global/excel/monstats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
@@ -426,6 +429,8 @@ public class MonStat
             }
             stats.Add(key, stat);
             stat.ext = MonStatsExtended.Find(stat.id);
+            if (stat.nameStr != null)
+                stat.name = Translation.Find(stat.nameStr);
         }
     }
 
@@ -838,6 +843,11 @@ public class Translation
 
     static Dictionary<string, string> map = new Dictionary<string, string>();
     public static Datasheet<Translation> sheet = Datasheet<Translation>.Load("data/local/string.txt", headerLines: 0);
+
+    public static string Find(string key)
+    {
+        return Find(key, key);
+    }
 
     public static string Find(string key, string defaultValue = null)
     {

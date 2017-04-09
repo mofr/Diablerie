@@ -412,7 +412,7 @@ public class Character : Entity
         get
         {
             if (monStat != null)
-                return monStat.nameStr;
+                return monStat.name;
             else
                 return "monStat null";
         }
