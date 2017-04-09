@@ -53,9 +53,6 @@ public class World : MonoBehaviour
             bloodMoor.Place(cottage, new Vector2i(8 + i * 8, 32 + 8 * Random.Range(-1, 1)));
         bloodMoor.Place(denEntrance, new Vector2i(40, 56));
 
-        var spawnPoint = Iso.MapTileToWorld(new Vector2i(44, 60));
-        StartCoroutine(SpawnMonsters(spawnPoint));
-
         return bloodMoor;
     }
     
@@ -161,20 +158,5 @@ public class World : MonoBehaviour
             return null;
         }
         return SpawnObject(objectInfo, pos);
-    }
-
-    IEnumerator SpawnMonsters(Vector3 spawnPoint)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(5f);
-            for (int i = 0; i < 2; ++i)
-            {
-                var pos = spawnPoint + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-                var monster = SpawnMonster("fallen1", pos);
-                monster.ressurecting = true;
-                yield return new WaitForSeconds(Random.Range(0.05f, 0.1f));
-            }
-        }
     }
 }

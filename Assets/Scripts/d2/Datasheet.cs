@@ -315,8 +315,8 @@ public class MonStat
     public string BossXfer;
     public string PartyMin;
     public string PartyMax;
-    public string MinGrp;
-    public string MaxGrp;
+    public int minGrp;
+    public int maxGrp;
     public string sparsePopulate;
     public int speed;
     public int runSpeed;
@@ -682,12 +682,19 @@ public class LevelInfo
     public int id;
     public int pal;
     public int act;
+    public int questFlag;
+    public int questFlagEx;
     public int layer;
     public int sizeX;
     public int sizeY;
+    public int sizeXNightmare;
+    public int sizeYNightmare;
+    public int sizeXHell;
+    public int sizeYHell;
     public int offsetX;
     public int offsetY;
     public int depend;
+    public int teleport;
     public int rain;
     public int mud;
     public int noPer;
@@ -713,22 +720,25 @@ public class LevelInfo
     public bool saveMonsters;
     public int quest;
     public int warpDist;
-    public int monLvl1;
-    public int monLvl2;
-    public int monLvl3;
-    public int monDen;
+    public int[] monLvl = new int[3];
+    public int[] monLvlEx = new int[3];
+    public int[] monDen = new int[3];
     public int monUMin;
     public int monUMax;
+    public int monUMinNightmare;
+    public int monUMaxNightmare;
+    public int monUMinHell;
+    public int monUMaxHell;
     public int monWndr;
     public int monSpcWalk;
-    public int mtot;
-    public int[] M = new int[25];
-    public int[] S = new int[25];
-    public int Utot;
-    public int[] U = new int[25];
-    public int[] C = new int[5];
-    public int[] CA = new int[5];
-    public int[] CD = new int[5];
+    public int numMon;
+    public string[] _monsters = new string[10];
+    public int rangedspawn;
+    public string[] nMonsters = new string[10];
+    public string[] uMonsters = new string[10];
+    public string[] cmon = new string[4];
+    public int[] cpct = new int[4];
+    public int[] camt = new int[4];
     public int themes;
     public int soundEnv;
     public int waypoint;
@@ -748,6 +758,9 @@ public class LevelInfo
     [System.NonSerialized]
     public string entryFile;
 
+    [System.NonSerialized]
+    public List<string> monsters = new List<string>();
+
     public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
     static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
@@ -761,6 +774,11 @@ public class LevelInfo
             levelInfo.type = LevelType.sheet.rows[levelInfo.levelTypeIndex];
             levelInfo.preset = LevelPreset.Find(levelInfo.id);
             levelInfo.entryFile = @"data\local\ui\eng\act" + (levelInfo.act + 1) + @"\" + levelInfo._entryFile + ".dc6";
+            foreach(string mon in levelInfo._monsters)
+            {
+                if (mon != null && mon != "")
+                    levelInfo.monsters.Add(mon);
+            }
             nameIndex.Add(levelInfo.name, levelInfo);
             idMap.Add(levelInfo.id, levelInfo);
         }

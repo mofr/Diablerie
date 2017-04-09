@@ -6,8 +6,8 @@ public class MonsterController : MonoBehaviour
     Character character;
     Iso iso;
     Character target;
-    readonly float viewRadius = 3f;
-    readonly float maxAgroDistance = 10f;
+    readonly float viewRadius = 6f;
+    readonly float maxAgroDistance = 15f;
 
     static Collider2D[] visibleColliders = new Collider2D[100];
 

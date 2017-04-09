@@ -209,9 +209,47 @@ public class LevelBuilder
         InstantiateFloors(offset, root);
         InstantiateWalls(offset, root);
         InstantiateObjects(offset, root);
+        InstantiateMonsters(offset, root);
         InstantiateDebugGrid(offset, root, gridSize: 8);
 
         return root;
+    }
+
+    private void InstantiateMonsters(Vector2i offset, GameObject root)
+    {
+        MonStat[] monsters = new MonStat[info.numMon];
+        int[] monsterColumns = new int[info.numMon];
+        for(int i = 0; i < info.numMon; ++i)
+            monsterColumns[i] = -1;
+
+        for (int i = 0; i < info.numMon; ++i)
+        {
+            int index;
+            do
+            {
+                index = Random.Range(0, info.monsters.Count);
+            }
+            while (System.Array.IndexOf(monsterColumns, index) != -1);
+            monsterColumns[i] = index;
+            monsters[i] = MonStat.Find(info.monsters[index]);
+        }
+
+        int density = info.monDen[0];
+
+        for (int x = 8; x < width - 8; ++x)
+        {
+            for (int y = 8; y < height - 8; ++y)
+            {
+                int sample = Random.Range(0, 100000);
+                if (sample >= density)
+                    continue;
+
+                var monster = monsters[Random.Range(0, monsters.Length)];
+                int count = Random.Range(monster.minGrp, monster.maxGrp + 1);
+                for(int i = 0; i < count; ++i)
+                    World.SpawnMonster(monster, Iso.MapTileToWorld(x, y));
+            }
+        }
     }
 
     private void InstantiateDebugGrid(Vector2i offset, GameObject root, int gridSize)
