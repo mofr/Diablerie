@@ -217,6 +217,9 @@ public class LevelBuilder
 
     private void InstantiateMonsters(Vector2i offset, GameObject root)
     {
+        if (info == null)
+            return;
+
         MonStat[] monsters = new MonStat[info.numMon];
         int[] monsterColumns = new int[info.numMon];
         for(int i = 0; i < info.numMon; ++i)

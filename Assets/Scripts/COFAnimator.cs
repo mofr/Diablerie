@@ -20,6 +20,7 @@ class COFAnimator : MonoBehaviour
     List<Layer> layers = new List<Layer>();
     bool _selected = false;
     Material shadowMaterial;
+    MaterialPropertyBlock materialProperties = new MaterialPropertyBlock();
 
     struct Layer
     {
@@ -60,8 +61,10 @@ class COFAnimator : MonoBehaviour
                 _selected = value;
                 foreach (var layer in layers)
                 {
-                    layer.renderer.material.SetFloat("_Brightness", _selected ? 3.0f : 1.0f);
-                    layer.renderer.material.SetFloat("_Contrast", _selected ? 1.01f : 1.0f);
+                    layer.renderer.GetPropertyBlock(materialProperties);
+                    materialProperties.SetFloat("_Brightness", _selected ? 3.0f : 1.0f);
+                    materialProperties.SetFloat("_Contrast", _selected ? 1.01f : 1.0f);
+                    layer.renderer.SetPropertyBlock(materialProperties);
                 }
             }
         }
@@ -151,7 +154,7 @@ class COFAnimator : MonoBehaviour
             try
             {
                 layer.dcc = DCC.Load(dccFilename);
-                layer.renderer.material = new Material(cofLayer.material);
+                layer.renderer.material = cofLayer.material;
                 layers[i] = layer;
                 layer.gameObject.SetActive(true);
                 layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
