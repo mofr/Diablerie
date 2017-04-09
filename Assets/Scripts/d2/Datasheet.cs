@@ -734,7 +734,7 @@ public class LevelInfo
     public int waypoint;
     public string levelName;
     public string levelWarp;
-    public string entryFile;
+    public string _entryFile;
     public int[] objGrp = new int[8];
     public int[] objPrb = new int[8];
     public bool beta;
@@ -744,6 +744,9 @@ public class LevelInfo
 
     [System.NonSerialized]
     public LevelPreset preset;
+
+    [System.NonSerialized]
+    public string entryFile;
 
     public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
@@ -757,6 +760,7 @@ public class LevelInfo
                 continue;
             levelInfo.type = LevelType.sheet.rows[levelInfo.levelTypeIndex];
             levelInfo.preset = LevelPreset.Find(levelInfo.id);
+            levelInfo.entryFile = @"data\local\ui\eng\act" + (levelInfo.act + 1) + @"\" + levelInfo._entryFile + ".dc6";
             nameIndex.Add(levelInfo.name, levelInfo);
             idMap.Add(levelInfo.id, levelInfo);
         }

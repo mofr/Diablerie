@@ -24,15 +24,8 @@ public class Popup : MonoBehaviour
         popup.scanArea = scanArea;
         popup.tileIndex = tileIndex;
         var collider = gameObject.AddComponent<PolygonCollider2D>();
-        var points = new Vector2[] {
-            Iso.MapTileToWorld(0, 0),
-            Iso.MapTileToWorld(triggerArea.width, 0),
-            Iso.MapTileToWorld(triggerArea.width, triggerArea.height),
-            Iso.MapTileToWorld(0, triggerArea.height)
-        };
-        collider.points = points;
+        collider.points = Iso.CreateTileRectPoints(triggerArea.width, triggerArea.height);
         collider.isTrigger = true;
-        collider.offset = Iso.MapToWorld(-2, -2);
         return popup;
     }
 

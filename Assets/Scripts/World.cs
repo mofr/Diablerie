@@ -5,7 +5,7 @@ public class World : MonoBehaviour
 {
     void Start ()
     {
-        var town = new Level("Act 1 - Town");
+        var town = new LevelBuilder("Act 1 - Town");
         var bloodMoor = CreateBloodMoor();
 
         var townOffset = new Vector2i(bloodMoor.width - town.width, bloodMoor.height);
@@ -16,9 +16,9 @@ public class World : MonoBehaviour
         SpawnPlayer(Iso.MapTileToWorld(entry + townOffset));
     }
 
-    Level CreateBloodMoor()
+    LevelBuilder CreateBloodMoor()
     {
-        var bloodMoor = new Level("Act 1 - Wilderness 1");
+        var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1");
         var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
         var uRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Uriver.ds1");
         var lRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Lriver.ds1");
@@ -75,7 +75,7 @@ public class World : MonoBehaviour
         character.directionCount = 16;
         character.run = true;
         character.walkSpeed = 7;
-        character.runSpeed = 13;
+        character.runSpeed = 15;
         character.maxHealth = 10000;
         character.health = 10000;
         PlayerController.instance.SetCharacter(character);

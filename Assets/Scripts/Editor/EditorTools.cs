@@ -14,7 +14,7 @@ public class EditorTools
             DS1.ResetCache();
         }
         var ds1 = DS1.Load(assetPath, mpq: false);
-        var level = new Level(ds1);
+        var level = new LevelBuilder(ds1);
         level.Instantiate(new Vector2i(0, 0));
     }
 
@@ -102,7 +102,7 @@ public class EditorTools
         if (name.Contains("font16") || name.Contains("font24") || name.Contains("font30"))
             textureSize = 512;
 
-        var dc6 = DC6.Load(assetPath, textureSize);
+        var dc6 = DC6.Load(assetPath, textureSize, mpq: false);
         var metrics = File.ReadAllText(Path.GetDirectoryName(assetPath) + "/" + name + ".txt").Split(',');
 
         var characterInfo = new CharacterInfo[dc6.framesPerDirection];

@@ -17,22 +17,29 @@ public class DC6
     public Frame[] frames;
     public Texture2D texture;
 
-    static public DC6 Load(string filename, int textureSize = 512)
+    static public DC6 Load(string filename, int textureSize = 512, bool mpq = true)
     {
         Palette.LoadPalette(0);
+        var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
 
-        var stream = File.OpenRead(filename);
-        var reader = new BinaryReader(stream);
-
-        int dc6_ver1 = reader.ReadInt32();
-        var dc6_ver2 = reader.ReadInt32();
-        var dc6_ver3 = reader.ReadInt32();
-        if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
+        using (var stream = new MemoryStream(bytes))
+        using (var reader = new BinaryReader(stream))
         {
-            Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
-            return null;
-        }
+            int dc6_ver1 = reader.ReadInt32();
+            var dc6_ver2 = reader.ReadInt32();
+            var dc6_ver3 = reader.ReadInt32();
+            if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
+            {
+                Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
+                return null;
+            }
 
+            return Load(stream, reader, textureSize);
+        }
+    }
+
+    static DC6 Load(Stream stream, BinaryReader reader, int textureSize)
+    {
         var dc6 = new DC6();
         reader.ReadInt32();
         dc6.directionCount = reader.ReadInt32();
@@ -74,8 +81,6 @@ public class DC6
             frame.textureY = pack.y;
             dc6.frames[i] = frame;
         }
-
-        stream.Close();
 
         dc6.texture.SetPixels32(pixels);
         dc6.texture.Apply();

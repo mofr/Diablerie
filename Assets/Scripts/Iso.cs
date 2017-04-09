@@ -106,7 +106,18 @@ public class Iso : MonoBehaviour
         return Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
     }
 
-	void Awake() {
+    static public Vector2[] CreateTileRectPoints(int width, int height)
+    {
+        var offset = MapToWorld(-2, -2);
+        return new Vector2[] {
+            MapTileToWorld(0, 0) + offset,
+            MapTileToWorld(width, 0) + offset,
+            MapTileToWorld(width, height) + offset,
+            MapTileToWorld(0, height) + offset
+        };
+    }
+
+    void Awake() {
 		pos = MapToIso(transform.position);
 		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
