@@ -11,32 +11,21 @@ public class MonsterController : MonoBehaviour
 
     static Collider2D[] visibleColliders = new Collider2D[100];
 
-	void Awake() {
+	void Awake()
+    {
         iso = GetComponent<Iso>();
     }
 
     void Start()
     {
         character = GetComponent<Character>();
-        character.OnTakeDamage += OnTakeDamage;
         StartCoroutine(Roam());
-    }
-
-    void OnTakeDamage(Character originator, int damage)
-    {
-        Attack(originator);
     }
 
     IEnumerator Roam()
     {
-        yield return new WaitForEndOfFrame();
         while (!this.target)
         {
-            var target = iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
-            character.GoTo(target);
-            yield return new WaitForSeconds(Random.Range(1f, 3f));
-            while (!isActiveAndEnabled) yield return null;
-
             int visibleCount = Physics2D.OverlapCircleNonAlloc(transform.position, viewRadius, visibleColliders);
             for (int i = 0; i < visibleCount; ++i)
             {
@@ -44,11 +33,17 @@ public class MonsterController : MonoBehaviour
                 var visibleCharacter = collider.GetComponent<Character>();
                 if (visibleCharacter == null)
                     continue;
-                if (visibleCharacter.gameObject.name == "Player")
+                if (visibleCharacter.tag == "Player")
                 {
                     Attack(visibleCharacter);
+                    yield break;
                 }
             }
+
+            var target = iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
+            character.GoTo(target);
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            while (!isActiveAndEnabled) yield return null;
         }
     }
 
@@ -77,7 +72,7 @@ public class MonsterController : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(0.5f, 1f));
                 target = null;
                 StartCoroutine(Roam());
-                break;
+                yield break;
             }
         }
     }

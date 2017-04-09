@@ -20,7 +20,7 @@ class COFAnimator : MonoBehaviour
     List<Layer> layers = new List<Layer>();
     bool _selected = false;
     Material shadowMaterial;
-    MaterialPropertyBlock materialProperties = new MaterialPropertyBlock();
+    static MaterialPropertyBlock materialProperties;
 
     struct Layer
     {
@@ -169,6 +169,8 @@ class COFAnimator : MonoBehaviour
 
     void Awake()
     {
+        if (materialProperties == null)
+            materialProperties = new MaterialPropertyBlock();
         shadowMaterial = new Material(Materials.shadow);
     }
 
