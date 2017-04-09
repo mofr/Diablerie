@@ -19,21 +19,34 @@ public class World : MonoBehaviour
     Level CreateBloodMoor()
     {
         var bloodMoor = new Level("Act 1 - Wilderness 1");
-        var river = DS1.Load(@"data\global\tiles\act1\outdoors\river.ds1");
+        var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
+        var uRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Uriver.ds1");
+        var lRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Lriver.ds1");
+        var bord1 = LevelPreset.Find("Act 1 - Wild Border 1");
         var bord2 = LevelPreset.Find("Act 1 - Wild Border 2");
         var bord3 = LevelPreset.Find("Act 1 - Wild Border 3");
+        var bord5 = LevelPreset.Find("Act 1 - Wild Border 5");
         var bord6 = LevelPreset.Find("Act 1 - Wild Border 6");
+        var bord9 = LevelPreset.Find("Act 1 - Wild Border 9");
         var cottage = LevelPreset.Find("Act 1 - Cottages 1");
         var denEntrance = LevelPreset.Find("Act 1 - DOE Entrance");
 
-        for (int i = 0; i < bloodMoor.height / (river.height - 1); ++i)
-            bloodMoor.Place(river, new Vector2i(bloodMoor.width - (river.width - 1), bloodMoor.height - (i + 1) * (river.height - 1)));
+        for (int i = 0; i < bloodMoor.height / (uRiver.height - 1); ++i)
+            bloodMoor.Place(lRiver, new Vector2i(bloodMoor.width - (lRiver.width - 1), i * (lRiver.height - 1)));
+        for (int i = 1; i < bloodMoor.height / (lRiver.height - 1); ++i)
+            bloodMoor.Place(uRiver, new Vector2i(bloodMoor.width - (lRiver.width - 1 + uRiver.width - 1), i * (uRiver.height - 1)));
+        bloodMoor.Place(riverN, new Vector2i(bloodMoor.width - 16, 0));
 
-        for (int i = 1; i < bloodMoor.height / bord2.sizeY; ++i)
-            bloodMoor.Place(bord2, new Vector2i(0, i * bord2.sizeY));
+        for (int i = 1; i < bloodMoor.height / bord2.sizeY - 1; ++i)
+            bloodMoor.Place(bord2, new Vector2i(0, i * bord2.sizeY), 0, 3);
+        bloodMoor.Place(bord5, new Vector2i(0, bloodMoor.height - bord5.sizeY));
 
-        for (int i = 1; i < (bloodMoor.width - river.width + 1) / bord3.sizeX; ++i)
-            bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0));
+        for(int i = 1; i < 3; ++i)
+            bloodMoor.Place(bord1, new Vector2i(i * bord1.sizeX, bloodMoor.height - bord1.sizeY), 0, 3);
+        bloodMoor.Place(bord9, new Vector2i(3 * bord9.sizeX, bloodMoor.height - bord9.sizeY));
+
+        for (int i = 1; i < (bloodMoor.width - (lRiver.width - 1) * 2) / bord3.sizeX; ++i)
+            bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0), 0, 3);
 
         bloodMoor.Place(bord6, new Vector2i(0, 0));
         for (int i = 0; i < 5; ++i)

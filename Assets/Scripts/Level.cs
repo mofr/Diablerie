@@ -71,9 +71,11 @@ public class Level
         }
     }
 
-    public void Place(LevelPreset preset, Vector2i pos)
+    public void Place(LevelPreset preset, Vector2i pos, int minIndex = 0, int maxIndex = -1)
     {
-        var ds1Filename = preset.ds1Files[Random.Range(0, preset.ds1Files.Count)];
+        if (maxIndex == -1)
+            maxIndex = preset.ds1Files.Count;
+        var ds1Filename = preset.ds1Files[Random.Range(minIndex, maxIndex)];
         var ds1 = DS1.Load(ds1Filename);
         Place(ds1, pos);
     }
