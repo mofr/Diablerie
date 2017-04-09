@@ -11,7 +11,7 @@ public class DS1
     public Cell[][] walls;
     public Cell[][] floors;
     public ObjectSpawnInfo[] objects;
-    public Group[] groups;
+    public List<Group> groups;
     public string[] dt1Files;
     public DT1.Sampler tileSampler;
 
@@ -116,7 +116,14 @@ public class DS1
 
             ReadLayers(ds1, bytes, reader, stream, tagType);
             ReadObjects(ds1, reader, act);
-            ReadGroups(ds1, reader, tagType);
+            try
+            {
+                ReadGroups(ds1, reader, tagType);
+            }
+            catch (EndOfStreamException)
+            {
+                // in fact there can be less groups than expected
+            }
 
             return ds1;
         }
@@ -124,27 +131,27 @@ public class DS1
 
     private static void ReadGroups(DS1 ds1, BinaryReader reader, int tagType)
     {
-        if (ds1.version >= 12 && (tagType == 1 || tagType == 2))
-        {
-            if (ds1.version >= 18)
-                reader.ReadInt32();
-            int groupCount = reader.ReadInt32();
-            //Debug.Log("Groups " + groupCount);
-            ds1.groups = new Group[groupCount];
+        bool hasGroups = ds1.version >= 12 && (tagType == 1 || tagType == 2);
+        if (!hasGroups)
+            return;
 
-            for (int i = 0; i < groupCount; i++)
+        if (ds1.version >= 18)
+            reader.ReadInt32();
+        int groupCount = reader.ReadInt32();
+        ds1.groups = new List<Group>();
+
+        for (int i = 0; i < groupCount; i++)
+        {
+            var group = new Group();
+            group.x = reader.ReadInt32();
+            group.y = reader.ReadInt32();
+            group.width = reader.ReadInt32();
+            group.height = reader.ReadInt32();
+            if (ds1.version >= 13)
             {
-                var group = new Group();
-                group.x = reader.ReadInt32();
-                group.y = reader.ReadInt32();
-                group.width = reader.ReadInt32();
-                group.height = reader.ReadInt32();
-                if (ds1.version >= 13)
-                {
-                    reader.ReadInt32(); // unknown
-                }
-                ds1.groups[i] = group;
+                reader.ReadInt32(); // unknown
             }
+            ds1.groups.Add(group);
         }
     }
 
