@@ -35,7 +35,7 @@ public class Entity : MonoBehaviour
         get { return 2; }
     }
 
-    public virtual void Operate()
+    public virtual void Operate(Character character = null)
     {
         throw new System.NotImplementedException("Entity.Operate shouldn't be called directly");
     }

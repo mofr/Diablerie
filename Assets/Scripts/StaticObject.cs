@@ -85,9 +85,9 @@ public class StaticObject : Entity
         }
     }
 
-    public override void Operate()
+    public override void Operate(Character character)
     {
-        Debug.Log("Use " + name);
+        Debug.Log(character.name + " use " + name);
         SetMode("OP");
     }
 

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114153361697340630}
   - component: {fileID: 114225344187329616}
   - component: {fileID: 114958092872097694}
+  - component: {fileID: 114936715888369398}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -81,7 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c090b690e9e86824f8d946bf30b5cf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Act 1 - Town
 --- !u!114 &114524355520886124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,6 +103,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c80c43ea0f6b0994a92ff93e31f37a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114936715888369398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576811083722074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c8963f676c99246aac087a38c54fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114958092872097694

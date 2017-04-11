@@ -51,8 +51,12 @@ public class Warp : Entity
         MouseSelection.Submit(this);
     }
 
-    public override void Operate()
+    public override void Operate(Character character)
     {
-        Debug.Log("WARP!");
+        ScreenFader.SetToBlack();
+        ScreenFader.FadeToClear();
+        var target = Iso.MapToIso(transform.position) + new Vector3(20, 20);
+        var iso = character.GetComponent<Iso>();
+        iso.pos = CollisionMap.Fit(target, (int)character.diameter);
     }
 }

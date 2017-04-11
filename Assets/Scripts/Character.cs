@@ -144,7 +144,7 @@ public class Character : Entity
                 var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
                 if (distance <= diameter + targetEntity.operateRange)
                 {
-                    targetEntity.Operate();
+                    targetEntity.Operate(this);
                     moving = false;
                     targetEntity = null;
                 }
