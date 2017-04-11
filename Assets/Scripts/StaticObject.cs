@@ -31,6 +31,11 @@ public class StaticObject : Entity
         get { return new Vector2(0, -objectInfo.nameOffset); }
     }
 
+    public override float operateRange
+    {
+        get { return objectInfo.operateRange; }
+    }
+
     void Awake()
     {
         iso = GetComponent<Iso>();
@@ -80,7 +85,7 @@ public class StaticObject : Entity
         }
     }
 
-    public void Use()
+    public override void Operate()
     {
         Debug.Log("Use " + name);
         SetMode("OP");

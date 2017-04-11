@@ -29,4 +29,14 @@ public class Entity : MonoBehaviour
     {
         get { return new Vector2(0, 0); }
     }
+
+    public virtual float operateRange
+    {
+        get { return 2; }
+    }
+
+    public virtual void Operate()
+    {
+        throw new System.NotImplementedException("Entity.Operate shouldn't be called directly");
+    }
 }

@@ -12,9 +12,8 @@ public class Character : Entity
 	public float walkSpeed = 3.5f;
     public float runSpeed = 6f;
     public float attackSpeed = 1.0f;
-    public float useRange = 2.5f;
-    public float attackRange = 2.5f;
-    public float diameter = 1f;
+    public float attackRange = 1.5f;
+    public float diameter = 2f;
     public bool run = false;
 
     public string basePath;
@@ -30,29 +29,15 @@ public class Character : Entity
     [HideInInspector]
     public GameObject target
     {
-        get
-        {
-            return m_Target;
-        }
-
         set
         {
-            var staticObject = value.GetComponent<StaticObject>();
-            if (staticObject != null)
-                Use(staticObject);
-            else
-            {
-                var targetCharacter = value.GetComponent<Character>();
-                if (targetCharacter) {
-                    Attack(targetCharacter);
-                }
-                else
-                {
-                    return;
-                }
-            }
+            var character = value.GetComponent<Character>();
+            var entity = value.GetComponent<Entity>();
 
-            m_Target = value;
+            if (character)
+                Attack(character);
+            else if (entity != null)
+                Use(entity);
         }
     }
 
@@ -71,8 +56,7 @@ public class Character : Entity
     bool dying = false;
     bool dead = false;
     public bool ressurecting = false;
-    GameObject m_Target;
-    StaticObject targetStaticObject;
+    Entity targetEntity;
     Character targetCharacter;
     public int attackDamage = 30;
     public int health = 100;
@@ -93,12 +77,12 @@ public class Character : Entity
         CollisionMap.SetPassable(Iso.Snap(iso.pos), false);
     }
 
-	public void Use(StaticObject staticObject)
+	public void Use(Entity entity)
     {
         if (attack || takingDamage || dying || dead || ressurecting)
             return;
-        targetPoint = staticObject.GetComponent<Iso>().pos;
-		targetStaticObject = staticObject;
+        targetPoint = Iso.MapToIso(entity.transform.position);
+		targetEntity = entity;
         targetCharacter = null;
         moving = true;
     }
@@ -113,7 +97,7 @@ public class Character : Entity
 
         moving = true;
         targetPoint = target;
-        targetStaticObject = null;
+        targetEntity = null;
         targetCharacter = null;
     }
 
@@ -143,28 +127,26 @@ public class Character : Entity
         Iso targetIso = targetCharacter.GetComponent<Iso>();
         targetPoint = targetIso.pos;
         this.targetCharacter = targetCharacter;
-        targetStaticObject = null;
+        targetEntity = null;
         moving = true;
     }
 
     void AbortPath()
     {
-        m_Target = null;
         path.Clear();
         traveled = 0;
     }
 
 	void Update() {
         if (!takingDamage && !dead && !dying && !ressurecting) {
-            if (targetStaticObject)
+            if (targetEntity)
             {
-                var distance = Vector2.Distance(iso.pos, targetStaticObject.GetComponent<Iso>().pos);
-                if (distance <= diameter + useRange + targetStaticObject.objectInfo.sizeX / 2)
+                var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
+                if (distance <= diameter + targetEntity.operateRange)
                 {
-                    targetStaticObject.Use();
+                    targetEntity.Operate();
                     moving = false;
-                    targetStaticObject = null;
-                    m_Target = null;
+                    targetEntity = null;
                 }
             }
             if (targetCharacter && !attack)
@@ -388,7 +370,6 @@ public class Character : Entity
                     targetCharacter.TakeDamage(attackDamage, this);
                 }
                 targetCharacter = null;
-                m_Target = null;
             }
         }
     }

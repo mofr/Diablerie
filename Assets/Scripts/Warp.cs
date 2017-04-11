@@ -50,4 +50,9 @@ public class Warp : Entity
     {
         MouseSelection.Submit(this);
     }
+
+    public override void Operate()
+    {
+        Debug.Log("WARP!");
+    }
 }
