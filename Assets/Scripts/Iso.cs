@@ -84,10 +84,10 @@ public class Iso : MonoBehaviour
 		DebugDrawTile(pos, Color.white, margin, duration);
 	}
 
-	static public Vector3 Snap(Vector3 pos) {
-		pos.x = Mathf.Round(pos.x);
-		pos.y = Mathf.Round(pos.y);
-		return pos;
+	static public Vector2i Snap(Vector3 pos) {
+		return new Vector2i(
+            Mathf.RoundToInt(pos.x), 
+            Mathf.RoundToInt(pos.y));
 	}
 
     static public Vector3 MacroTile(Vector3 pos)

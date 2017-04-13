@@ -115,7 +115,7 @@ public class Pathing {
         {
             int dir = i % 8;
             Vector2i pos = node.pos + directions[dir];
-            bool passable = CollisionMap.PassableTile(pos, 2, ignore: self);
+            bool passable = CollisionMap.Passable(pos, 2, ignore: self);
 
             if (passable)
             {

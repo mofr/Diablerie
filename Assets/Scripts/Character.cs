@@ -395,7 +395,7 @@ public class Character : Entity
             if (monStat != null)
                 return monStat.name;
             else
-                return "monStat null";
+                return gameObject.name;
         }
     }
 

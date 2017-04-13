@@ -28,12 +28,12 @@ public class CollisionMap : MonoBehaviour {
     {
         Color color = new Color(1, 0, 0, 0.3f);
         Color freeColor = new Color(1, 1, 1, 0.03f);
-        Vector3 pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
+        Vector2i pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
         int debugWidth = 100;
         int debugHeight = 100;
         pos.x -= debugWidth / 2;
         pos.y -= debugHeight / 2;
-        int index = instance.MapToIndex(Iso.Snap(pos));
+        int index = instance.MapToIndex(pos);
         for (int y = 0; y < debugHeight; ++y)
         {
             for (int x = 0; x < debugWidth; ++x)
@@ -49,12 +49,12 @@ public class CollisionMap : MonoBehaviour {
 
     private int MapToIndex(Vector3 pos)
     {
-		return origin + Mathf.RoundToInt(pos.x + pos.y * width);
+		return MapToIndex(Iso.Snap(pos));
 	}
 
     private int MapToIndex(Vector2i pos)
     {
-        return origin + Mathf.RoundToInt(pos.x + pos.y * width);
+        return origin + pos.x + pos.y * width;
     }
 
     private Vector3 MapToIso(int index)
@@ -70,26 +70,18 @@ public class CollisionMap : MonoBehaviour {
         return instance.map[index];
     }
 
-    public static void SetCell(Vector3 pos, Cell cell)
-    {
-        var tilePos = Iso.Snap(pos);
-        int index = instance.MapToIndex(tilePos);
-        instance.map[index] = cell;
-    }
-
     public static bool Passable(Vector3 pos, int radius = 0, bool debug = false, GameObject ignore = null)
     {
-        var tilePos = Iso.Snap(pos);
-        return PassableTile(tilePos, radius, debug, ignore);
+        return Passable(Iso.Snap(pos), radius, debug, ignore);
     }
 
-    public static bool PassableTile(Vector3 tilePos, int radius = 0, bool debug = false, GameObject ignore = null)
+    public static bool Passable(Vector2i pos, int radius = 0, bool debug = false, GameObject ignore = null)
     {
-        int index = instance.MapToIndex(tilePos);
-        return PassableTile(index, radius, debug, ignore);
+        int index = instance.MapToIndex(pos);
+        return Passable(index, radius, debug, ignore);
     }
 
-    public static bool PassableTile(int index, int radius = 0, bool debug = false, GameObject ignore = null)
+    public static bool Passable(int index, int radius = 0, bool debug = false, GameObject ignore = null)
     {
         UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
         var c0 = instance.map[index];
@@ -121,17 +113,27 @@ public class CollisionMap : MonoBehaviour {
         return passable;
     }
 
-    public static void SetPassable(Vector3 tilePos, bool passable)
+    public static void SetPassable(Vector3 pos, bool passable)
     {
-        int index = instance.MapToIndex(tilePos);
+        SetPassable(Iso.Snap(pos), passable);
+    }
+
+    public static void SetPassable(Vector2i pos, bool passable)
+    {
+        int index = instance.MapToIndex(pos);
         instance.map[index].passable = passable;
     }
 
-    public static void SetPassable(Vector3 tilePos, int sizeX, int sizeY, bool passable)
+    public static void SetPassable(Vector3 pos, int sizeX, int sizeY, bool passable)
+    {
+        SetPassable(Iso.Snap(pos), sizeX, sizeY, passable);
+    }
+
+    public static void SetPassable(Vector2i pos, int sizeX, int sizeY, bool passable)
     {
         if (!Application.isPlaying)
             return;
-        int index = instance.MapToIndex(tilePos) - sizeX / 2 - sizeY / 2 * instance.height;
+        int index = instance.MapToIndex(pos) - sizeX / 2 - sizeY / 2 * instance.height;
         int step = instance.width - sizeX;
         for (int y = 0; y < sizeY; ++y)
         {
@@ -211,9 +213,6 @@ public class CollisionMap : MonoBehaviour {
 
     static public void Move(Vector2 from, Vector2 to, GameObject gameObject)
     {
-        from = Iso.Snap(from);
-        to = Iso.Snap(to);
-
         int indexFrom = instance.MapToIndex(from);
         int indexTo = instance.MapToIndex(to);
 
@@ -226,9 +225,9 @@ public class CollisionMap : MonoBehaviour {
 
     static public Vector3 Fit(Vector3 pos, int size = 1)
     {
-        int index = instance.MapToIndex(Iso.Snap(pos));
+        int index = instance.MapToIndex(pos);
 
-        if (PassableTile(index, size))
+        if (Passable(index, size))
         {
             return instance.MapToIso(index);
         }
@@ -239,13 +238,13 @@ public class CollisionMap : MonoBehaviour {
         {
             int end = index + sign * i;
             for(; index != end; index += sign)
-                if (PassableTile(index, size))
+                if (Passable(index, size))
                     return instance.MapToIso(index);
 
             end = index - sign * i * instance.width;
             int step = -sign * instance.width;
             for (; index != end; index += step)
-                if (PassableTile(index, size))
+                if (Passable(index, size))
                     return instance.MapToIso(index);
         }
         return instance.MapToIso(index);
