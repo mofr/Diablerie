@@ -10,12 +10,12 @@ public class NpcController : MonoBehaviour
     void Awake()
     {
         iso = GetComponent<Iso>();
+        character = GetComponent<Character>();
     }
 
-    void Start()
+    void OnEnable()
     {
         initialPosition = iso.pos;
-        character = GetComponent<Character>();
         StartCoroutine(WalkAround());
     }
 

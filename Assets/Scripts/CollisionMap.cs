@@ -39,6 +39,9 @@ public class CollisionMap : MonoBehaviour
         {
             for (int x = 0; x < debugWidth; ++x)
             {
+                if (index + x < 0 || index + x >= instance.map.Length)
+                    continue;
+
                 if (!instance.map[index + x].passable)
                     Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
                 else
