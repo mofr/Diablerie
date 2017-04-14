@@ -483,21 +483,18 @@ public class LevelBuilder
             meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
         }
         meshFilter.mesh = mesh;
-
-        if (Application.isPlaying)
+        
+        int flagIndex = 0;
+        for (int dy = 2; dy > -3; --dy)
         {
-            int flagIndex = 0;
-            for (int dy = 2; dy > -3; --dy)
+            for (int dx = -2; dx < 3; ++dx)
             {
-                for (int dx = -2; dx < 3; ++dx)
+                if ((tile.flags[flagIndex] & (1 + 8)) != 0)
                 {
-                    if ((tile.flags[flagIndex] & (1 + 8)) != 0)
-                    {
-                        var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
-                        CollisionMap.SetPassable(subCellPos, false);
-                    }
-                    ++flagIndex;
+                    var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
+                    CollisionMap.SetPassable(subCellPos, false);
                 }
+                ++flagIndex;
             }
         }
 
