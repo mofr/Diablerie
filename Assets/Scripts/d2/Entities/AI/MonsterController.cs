@@ -14,11 +14,11 @@ public class MonsterController : MonoBehaviour
 	void Awake()
     {
         iso = GetComponent<Iso>();
+        character = GetComponent<Character>();
     }
 
-    void Start()
+    void OnEnable()
     {
-        character = GetComponent<Character>();
         StartCoroutine(Roam());
     }
 
