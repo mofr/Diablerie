@@ -22,7 +22,8 @@ public class Iso : MonoBehaviour
         return new Vector3(x - y, -(x + y) / 2) * tileSize;
     }
 
-    static public Vector3 MapToWorld(Vector3 iso) {
+    static public Vector3 MapToWorld(Vector3 iso)
+    {
         return MapToWorld(iso.x, iso.y);
 	}
 
@@ -36,7 +37,8 @@ public class Iso : MonoBehaviour
         return MapTileToWorld(new Vector3(x, y));
     }
 
-    static public Vector3 MapToIso(Vector3 world) {
+    static public Vector3 MapToIso(Vector3 world)
+    {
 		return new Vector3(-world.y + world.x / 2, -world.y - world.x / 2) / tileSize;
 	}
 
@@ -50,7 +52,8 @@ public class Iso : MonoBehaviour
         return sortingOrder;
     }
 
-	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f) {
+	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f)
+    {
 		float d = 0.5f - margin;
         var topRight = MapToWorld(pos + new Vector3(d, d));
         var topLeft = MapToWorld(pos + new Vector3(-d, d));
@@ -80,11 +83,13 @@ public class Iso : MonoBehaviour
         Gizmos.DrawLine(bottomRight, bottomLeft);
     }
 
-    static public void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f) {
+    static public void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f)
+    {
 		DebugDrawTile(pos, Color.white, margin, duration);
 	}
 
-	static public Vector2i Snap(Vector3 pos) {
+	static public Vector2i Snap(Vector3 pos)
+    {
 		return new Vector2i(
             Mathf.RoundToInt(pos.x), 
             Mathf.RoundToInt(pos.y));
@@ -117,35 +122,17 @@ public class Iso : MonoBehaviour
         };
     }
 
-    void Awake() {
+    void Awake()
+    {
 		pos = MapToIso(transform.position);
 		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
-	void Start () {
-		
-	}
+    void Update ()
+    {
+        transform.position = MapToWorld(pos);
 
-    void Update () {
-        if (Application.isPlaying)
-        {
-            transform.position = MapToWorld(pos);
-        }
-        else
-        {
-            if (macro)
-            {
-                transform.position = MapToWorld(MacroTile(MapToIso(transform.position))) * 5;
-            }
-            else
-            {
-                transform.position = MapToWorld(Snap(MapToIso(transform.position)));
-            }
-            pos = MapToIso(transform.position);
-        }
-
-		if (sort) {
+		if (sort)
 			spriteRenderer.sortingOrder = SortingOrder(transform.position);
-		}
     }
 }

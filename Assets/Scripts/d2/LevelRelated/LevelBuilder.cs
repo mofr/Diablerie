@@ -212,6 +212,9 @@ public class LevelBuilder
         InstantiateMonsters(offset, root);
         InstantiateDebugGrid(offset, root, gridSize: 8);
 
+        foreach (var popup in popups)
+            popup.transform.SetParent(root.transform);
+
         return root;
     }
 
@@ -220,7 +223,7 @@ public class LevelBuilder
         if (info == null)
             return;
 
-        MonStat[] monsters = new MonStat[info.numMon];
+        MonStat[] monStats = new MonStat[info.numMon];
         int[] monsterColumns = new int[info.numMon];
         for(int i = 0; i < info.numMon; ++i)
             monsterColumns[i] = -1;
@@ -234,7 +237,7 @@ public class LevelBuilder
             }
             while (System.Array.IndexOf(monsterColumns, index) != -1);
             monsterColumns[i] = index;
-            monsters[i] = MonStat.Find(info.monsters[index]);
+            monStats[i] = MonStat.Find(info.monsters[index]);
         }
 
         int density = info.monDen[0];
@@ -247,10 +250,13 @@ public class LevelBuilder
                 if (sample >= density)
                     continue;
 
-                var monster = monsters[Random.Range(0, monsters.Length)];
-                int count = Random.Range(monster.minGrp, monster.maxGrp + 1);
-                for(int i = 0; i < count; ++i)
-                    World.SpawnMonster(monster, Iso.MapTileToWorld(x, y));
+                var monStat = monStats[Random.Range(0, monStats.Length)];
+                int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
+                for (int i = 0; i < count; ++i)
+                {
+                    var monster = World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y));
+                    monster.transform.SetParent(root.transform);
+                }
             }
         }
     }
@@ -483,21 +489,19 @@ public class LevelBuilder
             meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
         }
         meshFilter.mesh = mesh;
-
-        if (Application.isPlaying)
+        
+        int flagIndex = 0;
+        var collisionMapIndex = Iso.Snap(Iso.MapToIso(pos));
+        for (int dy = 2; dy > -3; --dy)
         {
-            int flagIndex = 0;
-            for (int dy = 2; dy > -3; --dy)
+            for (int dx = -2; dx < 3; ++dx)
             {
-                for (int dx = -2; dx < 3; ++dx)
+                if ((tile.flags[flagIndex] & (1 + 8)) != 0)
                 {
-                    if ((tile.flags[flagIndex] & (1 + 8)) != 0)
-                    {
-                        var subCellPos = Iso.MapToIso(pos) + new Vector3(dx, dy);
-                        CollisionMap.SetPassable(subCellPos, false);
-                    }
-                    ++flagIndex;
+                    var subCellPos = collisionMapIndex + new Vector2i(dx, dy);
+                    CollisionMap.SetPassable(subCellPos, false);
                 }
+                ++flagIndex;
             }
         }
 

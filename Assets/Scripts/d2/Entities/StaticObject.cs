@@ -93,9 +93,6 @@ public class StaticObject : Entity
 
     void OnRenderObject()
     {
-        if (!Application.isPlaying)
-            return;
-
         if (objectInfo.draw && objectInfo.selectable[mode])
             MouseSelection.Submit(this);
     }

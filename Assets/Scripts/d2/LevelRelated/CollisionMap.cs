@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-public class CollisionMap : MonoBehaviour {
-
+[ExecuteInEditMode]
+public class CollisionMap : MonoBehaviour
+{
     static private CollisionMap instance;
 
     public struct Cell
@@ -15,7 +16,7 @@ public class CollisionMap : MonoBehaviour {
     private int origin;
     private Cell[] map;
 
-    void Awake()
+    void OnEnable()
     {
         map = new Cell[width * height];
         origin = width * 3;
@@ -38,6 +39,9 @@ public class CollisionMap : MonoBehaviour {
         {
             for (int x = 0; x < debugWidth; ++x)
             {
+                if (index + x < 0 || index + x >= instance.map.Length)
+                    continue;
+
                 if (!instance.map[index + x].passable)
                     Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
                 else
@@ -131,8 +135,6 @@ public class CollisionMap : MonoBehaviour {
 
     public static void SetPassable(Vector2i pos, int sizeX, int sizeY, bool passable)
     {
-        if (!Application.isPlaying)
-            return;
         int index = instance.MapToIndex(pos) - sizeX / 2 - sizeY / 2 * instance.height;
         int step = instance.width - sizeX;
         for (int y = 0; y < sizeY; ++y)
