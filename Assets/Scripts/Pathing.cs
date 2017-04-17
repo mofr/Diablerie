@@ -86,7 +86,6 @@ public class Pathing {
         new Vector2i(1, 0), new Vector2i(1, 1), new Vector2i(0, 1), new Vector2i(-1, 1),
         new Vector2i(-1, 0), new Vector2i(-1, -1), new Vector2i(0, -1), new Vector2i(1, -1),
     };
-    static private int directionCount;
     static private GameObject self;
 
     static private void StepTo(Node node)
@@ -170,7 +169,7 @@ public class Pathing {
         UnityEngine.Profiling.Profiler.EndSample();
     }
 
-	static public List<Step> BuildPath(Vector2 from_, Vector2 target_, int directionCount = 8, float minRange = 0.1f, GameObject self = null, int depth = 100)
+	static public List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, GameObject self = null, int depth = 100)
     {
         UnityEngine.Profiling.Profiler.BeginSample("BuildPath");
         Vector2i from = (Vector2i)Iso.Snap(from_);
@@ -184,7 +183,6 @@ public class Pathing {
         openNodes.Clear();
         Node.Recycle(closeNodes);
 
-        Pathing.directionCount = directionCount;
         Pathing.self = self;
         Node startNode = Node.Get();
 		startNode.parent = null;
