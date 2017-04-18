@@ -19,7 +19,7 @@ public class CollisionMap : MonoBehaviour
     void OnEnable()
     {
         map = new Cell[width * height];
-        origin = width * 3;
+        origin = width * 5 + 5;
         instance = this;
         for (int i = 0; i < map.Length; ++i)
             map[i].passable = true;
@@ -234,18 +234,18 @@ public class CollisionMap : MonoBehaviour
             return instance.MapToIso(index);
         }
 
-        int maxIterations = 1000;
+        int maxIterations = 100;
         int sign = 1;
         for(int i = 1; i < maxIterations; ++i, sign=-sign)
         {
             int end = index + sign * i;
-            for(; index != end; index += sign)
+            for(; index != end && index > size && index < instance.map.Length - size - 1; index += sign)
                 if (Passable(index, size))
                     return instance.MapToIso(index);
 
             end = index - sign * i * instance.width;
             int step = -sign * instance.width;
-            for (; index != end; index += step)
+            for(; index != end && index > size && index < instance.map.Length - size - 1; index += step)
                 if (Passable(index, size))
                     return instance.MapToIso(index);
         }

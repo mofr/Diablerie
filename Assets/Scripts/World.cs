@@ -8,9 +8,13 @@ public class World : MonoBehaviour
         var town = new LevelBuilder("Act 1 - Town");
         var bloodMoor = CreateBloodMoor();
 
-        var townOffset = new Vector2i(bloodMoor.width - town.width, bloodMoor.height);
+        var townOffset = new Vector2i(bloodMoor.gridWidth * bloodMoor.gridX - town.gridWidth * town.gridX, bloodMoor.gridHeight * bloodMoor.gridY);
         town.Instantiate(townOffset);
         bloodMoor.Instantiate(new Vector2i(0, 0));
+
+        var doe = new LevelBuilder("Act 1 - Cave 1", 24, 24);
+        var doeOffset = new Vector2i(90, 0);
+        doe.Instantiate(doeOffset);
 
         var entry = town.FindEntry();
         SpawnPlayer(Iso.MapTileToWorld(entry + townOffset));
@@ -18,7 +22,7 @@ public class World : MonoBehaviour
 
     LevelBuilder CreateBloodMoor()
     {
-        var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1");
+        var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", 8, 8);
         var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
         var uRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Uriver.ds1");
         var lRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Lriver.ds1");
@@ -31,31 +35,31 @@ public class World : MonoBehaviour
         var cottage = LevelPreset.Find("Act 1 - Cottages 1");
         var denEntrance = LevelPreset.Find("Act 1 - DOE Entrance");
 
-        for (int i = 0; i < bloodMoor.height / (uRiver.height - 1); ++i)
-            bloodMoor.Place(lRiver, new Vector2i(bloodMoor.width - (lRiver.width - 1), i * (lRiver.height - 1)));
-        for (int i = 1; i < bloodMoor.height / (lRiver.height - 1); ++i)
-            bloodMoor.Place(uRiver, new Vector2i(bloodMoor.width - (lRiver.width - 1 + uRiver.width - 1), i * (uRiver.height - 1)));
-        bloodMoor.Place(riverN, new Vector2i(bloodMoor.width - 16, 0));
+        for (int i = 0; i < bloodMoor.gridHeight; ++i)
+            bloodMoor.Place(lRiver, new Vector2i(bloodMoor.gridWidth - 1, i));
+        for (int i = 1; i < bloodMoor.gridHeight; ++i)
+            bloodMoor.Place(uRiver, new Vector2i(bloodMoor.gridWidth - 2, i));
+        bloodMoor.Place(riverN, new Vector2i(bloodMoor.gridWidth - 2, 0));
 
-        for (int i = 1; i < bloodMoor.height / bord2.sizeY - 1; ++i)
-            bloodMoor.Place(bord2, new Vector2i(0, i * bord2.sizeY), 0, 3);
-        bloodMoor.Place(bord5, new Vector2i(0, bloodMoor.height - bord5.sizeY));
+        for (int i = 1; i < bloodMoor.gridHeight - 1; ++i)
+            bloodMoor.Place(bord2, new Vector2i(0, i), 0, 3);
+        bloodMoor.Place(bord5, new Vector2i(0, bloodMoor.gridHeight - 1));
 
         for(int i = 1; i < 3; ++i)
-            bloodMoor.Place(bord1, new Vector2i(i * bord1.sizeX, bloodMoor.height - bord1.sizeY), 0, 3);
-        bloodMoor.Place(bord9, new Vector2i(3 * bord9.sizeX, bloodMoor.height - bord9.sizeY));
+            bloodMoor.Place(bord1, new Vector2i(i, bloodMoor.gridHeight - 1), 0, 3);
+        bloodMoor.Place(bord9, new Vector2i(3, bloodMoor.gridHeight - 1));
 
-        for (int i = 1; i < (bloodMoor.width - (lRiver.width - 1) * 2) / bord3.sizeX; ++i)
-            bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0), 0, 3);
+        for (int i = 1; i < bloodMoor.gridWidth - 2; ++i)
+            bloodMoor.Place(bord3, new Vector2i(i, 0), 0, 3);
 
         bloodMoor.Place(bord6, new Vector2i(0, 0));
-        for (int i = 0; i < 5; ++i)
-            bloodMoor.Place(cottage, new Vector2i(8 + i * 8, 32 + 8 * Random.Range(-1, 1)));
-        bloodMoor.Place(denEntrance, new Vector2i(40, 56));
+        for (int i = 1; i < 5; ++i)
+            bloodMoor.Place(cottage, new Vector2i(i, 4 + Random.Range(-1, 1)));
+        bloodMoor.Place(denEntrance, new Vector2i(5, 7));
 
         return bloodMoor;
     }
-    
+
     static void SpawnPlayer(Vector3 pos)
     {
         var player = new GameObject("Player");
