@@ -361,7 +361,7 @@ public class LevelBuilder
                         int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
                         if (sampler.Sample(index, out tile))
                         {
-                            var renderer = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                            CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
                         }
                         else
                         {

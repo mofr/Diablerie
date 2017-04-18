@@ -22,7 +22,6 @@ public class ScreenFader : MonoBehaviour
         overlay.transform.localScale = new Vector3(1, 1, 1);
         overlay.rectTransform.anchorMin = new Vector2(0, 0);
         overlay.rectTransform.anchorMax = new Vector2(1, 1);
-        overlay.raycastTarget = false;
     }
 
     void Start()

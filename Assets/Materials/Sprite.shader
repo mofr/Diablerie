@@ -5,7 +5,7 @@ Shader "Sprite"
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
         _Color("Tint", Color) = (1,1,1,1)
         [MaterialToggle] PixelSnap("Pixel snap", Float) = 0
-		_Brightness("Brightness", Float) = 1.0
+        _Brightness("Brightness", Float) = 1.0
         _Contrast("Contrast", Float) = 1.0
     }
 
@@ -32,7 +32,6 @@ Shader "Sprite"
 #pragma fragment frag
 #pragma target 2.0
 #pragma multi_compile _ PIXELSNAP_ON
-#pragma multi_compile _ ETC1_EXTERNAL_ALPHA
 #include "UnityCG.cginc"
 
             struct appdata_t
@@ -56,8 +55,8 @@ Shader "Sprite"
         };
 
         fixed4 _Color;
-		float _Brightness;
-		float _Contrast;
+        float _Brightness;
+        float _Contrast;
 
         v2f vert(appdata_t IN)
         {
@@ -77,27 +76,15 @@ Shader "Sprite"
         sampler2D _MainTex;
         sampler2D _AlphaTex;
 
-        fixed4 SampleSpriteTexture(float2 uv)
-        {
-            fixed4 color = tex2D(_MainTex, uv);
-
-#if ETC1_EXTERNAL_ALPHA
-            // get the color from an external texture (usecase: Alpha support for ETC1 on android)
-            color.a = tex2D(_AlphaTex, uv).r;
-#endif //ETC1_EXTERNAL_ALPHA
-
-            return color;
-        }
-
         fragmentOutput frag(v2f IN)
         {
             fragmentOutput o;
-            o.color = SampleSpriteTexture(IN.texcoord) * IN.color;
+            o.color = tex2D(_MainTex, IN.texcoord) * IN.color;
             o.color.rgb *= o.color.a * _Brightness;
-			o.color.rgb = (o.color.rgb - 0.5) * _Contrast + 0.5;
+            o.color.rgb = (o.color.rgb - 0.5) * _Contrast + 0.5;
             return o;
         }
             ENDCG
         }
-        }
+    }
 }
