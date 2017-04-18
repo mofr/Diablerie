@@ -154,7 +154,6 @@ public class LevelBuilder
                     int offsetX = offset.x + x * gridX;
                     int offsetY = offset.y + y * gridY;
                     Instantiate(ds1, offsetX, offsetY, root.transform);
-                    
                 }
                 else if (info != null && info.drlgType == 3)
                 {
@@ -222,7 +221,7 @@ public class LevelBuilder
 
     private void InstantiateDebugGrid(Vector2i offset, Transform root)
     {
-        var grid = new GameObject();
+        var grid = new GameObject("debug grid");
         grid.transform.SetParent(root);
         grid.layer = UnityLayers.SpecialTiles;
 
@@ -377,6 +376,11 @@ public class LevelBuilder
             int warpId = info.warp[cell.mainIndex];
             var targetLevel = LevelInfo.Find(targetLevelId);
             var levelWarpInfo = LevelWarpInfo.Find(warpId);
+            if (levelWarpInfo == null)
+            {
+                Debug.LogWarning("Warp info wasn't found");
+                return;
+            }
             Warp.Create(x, y, levelWarpInfo, targetLevel, parent);
         }
     }

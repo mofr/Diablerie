@@ -12,12 +12,38 @@ public class World : MonoBehaviour
         town.Instantiate(townOffset);
         bloodMoor.Instantiate(new Vector2i(0, 0));
 
-        var doe = new LevelBuilder("Act 1 - Cave 1", 24, 24);
+        var doe = CreateDenOfEvil();
         var doeOffset = new Vector2i(90, 0);
         doe.Instantiate(doeOffset);
 
         var entry = town.FindEntry();
         SpawnPlayer(Iso.MapTileToWorld(entry + townOffset));
+    }
+
+    LevelBuilder CreateDenOfEvil()
+    {
+        var builder = new LevelBuilder("Act 1 - Cave 1", 24, 24);
+        var palette = new Maze.Palette();
+        palette.previous = new LevelPreset[4];
+        palette.previous[0] = LevelPreset.Find("Act 1 - Cave Prev W");
+        palette.previous[1] = LevelPreset.Find("Act 1 - Cave Prev E");
+        palette.previous[2] = LevelPreset.Find("Act 1 - Cave Prev S");
+        palette.previous[3] = LevelPreset.Find("Act 1 - Cave Prev N");
+        palette.next = new LevelPreset[4];
+        palette.next[0] = LevelPreset.Find("Act 1 - Cave Next W");
+        palette.next[1] = LevelPreset.Find("Act 1 - Cave Next E");
+        palette.next[2] = LevelPreset.Find("Act 1 - Cave Next S");
+        palette.next[3] = LevelPreset.Find("Act 1 - Cave Next N");
+        palette.down = new LevelPreset[4];
+        palette.down[0] = LevelPreset.Find("Act 1 - Cave Down W");
+        palette.down[1] = LevelPreset.Find("Act 1 - Cave Down E");
+        palette.down[2] = LevelPreset.Find("Act 1 - Cave Down S");
+        palette.down[3] = LevelPreset.Find("Act 1 - Cave Down N");
+        palette.rooms = new LevelPreset[15];
+        for (int i = 0; i < 15; ++i)
+            palette.rooms[i] = LevelPreset.sheet.rows[53 + i];
+        Maze.Generate(builder, palette);
+        return builder;
     }
 
     LevelBuilder CreateBloodMoor()
