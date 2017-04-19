@@ -13,6 +13,7 @@ public class LevelBuilder
     DS1[] grid;
     List<Popup> popups = new List<Popup>();
     DT1.Sampler tileSampler = new DT1.Sampler();
+    MonStat[] monStats;
 
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
@@ -141,6 +142,8 @@ public class LevelBuilder
 
             var level = root.AddComponent<Level>();
             level.info = info;
+
+            SelectMonsterTypes();
         }
 
         int i = 0;
@@ -182,9 +185,51 @@ public class LevelBuilder
         if (info == null)
             return;
 
-        MonStat[] monStats = new MonStat[info.numMon];
+        int density = info.monDen[0];
+
+        for (int x = offsetX; x < offsetX + gridX; ++x)
+        {
+            for (int y = offsetY; y < offsetY + gridY; ++y)
+            {
+                int sample = Random.Range(0, 100000);
+                if (sample >= density)
+                    continue;
+
+                var monStat = monStats[Random.Range(0, monStats.Length)];
+                Spawn(monStat, x, y, root);
+            }
+        }
+    }
+
+    private static void Spawn(MonStat monStat, int x, int y, Transform root)
+    {
+        if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
+            return;
+
+        int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
+        for (int i = 0; i < count; ++i)
+        {
+            World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y), root);
+        }
+
+        if (monStat.minion1 != null)
+        {
+            int minionCount = Random.Range(monStat.partyMin, monStat.partyMax);
+            for(int i = 0; i < minionCount; ++i)
+            {
+                World.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
+            }
+        }
+    }
+
+    private void SelectMonsterTypes()
+    {
+        if (info == null)
+            return;
+
+        monStats = new MonStat[info.numMon];
         int[] monsterColumns = new int[info.numMon];
-        for(int i = 0; i < info.numMon; ++i)
+        for (int i = 0; i < info.numMon; ++i)
             monsterColumns[i] = -1;
 
         for (int i = 0; i < info.numMon; ++i)
@@ -197,31 +242,6 @@ public class LevelBuilder
             while (System.Array.IndexOf(monsterColumns, index) != -1);
             monsterColumns[i] = index;
             monStats[i] = MonStat.Find(info.monsters[index]);
-        }
-
-        int density = info.monDen[0];
-
-        for (int x = offsetX; x < offsetX + gridX; ++x)
-        {
-            for (int y = offsetY; y < offsetY + gridY; ++y)
-            {
-                int sample = Random.Range(0, 100000);
-                if (sample >= density)
-                    continue;
-
-                var monStat = monStats[Random.Range(0, monStats.Length)];
-
-                if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
-                    continue;
-
-                int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
-                for (int i = 0; i < count; ++i)
-                {
-                    var monster = World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y));
-                    if (monster != null)
-                        monster.transform.SetParent(root);
-                }
-            }
         }
     }
 

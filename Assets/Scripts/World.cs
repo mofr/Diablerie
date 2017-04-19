@@ -113,13 +113,13 @@ public class World : MonoBehaviour
         collider.radius = Iso.tileSizeY;
     }
 
-    public static Character SpawnMonster(string id, Vector3 pos)
+    public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null)
     {
         MonStat monStat = MonStat.Find(id);
         return SpawnMonster(monStat, pos);
     }
 
-    public static Character SpawnMonster(MonStat monStat, Vector3 pos)
+    public static Character SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null)
     {
         pos = Iso.MapToIso(pos);
         if (!CollisionMap.Fit(pos, out pos, monStat.ext.sizeX))
@@ -129,6 +129,7 @@ public class World : MonoBehaviour
         pos = Iso.MapToWorld(pos);
 
         var monster = new GameObject(monStat.nameStr);
+        monster.transform.SetParent(parent);
         monster.transform.position = pos;
 
         var character = monster.AddComponent<Character>();
