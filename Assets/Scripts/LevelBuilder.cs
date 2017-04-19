@@ -209,11 +209,16 @@ public class LevelBuilder
                     continue;
 
                 var monStat = monStats[Random.Range(0, monStats.Length)];
+
+                if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
+                    continue;
+
                 int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
                 for (int i = 0; i < count; ++i)
                 {
                     var monster = World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y));
-                    monster.transform.SetParent(root);
+                    if (monster != null)
+                        monster.transform.SetParent(root);
                 }
             }
         }
@@ -475,17 +480,22 @@ public class LevelBuilder
         meshFilter.mesh = mesh;
         
         int flagIndex = 0;
-        var collisionMapIndex = Iso.Snap(Iso.MapToIso(pos));
+        var collisionMapOffset = Iso.Snap(Iso.MapToIso(pos));
+        byte mask = DT1.BlockFlags.Walk | DT1.BlockFlags.PlayerWalk;
         for (int dy = 2; dy > -3; --dy)
         {
-            for (int dx = -2; dx < 3; ++dx)
+            for (int dx = -2; dx < 3; ++dx, ++flagIndex)
             {
-                if ((tile.flags[flagIndex] & (1 + 8)) != 0)
+                var subCellPos = collisionMapOffset + new Vector2i(dx, dy);
+                bool passable = (tile.flags[flagIndex] & mask) == 0;
+                if (tile.orientation == 0)
                 {
-                    var subCellPos = collisionMapIndex + new Vector2i(dx, dy);
+                    CollisionMap.SetPassable(subCellPos, passable);
+                }
+                else if (CollisionMap.Passable(subCellPos) && !passable)
+                {
                     CollisionMap.SetPassable(subCellPos, false);
                 }
-                ++flagIndex;
             }
         }
 

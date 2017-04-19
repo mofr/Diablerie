@@ -21,8 +21,6 @@ public class CollisionMap : MonoBehaviour
         map = new Cell[width * height];
         origin = width * 5 + 5;
         instance = this;
-        for (int i = 0; i < map.Length; ++i)
-            map[i].passable = true;
     }
 
     void DrawDebugCellGrid()
@@ -88,6 +86,9 @@ public class CollisionMap : MonoBehaviour
     public static bool Passable(int index, int radius = 0, bool debug = false, GameObject ignore = null)
     {
         UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
+        if (index - radius - radius * instance.width < 0 || index + radius + radius * instance.width >= instance.map.Length)
+            return false;
+
         var c0 = instance.map[index];
         bool passable = c0.passable || (ignore != null && ignore == c0.gameObject);
         if (radius > 0)
@@ -225,13 +226,14 @@ public class CollisionMap : MonoBehaviour
         instance.map[indexTo].gameObject = gameObject;
     }
 
-    static public Vector3 Fit(Vector3 pos, int size = 1)
+    static public bool Fit(Vector3 pos, out Vector3 result, int size = 1)
     {
         int index = instance.MapToIndex(pos);
 
         if (Passable(index, size))
         {
-            return instance.MapToIso(index);
+            result = instance.MapToIso(index);
+            return true;
         }
 
         int maxIterations = 100;
@@ -239,16 +241,28 @@ public class CollisionMap : MonoBehaviour
         for(int i = 1; i < maxIterations; ++i, sign=-sign)
         {
             int end = index + sign * i;
-            for(; index != end && index > size && index < instance.map.Length - size - 1; index += sign)
+            for (; index != end && index > size && index < instance.map.Length - size - 1; index += sign)
+            {
                 if (Passable(index, size))
-                    return instance.MapToIso(index);
+                {
+                    result = instance.MapToIso(index);
+                    return true;
+                }
+            }
 
             end = index - sign * i * instance.width;
             int step = -sign * instance.width;
-            for(; index != end && index > size && index < instance.map.Length - size - 1; index += step)
+            for (; index != end && index > size && index < instance.map.Length - size - 1; index += step)
+            {
                 if (Passable(index, size))
-                    return instance.MapToIso(index);
+                {
+                    result = instance.MapToIso(index);
+                    return true;
+                }
+            }
         }
-        return instance.MapToIso(index);
+
+        result = new Vector3();
+        return false;
     }
 }

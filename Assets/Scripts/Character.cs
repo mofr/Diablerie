@@ -106,8 +106,12 @@ public class Character : Entity
         if (attack || takingDamage || ressurecting)
             return;
 
-        iso.pos = CollisionMap.Fit(target, (int)diameter);
-        moving = false;
+        Vector3 newPos;
+        if (CollisionMap.Fit(target, out newPos, (int)diameter))
+        {
+            iso.pos = newPos;
+            moving = false;
+        }
     }
 
     public void Attack(Vector3 target)

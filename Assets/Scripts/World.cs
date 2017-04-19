@@ -121,10 +121,14 @@ public class World : MonoBehaviour
 
     public static Character SpawnMonster(MonStat monStat, Vector3 pos)
     {
-        var monster = new GameObject(monStat.nameStr);
         pos = Iso.MapToIso(pos);
-        pos = CollisionMap.Fit(pos, monStat.ext.sizeX);
+        if (!CollisionMap.Fit(pos, out pos, monStat.ext.sizeX))
+        {
+            return null;
+        }
         pos = Iso.MapToWorld(pos);
+
+        var monster = new GameObject(monStat.nameStr);
         monster.transform.position = pos;
 
         var character = monster.AddComponent<Character>();
@@ -162,15 +166,18 @@ public class World : MonoBehaviour
 
     public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos, bool fit = false)
     {
-        var gameObject = new GameObject();
-        gameObject.name = objectInfo.description;
-
         if (fit)
         {
             pos = Iso.MapToIso(pos);
-            pos = CollisionMap.Fit(pos, objectInfo.sizeX);
+            if (!CollisionMap.Fit(pos, out pos, objectInfo.sizeX))
+            {
+                return null;
+            }
             pos = Iso.MapToWorld(pos);
         }
+
+        var gameObject = new GameObject();
+        gameObject.name = objectInfo.description;
         gameObject.transform.position = pos;
 
         var staticObject = gameObject.AddComponent<StaticObject>();

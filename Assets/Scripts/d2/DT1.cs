@@ -8,6 +8,15 @@ public class DT1
     public Tile[] tiles;
     public List<Texture2D> textures = new List<Texture2D>();
 
+    public class BlockFlags
+    {
+        public const byte Walk = 1; // both player and mercenary
+        public const byte Light = 2; // and line of sight
+        public const byte Jump = 4;
+        public const byte PlayerWalk = 8;
+        public const byte LightOnly = 32; // but not line of sight
+    }
+
     public class Sampler
     {
         Dictionary<int, List<Tile>> tiles = new Dictionary<int, List<Tile>>();
@@ -101,7 +110,7 @@ public class DT1
         public Texture2D texture;
         public int textureX;
         public int textureY;
-        public int index;
+        public int index;        
 
         public void Read(BinaryReader reader)
         {
