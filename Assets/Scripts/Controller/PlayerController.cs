@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour {
         {
             targetPosition = Iso.MapToIso(MouseSelection.current.transform.position);
         }
-        else {
+        else
+        {
             targetPosition = IsoInput.mousePosition;
         }
         var path = Pathing.BuildPath(iso.pos, targetPosition, self: iso.gameObject);

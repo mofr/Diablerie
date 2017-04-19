@@ -57,6 +57,14 @@ public class Warp : Entity
         ScreenFader.FadeToClear();
         var target = Iso.MapToIso(transform.position) + new Vector3(20, 20);
         var iso = character.GetComponent<Iso>();
-        iso.pos = CollisionMap.Fit(target, (int)character.diameter);
+        Vector3 newPos;
+        if (CollisionMap.Fit(target, out newPos, (int)character.diameter))
+        {
+            iso.pos = newPos;
+        }
+        else
+        {
+            Debug.LogError("Wasn't able to fit character after warp");
+        }
     }
 }

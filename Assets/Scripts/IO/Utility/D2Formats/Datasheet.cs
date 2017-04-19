@@ -309,12 +309,12 @@ public class MonStat
     public string spawnX;
     public string spawnY;
     public string spawnMode;
-    public string minion1;
-    public string minion2;
+    public string minion1Id;
+    public string minion2Id;
     public string SetBoss;
     public string BossXfer;
-    public string PartyMin;
-    public string PartyMax;
+    public int partyMin = 0;
+    public int partyMax = 0;
     public int minGrp;
     public int maxGrp;
     public string sparsePopulate;
@@ -415,6 +415,12 @@ public class MonStat
     [System.NonSerialized]
     public string name;
 
+    [System.NonSerialized]
+    public MonStat minion1;
+
+    [System.NonSerialized]
+    public MonStat minion2;
+
     public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load("data/global/excel/monstats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
@@ -429,8 +435,9 @@ public class MonStat
             }
             stats.Add(key, stat);
             stat.ext = MonStatsExtended.Find(stat.id);
-            if (stat.nameStr != null)
-                stat.name = Translation.Find(stat.nameStr);
+            stat.name = stat.nameStr == null ? null : Translation.Find(stat.nameStr);
+            stat.minion1 = stat.minion1Id == null ? null : Find(stat.minion1Id);
+            stat.minion2 = stat.minion2Id == null ? null : Find(stat.minion2Id);
         }
     }
 

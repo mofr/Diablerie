@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class LevelBuilder
 {
-    public readonly int width;
-    public readonly int height;
+    public readonly int gridX;
+    public readonly int gridY;
+    public readonly int gridWidth;
+    public readonly int gridHeight;
+
     LevelInfo info;
     string name;
-    DS1.Cell[] floors;
-    List<DS1.Cell[]> walls = new List<DS1.Cell[]>();
-    List<DS1.ObjectSpawnInfo> objects = new List<DS1.ObjectSpawnInfo>();
-    DT1.Sampler[] samplers;
-    DT1.Sampler tileSampler = new DT1.Sampler();
+    DS1[] grid;
     List<Popup> popups = new List<Popup>();
+    DT1.Sampler tileSampler = new DT1.Sampler();
+    MonStat[] monStats;
 
     static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
     static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
@@ -28,34 +29,44 @@ public class LevelBuilder
         specialTiles.Add(dt1.tiles);
     }
 
-    public LevelBuilder(string name)
+    public LevelBuilder(string name, int gridX = -1, int gridY = -1)
     {
         info = LevelInfo.Find(name);
         this.name = info.levelName;
-        width = info.sizeX;
-        height = info.sizeY;
-        floors = new DS1.Cell[width * height];
-        InitSamplers();
+        
         if (info.preset != null)
         {
             var ds1 = DS1.Load(info.preset.ds1Files[0]);
-            Place(ds1, new Vector2i());
+            this.gridX = ds1.width - 1;
+            this.gridY = ds1.height - 1;
+            gridWidth = 1;
+            gridHeight = 1;
+            grid = new DS1[1] { ds1 };
         }
+        else
+        {
+            this.gridX = gridX;
+            this.gridY = gridY;
+            gridWidth = info.sizeX / gridX;
+            gridHeight = info.sizeY / gridY;
+            grid = new DS1[gridWidth * gridHeight];
+        }
+
+        InitTileSampler();
     }
 
     public LevelBuilder(DS1 ds1)
     {
         name = System.IO.Path.GetFileName(ds1.filename);
-        width = ds1.width;
-        height = ds1.height;
-        floors = new DS1.Cell[width * height];
-        InitSamplers();
-        Place(ds1, new Vector2i(), killEdge: false);
+        grid = new DS1[1] { ds1 };
+        gridWidth = 1;
+        gridHeight = 1;
+        gridX = ds1.width - 1;
+        gridY = ds1.height - 1;
     }
 
-    private void InitSamplers()
+    private void InitTileSampler()
     {
-        samplers = new DT1.Sampler[width * height];
         tileSampler = new DT1.Sampler();
         if (info != null)
         {
@@ -63,10 +74,6 @@ public class LevelBuilder
             {
                 var dt1 = DT1.Load(dt1Filename);
                 tileSampler.Add(dt1.tiles);
-            }
-            for (int i = 0; i < samplers.Length; ++i)
-            {
-                samplers[i] = tileSampler;
             }
         }
     }
@@ -80,83 +87,14 @@ public class LevelBuilder
         Place(ds1, pos);
     }
 
-    public void Place(DS1 ds1, Vector2i pos, bool killEdge = true)
+    public void Place(DS1 ds1, Vector2i pos)
     {
-        int stride = ds1.width;
-        int srcWidth = ds1.width;
-        int srcHeight = ds1.height;
-
-        if (killEdge)
-        {
-            srcWidth -= 1;
-            srcHeight -= 1;
-        }
-
-        for (int i = 0; i < ds1.floors.Length; ++i)
-        {
-            Blit(floors, ds1.floors[i], pos.x, pos.y, srcWidth, srcHeight, stride);
-        }
-
-        while (walls.Count < ds1.walls.Length)
-            walls.Add(new DS1.Cell[width * height]);
-
-        for (int i = 0; i < ds1.walls.Length; ++i)
-        {
-            Blit(walls[i], ds1.walls[i], pos.x, pos.y, srcWidth, srcHeight, stride);
-        }
-
-        for (int i = ds1.walls.Length; i < walls.Count; ++i)
-        {
-            Fill(walls[i], new DS1.Cell(), pos.x, pos.y, srcWidth, srcHeight);
-        }
-
-        Fill(samplers, ds1.tileSampler, pos.x, pos.y, srcWidth, srcHeight);
-
-        for (int i = 0; i < ds1.objects.Length; ++i)
-        {
-            var obj = ds1.objects[i];
-            obj.x += pos.x * Iso.SubTileCount;
-            obj.y += pos.y * Iso.SubTileCount;
-            objects.Add(obj);
-        }
-
-        CreatePopups(ds1, pos);
+        Debug.Assert(ds1.width - 1 == gridX);
+        Debug.Assert(ds1.height - 1 == gridY);
+        grid[pos.y * gridWidth + pos.x] = ds1;
     }
 
-    void Blit(DS1.Cell[] dst, DS1.Cell[] src, int offsetX, int offsetY, int srcWidth, int srcHeight, int stride)
-    {
-        int dstIndex = offsetX + offsetY * width;
-
-        srcWidth = Mathf.Min(srcWidth, width - offsetX);
-        srcHeight = Mathf.Min(srcHeight, height - offsetY);
-
-        int i = 0;
-        for (int y = 0; y < srcHeight; ++y)
-        {
-            for (int x = 0; x < srcWidth; ++x, ++i)
-            {
-                dst[dstIndex + x] = src[i];
-            }
-            i += (stride - srcWidth);
-            dstIndex += width;
-        }
-    }
-
-    void Fill<T>(T[] dst, T filler, int offsetX, int offsetY, int rectWidth, int rectHeight)
-    {
-        int dstIndex = offsetX + offsetY * width;
-
-        for (int y = 0; y < rectHeight; ++y)
-        {
-            for (int x = 0; x < rectWidth; ++x)
-            {
-                dst[dstIndex + x] = filler;
-            }
-            dstIndex += width;
-        }
-    }
-
-    void CreatePopups(DS1 ds1, Vector2i pos, Transform parent = null)
+    void InstantiatePopups(DS1 ds1, int offsetX, int offsetY, Transform parent = null)
     {
         bool firstFound = false;
         int x1 = 0;
@@ -174,8 +112,8 @@ public class LevelBuilder
                     {
                         if (firstFound)
                         {
-                            var scanArea = new IntRect(pos.x, pos.y, ds1.width, ds1.height);
-                            var triggerArea = new IntRect(x1 + pos.x, y1 + pos.y, x - x1, y - y1);
+                            var scanArea = new IntRect(offsetX, offsetY, ds1.width, ds1.height);
+                            var triggerArea = new IntRect(x1 + offsetX, y1 + offsetY, x - x1, y - y1);
                             var popup = Popup.Create(triggerArea, scanArea, walls[i].subIndex);
                             popup.transform.SetParent(parent);
                             popups.Add(popup);
@@ -199,33 +137,99 @@ public class LevelBuilder
         {
             var collider = root.AddComponent<PolygonCollider2D>();
             collider.offset = Iso.MapTileToWorld(offset);
-            collider.points = Iso.CreateTileRectPoints(width, height);
+            collider.points = Iso.CreateTileRectPoints(info.sizeX, info.sizeY);
             collider.isTrigger = true;
 
             var level = root.AddComponent<Level>();
             level.info = info;
+
+            SelectMonsterTypes();
         }
 
-        InstantiateFloors(offset, root);
-        InstantiateWalls(offset, root);
-        InstantiateObjects(offset, root);
-        InstantiateMonsters(offset, root);
-        InstantiateDebugGrid(offset, root, gridSize: 8);
+        int i = 0;
+        for(int y = 0; y < gridHeight; ++y)
+        {
+            for (int x = 0; x < gridWidth; ++x, ++i)
+            {
+                var ds1 = grid[i];
+                int offsetX = offset.x + x * gridX;
+                int offsetY = offset.y + y * gridY;
+                if (ds1 != null)
+                {
+                    Instantiate(ds1, offsetX, offsetY, root.transform);
+                    InstantiateMonsters(offsetX, offsetY, root.transform);
+                }
+                else if (info != null && info.drlgType == 3)
+                {
+                    FillGap(offset, x, y, root.transform);
+                    InstantiateMonsters(offsetX, offsetY, root.transform);
+                }
+            }
+        }
 
-        foreach (var popup in popups)
-            popup.transform.SetParent(root.transform);
+        InstantiateDebugGrid(offset, root.transform);
 
         return root;
     }
 
-    private void InstantiateMonsters(Vector2i offset, GameObject root)
+    private void Instantiate(DS1 ds1, int x, int y, Transform root)
+    {
+        InstantiatePopups(ds1, x, y, root);
+        InstantiateFloors(ds1, x, y, root);
+        InstantiateWalls(ds1, x, y, root);
+        InstantiateObjects(ds1, x, y, root);
+    }
+
+    private void InstantiateMonsters(int offsetX, int offsetY, Transform root)
     {
         if (info == null)
             return;
 
-        MonStat[] monStats = new MonStat[info.numMon];
+        int density = info.monDen[0];
+
+        for (int x = offsetX; x < offsetX + gridX; ++x)
+        {
+            for (int y = offsetY; y < offsetY + gridY; ++y)
+            {
+                int sample = Random.Range(0, 100000);
+                if (sample >= density)
+                    continue;
+
+                var monStat = monStats[Random.Range(0, monStats.Length)];
+                Spawn(monStat, x, y, root);
+            }
+        }
+    }
+
+    private static void Spawn(MonStat monStat, int x, int y, Transform root)
+    {
+        if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
+            return;
+
+        int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
+        for (int i = 0; i < count; ++i)
+        {
+            World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y), root);
+        }
+
+        if (monStat.minion1 != null)
+        {
+            int minionCount = Random.Range(monStat.partyMin, monStat.partyMax);
+            for(int i = 0; i < minionCount; ++i)
+            {
+                World.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
+            }
+        }
+    }
+
+    private void SelectMonsterTypes()
+    {
+        if (info == null)
+            return;
+
+        monStats = new MonStat[info.numMon];
         int[] monsterColumns = new int[info.numMon];
-        for(int i = 0; i < info.numMon; ++i)
+        for (int i = 0; i < info.numMon; ++i)
             monsterColumns[i] = -1;
 
         for (int i = 0; i < info.numMon; ++i)
@@ -239,42 +243,22 @@ public class LevelBuilder
             monsterColumns[i] = index;
             monStats[i] = MonStat.Find(info.monsters[index]);
         }
-
-        int density = info.monDen[0];
-
-        for (int x = 8; x < width - 8; ++x)
-        {
-            for (int y = 8; y < height - 8; ++y)
-            {
-                int sample = Random.Range(0, 100000);
-                if (sample >= density)
-                    continue;
-
-                var monStat = monStats[Random.Range(0, monStats.Length)];
-                int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
-                for (int i = 0; i < count; ++i)
-                {
-                    var monster = World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y));
-                    monster.transform.SetParent(root.transform);
-                }
-            }
-        }
     }
 
-    private void InstantiateDebugGrid(Vector2i offset, GameObject root, int gridSize)
+    private void InstantiateDebugGrid(Vector2i offset, Transform root)
     {
-        var grid = new GameObject();
-        grid.transform.SetParent(root.transform);
+        var grid = new GameObject("debug grid");
+        grid.transform.SetParent(root);
         grid.layer = UnityLayers.SpecialTiles;
 
-        for (int y = 0; y < height / gridSize; ++y)
+        for (int y = 0; y < gridHeight; ++y)
         {
-            for (int x = 0; x < width / gridSize; ++x)
+            for (int x = 0; x < gridWidth; ++x)
             {
                 var cellObject = new GameObject(x + ", " + y);
                 cellObject.transform.position = Iso.MapToWorld(
-                    (x * gridSize + offset.x) * Iso.SubTileCount - 2,
-                    (y * gridSize + offset.y) * Iso.SubTileCount - 2);
+                    (x * gridX + offset.x) * Iso.SubTileCount - 2,
+                    (y * gridY + offset.y) * Iso.SubTileCount - 2);
                 cellObject.transform.SetParent(grid.transform);
                 cellObject.layer = UnityLayers.SpecialTiles;
                 var line = cellObject.AddComponent<LineRenderer>();
@@ -283,11 +267,11 @@ public class LevelBuilder
                 line.material = Materials.normal;
                 line.useWorldSpace = false;
                 var corners = new Vector3[] {
-                    Iso.MapTileToWorld(0, 0) * gridSize,
-                    Iso.MapTileToWorld(0 + 1, 0) * gridSize,
-                    Iso.MapTileToWorld(0 + 1, 0 + 1) * gridSize,
-                    Iso.MapTileToWorld(0, 0 + 1) * gridSize,
-                    Iso.MapTileToWorld(0, 0) * gridSize
+                    Iso.MapTileToWorld(0, 0),
+                    Iso.MapTileToWorld(0 + gridX, 0),
+                    Iso.MapTileToWorld(0 + gridX, gridY),
+                    Iso.MapTileToWorld(0, gridY),
+                    Iso.MapTileToWorld(0, 0)
                 };
                 line.numPositions = corners.Length;
                 line.SetPositions(corners);
@@ -295,60 +279,63 @@ public class LevelBuilder
         }
     }
 
-    private void InstantiateFloors(Vector2i offset, GameObject root)
+    private void InstantiateFloors(DS1 ds1, int offsetX, int offsetY, Transform root)
     {
         var layerObject = new GameObject("floors");
         var layerTransform = layerObject.transform;
-        layerTransform.SetParent(root.transform);
+        layerTransform.SetParent(root);
 
-        int i = 0;
-        for (int y = 0; y < height; ++y)
+        for (int f = 0; f < ds1.floors.Length; ++f)
         {
-            for (int x = 0; x < width; ++x, ++i)
+            var floors = ds1.floors[f];
+            int i = 0;
+            for (int y = 0; y < ds1.height - 1; ++y)
             {
-                var cell = floors[i];
-                var sampler = samplers[i];
-                DT1.Tile tile;
-                if (sampler.Sample(cell.tileIndex, out tile))
+                for (int x = 0; x < ds1.width - 1; ++x)
                 {
-                    CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                    var cell = floors[i + x];
+                    DT1.Tile tile;
+                    if (ds1.tileSampler.Sample(cell.tileIndex, out tile))
+                    {
+                        CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
+                    }
                 }
+                i += ds1.width;
             }
         }
     }
 
-    private void InstantiateWalls(Vector2i offset, GameObject root)
+    private void InstantiateWalls(DS1 ds1, int offsetX, int offsetY, Transform root)
     {
-        for (int w = 0; w < walls.Count; ++w)
+        for (int w = 0; w < ds1.walls.Length; ++w)
         {
             var layerObject = new GameObject("walls " + (w + 1));
             var layerTransform = layerObject.transform;
-            layerTransform.SetParent(root.transform);
+            layerTransform.SetParent(root);
+            var sampler = ds1.tileSampler;
 
-            var cells = walls[w];
+            var cells = ds1.walls[w];
             int i = 0;
-            for (int y = 0; y < height; ++y)
+            for (int y = 0; y < ds1.height - 1; ++y)
             {
-                for (int x = 0; x < width; ++x, ++i)
+                for (int x = 0; x < ds1.width - 1; ++x)
                 {
-                    var cell = cells[i];
+                    var cell = cells[i + x];
                     if (cell.prop1 == 0) // no tile here
                         continue;
-
-                    var sampler = samplers[i];
 
                     DT1.Tile tile;
 
                     if (cell.orientation == 10 || cell.orientation == 11)
                     {
-                        CreateSpecialTile(cell, offset.x + x, offset.y + y, parent: root.transform);
+                        CreateSpecialTile(cell, offsetX + x, offsetY + y, parent: root);
                         continue;
                     }
 
                     if (sampler.Sample(cell.tileIndex, out tile))
                     {
-                        var renderer = CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
-                        PutToPopup(cell, renderer, offset.x + x, offset.y + y);
+                        var renderer = CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
+                        PutToPopup(cell, renderer, offsetX + x, offsetY + y);
                     }
                     else
                     {
@@ -361,7 +348,7 @@ public class LevelBuilder
                         int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
                         if (sampler.Sample(index, out tile))
                         {
-                            CreateTile(tile, offset.x + x, offset.y + y, parent: layerTransform);
+                            CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
                         }
                         else
                         {
@@ -369,6 +356,7 @@ public class LevelBuilder
                         }
                     }
                 }
+                i += ds1.width;
             }
         }
     }
@@ -414,20 +402,42 @@ public class LevelBuilder
             int warpId = info.warp[cell.mainIndex];
             var targetLevel = LevelInfo.Find(targetLevelId);
             var levelWarpInfo = LevelWarpInfo.Find(warpId);
+            if (levelWarpInfo == null)
+            {
+                Debug.LogWarning("Warp info wasn't found");
+                return;
+            }
             Warp.Create(x, y, levelWarpInfo, targetLevel, parent);
         }
     }
 
-    private void InstantiateObjects(Vector2i offset, GameObject root)
+    private void InstantiateObjects(DS1 ds1, int offsetX, int offsetY, Transform root)
     {
-        offset *= Iso.SubTileCount;
-        foreach (var info in objects)
+        offsetX *= Iso.SubTileCount;
+        offsetY *= Iso.SubTileCount;
+        foreach (var info in ds1.objects)
         {
-            var gameObject = CreateObject(info.obj, offset.x + info.x, offset.y + info.y);
+            var gameObject = CreateObject(info.obj, offsetX + info.x, offsetY + info.y);
             if (gameObject != null)
-                gameObject.transform.SetParent(root.transform, true);
+                gameObject.transform.SetParent(root, true);
             else
                 Debug.LogWarning("Object not instantiated " + info.obj.description);
+        }
+    }
+
+    private void FillGap(Vector2i offset, int x, int y, Transform root)
+    {
+        int offsetX = x * gridX;
+        int offsetY = y * gridY;
+
+        for (y = offsetY; y < offsetY + gridY; ++y)
+        {
+            for (x = offsetX; x < offsetX + gridX; ++x)
+            {
+                DT1.Tile tile;
+                tileSampler.Sample(0, out tile);
+                CreateTile(tile, offset.x + x, offset.y + y, parent: root);
+            }
         }
     }
 
@@ -491,17 +501,22 @@ public class LevelBuilder
         meshFilter.mesh = mesh;
         
         int flagIndex = 0;
-        var collisionMapIndex = Iso.Snap(Iso.MapToIso(pos));
+        var collisionMapOffset = Iso.Snap(Iso.MapToIso(pos));
+        byte mask = DT1.BlockFlags.Walk | DT1.BlockFlags.PlayerWalk;
         for (int dy = 2; dy > -3; --dy)
         {
-            for (int dx = -2; dx < 3; ++dx)
+            for (int dx = -2; dx < 3; ++dx, ++flagIndex)
             {
-                if ((tile.flags[flagIndex] & (1 + 8)) != 0)
+                var subCellPos = collisionMapOffset + new Vector2i(dx, dy);
+                bool passable = (tile.flags[flagIndex] & mask) == 0;
+                if (tile.orientation == 0)
                 {
-                    var subCellPos = collisionMapIndex + new Vector2i(dx, dy);
+                    CollisionMap.SetPassable(subCellPos, passable);
+                }
+                else if (CollisionMap.Passable(subCellPos) && !passable)
+                {
                     CollisionMap.SetPassable(subCellPos, false);
                 }
-                ++flagIndex;
             }
         }
 
@@ -534,30 +549,36 @@ public class LevelBuilder
 
     public Vector2i FindEntry()
     {
-        foreach(var cells in walls)
+        foreach (var ds1 in grid)
         {
-            int i = 0;
-            for (int y = 0; y < height; ++y)
+            if (ds1 == null)
+                continue;
+
+            foreach (var cells in ds1.walls)
             {
-                for (int x = 0; x < width; ++x, ++i)
+                int i = 0;
+                for (int y = 0; y < ds1.height - 1; ++y)
                 {
-                    var cell = cells[i];
-                    if (cell.tileIndex == mapEntryIndex)
+                    for (int x = 0; x < ds1.width - 1; ++x, ++i)
                     {
-                        return new Vector2i(x, y);
-                    }
-                    else if (cell.tileIndex == townEntryIndex)
-                    {
-                        return new Vector2i(x, y);
-                    }
-                    else if (cell.tileIndex == townEntry2Index)
-                    {
-                        return new Vector2i(x, y);
+                        var cell = cells[i];
+                        if (cell.tileIndex == mapEntryIndex)
+                        {
+                            return new Vector2i(x, y);
+                        }
+                        else if (cell.tileIndex == townEntryIndex)
+                        {
+                            return new Vector2i(x, y);
+                        }
+                        else if (cell.tileIndex == townEntry2Index)
+                        {
+                            return new Vector2i(x, y);
+                        }
                     }
                 }
             }
         }
 
-        return new Vector2i(width, height) / 2;
+        return new Vector2i(info.sizeX, info.sizeY) / 2;
     }
 }

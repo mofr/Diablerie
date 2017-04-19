@@ -8,17 +8,47 @@ public class World : MonoBehaviour
         var town = new LevelBuilder("Act 1 - Town");
         var bloodMoor = CreateBloodMoor();
 
-        var townOffset = new Vector2i(bloodMoor.width - town.width, bloodMoor.height);
+        var townOffset = new Vector2i(bloodMoor.gridWidth * bloodMoor.gridX - town.gridWidth * town.gridX, bloodMoor.gridHeight * bloodMoor.gridY);
         town.Instantiate(townOffset);
         bloodMoor.Instantiate(new Vector2i(0, 0));
+
+        var doe = CreateDenOfEvil();
+        var doeOffset = new Vector2i(90, 0);
+        doe.Instantiate(doeOffset);
 
         var entry = town.FindEntry();
         SpawnPlayer(Iso.MapTileToWorld(entry + townOffset));
     }
 
+    LevelBuilder CreateDenOfEvil()
+    {
+        var builder = new LevelBuilder("Act 1 - Cave 1", 24, 24);
+        var palette = new Maze.Palette();
+        palette.previous = new LevelPreset[4];
+        palette.previous[0] = LevelPreset.Find("Act 1 - Cave Prev W");
+        palette.previous[1] = LevelPreset.Find("Act 1 - Cave Prev E");
+        palette.previous[2] = LevelPreset.Find("Act 1 - Cave Prev S");
+        palette.previous[3] = LevelPreset.Find("Act 1 - Cave Prev N");
+        palette.next = new LevelPreset[4];
+        palette.next[0] = LevelPreset.Find("Act 1 - Cave Next W");
+        palette.next[1] = LevelPreset.Find("Act 1 - Cave Next E");
+        palette.next[2] = LevelPreset.Find("Act 1 - Cave Next S");
+        palette.next[3] = LevelPreset.Find("Act 1 - Cave Next N");
+        palette.down = new LevelPreset[4];
+        palette.down[0] = LevelPreset.Find("Act 1 - Cave Down W");
+        palette.down[1] = LevelPreset.Find("Act 1 - Cave Down E");
+        palette.down[2] = LevelPreset.Find("Act 1 - Cave Down S");
+        palette.down[3] = LevelPreset.Find("Act 1 - Cave Down N");
+        palette.rooms = new LevelPreset[15];
+        for (int i = 0; i < 15; ++i)
+            palette.rooms[i] = LevelPreset.sheet.rows[53 + i];
+        Maze.Generate(builder, palette);
+        return builder;
+    }
+
     LevelBuilder CreateBloodMoor()
     {
-        var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1");
+        var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", 8, 8);
         var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
         var uRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Uriver.ds1");
         var lRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Lriver.ds1");
@@ -31,31 +61,31 @@ public class World : MonoBehaviour
         var cottage = LevelPreset.Find("Act 1 - Cottages 1");
         var denEntrance = LevelPreset.Find("Act 1 - DOE Entrance");
 
-        for (int i = 0; i < bloodMoor.height / (uRiver.height - 1); ++i)
-            bloodMoor.Place(lRiver, new Vector2i(bloodMoor.width - (lRiver.width - 1), i * (lRiver.height - 1)));
-        for (int i = 1; i < bloodMoor.height / (lRiver.height - 1); ++i)
-            bloodMoor.Place(uRiver, new Vector2i(bloodMoor.width - (lRiver.width - 1 + uRiver.width - 1), i * (uRiver.height - 1)));
-        bloodMoor.Place(riverN, new Vector2i(bloodMoor.width - 16, 0));
+        for (int i = 0; i < bloodMoor.gridHeight; ++i)
+            bloodMoor.Place(lRiver, new Vector2i(bloodMoor.gridWidth - 1, i));
+        for (int i = 1; i < bloodMoor.gridHeight; ++i)
+            bloodMoor.Place(uRiver, new Vector2i(bloodMoor.gridWidth - 2, i));
+        bloodMoor.Place(riverN, new Vector2i(bloodMoor.gridWidth - 2, 0));
 
-        for (int i = 1; i < bloodMoor.height / bord2.sizeY - 1; ++i)
-            bloodMoor.Place(bord2, new Vector2i(0, i * bord2.sizeY), 0, 3);
-        bloodMoor.Place(bord5, new Vector2i(0, bloodMoor.height - bord5.sizeY));
+        for (int i = 1; i < bloodMoor.gridHeight - 1; ++i)
+            bloodMoor.Place(bord2, new Vector2i(0, i), 0, 3);
+        bloodMoor.Place(bord5, new Vector2i(0, bloodMoor.gridHeight - 1));
 
         for(int i = 1; i < 3; ++i)
-            bloodMoor.Place(bord1, new Vector2i(i * bord1.sizeX, bloodMoor.height - bord1.sizeY), 0, 3);
-        bloodMoor.Place(bord9, new Vector2i(3 * bord9.sizeX, bloodMoor.height - bord9.sizeY));
+            bloodMoor.Place(bord1, new Vector2i(i, bloodMoor.gridHeight - 1), 0, 3);
+        bloodMoor.Place(bord9, new Vector2i(3, bloodMoor.gridHeight - 1));
 
-        for (int i = 1; i < (bloodMoor.width - (lRiver.width - 1) * 2) / bord3.sizeX; ++i)
-            bloodMoor.Place(bord3, new Vector2i(i * bord3.sizeX, 0), 0, 3);
+        for (int i = 1; i < bloodMoor.gridWidth - 2; ++i)
+            bloodMoor.Place(bord3, new Vector2i(i, 0), 0, 3);
 
         bloodMoor.Place(bord6, new Vector2i(0, 0));
-        for (int i = 0; i < 5; ++i)
-            bloodMoor.Place(cottage, new Vector2i(8 + i * 8, 32 + 8 * Random.Range(-1, 1)));
-        bloodMoor.Place(denEntrance, new Vector2i(40, 56));
+        for (int i = 1; i < 5; ++i)
+            bloodMoor.Place(cottage, new Vector2i(i, 4 + Random.Range(-1, 1)));
+        bloodMoor.Place(denEntrance, new Vector2i(5, 7));
 
         return bloodMoor;
     }
-    
+
     static void SpawnPlayer(Vector3 pos)
     {
         var player = new GameObject("Player");
@@ -83,18 +113,23 @@ public class World : MonoBehaviour
         collider.radius = Iso.tileSizeY;
     }
 
-    public static Character SpawnMonster(string id, Vector3 pos)
+    public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null)
     {
         MonStat monStat = MonStat.Find(id);
         return SpawnMonster(monStat, pos);
     }
 
-    public static Character SpawnMonster(MonStat monStat, Vector3 pos)
+    public static Character SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null)
     {
-        var monster = new GameObject(monStat.nameStr);
         pos = Iso.MapToIso(pos);
-        pos = CollisionMap.Fit(pos, monStat.ext.sizeX);
+        if (!CollisionMap.Fit(pos, out pos, monStat.ext.sizeX))
+        {
+            return null;
+        }
         pos = Iso.MapToWorld(pos);
+
+        var monster = new GameObject(monStat.nameStr);
+        monster.transform.SetParent(parent);
         monster.transform.position = pos;
 
         var character = monster.AddComponent<Character>();
@@ -132,15 +167,18 @@ public class World : MonoBehaviour
 
     public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos, bool fit = false)
     {
-        var gameObject = new GameObject();
-        gameObject.name = objectInfo.description;
-
         if (fit)
         {
             pos = Iso.MapToIso(pos);
-            pos = CollisionMap.Fit(pos, objectInfo.sizeX);
+            if (!CollisionMap.Fit(pos, out pos, objectInfo.sizeX))
+            {
+                return null;
+            }
             pos = Iso.MapToWorld(pos);
         }
+
+        var gameObject = new GameObject();
+        gameObject.name = objectInfo.description;
         gameObject.transform.position = pos;
 
         var staticObject = gameObject.AddComponent<StaticObject>();
