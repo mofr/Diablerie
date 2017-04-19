@@ -149,15 +149,17 @@ public class LevelBuilder
             for (int x = 0; x < gridWidth; ++x, ++i)
             {
                 var ds1 = grid[i];
+                int offsetX = offset.x + x * gridX;
+                int offsetY = offset.y + y * gridY;
                 if (ds1 != null)
                 {
-                    int offsetX = offset.x + x * gridX;
-                    int offsetY = offset.y + y * gridY;
                     Instantiate(ds1, offsetX, offsetY, root.transform);
+                    InstantiateMonsters(offsetX, offsetY, root.transform);
                 }
                 else if (info != null && info.drlgType == 3)
                 {
                     FillGap(offset, x, y, root.transform);
+                    InstantiateMonsters(offsetX, offsetY, root.transform);
                 }
             }
         }
@@ -173,10 +175,9 @@ public class LevelBuilder
         InstantiateFloors(ds1, x, y, root);
         InstantiateWalls(ds1, x, y, root);
         InstantiateObjects(ds1, x, y, root);
-        InstantiateMonsters(ds1, x, y, root);
     }
 
-    private void InstantiateMonsters(DS1 ds1, int offsetX, int offsetY, Transform root)
+    private void InstantiateMonsters(int offsetX, int offsetY, Transform root)
     {
         if (info == null)
             return;
@@ -200,9 +201,9 @@ public class LevelBuilder
 
         int density = info.monDen[0];
 
-        for (int x = offsetX; x < offsetX + ds1.width - 1; ++x)
+        for (int x = offsetX; x < offsetX + gridX; ++x)
         {
-            for (int y = offsetY; y < offsetY + ds1.height - 1; ++y)
+            for (int y = offsetY; y < offsetY + gridY; ++y)
             {
                 int sample = Random.Range(0, 100000);
                 if (sample >= density)
