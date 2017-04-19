@@ -10,14 +10,11 @@ public class LifeBulbRenderer : MonoBehaviour {
     private Image imgHealthBar;
 
     // Update is called once per frame
-    void Update () {
-
-     double currHealth=   PlayerController.instance.character.health;
-        double maxHealth = PlayerController.instance.character.maxHealth;
-        Debug.Log((currHealth / maxHealth));
+    void Update ()
+    {
+        float currHealth=   PlayerController.instance.character.health;
+        float maxHealth = PlayerController.instance.character.maxHealth;
         imgHealthBar.fillAmount = (float)(currHealth / maxHealth);
-
-
     }
  
     void Start()

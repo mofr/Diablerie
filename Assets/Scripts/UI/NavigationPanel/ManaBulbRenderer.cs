@@ -10,14 +10,10 @@ public class ManaBulbRenderer : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
         //TODO change this to mana once it is available
-        double currHealth = PlayerController.instance.character.health;
-        double maxHealth = PlayerController.instance.character.maxHealth;
-        Debug.Log((currHealth / maxHealth));
+        float currHealth = PlayerController.instance.character.health;
+        float maxHealth = PlayerController.instance.character.maxHealth;
         imgManaBar.fillAmount = (float)(currHealth / maxHealth);
-
-
     }
 
     void Start()
