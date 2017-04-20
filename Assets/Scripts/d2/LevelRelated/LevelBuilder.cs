@@ -33,7 +33,7 @@ public class LevelBuilder
     {
         info = LevelInfo.Find(name);
         this.name = info.levelName;
-        
+
         if (info.preset != null)
         {
             var ds1 = DS1.Load(info.preset.ds1Files[0]);
@@ -147,7 +147,7 @@ public class LevelBuilder
         }
 
         int i = 0;
-        for(int y = 0; y < gridHeight; ++y)
+        for (int y = 0; y < gridHeight; ++y)
         {
             for (int x = 0; x < gridWidth; ++x, ++i)
             {
@@ -215,7 +215,7 @@ public class LevelBuilder
         if (monStat.minion1 != null)
         {
             int minionCount = Random.Range(monStat.partyMin, monStat.partyMax);
-            for(int i = 0; i < minionCount; ++i)
+            for (int i = 0; i < minionCount; ++i)
             {
                 World.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
             }
@@ -378,7 +378,7 @@ public class LevelBuilder
 
         if (cell.orientation == 15)
             popup.roofs.Add(renderer);
-        else if (cell.orientation == 5 || cell.orientation == 6 || 
+        else if (cell.orientation == 5 || cell.orientation == 6 ||
             (x != popup.triggerArea.xMin && y != popup.triggerArea.yMax))
             popup.walls.Add(renderer);
     }
@@ -407,7 +407,7 @@ public class LevelBuilder
                 Debug.LogWarning("Warp info wasn't found");
                 return;
             }
-            Warp.Create(x, y, levelWarpInfo, targetLevel, parent);
+            Warp.Create(x, y, levelWarpInfo, info, targetLevel, parent);
         }
     }
 
@@ -499,7 +499,7 @@ public class LevelBuilder
             meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
         }
         meshFilter.mesh = mesh;
-        
+
         int flagIndex = 0;
         var collisionMapOffset = Iso.Snap(Iso.MapToIso(pos));
         byte mask = DT1.BlockFlags.Walk | DT1.BlockFlags.PlayerWalk;

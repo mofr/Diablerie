@@ -9,7 +9,7 @@ public class Character : Entity
     [System.NonSerialized]
     public MonStat monStat;
     public int directionCount = 8;
-	public float walkSpeed = 3.5f;
+    public float walkSpeed = 3.5f;
     public float runSpeed = 6f;
     public float attackSpeed = 1.0f;
     public float attackRange = 1.5f;
@@ -42,16 +42,16 @@ public class Character : Entity
     }
 
     [HideInInspector]
-	public int directionIndex = 0;
+    public int directionIndex = 0;
     float direction = 0;
 
     Iso iso;
-	COFAnimator animator;
+    COFAnimator animator;
     List<Pathing.Step> path = new List<Pathing.Step>();
-	float traveled = 0;
-	int desiredDirection = 0;
+    float traveled = 0;
+    int desiredDirection = 0;
     bool moving = false;
-	bool attack = false;
+    bool attack = false;
     bool takingDamage = false;
     bool dying = false;
     bool dead = false;
@@ -66,8 +66,8 @@ public class Character : Entity
 
     void Awake()
     {
-		iso = GetComponent<Iso>();
-		animator = GetComponent<COFAnimator>();
+        iso = GetComponent<Iso>();
+        animator = GetComponent<COFAnimator>();
     }
 
     protected override void Start()
@@ -77,12 +77,12 @@ public class Character : Entity
         CollisionMap.SetPassable(Iso.Snap(iso.pos), false);
     }
 
-	public void Use(Entity entity)
+    public void Use(Entity entity)
     {
         if (attack || takingDamage || dying || dead || ressurecting)
             return;
         targetPoint = Iso.MapToIso(entity.transform.position);
-		targetEntity = entity;
+        targetEntity = entity;
         targetCharacter = null;
         moving = true;
     }
@@ -111,6 +111,10 @@ public class Character : Entity
         {
             iso.pos = newPos;
             moving = false;
+        }
+        else
+        {
+            Debug.LogWarning("Can't move character - doesn't fit");
         }
     }
 
@@ -141,16 +145,19 @@ public class Character : Entity
         traveled = 0;
     }
 
-	void Update() {
-        if (!takingDamage && !dead && !dying && !ressurecting) {
+    void Update()
+    {
+        if (!takingDamage && !dead && !dying && !ressurecting)
+        {
             if (targetEntity)
             {
                 var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
                 if (distance <= diameter + targetEntity.operateRange)
                 {
-                    targetEntity.Operate(this);
+                    var localEntity = targetEntity;
                     moving = false;
                     targetEntity = null;
+                    localEntity.Operate(this);
                 }
             }
             if (targetCharacter && !attack)
@@ -172,7 +179,7 @@ public class Character : Entity
         hasMoved = false;
         MoveToTargetPoint();
         Turn();
-	}
+    }
 
     void LateUpdate()
     {
@@ -191,37 +198,41 @@ public class Character : Entity
         }
     }
 
-	void MoveAlongPath() {
-		if (path.Count == 0 || !moving || attack || takingDamage || dead || dying || ressurecting)
-			return;
+    void MoveAlongPath()
+    {
+        if (path.Count == 0 || !moving || attack || takingDamage || dead || dying || ressurecting)
+            return;
 
-		Vector2 step = path[0].direction;
-		float stepLen = step.magnitude;
+        Vector2 step = path[0].direction;
+        float stepLen = step.magnitude;
         Vector2 movement = new Vector3();
         float speed = run ? runSpeed : walkSpeed;
         float distance = speed * Time.deltaTime;
 
-		while (traveled + distance >= stepLen) {
-			float part = stepLen - traveled;
+        while (traveled + distance >= stepLen)
+        {
+            float part = stepLen - traveled;
             movement += step.normalized * part;
             distance -= part;
             traveled = 0;
-			path.RemoveAt(0);
+            path.RemoveAt(0);
             if (path.Count > 0)
             {
                 step = path[0].direction;
             }
-		}
-		if (path.Count > 0) {
-			traveled += distance;
+        }
+        if (path.Count > 0)
+        {
+            traveled += distance;
             movement += step.normalized * distance;
         }
 
         Move(movement);
 
-        if (path.Count == 0) {
-			traveled = 0;
-		}
+        if (path.Count == 0)
+        {
+            traveled = 0;
+        }
         else if (moving)
         {
             desiredDirection = Iso.Direction(iso.pos, iso.pos + step, directionCount);
@@ -269,7 +280,8 @@ public class Character : Entity
         return true;
     }
 
-    void UpdateAnimation() {
+    void UpdateAnimation()
+    {
         string mode;
         string weaponClass = this.weaponClass;
         animator.speed = 1.0f;
@@ -313,8 +325,8 @@ public class Character : Entity
         animator.direction = directionIndex;
     }
 
-	public void LookAt(Vector3 target)
-	{
+    public void LookAt(Vector3 target)
+    {
         if (!moving)
             desiredDirection = Iso.Direction(iso.pos, target, directionCount);
     }

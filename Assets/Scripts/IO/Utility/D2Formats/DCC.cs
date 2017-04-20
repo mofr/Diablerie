@@ -255,7 +255,7 @@ public class DCC
         frame.cells = new Cell[frame.nb_cell_w * frame.nb_cell_h];
         int[] cell_w = new int[frame.nb_cell_w];
         int[] cell_h = new int[frame.nb_cell_h];
-        
+
         if (frame.nb_cell_w == 1)
             cell_w[0] = frame.width;
         else
@@ -319,7 +319,7 @@ public class DCC
                     {
                         if (streams.equalCell != null && streams.equalCell.ReadBool() != 0)
                             continue;
-                        
+
                         pixelMask = streams.pixelMask.ReadLessThanByte(4);
                     }
                     else
@@ -535,17 +535,17 @@ public class DCC
 
     static Dictionary<string, DCC> cache = new Dictionary<string, DCC>();
     readonly static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
-    readonly static int[] nb_pix_table = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+    readonly static int[] nb_pix_table = { 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4 };
     readonly static int[] dirs1 = new int[] { 0 };
     readonly static int[] dirs4 = new int[] { 0, 1, 2, 3 };
     readonly static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
-    readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15};
+    readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15 };
 
     public List<Sprite> GetSprites(int d)
     {
         if (sprites[d] == null)
             DecodeDirection(d);
-        
+
         return sprites[d];
     }
 

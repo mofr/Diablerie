@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class IsoInput : MonoBehaviour {
+public class IsoInput : MonoBehaviour
+{
+    static public Vector2 mousePosition;
+    static public Vector3 mouseTile;
 
-	static public Vector2 mousePosition;
-	static public Vector3 mouseTile;
-
-	void Update ()
+    void Update()
     {
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		mousePosition = Iso.MapToIso(mousePos);
-		mouseTile = Iso.Snap(mousePosition);
-	}
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = Iso.MapToIso(mousePos);
+        mouseTile = Iso.Snap(mousePosition);
+    }
 }

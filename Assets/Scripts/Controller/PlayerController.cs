@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerController : MonoBehaviour {
-
-	public Character character;
+public class PlayerController : MonoBehaviour
+{
     static public PlayerController instance;
 
+    public Character character;
+
+    bool flush = false;
     Iso iso;
 
     void Awake()
@@ -17,14 +19,19 @@ public class PlayerController : MonoBehaviour {
             var player = GameObject.FindWithTag("Player");
             if (player != null)
                 SetCharacter(player.GetComponent<Character>());
-        }   
-	}
+        }
+    }
 
-	public void SetCharacter (Character character)
+    public void FlushInput()
     {
-		this.character = character;
-		iso = character.GetComponent<Iso>();
-	}
+        flush = true;
+    }
+
+    public void SetCharacter(Character character)
+    {
+        this.character = character;
+        iso = character.GetComponent<Iso>();
+    }
 
     void DrawDebugPath()
     {
@@ -41,17 +48,27 @@ public class PlayerController : MonoBehaviour {
         Pathing.DebugDrawPath(iso.pos, path);
     }
 
-	void Update () {
+    void Update()
+    {
         if (character == null)
             return;
 
-        DrawDebugPath();
+        if (flush && Input.GetMouseButton(0))
+            return;
+
+        flush = false;
 
         character.LookAt(IsoInput.mousePosition);
 
-        if (Input.GetKeyDown(KeyCode.F4)) {
-			character.Teleport(IsoInput.mouseTile);
-		}
+        DrawDebugPath();
+
+        if (EventSystem.current.currentSelectedGameObject != null)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            character.Teleport(IsoInput.mouseTile);
+        }
 
         if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
         {
@@ -64,19 +81,11 @@ public class PlayerController : MonoBehaviour {
             {
                 character.target = MouseSelection.current.gameObject;
             }
-            else {
+            else
+            {
                 character.GoTo(IsoInput.mousePosition);
             }
         }
-
-		if (Input.GetKeyDown(KeyCode.Tab)) {
-			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {
-				if (this.character != character) {
-					SetCharacter(character);
-					return;
-				}
-			}
-		}
 
         if (Input.GetKeyDown(KeyCode.R))
         {

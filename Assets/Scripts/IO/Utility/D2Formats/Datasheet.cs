@@ -825,6 +825,9 @@ public class LevelWarpInfo
     public string direction;
     public int beta;
 
+    [System.NonSerialized]
+    public Warp instance;
+
     public static Datasheet<LevelWarpInfo> sheet = Datasheet<LevelWarpInfo>.Load("data/global/excel/LvlWarp.txt");
     static Dictionary<int, LevelWarpInfo> idMap = new Dictionary<int, LevelWarpInfo>();
 

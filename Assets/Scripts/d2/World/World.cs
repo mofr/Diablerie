@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    void Start ()
+    void Start()
     {
         var town = new LevelBuilder("Act 1 - Town");
         var bloodMoor = CreateBloodMoor();
@@ -13,7 +13,7 @@ public class World : MonoBehaviour
         bloodMoor.Instantiate(new Vector2i(0, 0));
 
         var doe = CreateDenOfEvil();
-        var doeOffset = new Vector2i(90, 0);
+        var doeOffset = new Vector2i(120, 0);
         doe.Instantiate(doeOffset);
 
         var entry = town.FindEntry();
@@ -71,7 +71,7 @@ public class World : MonoBehaviour
             bloodMoor.Place(bord2, new Vector2i(0, i), 0, 3);
         bloodMoor.Place(bord5, new Vector2i(0, bloodMoor.gridHeight - 1));
 
-        for(int i = 1; i < 3; ++i)
+        for (int i = 1; i < 3; ++i)
             bloodMoor.Place(bord1, new Vector2i(i, bloodMoor.gridHeight - 1), 0, 3);
         bloodMoor.Place(bord9, new Vector2i(3, bloodMoor.gridHeight - 1));
 
