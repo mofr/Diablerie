@@ -17,17 +17,15 @@ public class ControlPanelNavBarOpeningHandler : MonoBehaviour {
     public void Start()
     {
      buttonToggleMinibar =   GetComponent<Button>();
-        Debug.Log(buttonToggleMinibar.targetGraphic);
 
         //access the images from the button
         spriteDefaultNonPressed = buttonToggleMinibar.image.sprite;
         spriteDefaultPressed = buttonToggleMinibar.spriteState.pressedSprite;
-     
     }
 
 
-    public void ShowNavigationalBar (GameObject minipanelObject) {
-
+    public void ShowNavigationalBar (GameObject minipanelObject)
+    {
         //toggle the minibar
         minipanelObject.SetActive(!minipanelObject.activeSelf);
 
@@ -43,16 +41,13 @@ public class ControlPanelNavBarOpeningHandler : MonoBehaviour {
             buttonToggleMinibar.image.sprite = imgBarAvailableNonPressed.sprite;
             spriteStateClone.pressedSprite = imgBarAvailablePressed.sprite;
         }
-        else {
+        else
+        {
             buttonToggleMinibar.image.sprite = spriteDefaultNonPressed;
             spriteStateClone.pressedSprite = spriteDefaultPressed;
         }
-
         buttonToggleMinibar.spriteState = spriteStateClone;
-
-
-
-
-    }	}
+    }
+}
 	
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
 
@@ -56,8 +57,9 @@ public class PlayerController : MonoBehaviour {
         {
             character.Attack(IsoInput.mousePosition);
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+
             if (MouseSelection.current != null)
             {
                 character.target = MouseSelection.current.gameObject;
