@@ -6,7 +6,7 @@ public class Palette
     static public Color32[] palette;
     static public Dictionary<int, Color32[]> palettes = new Dictionary<int, Color32[]>();
 
-	static public Color32[] LoadPalette(int act)
+    static public Color32[] LoadPalette(int act)
     {
         if (palettes.ContainsKey(act))
         {

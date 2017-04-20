@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [ExecuteInEditMode]
-[RequireComponent (typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Iso : MonoBehaviour
 {
     public const int SubTileCount = 5;
@@ -13,9 +13,9 @@ public class Iso : MonoBehaviour
     public const float tileSizeY = tileSize / 2;
     public Vector2 pos;
     public bool macro = false;
-	public bool sort = true;
+    public bool sort = true;
 
-	SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
 
     static public Vector3 MapToWorld(float x, float y)
     {
@@ -25,7 +25,7 @@ public class Iso : MonoBehaviour
     static public Vector3 MapToWorld(Vector3 iso)
     {
         return MapToWorld(iso.x, iso.y);
-	}
+    }
 
     static public Vector3 MapTileToWorld(Vector2 iso)
     {
@@ -39,8 +39,8 @@ public class Iso : MonoBehaviour
 
     static public Vector3 MapToIso(Vector3 world)
     {
-		return new Vector3(-world.y + world.x / 2, -world.y - world.x / 2) / tileSize;
-	}
+        return new Vector3(-world.y + world.x / 2, -world.y - world.x / 2) / tileSize;
+    }
 
     static public int SortingOrder(Vector3 worldPosition)
     {
@@ -52,18 +52,18 @@ public class Iso : MonoBehaviour
         return sortingOrder;
     }
 
-	static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f)
+    static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f)
     {
-		float d = 0.5f - margin;
+        float d = 0.5f - margin;
         var topRight = MapToWorld(pos + new Vector3(d, d));
         var topLeft = MapToWorld(pos + new Vector3(-d, d));
         var bottomRight = MapToWorld(pos + new Vector3(d, -d));
         var bottomLeft = MapToWorld(pos + new Vector3(-d, -d));
         Debug.DrawLine(topRight, bottomRight, color, duration);
-		Debug.DrawLine(bottomLeft, topLeft, color, duration);
-		Debug.DrawLine(topRight, topLeft, color, duration);
-		Debug.DrawLine(bottomRight, bottomLeft, color, duration);
-	}
+        Debug.DrawLine(bottomLeft, topLeft, color, duration);
+        Debug.DrawLine(topRight, topLeft, color, duration);
+        Debug.DrawLine(bottomRight, bottomLeft, color, duration);
+    }
 
     static public void DebugDrawLine(Vector3 from, Vector3 to)
     {
@@ -85,15 +85,15 @@ public class Iso : MonoBehaviour
 
     static public void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f)
     {
-		DebugDrawTile(pos, Color.white, margin, duration);
-	}
+        DebugDrawTile(pos, Color.white, margin, duration);
+    }
 
-	static public Vector2i Snap(Vector3 pos)
+    static public Vector2i Snap(Vector3 pos)
     {
-		return new Vector2i(
-            Mathf.RoundToInt(pos.x), 
+        return new Vector2i(
+            Mathf.RoundToInt(pos.x),
             Mathf.RoundToInt(pos.y));
-	}
+    }
 
     static public Vector3 MacroTile(Vector3 pos)
     {
@@ -124,15 +124,15 @@ public class Iso : MonoBehaviour
 
     void Awake()
     {
-		pos = MapToIso(transform.position);
-		spriteRenderer = GetComponent<SpriteRenderer>();
-	}
+        pos = MapToIso(transform.position);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-    void Update ()
+    void Update()
     {
         transform.position = MapToWorld(pos);
 
-		if (sort)
-			spriteRenderer.sortingOrder = SortingOrder(transform.position);
+        if (sort)
+            spriteRenderer.sortingOrder = SortingOrder(transform.position);
     }
 }

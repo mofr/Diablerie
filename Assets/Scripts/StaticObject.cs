@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Iso))]
 [RequireComponent(typeof(COFAnimator))]
@@ -97,4 +96,3 @@ public class StaticObject : Entity
             MouseSelection.Submit(this);
     }
 }
-

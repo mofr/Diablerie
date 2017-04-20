@@ -60,7 +60,7 @@ class MouseSelection : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if(entity == current)
+            if (entity == current)
             {
                 currentPosition = position;
             }

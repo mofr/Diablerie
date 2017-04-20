@@ -1,39 +1,39 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pathing {
+public class Pathing
+{
+    public struct Step
+    {
+        public Vector2 direction;
+        public Vector2 pos;
+    }
 
-	public struct Step {
-		public Vector2 direction;
-		public Vector2 pos;
-	}
-
-	class Node : IEquatable<Node>, IComparable<Node>
+    class Node : IEquatable<Node>, IComparable<Node>
     {
         const int InitialCapacity = 10 * 1024;
 
-		public int gScore;
+        public int gScore;
         public int hScore;
         public int score;
-		public Vector2i pos;
-		public Node parent;
+        public Vector2i pos;
+        public Node parent;
         public int directionIndex;
 
-		private Node()
+        private Node()
         {
-		}
+        }
 
-		public int CompareTo(Node other)
+        public int CompareTo(Node other)
         {
-			return score.CompareTo(other.score);
-		}
+            return score.CompareTo(other.score);
+        }
 
-		public bool Equals(Node other)
+        public bool Equals(Node other)
         {
-			return pos == other.pos;
-		}
+            return pos == other.pos;
+        }
 
         override public int GetHashCode()
         {
@@ -44,45 +44,45 @@ public class Pathing {
 
         static Node()
         {
-            for(int i = 0; i < InitialCapacity; ++i)
+            for (int i = 0; i < InitialCapacity; ++i)
             {
                 pool.Add(new Node());
             }
         }
 
-		static public Node Get()
+        static public Node Get()
         {
             Node node;
             if (pool.Count > 0)
             {
                 int last = pool.Count - 1;
-				node = pool[last];
-				pool.RemoveAt(last);
-			}
+                node = pool[last];
+                pool.RemoveAt(last);
+            }
             else
             {
-				node = new Node();
-			}
+                node = new Node();
+            }
             return node;
         }
 
-		static public void Recycle(ICollection<Node> nodes)
+        static public void Recycle(ICollection<Node> nodes)
         {
             pool.AddRange(nodes);
-			nodes.Clear();
+            nodes.Clear();
         }
 
-		public void Recycle()
+        public void Recycle()
         {
             pool.Add(this);
         }
-	}
+    }
 
     static private List<Step> path = new List<Step>();
     static private Vector2i target;
-	static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
-	static private HashSet<Node> closeNodes = new HashSet<Node>();
-	static private Vector2i[] directions = {
+    static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
+    static private HashSet<Node> closeNodes = new HashSet<Node>();
+    static private Vector2i[] directions = {
         new Vector2i(1, 0), new Vector2i(1, 1), new Vector2i(0, 1), new Vector2i(-1, 1),
         new Vector2i(-1, 0), new Vector2i(-1, -1), new Vector2i(0, -1), new Vector2i(1, -1),
     };
@@ -90,7 +90,7 @@ public class Pathing {
 
     static private void StepTo(Node node)
     {
-		Node newNode = null;
+        Node newNode = null;
 
         int dirStart;
         int dirEnd;
@@ -121,11 +121,11 @@ public class Pathing {
                 if (newNode == null)
                     newNode = Node.Get();
                 newNode.pos = pos;
-                
+
                 bool closed = closeNodes.Contains(newNode);
                 if (!closed)
-                { 
-					newNode.parent = node;
+                {
+                    newNode.parent = node;
                     newNode.gScore = node.gScore + 1;
                     newNode.hScore = Vector2i.manhattanDistance(target, newNode.pos);
                     newNode.score = newNode.gScore + newNode.hScore;
@@ -133,12 +133,12 @@ public class Pathing {
                     openNodes.Add(newNode);
                     closeNodes.Add(newNode);
                     newNode = null;
-				}
+                }
             }
         }
 
         if (newNode != null)
-			newNode.Recycle();
+            newNode.Recycle();
     }
 
     static private void Collapse(Node node)
@@ -154,7 +154,7 @@ public class Pathing {
         }
     }
 
-	static private void TraverseBack(Node node)
+    static private void TraverseBack(Node node)
     {
         UnityEngine.Profiling.Profiler.BeginSample("TraverseBack");
         while (node.parent != null)
@@ -169,7 +169,7 @@ public class Pathing {
         UnityEngine.Profiling.Profiler.EndSample();
     }
 
-	static public List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, GameObject self = null, int depth = 100)
+    static public List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, GameObject self = null, int depth = 100)
     {
         UnityEngine.Profiling.Profiler.BeginSample("BuildPath");
         Vector2i from = (Vector2i)Iso.Snap(from_);
@@ -185,9 +185,9 @@ public class Pathing {
 
         Pathing.self = self;
         Node startNode = Node.Get();
-		startNode.parent = null;
-		startNode.pos = from;
-		startNode.gScore = 0;
+        startNode.parent = null;
+        startNode.pos = from;
+        startNode.gScore = 0;
         startNode.hScore = Vector2i.manhattanDistance(from, target);
         startNode.score = int.MaxValue;
         startNode.directionIndex = -1;
@@ -204,16 +204,16 @@ public class Pathing {
             if (node.hScore <= minRange)
             {
                 TraverseBack(node);
-				break;
-			}
+                break;
+            }
             StepTo(node);
             iterCount += 1;
-			if (iterCount > depth)
+            if (iterCount > depth)
             {
                 TraverseBack(bestNode);
                 break;
-			}
-		}
+            }
+        }
         //foreach (Node node in closeNodes)
         //{
         //    Iso.DebugDrawTile(node.pos, Color.magenta, 0.3f);
@@ -224,22 +224,23 @@ public class Pathing {
         //}
         UnityEngine.Profiling.Profiler.EndSample();
         return path;
-	}
+    }
 
-	static public void DebugDrawPath(Vector2 from, List<Step> path) {
+    static public void DebugDrawPath(Vector2 from, List<Step> path)
+    {
         if (path.Count > 0)
         {
             Debug.DrawLine(Iso.MapToWorld(from), Iso.MapToWorld(path[0].pos), Color.grey);
         }
-		for (int i = 0; i < path.Count - 1; ++i)
+        for (int i = 0; i < path.Count - 1; ++i)
         {
-			Debug.DrawLine(Iso.MapToWorld(path[i].pos), Iso.MapToWorld(path[i + 1].pos));
-		}
+            Debug.DrawLine(Iso.MapToWorld(path[i].pos), Iso.MapToWorld(path[i + 1].pos));
+        }
         if (path.Count > 0)
         {
             var center = Iso.MapToWorld(path[path.Count - 1].pos);
             Debug.DrawLine(center + Iso.MapToWorld(new Vector2(0, 0.15f)), center + Iso.MapToWorld(new Vector2(0, -0.15f)));
             Debug.DrawLine(center + Iso.MapToWorld(new Vector2(-0.15f, 0)), center + Iso.MapToWorld(new Vector2(0.15f, 0)));
         }
-	}
+    }
 }

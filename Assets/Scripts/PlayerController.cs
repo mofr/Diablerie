@@ -18,14 +18,14 @@ public class PlayerController : MonoBehaviour
             var player = GameObject.FindWithTag("Player");
             if (player != null)
                 SetCharacter(player.GetComponent<Character>());
-        }   
-	}
+        }
+    }
 
-	public void SetCharacter (Character character)
+    public void SetCharacter(Character character)
     {
-		this.character = character;
-		iso = character.GetComponent<Iso>();
-	}
+        this.character = character;
+        iso = character.GetComponent<Iso>();
+    }
 
     void DrawDebugPath()
     {
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         Pathing.DebugDrawPath(iso.pos, path);
     }
 
-	void Update ()
+    void Update()
     {
         if (character == null)
             return;
@@ -56,9 +56,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F4))
         {
-			character.Teleport(IsoInput.mouseTile);
-		}
-        
+            character.Teleport(IsoInput.mouseTile);
+        }
+
         if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
         {
             character.Attack(IsoInput.mousePosition);
