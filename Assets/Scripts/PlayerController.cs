@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         DrawDebugPath();
 
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.currentSelectedGameObject != null)
             return;
 
         if (Input.GetKeyDown(KeyCode.F4))

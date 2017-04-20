@@ -230,12 +230,6 @@ public class CollisionMap : MonoBehaviour
     {
         int index = instance.MapToIndex(pos);
 
-        if (Passable(index, size))
-        {
-            result = instance.MapToIso(index);
-            return true;
-        }
-
         int maxIterations = 100;
         int sign = 1;
         for(int i = 1; i < maxIterations; ++i, sign=-sign)

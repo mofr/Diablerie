@@ -112,6 +112,10 @@ public class Character : Entity
             iso.pos = newPos;
             moving = false;
         }
+        else
+        {
+            Debug.LogWarning("Can't move character - doesn't fit");
+        }
     }
 
     public void Attack(Vector3 target)
