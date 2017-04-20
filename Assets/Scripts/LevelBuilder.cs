@@ -294,6 +294,9 @@ public class LevelBuilder
                 for (int x = 0; x < ds1.width - 1; ++x)
                 {
                     var cell = floors[i + x];
+                    if (cell.prop1 == 0) // no tile here
+                        continue;
+
                     DT1.Tile tile;
                     if (ds1.tileSampler.Sample(cell.tileIndex, out tile))
                     {
