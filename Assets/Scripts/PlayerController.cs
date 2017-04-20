@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class PlayerController : MonoBehaviour {
-
-	public Character character;
+public class PlayerController : MonoBehaviour
+{
     static public PlayerController instance;
+
+    public Character character;
 
     Iso iso;
 
@@ -40,18 +42,23 @@ public class PlayerController : MonoBehaviour {
         Pathing.DebugDrawPath(iso.pos, path);
     }
 
-	void Update () {
+	void Update ()
+    {
         if (character == null)
             return;
 
-        DrawDebugPath();
-
         character.LookAt(IsoInput.mousePosition);
 
-        if (Input.GetKeyDown(KeyCode.F4)) {
+        DrawDebugPath();
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
 			character.Teleport(IsoInput.mouseTile);
 		}
-
+        
         if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
         {
             character.Attack(IsoInput.mousePosition);
@@ -62,19 +69,11 @@ public class PlayerController : MonoBehaviour {
             {
                 character.target = MouseSelection.current.gameObject;
             }
-            else {
+            else
+            {
                 character.GoTo(IsoInput.mousePosition);
             }
         }
-
-		if (Input.GetKeyDown(KeyCode.Tab)) {
-			foreach (Character character in GameObject.FindObjectsOfType<Character>()) {
-				if (this.character != character) {
-					SetCharacter(character);
-					return;
-				}
-			}
-		}
 
         if (Input.GetKeyDown(KeyCode.R))
         {

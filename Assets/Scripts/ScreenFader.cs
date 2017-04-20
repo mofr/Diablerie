@@ -16,6 +16,7 @@ public class ScreenFader : MonoBehaviour
         GameObject overlayObject = new GameObject("ScreenFader");
         overlay = overlayObject.AddComponent<RawImage>();
         overlay.color = new Color(0, 0, 0, 0.0f);
+        overlay.raycastTarget = false;
 
         Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         overlay.transform.SetParent(canvas.transform);
