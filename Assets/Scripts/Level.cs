@@ -17,4 +17,3 @@ public class Level : MonoBehaviour
         current = this;
     }
 }
-

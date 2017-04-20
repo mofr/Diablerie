@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public Character character;
 
+    bool flush = false;
     Iso iso;
 
     void Awake()
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
             if (player != null)
                 SetCharacter(player.GetComponent<Character>());
         }
+    }
+
+    public void FlushInput()
+    {
+        flush = true;
     }
 
     public void SetCharacter(Character character)
@@ -46,6 +52,11 @@ public class PlayerController : MonoBehaviour
     {
         if (character == null)
             return;
+
+        if (flush && Input.GetMouseButton(0))
+            return;
+
+        flush = false;
 
         character.LookAt(IsoInput.mousePosition);
 

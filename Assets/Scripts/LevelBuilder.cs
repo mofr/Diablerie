@@ -407,7 +407,7 @@ public class LevelBuilder
                 Debug.LogWarning("Warp info wasn't found");
                 return;
             }
-            Warp.Create(x, y, levelWarpInfo, targetLevel, parent);
+            Warp.Create(x, y, levelWarpInfo, info, targetLevel, parent);
         }
     }
 

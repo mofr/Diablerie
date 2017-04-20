@@ -2,13 +2,14 @@
 
 public class Warp : Entity
 {
+    LevelWarpInfo info;
+    LevelInfo sourceLevel;
     LevelInfo targetLevel;
-    LevelWarpInfo warpInfo;
     new Transform transform;
     Vector3 selectOffset;
     Vector3 selectSize;
 
-    public static Warp Create(int x, int y, LevelWarpInfo warpInfo, LevelInfo targetLevel, Transform parent)
+    public static Warp Create(int x, int y, LevelWarpInfo warpInfo, LevelInfo sourceLevel, LevelInfo targetLevel, Transform parent)
     {
         var offset = new Vector3(warpInfo.offsetX, warpInfo.offsetY);
         var pos = new Vector3(x, y) * Iso.SubTileCount - new Vector3(2, 2) + offset;
@@ -18,12 +19,14 @@ public class Warp : Entity
         warpObject.transform.position = pos;
         warpObject.transform.SetParent(parent);
         var warp = warpObject.AddComponent<Warp>();
+        warp.sourceLevel = sourceLevel;
         warp.targetLevel = targetLevel;
-        warp.warpInfo = warpInfo;
+        warp.info = warpInfo;
         warp.transform = warpObject.transform;
         warp.selectSize = new Vector3(warpInfo.selectDX, warpInfo.selectDY) / Iso.pixelsPerUnit;
         warp.selectOffset = new Vector3(warpInfo.selectX, -warpInfo.selectY) / Iso.pixelsPerUnit;
         warp.selectOffset += new Vector3(warp.selectSize.x, -warp.selectSize.y) / 2;
+        warpInfo.instance = warp;
         return warp;
     }
 
@@ -43,7 +46,7 @@ public class Warp : Entity
 
     public override Vector2 nameOffset
     {
-        get { return new Vector2(warpInfo.selectX + warpInfo.selectDX / 2, warpInfo.selectDY / 2); }
+        get { return new Vector2(info.selectX + info.selectDX / 2, info.selectDY / 2); }
     }
 
     private void OnRenderObject()
@@ -51,20 +54,36 @@ public class Warp : Entity
         MouseSelection.Submit(this);
     }
 
+    private Warp FindTargetWarp()
+    {
+        for (int i = 0; i < targetLevel.vis.Length; ++i)
+        {
+            if (targetLevel.vis[i] == sourceLevel.id)
+            {
+                int warpId = targetLevel.warp[i];
+                Warp warp = LevelWarpInfo.Find(warpId).instance;
+                if (warp != null)
+                    return warp;
+            }
+        }
+
+        return null;
+    }
+
     public override void Operate(Character character)
     {
+        var targetWarp = FindTargetWarp();
+        if (targetWarp == null)
+        {
+            Debug.LogError("Target warp wasn't found");
+            return;
+        }
+
         ScreenFader.SetToBlack();
         ScreenFader.FadeToClear();
-        var target = Iso.MapToIso(transform.position) + new Vector3(20, 20);
-        var iso = character.GetComponent<Iso>();
-        Vector3 newPos;
-        if (CollisionMap.Fit(target, out newPos, (int)character.diameter))
-        {
-            iso.pos = newPos;
-        }
-        else
-        {
-            Debug.LogError("Wasn't able to fit character after warp");
-        }
+        var target = Iso.MapToIso(targetWarp.transform.position);
+        character.Teleport(target);
+        character.GoTo(target + new Vector3(targetWarp.info.exitWalkX, targetWarp.info.exitWalkY));
+        PlayerController.instance.FlushInput();
     }
 }

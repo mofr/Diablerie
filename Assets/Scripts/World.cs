@@ -13,7 +13,7 @@ public class World : MonoBehaviour
         bloodMoor.Instantiate(new Vector2i(0, 0));
 
         var doe = CreateDenOfEvil();
-        var doeOffset = new Vector2i(90, 0);
+        var doeOffset = new Vector2i(120, 0);
         doe.Instantiate(doeOffset);
 
         var entry = town.FindEntry();

@@ -150,9 +150,10 @@ public class Character : Entity
                 var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
                 if (distance <= diameter + targetEntity.operateRange)
                 {
-                    targetEntity.Operate(this);
+                    var localEntity = targetEntity;
                     moving = false;
                     targetEntity = null;
+                    localEntity.Operate(this);
                 }
             }
             if (targetCharacter && !attack)
