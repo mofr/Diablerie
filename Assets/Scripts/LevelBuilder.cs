@@ -297,6 +297,9 @@ public class LevelBuilder
                     if (cell.prop1 == 0) // no tile here
                         continue;
 
+                    if ((cell.prop4 & 0x80) != 0)
+                        continue;
+
                     DT1.Tile tile;
                     if (ds1.tileSampler.Sample(cell.tileIndex, out tile))
                     {
@@ -544,9 +547,11 @@ public class LevelBuilder
         else
         {
             var monStat = MonStat.Find(obj.act, obj.id);
-            if (monStat == null)
-                return null;
-            return World.SpawnMonster(monStat, pos).gameObject;
+            if (monStat != null)
+                return World.SpawnMonster(monStat, pos).gameObject;
+
+            // todo search SuperUniques.txt here
+            return null;
         }
     }
 

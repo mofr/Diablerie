@@ -11,8 +11,8 @@ public class CollisionMap : MonoBehaviour
         public GameObject gameObject;
     }
 
-    private int width = 1024;
-    private int height = 1024;
+    private int width = 2048;
+    private int height = 2048;
     private int origin;
     private Cell[] map;
 

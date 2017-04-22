@@ -24,24 +24,26 @@ public class World : MonoBehaviour
     {
         var builder = new LevelBuilder("Act 1 - Cave 1", 24, 24);
         var palette = new Maze.Palette();
-        palette.previous = new LevelPreset[4];
-        palette.previous[0] = LevelPreset.Find("Act 1 - Cave Prev W");
-        palette.previous[1] = LevelPreset.Find("Act 1 - Cave Prev E");
-        palette.previous[2] = LevelPreset.Find("Act 1 - Cave Prev S");
-        palette.previous[3] = LevelPreset.Find("Act 1 - Cave Prev N");
-        palette.next = new LevelPreset[4];
-        palette.next[0] = LevelPreset.Find("Act 1 - Cave Next W");
-        palette.next[1] = LevelPreset.Find("Act 1 - Cave Next E");
-        palette.next[2] = LevelPreset.Find("Act 1 - Cave Next S");
-        palette.next[3] = LevelPreset.Find("Act 1 - Cave Next N");
-        palette.down = new LevelPreset[4];
-        palette.down[0] = LevelPreset.Find("Act 1 - Cave Down W");
-        palette.down[1] = LevelPreset.Find("Act 1 - Cave Down E");
-        palette.down[2] = LevelPreset.Find("Act 1 - Cave Down S");
-        palette.down[3] = LevelPreset.Find("Act 1 - Cave Down N");
-        palette.rooms = new LevelPreset[15];
+        palette.special = new LevelPreset[][] {
+            new LevelPreset[] {
+                LevelPreset.Find("Act 1 - Cave Prev W"),
+                LevelPreset.Find("Act 1 - Cave Prev E"),
+                LevelPreset.Find("Act 1 - Cave Prev S"),
+                LevelPreset.Find("Act 1 - Cave Prev N")
+            },
+            new LevelPreset[] {
+                LevelPreset.Find("Act 1 - Cave Den Of Evil W"),
+                LevelPreset.Find("Act 1 - Cave Den Of Evil E"),
+                LevelPreset.Find("Act 1 - Cave Den Of Evil S"),
+                LevelPreset.Find("Act 1 - Cave Den Of Evil N")
+            }
+        };
+        palette.rooms = new LevelPreset[16];
         for (int i = 0; i < 15; ++i)
-            palette.rooms[i] = LevelPreset.sheet.rows[53 + i];
+            palette.rooms[i + 1] = LevelPreset.sheet.rows[53 + i];
+        palette.themedRooms = new LevelPreset[16];
+        for (int i = 0; i < 15; ++i)
+            palette.themedRooms[i + 1] = LevelPreset.sheet.rows[68 + i];
         Maze.Generate(builder, palette);
         return builder;
     }
