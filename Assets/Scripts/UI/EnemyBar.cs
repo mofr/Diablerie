@@ -1,9 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyBar : MonoBehaviour {
+public class EnemyBar : MonoBehaviour
+{
+    static public EnemyBar instance;
+
+    [HideInInspector]
+    public Character character;
 
     [SerializeField]
     Slider slider;
@@ -11,22 +14,18 @@ public class EnemyBar : MonoBehaviour {
     [SerializeField]
     Text title;
 
-    [HideInInspector]
-    public Character character;
-
-    static public EnemyBar instance;
-
     void Awake()
     {
         instance = this;
         slider.gameObject.SetActive(false);
     }
 
-	void LateUpdate () {
+    void LateUpdate()
+    {
         slider.gameObject.SetActive(character != null);
         if (character)
         {
-            title.text = character.name;
+            title.text = character.title;
             slider.maxValue = character.maxHealth;
             slider.value = character.health;
         }

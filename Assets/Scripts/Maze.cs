@@ -94,7 +94,6 @@ public class Maze
             while (dirMask == 0);
 
             int dirIndex = Random.Range(0, 4);
-            var dir = dirs[dirIndex];
             while ((dirMask & (1 << dirIndex)) == 0)
                 dirIndex = (dirIndex + 1) % 4;
             dirMask = 1 << dirIndex;
@@ -153,7 +152,10 @@ public class Maze
         if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1))
             return 0;
 
-        return grid[x, y].dirMask & (1 << dirIndex);
+        if ((grid[x, y].dirMask & (1 << dirIndex)) == 0)
+            return 0;
+
+        return 1;
     }
 
     private static bool Empty(int x, int y)

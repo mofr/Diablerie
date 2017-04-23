@@ -136,14 +136,16 @@ public class World : MonoBehaviour
 
         var character = monster.AddComponent<Character>();
         character.monStat = monStat;
+        character.title = monStat.name;
         character.basePath = @"data\global\monsters";
         character.token = monStat.code;
         character.weaponClass = monStat.ext.baseWeaponClass;
         character.run = false;
         character.walkSpeed = monStat.speed;
         character.runSpeed = monStat.runSpeed;
-        character.health = monStat.minHP;
-        character.maxHealth = monStat.minHP;
+        int health = Random.Range(monStat.minHP, monStat.maxHP + 1);
+        character.health = health;
+        character.maxHealth = health;
 
         character.gear = new string[monStat.ext.gearVariants.Length];
         for (int i = 0; i < character.gear.Length; ++i)
@@ -167,7 +169,7 @@ public class World : MonoBehaviour
         return character;
     }
 
-    public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos, bool fit = false)
+    public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos, bool fit = false, Transform parent = null)
     {
         if (fit)
         {
@@ -179,12 +181,14 @@ public class World : MonoBehaviour
             pos = Iso.MapToWorld(pos);
         }
 
-        var gameObject = new GameObject();
-        gameObject.name = objectInfo.description;
+        var gameObject = new GameObject(objectInfo.description);
         gameObject.transform.position = pos;
 
         var staticObject = gameObject.AddComponent<StaticObject>();
         staticObject.objectInfo = objectInfo;
+        staticObject.title = objectInfo.name;
+
+        gameObject.transform.SetParent(parent, true);
 
         return staticObject;
     }

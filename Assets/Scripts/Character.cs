@@ -404,18 +404,7 @@ public class Character : Entity
         UpdateAnimation();
     }
 
-    public override string name
-    {
-        get
-        {
-            if (monStat != null)
-                return monStat.name;
-            else
-                return gameObject.name;
-        }
-    }
-
-    public override Vector2 nameOffset
+    public override Vector2 titleOffset
     {
         get
         {

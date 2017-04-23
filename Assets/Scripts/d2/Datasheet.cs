@@ -11,7 +11,6 @@ public struct Datasheet<T> where T : new()
 
     public static Datasheet<T> Load(string filename, int headerLines = 1)
     {
-        UnityEngine.Profiling.Profiler.BeginSample("Datasheet.Load");
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
         string csv = File.ReadAllText(Application.streamingAssetsPath + "/" + filename);
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
@@ -58,7 +57,6 @@ public struct Datasheet<T> where T : new()
             }
         }
         Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
-        UnityEngine.Profiling.Profiler.EndSample();
         return sheet;
     }
 
@@ -441,24 +439,10 @@ public class MonStat
         }
     }
 
-    public static MonStat Find(int act, int id)
-    {
-        MonPreset preset = MonPreset.Find(act, id);
-        if (preset != null)
-        {
-            if (stats.ContainsKey(preset.place))
-                return stats[preset.place];
-            else
-                return null;
-        }
-        else
-        {
-            return sheet.rows[id];
-        }
-    }
-
     public static MonStat Find(string id)
     {
+        if (id == null)
+            return null;
         return stats.GetValueOrDefault(id, null);
     }
 }
@@ -585,17 +569,16 @@ public class MonPreset
         for(int i = 0; i < sheet.rows.Count; ++i)
         {
             MonPreset preset = sheet.rows[i];
-            preset.place = preset.place.ToLower();
             presets[preset.act].Add(preset);
         }
     }
 
-    public static MonPreset Find(int act, int id)
+    public static string Find(int act, int id)
     {
         var actPresets = presets[act];
         if (id < actPresets.Count)
         {
-            return actPresets[id];
+            return actPresets[id].place;
         }
         return null;
     }
@@ -861,6 +844,8 @@ public class Translation
 
     public static string Find(string key, string defaultValue = null)
     {
+        if (key == null)
+            return null;
         return map.GetValueOrDefault(key, defaultValue);
     }
 
@@ -872,4 +857,50 @@ public class Translation
                 map.Add(translation.key, translation.value);
         }
     }
+}
+
+[System.Serializable]
+public class SuperUnique
+{
+    public static Datasheet<SuperUnique> sheet = Datasheet<SuperUnique>.Load("data/global/excel/SuperUniques.txt");
+    static Dictionary<string, SuperUnique> map = new Dictionary<string, SuperUnique>();
+
+    public static SuperUnique Find(string key)
+    {
+        return map.GetValueOrDefault(key);
+    }
+
+    static SuperUnique()
+    {
+        foreach (var row in sheet.rows)
+        {
+            row.monStat = MonStat.Find(row.monStatId);
+            row.name = Translation.Find(row.nameStr);
+            map.Add(row.superUnique, row);
+        }
+    }
+
+    public string superUnique;
+    public string nameStr;
+    public string monStatId;
+    public int hcIdx;
+    public string monSound;
+    public int mod1;
+    public int mod2;
+    public int mod3;
+    public int minGrp;
+    public int maxGrp;
+    public int eClass;
+    public bool autoPos;
+    public int stacks;
+    public bool replacable;
+    public int[] uTrans = new int[3];
+    public string[] treasureClass = new string[3];
+    public string eol;
+
+    [System.NonSerialized]
+    public MonStat monStat;
+
+    [System.NonSerialized]
+    public string name;
 }

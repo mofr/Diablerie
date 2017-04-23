@@ -3,6 +3,7 @@
 public class Entity : MonoBehaviour
 {
     COFAnimator animator;
+    string _title = null;
 
     protected virtual void Start()
     {
@@ -20,12 +21,13 @@ public class Entity : MonoBehaviour
         set { animator.selected = value; }
     }
 
-    public virtual string name
+    public string title
     {
-        get { return base.name; }
+        set { _title = value; }
+        get { return _title == null ? name : _title; }
     }
 
-    public virtual Vector2 nameOffset
+    public virtual Vector2 titleOffset
     {
         get { return new Vector2(0, 0); }
     }

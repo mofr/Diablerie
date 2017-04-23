@@ -22,8 +22,8 @@ class MouseSelection : MonoBehaviour
             }
             else
             {
-                var labelPosition = current.transform.position + (Vector3)current.nameOffset / Iso.pixelsPerUnit;
-                UI.ShowLabel(labelPosition, current.name);
+                var labelPosition = current.transform.position + (Vector3)current.titleOffset / Iso.pixelsPerUnit;
+                UI.ShowLabel(labelPosition, current.title);
             }
         }
         else

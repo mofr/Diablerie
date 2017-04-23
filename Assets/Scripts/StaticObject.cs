@@ -20,12 +20,7 @@ public class StaticObject : Entity
         get { return objectInfo; }
     }
 
-    public override string name
-    {
-        get { return objectInfo.name; }
-    }
-
-    public override Vector2 nameOffset
+    public override Vector2 titleOffset
     {
         get { return new Vector2(0, -objectInfo.nameOffset); }
     }

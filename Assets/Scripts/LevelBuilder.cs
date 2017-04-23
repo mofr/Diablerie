@@ -423,10 +423,8 @@ public class LevelBuilder
         offsetY *= Iso.SubTileCount;
         foreach (var info in ds1.objects)
         {
-            var gameObject = CreateObject(info.obj, offsetX + info.x, offsetY + info.y);
-            if (gameObject != null)
-                gameObject.transform.SetParent(root, true);
-            else
+            var gameObject = CreateObject(info.obj, offsetX + info.x, offsetY + info.y, root);
+            if (gameObject == null)
                 Debug.LogWarning("Object not instantiated " + info.obj.description);
         }
     }
@@ -530,7 +528,7 @@ public class LevelBuilder
         return meshRenderer;
     }
 
-    static GameObject CreateObject(Obj obj, int x, int y)
+    static GameObject CreateObject(Obj obj, int x, int y, Transform root)
     {
         var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)
@@ -540,17 +538,41 @@ public class LevelBuilder
                 return null;
             }
             ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
-            var staticObject = World.SpawnObject(objectInfo, pos);
+            var staticObject = World.SpawnObject(objectInfo, pos, parent: root);
             staticObject.modeName = obj.mode;
             return staticObject.gameObject;
         }
         else
         {
-            var monStat = MonStat.Find(obj.act, obj.id);
-            if (monStat != null)
-                return World.SpawnMonster(monStat, pos).gameObject;
+            string monPreset = MonPreset.Find(obj.act, obj.id);
+            MonStat monStat = null;
+            SuperUnique superUnique = null;
 
-            // todo search SuperUniques.txt here
+            if (monPreset != null)
+            {
+                monStat = MonStat.Find(monPreset);
+                if (monStat == null)
+                    superUnique = SuperUnique.Find(monPreset);
+            }
+            else
+            {
+                monStat = MonStat.sheet.rows[obj.id];
+            }
+
+            if (monStat != null)
+                return World.SpawnMonster(monStat, pos, root).gameObject;
+
+            if (superUnique != null)
+            {
+                var monster = World.SpawnMonster(superUnique.monStat, pos, root);
+                monster.gameObject.name = superUnique.nameStr;
+                monster.title = superUnique.name;
+                int minionCount = Random.Range(superUnique.minGrp, superUnique.maxGrp + 1);
+                for (int i = 0; i < minionCount; ++i)
+                    World.SpawnMonster(superUnique.monStat, pos, root);
+                return monster.gameObject;
+            }
+            
             return null;
         }
     }

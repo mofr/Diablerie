@@ -44,7 +44,7 @@ public class Warp : Entity
         set { }
     }
 
-    public override Vector2 nameOffset
+    public override Vector2 titleOffset
     {
         get { return new Vector2(info.selectX + info.selectDX / 2, info.selectDY / 2); }
     }
