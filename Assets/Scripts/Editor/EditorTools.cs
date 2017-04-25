@@ -92,6 +92,32 @@ public class EditorTools
         return assetPath.ToLower().EndsWith("dcc");
     }
 
+    [MenuItem("Assets/Convert DC6 to PNG")]
+    static public void ConvertDC6ToPNG()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+
+        Palette.LoadPalette(0);
+        DC6 dc6 = DC6.Load(assetPath, loadAllDirections: true, mpq: false);
+        int i = 0;
+        foreach (var texture in dc6.textures)
+        {
+            var pngData = texture.EncodeToPNG();
+            Object.DestroyImmediate(texture);
+            var pngPath = assetPath + "." + i + ".png";
+            File.WriteAllBytes(pngPath, pngData);
+            AssetDatabase.ImportAsset(pngPath);
+            ++i;
+        }
+    }
+
+    [MenuItem("Assets/Convert DC6 to PNG", true)]
+    static public bool ConvertDC6ToPNGValidate()
+    {
+        var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+        return assetPath.ToLower().EndsWith("dc6");
+    }
+
     [MenuItem("Assets/Create font from DC6")]
     static public void CreateFontFromDC6()
     {
@@ -134,8 +160,15 @@ public class EditorTools
         
         var filepath = "Assets/Fonts/" + name;
 
-        var pngData = dc6.texture.EncodeToPNG();
-        Object.DestroyImmediate(dc6.texture);
+        if (dc6.textures.Count != 1)
+        {
+            Debug.LogError("Font not fit into a single texture");
+            return;
+        }
+
+        var texture = dc6.textures[0];
+        var pngData = texture.EncodeToPNG();
+        Object.DestroyImmediate(texture);
         var texturePath = filepath + ".png";
         File.WriteAllBytes(texturePath, pngData);
         AssetDatabase.ImportAsset(texturePath);

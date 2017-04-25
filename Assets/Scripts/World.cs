@@ -118,6 +118,11 @@ public class World : MonoBehaviour
     public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null)
     {
         MonStat monStat = MonStat.Find(id);
+        if (monStat == null)
+        {
+            Debug.LogWarning("Monster id not found: " + id);
+            return null;
+        }
         return SpawnMonster(monStat, pos);
     }
 

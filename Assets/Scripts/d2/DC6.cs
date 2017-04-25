@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DC6
@@ -15,9 +16,9 @@ public class DC6
     public int directionCount;
     public int framesPerDirection;
     public Frame[] frames;
-    public Texture2D texture;
+    public List<Texture2D> textures = new List<Texture2D>();
 
-    static public DC6 Load(string filename, int textureSize = 512, bool mpq = true)
+    static public DC6 Load(string filename, int textureSize = 512, bool mpq = true, bool loadAllDirections = false)
     {
         Palette.LoadPalette(0);
         var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
@@ -34,11 +35,11 @@ public class DC6
                 return null;
             }
 
-            return Load(stream, reader, textureSize);
+            return Load(stream, reader, textureSize, loadAllDirections);
         }
     }
 
-    static DC6 Load(Stream stream, BinaryReader reader, int textureSize)
+    static DC6 Load(Stream stream, BinaryReader reader, int textureSize, bool loadAllDirections = false)
     {
         var dc6 = new DC6();
         reader.ReadInt32();
@@ -47,9 +48,12 @@ public class DC6
         dc6.frames = new Frame[dc6.framesPerDirection];
         var fptr = stream.Position;
 
-        dc6.texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
-        var pixels = new Color32[textureSize * textureSize];
-        var packer = new TexturePacker(textureSize, textureSize, padding: 2);
+        int textureWidth = textureSize;
+        int textureHeight = textureSize;
+
+        Texture2D texture = null;
+        var pixels = new Color32[textureWidth * textureHeight];
+        var packer = new TexturePacker(textureWidth, textureHeight, padding: 2);
         byte[] data = new byte[1024];
 
         int dir = 0;
@@ -74,16 +78,30 @@ public class DC6
             reader.Read(data, 0, f_len);
 
             var pack = packer.put(frame.width, frame.height);
+            if (pack.newTexture)
+            {
+                if (texture != null)
+                {
+                    texture.SetPixels32(pixels);
+                    texture.Apply();
+                }
+                texture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGBA32, false);
+                pixels = new Color32[textureWidth * textureHeight];
+                dc6.textures.Add(texture);
+            }
             drawFrame(data, f_len, pixels, textureSize, pack.x, pack.y + frame.height);
 
-            frame.texture = dc6.texture;
+            frame.texture = texture;
             frame.textureX = pack.x;
             frame.textureY = pack.y;
             dc6.frames[i] = frame;
         }
 
-        dc6.texture.SetPixels32(pixels);
-        dc6.texture.Apply();
+        if (texture != null)
+        {
+            texture.SetPixels32(pixels);
+            texture.Apply();
+        }
 
         return dc6;
     }
