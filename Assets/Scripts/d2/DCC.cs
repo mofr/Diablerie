@@ -11,7 +11,7 @@ public class DCC
     string filename;
     byte[] bytes;
     Header header;
-    List<Sprite>[] sprites;
+    Sprite[][] sprites;
 
     const int DCC_MAX_PB_ENTRY = 85000;
 
@@ -402,7 +402,7 @@ public class DCC
         }
     }
 
-    static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, List<Sprite> sprites)
+    static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, Sprite[] sprites)
     {
         const int padding = 2;
         int textureWidth = Mathf.NextPowerOfTwo((dir.box.width + padding) * header.framesPerDir);
@@ -445,8 +445,7 @@ public class DCC
 
             var textureRect = new Rect(frame.textureX, frame.textureY, dir.box.width, dir.box.height);
             var pivot = new Vector2(-dir.box.xMin / (float)dir.box.width, dir.box.yMax / (float)dir.box.height);
-            Sprite sprite = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit, extrude: 0, meshType: SpriteMeshType.FullRect);
-            sprites.Add(sprite);
+            sprites[f] = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit, extrude: 0, meshType: SpriteMeshType.FullRect);
 
             int nb_cell = frame.nb_cell_w * frame.nb_cell_h;
             for (int c = 0; c < nb_cell; c++)
@@ -542,7 +541,7 @@ public class DCC
     readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15 };
     readonly static int[] dirs32 = new int[] { 4, 16, 8, 17, 0, 18, 9, 19, 5, 20, 10, 21, 1, 22, 11, 23, 6, 24, 12, 25, 2, 26, 13, 27, 7, 28, 14, 29, 3, 30, 15, 31 };
 
-    public List<Sprite> GetSprites(int d)
+    public Sprite[] GetSprites(int d)
     {
         if (sprites[d] == null)
             DecodeDirection(d);
@@ -552,7 +551,7 @@ public class DCC
 
     void DecodeDirection(int d)
     {
-        sprites[d] = new List<Sprite>();
+        sprites[d] = new Sprite[header.framesPerDir];
         int[] dirs = null;
         switch (header.directionCount)
         {
@@ -638,7 +637,7 @@ public class DCC
         {
             ReadHeader(reader, dcc.header);
             dcc.framesPerDirection = dcc.header.framesPerDir;
-            dcc.sprites = new List<Sprite>[dcc.header.directionCount];
+            dcc.sprites = new Sprite[dcc.header.directionCount][];
 
             if (loadAllDirections)
                 for (int d = 0; d < dcc.header.directionCount; ++d)

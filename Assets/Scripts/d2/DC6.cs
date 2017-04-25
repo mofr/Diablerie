@@ -60,9 +60,12 @@ public class DC6
             dc6.offsets[i] = reader.ReadInt32();
         }
 
-        for(int i = 0; i < dc6.directionCount; ++i)
+        if (loadAllDirections)
         {
-            dc6.LoadDirection(stream, reader, bytes, i, textureSize);
+            for (int i = 0; i < dc6.directionCount; ++i)
+            {
+                dc6.LoadDirection(stream, reader, bytes, i, textureSize);
+            }
         }
 
         return dc6;
