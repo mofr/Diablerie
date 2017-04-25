@@ -129,14 +129,21 @@ public class EditorTools
             textureSize = 512;
 
         var dc6 = DC6.Load(assetPath, textureSize, mpq: false);
+        if (dc6.textures.Count != 1)
+        {
+            Debug.LogError("Font not fit into a single texture");
+            return;
+        }
+
         var metrics = File.ReadAllText(Path.GetDirectoryName(assetPath) + "/" + name + ".txt").Split(',');
+        var frames = dc6.directions[0].frames;
 
         var characterInfo = new CharacterInfo[dc6.framesPerDirection];
-        for (int i = 0; i < dc6.framesPerDirection; i++)
+        for (int i = 0; i < frames.Length; i++)
         {
             int glyphHeight = int.Parse(metrics[i * 2].Trim());
             int glyphWidth = int.Parse(metrics[i * 2 + 1].Trim());
-            var frame = dc6.frames[i];
+            var frame = frames[i];
             characterInfo[i].index = i;
             characterInfo[i].advance = glyphWidth;
             characterInfo[i].minX = 0;
@@ -159,12 +166,6 @@ public class EditorTools
 
         
         var filepath = "Assets/Fonts/" + name;
-
-        if (dc6.textures.Count != 1)
-        {
-            Debug.LogError("Font not fit into a single texture");
-            return;
-        }
 
         var texture = dc6.textures[0];
         var pngData = texture.EncodeToPNG();

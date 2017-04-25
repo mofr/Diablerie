@@ -8,15 +8,23 @@ public class DC6
     {
         public int width;
         public int height;
+        public int offsetX;
+        public int offsetY;
         public Texture2D texture;
         public int textureX;
         public int textureY;
     }
 
+    public struct Direction
+    {
+        public Frame[] frames;
+    }
+
     public int directionCount;
     public int framesPerDirection;
-    public Frame[] frames;
+    public Direction[] directions;
     public List<Texture2D> textures = new List<Texture2D>();
+    int[] offsets;
 
     static public DC6 Load(string filename, int textureSize = 512, bool mpq = true, bool loadAllDirections = false)
     {
@@ -35,47 +43,58 @@ public class DC6
                 return null;
             }
 
-            return Load(stream, reader, textureSize, loadAllDirections);
+            return Load(stream, reader, bytes, textureSize, loadAllDirections);
         }
     }
 
-    static DC6 Load(Stream stream, BinaryReader reader, int textureSize, bool loadAllDirections = false)
+    static DC6 Load(Stream stream, BinaryReader reader, byte[] bytes, int textureSize, bool loadAllDirections = false)
     {
         var dc6 = new DC6();
         reader.ReadInt32();
         dc6.directionCount = reader.ReadInt32();
         dc6.framesPerDirection = reader.ReadInt32();
-        dc6.frames = new Frame[dc6.framesPerDirection];
-        var fptr = stream.Position;
+        dc6.directions = new Direction[dc6.directionCount];
+        dc6.offsets = new int[dc6.directionCount * dc6.framesPerDirection];
+        for(int i = 0; i < dc6.offsets.Length; ++i)
+        {
+            dc6.offsets[i] = reader.ReadInt32();
+        }
 
+        for(int i = 0; i < dc6.directionCount; ++i)
+        {
+            dc6.LoadDirection(stream, reader, bytes, i, textureSize);
+        }
+
+        return dc6;
+    }
+
+    void LoadDirection(Stream stream, BinaryReader reader, byte[] bytes, int dirIndex, int textureSize)
+    {
         int textureWidth = textureSize;
         int textureHeight = textureSize;
 
         Texture2D texture = null;
-        var pixels = new Color32[textureWidth * textureHeight];
+        Color32[] pixels = null;
         var packer = new TexturePacker(textureWidth, textureHeight, padding: 2);
-        byte[] data = new byte[1024];
 
-        int dir = 0;
-        for (int i = 0; i < dc6.framesPerDirection; i++)
+        var dir = new Direction();
+        dir.frames = new Frame[framesPerDirection];
+
+        for (int i = 0; i < framesPerDirection; i++)
         {
-            stream.Seek(fptr + (dir * dc6.framesPerDirection + i) * 4, SeekOrigin.Begin);
-            long offset = reader.ReadInt32();
+            int offset = offsets[dirIndex * framesPerDirection + i];
             stream.Seek(offset, SeekOrigin.Begin);
 
             var frame = new Frame();
 
-            reader.ReadInt32();
+            reader.ReadInt32(); // skip
             frame.width = reader.ReadInt32();
             frame.height = reader.ReadInt32();
-            reader.ReadInt32(); // f_offx
-            reader.ReadInt32(); // f_offy
-            reader.ReadInt32();
-            reader.ReadInt32();
-            int f_len = reader.ReadInt32();
-            if (data.Length < f_len)
-                data = new byte[f_len];
-            reader.Read(data, 0, f_len);
+            frame.offsetX = reader.ReadInt32();
+            frame.offsetY = reader.ReadInt32();
+            reader.ReadInt32(); // skip
+            reader.ReadInt32(); // skip
+            int size = reader.ReadInt32();
 
             var pack = packer.put(frame.width, frame.height);
             if (pack.newTexture)
@@ -87,14 +106,14 @@ public class DC6
                 }
                 texture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGBA32, false);
                 pixels = new Color32[textureWidth * textureHeight];
-                dc6.textures.Add(texture);
+                textures.Add(texture);
             }
-            drawFrame(data, f_len, pixels, textureSize, pack.x, pack.y + frame.height);
 
+            drawFrame(bytes, (int)stream.Position, size, pixels, textureWidth, textureHeight, pack.x, pack.y + frame.height);
             frame.texture = texture;
             frame.textureX = pack.x;
             frame.textureY = pack.y;
-            dc6.frames[i] = frame;
+            dir.frames[i] = frame;
         }
 
         if (texture != null)
@@ -103,25 +122,24 @@ public class DC6
             texture.Apply();
         }
 
-        return dc6;
+        directions[dirIndex] = dir;
     }
 
-    static void drawFrame(byte[] data, int size, Color32[] pixels, int textureSize, int x0, int y0)
+    static void drawFrame(byte[] data, int offset, int size, Color32[] pixels, int textureWidth, int textureHeight, int x0, int y0)
     {
-        int dst = textureSize * textureSize - y0 * textureSize - textureSize;
-        int ptr = 0;
+        int dst = textureWidth * textureHeight - y0 * textureHeight - textureHeight;
         int i2, x = x0, y = y0, c, c2;
 
         for (int i = 0; i < size; i++)
         {
-            c = data[ptr];
-            ++ptr;
+            c = data[offset];
+            ++offset;
 
             if (c == 0x80)
             {
                 x = x0;
                 y--;
-                dst += textureSize;
+                dst += textureWidth;
             }
             else if ((c & 0x80) != 0)
                 x += c & 0x7F;
@@ -129,8 +147,8 @@ public class DC6
             {
                 for (i2 = 0; i2 < c; i2++)
                 {
-                    c2 = data[ptr];
-                    ++ptr;
+                    c2 = data[offset];
+                    ++offset;
                     i++;
                     pixels[dst + x] = Palette.palette[c2];
                     x++;

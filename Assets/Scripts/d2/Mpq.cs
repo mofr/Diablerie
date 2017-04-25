@@ -17,6 +17,8 @@ public class Mpq
     public static byte[] ReadAllBytes(string filename)
     {
         var file = fs.FindFile(filename);
+        if (file == null)
+            throw new System.IO.FileNotFoundException();
         return ReadAllBytes(file);
     }
 
