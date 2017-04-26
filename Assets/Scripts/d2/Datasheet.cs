@@ -432,7 +432,7 @@ public class MonStat
                 stats.Remove(key);
             }
             stats.Add(key, stat);
-            stat.ext = MonStatsExtended.Find(stat.id);
+            stat.ext = MonStatsExtended.Find(stat.monStatEx);
             stat.name = stat.nameStr == null ? null : Translation.Find(stat.nameStr);
             stat.minion1 = stat.minion1Id == null ? null : Find(stat.minion1Id);
             stat.minion2 = stat.minion2Id == null ? null : Find(stat.minion2Id);
