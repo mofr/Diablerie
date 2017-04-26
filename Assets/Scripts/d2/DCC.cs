@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-public class DCC
+public class DCC : Spritesheet
 {
     public List<Texture2D> textures;
     public int directionCount;
@@ -541,7 +541,7 @@ public class DCC
     readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15 };
     readonly static int[] dirs32 = new int[] { 4, 16, 8, 17, 0, 18, 9, 19, 5, 20, 10, 21, 1, 22, 11, 23, 6, 24, 12, 25, 2, 26, 13, 27, 7, 28, 14, 29, 3, 30, 15, 31 };
 
-    public Sprite[] GetSprites(int d)
+    public override Sprite[] GetSprites(int d)
     {
         if (sprites[d] == null)
             DecodeDirection(d);

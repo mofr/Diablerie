@@ -27,7 +27,7 @@ class COFAnimator : MonoBehaviour
         public GameObject gameObject;
         public SpriteRenderer renderer;
         public Transform transform;
-        public DCC dcc;
+        public Spritesheet spritesheet;
         public SpriteRenderer shadow;
     }
 
@@ -150,18 +150,18 @@ class COFAnimator : MonoBehaviour
                 continue;
             }
 
-            var dccFilename = _cof.DccFilename(cofLayer, equip);
+            var spritesheetFilename = _cof.GetSpritesheetFilename(cofLayer, equip);
             try
             {
-                layer.dcc = DCC.Load(dccFilename);
+                layer.spritesheet = Spritesheet.Load(spritesheetFilename);
                 layer.renderer.material = cofLayer.material;
                 layers[i] = layer;
                 layer.gameObject.SetActive(true);
                 layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
             }
-            catch (System.IO.FileNotFoundException)
+            catch (System.IO.FileNotFoundException e)
             {
-                Debug.LogWarning("File not found " + dccFilename);
+                Debug.LogWarning("File not found " + e.FileName);
                 layer.gameObject.SetActive(false);
             }
         }
@@ -212,7 +212,7 @@ class COFAnimator : MonoBehaviour
             Layer layer = layers[cofLayer.index];
             if (!layer.gameObject.activeSelf)
                 continue;
-            layer.renderer.sprite = layer.dcc.GetSprites(direction)[spriteIndex];
+            layer.renderer.sprite = layer.spritesheet.GetSprites(direction)[spriteIndex];
             layer.renderer.sortingOrder = sortingOrder;
             layer.shadow.sprite = layer.renderer.sprite;
             var pos = layer.transform.position;

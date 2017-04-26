@@ -163,7 +163,7 @@ public class World : MonoBehaviour
 
         if (monStat.ai == "Npc")
             monster.AddComponent<NpcController>();
-        else if (monStat.ai != "Idle")
+        else if (monStat.ai != "Idle" && monStat.ai != "NpcStationary")
             monster.AddComponent<MonsterController>();
 
         var body = monster.AddComponent<Rigidbody2D>();

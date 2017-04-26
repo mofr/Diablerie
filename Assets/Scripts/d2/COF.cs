@@ -123,9 +123,8 @@ public class COF
         return cof;
     }
 
-    public string DccFilename(Layer layer, string equip)
+    public string GetSpritesheetFilename(Layer layer, string equip)
     {
-        string filename = basePath + @"\" + token + @"\" + layer.name + @"\" + token + layer.name + equip + mode + layer.weaponClass + ".dcc";
-        return filename.ToLower();
+        return basePath + @"\" + token + @"\" + layer.name + @"\" + token + layer.name + equip + mode + layer.weaponClass;
     }
 }
