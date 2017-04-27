@@ -27,7 +27,8 @@ public class DC6 : Spritesheet
     int[] offsets;
     Sprite[][] sprites;
     byte[] bytes;
-    int textureSize;
+    int textureWidth;
+    int textureHeight;
 
     static public DC6 Load(string filename, int textureSize = 512, bool mpq = true, bool loadAllDirections = false)
     {
@@ -64,7 +65,8 @@ public class DC6 : Spritesheet
             dc6.offsets[i] = reader.ReadInt32();
         }
         dc6.sprites = new Sprite[dc6.directionCount][];
-        dc6.textureSize = textureSize;
+        dc6.textureWidth = textureSize;
+        dc6.textureHeight = textureSize;
 
         if (loadAllDirections)
         {
@@ -96,9 +98,6 @@ public class DC6 : Spritesheet
 
     void LoadDirection(Stream stream, BinaryReader reader, int dirIndex)
     {
-        int textureWidth = textureSize;
-        int textureHeight = textureSize;
-
         Texture2D texture = null;
         Color32[] pixels = null;
         var packer = new TexturePacker(textureWidth, textureHeight, padding: 2);
@@ -107,9 +106,9 @@ public class DC6 : Spritesheet
         dir.frames = new Frame[framesPerDirection];
         sprites[dirIndex] = new Sprite[framesPerDirection];
 
-        for (int i = 0; i < framesPerDirection; i++)
+        for (int frameIndex = 0; frameIndex < framesPerDirection; frameIndex++)
         {
-            int offset = offsets[dirIndex * framesPerDirection + i];
+            int offset = offsets[dirIndex * framesPerDirection + frameIndex];
             stream.Seek(offset, SeekOrigin.Begin);
 
             var frame = new Frame();
@@ -140,11 +139,11 @@ public class DC6 : Spritesheet
             frame.texture = texture;
             frame.textureX = pack.x;
             frame.textureY = pack.y;
-            dir.frames[i] = frame;
+            dir.frames[frameIndex] = frame;
 
-            var textureRect = new Rect(frame.textureX, frame.textureY, frame.width, frame.height);
-            var pivot = new Vector2(0.5f, 1.0f);
-            sprites[dirIndex][i] = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit, extrude: 0, meshType: SpriteMeshType.FullRect);
+            var textureRect = new Rect(frame.textureX, textureHeight - frame.textureY - frame.height, frame.width, frame.height);
+            var pivot = new Vector2(-frame.offsetX / (float) frame.width, frame.offsetY / (float)frame.height);
+            sprites[dirIndex][frameIndex] = Sprite.Create(texture, textureRect, pivot, Iso.pixelsPerUnit, extrude: 0, meshType: SpriteMeshType.FullRect);
         }
 
         if (texture != null)
@@ -158,7 +157,7 @@ public class DC6 : Spritesheet
 
     static void drawFrame(byte[] data, int offset, int size, Color32[] pixels, int textureWidth, int textureHeight, int x0, int y0)
     {
-        int dst = textureWidth * textureHeight - y0 * textureHeight - textureHeight;
+        int dst = textureWidth * (textureHeight - 1) - y0 * textureWidth;
         int i2, x = x0, c, c2;
 
         for (int i = 0; i < size; i++)
