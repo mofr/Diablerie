@@ -2,9 +2,9 @@
 
 public struct TexturePacker
 {
-    int maxWidth;
-    int maxHeight;
-    int padding;
+    public readonly int maxWidth;
+    public readonly int maxHeight;
+    public readonly int padding;
 
     int xPos;
     int yPos;

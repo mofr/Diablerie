@@ -125,7 +125,7 @@ public class EditorTools
         if (name.Contains("font16") || name.Contains("font24") || name.Contains("font30"))
             textureSize = 512;
 
-        var dc6 = DC6.Load(assetPath, textureSize, mpq: false);
+        var dc6 = DC6.Load(assetPath, mpq: false, textureSize: textureSize, loadAllDirections: true);
         if (dc6.textures.Count != 1)
         {
             Debug.LogError("Font not fit into a single texture");
