@@ -532,7 +532,6 @@ public class DCC : Spritesheet
         }
     }
 
-    static Dictionary<string, DCC> cache = new Dictionary<string, DCC>();
     readonly static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
     readonly static int[] nb_pix_table = { 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4 };
     readonly static int[] dirs1 = new int[] { 0 };
@@ -609,19 +608,10 @@ public class DCC : Spritesheet
         MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
     }
 
-    static public DCC Load(string filename, bool loadAllDirections = false, bool ignoreCache = false, bool mpq = true)
+    static public DCC Load(string filename, bool loadAllDirections = false, bool mpq = true)
     {
-        string lowerFilename = filename.ToLower();
-        if (!ignoreCache && cache.ContainsKey(lowerFilename))
-        {
-            return cache[lowerFilename];
-        }
-
         var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-        var dcc = Load(filename, bytes, loadAllDirections);
-        if (!ignoreCache)
-            cache.Add(lowerFilename, dcc);
-        return dcc;
+        return Load(filename, bytes, loadAllDirections);
     }
 
     static DCC Load(string filename, byte[] bytes, bool loadAllDirections = false)
@@ -636,13 +626,14 @@ public class DCC : Spritesheet
         using (var reader = new BinaryReader(stream))
         {
             ReadHeader(reader, dcc.header);
-            dcc.framesPerDirection = dcc.header.framesPerDir;
-            dcc.sprites = new Sprite[dcc.header.directionCount][];
-
-            if (loadAllDirections)
-                for (int d = 0; d < dcc.header.directionCount; ++d)
-                    dcc.DecodeDirection(d);
         }
+
+        dcc.framesPerDirection = dcc.header.framesPerDir;
+        dcc.sprites = new Sprite[dcc.header.directionCount][];
+
+        if (loadAllDirections)
+            for (int d = 0; d < dcc.header.directionCount; ++d)
+                dcc.DecodeDirection(d);
 
         return dcc;
     }

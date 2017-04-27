@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -72,17 +73,8 @@ public class EditorTools
         var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
         Palette.LoadPalette(0);
-        DCC dcc = DCC.Load(assetPath, loadAllDirections: true, ignoreCache: true, mpq: false);
-        int i = 0;
-        foreach (var texture in dcc.textures)
-        {
-            var pngData = texture.EncodeToPNG();
-            Object.DestroyImmediate(texture);
-            var pngPath = assetPath + "." + i + ".png";
-            File.WriteAllBytes(pngPath, pngData);
-            AssetDatabase.ImportAsset(pngPath);
-            ++i;
-        }
+        DCC dcc = DCC.Load(assetPath, loadAllDirections: true, mpq: false);
+        SaveTextures(assetPath, dcc.textures);
     }
 
     [MenuItem("Assets/Convert DCC to PNG", true)]
@@ -99,12 +91,17 @@ public class EditorTools
 
         Palette.LoadPalette(0);
         DC6 dc6 = DC6.Load(assetPath, loadAllDirections: true, mpq: false);
+        SaveTextures(assetPath, dc6.textures);
+    }
+
+    static private void SaveTextures(string baseName, IList<Texture2D> textures)
+    {
         int i = 0;
-        foreach (var texture in dc6.textures)
+        foreach (var texture in textures)
         {
             var pngData = texture.EncodeToPNG();
             Object.DestroyImmediate(texture);
-            var pngPath = assetPath + "." + i + ".png";
+            var pngPath = baseName + "." + i + ".png";
             File.WriteAllBytes(pngPath, pngData);
             AssetDatabase.ImportAsset(pngPath);
             ++i;
