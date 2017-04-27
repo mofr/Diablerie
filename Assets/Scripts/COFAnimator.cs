@@ -61,10 +61,7 @@ class COFAnimator : MonoBehaviour
                 _selected = value;
                 foreach (var layer in layers)
                 {
-                    layer.renderer.GetPropertyBlock(materialProperties);
-                    materialProperties.SetFloat("_Brightness", _selected ? 3.0f : 1.0f);
-                    materialProperties.SetFloat("_Contrast", _selected ? 1.01f : 1.0f);
-                    layer.renderer.SetPropertyBlock(materialProperties);
+                    Materials.SetRendererHighlighted(layer.renderer, _selected);
                 }
             }
         }

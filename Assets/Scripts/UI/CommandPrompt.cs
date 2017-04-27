@@ -78,7 +78,15 @@ public class CommandPrompt : MonoBehaviour
         if (parts.Length >= 2 && parts[0] == "/spawn")
         {
             var pos = Iso.MapToWorld(IsoInput.mousePosition);
+            if (parts[1] == "item")
+            {
+                string code = parts[2];
+                Pickup.Create(pos, code);
+                return;
+            }
+
             var id = parts[1];
+
             var objectInfo = ObjectInfo.Find(id);
             if (objectInfo != null)
             {
@@ -87,7 +95,7 @@ public class CommandPrompt : MonoBehaviour
                     obj.modeName = parts[2];
                 return;
             }
-
+            
             World.SpawnMonster(id, pos);
         }
         else
