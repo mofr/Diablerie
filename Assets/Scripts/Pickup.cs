@@ -8,6 +8,13 @@ public class Pickup : Entity
 
     public static Pickup Create(Vector3 position, string code)
     {
+        position = Iso.MapToIso(position);
+        if (!CollisionMap.Fit(position, out position))
+        {
+            Debug.LogError("Can't fit pickup");
+            return null;
+        }
+        position = Iso.MapToWorld(position);
         var gameObject = new GameObject("pickup " + code);
         gameObject.transform.position = position;
         var spritesheet = DC6.Load(@"data\global\items\flp" + code + ".dc6");
@@ -22,6 +29,12 @@ public class Pickup : Entity
     {
         if (materialProperties == null)
             materialProperties = new MaterialPropertyBlock();
+        CollisionMap.SetPassable(Iso.MapToIso(transform.position), false);
+    }
+
+    private void OnDisable()
+    {
+        CollisionMap.SetPassable(Iso.MapToIso(transform.position), true);
     }
 
     protected override void Start()

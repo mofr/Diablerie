@@ -77,7 +77,7 @@ public class CommandPrompt : MonoBehaviour
         string[] parts = input.Split(' ');
         if (parts.Length >= 2 && parts[0] == "/spawn")
         {
-            var pos = Iso.MapToWorld(IsoInput.mousePosition);
+            var pos = Iso.MapToWorld(IsoInput.mouseTile);
             if (parts[1] == "item")
             {
                 string code = parts[2];
