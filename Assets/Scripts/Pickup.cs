@@ -41,6 +41,7 @@ public class Pickup : Entity
     {
         base.Start();
         renderer = GetComponent<SpriteRenderer>();
+        renderer.sortingOrder = Iso.SortingOrder(transform.position);
     }
 
     public override bool selected
