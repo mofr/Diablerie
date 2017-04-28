@@ -12,7 +12,7 @@ public class Tools
         return Mod(b - a + range / 2, range) - range / 2;
     }
 
-    static public float manhattanDistance(Vector2 a, Vector2 b)
+    static public float ManhattanDistance(Vector2 a, Vector2 b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }

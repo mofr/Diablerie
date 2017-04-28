@@ -73,7 +73,7 @@ class MouseSelection : MonoBehaviour
         if (!bounds.Contains(mousePos))
             return;
 
-        bool betterMatch = current == null || Tools.manhattanDistance(mousePos, bounds.center) < Tools.manhattanDistance(mousePos, currentPosition);
+        bool betterMatch = current == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
         if (betterMatch)
         {
             current = entity;
