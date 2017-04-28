@@ -19,9 +19,11 @@ class MouseSelection : MonoBehaviour
             if (character && character.monStat != null && character.monStat.ai != "Npc")
             {
                 EnemyBar.instance.character = character;
+                UI.HideLabel();
             }
             else
             {
+                EnemyBar.instance.character = null;
                 var labelPosition = current.transform.position + (Vector3)current.titleOffset / Iso.pixelsPerUnit;
                 UI.ShowLabel(labelPosition, current.title);
             }
@@ -56,27 +58,26 @@ class MouseSelection : MonoBehaviour
         if (entity == PlayerController.instance.character)
             return;
 
-        var position = entity.transform.position;
+        Bounds bounds = entity.bounds;
 
         if (Input.GetMouseButton(0))
         {
             if (entity == current)
             {
-                currentPosition = position;
+                currentPosition = bounds.center;
             }
             return;
         }
 
-        bool betterMatch = current == null || position.y < currentPosition.y;
+        bounds.Expand(Expand);
+        if (!bounds.Contains(mousePos))
+            return;
+
+        bool betterMatch = current == null || Tools.manhattanDistance(mousePos, bounds.center) < Tools.manhattanDistance(mousePos, currentPosition);
         if (betterMatch)
         {
-            Bounds bounds = entity.bounds;
-            bounds.Expand(Expand);
-            if (bounds.Contains(mousePos))
-            {
-                current = entity;
-                currentPosition = position;
-            }
+            current = entity;
+            currentPosition = bounds.center;
         }
     }
 }
