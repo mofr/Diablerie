@@ -204,7 +204,7 @@ public class EditorTools
     [MenuItem("Assets/Test serialization")]
     static public void TestSerialization()
     {
-        var rb = Obj.Find(1, 2, 2);
+        var rb = SpawnPreset.Find(1, 2, 2);
         Debug.Log(rb.description);
     }
 }

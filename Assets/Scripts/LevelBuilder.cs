@@ -528,7 +528,7 @@ public class LevelBuilder
         return meshRenderer;
     }
 
-    static GameObject CreateObject(Obj obj, int x, int y, Transform root)
+    static GameObject CreateObject(SpawnPreset obj, int x, int y, Transform root)
     {
         var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)

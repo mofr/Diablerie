@@ -3,7 +3,6 @@
 class MouseSelection : MonoBehaviour
 {
     static readonly Vector3 Expand = new Vector3(25, 20) / Iso.pixelsPerUnit;
-    public Font selectionFont;
 
     [HideInInspector]
     static public Entity current;
