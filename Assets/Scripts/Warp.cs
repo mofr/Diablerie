@@ -84,6 +84,5 @@ public class Warp : Entity
         var target = Iso.MapToIso(targetWarp.transform.position);
         character.Teleport(target);
         character.GoTo(target + new Vector3(targetWarp.info.exitWalkX, targetWarp.info.exitWalkY));
-        PlayerController.instance.FlushInput();
     }
 }

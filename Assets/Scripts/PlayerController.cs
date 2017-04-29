@@ -78,8 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             if (MouseSelection.current != null)
             {
-                character.target = MouseSelection.current.gameObject;
-                FlushInput();
+                character.target = MouseSelection.current;
             }
             else
             {

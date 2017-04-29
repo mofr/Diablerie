@@ -27,17 +27,16 @@ public class Character : Entity
     public event TakeDamageHandler OnTakeDamage;
 
     [HideInInspector]
-    public GameObject target
+    public Entity target
     {
         set
         {
             var character = value.GetComponent<Character>();
-            var entity = value.GetComponent<Entity>();
 
             if (character)
                 Attack(character);
-            else if (entity != null)
-                Use(entity);
+            else
+                Use(value);
         }
     }
 
@@ -158,6 +157,7 @@ public class Character : Entity
                     moving = false;
                     targetEntity = null;
                     localEntity.Operate(this);
+                    PlayerController.instance.FlushInput();
                 }
             }
             if (targetCharacter && !attack)
