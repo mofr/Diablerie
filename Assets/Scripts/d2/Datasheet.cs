@@ -36,16 +36,9 @@ public struct Datasheet
             if (lineIndex < headerLines)
                 continue;
 
-            try
-            {
-                T obj = new T();
-                ReadObject(obj, members, fields);
-                sheet.Add(obj);
-            }
-            catch (System.Exception)
-            {
-                throw new System.Exception("Datasheet parsing error at " + filename + ":" + (lineIndex + 1));
-            }
+            T obj = new T();
+            ReadObject(obj, members, fields);
+            sheet.Add(obj);
         }
         Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
         return sheet;

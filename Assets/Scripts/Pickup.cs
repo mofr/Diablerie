@@ -6,7 +6,7 @@ public class Pickup : Entity
     static MaterialPropertyBlock materialProperties;
     bool _selected = false;
 
-    public static Pickup Create(Vector3 position, string code)
+    public static Pickup Create(Vector3 position, string flippyFile, string name)
     {
         position = Iso.MapToIso(position);
         if (!CollisionMap.Fit(position, out position))
@@ -15,9 +15,9 @@ public class Pickup : Entity
             return null;
         }
         position = Iso.MapToWorld(position);
-        var gameObject = new GameObject("pickup " + code);
+        var gameObject = new GameObject(name);
         gameObject.transform.position = position;
-        var spritesheet = DC6.Load(@"data\global\items\flp" + code + ".dc6");
+        var spritesheet = DC6.Load(@"data\global\items\" + flippyFile + ".dc6");
         var animator = gameObject.AddComponent<SpriteAnimator>();
         animator.sprites = spritesheet.GetSprites(0);
         animator.loop = false;

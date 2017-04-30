@@ -78,10 +78,17 @@ public class CommandPrompt : MonoBehaviour
         if (parts.Length >= 2 && parts[0] == "/spawn")
         {
             var pos = Iso.MapToWorld(IsoInput.mouseTile);
+            if (parts[1] == "pickup")
+            {
+                string flippyFile = "flp" + parts[2];
+                Pickup.Create(pos, flippyFile, flippyFile);
+                return;
+            }
+
             if (parts[1] == "item")
             {
                 string code = parts[2];
-                Pickup.Create(pos, code);
+                World.SpawnItem(code, pos);
                 return;
             }
 

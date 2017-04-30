@@ -207,9 +207,9 @@ public class EditorTools
     [MenuItem("Assets/Test Action")]
     static public void TestAction()
     {
-        var tc = TreasureClass.Find("Jewelry A");
-        Debug.Log(tc.name);
-        Debug.Log(tc.sub[0].item);
+        Debug.Log(ArmorInfo.Find("gth").name);
+        Debug.Log(WeaponInfo.Find("gsc").name);
+        Debug.Log(MiscInfo.Find("gld").name);
     }
 }
 
