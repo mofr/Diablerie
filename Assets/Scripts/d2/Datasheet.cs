@@ -1,35 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Reflection;
 using System.IO;
 using UnityEngine;
 
-public struct Datasheet<T> where T : new()
+public struct Datasheet
 {
-    public List<T> rows;
+    [System.AttributeUsage(System.AttributeTargets.Field)]
+    public class Sequence : System.Attribute
+    {
+        public int length;
+    }
 
-    public static Datasheet<T> Load(string filename, int headerLines = 1)
+    public static List<T> Load<T>(string filename, int headerLines = 1) where T : new()
     {
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
         string csv = File.ReadAllText(Application.streamingAssetsPath + "/" + filename);
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
-        int expectedFieldCount = 0;
-        T dummy = new T();
-        foreach (MemberInfo member in members)
-        {
-            FieldInfo fi = (FieldInfo)member;
-            if (fi.FieldType.IsArray)
-            {
-                expectedFieldCount += ((System.Collections.IList)fi.GetValue(dummy)).Count;
-            }
-            else
-            {
-                expectedFieldCount += 1;
-            }
-        }
-        Datasheet<T> sheet = new Datasheet<T>();
-        sheet.rows = new List<T>();
+        int expectedFieldCount = CalcFieldCount(typeof(T));
         var lines = csv.Split('\n');
+        var sheet = new List<T>(lines.Length);
         for (int lineIndex = 0; lineIndex < lines.Length; ++lineIndex)
         {
             string line = lines[lineIndex];
@@ -47,49 +38,85 @@ public struct Datasheet<T> where T : new()
 
             try
             {
-                T obj = ReadLine(fields, members);
-                sheet.rows.Add(obj);
+                T obj = new T();
+                ReadObject(obj, members, fields);
+                sheet.Add(obj);
             }
             catch (System.Exception)
             {
                 throw new System.Exception("Datasheet parsing error at " + filename + ":" + (lineIndex + 1));
             }
         }
-        Debug.Log("Load " + filename + " (" + sheet.rows.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
+        Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
         return sheet;
     }
 
-    static T ReadLine(string[] fields, MemberInfo[] members)
+    private static int CalcFieldCount(System.Type type)
     {
-        T obj = new T();
-        int fieldIndex = 0;
+        MemberInfo[] members = FormatterServices.GetSerializableMembers(type);
+        if (members.Length == 0)
+            return 1;
+
+        int fieldCount = 0;
+        foreach (MemberInfo member in members)
+        {
+            FieldInfo fi = (FieldInfo)member;
+            if (fi.FieldType.IsArray)
+            {
+                var seq = (Sequence)System.Attribute.GetCustomAttribute(member, typeof(Sequence), true);
+                var elementType = fi.FieldType.GetElementType();
+                int elementFieldCount = CalcFieldCount(elementType);
+                fieldCount += seq.length * elementFieldCount;
+            }
+            else
+            {
+                fieldCount += 1;
+            }
+        }
+
+        return fieldCount;
+    }
+
+    static int ReadObject(object obj, MemberInfo[] members, string[] fields, int fieldIndex = 0)
+    {
         for (int memberIndex = 0; memberIndex < members.Length; ++memberIndex)
         {
             MemberInfo member = members[memberIndex];
             try
             {
-                FieldInfo fi = (FieldInfo)member;
-                fieldIndex = ReadMember(obj, fi, fields, fieldIndex);
+                fieldIndex = ReadMember(obj, member, fields, fieldIndex);
             }
             catch (System.Exception)
             {
                 throw new System.Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member);
             }
         }
-
-        return obj;
+        return fieldIndex;
     }
 
-    static int ReadMember(T obj, FieldInfo fi, string[] fields, int fieldIndex)
+    static int ReadMember(object obj, MemberInfo member, string[] fields, int fieldIndex)
     {
+        FieldInfo fi = (FieldInfo)member;
         if (fi.FieldType.IsArray)
         {
             var elementType = fi.FieldType.GetElementType();
-            var array = (System.Collections.IList)fi.GetValue(obj);
+            var seq = (Sequence)System.Attribute.GetCustomAttribute(fi, typeof(Sequence), true);
+            var array = (IList)System.Array.CreateInstance(elementType, seq.length);
+            fi.SetValue(obj, array);
+            var elementMembers = FormatterServices.GetSerializableMembers(elementType);
             for (int i = 0; i < array.Count; ++i)
             {
-                array[i] = CastValue(fields[fieldIndex], elementType, array[i]);
-                ++fieldIndex;
+                if (elementMembers.Length == 0)
+                {
+                    array[i] = CastValue(fields[fieldIndex], elementType, array[i]);
+                    ++fieldIndex;
+                }
+                else
+                {
+                    object element = System.Activator.CreateInstance(elementType);
+                    fieldIndex = ReadObject(element, elementMembers, fields, fieldIndex);
+                    array[i] = element;
+                }
             }
         }
         else

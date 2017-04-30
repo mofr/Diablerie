@@ -8,7 +8,8 @@ public class ObjectInfo
     public int id;
     public string token;
     public int spawnMax;
-    public bool[] selectable = new bool[8];
+    [Datasheet.Sequence(length = 8)]
+    public bool[] selectable;
     public int trapProb;
     public int sizeX;
     public int sizeY;
@@ -16,29 +17,39 @@ public class ObjectInfo
     public int nTgtFY;
     public int nTgtBX;
     public int nTgtBY;
-    public int[] frameCount = new int[8];
-    public int[] frameDelta = new int[8];
-    public bool[] cycleAnim = new bool[8];
-    public int[] lit = new int[8];
-    public bool[] blocksLight = new bool[8];
-    public bool[] hasCollision = new bool[8];
+    [Datasheet.Sequence(length = 8)]
+    public int[] frameCount;
+    [Datasheet.Sequence(length = 8)]
+    public int[] frameDelta;
+    [Datasheet.Sequence(length = 8)]
+    public bool[] cycleAnim;
+    [Datasheet.Sequence(length = 8)]
+    public int[] lit;
+    [Datasheet.Sequence(length = 8)]
+    public bool[] blocksLight;
+    [Datasheet.Sequence(length = 8)]
+    public bool[] hasCollision;
     public int isAttackable;
-    public int[] start = new int[8];
+    [Datasheet.Sequence(length = 8)]
+    public int[] start;
     public int envEffect;
     public bool isDoor;
     public bool blocksVis;
     public int orientation;
     public int trans;
-    public int[] orderFlag = new int[8];
+    [Datasheet.Sequence(length = 8)]
+    public int[] orderFlag;
     public int preOperate;
-    public bool[] mode = new bool[8];
+    [Datasheet.Sequence(length = 8)]
+    public bool[] mode;
     public int yOffset;
     public int xOffset;
     public bool draw;
     public int red;
     public int blue;
     public int green;
-    public bool[] layersSelectable = new bool[16];
+    [Datasheet.Sequence(length = 16)]
+    public bool[] layersSelectable;
     public int totalPieces;
     public int subClass;
     public int xSpace;
@@ -48,7 +59,8 @@ public class ObjectInfo
     public int operateRange;
     public string shrineFunction;
     public string restore;
-    public int[] parm = new int[8];
+    [Datasheet.Sequence(length = 8)]
+    public int[] parm;
     public int act;
     public int lockable;
     public int gore;
@@ -78,12 +90,12 @@ public class ObjectInfo
     [System.NonSerialized]
     public string name;
 
-    public static Datasheet<ObjectInfo> sheet = Datasheet<ObjectInfo>.Load("data/global/excel/objects.txt");
+    public static List<ObjectInfo> sheet = Datasheet.Load<ObjectInfo>("data/global/excel/objects.txt");
     static Dictionary<string, ObjectInfo> byToken = new Dictionary<string, ObjectInfo>();
 
     static ObjectInfo()
     {
-        foreach(var info in sheet.rows)
+        foreach(var info in sheet)
         {
             for(int i = 0; i < 8; ++i)
             {

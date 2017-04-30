@@ -34,8 +34,10 @@ public class LevelInfo
     public int subTheme;
     public int subWaypoint;
     public int subShrine;
-    public int[] vis = new int[8];
-    public int[] warp = new int[8];
+    [Datasheet.Sequence(length = 8)]
+    public int[] vis;
+    [Datasheet.Sequence(length = 8)]
+    public int[] warp;
     public int intensity;
     public int red;
     public int green;
@@ -45,9 +47,12 @@ public class LevelInfo
     public bool saveMonsters;
     public int quest;
     public int warpDist;
-    public int[] monLvl = new int[3];
-    public int[] monLvlEx = new int[3];
-    public int[] monDen = new int[3];
+    [Datasheet.Sequence(length = 3)]
+    public int[] monLvl;
+    [Datasheet.Sequence(length = 3)]
+    public int[] monLvlEx;
+    [Datasheet.Sequence(length = 3)]
+    public int[] monDen;
     public int monUMin;
     public int monUMax;
     public int monUMinNightmare;
@@ -57,21 +62,29 @@ public class LevelInfo
     public int monWndr;
     public int monSpcWalk;
     public int numMon;
-    public string[] _monsters = new string[10];
+    [Datasheet.Sequence(length = 10)]
+    public string[] _monsters;
     public int rangedspawn;
-    public string[] nMonsters = new string[10];
-    public string[] uMonsters = new string[10];
-    public string[] cmon = new string[4];
-    public int[] cpct = new int[4];
-    public int[] camt = new int[4];
+    [Datasheet.Sequence(length = 10)]
+    public string[] nMonsters;
+    [Datasheet.Sequence(length = 10)]
+    public string[] uMonsters;
+    [Datasheet.Sequence(length = 4)]
+    public string[] cmon;
+    [Datasheet.Sequence(length = 4)]
+    public int[] cpct;
+    [Datasheet.Sequence(length = 4)]
+    public int[] camt;
     public int themes;
     public int soundEnv;
     public int waypoint;
     public string levelName;
     public string levelWarp;
     public string _entryFile;
-    public int[] objGrp = new int[8];
-    public int[] objPrb = new int[8];
+    [Datasheet.Sequence(length = 8)]
+    public int[] objGrp;
+    [Datasheet.Sequence(length = 8)]
+    public int[] objPrb;
     public bool beta;
 
     [System.NonSerialized]
@@ -86,17 +99,17 @@ public class LevelInfo
     [System.NonSerialized]
     public List<string> monsters = new List<string>();
 
-    public static Datasheet<LevelInfo> sheet = Datasheet<LevelInfo>.Load("data/global/excel/Levels.txt");
+    public static List<LevelInfo> sheet = Datasheet.Load<LevelInfo>("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
     static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
 
     static LevelInfo()
     {
-        foreach(var levelInfo in sheet.rows)
+        foreach(var levelInfo in sheet)
         {
             if (levelInfo.id == 0)
                 continue;
-            levelInfo.type = LevelType.sheet.rows[levelInfo.levelTypeIndex];
+            levelInfo.type = LevelType.sheet[levelInfo.levelTypeIndex];
             levelInfo.preset = LevelPreset.Find(levelInfo.id);
             levelInfo.entryFile = @"data\local\ui\eng\act" + (levelInfo.act + 1) + @"\" + levelInfo._entryFile + ".dc6";
             foreach(string mon in levelInfo._monsters)

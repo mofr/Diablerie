@@ -533,11 +533,11 @@ public class LevelBuilder
         var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)
         {
-            if (obj.objectId >= ObjectInfo.sheet.rows.Count)
+            if (obj.objectId >= ObjectInfo.sheet.Count)
             {
                 return null;
             }
-            ObjectInfo objectInfo = ObjectInfo.sheet.rows[obj.objectId];
+            ObjectInfo objectInfo = ObjectInfo.sheet[obj.objectId];
             var staticObject = World.SpawnObject(objectInfo, pos, parent: root);
             staticObject.modeName = obj.mode;
             return staticObject.gameObject;
@@ -556,7 +556,7 @@ public class LevelBuilder
             }
             else
             {
-                monStat = MonStat.sheet.rows[obj.id];
+                monStat = MonStat.sheet[obj.id];
             }
 
             if (monStat != null)

@@ -13,11 +13,15 @@ public class MonStatsExtended
     public int meleeRng;
     public string baseWeaponClass;
     public string HitClass;
-    public string[] gearVariantsStr = new string[16];
-    public bool[] hasLayer = new bool[16];
+    [Datasheet.Sequence(length = 16)]
+    public string[] gearVariantsStr;
+    [Datasheet.Sequence(length = 16)]
+    public bool[] hasLayer;
     public int totalPieces;
-    public bool[] hasMode = new bool[16];
-    public int[] directionCount = new int[16];
+    [Datasheet.Sequence(length = 16)]
+    public bool[] hasMode;
+    [Datasheet.Sequence(length = 16)]
+    public int[] directionCount;
     public bool a1Moving;
     public bool a2Moving;
     public bool scMoving;
@@ -58,7 +62,8 @@ public class MonStatsExtended
     public int lightR;
     public int lightG;
     public int lightB;
-    public int[] utrans = new int[3];
+    [Datasheet.Sequence(length = 3)]
+    public int[] utrans;
     public int heart;
     public int bodyPart;
     public int infernoLen;
@@ -71,12 +76,12 @@ public class MonStatsExtended
     [System.NonSerialized]
     public string[][] gearVariants = new string[16][];
 
-    public static Datasheet<MonStatsExtended> sheet = Datasheet<MonStatsExtended>.Load("data/global/excel/MonStats2.txt");
+    public static List<MonStatsExtended> sheet = Datasheet.Load<MonStatsExtended>("data/global/excel/MonStats2.txt");
     static Dictionary<string, MonStatsExtended> stats = new Dictionary<string, MonStatsExtended>();
 
     static MonStatsExtended()
     {
-        foreach (var stat in sheet.rows)
+        foreach (var stat in sheet)
         {
             for(int i = 0; i < stat.gearVariantsStr.Length; ++i)
             {

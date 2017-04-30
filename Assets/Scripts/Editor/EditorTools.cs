@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System.Runtime.Serialization;
+using System.Reflection;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -201,11 +204,12 @@ public class EditorTools
         return assetPath.ToLower().EndsWith("dc6");
     }
 
-    [MenuItem("Assets/Test serialization")]
-    static public void TestSerialization()
+    [MenuItem("Assets/Test Action")]
+    static public void TestAction()
     {
-        var rb = SpawnPreset.Find(1, 2, 2);
-        Debug.Log(rb.description);
+        var tc = TreasureClass.Find("Jewelry A");
+        Debug.Log(tc.name);
+        Debug.Log(tc.sub[0].item);
     }
 }
 

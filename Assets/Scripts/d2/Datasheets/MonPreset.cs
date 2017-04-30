@@ -8,7 +8,7 @@ public class MonPreset
     public int act;
     public string place;
 
-    public static Datasheet<MonPreset> sheet = Datasheet<MonPreset>.Load("data/global/excel/MonPreset.txt");
+    public static List<MonPreset> sheet = Datasheet.Load<MonPreset>("data/global/excel/MonPreset.txt");
     static List<MonPreset>[] presets = new List<MonPreset>[ActCount + 1];
 
     static MonPreset()
@@ -18,9 +18,9 @@ public class MonPreset
             presets[act] = new List<MonPreset>();
         }
 
-        for(int i = 0; i < sheet.rows.Count; ++i)
+        for(int i = 0; i < sheet.Count; ++i)
         {
-            MonPreset preset = sheet.rows[i];
+            MonPreset preset = sheet[i];
             presets[preset.act].Add(preset);
         }
     }

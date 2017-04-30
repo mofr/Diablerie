@@ -40,10 +40,10 @@ public class World : MonoBehaviour
         };
         palette.rooms = new LevelPreset[16];
         for (int i = 0; i < 15; ++i)
-            palette.rooms[i + 1] = LevelPreset.sheet.rows[53 + i];
+            palette.rooms[i + 1] = LevelPreset.sheet[53 + i];
         palette.themedRooms = new LevelPreset[16];
         for (int i = 0; i < 15; ++i)
-            palette.themedRooms[i + 1] = LevelPreset.sheet.rows[68 + i];
+            palette.themedRooms[i + 1] = LevelPreset.sheet[68 + i];
         Maze.Generate(builder, palette);
         return builder;
     }

@@ -7,7 +7,7 @@ public class Translation
     public string value;
 
     static Dictionary<string, string> map = new Dictionary<string, string>();
-    public static Datasheet<Translation> sheet = Datasheet<Translation>.Load("data/local/string.txt", headerLines: 0);
+    public static List<Translation> sheet = Datasheet.Load<Translation>("data/local/string.txt", headerLines: 0);
 
     public static string Find(string key)
     {
@@ -23,7 +23,7 @@ public class Translation
 
     static Translation()
     {
-        foreach (var translation in sheet.rows)
+        foreach (var translation in sheet)
         {
             if (!map.ContainsKey(translation.key))
                 map.Add(translation.key, translation.value);

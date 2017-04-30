@@ -14,17 +14,18 @@ public class SpawnPreset
     public string token;
     public string mode;
     public string weaponClass;
-    public string[] gear = new string[16];
+    [Datasheet.Sequence(length = 16)]
+    public string[] gear;
     public string colormap;
     public string index;
     string eol;
 
-    public static Datasheet<SpawnPreset> sheet = Datasheet<SpawnPreset>.Load("/obj.txt");
+    public static List<SpawnPreset> sheet = Datasheet.Load<SpawnPreset>("/obj.txt");
     static Dictionary<long, SpawnPreset> lookup = new Dictionary<long, SpawnPreset>();
 
     static SpawnPreset()
     {
-        foreach (SpawnPreset obj in sheet.rows)
+        foreach (SpawnPreset obj in sheet)
         {
             lookup.Add(Key(obj.act - 1, obj.type, obj.id), obj);
         }

@@ -36,13 +36,17 @@ public class MonStat
     public int speed;
     public int runSpeed;
     public string Rarity;
-    public string[] level = new string[DifficultyCount];
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public string[] level;
     public string MonSound;
     public string UMonSound;
     public string threat;
-    public string[] aidel = new string[DifficultyCount];
-    public string[] aidist = new string[DifficultyCount];
-    public string[] aip1 = new string[8 * DifficultyCount];
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public string[] aidel;
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public string[] aidist;
+    [Datasheet.Sequence(length = 8 * DifficultyCount)]
+    public string[] aip1;
     public string MissA1;
     public string MissA2;
     public string MissS1;
@@ -79,10 +83,13 @@ public class MonStat
     public string Skill1;
     public string Sk1mode;
     public string Sk1lvl;
-    public string[] remainingSkillsInfo = new string[3 * 7];
+    [Datasheet.Sequence(length = 3 * 7)]
+    public string[] remainingSkillsInfo;
 
-    public string[] drain = new string[DifficultyCount];
-    public string[] coldEffect = new string[DifficultyCount];
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public string[] drain;
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public string[] coldEffect;
 
     public string ResDm;
     public string ResMa;
@@ -90,13 +97,15 @@ public class MonStat
     public string ResLi;
     public string ResCo;
     public string ResPo;
-    public string[] remainingResInfo = new string[6 * (DifficultyCount - 1)];
+    [Datasheet.Sequence(length = 6 * (DifficultyCount - 1))]
+    public string[] remainingResInfo;
 
     public string DamageRegen;
     public string skillDamage;
     public string noRatio;
     public string NoShldBlock;
-    public string[] toBlock = new string[DifficultyCount];
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public string[] toBlock;
     public string Crit;
 
     public int minHP;
@@ -112,10 +121,13 @@ public class MonStat
     public string S1MinD;
     public string S1MaxD;
     public string S1TH;
-    public string[] repeatedStruct = new string[13 * (DifficultyCount - 1)];
+    [Datasheet.Sequence(length = 13 * (DifficultyCount - 1))]
+    public string[] repeatedStruct;
 
-    public string[] elementalDamage = new string[3 * (2 + 4 * DifficultyCount)];
-    public string[] treasureClass = new string[4 * 3];
+    [Datasheet.Sequence(length = 3 * (2 + 4 * DifficultyCount))]
+    public string[] elementalDamage;
+    [Datasheet.Sequence(length = 3 * 4)]
+    public string[] treasureClass;
     public string TCQuestId;
     public string TCQuestCP;
     public string SplEndDeath;
@@ -136,12 +148,12 @@ public class MonStat
     [System.NonSerialized]
     public MonStat minion2;
 
-    public static Datasheet<MonStat> sheet = Datasheet<MonStat>.Load("data/global/excel/monstats.txt");
+    public static List<MonStat> sheet = Datasheet.Load<MonStat>("data/global/excel/monstats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
     static MonStat()
     {
-        foreach(MonStat stat in sheet.rows)
+        foreach(MonStat stat in sheet)
         {
             var key = stat.id.ToLower();
             if (stats.ContainsKey(key))

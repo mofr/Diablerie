@@ -3,7 +3,7 @@
 [System.Serializable]
 public class SuperUnique
 {
-    public static Datasheet<SuperUnique> sheet = Datasheet<SuperUnique>.Load("data/global/excel/SuperUniques.txt");
+    public static List<SuperUnique> sheet = Datasheet.Load<SuperUnique>("data/global/excel/SuperUniques.txt");
     static Dictionary<string, SuperUnique> map = new Dictionary<string, SuperUnique>();
 
     public static SuperUnique Find(string key)
@@ -13,7 +13,7 @@ public class SuperUnique
 
     static SuperUnique()
     {
-        foreach (var row in sheet.rows)
+        foreach (var row in sheet)
         {
             row.monStat = MonStat.Find(row.monStatId);
             row.name = Translation.Find(row.nameStr);
@@ -35,8 +35,10 @@ public class SuperUnique
     public bool autoPos;
     public int stacks;
     public bool replacable;
-    public int[] uTrans = new int[3];
-    public string[] treasureClass = new string[3];
+    [Datasheet.Sequence(length = 3)]
+    public int[] uTrans;
+    [Datasheet.Sequence(length = 3)]
+    public string[] treasureClass;
     public string eol;
 
     [System.NonSerialized]

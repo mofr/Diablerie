@@ -21,12 +21,12 @@ public class LevelWarpInfo
     [System.NonSerialized]
     public Warp instance;
 
-    public static Datasheet<LevelWarpInfo> sheet = Datasheet<LevelWarpInfo>.Load("data/global/excel/LvlWarp.txt");
+    public static List<LevelWarpInfo> sheet = Datasheet.Load<LevelWarpInfo>("data/global/excel/LvlWarp.txt");
     static Dictionary<int, LevelWarpInfo> idMap = new Dictionary<int, LevelWarpInfo>();
 
     static LevelWarpInfo()
     {
-        foreach(var warpInfo in sheet.rows)
+        foreach(var warpInfo in sheet)
         {
             idMap[warpInfo.id] = warpInfo;
         }
