@@ -26,6 +26,9 @@ public class Character : Entity
     public delegate void TakeDamageHandler(Character originator, int damage);
     public event TakeDamageHandler OnTakeDamage;
 
+    public delegate void DeathHandler(Character target, Character killer);
+    public static event DeathHandler OnDeath;
+
     [HideInInspector]
     public Entity target
     {
@@ -338,7 +341,7 @@ public class Character : Entity
 
     public void TakeDamage(int damage, Character originator = null)
     {
-        if (dead || ressurecting)
+        if (dying || dead || ressurecting)
             return;
 
         health -= damage;
@@ -362,6 +365,8 @@ public class Character : Entity
             attack = false;
             moving = false;
             targetCharacter = null;
+            if (OnDeath != null)
+                OnDeath(this, originator);
         }
     }
 

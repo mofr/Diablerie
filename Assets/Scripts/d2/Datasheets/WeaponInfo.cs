@@ -36,7 +36,26 @@ public class WeaponInfo
     public bool spawnable;
     public int minDamage;
     public int maxDamage;
-    [Datasheet.Sequence(length = 35)]
+    public bool oneOrTwoHanded;
+    public bool twoHanded;
+    public int twoHandedMinDamage;
+    public int twoHandedMaxDamage;
+    public int missileMinDamage;
+    public int missileMaxDamage;
+    public int unknown;
+    public int rangeAdder;
+    public int speed;
+    public int strBonus;
+    public int dexBonus;
+    public int reqStr;
+    public int reqDex;
+    public int durability;
+    public bool noDurability;
+    public int level;
+    public int levelReq;
+    public int cost;
+    public int gambleCost;
+    [Datasheet.Sequence(length = 16)]
     public string[] skipped;
     public string flippyFile;
     [Datasheet.Sequence(length = 118)]
