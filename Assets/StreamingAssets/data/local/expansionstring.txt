@@ -1,0 +1,2818 @@
+A4Q2ExpansionSuccessTyrael	40}Praise be to the Light! You have }accomplished the impossible!} }Diablo and Mephisto have been }banished back into the Black Abyss }that spawned them, and the corrupted }Soulstones are no more.} }However, while you were fighting here, }Baal remained behind in the mortal }realm, building an army of hellish }minions. Now, Baal's army is searching }for the Worldstone, the ancient source }of all the Soulstones and their power, }while leaving behind a wake of }destruction. They have forged deeply }into the Barbarian homelands, heading }directly for the summit of Mount }Arreat!} }Baal knows, mortal hero! That is the }very site of the blessed Worldstone!} }Now, enter the portal I have opened for }you. It will take you to the Barbarian }city of Harrogath, the last bastion of }Order on the slopes of Arreat.}
+A4Q2ExpansionSuccessCain	40}I knew there was great potential in you, }my friend. You've done a fantastic job.} }Though my ancestors often struggled }against the Three Evils and their }minions, I've always lived a shut-in, }scholarly life. I'm glad that my wisdom }aided you.} }Now, I wish to leave this place. Though }Heaven's Gates are a marvel to behold, }I hope I won't have to see them again }for many, many years.} }Please talk to Tyrael about leaving this }place now!}
+AncientsAct5IntroGossip1	35}We are the spirits of the Nephalem, the }Ancient Ones. We have been chosen to }guard sacred Mount Arreat, wherein }the Worldstone rests. Few are worthy }to stand in its presence; fewer still can }comprehend its true purpose.} }Before you enter, you must defeat us.}
+CainAct5IntroGossip1	39}I am amazed to find this place so }untouched. Everything else in the path }of Baal the Lord of Destruction lies in }ruin. } }These Barbarians must indeed be the }legendary guardians of Mount Arreat. }They are a proud, hardy people. Don't }expect to be greeted warmly -- }strangers here rarely are.} }Perhaps I can gain their trust. I'll spend }some time with the townsfolk and try }to understand them better. I'll let you }know what I discover.}
+CainAct5Gossip1	52}With hellspawn, size is no measure of }their threat. Demons half the size of }men can kill with a gesture, while }hellish pack animals trample any who }stand in their way.}
+CainAct5Gossip2	55}Though these Barbarians are known }throughout the kingdoms as ferocious }fighters, they are also capable of great }compassion.} }They have trained throughout history }for a battle their legends foretell will }decide the fate of the world.}
+CainAct5Gossip3	55}The angel Tyrael has watched over the }guardians of Arreat throughout }history. I do not believe that Baal and }Tyrael have come to fight over a paltry }few souls.} }They are here to settle a conflict as old }as time itself.}
+CainAct5Gossip4	44}During my time with the Horadrim, we }often debated the nature of Mount }Arreat.} }We knew that the Barbarian clans }zealously guarded the mountain as }their sacred duty. However, many }dismissed their zeal as simple }superstition...combined with an inborn }hostility toward outsiders.} }Those Horadrim who trekked up Arreat }were never heard from again...Still, I }do not believe they died at the hands of }Barbarians.}
+CainAct5Gossip5	41}All users of the magical arts know of }Mount Arreat, but few understand its }true nature. It is the nexus of an }unfathomable magic.} }It bodes ill that the Lord of Destruction }races to its summit with such purpose. }I fear for the whole world should Baal }gain what he seeks.}
+CainAct5Gossip6	59}I have spent decades trying to }understand the forces at work in this }world. But in the face of all that is }transpiring, I realize how meager my }knowledge is.} }I will be of assistance where I can, my }friend.}
+CainAct5Gossip7	54}Though the Elder Council of Harrogath }is gone, there are many capable young }leaders to take their place.} }Anya certainly has enough courage and }intelligence to lead them all, if they can }survive this catastrophe.}
+CainAct5Gossip8	53}Ah, Anya. Such a fine example of }feminine strength...} }She reminds me of the Zakarum }priestesses I knew in my youth. They }don't take vows of chastity, you know.}
+CainAct5Gossip9	65}It is fortunate that this town has such a }talented smith.} }The quality of Larzuk's work surely }complements your skills. In fact, he }would have been quite welcome }amongst the Horadrim.}
+CainAct5Gossip10	54}It is my belief that the Soulstones are at }the center of this conflict. If only that }fool Marius had not intervened, Baal }would still be imprisoned within Tal }Rasha.}
+AnyaAct5IntroGossip1	54}You have proven yourself a true hero to }me and my people.} }These are dark times, warrior. I hope }you can bring an end to Baal's reign of }destruction. } }Our Council of Elders is gone -- my }father, Aust, among them. The one }thing that keeps us from total despair }is the promise of vengeance against }Baal.}
+AnyaGossip1	45}Now that the Elders are all dead, I don't }know who will guide our people through }this dark time. I was to be next in line }after my father, but this burden is too }great for me to shoulder alone. } }We are a people of strong blood. I shall }do what I can and let fate do the rest.}
+AnyaGossip2	82}Baal's minions are not to be trifled with. }In their bloodlust they will sacrifice }themselves to destroy you.}
+AnyaGossip3	60}Many outsiders believe that the }fantastic stories about our ancestors, }the Ancients, are but fables. However, I }believe that the Ancients were more }than human -- that mankind has fallen }from what it once was.}
+AnyaGossip4	58}When I was a child, the Elders told us }stories about the mountain and its }power...and how the Barbarian people }are bound to it as protectors.} }Baal is not just taking our land -- with }every step he takes up the mountain, }he takes a part of who we are as a }people.}
+AnyaGossip5	72}I am truly glad you are here, warrior. }Perhaps things would be different now }if we had asked for assistance from }the neighboring kingdoms.} }Our foolish, foolish pride...}
+AnyaGossip6	54}My father, Aust, was among those }Elders wise enough to see that we }would need outside help to deal with }Baal's legions. He believed that this }conflict would affect the entire world, }not just our homeland. He said that }Mount Arreat is as necessary to the }world's survival as food and water is to }our own.} }I believe this to be true.}
+AnyaGossip7	50}Qual-Kehk's confidence in his abilities }once bordered on arrogance, but in the }early days of the siege, he was }humbled by Baal. While he saved us }from immediate destruction, a third of }our warriors were lost.} }None felt those losses more than he. }Though he may not admit it, your }presence gives him hope, warrior.}
+AnyaGossip8	78}If Larzuk could sing or dance half as }well as he smiths, he'd be married by }now.} }...Just look at those shoulders.}
+AnyaGossip9	57}Nihlathak was the last of our Elders, }whose charge it was to safeguard the }mountain. He alone tried to guide us }through the most desperate time in our }history -- but he was just as helpless as }the rest of us.} }I cannot forgive his betrayal, but I can }learn from it.}
+AnyaGossip10	60}Our people believe that the Ancients }protecting Mount Arreat have the }power to stop Baal. Unfortunately, the }Lord of Destruction has shown great }power to undermine our faith.}
+LarzukAct5IntroGossip1	55}I am Larzuk, the armorer. My ancestors }were some of the finest craftsmen in }Harrogath. } }Regretfully, my supplies run lower with }every passing day, yet the demons }beyond the walls have not weakened. } }I fear the time is near when I must put }down my hammer and take up a sword, }instead.}
+LarzukAct5IntroAmaGossip1	42}So, you're an Amazon. I have heard }rumors about your kind. Your unusual }weapons could prove a challenge to my }skills, but I'm prepared to meet it.} }I am Larzuk, the armorer. My ancestors }were some of the finest craftsmen in }Harrogath. Regretfully, my supplies run }lower with every passing day, yet the }demons beyond the walls have not }weakened. I fear the time is near when }I must put down my hammer and take }up a sword, instead.}
+LarzukGossip1	65}I've heard that you Amazons excel at }killing from a distance. From what I've }seen, that's the best way to deal with }Hell's minions. } }Are all of your kind so...big?}
+LarzukGossip2	65}Why did you ever leave your beautiful }islands to come to this frozen }battleground? Perhaps if we both }survive this, we'll travel back there }together.}
+LarzukGossip3	75}Has that infernal howling been keeping }you awake at night, too? Some think }it's the howling of animals, but those }sounds don't come from any beast I've }ever known.}
+LarzukGossip4	69}Demonic forces have been using our }own towers and barricades against us. }You know, it would be wise to cut the }demons down in the open before they }can mount those fortifications.}
+LarzukGossip5	70}Nihlathak's despair is infectious -- and }his behavior does not befit an Elder of }his stature. I think we'd be better off }without him.}
+LarzukGossip6	63}I've offered Qual-Kehk my ideas on how }to break the siege, but he dismisses }them. Is it because I lack scars of }battle, or does he think I'm a couple }arrows short of a quiver?}
+LarzukGossip7	64}Legend has it that the top of Mount }Arreat is guarded by the spirits of our }ancestors. Though our people are }forbidden to climb to the mountain's }summit, some foreign travelers have }made the attempt.} }None have ever returned.}
+LarzukGossip8	66}This is a lively town during our victory }celebrations. We Barbarians train long }and hard from childhood to become }warriors, and we celebrate with equal }fervor.} }You didn't happen to bring along any }ale to trade?}
+LarzukGossip9	54}Every day, one of my friends dies }fighting outside the town walls, while I }tend my anvil here unscathed. If only }we didn't need weapons so badly, I }could be out doing my share of the }fighting. } }Good luck to you, warrior.}
+LarzukGossip10	56}Just so you know...The gold you pay me }doesn't line my pockets. Much of it }goes to buy the raw metal I need to }melt down for weapons and armor. The }rest -- well, all I can spare -- goes to }Malah and Qual-Kehk for other }supplies.}
+MalahAct5IntroGossip1	35}I, Malah, welcome you to Harrogath, }the last stronghold of Order on Mount }Arreat. You have come to the right }place if you intend to defeat Baal the }Lord of Destruction.} }Baal has laid waste to our mountain }and its denizens. His minions continue }to attack our town, while Qual-Kehk }and his men have proven helpless to }stop them. Baal is still out on the }mountain looking for something -- but I }know not what. } }All of the Elders, save Nihlathak, }sacrificed themselves to place a }protective ward around Harrogath.} }Some of us here, certainly Nihlathak, do }not appreciate your presence. We are a }proud people, and it is not easy for us }to accept aid. I, however, am glad you }are here.} }If you need healing or a potion, please }come to me. See Larzuk for weapons, }armor, and repairs. Nihlathak, despite }his disposition, may be of some }assistance with other wares. Finally, }Qual-Kehk, our Man-At-Arms, leads }Harrogath's remaining forces against }Baal.}
+MalahAct5IntroSorGossip1	36}A Sorceress...Here in Harrogath?} }There was a time, child, when I thought }I was destined to follow your kind's }path. However, my powers never }developed beyond the simplest of }spells. Although I can heal almost any }wound with time and energy, there is }little I can do to help against Baal.} }But enough of that...I spend too much }time in reflection and have forgotten }my manners.} }I, Malah, welcome you to Harrogath, }the last stronghold of Order on Mount }Arreat. You have come to the right }place, if you intend to defeat Baal the }Lord of Destruction.} }Baal has laid waste to our mountain }and its denizens. His minions continue }to attack our town, while Qual-Kehk }and his men have proven helpless to }stop them. Baal is still out on the }mountain looking for something -- but I }know not what. } }All of the Elders, save Nihlathak, }sacrificed themselves to place a }protective ward around Harrogath.} }Some of us here, certainly Nihlathak, do }not appreciate your presence. We are a }proud people, and it is not easy for us }to accept aid. I, however, am glad you }are here.} }If you need healing or a potion, please }come to me. See Larzuk for weapons, }armor, and repairs. Nihlathak, despite }his disposition, may be of some }assistance with other wares. Finally, }Qual-Kehk, our Man-At-Arms, leads }Harrogath's remaining forces against }Baal.}
+MalahAct5IntroBarGossip1	34}You have traveled far only to return }home to us, Barbarian. Ohh...Much has }happened in Harrogath since you left. }Our homeland is hardly recognizable }with so much evil about.} }Yet, I've managed to survive so far. }You've seen your share of suffering as }well, I'm sure. Seeing you again -- alive }-- does my heart good. I shall pray that }you can help us out of this hell.} }Baal has laid waste to our mountain }and its denizens. His minions continue }to attack our town, while Qual-Kehk }and his men have proven helpless to }stop them. Baal is still out on the }mountain looking for something -- but I }know not what.} }Nihlathak is the last survivor of the }Council of Elders, but I'm afraid he has }not been himself lately. The other }Elders sacrificed themselves to place a }protective ward around Harrogath. If }Nihlathak is curt with you, it is because }he feels responsible for our situation. }He does not relish sending more of our }people out to die.} }So much has changed since you left }that I see little hope for us in this life.} }If you need healing or a potion, please }come to me. See Larzuk for weapons, }armor, and repairs. Nihlathak, despite }his disposition, may be of some }assistance with other wares. Finally, }Qual-Kehk, our Man-At-Arms, leads }Harrogath's remaining forces against }Baal.}
+MalahGossip1	53}I'm aware of the amazing magical }powers a Sorceress can channel. If we }survive Baal's wrath, I would be most }honored if you could demonstrate and }perhaps teach me something of what }you know. } }I may be old, but I'm not dead.}
+MalahGossip2	42}I know you and my son, Bannuk, did not }part on the best of terms. He did not }understand the wanderlust that drove }you to leave your homeland. However, }even though Bannuk could never admit }it to me, as he grew older I could see }that same desire in his eyes.} }Oh...It's a pity I didn't encourage him to }go with you. He might still be alive }today.}
+MalahGossip3	57}Though once considered shelter by our }people, the Ice Caves offer no refuge }from the dark horde. There are }creatures there that will freeze your }heart before feasting upon it.}
+MalahGossip4	107}On the battlefield, turning your back on }even the dead is unwise.}
+MalahGossip5	60}This battle plays mind tricks on our }warriors. Those fortunate enough to }have returned from the mountainside }claim to have seen angels in flight.} }Fly they might, but that certainly does }not make them angels.}
+MalahGossip6	53}Perhaps you have heard the accounts }of my son's horrible death at the hands }of Baal's minions. He was my last living }child...} }The oath of compassion I have taken as }a healer extends only to humankind.} }Cut them down, warrior. All of them!}
+MalahGossip7	78}The catapults are infernal machines }made of demon flesh fused with steel.} }Be wary of them.}
+MalahGossip8	60}Qual-Kehk is a worthy leader, but the }losses have borne heavily upon him. He }is only impatient because he judges the }worth of a warrior by action, not }words.} }You must prove yourself worthy of his }trust.}
+MalahGossip9	52}Larzuk possesses a good soul, but at }times his mind seems quite unsound. } }He once asked me for twenty of my }finest sheepskins. He said he would fill }them with hot air and float like a cloud }above the battlefield to spy on Baal's }legions! } }I worry the siege has driven him mad.}
+MalahGossip10	90}Be cautious, warrior.} }Though I am an experienced healer, }resurrection is beyond my powers.}
+MalahGossip11	53}I pray for the day when the fields are }covered in snow unstained by the blood }of our own. Perhaps that day will come }soon...Perhaps never...} }Oh...But I forget myself. How may I aid }your quest?}
+MalahGossip12	64}Your gold is most helpful. Medical }supplies for our wounded are scarce }and very expensive.} }When we can find a supplier, oh, we }must pay dearly for what we need.}
+MalahGossip13	44}With the exception of Qual-Kehk, the }townspeople do not see what I see -- }the massacre we face.} }Our bravest, strongest heroes hobble }back to me begging for help. I do what }I can -- healing and bandaging some, }preparing the others for what lies }beyond.}
+NihlathakAct5IntroGossip1	43}Well, well. The siege has everything in }short supply...except fools. } }Why would you seek this place, }stranger? Are you a vulture come to }loot the bodies of our fallen warriors? } }Regardless, this is no place to make a }name for yourself. The mountain is }ours to protect. It is only a matter of }time before Hell's legions are routed.}
+NihlathakAct5IntroAssGossip1	54}Well, well...An Assassin!} }Heh, heh...While I am sure we are all }grateful for your presence in our }troubled town, you need not have made }the journey.} }I can personally say that your skills are }not required here. You would serve }your clan better elsewhere.}
+NihlathakAct5IntroNecGossip1	45}Ahhh, a Necromancer.} }While I admire your courage in seeking }out the darker side of magic, we really }have little need of your skills. The }battle will turn soon enough without }your meddling. } }Yet, I should have expected to see your }kind here. You are like a moth to the }flame -- drawn to all this death. It }feeds you in more ways than one, does }it not?}
+NihlathakGossip1	49}If you're looking for cases of }treacherous magic, Assassin, take a }hard look at Larzuk. He was the only }one in town who escaped the Red Fever }last spring. He claimed his good }fortune was due to 'hand washing' }before meals.} }Hmmm...Very suspicious...}
+NihlathakGossip2	48}Why would you seek this place, }stranger? Are you a vulture come to }loot the bodies of our fallen warriors? } }Regardless, this is no place to make a }name for yourself. The mountain is }ours to protect. It is only a matter of }time before Hell's legions are routed.}
+NihlathakGossip3	67}Qual-Kehk is useless. He has blindly }sent our warriors to their deaths, }assuming Baal's legions would fight as }men do. Of course, everyone knows }they do not.}
+NihlathakGossip4	57}The demon hordes have grown powerful }beyond measure, aided by our foolish }mistakes. But I may have found a way }to correct those mistakes...}
+NihlathakGossip5	37}Oh yes...I remember our warriors as }children. Malah would set their broken }bones and give them powders for their }fevers. Now, they return to her with }wounds that will never heal.} }I am tired...Please...leave me.}
+NihlathakGossip6	133}If you have nothing useful for me, be on }your way!}
+NihlathakGossip7	81}Anya's father was my good friend. }There are so many to mourn...I have }no time for you!}
+NihlathakGossip8	53}I have long been criticized, but }especially of late -- since the deaths of }my fellow Elders. Through it all, I have }learned one thing. Each man must do }what's right, no matter what others }may think.}
+NihlathakGossip9	65}The Council of Elders always believed }itself prepared for the coming of the }Three. Obviously, we were not prepared }enough.}
+QualKehkAct5IntroGossip1	45}I am Qual-Kehk, the Senior Man-At-Arms }of Harrogath.} }You have the look of a warrior...An }extra soldier will be useful. But don't }expect anyone to mourn if you get }yourself killed. } }Baal is true to his namesake. He has }ravaged through our lands like a }merciless plague.} }The protective ward laid down by our }lost Elders helps hold the evil at bay, }but Baal's siege has taken its toll all }the same.} }Most of my men are now dead. Others }are trapped in the mountain passes.} }But I swear we are not beaten yet! We }will fight to the end to protect this }mountain!}
+QualKehkAct5IntroPalGossip1	42}A Paladin! I have long heard of your }people.} }As a young warrior I even considered }the pilgrimage to Kurast. But I was }younger then and foolish. My place has }always been here -- protecting }Harrogath, and Mount Arreat with it.} }I am Qual-Kehk, the Senior Man-At-Arms }of Harrogath.} }You have the look of a warrior...An }extra soldier will be useful. But don't }expect anyone to mourn if you get }yourself killed. } }Baal is true to his namesake. He has }ravaged through our lands like a }merciless plague.} }The protective ward laid down by our }lost Elders helps hold the evil at bay, }but Baal's siege has taken its toll all }the same.} }Most of my men are now dead. Others }are trapped in the mountain passes.} }But I swear we are not beaten yet! We }will fight to the end to protect this }mountain!}
+QualKehkAct5IntroDruGossip1	42}A Druid in Harrogath! Have things truly }come to this?} }After the Mage Wars, I assumed Druids }would never be seen in Harrogath }again. You take a big chance coming }here! } }To be honest, I have never been }comfortable with your shape-shifting }kind, but I do respect your search for }balance and peace. So, if you trust us }enough to enter our gates, I trust you }enough to let you stay.} }I am Qual-Kehk, the Senior Man-At-Arms }of Harrogath.} }You have the look of a warrior...An }extra soldier will be useful. But don't }expect anyone to mourn if you get }yourself killed. } }Baal is true to his namesake. He has }ravaged through our lands like a }merciless plague.} }The protective ward laid down by our }lost Elders helps hold the evil at bay, }but Baal's siege has taken its toll all }the same.} }Most of my men are now dead. Others }are trapped in the mountain passes.} }But I swear we are not beaten yet! We }will fight to the end to protect this }mountain!}
+QualKehkGossip1	67}It would be an honor to have a warrior }of the Light fighting side-by-side with }my men.} }I can see your faith gives you great }strength, Paladin, but don't expect it to }keep you out of harm's way.}
+QualKehkGossip2	61}Harrogath has great need of your }powers, noble Druid. However, in the }face of this supernatural onslaught, }are your natural powers up to the }task?}
+QualKehkGossip3	44}The death of Malah's son was a great }tragedy. He was our finest archer.} }While leading a successful campaign }against Baal's forces, he was impaled }on a demon's spear. The wound was }such that...Well, even Malah herself }acknowledges that quick death was a }blessing.}
+QualKehkGossip4	57}We have lost many well-trained warriors }to Baal's siege machines. Their range is }great. Though, they are vulnerable if }you close the distance quickly enough.}
+QualKehkGossip5	96}Baal's legions seem countless, but }slaying their commanders takes some }of the fight out of them.}
+QualKehkGossip6	58}Early on, parties of our best scouts }were ambushed by demons that }spawned from the very air around }them. Survivors often mentioned a }strange creature floating in the }distance.} }Perhaps taking it down could prevent }some nasty surprises.}
+QualKehkGossip7	57}This is unlike any battle I have ever }fought. While we ration food and }water, the demon hordes feast nightly }on the flesh and blood of our dead.}
+QualKehkGossip8	48}Larzuk is a talented blacksmith, but his }head is full of some strange ideas. } }Just the other day he came to me with a }plan to break the siege. He wanted to }fill large pipes with exploding powders }and steel balls, then...Well, like I said, }strange.}
+QualKehkGossip9	46}Our Elders were wise leaders in more }peaceful times, but now the survival of }our people has fallen to me. My men }and I will fight to the death, but there's }no way to ensure the outcome.} }I used to believe that nothing could }break through our guard and assault }the holy mountain. I know now that I }was horribly mistaken.}
+A5Q1InitLarzuk	45}If you're here to defeat Baal, you must }prove it!} }As we speak, Harrogath is under siege }by Baal's demons. Catapults rain death }just outside the town walls.} }Baal himself travels up the sacred }mountain, having left in charge here }one of his most vicious generals, Shenk }the Overseer. A ruthless taskmaster, }he lashes his own minions into suicidal }frenzies on the battlefield.} }If you wish to prove yourself to us, }destroy the monster, Shenk, that }commands those infernal catapults }outside Harrogath.  If you manage to }do this, return to me.}
+A5Q1AfterInitLarzuk	150}Uh...Did I mention there were catapults?}
+A5Q1AfterInitCain	83}I believe that stopping the siege on }Harrogath is the only way for you to }earn the trust of these people.}
+A5Q1AfterInitAnya	84}You've proven your skill at rescuing fair }maidens...but how are you at killing }vicious beasts?}
+A5Q1AfterInitMalah	77}Qual-Kehk and his men have been }fighting to break the siege for some }time. Where many have failed, you may }succeed.}
+A5Q1AfterInitNihlathak	70}After so many have died, who are you }to think you can accomplish what our }proud warriors could not?}
+A5Q1AfterInitQualKehk	66}About to face Shenk the Overseer and }stop the siege, are you? You should }ask Malah to perform your last rites }before you go, stranger.}
+A5Q1EarlyReturnLarzuk	90}What's the matter, hero? Questioning }your fortitude? I know we are.}
+A5Q1EarlyReturnCain	105}I understand your reluctance, but now }is the time to strike.}
+A5Q1EarlyReturnAnya	66}Those demons have been out there }since before your arrival. Can you do }nothing to stop them?} }Your task is a simple one, warrior. Find }Shenk and destroy him.}
+A5Q1EarlyReturnMalah	64}This may not be very encouraging, but }you have fared better than the others }who passed through those gates.} }In regards to Shenk the Overseer, }remember: a general is nothing without }his men.}
+A5Q1EarlyReturnNihlathak	78}What are you still doing here? I thought }you were going off to die.} }Go...Be quick about it.}
+A5Q1EarlyReturnQualKehk	93}So, you still live. You're either quick or a }coward.}
+A5Q1SuccessfulLarzuk	63}You're an even greater warrior than I }expected...Sorry for underestimating }you.} }As a token of my appreciation, I will }craft sockets into an item of your }choosing, and from now on, you'll get }the best price for all my wares.}
+A5Q1SuccessfulCain	60}Those catapults were like nothing I have }ever seen before. You have prevailed }against Shenk, my friend, but Baal is }still far ahead of you.}
+A5Q1SuccessfulAnya	108}I was starting to wonder how long it }would take you to stop those beasts.} }Good job.}
+A5Q1SuccessfulMalah	94}Oh...At last, the siege is ended. You }truly are an angel.} }I thank you.}
+A5Q1SuccessfulNihlathak	65}Ending the siege does not earn }immediate respect, outsider.} }Respect only comes with sacrifice -- }something I'm sure you know nothing }of.}
+A5Q1SuccessfulQualKehk	68}So...You managed to stop the siege.} }You are more powerful than I gave you }credit for. You have rightfully earned }my respect.}
+A5Q2InitQualKehk	58}My concerns have turned to my men }taken prisoner on the battlefield by }Baal's demons. I hate to think what's }happened to them.} }As you journey up the mountain, keep }your eyes open for my soldiers and }bring them back to me if you can.}
+A5Q2AfterInitQualKehk	85}Those of my men fortunate enough to }escape on their own told me that they }were held captive in the highlands and }plateaus.}
+A5Q2AfterInitCain	74}I know firsthand that captivity is a sad }fate for a man. Find them quickly.}
+A5Q2AfterInitAnya	85}If those men are being treated like I }was, you must find them. They won't }survive much longer.}
+A5Q2AfterInitLarzuk	73}I crafted the swords and armor for }Qual-Kehk's men. They were like }brothers to me. I can't imagine the pain }they must be suffering.} }Save them if you can!}
+A5Q2AfterInitMalah	84}Qual-Kehk's men have been imprisoned }for some time. They are certain to be }tired and weak.} }You must protect them once you free }them.}
+A5Q2AfterInitNihlathak	94}You have proven you can take life, }warrior, but can you save it as well?}
+A5Q2EarlyReturnQualKehk	95}They say that discretion, not }procrastination, is the better part of }valor.}
+A5Q2EarlyReturnQualKehkMan	78}More of my men are still alive out there. }I am certain of it!} }Find them. Free them from their cages }and bring them back to me.}
+A5Q2EarlyReturnCain	63}If you are having trouble finding }Qual-Kehk's soldiers, you should talk to }Malah. She healed those who made it }back before. Perhaps she would have }some advice.}
+A5Q2EarlyReturnAnya	115}Well, you found me on the mountain; I'm }sure you'll find them too.}
+A5Q2EarlyReturnLarzuk	76}As a kid, I used to play soldier among }the barricades on the mountain. }There's no easy way through that maze }of walls.}
+A5Q2EarlyReturnMalah	67}Soldiers who made it back told of a }system of barricades placed among the }mountain passes. They said that is }where the prisoners are held.}
+A5Q2EarlyReturnNihlathak	52}Did you ever stop to think why these }demons are capturing Qual-Kehk's }men? Why they are attacking us? Have }you considered what Baal wants with }the mountain?} }No. You've not. You have no idea what }you are dealing with.}
+A5Q2SuccessfulQualKehk	51}Thank you for rescuing my men. They }have spoken well of your bravery in }battle. Perhaps there is hope for us }after all. } }If you wish, you may hire some of my }mercenaries that you saved. And }please...take this set of runes. I had }been saving them for a socketed shield, }but I think you'll make better use of }them.} }Be sure to set them in the right order }for their fullest effect.}
+A5Q2SuccessfulCain	80}You've become a hero to this town, my }friend. The shadows have lifted ever }since you brought the Light to }Harrogath.}
+A5Q2SuccessfulAnya	107}I'm sure those men appreciate the }freedom you gave them...as much as I }do.}
+A5Q2SuccessfulLarzuk	55}Since your arrival, Cain has spoken of }your deeds in the Southern Kingdoms, }defeating both Mephisto and Diablo. At }first, I scoffed at his tales, but I'm }finding them more believable with every }passing day.}
+A5Q2SuccessfulMalah	73}You have inspired the people in this }town -- not only those you rescued, but }those you've helped in other ways as }well.}
+A5Q2SuccessfulNihlathak	72}So. You brought the lost sheep home to }the shepherd. Well done.}
+A5Q3InitMalah	43}There is a matter which I hesitate to }share, but I believe you are the only }one who can help me now.} }Anya, the young alchemist and }daughter to one of our slain Elders, }has been missing for some time. She is }a strong, crafty woman with a spirit }like no other.} }One night, just before your arrival, I }overheard her and Nihlathak arguing }about her father's death. The next }morning she was gone.} }Nihlathak has his own tale as to where }she went and why. Don't believe him! I }fear he is at the root of her }disappearance.} }Please, if you can, search for Anya and }bring her back to us. She'll know what }to do about Nihlathak.}
+A5Q3AfterInitMalah	94}When you talk to Nihlathak, be careful. }There is no telling what he will say or }do.}
+A5Q3AfterInitCain	59}I would listen to Malah. Nihlathak }speaks with a venomous tongue and }acts as if the entire weight of this town }rests upon his shoulders.} }Perhaps there is more going on here }than we know.}
+A5Q3AfterInitLarzuk	57}Anya is an amazing alchemist, }especially for her young age. As long }as I've known her, she's never let }anything stop her from pursuing what }she believed in. } }I wouldn't doubt that Nihlathak is }involved. Ever since her father died, }they haven't gotten along.}
+A5Q3AfterInitNihlathak	41}Anya! Who have you been talking to? }Likely it was that meddling Malah. } }Well, I'll tell you what really happened. }Anya came to me for guidance, after }receiving a vision that her mother and }younger brother were trapped in the }lands beyond the Ice Caves. She had }decided to go rescue them. } }I told her that her quest was a foolish }one and that she would be safer }staying within the city walls. However, }she is a willful girl and would not listen }to me. } }The next morning, she was gone. No }one is more distraught than I over }losing her. } }However, if you feel the need to be }Malah's errand child, I won't try to stop }you.}
+A5Q3AfterInitQualKehk	43}Anya's father, Aust, was our wisest }Elder. He was killed along with the }other Elders who erected the ward that }protects this city. The ward has kept }Baal's demons out of Harrogath, but at }a costly sacrifice. } }Nihlathak, on the other hand, was the }only Elder to escape the demons. }Somehow, he alone managed to find }sanctuary, while the others died }around him.} }Ever since that day, Nihlathak and Anya }have been at odds.}
+A5Q3EarlyReturnMalah	52}If it were anyone else, I would assume }her dead. However, Anya is not so }easily beaten. I know she must be alive.}
+A5Q3EarlyReturnCain	60}Nihlathak's story does sound }reasonable, considering what I've }heard about Anya. However, the best }lies are often hidden within truth.}
+A5Q3EarlyReturnLarzuk	56}As the daughter of Elder Aust, Anya is }the only person, besides Nihlathak, }who has any real knowledge of Mount }Arreat's secrets. I'd hate to see our }fate in the hands of Nihlathak alone.}
+A5Q3EarlyReturnNihlathak	46}Look, I've told you! She's dead! If you }knew what was good for you, you'd }concentrate your efforts on saving }Harrogath -- not on lost causes like }Anya.}
+A5Q3EarlyReturnQualKehk	81}It seems like everyone feels Nihlathak }played a part in Anya's disappearance.} }Why would he do such a thing?}
+A5Q3FoundAnyaMalah	56}So! That snake Nihlathak was behind }Anya's disappearance...and he trapped }her with a freezing curse.} }Here. Take this potion to Anya and give }it to her. That should release her.}
+A5Q3FoundAnyaCain	54}Goodness! Anya frozen by that fallen }Barbarian, Nihlathak...Perhaps Malah }can help you where I cannot.}
+A5Q3FoundAnyaLarzuk	80}Poor Anya! I should've known Nihlathak }was a traitor...} }If you find him alive, kill him for me!}
+A5Q3FoundAnyaQualKehk	70}The snake has slipped our grasp! While }you were gone, Nihlathak disappeared.} }I'll bet Anya knows how to track him }down.}
+A5Q3FoundAnyaAnya	50}Hero. Nihlathak did this to me!} }If you've come to help me, my only hope }lies with Malah.} }Please...Tell her you've found me...}
+A5Q3SuccessfulMalah	48}Thank you so much for bringing Anya }back to us. I have devised this spell to }increase your resistances as a token of }my thanks. I know it isn't much, but I }hope you find it helpful.} }Please go talk to Anya. She has urgent }news concerning Nihlathak.}
+A5Q3SuccessfulCain	62}For one so young, Anya commands }great respect. Now that she is here, I }will make it a point to talk to her about }Mount Arreat.} }You should do the same.}
+A5Q3SuccessfulLarzuk	67}I never liked Nihlathak, but I never }suspected that he'd betray us! I just }can't understand how an Elder could do }such a thing.}
+A5Q3SuccessfulQualKehk	140}Your rescue of Anya was quite an }accomplishment.}
+A5Q3SuccessfulAnya	80}Thank you, hero, for rescuing me.} }To show my personal gratitude, I give }you this. I had it custom-made for you }by Larzuk.}
+A5Q4InitAnya	43}Nihlathak told me he struck a deal with }Baal to protect Harrogath. In exchange }for the demon's mercy, the misguided }fool plans to give Baal the Relic of the }Ancients, our most holy totem!} }Doing so will allow Baal to enter Mount }Arreat unchallenged by the Ancients. I }tried to stop Nihlathak, but he }imprisoned me in that icy tomb.} }Nihlathak must be stopped before he }dooms the whole world. As much as I }would love to strangle the life out of }him, I'm afraid I haven't the strength.} }You must go to his lair through this }portal I've opened, kill him, and then }bring back the Relic of the Ancients.} }Stop Nihlathak from destroying what we }have striven for eons to protect.}
+A5Q4AfterInitAnya	90}As noble as Nihlathak's intentions are, }nothing can excuse his actions.}
+A5Q4AfterInitCain	50}Regretfully, I know very little about this }Relic. However, if what the others say }is true, then Baal must not gain }possession of it.} }Stop Nihlathak...before all is lost.}
+A5Q4AfterInitMalah	65}My worst fear has come true. Nihlathak }has gone mad.} }You must stop him, before he gives the }Relic to the Lord of Destruction!}
+A5Q4AfterInitLarzuk	56}Now, rescuing Anya -- that's good. }Talking to me while Nihlathak hands }over the Relic to Baal -- uh...that's bad!}
+A5Q4AfterInitQualKehk	60}I saw Nihlathak leave town just before }you found Anya. He must be held }accountable for his criminal deeds.} }Find him and bring him back, if you can. }Likely, he won't come willingly, and }you'll be forced to kill him.} }So be it.}
+A5Q4EarlyReturnAnya	55}Nihlathak is a traitor! If Baal gets the }Relic, he shall enter the mountain and }wreak havoc there!} }I cannot believe that Nihlathak would }give the Relic to Baal in any kind of }trade. He's truly insane if he believes }that he can deal with the Lord of }Destruction.}
+A5Q4EarlyReturnCain	58}Ohh...This is a truly horrible turn of }events.} }I know it seems you have always been }one step behind, my friend. But look at }it this way...You have evil on the run.}
+A5Q4EarlyReturnLarzuk	160}...What's there to talk about?} }Kill Nihlathak!}
+A5Q4EarlyReturnMalah	63}Nihlathak was never the kindest man. }But for him to betray the whole world...} }Ahh...Where shall his soul finally rest?}
+A5Q4EarlyReturnQualKehk	65}My advice is to go in quick and hit hard. }Nihlathak can't be half as tough as the }beasts you've faced out there.}
+A5Q4SuccessfulAnya	55}You have stopped Nihlathak, but he }didn't have the Relic! He must have }already given it to Baal. Now, Baal will }not be tested when he reaches Arreat's }summit.} }...Damn Nihlathak!} }I do thank you for trying, though. }Please, allow me to honor your courage }by magically inscribing your name onto }an item of your choosing. It's the least }I can do.}
+A5Q4SuccessfulCain	90}Beware! Baal grows stronger with every }passing moment.}
+A5Q4SuccessfulLarzuk	93}Hmmm...What does Baal plan to do }inside Mount Arreat?}
+A5Q4SuccessfulMalah	65}So, the Relic is lost. Do not dwell on }failures past. It is your future that }matters more.}
+A5Q4SuccessfulQualKehk	57}Nihlathak was a vile demon that shall }find his home among the tortured }minions of Hell!} }You battled the Darkness without fear. I }laud your skill and courage.}
+A5Q5InitQualKehk	37}Every time I hear of you, warrior, your }deeds become more legendary.} }But take heed. You are approaching the }very summit of Mount Arreat. I have }never dared venture there. It is sacred }-- our most holy place. The legends say }it is guarded by the Ancient Ones, who }block the path of all who are unworthy.} }Your reputation here does not }matter...It will be the Ancients who }determine your worthiness.} }Good luck.}
+A5Q5AfterInitQualKehk	63}The Ancients are not our enemies. }Remember that! They are our }ancestors -- our gods.}
+A5Q5AfterInitCain	90}A test of mettle is a fitting rite of }passage for a Barbarian hero.}
+A5Q5AfterInitAnya	72}You wouldn't have to test yourself }against the Ancients if it weren't for }Nihlathak's treachery. He was a fool }and deserves to suffer for eternity.}
+A5Q5AfterInitLarzuk	75}Every night, I've prayed to the Ancients }to bring us peace...and now you must }fight them.} }Huh...Who shall I pray to now, warrior?}
+A5Q5AfterInitMalah	65}By reaching the summit, you cease }being just a simple warrior. When you }come back, you will be far more.}
+A5Q5EarlyReturnQualKehk	114}I warned you!} }The Ancients are not like the demons }you're accustomed to fighting.}
+A5Q5EarlyReturnCain	52}We have come too far to be defeated }now, my friend. I have seen you }complete many difficult quests. Though }this may be your greatest trial, it is not }beyond your reach.}
+A5Q5EarlyReturnAnya	71}Look. I must apologize.} }I feel responsible for your current }struggle. If I had only stopped }Nihlathak from giving Baal the Relic, }you would not have to fight those }ghosts.}
+A5Q5EarlyReturnLarzuk	70}You've walked on the burial grounds of }our greatest ancestors. I'm not sure }whether I should bow before you or }revile you for committing sacrilege.} }Tread lightly when you walk with gods.}
+A5Q5EarlyReturnMalah	68}Do not doubt yourself. I believe you are }worthy to pass through the Ancients' }gates, but you must believe, as well.}
+A5Q5SuccessfulQualKehk	75}Besting the Ancients in battle is a }mighty feat indeed. I hope this means }you're ready to battle Baal.}
+A5Q5SuccessfulCain	67}You have proven yourself to these }people. They look to you as their }warrior, their champion.}
+A5Q5SuccessfulAnya	82}You stand before me a worthy hero -- }and on you rests the last hope of our }people.} }Bear it well, warrior.}
+A5Q5SuccessfulLarzuk	82}The Ancients have honored you, and in }turn, so do we. I have no remaining }doubts about you, now.}
+A5Q5SuccessfulMalah	60}I knew the Ancients would find you }worthy of Mount Arreat's secrets. Now, }stop Baal before he destroys all that is }sacred.}
+A5Q6InitAncients	31}You are a worthy hero! We augment }your skill and grant you entry to the }interior of Mount Arreat, wherein lies }the Worldstone.} }Beware. You will not be alone. Baal the }Lord of Destruction is already inside. } }The Archangel Tyrael has always been }our benefactor, but even he cannot }help us now. For Baal blocks Tyrael's }spiritual presence from entering the }chamber of the Worldstone. Only you, }mortal, have the power to defeat Baal }now.} }Baal threatens the Worldstone -- and }through it, the mortal realm, itself. You }must stop him before he gains full }control of the sacred stone. With it }under his control, Baal could shatter }the boundaries between this world and }the Burning Hells, thus allowing the }hordes of the Prime Evils to pour forth }into the mortal realm like an }unstoppable tide!} }If you are weak, the world as you know }it could be lost forever. You must NOT }fail!}
+A5Q6EarlyReturnCain	51}Remember this. Baal once possessed Tal }Rasha, one of the most powerful of the }ancient Horadrim.} }Your battles with Mephisto and Diablo }will pale in comparison to your battle }with Baal.} }The Lord of Destruction aided by Tal }Rasha's knowledge...The mountain }itself will tremble when you clash.}
+A5Q6EarlyReturnLarzuk	59}I may be just an armorer, but I know }this...Baal plans to destroy the world }with the secrets contained in that }mountain. It doesn't take a genius to }know he has to be stopped.}
+A5Q6EarlyReturnMalah	70}You knew it would eventually come down }to this. Kill Baal! Finish the game!}
+A5Q6EarlyReturnAnya	60}Baal has blocked Tyrael from entering }the Worldstone Chamber? This truly }has become a battle against Hell.} }Whether or not it was the Heavens' }decree, this is your fight now -- your }destiny.}
+A5Q6EarlyReturnQualKehk	63}You have ventured to a place beyond }legend. You rush to face an evil few }can even imagine.} }Be careful, my friend, and may the Light }watch over you.}
+A5Q6SuccessfulTyrael	40}I am impressed, mortal. You have }overcome the greatest challenge this }world has ever faced and defeated the }last of the Prime Evils. However, we are }too late to save the Worldstone. Baal's }destructive touch has corrupted it }completely.} }Given enough time, the Worldstone's }energies will drain away and the }barriers between the worlds will }shatter -- the powers of Hell will flood }into this...Sanctuary...and eradicate }your people and everything you've }labored to build.} }Therefore, I must destroy the corrupted }Worldstone before the powers of Hell }take root. This act will change your }world forever -- with consequences }even I cannot foresee. However, it is }the only way to ensure mankind's }survival.} }Go now, mortal. I have opened a portal }that will lead you to safety.} }May the Eternal Light shine upon you }and your descendants for what you've }done this day. The continued survival }of mankind is your legacy! Above all }else, you have earned a rest from this }endless battle.}
+A5Q6SuccessfulAnya	53}You have done the impossible, hero. }Your defeat of the last of the three }Prime Evils is a great victory for the }Light. } }Strange that you say that the }Worldstone must be destroyed. The }prophecies said nothing about that.} }Perhaps all we have fought for will be }lost...or perhaps we'll never need fight }again!}
+A5Q6SuccessfulCain	40}I knew in time you would defeat Baal. }You have done everything you set out }to do, my friend.} }Ever since you rescued me from }Tristram, I have believed in you. It has }been a supreme honor to aid you along }the way. } }So...The Worldstone was corrupted by }Baal. And now Tyrael must destroy it. }Worry not. Through whatever lies }ahead I have faith that the Light will }guide us both.} }Go, now, back to the Worldstone }chamber, and enter the portal Tyrael }has opened for you.}
+A5Q6SuccessfulLarzuk	74}The Ancients themselves will envy our }songs about you.} }Please, don't forget about us! Farewell, }my friend.}
+A5Q6SuccessfulMalah	48}If Tyrael says the Worldstone must be }destroyed, then it must. We cannot let }Baal's corruption prevail!} }The world will change, true -- but who is }to say it isn't for the better?}
+A5Q6SuccessfulQualKehk	60}The destruction of the Worldstone does }not bode well for our world. But I'll try }not to worry...} }After all, we have warriors like you }fighting for us and for the Light.} }Farewell!}
+ktr	Katar
+wrb	Wrist Blade
+ces	Cestus
+clw	Claws
+btl	Blade Talons
+skr	Scissors Katar
+9ar	Quhab
+9wb	Wrist Spike
+9xf	Fascia
+9cs	Hand Scythe
+9lw	Greater Claws
+9tw	Greater Talons
+9qr	Scissors Quhab
+7ar	Suwayyah
+7wb	Wrist Sword
+7xf	War Fist
+7cs	Battle Cestus
+7lw	Feral Claws
+7tw	Runic Talons
+7qr	Scissors Suwayyah
+7ha	Tomahawk
+7ax	Small Crescent
+72a	Ettin Axe
+7mp	War Spike
+7wa	Beserker Axe
+7la	Feral Axe
+7ba	Silver-edged Axe
+7bt	Decapitator
+7ga	Champion Axe
+7gi	Glorious Axe
+7wn	Polished Wand
+7yw	Ghost Wand
+7bw	Lich Wand
+7gw	Unearthed Wand
+7cl	Truncheon
+7sc	Mighty Scepter
+7qs	Seraph Rod
+7ws	Caduceus
+7sp	Tyrant Club
+7ma	Reinforced Mace
+7mt	Devil Star
+7fl	Scourge
+7wh	Legendary Mallet
+7m7	Ogre Maul
+7gm	Thunder Maul
+7ss	Falcata
+7sm	Ataghan
+7sb	Elegant Blade
+7fc	Hydra Edge
+7cr	Phase Blade
+7bs	Conquest Sword
+7ls	Cryptic Sword
+7wd	Mythical Sword
+72h	Legend Sword
+7cm	Highland Blade
+7gs	Balrog Blade
+7b7	Champion Sword
+7fb	Colossus Sword
+7gd	Colossus Blade
+7dg	Bone Knife
+7di	Mithril Point
+7kr	Fanged Knife
+7bl	Legend Spike
+7tk	Flying Knife
+7ta	Flying Axe
+7bk	Winged Knife
+7b8	Winged Axe
+7ja	Hyperion Javelin
+7pi	Stygian Pilum
+7s7	Balrog Spear
+7gl	Ghost Glaive
+7ts	Winged Harpoon
+7sr	Hyperion Spear
+7tr	Stygian Pike
+7br	Mancatcher
+7st	Ghost Spear
+7p7	War Pike
+7o7	Ogre Axe
+7vo	Colossus Voulge
+7s8	Thresher
+7pa	Cryptic Axe
+7h7	Great Poleaxe
+7wc	Giant Thresher
+6ss	Walking Stick
+6ls	Stalagmite
+6cs	Elder Staff
+6bs	Shillelagh
+6ws	Archon Staff
+6sb	Spider Bow
+6hb	Blade Bow
+6lb	Shadow Bow
+6cb	Great Bow
+6s7	Diamond Bow
+6l7	Crusader Bow
+6sw	Ward Bow
+6lw	Hydra Bow
+6lx	Pellet Bow
+6mx	Gorgon Crossbow
+6hx	Colossus Crossbow
+6rx	Demon Crossbow
+ob1	Eagle Orb
+ob2	Sacred Globe
+ob3	Smoked Sphere
+ob4	Clasped Orb
+as1	Wraps
+as2	Knuckles
+as3	Slashers
+as4	Splay
+as5	Hook
+as6	Shank
+as7	Claws
+am1	Stag Bow
+am2	Reflex Bow
+am3	Maiden Spear
+am4	Maiden Pike
+am5	Maiden Javelin
+ob6	Glowing Orb
+ob7	Crystalline Globe
+ob8	Cloudy Sphere
+ob9	Sparkling Ball
+oba	Swirling Crystal
+am6	Ashwood Bow
+am7	Ceremonial Bow
+am8	Ceremonial Spear
+am9	Ceremonial Pike
+ama	Ceremonial Javelin
+obb	Heavenly Stone
+obc	Eldritch Orb
+obd	Demon Heart
+obe	Vortex Orb
+obf	Dimensional Shard
+amb	Matriarchal Bow
+amc	Grand Matron Bow
+amd	Matriarchal Spear
+ame	Matriarchal Pike
+amf	Matriarchal Javelin
+dr4	Falcon Mask
+dr2	Hawk Helm
+dr3	Antlers
+dr1	Wolf Head
+dr5	Spirit Mask
+ba1	Jawbone Cap
+ba2	Fanged Helm
+ba3	Horned Helm
+ba4	Assault Helmet
+ba5	Avenger Guard
+pa1	Targe
+pa2	Rondache
+pa3	Heraldic Shield
+pa4	Aerin Shield
+pa5	Crown Shield
+ne1	Preserved Head
+ne2	Zombie Head
+ne3	Unraveller Head
+ne4	Gargoyle Head
+ne5	Demon Head
+ci0	Circlet
+ci1	Coronet
+ci2	Tiara
+ci3	Diadem
+uap	Shako
+ukp	Hydraskull
+ulm	Armet
+uhl	Giant Conch
+uhm	Spired Helm
+urn	Corona
+usk	Demonhead
+uui	Dusk Shroud
+uea	Wyrmhide
+ula	Scarab Husk
+utu	Wire Fleece
+ung	Diamond Mail
+ucl	Loricated Mail
+uhn	Boneweave
+urs	Great Hauberk
+upl	Balrog Skin
+ult	Hellforge Plate
+uld	Kraken Shell
+uth	Lacquered Plate
+uul	Shadow Plate
+uar	Sacred Armor
+utp	Archon Plate
+uuc	Heater
+uml	Luna
+urg	Hyperion
+uit	Monarch
+uow	Aegis
+uts	Ward
+ulg	Bramble Mitts
+uvg	Vampirebone Gloves
+umg	Vambraces
+utg	Crusader Gauntlets
+uhg	Ogre Gauntlets
+ulb	Wyrmhide Boots
+uvb	Scarabshell Boots
+umb	Boneweave Boots
+utb	Mirrored Boots
+uhb	Myrmidon Greaves
+ulc	Spiderweb Sash
+uvc	Vampirefang Belt
+umc	Mithril Coil
+utc	Troll Belt
+uhc	Colossus Girdle
+uh9	Bone Visage
+ush	Troll Nest
+upk	Blade Barrier
+dr9	Sacred Feathers
+dr7	Griffon Headdress
+dr8	Hunter's Guise
+dr6	Alpha Helm
+dra	Totemic Mask
+ba6	Jawbone Visor
+ba7	Lion Helm
+ba8	Rage Mask
+ba9	Savage Helmet
+baa	Slayer Guard
+pa6	Akaran Targe
+pa7	Akaran Rondache
+pa8	Protector Shield
+pa9	Gilded Shield
+paa	Royal Shield
+ne6	Mummified Trophy
+ne7	Fetish Trophy
+ne8	Sexton Trophy
+ne9	Cantor Trophy
+nea	Hierophant Trophy
+dre	Sky Spirit
+drc	Sun Spirit
+drd	Earth Spirit
+drb	Blood Spirit
+drf	Dream Spirit
+bab	Carnage Helm
+bac	Fury Visor
+bad	Destroyer Helm
+bae	Conqueror Crown
+baf	Guardian Crown
+pab	Sacred Targe
+pac	Sacred Rondache
+pae	Zakarum Shield
+paf	Vortex Shield
+neb	Minion Skull
+nec	Hellspawn Skull
+ned	Overseer Skull
+nee	Succubus Skull
+nef	Bloodlord Skull
+AmaOnly	(Amazon Only)
+SorOnly	(Sorceress Only)
+NecOnly	(Necromancer Only)
+PalOnly	(Paladin Only)
+BarOnly	(Barbarian Only)
+DruOnly	(Druid Only)
+AssOnly	(Assassin Only)
+jew	Jewel
+hrb	Herb
+cm1	Small Charm
+cm2	Large Charm
+cm3	Grand Charm
+Charmdes	Keep in Inventory to Gain Bonus
+ice	Keep it to thaw Anya}Malah's Potion
+r33	Zod Rune
+r32	Cham Rune
+r31	Jo Rune
+r30	Ber Rune
+r29	Sur Rune
+r28	Lo Rune
+r27	Ohm Rune
+r26	Vex Rune
+r25	Gul Rune
+r24	Ist Rune
+r23	Mal Rune
+r22	Um Rune
+r21	Pul Rune
+r20	Lem Rune
+r19	Fal Rune
+r18	Ko Rune
+r17	Lum Rune
+r16	Po Rune
+r15	Hel Rune
+r14	Dol Rune
+r13	Shae Rune
+r12	Sol Rune
+r11	Amn Rune
+r10	Thul Rune
+r09	Ort Rune
+r08	Ral Rune
+r07	Tal Rune
+r06	Ith Rune
+r05	Eth Rune
+r04	Nef Rune
+r03	Tir Rune
+r02	Eld Rune
+r01	El Rune
+r33L	Zod
+r32L	Cham
+r31L	Jo
+r30L	Ber
+r29L	Sur
+r28L	Lo
+r27L	Ohm
+r26L	Vex
+r25L	Gul
+r24L	Ist
+r23L	Mal
+r22L	Um
+r21L	Pul
+r20L	Lem
+r19L	Fal
+r18L	Ko
+r17L	Lum
+r16L	Po
+r15L	Hel
+r14L	Dol
+r13L	Shae
+r12L	Sol
+r11L	Amn
+r10L	Thul
+r09L	Ort
+r08L	Ral
+r07L	Tal
+r06L	Ith
+r05L	Eth
+r04L	Nef
+r03L	Tir
+r02L	Eld
+r01L	El
+RuneQuote	'
+Runeword1	Ancients' Pledge
+Runeword2	Armageddon
+Runeword3	Authority
+Runeword4	Beast
+Runeword5	Beauty
+Runeword6	Black
+Runeword7	Blood
+Runeword8	Bone
+Runeword9	Bramble
+Runeword10	Brand
+Runeword11	Breath of the Dying
+Runeword12	Broken Promise
+Runeword13	Call to Arms
+Runeword14	Chains of Honor
+Runeword15	Chance
+Runeword16	Chaos
+Runeword17	Crescent Moon
+Runeword18	Darkness
+Runeword19	Daylight
+Runeword20	Death
+Runeword21	Deception
+Runeword22	Delerium
+Runeword23	Desire
+Runeword24	Despair
+Runeword25	Destruction
+Runeword26	Doom
+Runeword27	Dragon
+Runeword28	Dread
+Runeword29	Dream
+Runeword30	Duress
+Runeword31	Edge
+Runeword32	Elation
+Runeword33	Enigma
+Runeword34	Enlightenment
+Runeword35	Envy
+Runeword36	Eternity
+Runeword37	Exile
+Runeword38	Faith
+Runeword39	Famine
+Runeword40	Flame
+Runeword41	Fortitude
+Runeword42	Fortune
+Runeword43	Friendship
+Runeword44	Fury
+Runeword45	Gloom
+Runeword46	Glory
+Runeword47	Grief
+Runeword48	Hand of Justice
+Runeword49	Harmony
+Runeword50	Hatred
+Runeword51	Heart of the Oak
+Runeword52	Heaven's Will
+Runeword53	Holy Tears
+Runeword54	Holy Thunder
+Runeword55	Honor
+Runeword56	Revenge
+Runeword57	Humility
+Runeword58	Hunger
+Runeword59	Ice
+Runeword60	Infinity
+Runeword61	Innocence
+Runeword62	Insight
+Runeword63	Jealousy
+Runeword64	Judgement
+Runeword65	King's Grace
+Runeword66	Kingslayer
+Runeword67	Knight's Vigil
+Runeword68	Knowledge
+Runeword69	Last Wish
+Runeword70	Law
+Runeword71	Lawbringer
+Runeword72	Leaf
+Runeword73	Lightning
+Runeword74	Lionheart
+Runeword75	Lore
+Runeword76	Love
+Runeword77	Loyalty
+Runeword78	Lust
+Runeword79	Madness
+Runeword81	Malice
+Runeword82	Melody
+Runeword83	Memory
+Runeword84	Mist
+Runeword85	Morning
+Runeword86	Mystery
+Runeword87	Myth
+Runeword88	Nadir
+Runeword89	Nature's Kingdom
+Runeword90	Night
+Runeword91	Oath
+Runeword92	Obedience
+Runeword93	Oblivion
+Runeword94	Obsession
+Runeword95	Passion
+Runeword96	Patience
+Runeword97	Patter
+Runeword98	Peace
+Runeword99	Voice of Reason
+Runeword100	Penitence
+Runeword101	Peril
+Runeword102	Pestilence
+Runeword103	Phoenix
+Runeword104	Piety
+Runeword105	Pillar of Faith
+Runeword106	Plague
+Runeword107	Praise
+Runeword108	Prayer
+Runeword109	Pride
+Runeword110	Principle
+Runeword111	Prowess in Battle
+Runeword112	Prudence
+Runeword113	Punishment
+Runeword114	Purity
+Runeword115	Question
+Runeword116	Radiance
+Runeword117	Rain
+Runeword118	Reason
+Runeword119	Red
+Runeword120	Rhyme
+Runeword121	Rift
+Runeword122	Sanctuary
+Runeword123	Serendipity
+Runeword124	Shadow
+Runeword125	Shadow of Doubt
+Runeword126	Silence
+Runeword127	Siren's Song
+Runeword128	Smoke
+Runeword129	Sorrow
+Runeword130	Spirit
+Runeword131	Splendor
+Runeword132	Starlight
+Runeword133	Stealth
+Runeword134	Steel
+Runeword135	Still Water
+Runeword136	Sting
+Runeword137	Stone
+Runeword138	Storm
+Runeword139	Strength
+Runeword140	Tempest
+Runeword141	Temptation
+Runeword142	Terror
+Runeword143	Thirst
+Runeword144	Thought
+Runeword145	Thunder
+Runeword146	Time
+Runeword147	Tradition
+Runeword148	Treachery
+Runeword149	Trust
+Runeword150	Truth
+Runeword151	Unbending Will
+Runeword152	Valor
+Runeword153	Vengeance
+Runeword154	Venom
+Runeword155	Victory
+Runeword156	Voice
+Runeword157	Void
+Runeword158	War
+Runeword159	Water
+Runeword160	Wealth
+Runeword161	Whisper
+Runeword162	White
+Runeword163	Wind
+Runeword164	Wings of Hope
+Runeword165	Wisdom
+Runeword166	Woe
+Runeword167	Wonder
+Runeword168	Wrath
+Runeword169	Youth
+Runeword170	Zephyr
+spe	Spleen
+scz	Scalp
+sol	Soul
+qll	Quill
+fng	Fang
+flg	Flag
+tal	Tail
+hrn	Horn
+eyz	Eye
+jaw	Jawbone
+brz	Brain
+hrt	Heart
+Stout	Stout
+Antimagic	Antimagic
+Null	Null
+Godly	Godly
+Ivory	Ivory
+Eburin	Eburine
+Blanched	Blanched
+Stalwart	Stalwart
+Burly	Burly
+Dense	Dense
+Thin	Thin
+Compact	Compact
+Witch-hunter's	Witch-hunter's
+Magekiller's	Magekiller's
+Hierophant's	Hierophant's
+Shaman's	Shaman's
+Pestilent	Pestilent
+Toxic	Toxic
+Corosive	Corrosive
+Envenomed	Foul
+Septic	Septic
+Shocking	Shocking
+Arcing	Arcing
+Buzzing	Buzzing
+Static	Static
+Scorching	Condensing
+Flaming	Flaming
+Smoking	Smoking
+Smoldering	Smoldering
+Ember	Fiery
+Hibernal	Hibernal
+Boreal	Boreal
+Shivering	Shivering
+Snowflake	Snowy
+Mnemonic	Mnemonic
+Visionary	Visionary
+Eagleeye	Eagleeye
+Hawkeye	Hawkeye
+Falconeye	Falconeye
+Sparroweye	Sparroweye
+Robineye	Robineye
+Paradox	Paradox
+Shouting	Howling
+Yelling	Yelling
+Calling	Calling
+Loud	Alarming
+Trump	Fool's
+Joker's	Joker's
+Jester's	Jester's
+Jack's	Jack's
+Knave's	Knave's
+Paleocene	Faithful
+Eocene	Righteous
+Oligocene	Honorable
+Miocene	Enlightened
+Kenshi's	Kenshi's
+Sensei's	Sensei's
+Shogukusha's	Shogukusha's
+Psychic	Psychic
+Mentalist's	Mentalist's
+Cunning	Cunning
+Trickster's	Trickster's
+Entrapping	Entrapping
+Gaea's	Gaean
+Terra's	Terrene
+Nature's	Natural
+Communal	Communal
+Feral	Feral
+Spiritual	Spiritual
+Keeper's	Keeper's
+Caretaker's	Caretaker's
+Trainer's	Trainer's
+Veteran's	Veteran's
+Expert's	Expert's
+Furious	Furious
+Raging	Raging
+Echoing	Echoing
+Resonant	Resonant
+Sounding	Sounding
+Guardian's	Guardian's
+Warder's	Warden's
+Preserver's	Preserver's
+Marshal's	Marshal's
+Commander's	Commander's
+Captain's	Captain's
+Rose Branded	Rose Branded
+Hawk Branded	Hawk Branded
+Lion Branded	Lion Branded
+Golemlord's	Golemlord's
+Vodoun	Mojo
+Graverobber's	Graverobber's
+Venomous	Venomous
+Noxious	Noxious
+Fungal	Fungal
+Accursed	Cursing
+Blighting	Blighting
+Hexing	Hexing
+Glacial	Glacial
+Freezing	Freezing
+Chilling	Chilling
+Powered	Powered
+Charged	Charged
+Sparking	Sparking
+Volcanic	Volcanic
+Blazing	Blazing
+Burning	Burning
+Lancer's	Lancer's
+Spearmaiden's	Spearmaiden's
+Harpoonist's	Harpoonist's
+Athlete's	Athletic
+Gymnast's	Gymnastic
+Acrobat's	Acrobatic
+Bowyer's	Bowyer's
+Diamond	Diamond
+Celestial	Celestial
+Elysian	Elysian
+Astral	Astral
+Unearthly	Unearthly
+Arcadian	Arcadian
+Jeweler's	Jeweler's
+Artificer's	Artisan's
+Mechanist's	Mechanic's
+Aureolin	Aureolic
+Victorious	Victorious
+Ambergris	Ambergris
+Camphor	Camphor
+Lapis Lazuli	Lapis Lazuli
+Chromatic	Chromatic
+Scintillating	Scintillating
+Turquoise	Turquoise
+Jacinth	Jacinth
+Zircon	Zircon
+Bahamut's	Bahamut's
+Great Wyrm's	Great Wyrm's
+Felicitous	Felicitous
+Lucky	Lucky
+Wailing	Wailing
+Screaming	Screaming
+Grandmaster's	Grandmaster's
+Master's	Master's
+Argent	Argent
+Tin	Tin
+Nickel	Nickel
+Maroon	Maroon
+Chestnut	Chestnut
+Vigorous	Vigorous
+Brown	Brown
+Dun	Dun
+Realgar	Realgar
+Rusty	Rusty
+Cinnabar	Cinnabar
+Vermillion	Vermilion
+Carmine	Carmine
+Carbuncle	Carbuncle
+Serrated	Serrated
+Scarlet	Scarlet
+Bloody	Bloody
+Sanguinary	Sanguinary
+Pearl	Pearl
+Divine	Divine
+Hallowed	Hallowed
+Sacred	Sacred
+Pure	Pure
+Consecrated	Consecrated
+Assamic	Lunar
+Frantic	Frantic
+Hellatial	Hellacious
+Quixotic	Quixotic
+Smiting	Smiting
+Steller	Stellar
+Stinging	Stinging
+Singing	Singing
+Timeless	Timeless
+Original	Original
+Corporal	Corporal
+Lawful	Lawful
+Chaotic	Chaotic
+Fierce	Fierce
+Ferocious	Ferocious
+Perpetual	Perpetual
+Continuous	Everlasting
+Laden	Laden
+Pernicious	Pernicious
+Harmful	Harmful
+Evil	Evil
+Insidious	Insidious
+Malicious	Malicious
+Spiteful	Spiteful
+Precocious	Precocious
+Majestic	Majestic
+Sanguine	Sanguine
+Monumental	Monumental
+Irresistible	Irresistible
+Festering	Festering
+Musty	Musty
+Dusty	Dusty
+Decaying	Decaying
+Rotting	Rotting
+Infectious	Infectious
+Foggy	Foggy
+Cloudy	Cloudy
+Hazy	Hazy
+Punishing	Punishing
+Obsidian	Obsidian
+Royal	Royal
+Frigid	Frigid
+Moldy	Moldy
+Gaudy	Gaudy
+Impecable	Impeccable
+Soulless	Soulless
+Heated	Heated
+Lasting	Lasting
+Scorched	Scorched
+Marred	Marred
+Lilac	Lilac
+Rose	Rose
+Shimmering	Shimmering
+Green	Green
+Wicked	Wicked
+Strange	Strange
+Repulsive	Repulsive
+Reclusive	Reclusive
+Crude	Crude
+Rude	Rude
+Hermetic	Hermetic
+Rainbow	Rainbow
+Colorful	Colorful
+Stinky	Odiferous
+Gritty	Grinding
+of Warming	of Warming
+of Stoicism	of Stoicism
+of the Dynamo	of the Dynamo
+of Grounding	of Grounding
+of Insulation	of Insulation
+of Resistance	of Resistance
+of Faith	of Faith
+of Fire Quenching	of Quenching
+of Amianthus	of Amianthus
+of Incombustibility	of Inflammability
+of Coolness	of Coolness
+of Anima	of Amicae
+of Life Everlasting	of Life Everlasting
+of Sunlight	of Sunlight
+of Frozen Orb	of Frozen Orb
+of Hydra Shield	of Hydra Shield
+of Chilling Armor	of Chilling Armor
+of Blizzard	of Blizzard
+of Energy Shield	of Energy Shield
+of Thunder Storm	of Thunder Storm
+of Meteor	of Meteor
+of Glacial Spike	of Glacial Spike
+of Teleport Shield	of Teleport Shield
+of Chain Lightning	of Chain Lightning
+of Enchant	of Enchant
+of Fire Wall	of Fire Wall
+of Shiver Armor	of Shiver Armor
+of Nova Shield	of Nova Shield
+of Nova	of Nova
+of Fire Ball	of Fire Ball
+of Blaze	of Blaze
+of Ice Blast	of Ice Blast
+of Frost Shield	of Frost Shield
+of Telekinesis	of Telekinesis
+of Static Field	of Static Field
+of Frozen Armor	of Frozen Armor
+of Icebolt	of Icebolt
+of Charged Shield	of Charged Bolt
+of Firebolts	of Firebolts
+of the Elements	of the Elements
+of the Cobra	of the Cobra
+of the Efreeti	of the Efreeti
+of the Phoenix	of the Phoenix
+of the Yeti	of the Yeti
+of Grace and Power	of Grace and Power
+of Grace	of Grace
+of Power	of Power
+of the Elephant	of the Elephant
+of Memory	of Memory
+of the Kraken1	of the Kraken
+of Propogation	of Propogation
+of Replenishing	of Replenishing
+of Ages	of Ages
+of Fast Repair	of Restoration
+of Self-Repair	of Self-Repair
+of Acceleration	of Acceleration
+of Traveling	of Transportation
+of Virility	of Virility
+of Atlus	of Atlas
+of Freedom	of Freedom
+of the Lamprey	of the Lamprey
+of Hope	of Hope
+of Spirit	of Spirit
+of Vita	of Vita
+of Substinence	of Sustenance
+of the Whale	of the Whale
+of the Squid	of the Squid
+of the Colossus1	of the Colossus
+of Knowledge	of Knowledge
+of Enlightenment	of Enlightenment
+of Prosperity	of Prosperity
+of Good Luck	of Good Luck
+of Luck	of Luck
+of Avarice	of Avarice
+of Honor	of Honor
+of Revivification	of Revivification
+of Truth	of Truth
+of Daring	of Daring
+of Nirvana	of Nirvana
+of Envy	of Envy
+of Anthrax	of Anthrax
+of Bliss	of Bliss
+of Joy	of Joy
+of Transcendence	of Transcendence
+of Wrath	of Wrath
+of Ire	of Ire
+of Evisceration	of Evisceration
+of Butchery	of Butchery
+of Ennui	of Ennui
+of Storms	of Storms
+of Passion	of Passion
+of Incineration	of Incineration
+of Frigidity	of Frigidity
+of Winter	of Winter
+of the Icicle	of the Icicle
+of Fervor	of Fervor
+of Malice	of Malice
+of Swords	of Swords
+of Razors	of Razors
+of Desire	of Desire
+of the Sirocco	of the Scirocco
+of the Dunes	of the Dunes
+of Thawing	of Thawing
+Of the Choir	Of the Choir
+Of the Sniper	Of the Sniper
+Of the Stiletto	Of the Stiletto
+Of Bile	of Bile
+Of Blitzen	of Blitzen
+Of Cremation	of Cremation
+Of Darkness	of Darkness
+Of Disease	of Disease
+Of Remorse	of Remorse
+Of Terror	of Terror
+Of the Sky	of the Sky
+Of Valhalla	of Valhalla
+Of Waste	of Waste
+Of Nobility	of Nobility
+Of Karma	of Karma
+Of Grounding	of Grounding
+Of the River	of the River
+Of the Lake	of the Lake
+Of the Ocean	of the Ocean
+Of the Bayou	of the Bayou
+Of the Stream	of the Stream
+Of the Lady	of the Lady
+Of the Maiden	Of the Maiden
+Of the Virgin	of the Virgin
+Of the Hag	of the Hag
+Of the Witch	of the Witch
+Of Judgement	of Judgement
+Of Illusion	of Illusion
+Of Elusion	of Eluding
+Of Combat	of Combat
+Of Attrition	of Attrition
+Of Abrasion	of Abrasion
+Of Erosion	of Erosion
+Of Searing	of Searing
+Of Stone	of Stone
+Of Stature	of Stature
+Of Fortication	of Fortification
+Of Quickening	of Quickening
+Of Dispatch	of Dispatch
+Of Daring	of Daring
+Of Dread	of Dread
+Of Suffering	of Suffering
+Of Doom	of Doom
+Of Vengence	of Vengence
+Of Redemption	of Redemption
+Of Luck	of Luck
+Of the Avenger	of the Avenger
+Of the Specter	of the Specter
+Of the Ghost	of the Ghost
+Of the Infantry	of the Infantry
+Of the Mosquito	of the Mosquito
+Of the Gnat	of the Gnat
+Of the Fly	of the Fly
+Of the Plague	of the Plague
+Of Twilight	of Twilight
+Of Dusk	of Dusk
+Of Dawn	of Dawn
+Of the Imbecile	of the Imbecile
+Of the Idiot	of the Idiot
+Of the Retard	of the Moron
+Of the Jujube	of the Jujube
+Of the Obscenity	of the Obscene
+Of Quota	of the Quota
+Of the Maggot	of Maggots
+Of Horror	of Horror
+Of Baddass	of the Abyss
+Of the Beast	of the Beast
+Of Cruelty	of Cruelty
+Of Badness	of Badness
+Of the Horde	of the Horde
+Of the Forest	of the Forest
+Of the Lilly	of the Lilly
+Of the Grassy Gnoll	of the Grassy Gnoll
+Of the Stars	of the Stars
+Of the Moon	of the Moon
+Of Love	of Love
+Of the Unicorn	of the Unicorn
+Of the Walrus	of the Walrus
+Of the Earth	of the Earth
+Of Vines	of Vines
+Of Honor	of Honor
+Of Tribute	of Tribute
+Of Credit	of Credit
+Of Admiration	of Admiration
+Of Sweetness	of Sweetness
+Of Beauty	of Beauty
+Of Pilfering	of Pilfering
+of Damage Amplification	of Amplify Damage
+of Hurricane	of Hurricane
+of Armageddon	of Armageddon
+of Tornado	of Tornado
+of Volcano	of Volcano
+of Twister	of Twister
+of Cyclone Armor	of Cyclone Armor
+of Eruption	of Fissure
+of Molten Boulders	of Molten Boulder
+of Firestorms	of Firestorms
+of Battle Command	of Battle Command
+of War Cry	of War Cry
+of Grim Ward	of Grim Ward
+of Battle Orders	of Battle Orders
+of Battle Cry	of Battle Cry
+of Concentration	of Concentration
+of Item Finding	of Find Item
+of Stunning	of Stun
+of Shouting	of Shout
+of Taunting	of Taunt
+of Potion Finding	of Find Potion
+of Howling	of Howl
+of Fist of the Heavens	of Fist of the Heavens
+of Holy Shield	of Holy Shield
+of Conversion	of Conversion
+of Blessed Hammers	of Blessed Hammer
+of Vengeance	of Vengeance
+of Charging	of Charge
+of Zeal	of Zeal
+of Holy Bolts	of Holy Bolt
+of Sacrifice	of Sacrifice
+of Fire Golem Summoning	of Fire Golem
+of Bone Spirits	of Bone Spirit
+of Poison Novas	of Poison Nova
+of Lower Resistance	of Lower Resistance
+of Iron Golem Creation	of Iron Golem
+of Bone Imprisonment	of Bone Prison
+of Decrepification	of Decrepify
+of Attraction	of Attract
+of Blood Golem Summoning	of Blood Golem
+of Bone Spears	of Bone Spear
+of Poison Explosion	of Poison Explosion
+of Life Tap	of Life Tap
+of Confusion	of Confusion
+of Raise Skeletal Mages	of Skeletal Mages
+of Bone Walls	of Bone Wall
+of Terror	of Terror
+of Iron Maiden	of Iron Maiden
+of Clay Golem Summoning	of Clay Golem
+of Corpse Explosions	of Corpse Explosion
+of Poison Dagger	of Poison Dagger
+of Weaken	of Weaken
+of Dim Vision	of Dim Vision
+of Raise Skeletons	of Raise Skeleton
+of Bone Armor	of Bone Armor
+of Teeth	of Teeth
+of Amplify Damage	of Amplify Damage
+of Frozen Orbs	of Frozen Orb
+of Hydras	of Hydra
+of Blizzards	of Blizzard
+of Meteors	of Meteor
+of Glacial Spikes	of Glacial Spike
+of Teleportation	of Teleportation
+of Enchantment	of Enchantment
+of Fire Walls	of Fire Wall
+of Novas	of Nova
+of Fire Balls	of Fire Ball
+of Blazing	of Blazing
+of Ice Blasts	of Ice Blast
+of Frost Novas	of Frost Nova
+of Ice Bolts	of Ice Bolt
+of Charged Bolts	of Charged Bolt
+of Fire Bolts	of Fire Bolt
+of Lightning Fury	of Lightning Fury
+of Lightning Spear	of Lightning Spear
+of Freezing Arrows	of Freezing Arrow
+of Fending	of Fending
+of Immolating Arrows	of Immolating Arrow
+of Plague Javelin	of Plague Javelin
+of Charged Spear	of Charged Spear
+of Guided Arrows	of Guided Arrow
+of Ice Arrows	of Ice Arrow
+of Lightning Javelin	of Lightning Javelin
+of Impaling Spear	of Impaling Spear
+of Slow Missiles	of Slow Missile
+of Exploding Arrows	of Exploding Arrow
+of Poison Javelin	of Poison Javelin
+of Power Spear	of Power Spear
+of Multiple Shot	of Multiple Shot
+of Cold Arrows	of Cold Arrow
+of Jabbing	of Jab
+of Inner Sight	of Inner Sight
+of Fire Arrows	of Fire Arrow
+of Magic Arrows	of Magic Arrow
+Of self-repair	Self-Repair
+of Dawn	of Dawn
+of Inertia	of Inertia
+of Joyfulness	of Joyfulness
+ModStre8a	to Druid Skills
+ModStre8b	to Assassin Skills
+ModStre8c	 Sockets
+ModStre8d	 to Attack Rating vs. Demons
+ModStre8e	 to Attack Rating vs. Undead
+ModStre8f	 to Damage vs. Demons
+ModStre8g	 percent to Attack Rating
+ModStre8h	 to Javelin and Spear Skills
+ModStre8i	 to Passive and Magic Skills
+ModStre8j	 to Bow and Crossbow Skills
+ModStre8k	 to Defensive Aura Skills
+ModStre8l	 to Offensive Aura Skills
+ModStre8m	 to Combat Skills
+ModStre8n	 to Summoning Skills
+ModStre8o	 to Poison and Bone Skills
+ModStre8p	 to Curses
+ModStre8q	 to Warcry Skills
+ModStre8r	 to Combat Skills
+ModStre8s	 to Masteries Skills
+ModStre8t	 to Cold Skills
+ModStre8u	 to Lightning Skills
+ModStre8v	 to Fire Skills
+ModStre8w	 to Summoning Skills
+ModStre8x	 to Shape-Shifting Skills
+ModStre8y	 to Elemental Skills
+ModStre8z	 to Trap Skills
+ModStre9a	 to Shadow Discipline Skills
+ModStre9b	 to Martial Art Skills
+ModStre9c	(Based on Character Level)
+ModStre9d	(Increases During Nighttime)
+ModStre9e	(Increases During Daytime)
+ModStre9f	(Increases Near Dawn)
+ModStre9g	(Increases Near Dusk)
+ModStre9h	 Charges of
+ModStre9i	Increased Stack Size
+ModStre9s	Indestructible
+ModStre9t	Repairs %d durability per second
+ModStre9u	Repairs %d durability in %d seconds
+ModStre9v	Replenishes quantity
+ModStre9w	Cast a Level %d
+ModStre9x	When You Swing
+ModStre9y	When You Get Hit
+ModStre9z	When You Hit an Enemy
+ModStre10a	Charges
+ModStre10b	Level
+ModStre10c	Per Level
+ModStre10d	(%d/%d Charges)
+ModStre10e	(
+ModStre10f	)
+ModStre10g	Stealth
+ModStre10h	Immunity to Poison
+ModStre10i	Cursed
+ModStre10j	Per Player in Party
+WeaponDescH2H	Claw Class
+WeaponDescOrb	Orb Class
+ItemexpED	 Elemental Damage
+StrGemX1	Helms:
+StrGemX2	Shields:
+StrGemX3	Weapons:
+StrGemX4	Armor:
+GemeffectX11	Adds to Strength
+GemeffectX12	Adds to Defense Rating
+GemeffectX13	Adds to Attack Rating
+GemeffectX21	Adds to Maximum Mana
+GemeffectX22	Adds Resistance to Cold
+GemeffectX23	Adds Cold Damage to Attack
+GemeffectX31	Adds to Dexterity
+GemeffectX32	Adds Resistance to Poison
+GemeffectX33	Adds Poison Damage to Attack
+GemeffectX41	Adds to Maximum Life
+GemeffectX42	Adds Resistance to Fire
+GemeffectX43	Adds Fire Damage to Attack
+GemeffectX51	Adds to Attack Rating
+GemeffectX52	Adds to All Resistances
+GemeffectX53	Adds to Damage vs. Undead
+GemeffectX61	Adds to Chance to Find Magic Items
+GemeffectX62	Adds Resistance to Lightning
+GemeffectX63	Adds Lightning Damage to Attack
+GemeffectX71	Adds Mana and Life Regeneration
+GemeffectX72	Adds Attacker Takes Damage
+GemeffectX73	Adds Mana and Life Steal to Attack
+Coldkill	Coldkill
+Butchers Cleaver	Butcher's Cleaver
+Butcher's Pupil	Butcher's Pupil
+Islestrike	Islestrike
+Pompe's Wrath	Pompeii's Wrath
+Guardian Naga	Guardian Naga
+Warlord's Trust	Warlord's Trust
+Spellsteel	Spellsteel
+Stormrider	Stormrider
+Boneslayer Blade	Boneslayer Blade
+The Minotaur	The Minotaur
+Suicide Branch	Suicide Branch
+Cairn Shard	Cairn Shard
+Arm of King Leoric	Arm of King Leoric
+Blackhand Key	Blackhand Key
+Dark Clan Crusher	Dark Clan Crusher
+Drulan's Tongue	Drulan's Tongue
+Zakrum's Hand	Zakarum's Hand
+The Fetid Sprinkler	The Fetid Sprinkler
+Hand of Blessed Light	Hand of Blessed Light
+Fleshrender	Fleshrender
+Sureshrill Frost	Sureshrill Frost
+Moonfall	Moonfall
+Baezils Vortex	Baezil's Vortex
+Earthshaker	Earthshaker
+Bloodtree Stump	Bloodtree Stump
+The Gavel of Pain	The Gavel of Pain
+Bloodletter	Bloodletter
+Coldsteal Eye	Coldsteal Eye
+Hexfire	Hexfire
+Blade of Ali Baba	Blade of Ali Baba
+Riftslash	Riftslash
+Headstriker	Headstriker
+Plague Bearer	Plague Bearer
+The Atlantien	The Atlantean
+Crainte Vomir	Crainte Vomir
+Bing Sz Wang	Bing Sz Wang
+The Vile Husk	The Vile Husk
+Cloudcrack	Cloudcrack
+Todesfaelle Flamme	Todesfaelle Flamme
+Swordguard	Swordguard
+Spineripper	Spineripper
+Heart Carver	Heart Carver
+Blackbog's Sharp	Blackbog's Sharp
+Stormspike	Stormspike
+The Impaler	The Impaler
+Kelpie Snare	Kelpie Snare
+Soulfeast Tine	Soulfeast Tine
+Hone Sundan	Hone Sundan
+Spire of Honor	Spire of Honor
+The Meat Scraper	The Meat Scraper
+Blackleach Blade	Blackleach Blade
+Athena's Wrath	Athena's Wrath
+Pierre Tombale Couant	Pierre Tombale Couant
+Husoldal Evo	Husoldal Evo
+Grim's Burning Dead	Grim's Burning Dead
+Ribcracker	Ribcracker
+Chromatic Ire	Chromatic Ire
+Warpspear	Warpspear
+Skullcollector	Skull Collector
+Skystrike	Skystrike
+Kuko Shakaku	Kuko Shakaku
+Endlessshail	Endlesshail
+Whichwild String	Whichwild String
+Godstrike Arch	Goldstrike Arch
+Langer Briser	Langer Briser
+Pus Spiter	Pus Spitter
+Buriza-Do Kyanon	Buriza-Do Kyanon
+Vampiregaze	Vampire Gaze
+String of Ears	String of Ears
+Gorerider	Gore Rider
+Lavagout	Lava Gout
+Venom Grip	Venom Grip
+Visceratuant	Visceratuant
+Guardian Angle	Guardian Angel
+Shaftstop	Shaftstop
+Skin of the Vipermagi	Skin of the Vipermagi
+Blackhorn	Blackhorn
+Valkiry Wing	Valkyrie Wing
+Peasent Crown	Peasant Crown
+Demon Machine	Demon Machine
+Magewrath	Magewrath
+Cliffkiller	Cliffkiller
+Riphook	Riphook
+Razorswitch	Razorswitch
+Meatscrape	Meatscrape
+Coldsteel Eye	Coldsteel Eye
+Pitblood Thirst	Pitblood Thirst
+Gaya Wand	Gaya Wand
+Ondal's Wisdom	Ondal's Wisdom
+Geronimo's Fury	Geronimo's Fury
+Charsi's Favor	Charsi's Favor
+Doppleganger's Shadow	Doppleganger's Shadow
+Deathbit	Deathbit
+Warshrike	Warshrike
+Gutsiphon	Gut Siphon
+Razoredge	Razor's Edge
+Stonerattle	Stone Rattle
+Marrowgrinder	Marrow Grinder
+Gore Ripper	Gore Ripper
+Bush Wacker	Bush Wacker
+Demonlimb	Demon Limb
+Steelshade	Steel Shade
+Tomb Reaver	Tomb Reaver
+Death's Web	Death's Web
+Gaia's Wrath	Gaia's Wrath
+Khalim's Vengance	Khalim's Vengeance
+Angel's Song	Angel's Song
+The Reedeemer	The Redeemer
+Fleshbone	Fleshbone
+Odium	Odium
+Blood Comet	Blood Comet
+Bonehew	Bonehew
+Steelrend	Steelrend
+Stone Crusher	Stone Crusher
+Bul-Kathos' Might	Bul-Kathos' Might
+Arioc's Needle	Arioc's Needle
+Shadowdancer	Shadow Dancer
+Indiego's Fancy	Indiego's Fancy
+Aladdin's Eviserator	Aladdin's Eviscerator
+Tyrael's Mercy	Tyrael's Mercy
+Souldrain	Soul Drainer
+Runemaster	Rune Master
+Deathcleaver	Death Cleaver
+Executioner's Justice	Executioner's Justice
+Wallace's Tear	Wallace's Tear
+Leviathan	Leviathan
+The Wanderer's Blade	The Wanderer's Blade
+Qual'Kek's Enforcer	Qual-Khek's Enforcer
+Dawnbringer	Dawn Bringer
+Dragontooth	Dragontooth
+Wisp	Wisp Projector
+Gargoyle's Bite	Gargoyle's Bite
+Lacerator	Lacerator
+Mang Song's Lesson	Mang Song's Lesson
+Viperfork	Viperfork
+Blood Chalice	Blood Chalice
+El Espiritu	El Espiritu
+The Long Rod	The Longest Rod
+Demonhorn's Edge	Demonhorn's Edge
+The Ensanguinator	The Ensanguinator
+The Reaper's Toll	The Reaper's Toll
+Spiritkeeper	Spirit Keeper
+Hellrack	Hellrack
+Alma Negra	Alma Negra
+Darkforge Spawn	Darkforce Spawn
+Rockhew	Rockhew
+Sankenkur's Resurrection	Sankekur's Resurrection
+Erion's Bonehandle	Erion's Bonehandle
+The Archon Magus	The Achron Magus
+Widow maker	Widowmaker
+Catgut	Catgut
+Ghostflame	Ghostflame
+Shadowkiller	Shadow Killer
+Bling Bling	Bling Bling
+Nebucaneezer's Storm	Nebuchadnezzar's Storm
+Griffon's Eye	Griffon's Eye
+Eaglewind	Eaglewind
+Windhammer	Windhammer
+Thunderstroke	Thunderstroke
+Giantmaimer	Giant Maimer
+Demon's Arch	Demon's Arch
+The Scalper	The Scalper
+Bloodmoon	Bloodmoon
+Djinnslayer	Djinn Slayer
+Cranebeak	Cranebeak
+Iansang's Frenzy	Iansang's Frenzy
+Warhound	Warhound
+Gulletwound	Gulletwound
+Headhunter's Glory	Head Hunter's Glory
+Mordoc's marauder	Mordoc's Marauder
+Talberd's Law	Talberd's Law
+Amodeus's Manipulator	Amodeus' Manipulator
+Darksoul	Darksoul
+The Black Adder	The Black Adder
+Earthshifter	Earth Shifter
+Nature's Peace	Nature's Peace
+Horazon's Chalice	Horazon's Chalice
+Seraph's Hymn	Seraph's Hymn
+Zakarum's Salvation	Zakarum's Salvation
+Fleshripper	Fleshripper
+Stonerage	Stonerage
+Blood Rain	Blood Rain
+Horizon's Tornado	Horizon's Tornado
+Nord's Tenderizer	Nord's Tenderizer
+Wrath of Cain	Wrath of Cain
+Siren's call	Siren's Call
+Jadetalon	Jade Talon
+Wraithfang	Wraithfang
+Blademaster	Blade Master
+Cerebus	Cerebus' Bite
+Archangel's Deliverance	Arch-angel's Deliverance
+Sinblade	Sinblade
+Runeslayer	Rune Slayer
+Excalibur	Excalibur
+Fuego Del Sol	Fuego Del Sol
+Stoneraven	Stoneraven
+El Infierno	El Infierno
+Moonrend	Moonrend
+Larzuk's Champion	Larzuk's Champion
+Nightsummon	Nightsummon
+Bonescapel	Bonescalpel
+Rabbit Slayer	Rabbit Slayer
+Pagan's Athame	Pagan's Athame
+The Swashbuckler	The Swashbuckler
+Kang's Virtue	Kang's Virtue
+Snaketongue	Snake Tongue
+Lifechoke	Lifechoke
+Ethereal edge	Ethereal Edge
+Palo Grande	Palo Grande
+Carnageleaver	Carnage Leaver
+Ghostleach	Ghost Leach
+Soulreaper	Soul Reaper
+Samual's Caretaker	Samuel's Caretaker
+Hell's Whisper	Hell Whisper
+The Harvester	The Harvester
+Raiden's Crutch	Raiden's Crutch
+The TreeEnt	The Treentster
+Stormwillow	Stormwillow
+Moonshadow	Moon Shadow
+Strongoak	Strong Oak
+Demonweb	Demonweb
+Bloodraven's Charge	Blood Raven's Charge
+Shadefalcon	Shade Falcon
+Robin's Yolk	Robin's Yolk
+Glimmershred	Glimmershred
+Wraithflight	Wraith Flight
+Lestron's Mark	Lestron's Mark
+Banshee's Wail	Banshee's Wail
+Windstrike	Windstrike
+Medusa's Gaze	Medusa's Gaze
+Titanfist	Titan's Fist
+Hadeshorn	Hadeshorn
+Rockstopper	Rockstopper
+Stealskull	Stealskull
+Darksight Helm	Darksight Helm
+Crown of Thieves	Crown of Thieves
+Blackhorn's Face	Blackhorn's Face
+The Spirit Shroud	The Spirit Shroud
+Skin of the Flayed One	Skin of Flayed One
+Ironpelt	Iron Pelt
+Spiritforge	Spirit Forge
+Crow Caw	Crow Caw
+Duriel's Shell	Duriel's Shell
+Skullder's Ire	Skullder's Ire
+Toothrow	Toothrow
+Atma's Wail	Atma's Wail
+Black Hades	Black Hades
+Corpsemourn	Corpsemourn
+Que-hegan's Wisdom	Que-Hegan's Wisdom
+Moser's Blessed Circle	Moser's Blessed Circle
+Stormchaser	Stormchaser
+Tiamat's Rebuke	Tiamat's Rebuke
+Gerke's Sanctuary	Gerke's Sanctuary
+Radimant's Sphere	Radament's Sphere
+Gravepalm	Gravepalm
+Ghoulhide	Ghoulhide
+Hellmouth	Hellmouth
+Infernostride	Infernostride
+Waterwalk	Waterwalk
+Silkweave	Silkweave
+Wartraveler	War Traveler
+Razortail	Razortail
+Gloomstrap	Gloom's Trap
+Snowclash	Snowclash
+Thudergod's Vigor	Thundergod's Vigor
+Lidless Wall	Lidless Wall
+Lanceguard	Lance Guard
+Squire's Cover	Squire's Cover
+Boneflame	Boneflame
+Steelpillar	Steel Pillar
+Nightwing's Veil	Nightwing's Veil
+Hightower's Watch	Hightower's Watch
+Crown of Ages	Crown of Ages
+Andariel's Visage	Andariel's Visage
+Darkfear	Darkfear
+Dragonscale	Dragonscale
+Steel Carapice	Steel Carapace
+Ashrera's Wired Frame	Asheara's Wired Frame
+Rainbow Facet	Rainbow Facet
+Ravenlore	Ravenlore
+Boneshade	Boneshade
+Nethercrow	Nethercrow
+Hellwarden's Husk	Hell Warden's Husk
+Flamebellow	Flamebellow
+Fathom	Death's Fathom
+Wolfhowl	Wolfhowl
+Spirit Ward	Spirit Ward
+Kira's Guardian	Kira's Guardian
+Orumus' Robes	Ormus' Robe
+Gheed's Fortune	Gheed's Fortune
+The Vicar	The Vicar
+Stormlash	Stormlash
+Halaberd's Reign	Halaberd's Reign
+Parkersor's Calm	Parkersor's Calm
+Warriv's Warder	Warriv's Warder
+Spike Thorn	Spike Thorn
+Dracul's Grasp	Dracul's Grasp
+Frostwind	Frostwind
+Templar's Might	Templar's Might
+Eschuta's temper	Eschuta's Temper
+Firelizard's Talons	Firelizard's Talons
+Sandstorm Trek	Sandstorm Trek
+Marrowwalk	Marrowwalk
+Heaven's Light	Heaven's Light
+Merman's Speed	Merman's Sprocket
+Arachnid Mesh	Arachnid Mesh
+Nosferatu's Coil	Nosferatu's Coil
+Metalgird	Metalite's Girth
+Verdugo's Hearty Cord	Verdungo's Hearty Cord
+Sigurd's Staunch	Siggard's Stealth
+Carrion Wind	Carrion Wind
+Giantskull	Giant Skull
+Ironward	Astreon's Iron Ward
+Gillian's Brazier	Gillian's Brazier
+Drakeflame	Drakeflame
+Dust Storm	Dust Storm
+Skulltred	Skulltred
+Alma's Reflection	Alma's Reflection
+Drulan's Tounge	Drulan's Tongue
+Sacred Charge	Sacred Charge
+Bul-Kathos	Bul-Kathos
+Saracen's Chance	Saracen's Chance
+Highlord's Wrath	Highlord's Wrath
+Raven Frost	Raven Frost
+Dwarf Star	Dwarf Star
+Atma's Scarab	Atma's Scarab
+Mara's Kaleidoscope	Mara's Kaleidoscope
+Crescent Moon	Crescent Moon
+The Rising Sun	The Rising Sun
+The Cat's Eye	The Cat's Eye
+Bul Katho's Wedding Band	Bul-Kathos' Wedding Band
+Rings	Rings
+Metalgrid	Metalgrid
+Eschuta's temper	Eschuta's Temper
+Stormshield	Stormshield
+Blackoak Shield	Blackoak Shield
+Ormus' Robes	Ormus' Robes
+Arkaine's Valor	Arkaine's Valor
+The Gladiator's Bane	The Gladiator's Bane
+Veil of Steel	Veil of Steel
+Harlequin Crest	Harlequin Crest
+Lance Guard	Lance Guard
+Kerke's Sanctuary	Gerke's Sanctuary
+Mosers Blessed Circle	Moser's Blessed Circle
+Que-Hegan's Wisdon	Que-Hegan's Wisdom
+Guardian Angel	Guardian Angel
+Skin of the Flayerd One	Skin of the Flayed One
+Armor	Armor
+Windforce	Windforce
+Eaglehorn	Eaglehorn
+Gimmershred	Gimmershred
+Widowmaker	Widowmaker
+Stormspire	Stormspire
+Naj's Puzzler	Naj's Puzzler
+Ethereal Edge	Ethereal Edge
+Wizardspike	Wizardspike
+The Grandfather	The Grandfather
+Doombringer	Doombringer
+Tyrael's Might	Tyrael's Might
+Lightsabre	Lightsabre
+The Cranium Basher	The Cranium Basher
+Schaefer's Hammer	Schaefer's Hammer
+Baranar's Star	Baranar's Star
+Deaths's Web	Death's Web
+Messerschmidt's Reaver	Messerschmidt's Reaver
+Hellslayer	Hellslayer
+Endlesshail	Endlesshail
+The Atlantian	The Atlantean
+Riftlash	Riftlash
+Baezil's Vortex	Baezil's Vortex
+Zakarum's Hand	Zakarum's Hand
+Carin Shard	Carin Shard
+The Minataur	The Minotaur
+Trang-Oul's Avatar	Trang-Oul's Avatar
+Trang-Oul's Guise	Trang-Oul's Guise
+Trang-Oul's Wing	Trang-Oul's Wing
+Trang-Oul's Mask	Trang-Oul's Mask
+Trang-Oul's Scales	Trang-Oul's Scales
+Trang-Oul's Claws	Trang-Oul's Claws
+Trang-Oul's Girth	Trang-Oul's Girth
+Natalya's Odium	Natalya's Odium
+Natalya's Totem	Natalya's Totem
+Natalya's Mark	Natalya's Mark
+Natalya's Shadow	Natalya's Shadow
+Natalya's Soul	Natalya's Soul
+Griswold's Legacy	Griswold's Legacy
+Griswolds's Redemption	Griswold's Redemption
+Griswold's Honor	Griswold's Honor
+Griswold's Heart	Griswold's Heart
+Griswold's Valor	Griswold's Valor
+Tang's Imperial Robes	Tang's Imperial Robes
+Tang's Fore-Fathers	Tang's Fore-Fathers
+Tang's Rule	Tang's Rule
+Tang's Throne	Tang's Throne
+Tang's Battle Standard	Tang's Battle Standard
+Ogun's Fierce Visage	Ogun's Fierce Visage
+Ogun's Shadow	Ogun's Shadow
+Ogun's Lash	Ogun's Lash
+Ogun's Vengeance	Ogun's Vengeance
+Bul-Kathos' Warden	Bul-Kathos' Warden
+Bul-Kathos' Children	Bul-Kathos' Children
+Bul-Kathos' Sacred Charge	Bul-Kathos' Sacred Charge
+Bul-Kathos' Tribal Guardian	Bul-Kathos' Tribal Guardian
+Bul-Kathos' Custodian	Bul-Kathos' Custodian
+Flowkrad's Howl	Flowkrad's Howl
+Flowkrad's Grin	Flowkrad's Grin
+Flowkrad's Fur	Flowkrad's Fur
+Flowkrad's Paws	Flowkrad's Paws
+Flowkrad's Sinew	Flowkrad's Sinew
+Aldur's Watchtower	Aldur's Watchtower
+Aldur's Stony Gaze	Aldur's Stony Gaze
+Aldur's Deception	Aldur's Deception
+Aldur's Guantlet	Aldur's Gauntlet
+Aldur's Advance	Aldur's Advance
+M'avina's Battle Hymn	M'avina's Battle Hymn
+M'avina's True Sight	M'avina's True Sight
+M'avina's Embrace	M'avina's Embrace
+M'avina's Icy Clutch	M'avina's Icy Clutch
+M'avina's Tenet	M'avina's Tenet
+M'avina's Caster	M'avina's Caster
+Sazabi's Grand Tribute	Sazabi's Grand Tribute
+Sazabi's Cobalt Redeemer	Sazabi's Cobalt Redeemer
+Sazabi's Ghost Liberator	Sazabi's Ghost Liberator
+Sazabi's Mental Sheath	Sazabi's Mental Sheath
+Hwanin's Majesty	Hwanin's Majesty
+Hwanin's Justice	Hwanin's Justice
+Hwanin's Splendor	Hwanin's Splendor
+Hwanin's Refuge	Hwanin's Refuge
+Hwanin's Cordon	Hwanin's Cordon
+The Disciple	The Disciple
+Telling of Beads	Telling of Beads
+Laying of Hands	Laying of Hands
+Rite of Passage	Rite of Passage
+Spiritual Custodian	Dark Adherent
+Credendum	Credendum
+Cow King's Leathers	Cow King's Leathers
+Cow King's Horns	Cow King's Horns
+Cow King's Hide	Cow King's Hide
+Cow King's Hoofs	Cow King's Hooves
+Aragon's Masterpiece	Aragon's Masterpiece
+Aragon's Sunfire	Aragon's Sunfire
+Aragon's Icy Stare	Aragon's Icy Stare
+Aragon's Storm Cloud	Aragon's Storm Cloud
+Orphan's Call	Orphan's Call
+Guillaume's Face	Guillaume's Face
+Willhelm's Pride	Willhelm's Pride
+Magnus' Skin	Magnus' Skin
+Wihtstan's Guard	Whitstan's Guard
+Titan's Revenge	Titan's Revenge
+Shakabra's Crux	Shakabra's Crux
+Lycander's Aim	Lycander's Aim
+Shadow's Touch	Shadow Touch
+The Prowler	The Prowler
+Mortal Crescent	Mortal Crescent
+Cutthroat	Bartuc's Chop Chop
+Sarmichian Justice	Samurai Justice
+Annihilus	Annihilus
+Arreat's Face	Arreat's Face
+The Harbinger	The Harbinger
+Doomseer	Doomseer
+Howling Visage	Howling Visage
+Terra	Terra's Guardian
+Syrian	Triad's Foliage
+Jalal's Mane	Jalal's Mane
+Malignant	Malignant Skull
+Apothecary's Tote	Apothecary's Tote
+Apocrypha	Apocrypha
+Foci of Visjerei	Foci of the Vizjerei
+Homunculus	Homunculus
+Aurora's Guard	Aurora's Guard
+Crest of Morn	Crest of Morn
+Herald of Zakarum	Herald of Zakarum
+Akarat's Protector	Akarat's Protector
+Ancient Eye	Ancient Eye
+Globe of Visjerei	Globe of the Vizjerei
+The Oculus	The Oculus
+Phoenix Egg	Phoenix Egg
+Xenos	Xenos
+Nagas	Nagas
+Wyvern's Head	Wyvern's Head
+Sightless Veil	Sightless Veil
+ChampionFormatX	%0 %1
+EskillKickSing	 Kick
+EskillKickPlur	 Kicks
+EskillPetLife	Pet Life: 
+EskillWolfDef	Wolf Defense: 
+EskillPassiveFeral	Passive Bonus to Wolves and Bears
+Eskillperhit12	 per hit
+Eskillincasehit	 hit
+Eskillincasemastery	%d Percent Chance of Critical Strike
+Eskillincaseraven	Mana Cost Per Raven: 
+ob5	Jared's Stone
+pad	Kurast Shield
+axf	Hatchet Hands
+Eskillkickdamage	Kick Damage: 
+ModStre10k	Kick Damage:
+ModStre10L	Percent Chance to Cast
+Class Specific	Class-specific
+fana	Frozen Anya
+qsta5q14	Larzuk will add sockets to the item of your choice.
+qstsa5q42a	Find Nihlathak in the Halls of Vaught.
+qstsa5q31a	Rescue Anya.
+qstsa5q21a	Free the soldiers from their prison and lead them back to town.
+qstsa5q43a	Anya will personalize an item for you.
+qstsa5q62a	Kill Baal in the Worldstone Chamber before he corrupts it.
+qstsa5q61a	Find Baal's Throne Room.
+x	Unable to enter game. Your character must kill Baal in Nightmare difficulty to play in a Hell game.
+x	Unable to enter game. Your character must kill Baal to play in a Nightmare game.
+x	CREATE NEW
+x	CHARACTER
+act1X	THE SISTER'S LAMENT
+act2X	DESERT JOURNEY
+act3X	MEPHISTO'S JUNGLE
+act4X	ENTER HELL
+strepilogueX	TERROR'S END
+act5X	SEARCH FOR BAAL
+strlastcinematic	DESTRUCTION'S END
+CfgSay7	Say 'Retreat'
+0sc	Scroll of Knowledge
+tr2	Right Click to Cast}Scroll of Resistance
+of Lightning Strike	of Lightning Strike
+of Plague Jab	of Plague Jab
+of Charged Strike	of Charged Strike
+of Impaling Strike	of Impaling Strike
+of Poison Jab	of Poison Jab
+of Power Strike	of Power Strike
+of the Colossus	of the Gargantuan
+of the Kraken	of the Centaur
+Tal Rasha's Wrappings	Tal Rasha's Wrappings
+Tal Rasha's Fire-Spun Cloth	Tal Rasha's Fine-Spun Cloth
+Tal Rasha's Adjudication	Tal Rasha's Adjudication
+Tal Rasha's Howling Wind	Tal Rasha's Guardianship
+Tal Rasha's Lidless Eye	Tal Rasha's Lidless Eye
+Tal Rasha's Horadric Crest	Tal Rasha's Horadric Crest
+Hwanin's Seal	Hwanin's Blessing
+Heaven's Brethren	Heaven's Brethren
+Dangoon's Teaching	Dangoon's Teaching
+Ondal's Almighty	Ondal's Almighty
+Heaven's Taebaek	Taebaek's Glory
+Haemosu's Adament	Haemosu's Adamant
+Lycander's Flank	Lycander's Flank
+Constricting Ring	Constricting Ring
+Ginther's Rift	Ginther's Rift
+Naj's Ancient Set	Naj's Ancient Vestige
+Naj's Light Plate	Naj's Light Plate
+Naj's Circlet	Naj's Circlet
+Sander's Superstition	McAuley's Superstition
+Sander's Taboo	McAuley's Taboo
+Sander's Basis	McAuley's Basis
+Sander's Derby	McAuley's Pledge
+Sander's Court Jester	McAuley's Folly
+Ghost Liberator	Ghost Liberator
+Wilhelm's Pride	Wilhelm's Pride
+Immortal King's Stone Crusher	Immortal King's Stone Crusher
+Immortal King's Pillar	Immortal King's Pillar
+Immortal King's Forge	Immortal King's Forge
+Immortal King's Detail	Immortal King's Detail
+Immortal King's Soul Cage 	Immortal King's Soul Cage
+Immortal King's Will	Immortal King's Will
+Immortal King	Immortal King
+Aldur's Gauntlet	Aldur's Rhythm
+Ancient Statue 3	Korlic the Protector
+Ancient Statue 2	Madawc the Guardian
+Ancient Statue 1	Talic the Defender
+Baal Subject 1	Colenzo the Annihilator
+Baal Subject 2	Achmel the Cursed
+Baal Subject 3	Bartuc the Bloody
+Baal Subject 4	Ventar the Unholy
+Baal Subject 5	Lister the Tormentor
+Baal Subject 6	The Butcher
+Baal Subject 6a	The Baker
+Baal Subject 6b	The Candlestick Maker
+Baal Crab Clone	Baal
+Baal Crab to Stairs	Baal
+BaalColdMage	Death Mage
+Baal Subject Mummy	Unraveler
+Baal Tentacle	Festering Appendages
+Baals Minion	Minion of Destruction
+Hell1	Abaddon
+Hell2	Pit of Acheron
+Hell3	Infernal Pit
+To Hell1	To Abaddon
+To Hell2	To The Pit of Acheron
+To Hell3	To The Infernal Pit
+Lord of Destruction	
+x	Unable to access file. Cannot convert character.
+EskillPerBlade	 per blade
+ExInsertSockets	Can be Inserted into Socketed Items
+McAuley's Superstition	Sander's Superstition
+McAuley's Taboo	Sander's Taboo
+McAuley's Riprap	Sander's Riprap
+McAuley's Paragon	Sander's Paragon
+McAuley's Folly	Sander's Folly
+x	Expansion Disc
+qstsa5q62b	Kill Baal's Minions.
+x	© Copyright 2001 Blizzard Entertainment
+of the Plague	of the Plague
+Go South	return to hell
+ItemExpansiveChancX	%d%% Chance to cast level %d %s on attack
+ItemExpansiveChanc1	%d%% Chance to cast level %d %s on striking
+ItemExpansiveChanc2	%d%% Chance to cast level %d %s when struck
+ItemExpcharmdesc	Keep in inventory to gain bonus
+StrMercEx12	Defensive
+StrMercEx14	Offensive
+StrMercEx15	Combat
+Eskillelementaldmg	Elemental Charge-up Damage: 
+Playersubtitles29	Retreat!
+Playersubtitles30	Run away!
+LeaveCampDru	So, it begins.
+LeaveCampAss	They'll never see me coming.
+EnterDOEAss	So dark... perfect.
+EnterDOEDru	So, this is where evil hides.
+EnterBurialAss	Whose handiwork lies buried here?
+EnterBurialDru	Planting the dead... How odd.
+EnterMonasteryAss	Such corruption in this place...
+EnterMonasteryDru	Evil flows from here.
+EnterForgottenTAss	Who would want to remember this place?
+EnterForgottenTDru	I can smell why this tower was abandoned.
+EnterJailAss	Try and cage me, demons.
+EnterJailDru	Bars can't hold a force of nature.
+EnterCatacombsAss	I don't like it down here.
+EnterCatacombsDru	The supernatural is strong here.
+CompletingDOEAss	The Rogues' test is done.
+CompletingDOEDru	Bah! Is that all of them?
+CompletingBurialAss	What I kill stays dead.
+CompletingBurialDru	Your time is past, Blood Raven.
+FindingInifusAss	How has this tree escaped corruption?
+FindingInifusDru	This dead tree teems with energy.
+FindingCairnAss	These stones hold an ancient power.
+FindingCairnDru	Such stones are common back home.
+FindingTristramAss	Tristram... The first to fall to Diablo's wrath.
+FindingTristramDru	Ruins... the fate of all cities.
+RescueCainAss	Cain! Go to the Rogue camp.
+RescueCainDru	Deckard Cain, leave this place!
+HoradricMalusAss	A Malus! This should go to Charsi.
+HoradricMalusDru	Charsi will be thankful to get this Malus.
+CompletingForgottenTPal	So much treasure almost covers the stench.
+CompletingForgottenTPal	This tower has its charms...
+CompletingAndarielAss	Death becomes you, Andariel.
+CompletingAndarielDru	Your reign is over, Andariel.
+EnteringRadamentAss	Why must evil hide in such wretched places?
+EnteringRadamentDru	Face the light or lurk in darkness.
+CompletingRadamentAss	Vengeance... for Atma.
+CompletingRadamentDru	Return to dust, Radament.
+BeginTaintedSunAss	An eclipse... never a good omen.
+BeginTaintedSunDru	Strange... an unexpected eclipse.
+EnteringClawViperAss	Dark magic in a darker tomb...
+EnteringClawViperDru	Snakes... I hate snakes.
+CompletingTaintedSunAss	Serpents! I expected worse.
+CompletingTaintedSunDru	The sun warms the world once more.
+EnteringArcaneAss	The Sanctuary - Horazon's obsession.
+EnteringArcaneDru	This was not designed by nature's Architect.
+FindingSummonerAss	Summoner, the dark magics have corrupted you.
+FindingSummonerDru	This place would drive anyone mad.
+CompletingSummonerAss	Horazon. Your decoy is dead.
+CompletingSummonerDru	Now I can leave this twisted nightmare.
+FindingdecoyTombAss	The Horadrim have left their mark here.
+FindingdecoyTombDru	These Horadric markings are mysterious.
+FindingTrueTombAss	I can sense Tal Rasha's presence now.
+FindingTrueTombDru	So, Tal Rasha... This is your resting place.
+CompletingTombAss	I shall track the Prime Evils to the ends of the world.
+CompletingTombDru	Diablo... I will find you yet.
+FindingLamEsenAss	Black books make for dark thoughts.
+FindingLamEsenDru	An ancient manuscript...  This could be useful.
+CompletingLamEsenAss	One can't judge a book by its cover.
+CompletingLamEsenAss	Ormus... You have strange taste in books.
+CompletingLamEsenDru	Ormus... study the book well.
+FindingBeneathCityAss	And I thought the Forgotten Tower stank.
+FindingBeneathCityDru	This smells worse than the sewers of Lut Gohlein.
+FindingDrainLeverAss	Levers are made to be pulled.
+FindingDrainLeverDru	Finally... The drain lever.
+CompletingBeneathCityAss	This is one drain I don't mind cleaning out.
+CompletingBeneathCityDru	From trash to treasure...
+CompletingBladeAss	What a delicious blade! I should consult Ormus.
+CompletingBladeDru	Ormus may know something about this unusual blade.
+FindingJadeFigAss	Hmm, a jade statue. What should I do with it?
+FindingJadeFigDru	It looks like jade. Perhaps it's worth something.
+FindingTempleAss	I dread this place of darkness.
+FindingTempleDru	This temple is a nest of evil.
+CompletingTempleAss	The dark magic here is dispelled.
+CompletingTempleDru	There is hope once again.
+FindingGuardianTowerAss	Mephisto... I'm coming for you.
+FindingGuardianTowerDru	Hatred stirs within me.
+CompletingGuardianTowerAss	Mephisto, you were no match for me.
+CompletingGuardianTowerAss	Mephisto's hatred was a poisonous void.
+FreezingIzualAma	Goodbye, Izual.
+FreezingIzualAss	Corruption... take flight.
+FreezingIzualDru	I have no pity for him. Oblivion is his reward.
+KillingdDiabloSor	Terror stalks Hell no more.
+KillingdDiabloBar	Eternal suffering would be too brief for you, Diablo.
+KillingdDiabloNec	Lord Diablo I have bested you.
+KillingdDiabloPal	Let Diablo's death end the reign of the Three!
+KillingdDiabloAms	The reign of Terror has ended.
+KillingdDiabloAss	A hero's mistake is finally corrected.
+KillingdDiabloDru	Thus ends the plague of Terror.
+LeavingTownAct5Sor	My magic will break the siege.
+LeavingTownAct5Bar	The time has come to cleanse my homeland!
+LeavingTownAct5Nec	It takes more than a siege to stop me.
+LeavingTownAct5Pal	Baal. I'm coming for you.
+LeavingTownAct5Ams	The siege must be stopped.
+LeavingTownAct5Ass	You'll pay for your atrocities, Baal.
+LeavingTownAct5Dru	Baal! Nothing will stand in my way.
+CompletingStopSiegeSor	Harrogath can rest easier now.
+CompletingStopSiegeBar	The siege is broken.
+CompletingStopSiegeNec	My, my, what a messy little demon.
+CompletingStopSiegePal	Harrogath is free of your kind, demon.
+CompletingStopSiegeAms	Oops...Did I do that?
+CompletingStopSiegeAss	Shenk, your command has ended.
+CompletingStopSiegeDru	The catapults have been silenced.
+RescueQual-KehkAct5Sor	Follow me.
+RescueQual-KehkAct5Bar	Follow me.
+RescueQual-KehkAct5Nec	Follow me.
+RescueQual-KehkAct5Pal	Follow me.
+RescueQual-KehkAct5Ams	Follow me.
+RescueQual-KehkAct5Ass	Follow me.
+RescueQual-KehkAct5Dru	Follow me.
+EnteringNihlathakAct5Sor	Could this be a trap?
+EnteringNihlathakAct5Bar	A coward's hiding place.
+EnteringNihlathakAct5Nec	Ahh, the familiar scent of death.
+EnteringNihlathakAct5Pal	By the Light! What is this place?
+EnteringNihlathakAct5Ams	...Nihlathak's home away from home.
+EnteringNihlathakAct5Ass	I should have known...
+EnteringNihlathakAct5Dru	Nihlathak... you can't hide from me.
+CompletingNihlathakAct5Sor	Your power was no match for mine.
+CompletingNihlathakAct5Bar	A fitting death for a traitor.
+CompletingNihlathakAct5Nec	You were a sad little man, Nihlathak.
+CompletingNihlathakAct5Pal	Nihlathak. What led you to this end?
+CompletingNihlathakAct5Ams	Conspiring with Baal... What a tragic mistake.
+CompletingNihlathakAct5Ass	You Dark Mages are all alike - obsessed with power.
+CompletingNihlathakAct5Dru	Betrayer, you've reaped your reward.
+EnteringTopMountAct5Sor	The fabled home of the Ancients.
+EnteringTopMountAct5Bar	The guardians of Mount Arreat await.
+EnteringTopMountAct5Nec	The resting place of the Ancients...
+EnteringTopMountAct5Pal	The summit - The Barbarian holy ground.
+EnteringTopMountAct5Ams	The fabled home of the Ancients.
+EnteringTopMountAct5Ass	I shall prove worthy.
+EnteringTopMountAct5Dru	At last...The summit of Mount Arreat.
+EnteringWorldstoneAct5Sor	The power of the Worldstone washes over me.
+EnteringWorldstoneAct5Bar	The halls of the Ancients... Magnificent.
+EnteringWorldstoneAct5Nec	So, this is what the Ancients guard.
+EnteringWorldstoneAct5Pal	The Worldstone! Praise the Light.
+EnteringWorldstoneAct5Ams	The Worldstone!
+EnteringWorldstoneAct5Ass	The Worldstone. What power.
+EnteringWorldstoneAct5Dru	The legendary Worldstone - guardian of the Natural realm.
+CompletingDefeatBaalAct5Sor	The last of the Three has fallen.
+CompletingDefeatBaalAct5Bar	The Prime Evils are no more.
+CompletingDefeatBaalAct5Nec	Baal, never doubt my skills.
+CompletingDefeatBaalAct5Pal	Baal, you shall no longer taint this mortal realm.
+CompletingDefeatBaalAct5Ams	My work here is truly done.
+CompletingDefeatBaalAct5Ass	The Evil brotherhood is no more.
+CompletingDefeatBaalAct5Dru	Baal! Join your brothers in oblivion.
+Skillname222	Raven
+Skillsd222	summon ravens
+Skillld222	the eyes of your enemies}summon ravens to peck out
+Skillan222	Raven
+Skillname223	Poison Creeper
+Skillsd223	summon disease spreading vine
+Skillld223	disease to all it contacts}summon a vine that spreads
+Skillan223	Psn Creep
+Skillname223	Werewolf
+Skillsd223	transform into a werewolf
+Skillld223	transform into a werewolf
+Skillan223	Werewolf
+Skillname225	Lycanthropy
+Skillsd225	passive - improves shape-shifting ability
+Skillld225	when in werewolf or werebear form}passive - improves duration and life
+Skillan225	Lycanthropy
+Skillname226	Firestorm
+Skillsd226	unleash fiery chaos
+Skillld226	unleash fiery chaos to burn your enemies
+Skillan226	Firestorm
+Skillname227	Oak Sage
+Skillsd227	summon the spirit of the oak
+Skillld227	life for you and your party}summon a spirit pet that increases
+Skillan227	Oak Sage
+Skillname228	Summon Spirit Wolf
+Skillsd228	summon a wolf
+Skillld228	to fight by your side}summon a wolf with teleporting ability
+Skillan228	Sum Spt Wolf
+Skillname229	Werebear
+Skillsd229	transform into a werebear
+Skillld229	transform into a werebear
+Skillan229	Werebear
+Skillname230	Molten Boulder
+Skillsd230	launch a molten boulder
+Skillld230	that knocks back your enemies}launch a boulder of flaming hot magma
+Skillan230	Molten Boulder
+Skillname231	Arctic Blast
+Skillsd231	shoot a jet of ice
+Skillld231	to burn your enemies with frost}blast a continuous jet of ice
+Skillan231	Arctic Blast
+Skillname232	Carrion Vine
+Skillsd232	summon corpse eating vine
+Skillld232	and replenishes your life}summon a vine that eats corpses
+Skillan232	Carrion Vine
+Skillname233	Feral Rage
+Skillsd233	life-stealing rage attack - werewolf form
+Skillld233	with successive hits}increasing amounts of life from your enemies}go into a frenzied rage to steal}when in werewolf form,
+Skillan233	Feral Rage
+Skillname234	Maul
+Skillsd234	maul your enemies - werebear form
+Skillld234	with successive hits}for increasing extra damage}maul your enemies}when in werebear form,
+Skillan234	Maul
+Skillname235	Fissure
+Skillsd235	open the earth to burn enemies
+Skillld235	burning them to a crisp}open volcanic vents below your enemies,
+Skillan235	Fissure
+Skillname236	Cyclone Armor
+Skillsd236	shield from elemental damage
+Skillld236	fire, cold, and lightning}shield yourself from damage caused by
+Skillan236	Cyclone Armor
+Skillname237	Heart of Wolverine
+Skillsd237	summon a wolverine spirit
+Skillld237	of you and your party}to the damage and attack rating}summon a spirit pet that adds
+Skillan237	Wolverine Hrt
+Skillname238	Summon Dire Wolf
+Skillsd238	summon an enraged wolf
+Skillld238	it does to enemies}eating corpses to increase damage}summon a wolf that becomes enraged,
+Skillan238	Summon D Wolf
+Skillname239	Rabies
+Skillsd239	bite causes disease - werewolf form
+Skillld239	that spreads to other monsters}to inflict them with disease}bite your enemies}when in werewolf form,
+Skillan239	Rabies
+Skillname240	Fire Claws
+Skillsd240	fiery, mauling attack
+Skillld240	with a fiery claw attack}form, maul your enemies}when in werewolf or werebear
+Skillan240	Fire Claws
+Skillname241	Twister
+Skillsd241	release several small whirlwinds
+Skillld241	cut a path through your enemies}release several small whirlwinds that
+Skillan241	Twister
+Skillname242	Solar Creeper
+Skillsd242	summon corpse eating vine
+Skillld242	and replenishes your mana}summon a vine that eats corpses
+Skillan242	Sol Creep
+Skillname243	Hunger
+Skillsd243	life-and-mana-stealing bite
+Skillld243	to gain life and mana}form, bite your enemies}when in werewolf or werebear
+Skillan243	Hunger
+Skillname244	Shock Wave
+Skillsd244	create shock waves - werebear form
+Skillld244	that stuns nearby enemies}stomp to create a shock wave}when in werebear form,
+Skillan244	Shock Wave
+Skillname245	Volcano
+Skillsd245	create a volcano
+Skillld245	and destruction over your enemies}summon forth a volcano to rain death
+Skillan245	Volcano
+Skillname246	Tornado
+Skillsd246	create a tornado
+Skillld246	to blast your enemies}create a funnel of wind and debris
+Skillan246	Tornado
+Skillname247	Spirit of Barbs
+Skillsd247	summon a spirit pet of thorns
+Skillld247	back at your enemies}taken by you and your party}summon spirit pet that reflects damage
+Skillan247	Spirit Barbs
+Skillname248	Summon Grizzly
+Skillsd248	summon a grizzly bear
+Skillld248	summon a ferocious grizzly bear
+Skillan248	Summon Grizzly
+Skillname249	Fury
+Skillsd249	multiple attacks - werewolf Form
+Skillld249	or one target multiple times}either multiple adjacent targets}when in werewolf form, attack
+Skillan249	Fury
+Skillname250	Armageddon
+Skillsd250	rain fire on your enemies
+Skillld250	destruction on nearby enemies}create a meteor shower to rain fiery
+Skillan250	Armageddon
+Skillname251	Hurricane
+Skillsd251	create a massive wind storm
+Skillld251	debris to pound your enemies to bits}create a massive storm of wind and
+Skillan251	Hurricane
+Skillname252	Fire Blast
+Skillsd252	throw a fire bomb
+Skillld252	to blast your enemies to bits}throw a fire bomb
+Skillan252	Fire Blast
+Skillname253	Claw Mastery
+Skillsd253	passive - improves claw-class weapons ability
+Skillld253	with claw-class weapons}passive - improves your skill
+Skillan253	Claw Mastery
+Skillname254	Psychic Hammer
+Skillsd254	a mind blast to crush your enemies
+Skillld254	to crush and knock back your enemies}to create a psychic blast}use the power of your mind
+Skillan254	Psyc Hammer
+Skillname255	Tiger Strike
+Skillsd255	increases damage of finishing moves}}Charge-up Skill
+Skillld255	normal attack to release charges}must use a dragon finishing move or}to finishing moves}consecutive hits add damage bonuses}}Charge-up Skill}
+Skillan255	Tiger Strike
+Skillname256	Dragon Talon
+Skillsd256	kick your enemies}}Finishing Move
+Skillld256	adds charged-up bonuses to the kick}kick your enemies out of your way}}Finishing Move}
+Skillan256	Dragon Talon
+Skillname257	Shock Web
+Skillsd257	throw a web of lightning
+Skillld257	to shock your enemies}throw a web of lightning
+Skillan257	Shock Web
+Skillname258	Blade Sentinel
+Skillsd258	set a spinning blade
+Skillld258	between you and target point}set a spinning blade to patrol
+Skillan258	Blade Sentinel
+Skillname259	Burst of Speed
+Skillsd259	increases attack and movement speed
+Skillld259	for a period of time}increases attack and movement speed
+Skillan259	Burst of Speed
+Skillname260	Fists of Fire
+Skillsd260	adds fire damage to finishing moves}}Charge-up Skill
+Skillld260	normal attack to release charges}must use a dragon finishing move or}can only be used with claw-class weapons}to finishing moves}consecutive hits add fire damage}}Charge-up Skill}
+Skillan260	Fists of Fire
+Skillname261	Dragon Claw
+Skillsd261	double claw attack}}Finishing Move
+Skillld261	adds charged-up bonuses to both claw attacks}with your dual claw-class weapons}slice and dice your enemies}}Finishing Move}
+Skillan261	Dragon Claw
+Skillname262	Charged Bolt Sentry
+Skillsd262	a trap that emits charged bolts
+Skillld262	at enemies that pass near}a trap that emits charged bolts
+Skillan262	Charged Bolt
+Skillname263	Wake of Fire
+Skillsd263	a trap that emits waves of fire
+Skillld263	a trap that emits waves of fire
+Skillan263	Wake of Fire
+Skillname264	Weapon Block
+Skillsd264	passive - block with two claw-class weapons
+Skillld264	you are using dual claw-class weapons}passive - chance to block when
+Skillan264	Wpn Block
+Skillname265	Cloak of Shadows
+Skillsd265	blind your enemies
+Skillld265	lowering their defenses for a period of time}cast a shadow to blind nearby enemies
+Skillan265	Cloak of Shdws
+Skillname266	Cobra Strike
+Skillsd266	 adds life and mana stealing to finishing moves}}Charge-up Skill
+Skillld266	normal attack to release charges}must use a dragon finishing move or}to finishing moves}consecutive hits add life and mana stealing}}Charge-up Skill}
+Skillan266	Cobra Strike
+Skillname267	Blade Fury
+Skillsd267	throw spinning blades
+Skillld267	to slice up your enemies}throw spinning blades
+Skillan267	Blade Fury
+Skillname268	Fade
+Skillsd268	temporary resist all
+Skillld268	for a period of time}raise all resistances and resist curses
+Skillan268	Fade
+Skillname269	Shadow Warrior
+Skillsd269	summon a shadow of yourself
+Skillld269	your skills and fights by your side}summon a shadow of yourself that mimics
+Skillan269	Shdw Warrior
+Skillname270	Claws of Thunder
+Skillsd270	adds lightning damage to finishing moves} }Charge-up Skill
+Skillld270	normal attack to release charges}must use a dragon finishing move or}can only be used with claw-class weapons}to finishing moves}consecutive hits add lightning damage}}Charge-up Skill}
+Skillan270	Thunder Claws
+Skillname271	Dragon Tail
+Skillsd271	explosive kick}}Finishing Move
+Skillld271	adds charged-up bonuses to the kick}knock back your enemies with an explosive kick}}Finishing Move}
+Skillan271	Dragon Tail
+Skillname272	Lightning Sentry
+Skillsd272	a trap that emits lightning
+Skillld272	to scorch passing enemies}a trap that shoots lightning
+Skillan272	Lightning Sentry
+Skillname273	Wake of Inferno
+Skillsd273	trap that sprays fire
+Skillld273	trap that sprays fire at passing enemies
+Skillan273	Wake of Inferno
+Skillname274	Mind Blast
+Skillsd274	compelling psionic blast
+Skillld274	and convert the feeble-minded}stun a group of enemies}using the power of your mind
+Skillan274	Mind Blast
+Skillname275	Blades of Ice
+Skillsd275	adds cold damage to finishing moves}}Charge-up Skill
+Skillld275	normal attack to release charges}must use a dragon finishing move or}can only be used with claw-class weapons}to finishing moves}consecutive hits add cold damage}}Charge-up Skill}
+Skillan275	Blades of Ice
+Skillname276	Dragon Flight
+Skillsd276	teleport and kick enemies}}Finishing Move
+Skillld276	adds charged-up bonuses to the kick}and destroy them with a kick}teleport to your enemies}}Finishing Move}
+Skillan276	Dragon Flight
+Skillname277	Death Sentry
+Skillsd277	trap that explodes nearby corpses
+Skillld277	or explodes nearby corpses laying waste to more enemies}trap that shoots lightning at your enemies
+Skillan277	Death Sentry
+Skillname278	Blade Shield
+Skillsd278	spinning blades of defense
+Skillld278	who stray too close}spinning blades slice enemies
+Skillan278	Blade Shield
+Skillname279	Venom
+Skillsd279	poison your weapon
+Skillld279	add poison damage to your weapons
+Skillan279	Venom
+Skillname280	Shadow Master
+Skillsd280	summon your shadow
+Skillld280	to fight by your side}summon a powerful shadow of yourself
+Skillan280	Shdw Master
+Skillname281	Phoenix Strike
+Skillsd281	adds elemental novas to finishing moves}}Charge-up Skill
+Skillld281	normal attack to release charges}must use a dragon finishing move or}adds elemental novas to finishing moves}}Charge-up Skill}
+Skillan281	Phnx Strike
+ESkillHawk	Ravens: 
+ESkillSpikes	Spikes: 
+ESkillStars	Stars: 
+ESkillWolf	Wolf: 
+ESkillWolves	Wolves: 
+ESkillShoots	Shoots 
+ESkillTimes	 Times
+ESkillSpikes2	 Spikes
+ESkillPerKick	 per kick
+EskillLifeSteal	Life Steal: 
+Eskillchancetostun	Chance to stun: 
+Eskillchancetoafflict	Chance to afflict target: 
+Eskillpowerup1	Charge 1 - 
+Eskillpowerup2	Charge 2 - 
+Eskillpowerup3	Charge 3 - 
+Eskillpowerupadd	Adds 
+Eskillsinishup	Finishing Move Bonuses
+Eskillpudlife	 percent life stealing
+Eskillpudmana	 percent life and mana stealing 
+Eskillpudburning	burning damage
+Eskillpuddgmper	 percent damage
+Eskilllowerresis	Lowers Resistance 
+Eskilltomeleeattacks	 to melee attacks
+EskillManaSteal	Mana Steal: 
+Eskillferalpets	Feral Pets: 
+Eskillpercentatt	 Percent Attack
+Eskillpercentlif	 Percent Life
+Eskillpercentdmg	 Percent Damage
+Eskillfinishmove	Finishing Move - 
+Eskillmanarecov	Mana Recovered: 
+Eskillphoenix1	meteor damage: 
+Eskillphoenix2	chain lightning damage: 
+Eskillphoenix3	chaos ice bolt damage: 
+Eskillthunder1	lightning damage: 
+Eskillthunder2	nova damage: 
+Eskillthunder3	charged bolt damage: 
+Eskillfistsoffire1	fire damage: 
+Eskillfistsoffire2	fire damage radius: 
+Eskillfistsoffire3	burning duration: 
+Eskillbladesofice1	cold damage: 
+Eskillbladesofice2	cold damage radius: 
+Eskillbladesofice3	freeze duration: 
+strUI5	Raven
+strUI6	Wolf
+strUI7	Bear
+strUI8	Poison Creeper
+strUI9	Carrion Vine
+strUI10	Solar Creeper
+strUI11	Spirit of Barbs
+strUI12	Heart of Wolverine
+strUI13	Vine
+strUI14	Spirit
+UIFenirsui	Dire Wolf
+UiRescuedBarUI	Warrior
+UiShadowUI	Shadow
+StrUI18	Master
+Spike Generator	Spike Generator
+Charged Bolt Sentry	Charged Bolt Sentry
+Lightning Sentry	Lightning Sentry
+Blade Creeper	Blade Sentinel
+Invis Pet	Pet
+Druid Hawk	Raven
+Druid Wolf	Wolf
+Druid Totem	Druid Spirit
+Druid Fenris	Dire Wolf
+Druid Spirit Wolf	Spirit Wolf
+Druid Bear	Grizzly
+Druid Plague Poppy	Plague Poppy
+Druid Cycle of Life	Cycle of Life
+Vine Creature	Vine Creature
+Eagleexp	Eagle
+Wolf	Wolf
+Bear	Bear
+Siege Door	Siege Door
+Seige Tower	Seige Tower
+RotWalker	Rot Walker
+ReanimatedHorde	Reanimated Horde
+ProwlingDead	Prowling Dead
+UnholyCorpse	Unholy Corpse
+DefiledWarrior	Defiled Warrior
+Siege Beast	Siege Beast
+CrushBiest	Crush Beast
+BloodBringer	Blood Bringer
+GoreBearer	Gore Bearer
+DeamonSteed	Demon Steed
+WailingSpirit	Wailing Spirit
+LifeSeeker	Life Seeker
+LifeStealer	Life Stealer
+DeathlyVisage	Deathly Visage
+BoundSpirit	Bound Spirit
+BanishedSoul	Banished Soul
+Deathexp	Death
+Minionexp	Enslaved
+Slayerexp	Slayer
+IceBoar	Ice Boar
+FireBoar	Fire Boar
+HellSpawn	Hell Spawn
+IceSpawn	Ice Spawn
+GreaterHellSpawn	Greater Hell Spawn
+GreaterIceSpawn	Greater Ice Spawn
+FanaticMinion	Fanatic Enslaved
+BerserkSlayer	Berserker Slayer
+ConsumedFireBoar	Consumed Fire Boar
+ConsumedIceBoar	Consumed Ice Boar
+FrenziedHellSpawn	Frenzied Hell Spawn
+FrenziedIceSpawn	Frenzied Ice Spawn
+InsaneHellSpawn	Insane Hell Spawn
+InsaneIceSpawn	Insane Ice Spawn
+Succubusexp	Succubus
+VileTemptress	Vile Temptress
+StygianHarlot	Stygian Harlot
+Hell Temptress	Hell Temptress
+Blood Temptress	Blood Temptress
+Dominus	Siren
+VileWitch	Vile Witch
+StygianFury	Stygian Fury
+Blood Witch	Blood Witch
+Hell Witch	Hell Witch
+OverSeer	Overseer
+Lasher	Lasher
+OverLord	Overlord
+BloodBoss	Blood Boss
+HellWhip	Hell Whip
+MinionSpawner	Demon Portal
+MinionSlayerSpawner	Demon Portal
+MinionIce/fireBoarSpawner	Demon Portal
+Minionice/hellSpawnSpawner	Demon Portal
+MinionGreaterIce/hellSpawnSpawner	Demon Portal
+Imp1	Demon Imp
+Imp2	Demon Rascal
+Imp3	Demon Gremlin
+Imp4	Demon Trickster
+Imp5	Demon Sprite
+CatapultN	Catapult
+CatapultS	Catapult
+CatapultE	Catapult
+CatapultW	Catapult
+Frozen Horror1	Frozen Creeper
+Frozen Horror2	Frozen Terror
+Frozen Horror3	Frozen Scourge
+Frozen Horror4	Frozen Horror
+Frozen Horror5	Frozen Scorch
+Blood Lord1	Moon Lord
+Blood Lord2	Night Lord
+Blood Lord3	Blood Lord
+Blood Lord4	Hell Lord
+Blood Lord5	Death Lord
+Catapult Spotter N	Catapult
+Catapult Spotter S	Catapult
+Catapult Spotter E	Catapult
+Catapult Spotter W	Catapult
+Catapult Spotter Siege	Catapult
+CatapultSiege	Catapult
+Barricade Wall Right	Barricade
+Barricade Wall Left	Barricade
+Barricade Door	Barricaded Door
+Barricade Tower	Barricaded Tower
+Siege Boss	Shenk the Overseer
+Evil hut	Evil Demon Hut
+Death Mauler1	Death Mauler
+Death Mauler2	Death Brawler
+Death Mauler3	Death Slasher
+Death Mauler4	Death Berserker
+Death Mauler5	Death Brigadier
+SnowYeti1	Snow Drifter
+SnowYeti2	Abominable
+SnowYeti3	Chilled Froth
+SnowYeti4	Frozen Abyss
+Baal Throne	Baal
+Baal Crab	Baal
+Baal Taunt	Baal
+Putrid Defiler1	Putrid Defiler
+Putrid Defiler2	Wretched Defiler
+Putrid Defiler3	Fetid Defiler
+Putrid Defiler4	Rancid Defiler
+Putrid Defiler5	Rank Defiler
+Pain Worm1	Pain Worm
+Pain Worm2	Torment Worm
+Pain Worm3	Agony Worm
+Pain Worm4	Menace Worm
+Pain Worm5	Anguish Worm
+WolfRider5	Warped Fallen Wolfrider
+WolfRider4	Darkone Wolfrider
+WolfRider3	Devilkin Wolfrider
+WolfRider2	Carver Wolfrider
+WolfRider1	Fallen Wolfrider
+Oak Sage	Oak Sage
+Heart of Wolverine	Heart of Wolverine
+Spirit of Barbs	Spirit of Barbs
+Shadow Warrior	Shadow Warrior
+Death Sentry	Death Sentry
+Inferno Sentry	Inferno Sentry
+Shadow Master	Shadow Master
+Wake of Destruction	Wake of Fire
+Ghostly	Ghostly
+Fanatic	Fanatic
+Possessed	Possessed
+Berserk	Berserker
+Larzuk	Larzuk
+Drehya	Anya
+Malah	Malah
+Nihlathak Town	Nihlathak
+Qual-Kehk	Qual-Kehk
+Act 5 Townguard	Guard
+Act 5 Combatant	Combatant
+Nihlathak	Nihlathak
+POW	Barbarian Captive
+Moe	Moe
+Curly	Curly
+Larry	Larry
+Ancient Barbarian 3	Korlic
+Ancient Barbarian 2	Madawc
+Ancient Barbarian 1	Talic
+Blaze Ripper	Blaze Ripper
+Magma Torquer	Magma Torquer
+Sharp Tooth Sayer	Sharptooth Slayer
+Vinvear Molech	Vinvear Molech
+Anodized Elite	Hell's Belle
+Snapchip Shatter	Snapchip Shatter
+Pindleskin	Pindleskin
+Threash Socket	Thresh Socket
+Eyeback Unleashed	Eyeback the Unleashed
+Megaflow Rectifier	Eldritch the Rectifier
+Dac Farren	Dac Farren
+Bonesaw Breaker	Bonesaw Breaker
+Axe Dweller	Axe Dweller
+Frozenstein	Frozenstein
+strDruidOnly	(Druid Only)
+strAssassinOnly	(Assassin Only)
+strAmazonOnly	(Amazon Only)
+strBarbarianOnly	(Barbarian Only)
+StrSklTree26	Summoning
+StrSklTree27	Shape
+StrSklTree28	Shifting
+StrSklTree29	Elemental
+StrSklTree30	Traps
+StrSklTree31	Shadow
+StrSklTree32	Disciplines
+StrSklTree33	Martial
+StrSklTree34	Arts
+x	Commanding the forces of nature, he summons wild beasts and raging storms to his side.
+x	Schooled in the Martial Arts, her mind and body are deadly weapons.
+chestr	Chest
+barrel wilderness	Barrel
+woodchestL	Wooden Chest
+burialchestL	Burial Chest
+burialchestR	Burial Chest
+well	Well
+Waypoint	Waypoint
+ChestL	Chest
+ChestSL	Chest
+ChestSR	Chest
+woodchestR	Wooden Chest
+chestR	Chest
+burningbodies	Pyre of Flesh
+burningpit	Burning Pit
+tribal flag	Tribal Flag
+flag widlerness	Flag
+eflg	Town Flag
+chan	Chandelier
+jar	Jar
+jar2	Jar
+jar3	Jar
+swingingheads	Swinging Heads
+pole	Pole
+animatedskullsandrocks	Skulls and Rocks
+hellgate	Hell Gate
+gate	Main Gate
+banner1	Banner
+banner2	Banner
+mrpole	Pole
+pene	Stash
+debris	Debris
+woodchest2R	Wooden Chest
+woodchest2L	Wooden Chest
+object1	Hidden Stash
+magic shrine2	Magic Shrine
+torch2	Torch
+torch1	Torch
+tomb3	Tomb
+tomb2	Tomb
+tomb1	Tomb
+ttor	Torch
+icecave_torch2	Torch
+icecave_torch1	Torch
+clientsmoke	Smoke
+deadbarbarian	Dead Barbarian
+deadbarbarian18	Dead Barbarian
+uncle f#%* comedy central(c)	Moe
+cagedwussie1	Cage
+icecaveshrine2	Shrine
+icecavejar4	Jar
+icecavejar3	Jar
+icecavejar2	Jar
+icecavejar1	Jar
+evilurn	Evil Urn
+secret object	secret object
+Altar	Altar
+Ldeathpole	Death Pole
+deathpole	Death Pole
+explodingchest	Chest
+banner 2	Banner
+banner 1	Banner
+pileofskullsandrocks	Skulls and Rocks
+animated skulland rockpile	Skulls and Rocks
+jar1	Jar
+etorch2	Torch
+ettr	Torch
+ecfra	Fire
+etorch1	Torch
+healthshrine	Health Shrine
+explodingbarrel	Barrel
+flag wilderness	Flag
+object	Hidden Stash
+Shrine2wilderness	Shrine
+Shrine3wilderness	Shrine
+pyox	Fire Pit
+ptox	Torch Pit
+Siege Control	Siege Control
+mrjar	Hidden Stash
+object2	Hidden Stash
+mrbox	Box
+tomb3L	Tomb
+tomb2L	Tomb
+tomb1L	Tomb
+red light	Red Light
+groundtombL	Tomb
+groundtomb	Tomb
+deadperson	Corpse
+candles	Candles
+sbub	Shrub
+ubub	Shrub
+deadperson2	Corpse
+Prison Door	Prison Door
+ancientsaltar	Altar of the Heavens
+hiddenstash	Hidden Stash
+eweaponrackL	Weapon Rack
+eweaponrackR	Weapon Rack
+earmorstandL	Armor Stand
+earmorstandR	Armor Stand
+qstsa5q1	Siege on Harrogath
+qsta5q11	Stop the Siege by killing Shenk the Overseer in the Bloody Foothills.
+qsta5q12	Kill Shenk the Overseer.
+qsta5q13	Go talk to Larzuk for your reward.
+qstsa5q2	Rescue on Mount Arreat
+qstsa5q21	Find the Soldiers in the Frigid Highlands.
+qstsa5q22	Rescue %d more Soldiers in the Frigid Highlands.
+qstsa5q23	Return to Qual-Kehk for your reward.
+qstsa5q24	Apply the Runes to a Socketed item in this order:
+qstsa5q3	Prison of Ice
+qstsa5q31	Look for Anya under the Crystalline Passage by the Frozen River.
+qstsa5q32	Talk to Malah.
+qstsa5q33	Use the potion Malah gave you to thaw Anya.
+qstsa5q34	Talk to Malah for your reward.
+qstsa5q35	Talk to Anya.
+qstsa5q4	Betrayal of Harrogath
+qstsa5q41	Take Anya's portal to Nihlathak's Temple.
+qstsa5q42	Kill Nihlathak.
+qstsa5q43	Talk to Anya before you continue through the Crystalline Passage, past the Glacial Trail, to proceed up Mount Arreat to the Summit.
+qstsa5q5	Rite of Passage
+qstsa5q51	Travel through the Ancient's Way to find the Ancients at the Arreat Summit.
+qstsa5q52	Consult with the Ancients by activating the Altar of the Heavens.
+qstsa5q53	Defeat all three Ancients without leaving Mount Arreat.
+qstsa5q6	Eve of Destruction
+qstsa5q61	Consult with the Ancients.
+qstsa5q62	Kill Baal.
+qstsa5q63	Talk to Tyreal.
+qstsa5q64	Take Tyreal's Portal to Safety.
+Harrogath	Harrogath
+Bloody Foothills	Bloody Foothills
+Rigid Highlands	Frigid Highlands
+Arreat Plateau	Arreat Plateau
+Crystalized Cavern Level 1	Crystalline Passage
+Cellar of Pity	Frozen River
+Crystalized Cavern Level 2	Glacial Trail
+Echo Chamber	Drifter Cavern
+Tundra Wastelands	Frozen Tundra
+Glacial Caves Level 1	The Ancients' Way
+Glacial Caves Level 2	Icy Cellar
+Rocky Summit	Arreat Summit
+Nihlathaks Temple	Nihlathak's Temple
+Halls of Anguish	Halls of Anguish
+Halls of Death's Calling	Halls of Pain
+Halls of Tormented Insanity	Halls of Torment
+Halls of Vaught	Halls of Vaught
+The Worldstone Keep Level 1	Worldstone Keep Level 1
+The Worldstone Keep Level 2	Worldstone Keep Level 2
+The Worldstone Keep Level 3	Worldstone Keep Level 3
+The Worldstone Chamber	The Worldstone Chamber
+Throne of Destruction	Throne of Destruction
+To Harrogath	To Harrogath
+To The Bloody Foothills	To The Bloody Foothills
+To The Rigid Highlands	To The Frigid Highlands
+To The Arreat Plateau	To The Arreat Plateau
+To The Crystalized Cavern Level 1	To The Crystalline Passage
+To The Cellar of Pity	To The Frozen River
+To The Crystalized Cavern Level 2	To The Glacial Trail
+To The Echo Chamber	To The Drifter Cavern
+To The Tundra Wastelands	To The Frozen Tundra
+To The Glacier Caves Level 1	To The Ancients' Way
+To The Glacier Caves Level 2	To The Icy Cellar
+To The Rocky Summit	To The Arreat Summit
+To Nihlathaks Temple	To Nihlathak's Temple
+To The Halls of Anguish	To The Halls of Anguish
+To The Halls of Death's Calling	To The Halls of Pain
+To The Halls of Tormented Insanity	To The Halls of Torment
+To The Halls of Vaught	To The Halls of Vaught
+To The Worldstone Keep Level 1	To The Worldstone Keep Level 1
+To The Worldstone Keep Level 2	To The Worldstone Keep Level 2
+To The Worldstone Keep Level 3	To The Worldstone Keep Level 3
+To The Worldstone Chamber	To The Worldstone Chamber
+To The Throne of Destruction	To The Throne of Destruction
+hireiconinfo1	Drop Potion on Portrait to Heal
+hireiconinfo2	Right-click to Open Inventory (%s)
+hiredismiss	Dismiss
+hiredismisshire	Dismiss Hireling
+hirerehire	Rehire
+hireresurrect	Resurrect
+hireresurrect2	Resurrect %s: %d
+hirechat1	Thanks.
+hirechat2	Thank you.
+hirechat3	I needed that.
+hirepraise1	It is good to work for someone who cares.
+hirepraise2	Good for you.
+hiredanger1	I sense danger.
+hiredanger2	I hate these vermin.
+hiredanger3	I have a bad feeling about this.
+hiredanger4	Beware!
+hiredanger5	I detest spiders.
+hiredanger6	Eek, snakes!
+hirefeelstronger2	I am more experienced.
+hirehelp1	I am hurt!
+hirehelp2	Help!
+hirehelp3	I am dying.
+hirehelp4	Help me!
+hiregreets1	Good morning.
+hiregreets2	Good afternoon.
+hiregreets3	Good evening.
+hiregreets4	Hello.
+CfgSkill9	Skill 9
+CfgSkill10	Skill 10
+CfgSkill11	Skill 11
+CfgSkill12	Skill 12
+CfgSkill13	Skill 13
+CfgSkill14	Skill 14
+CfgSkill15	Skill 15
+CfgSkill16	Skill 16
+CfgToggleminimap	Toggle MiniMap
+Cfgswapweapons	Swap Weapons
+Cfghireling	Hireling Screen
+MiniPanelHireinv	Hireling Inventory
+MiniPanelHire	Hireling
+x	EXPANSION
+x	EXPANSION CHARACTER
+x	CONVERT TO
+x	CLICK OK TO CONVERT YOUR ORIGINAL DIABLO II CHARACTER TO PLAY IN EXPANSION GAMES.
+X	Warning:  Once you convert a character to expansion, you cannot play it in original Diablo II games.
+X	
+X	Are you sure you wish to continue?
+Go North	go north
+Travel To Harrogath	travel to harrogath
+x	NEW EXPANSION CHARACTER
+x	NEW EXPANSION OPEN CHARACTER.
+x	NEW EXPANSION REALM CHARACTER.
+X	CONVERT TO EXPANSION
+X	CREATE NEW CHARACTER
+X	DELETE CHARACTER
+X	Ethereal (Cannot be Repaired)
+X	This item cannot be repaired.
+Rename Instruct	Choose the item that you wish to personalize with your name.
+Addsocketsui	add sockets
+Personalizeui	personalize
+Addsocketsui2	Choose the item to which you wish to add sockets.
+MercX101	Vardhaka
+MercX102	Khan
+MercX103	Klisk
+MercX104	Bors
+MercX105	Brom
+MercX106	Wiglaf
+MercX107	Hrothgar
+MercX108	Scyld
+MercX109	Healfdane
+MercX110	Heorogar
+MercX111	Halgaunt
+MercX112	Hygelac
+MercX113	Egtheow
+MercX114	Bohdan
+MercX115	Wulfgar
+MercX116	Hild
+MercX117	Heatholaf
+MercX118	Weder
+MercX119	Vikhyat
+MercX120	Unferth
+MercX121	Sigemund
+MercX122	Heremod
+MercX123	Hengest
+MercX124	Folcwald
+MercX125	Frisian
+MercX126	Hnaef
+MercX127	Guthlaf
+MercX128	Oslaf
+MercX129	Yrmenlaf
+MercX130	Garmund
+MercX131	Freawaru
+MercX132	Eadgils
+MercX133	Onela
+MercX134	Damien
+MercX135	Erfor
+MercX136	Weohstan
+MercX137	Wulf
+MercX138	Bulwye
+MercX139	Lief
+MercX140	Magnus
+MercX141	Klatu
+MercX142	Drus
+MercX143	Hoku
+MercX144	Kord
+MercX145	Uther
+MercX146	Ip
+MercX147	Ulf
+MercX148	Tharr
+MercX149	Kaelim
+MercX150	Ulric
+MercX151	Alaric
+MercX152	Ethelred
+MercX153	Caden
+MercX154	Elgifu
+MercX155	Tostig
+MercX156	Alcuin
+MercX157	Emund
+MercX158	Sigurd
+MercX159	Gorm
+MercX160	Hollis
+MercX161	Ragnar
+MercX162	Torkel
+MercX163	Wulfstan
+MercX164	Alban
+MercX165	Barloc
+MercX166	Bill
+MercX167	Theodoric
