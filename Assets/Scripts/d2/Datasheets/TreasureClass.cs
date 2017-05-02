@@ -13,49 +13,7 @@ public class TreasureClass
 
     static TreasureClass()
     {
-        var nodes = new List<Node>();
-
-        for(int i = 0; i < 100; i += 3)
-        {
-            var treasureClass = new TreasureClass();
-            treasureClass.name = "armo" + i;
-            treasureClass.picks = 1;
-            byName.Add(treasureClass.name, treasureClass);
-            nodes.Clear();
-            foreach (var armor in ArmorInfo.sheet)
-            {
-                if (armor.level > i && armor.level <= i + 3)
-                {
-                    var node = new Node();
-                    node.code = armor.code;
-                    node.prob = 1;
-                    nodes.Add(node);
-                    treasureClass.probSum += node.prob;
-                }
-            }
-            treasureClass.nodeArray = nodes.ToArray();
-        }
-
-        for (int i = 0; i < 100; i += 3)
-        {
-            var treasureClass = new TreasureClass();
-            treasureClass.name = "weap" + i;
-            treasureClass.picks = 1;
-            byName.Add(treasureClass.name, treasureClass);
-            nodes.Clear();
-            foreach (var weapon in WeaponInfo.sheet)
-            {
-                if (weapon.level > i && weapon.level <= i + 3)
-                {
-                    var node = new Node();
-                    node.code = weapon.code;
-                    node.prob = 1;
-                    nodes.Add(node);
-                    treasureClass.probSum += node.prob;
-                }
-            }
-            treasureClass.nodeArray = nodes.ToArray();
-        }
+        GenerateFromItemTypes();
 
         foreach (TreasureClass tc in sheet)
         {
@@ -71,7 +29,7 @@ public class TreasureClass
             if (tc.name == null)
                 continue;
             tc.probSum = 0;
-            for(int i = 0; i < tc.nodeArray.Length; ++i)
+            for (int i = 0; i < tc.nodeArray.Length; ++i)
             {
                 var node = tc.nodeArray[i];
                 if (node.code == null)
@@ -80,6 +38,38 @@ public class TreasureClass
                     node.code = "gld"; // todo correctly parse strings like "gld,mul=123"
                 tc.probSum += node.prob;
                 tc.nodeArray[i] = node;
+            }
+        }
+    }
+
+    private static void GenerateFromItemTypes()
+    {
+        var nodes = new List<Node>();
+
+        foreach (var type in ItemType.sheet)
+        {
+            if (!type.treasureClass)
+                continue;
+
+            for (int i = 0; i < 100; i += 3)
+            {
+                var treasureClass = new TreasureClass();
+                treasureClass.name = type.code + i;
+                treasureClass.picks = 1;
+                byName.Add(treasureClass.name, treasureClass);
+                nodes.Clear();
+                foreach (var item in ItemInfo.all)
+                {
+                    if (item.level > i && item.level <= i + 3 && item.HasType(type))
+                    {
+                        var node = new Node();
+                        node.code = item.code;
+                        node.prob = 1;
+                        nodes.Add(node);
+                        treasureClass.probSum += node.prob;
+                    }
+                }
+                treasureClass.nodeArray = nodes.ToArray();
             }
         }
     }

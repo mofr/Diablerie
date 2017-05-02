@@ -1,8 +1,6 @@
-﻿using System.Runtime.Serialization;
-using System.Reflection;
-using System.IO;
-using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -207,9 +205,9 @@ public class EditorTools
     [MenuItem("Assets/Test Action")]
     static public void TestAction()
     {
-        Debug.Log(ArmorInfo.Find("gth").name);
-        Debug.Log(WeaponInfo.Find("gsc").name);
-        Debug.Log(MiscInfo.Find("gld").name);
+        Debug.Log(ItemInfo.Find("gth").name);
+        Debug.Log(ItemInfo.Find("gsc").name);
+        Debug.Log(ItemInfo.Find("gld").name);
     }
 }
 

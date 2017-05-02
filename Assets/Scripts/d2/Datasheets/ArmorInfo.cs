@@ -1,29 +1,6 @@
-﻿using System.Collections.Generic;
-
-[System.Serializable]
-public class ArmorInfo
+﻿[System.Serializable]
+public class ArmorInfo : ItemInfo
 {
-    public static List<ArmorInfo> sheet = Datasheet.Load<ArmorInfo>("data/global/excel/armor.txt");
-    static Dictionary<string, ArmorInfo> byCode = new Dictionary<string, ArmorInfo>();
-
-    public static ArmorInfo Find(string code)
-    {
-        return byCode.GetValueOrDefault(code);
-    }
-
-    static ArmorInfo()
-    {
-        foreach (ArmorInfo item in sheet)
-        {
-            if (item.code == null)
-                continue;
-            if (byCode.ContainsKey(item.code))
-                continue;
-            item.name = Translation.Find(item.nameStr);
-            byCode.Add(item.code, item);
-        }
-    }
-
     public string _name;
     public string version;
     public string compactSave;
@@ -37,19 +14,31 @@ public class ArmorInfo
     public int block;
     public int durability;
     public string noDurability;
-    public int level;
-    public int levelReq;
-    public int cost;
-    public int gambleCost;
-    public string code;
+    public int _level;
+    public int _levelReq;
+    public int _cost;
+    public int _gambleCost;
+    public string _code;
     public string nameStr;
     [Datasheet.Sequence(length = 14)]
     public string[] skipped;
-    public string flippyFile;
-    public string invFile;
-    [Datasheet.Sequence(length = 129)]
+    public string _flippyFile;
+    public string _invFile;
+    public string _uniqueInvFile;
+    public string _setInvFile;
+    public string rArm;
+    public string lArm;
+    public string torso;
+    public string legs;
+    public string rSPad;
+    public string lSPad;
+    public bool usable;
+    public bool throwable;
+    public bool stackable;
+    public int minStack;
+    public int maxStack;
+    public string _type1;
+    public string _type2;
+    [Datasheet.Sequence(length = 114)]
     public string[] skipped2;
-
-    [System.NonSerialized]
-    public string name;
 }

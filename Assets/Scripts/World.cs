@@ -211,18 +211,10 @@ public class World : MonoBehaviour
 
     public static Pickup SpawnItem(string code, Vector3 pos)
     {
-        var armor = ArmorInfo.Find(code);
-        if (armor != null)
-            return Pickup.Create(pos, armor.flippyFile, armor.name);
+        var item = ItemInfo.Find(code);
+        if (item == null)
+            return null;
 
-        var weapon = WeaponInfo.Find(code);
-        if (weapon != null)
-            return Pickup.Create(pos, weapon.flippyFile, weapon.name);
-
-        var misc = MiscInfo.Find(code);
-        if (misc != null)
-            return Pickup.Create(pos, misc.flippyFile, misc.name);
-
-        return null;
+        return Pickup.Create(pos, item.flippyFile, item.name);
     }
 }
