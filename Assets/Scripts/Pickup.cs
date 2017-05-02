@@ -6,7 +6,7 @@ public class Pickup : Entity
     static MaterialPropertyBlock materialProperties;
     bool _selected = false;
 
-    public static Pickup Create(Vector3 position, string flippyFile, string name)
+    public static Pickup Create(Vector3 position, string flippyFile, string name, string title = null)
     {
         position = Iso.MapToIso(position);
         if (!CollisionMap.Fit(position, out position))
@@ -22,6 +22,7 @@ public class Pickup : Entity
         animator.sprites = spritesheet.GetSprites(0);
         animator.loop = false;
         var pickup = gameObject.AddComponent<Pickup>();
+        pickup.title = title;
         return pickup;
     }
 
