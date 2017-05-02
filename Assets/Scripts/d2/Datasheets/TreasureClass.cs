@@ -30,6 +30,7 @@ public class TreasureClass
                     node.code = armor.code;
                     node.prob = 1;
                     nodes.Add(node);
+                    treasureClass.probSum += node.prob;
                 }
             }
             treasureClass.nodeArray = nodes.ToArray();
@@ -50,6 +51,7 @@ public class TreasureClass
                     node.code = weapon.code;
                     node.prob = 1;
                     nodes.Add(node);
+                    treasureClass.probSum += node.prob;
                 }
             }
             treasureClass.nodeArray = nodes.ToArray();

@@ -91,6 +91,17 @@ public class PlayerController : MonoBehaviour
             character.run ^= true;
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            for (int i = 0; i < 1; ++i)
+            {
+                var tc = TreasureClass.sheet[Random.Range(0, TreasureClass.sheet.Count)];
+                if (tc.name == null)
+                    continue;
+                ItemDrop.Drop(tc.name, Iso.MapToWorld(IsoInput.mouseTile));
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.F8))
         {
             var pos = Iso.MapToWorld(IsoInput.mousePosition);

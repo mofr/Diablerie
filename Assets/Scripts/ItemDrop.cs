@@ -15,23 +15,21 @@ public class ItemDrop : MonoBehaviour
         Drop(target.monStat.treasureClass[0], target.transform.position);
     }
 
-    public void Drop(string code, Vector3 pos)
+    public static void Drop(string code, Vector3 pos)
     {
         var treasureClass = TreasureClass.Find(code);
         if (treasureClass == null)
         {
             var pickup = World.SpawnItem(code, pos);
             if (pickup == null)
-                Debug.LogError("Item wasn't spawned: " + code);
+                Debug.LogWarning("Item wasn't spawned: " + code);
             return;
         }
 
-        int noDrop = treasureClass.noDrop / 4; // division is temporary just to increase drop for debugging purposes
+        int noDrop = 0; // value is temporary just to increase drop for debugging purposes, should be treasureClass.noDrop
         for (int i = 0; i < treasureClass.picks; ++i)
         {
             int sample = Random.Range(0, treasureClass.probSum + noDrop);
-            if (sample < noDrop)
-                continue;
             foreach (var node in treasureClass.nodeArray)
             {
                 if (node.code == null)
@@ -44,6 +42,17 @@ public class ItemDrop : MonoBehaviour
                 }
 
                 sample -= node.prob;
+            }
+        }
+
+        for (int i = 0; i < -treasureClass.picks; ++i)
+        {
+            var node = treasureClass.nodeArray[i];
+            if (node.code == null)
+                break;
+            for (int j = 0; j < node.prob; ++j)
+            {
+                Drop(node.code, pos);
             }
         }
     }
