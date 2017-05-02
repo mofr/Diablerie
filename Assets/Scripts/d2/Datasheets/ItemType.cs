@@ -19,6 +19,11 @@ public class ItemType
                 continue;
             if (byCode.ContainsKey(type.code))
                 continue;
+            if (type.body)
+            {
+                type.bodyLoc1 = BodyLoc.GetIndex(type.bodyLoc1Code);
+                type.bodyLoc2 = BodyLoc.GetIndex(type.bodyLoc2Code);
+            }
             byCode.Add(type.code, type);
         }
 
@@ -56,8 +61,8 @@ public class ItemType
     public string _equiv2;
     public bool repair;
     public bool body;
-    public string bodyLoc1;
-    public string bodyLoc2;
+    public string bodyLoc1Code;
+    public string bodyLoc2Code;
     public string shoots;
     public string quiver;
     public bool throwable;
@@ -89,4 +94,10 @@ public class ItemType
 
     [System.NonSerialized]
     public ItemType equiv2;
+
+    [System.NonSerialized]
+    public int bodyLoc1;
+
+    [System.NonSerialized]
+    public int bodyLoc2;
 }

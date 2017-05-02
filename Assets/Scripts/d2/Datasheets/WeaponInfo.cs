@@ -5,7 +5,7 @@ public class WeaponInfo : ItemInfo
     public string _type1;
     public string _type2;
     public string _code;
-    public string alternateGfx;
+    public string _alternateGfx;
     public string nameStr;
     public int version;
     public int compactSave;
@@ -32,8 +32,16 @@ public class WeaponInfo : ItemInfo
     public int _levelReq;
     public int _cost;
     public int _gambleCost;
-    [Datasheet.Sequence(length = 16)]
+    [Datasheet.Sequence(length = 8)]
     public string[] skipped;
+    public int _component;
+    public string hitClass;
+    public int _invWidth;
+    public int _invHeight;
+    public bool _stackable;
+    public int minStack;
+    public int maxStack;
+    public int spawnStack;
     public string _flippyFile;
     [Datasheet.Sequence(length = 118)]
     public string[] skipped2;

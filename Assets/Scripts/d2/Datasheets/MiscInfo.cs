@@ -15,9 +15,10 @@ public class MiscInfo : ItemInfo
     public int _cost;
     public int _gambleCost;
     public string _code;
-    public string alternateGfx;
+    public string _alternateGfx;
     public string nameStr;
-    [Datasheet.Sequence(length = 6)]
+    public int _component;
+    [Datasheet.Sequence(length = 5)]
     public string[] skipped;
     public string _flippyFile;
     public string _invFile;

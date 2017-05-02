@@ -5,6 +5,7 @@ public class Pickup : Entity
     new SpriteRenderer renderer;
     static MaterialPropertyBlock materialProperties;
     bool _selected = false;
+    Item item;
 
     public static Pickup Create(Vector3 position, string flippyFile, string name, string title = null)
     {
@@ -23,6 +24,14 @@ public class Pickup : Entity
         animator.loop = false;
         var pickup = gameObject.AddComponent<Pickup>();
         pickup.title = title;
+        return pickup;
+    }
+
+    public static Pickup Create(Vector3 position, Item item)
+    {
+        var title = item.info.name + ", " + COF.layerNames[item.info.component % COF.layerNames.Length] + " " + item.info.alternateGfx;
+        var pickup = Create(position, item.info.flippyFile, item.info.name, title);
+        pickup.item = item;
         return pickup;
     }
 
@@ -70,6 +79,9 @@ public class Pickup : Entity
 
     public override void Operate(Character character = null)
     {
+        var equip = character.GetComponent<Equipment>();
+        if (item != null && item.info.type.body)
+            equip.Equip(item);
         Destroy(gameObject);
     }
 

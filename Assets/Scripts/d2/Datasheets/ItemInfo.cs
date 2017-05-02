@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 [System.Serializable]
 public class ItemInfo
@@ -56,6 +55,8 @@ public class ItemInfo
             item.name = Translation.Find(item.nameStr);
             item.type1Code = item._type1;
             item.type2Code = item._type2;
+            item.component = item._component;
+            item.alternateGfx = item._alternateGfx;
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -79,6 +80,8 @@ public class ItemInfo
             item.name = Translation.Find(item.nameStr);
             item.type1Code = item._type1;
             item.type2Code = item._type2;
+            item.component = item._component;
+            item.alternateGfx = item._alternateGfx;
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -102,6 +105,8 @@ public class ItemInfo
             item.name = Translation.Find(item.nameStr);
             item.type1Code = item._type1;
             item.type2Code = item._type2;
+            item.component = item._component;
+            item.alternateGfx = item._alternateGfx;
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -142,6 +147,12 @@ public class ItemInfo
 
     [System.NonSerialized]
     public int levelReq;
+
+    [System.NonSerialized]
+    public int component;
+
+    [System.NonSerialized]
+    public string alternateGfx;
 
     [System.NonSerialized]
     public MiscInfo misc;

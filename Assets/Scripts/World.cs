@@ -108,6 +108,7 @@ public class World : MonoBehaviour
         character.maxHealth = 10000;
         character.health = 10000;
         PlayerController.instance.SetCharacter(character);
+        var equip = player.AddComponent<Equipment>();
 
         var body = player.AddComponent<Rigidbody2D>();
         body.isKinematic = true;
@@ -211,10 +212,12 @@ public class World : MonoBehaviour
 
     public static Pickup SpawnItem(string code, Vector3 pos)
     {
-        var item = ItemInfo.Find(code);
-        if (item == null)
+        var info = ItemInfo.Find(code);
+        if (info == null)
             return null;
 
-        return Pickup.Create(pos, item.flippyFile, item.name);
+        var item = new Item(info);
+
+        return Pickup.Create(pos, item);
     }
 }

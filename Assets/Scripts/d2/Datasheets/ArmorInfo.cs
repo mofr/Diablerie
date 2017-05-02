@@ -20,8 +20,20 @@ public class ArmorInfo : ItemInfo
     public int _gambleCost;
     public string _code;
     public string nameStr;
-    [Datasheet.Sequence(length = 14)]
-    public string[] skipped;
+    public int magicLvl;
+    public string autoPrefix;
+    public string _alternateGfx;
+    public string openBetaGfx;
+    public string normCode;
+    public string uberCode;
+    public string ultraCode;
+    public int spellOffset;
+    public int _component;
+    public int _invWidth;
+    public int _invHeight;
+    public bool hasInv;
+    public int gemSockets;
+    public string gemApplyType;
     public string _flippyFile;
     public string _invFile;
     public string _uniqueInvFile;
