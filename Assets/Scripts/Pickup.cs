@@ -18,7 +18,7 @@ public class Pickup : Entity
         position = Iso.MapToWorld(position);
         var gameObject = new GameObject(name);
         gameObject.transform.position = position;
-        var spritesheet = DC6.Load(@"data\global\items\" + flippyFile + ".dc6");
+        var spritesheet = DC6.Load(flippyFile);
         var animator = gameObject.AddComponent<SpriteAnimator>();
         animator.sprites = spritesheet.GetSprites(0);
         animator.loop = false;
@@ -79,15 +79,9 @@ public class Pickup : Entity
 
     public override void Operate(Character character = null)
     {
-        var equip = character.GetComponent<Equipment>();
-        if (item != null && item.info.type.body)
+        if (item != null)
         {
-            equip.Equip(item);
-            var dc6 = DC6.Load(@"data\global\items\" + item.info.invFile + ".dc6", loadAllDirections: true);
-            var texture = dc6.textures[0];
-            var frame = dc6.directions[0].frames[0];
-            var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
-            Cursor.SetCursor(texture, hotSpot, CursorMode.ForceSoftware);
+            PlayerController.instance.mouseItem = item;
         }
         Destroy(gameObject);
     }

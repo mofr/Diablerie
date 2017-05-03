@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     bool flush = false;
     Iso iso;
+    Item _mouseItem;
 
     void Awake()
     {
@@ -33,6 +34,31 @@ public class PlayerController : MonoBehaviour
         iso = character.GetComponent<Iso>();
     }
 
+    public Item mouseItem
+    {
+        get { return _mouseItem; }
+        set
+        {
+            if (_mouseItem == value)
+                return;
+
+            _mouseItem = value;
+
+            if (_mouseItem != null)
+            {
+                var dc6 = DC6.Load(_mouseItem.info.invFile, loadAllDirections: true);
+                var texture = dc6.textures[0];
+                var frame = dc6.directions[0].frames[0];
+                var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
+                Cursor.SetCursor(texture, hotSpot, CursorMode.ForceSoftware);
+            }
+            else
+            {
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            }
+        }
+    }
+
     void DrawDebugPath()
     {
         Vector3 targetPosition;
@@ -53,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (character == null)
             return;
 
-        if (flush && Input.GetMouseButton(0))
+        if (flush && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
             return;
 
         flush = false;
@@ -64,6 +90,33 @@ public class PlayerController : MonoBehaviour
 
         if (EventSystem.current.currentSelectedGameObject != null)
             return;
+
+        if (_mouseItem != null)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Pickup.Create(character.transform.position, _mouseItem);
+                FlushInput();
+                mouseItem = null;
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (_mouseItem.info.type.body)
+                {
+                    if (_mouseItem.info.component < character.gear.Length)
+                        character.gear[_mouseItem.info.component] = _mouseItem.info.alternateGfx;
+                    if (_mouseItem.info.weapon != null)
+                        character.weaponClass = _mouseItem.info.weapon.wClass;
+
+                    var equip = character.GetComponent<Equipment>();
+                    mouseItem = equip.Equip(_mouseItem);
+                }
+                else
+                    mouseItem = null;
+                FlushInput();
+            }
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.F4))
         {

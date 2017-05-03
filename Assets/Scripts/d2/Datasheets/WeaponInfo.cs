@@ -32,8 +32,14 @@ public class WeaponInfo : ItemInfo
     public int _levelReq;
     public int _cost;
     public int _gambleCost;
-    [Datasheet.Sequence(length = 8)]
-    public string[] skipped;
+    public int _magicLvl;
+    public string autoPrefix;
+    public string openBetaGfx;
+    public string normCode;
+    public string uberCode;
+    public string ultraCode;
+    public string wClass;
+    public string twoHandedWClass;
     public int _component;
     public string hitClass;
     public int _invWidth;

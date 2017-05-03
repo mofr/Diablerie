@@ -4,20 +4,21 @@ public class Equipment : MonoBehaviour
 {
     public Item[] items;
 
-    public void Equip(Item item)
+    public Item Equip(Item item)
     {
+        Item previous = null;
         if (items[item.info.type.bodyLoc1] != null)
         {
-            if (items[item.info.type.bodyLoc2] != null)
-            {
-                Pickup.Create(transform.position, items[item.info.type.bodyLoc2]);
-            }
+            previous = items[item.info.type.bodyLoc2];
             items[item.info.type.bodyLoc2] = item;
         }
         else
         {
+            previous = items[item.info.type.bodyLoc1];
             items[item.info.type.bodyLoc1] = item;
         }
+
+        return previous;
     }
 
     void Start()

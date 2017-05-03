@@ -80,7 +80,7 @@ public class CommandPrompt : MonoBehaviour
             var pos = Iso.MapToWorld(IsoInput.mouseTile);
             if (parts[1] == "pickup")
             {
-                string flippyFile = "flp" + parts[2];
+                string flippyFile = @"data\global\items\flp" + parts[2] + ".dc6";
                 Pickup.Create(pos, flippyFile, flippyFile);
                 return;
             }

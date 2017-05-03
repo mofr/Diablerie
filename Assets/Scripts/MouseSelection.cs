@@ -59,7 +59,7 @@ class MouseSelection : MonoBehaviour
 
         Bounds bounds = entity.bounds;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || PlayerController.instance.mouseItem != null)
         {
             if (entity == current)
             {

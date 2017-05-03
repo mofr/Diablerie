@@ -34,7 +34,7 @@ public class ItemInfo
         LoadArmorInfo();
         LoadWeaponInfo();
         LoadMiscInfo();
-        SetupItemTypes();
+        SetupLinks();
         all = byCode.Values;
     }
 
@@ -116,7 +116,7 @@ public class ItemInfo
         }
     }
 
-    private static void SetupItemTypes()
+    private static void SetupLinks()
     {
         foreach(var item in byCode.Values)
         {
@@ -127,6 +127,9 @@ public class ItemInfo
                 item.type2 = ItemType.Find(item.type2Code);
 
             item.type = item.type1 != null ? item.type1 : item.type2;
+
+            item.invFile = @"data\global\items\" + item.invFile + ".dc6";
+            item.flippyFile = @"data\global\items\" + item.flippyFile + ".dc6";
         }
     }
 
