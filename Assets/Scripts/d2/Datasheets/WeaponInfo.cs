@@ -43,6 +43,7 @@ public class WeaponInfo : ItemInfo
     public int maxStack;
     public int spawnStack;
     public string _flippyFile;
-    [Datasheet.Sequence(length = 118)]
+    public string _invFile;
+    [Datasheet.Sequence(length = 117)]
     public string[] skipped2;
 }

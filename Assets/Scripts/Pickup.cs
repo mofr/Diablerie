@@ -81,7 +81,14 @@ public class Pickup : Entity
     {
         var equip = character.GetComponent<Equipment>();
         if (item != null && item.info.type.body)
+        {
             equip.Equip(item);
+            var dc6 = DC6.Load(@"data\global\items\" + item.info.invFile + ".dc6", loadAllDirections: true);
+            var texture = dc6.textures[0];
+            var frame = dc6.directions[0].frames[0];
+            var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
+            Cursor.SetCursor(texture, hotSpot, CursorMode.ForceSoftware);
+        }
         Destroy(gameObject);
     }
 
