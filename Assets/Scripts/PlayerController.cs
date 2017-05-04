@@ -6,11 +6,11 @@ public class PlayerController : MonoBehaviour
     static public PlayerController instance;
 
     public Character character;
+    public Equipment equip;
     public CameraController cameraController;
 
     bool flush = false;
     Iso iso;
-    Equipment equip;
     Item _mouseItem;
 
     void Awake()
@@ -126,21 +126,6 @@ public class PlayerController : MonoBehaviour
                 Pickup.Create(character.transform.position, _mouseItem);
                 FlushInput();
                 mouseItem = null;
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (_mouseItem.info.type.body)
-                {
-                    if (_mouseItem.info.component < character.gear.Length)
-                        character.gear[_mouseItem.info.component] = _mouseItem.info.alternateGfx;
-                    if (_mouseItem.info.weapon != null)
-                        character.weaponClass = _mouseItem.info.weapon.wClass;
-                    
-                    mouseItem = equip.Equip(_mouseItem);
-                }
-                else
-                    mouseItem = null;
-                FlushInput();
             }
             return;
         }

@@ -27,19 +27,21 @@ public class InventoryPanel : MonoBehaviour
     }
 
     Equipment _equip;
-    Image[] slots;
-    Sprite[] placeholders;
+    InventorySlot[] slots;
 
     void Awake()
     {
         instance = this;
-        slots = new Image[BodyLoc.sheet.Count];
-        placeholders = new Sprite[BodyLoc.sheet.Count];
+        slots = new InventorySlot[BodyLoc.sheet.Count];
         for (int i = 0; i < slots.Length; ++i)
         {
             Transform slotTransform = panel.transform.Find(BodyLoc.sheet[i].code);
-            slots[i] = slotTransform.GetComponent<Image>();
-            placeholders[i] = slots[i].sprite;
+            var slot = slotTransform.gameObject.AddComponent<InventorySlot>();
+            slot.placeholder = slotTransform.Find("placeholder").GetComponent<Image>();
+            slot.highlighter = slotTransform.Find("highlighter").GetComponent<Image>();
+            slot.itemImage = slotTransform.Find("item").GetComponent<Image>();
+            slot.bodyLoc = i;
+            slots[i] = slot;
         }
     }
 
@@ -53,18 +55,21 @@ public class InventoryPanel : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; ++i)
         {
-            Sprite sprite = placeholders[i];
+            Item item = null;
             if (_equip != null)
+                item = _equip.items[i];
+
+            if (item != null)
             {
-                Item item = _equip.items[i];
-                if (item != null)
-                {
-                    var dc6 = DC6.Load(item.info.invFile);
-                    sprite = dc6.GetSprites(0)[0];
-                }
+                var dc6 = DC6.Load(item.info.invFile);
+                Sprite sprite = dc6.GetSprites(0)[0];
+                slots[i].itemImage.sprite = sprite;
+                slots[i].itemImage.SetNativeSize();
             }
-            slots[i].sprite = sprite;
-            slots[i].SetNativeSize();
+
+            slots[i].itemImage.gameObject.SetActive(item != null);
+            slots[i].placeholder.color = new Color(1, 1, 1, item == null ? 1 : 0);
+            slots[i].item = item;
         }
     }
 }
