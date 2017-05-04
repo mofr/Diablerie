@@ -19,8 +19,16 @@ public class InventorySlot :
         highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
     }
 
+    private bool Accept(Item item)
+    {
+        return item.info.type.body && (item.info.type.bodyLoc1 == bodyLoc || item.info.type.bodyLoc2 == bodyLoc);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        var mouseItem = PlayerController.instance.mouseItem;
+        if (mouseItem != null && !Accept(mouseItem))
+            return;
         highlighter.gameObject.SetActive(true);
     }
 
@@ -32,6 +40,8 @@ public class InventorySlot :
     public void OnPointerDown(PointerEventData eventData)
     {
         var mouseItem = PlayerController.instance.mouseItem;
+        if (mouseItem != null && !Accept(mouseItem))
+            return;
         PlayerController.instance.mouseItem = item;
         item = null;
         PlayerController.instance.equip.Equip(mouseItem, bodyLoc);

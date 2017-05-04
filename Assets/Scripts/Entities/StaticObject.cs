@@ -34,7 +34,7 @@ public class StaticObject : Entity
     {
         iso = GetComponent<Iso>();
         animator = GetComponent<COFAnimator>();
-        animator.gear = gear;
+        animator.equip = gear;
     }
 
     override protected void Start()

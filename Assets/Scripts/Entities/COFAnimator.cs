@@ -11,7 +11,7 @@ class COFAnimator : MonoBehaviour
     public float speed = 1.0f;
     public float frameDuration = 1.0f / 12.0f;
     public bool shadow = true;
-    string[] _gear;
+    string[] _equip;
 
     float time = 0;
     int frameCounter = 0;
@@ -86,12 +86,16 @@ class COFAnimator : MonoBehaviour
         }
     }
 
-    public string[] gear
+    public string[] equip
     {
-        get { return _gear; }
+        get { return _equip; }
         set
         {
-            _gear = value;
+            if (_equip == null || value == null || Equals(_equip, value))
+            {
+                _equip = value;
+                UpdateConfiguration();
+            }
         }
     }
 
@@ -104,7 +108,7 @@ class COFAnimator : MonoBehaviour
 
     void UpdateConfiguration()
     {
-        if (_cof == null || _gear == null)
+        if (_cof == null || _equip == null)
             return;
 
         time = 0;
@@ -140,7 +144,7 @@ class COFAnimator : MonoBehaviour
             }
 
             var cofLayer = _cof.layers[i];
-            string equip = gear[cofLayer.compositIndex];
+            string equip = this.equip[cofLayer.compositIndex];
             if (equip == null || equip == "")
             {
                 layer.gameObject.SetActive(false);
@@ -196,7 +200,7 @@ class COFAnimator : MonoBehaviour
 
     void LateUpdate()
     {
-        if (_cof == null)
+        if (_cof == null || _equip == null)
             return;
         int sortingOrder = Iso.SortingOrder(transform.position);
         int frameIndex = Mathf.Min(frameCounter, frameCount - 1);

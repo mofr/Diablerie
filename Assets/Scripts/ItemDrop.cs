@@ -20,9 +20,11 @@ public class ItemDrop : MonoBehaviour
         var treasureClass = TreasureClass.Find(code);
         if (treasureClass == null)
         {
-            var pickup = World.SpawnItem(code, pos);
-            if (pickup == null)
+            var item = Item.Create(code);
+            if (item == null)
                 Debug.LogWarning("Item wasn't spawned: " + code);
+            else
+                Pickup.Create(pos, item);
             return;
         }
 

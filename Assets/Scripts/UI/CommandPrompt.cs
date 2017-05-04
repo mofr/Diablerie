@@ -88,7 +88,9 @@ public class CommandPrompt : MonoBehaviour
             if (parts[1] == "item")
             {
                 string code = parts[2];
-                World.SpawnItem(code, pos);
+                var item = Item.Create(code);
+                if (item != null)
+                    Pickup.Create(pos, item);
                 return;
             }
 

@@ -19,7 +19,6 @@ public class Character : Entity
     public string basePath;
     public string token;
     public string weaponClass;
-    public string[] gear;
 
     static float turnSpeed = 3.5f; // full rotations per second
 
@@ -75,7 +74,6 @@ public class Character : Entity
     protected override void Start()
     {
         base.Start();
-        animator.gear = gear;
         CollisionMap.SetPassable(Iso.Snap(iso.pos), false);
     }
 

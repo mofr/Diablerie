@@ -95,12 +95,8 @@ public class World : MonoBehaviour
         player.transform.position = pos;
         var character = player.AddComponent<Character>();
         character.basePath = @"data\global\chars";
-        character.token = "BA";
-        character.weaponClass = "1SS";
-        character.gear = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "AXE", "AXE", "", "LIT", "LIT", "", "", "", "", "", "" };
-        //character.token = "PA";
-        //character.weaponClass = "1HS";
-        //character.gear = new string[] { "CRN", "HVY", "HVY", "HVY", "HVY", "SCM", "", "KIT", "", "", "", "", "", "", "", "" };
+        character.token = "SO";
+        character.weaponClass = "HTH";
         character.directionCount = 16;
         character.run = true;
         character.walkSpeed = 7;
@@ -154,13 +150,14 @@ public class World : MonoBehaviour
         character.health = health;
         character.maxHealth = health;
 
-        character.gear = new string[monStat.ext.gearVariants.Length];
-        for (int i = 0; i < character.gear.Length; ++i)
+        var animator = character.GetComponent<COFAnimator>();
+        animator.equip = new string[monStat.ext.gearVariants.Length];
+        for (int i = 0; i < animator.equip.Length; ++i)
         {
             var variants = monStat.ext.gearVariants[i];
             if (variants == null)
                 continue;
-            character.gear[i] = variants[Random.Range(0, variants.Length)];
+            animator.equip[i] = variants[Random.Range(0, variants.Length)];
         }
 
         if (monStat.ai == "Npc")
@@ -209,16 +206,5 @@ public class World : MonoBehaviour
             return null;
         }
         return SpawnObject(objectInfo, pos);
-    }
-
-    public static Pickup SpawnItem(string code, Vector3 pos)
-    {
-        var info = ItemInfo.Find(code);
-        if (info == null)
-            return null;
-
-        var item = new Item(info);
-
-        return Pickup.Create(pos, item);
     }
 }
