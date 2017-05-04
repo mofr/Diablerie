@@ -1,0 +1,392 @@
+fileFormatVersion: 2
+guid: 9ccc7a5282719d145ab4f9476af99008
+timeCreated: 1493888275
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: buysellbtn.DC6.0_0
+    21300002: buysellbtn.DC6.0_1
+    21300004: buysellbtn.DC6.0_2
+    21300006: buysellbtn.DC6.0_3
+    21300008: buysellbtn.DC6.0_4
+    21300010: buysellbtn.DC6.0_5
+    21300012: buysellbtn.DC6.0_6
+    21300014: buysellbtn.DC6.0_7
+    21300016: buysellbtn.DC6.0_8
+    21300018: buysellbtn.DC6.0_9
+    21300020: buysellbtn.DC6.0_10
+    21300022: buysellbtn.DC6.0_11
+    21300024: buysellbtn.DC6.0_12
+    21300026: buysellbtn.DC6.0_13
+    21300028: buysellbtn.DC6.0_14
+    21300030: buysellbtn.DC6.0_15
+    21300032: buysellbtn.DC6.0_16
+    21300034: buysellbtn.DC6.0_17
+    21300036: buysellbtn.DC6.0_18
+    21300038: buysellbtn.DC6.0_19
+    21300040: buysellbtn.DC6.0_20
+    21300042: buysellbtn.DC6.0_21
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 80
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_5
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_6
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_7
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_8
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_9
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_10
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_11
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_12
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_13
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_14
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_15
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_16
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_17
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_18
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 31
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_19
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 31
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_20
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 31
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: buysellbtn.DC6.0_21
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 31
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
