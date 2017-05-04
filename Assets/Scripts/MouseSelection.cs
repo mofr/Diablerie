@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 class MouseSelection : MonoBehaviour
 {
@@ -59,7 +60,7 @@ class MouseSelection : MonoBehaviour
 
         Bounds bounds = entity.bounds;
 
-        if (Input.GetMouseButton(0) || PlayerController.instance.mouseItem != null)
+        if (Input.GetMouseButton(0) || PlayerController.instance.mouseItem != null || EventSystem.current.IsPointerOverGameObject())
         {
             if (entity == current)
             {

@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  cameraController: {fileID: 0}
 --- !u!114 &114846714760764304
 MonoBehaviour:
   m_ObjectHideFlags: 1

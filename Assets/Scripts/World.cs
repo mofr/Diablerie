@@ -107,13 +107,14 @@ public class World : MonoBehaviour
         character.runSpeed = 15;
         character.maxHealth = 10000;
         character.health = 10000;
-        PlayerController.instance.SetCharacter(character);
-        var equip = player.AddComponent<Equipment>();
 
+        var equip = player.AddComponent<Equipment>();
         var body = player.AddComponent<Rigidbody2D>();
         body.isKinematic = true;
         var collider = player.AddComponent<CircleCollider2D>();
         collider.radius = Iso.tileSizeY;
+
+        PlayerController.instance.SetCharacter(character);
     }
 
     public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null)

@@ -3,6 +3,7 @@
 public class CameraController : MonoBehaviour
 {
     public float sizeChangeSpeed = 3f;
+    public float horizontalShift = 0;
 
     new Camera camera;
 
@@ -40,6 +41,8 @@ public class CameraController : MonoBehaviour
     {
         Vector3 targetPos = PlayerController.instance.character.transform.position;
         targetPos.z = transform.position.z;
+
+        targetPos.x += camera.orthographicSize * camera.pixelWidth / camera.pixelHeight * horizontalShift;
 
         return targetPos;
     }

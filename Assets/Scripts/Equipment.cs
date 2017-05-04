@@ -4,6 +4,9 @@ public class Equipment : MonoBehaviour
 {
     public Item[] items;
 
+    public delegate void OnUpdateHandler();
+    public event OnUpdateHandler OnUpdate;
+
     public Item Equip(Item item)
     {
         Item previous = null;
@@ -18,10 +21,13 @@ public class Equipment : MonoBehaviour
             items[item.info.type.bodyLoc1] = item;
         }
 
+        if (OnUpdate != null)
+            OnUpdate();
+
         return previous;
     }
 
-    void Start()
+    void Awake()
     {
         items = new Item[BodyLoc.sheet.Count];
     }

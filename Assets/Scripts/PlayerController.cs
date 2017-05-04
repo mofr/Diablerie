@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour
     static public PlayerController instance;
 
     public Character character;
+    public CameraController cameraController;
 
     bool flush = false;
     Iso iso;
+    Equipment equip;
     Item _mouseItem;
 
     void Awake()
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
     {
         this.character = character;
         iso = character.GetComponent<Iso>();
+        equip = character.GetComponent<Equipment>();
+        InventoryPanel.instance.equip = equip;
     }
 
     public Item mouseItem
@@ -74,22 +78,46 @@ public class PlayerController : MonoBehaviour
         Pathing.DebugDrawPath(iso.pos, path);
     }
 
-    void Update()
+    void UpdateCamera()
+    {
+        float cameraShift = 0;
+        if (InventoryPanel.instance.visible)
+            cameraShift += 0.5f;
+        if (CharstatPanel.instance.visible)
+            cameraShift -= 0.5f;
+        cameraController.horizontalShift = cameraShift;
+    }
+
+    void ControlUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
+        {
+            InventoryPanel.instance.visible = false;
+            CharstatPanel.instance.visible = false;
+            UpdateCamera();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            InventoryPanel.instance.visible ^= true;
+            UpdateCamera();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CharstatPanel.instance.visible ^= true;
+            UpdateCamera();
+        }
+    }
+
+    void ControlCharacter()
     {
         if (character == null)
             return;
 
-        if (flush && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
-            return;
-
-        flush = false;
-
         character.LookAt(IsoInput.mousePosition);
 
         DrawDebugPath();
-
-        if (EventSystem.current.currentSelectedGameObject != null)
-            return;
 
         if (_mouseItem != null)
         {
@@ -107,8 +135,7 @@ public class PlayerController : MonoBehaviour
                         character.gear[_mouseItem.info.component] = _mouseItem.info.alternateGfx;
                     if (_mouseItem.info.weapon != null)
                         character.weaponClass = _mouseItem.info.weapon.wClass;
-
-                    var equip = character.GetComponent<Equipment>();
+                    
                     mouseItem = equip.Equip(_mouseItem);
                 }
                 else
@@ -144,6 +171,21 @@ public class PlayerController : MonoBehaviour
         {
             character.run ^= true;
         }
+    }
+
+    void Update()
+    {
+        ControlUI();
+
+        if (flush && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
+            return;
+
+        flush = false;
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        ControlCharacter();
 
         if (Input.GetKeyDown(KeyCode.T))
         {

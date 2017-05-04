@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DC6 : Spritesheet
 {
-    const int padding = 2;
-
     public struct Frame
     {
         public int width;
@@ -133,6 +131,7 @@ public class DC6 : Spritesheet
         }
 
         TexturePacker packer;
+        int padding = framesPerDirection > 1 ? 2 : 0;
 
         if (textureSize == -1)
         {
