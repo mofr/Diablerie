@@ -584,11 +584,12 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Collab: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 1
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: 7f2b111d-2a6e-4e28-9b28-ecda833a5481
+  projectName: Diablerie
+  organizationId: barney5ive
   cloudEnabled: 0
   enableNewInputSystem: 0
