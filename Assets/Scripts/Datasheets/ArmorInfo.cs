@@ -38,12 +38,12 @@ public class ArmorInfo : ItemInfo
     public string _invFile;
     public string _uniqueInvFile;
     public string _setInvFile;
-    public string rArm;
-    public string lArm;
-    public string torso;
-    public string legs;
-    public string rSPad;
-    public string lSPad;
+    public int rArm = -1;
+    public int lArm = -1;
+    public int torso = -1;
+    public int legs = -1;
+    public int rSPad = -1;
+    public int lSPad = -1;
     public bool usable;
     public bool throwable;
     public bool stackable;
