@@ -321,7 +321,7 @@ public class Character : Entity
         {
             mode = "NU";
         }
-
+        
         animator.cof = COF.Load(basePath, token, weaponClass, mode);
         animator.direction = directionIndex;
     }

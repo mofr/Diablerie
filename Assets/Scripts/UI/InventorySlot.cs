@@ -42,8 +42,10 @@ public class InventorySlot :
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null && !Accept(mouseItem))
             return;
-        PlayerController.instance.mouseItem = item;
         item = null;
-        PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
+        Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
+        PlayerController.instance.mouseItem = unequipped[0];
+        if (unequipped[1] != null)
+            Pickup.Create(PlayerController.instance.character.transform.position, unequipped[1]);
     }
 }

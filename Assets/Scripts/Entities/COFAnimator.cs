@@ -21,6 +21,8 @@ class COFAnimator : MonoBehaviour
     bool _selected = false;
     Material shadowMaterial;
     static MaterialPropertyBlock materialProperties;
+    bool configChanged = false;
+    bool modeChanged = false;
 
     struct Layer
     {
@@ -69,7 +71,6 @@ class COFAnimator : MonoBehaviour
 
     void Start()
     {
-        UpdateConfiguration();
     }
 
     public COF cof
@@ -79,9 +80,10 @@ class COFAnimator : MonoBehaviour
         {
             if (_cof != value)
             {
+                modeChanged = _cof == null || _cof.mode != value.mode;
                 _cof = value;
                 frameCount = 0;
-                UpdateConfiguration();
+                configChanged = true;
             }
         }
     }
@@ -94,7 +96,7 @@ class COFAnimator : MonoBehaviour
             if (_equip == null || value == null || Equals(_equip, value))
             {
                 _equip = value;
-                UpdateConfiguration();
+                configChanged = true;
             }
         }
     }
@@ -103,19 +105,30 @@ class COFAnimator : MonoBehaviour
     {
         frameStart = start;
         frameCount = count != 0 ? count : _cof.framesPerDirection;
-        UpdateConfiguration();
+        configChanged = true;
+    }
+
+    public void Restart()
+    {
+        time = 0;
+        frameCounter = 0;
     }
 
     void UpdateConfiguration()
     {
-        if (_cof == null || _equip == null)
+        if (_cof == null || _equip == null || !configChanged)
             return;
 
-        time = 0;
-        frameCounter = 0;
+        configChanged = false;
         frameDuration = _cof.frameDuration;
         if (frameCount == 0)
             frameCount = _cof.framesPerDirection;
+
+        if (modeChanged)
+        {
+            Restart();
+            modeChanged = false;
+        }
 
         for (int i = layers.Count; i < _cof.layerCount; ++i)
         {
@@ -177,8 +190,11 @@ class COFAnimator : MonoBehaviour
 
     void Update()
     {
-        if (_cof == null)
+        if (_cof == null || _equip == null)
             return;
+
+        UpdateConfiguration();
+
         if (!loop && frameCounter >= frameCount)
             return;
         time += Time.deltaTime * speed;
@@ -202,6 +218,7 @@ class COFAnimator : MonoBehaviour
     {
         if (_cof == null || _equip == null)
             return;
+        UpdateConfiguration();
         int sortingOrder = Iso.SortingOrder(transform.position);
         int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
         int spriteIndex = frameStart + frameIndex;
