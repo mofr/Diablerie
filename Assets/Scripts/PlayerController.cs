@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
             if (_mouseItem != null)
             {
-                var dc6 = DC6.Load(_mouseItem.info.invFile, loadAllDirections: true);
+                var dc6 = DC6.Load(_mouseItem.invFile, loadAllDirections: true);
                 var texture = dc6.textures[0];
                 var frame = dc6.directions[0].frames[0];
                 var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
