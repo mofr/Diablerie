@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour
             return true;
         }
 
+        if (equip.Equip(item))
+            return true;
+
         return inventory.Put(item);
     }
 

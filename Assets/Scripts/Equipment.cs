@@ -14,23 +14,19 @@ public class Equipment : MonoBehaviour
     static string[] defaultEquip = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "", "", "", "LIT", "LIT", "", "", "", "", "", "" };
     static Item[] unequippedItems = new Item[2];
 
-    public Item[] Equip(Item item)
+    public bool Equip(Item item)
     {
-        unequippedItems[0] = null;
-        unequippedItems[1] = null;
-
         if (!item.info.type.body)
-            return unequippedItems;
+            return false;
         
-        int loc = item.info.type.bodyLoc1;
-        if (items[loc] != null)
-            loc = item.info.type.bodyLoc2;
-        Equip(item, loc);
+        if (items[item.info.type.bodyLoc1] != null || items[item.info.type.bodyLoc2] != null)
+            return false;
+        Equip(item, item.info.type.bodyLoc1);
 
         if (OnUpdate != null)
             OnUpdate();
 
-        return unequippedItems;
+        return true;
     }
 
     public Item[] Equip(Item item, int loc)
