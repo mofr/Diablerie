@@ -9,7 +9,6 @@ public class SpriteAnimator : MonoBehaviour
     Sprite[] _sprites;
     float time = 0;
     float fps = 25;
-    int frameCounter = 0;
 
     public Sprite[] sprites
     {
@@ -24,6 +23,11 @@ public class SpriteAnimator : MonoBehaviour
         }
     }
 
+    public void Restart()
+    {
+        time = 0;
+    }
+
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
@@ -35,7 +39,7 @@ public class SpriteAnimator : MonoBehaviour
         if (_sprites == null)
             return;
 
-        frameCounter = (int)(time * fps);
+        int frameCounter = (int)(time * fps);
         if (frameCounter >= sprites.Length)
         {
             if (!loop)

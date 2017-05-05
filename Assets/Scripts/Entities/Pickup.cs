@@ -3,6 +3,7 @@
 public class Pickup : Entity
 {
     new SpriteRenderer renderer;
+    SpriteAnimator animator;
     static MaterialPropertyBlock materialProperties;
     bool _selected = false;
     Item item;
@@ -29,7 +30,7 @@ public class Pickup : Entity
 
     public static Pickup Create(Vector3 position, Item item)
     {
-        var title = item.info.name + ", " + COF.layerNames[item.info.component % COF.layerNames.Length] + " " + item.info.alternateGfx;
+        var title = item.info.name;
         var pickup = Create(position, item.info.flippyFile, item.info.name, title);
         pickup.item = item;
         return pickup;
@@ -40,6 +41,7 @@ public class Pickup : Entity
         if (materialProperties == null)
             materialProperties = new MaterialPropertyBlock();
         CollisionMap.SetPassable(Iso.MapToIso(transform.position), false);
+        animator = GetComponent<SpriteAnimator>();
     }
 
     private void OnDisable()
@@ -79,11 +81,18 @@ public class Pickup : Entity
 
     public override void Operate(Character character = null)
     {
-        if (item != null)
+        if (item == null)
+            Destroy(gameObject);
+
+        if (PlayerController.instance.Take(item))
         {
-            PlayerController.instance.mouseItem = item;
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else
+        {
+            // I can't!
+            animator.Restart();
+        }
     }
 
     private void OnRenderObject()

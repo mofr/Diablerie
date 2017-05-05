@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public Character character;
     public Equipment equip;
+    public Inventory inventory;
     public CameraController cameraController;
 
     bool flush = false;
@@ -35,7 +36,19 @@ public class PlayerController : MonoBehaviour
         this.character = character;
         iso = character.GetComponent<Iso>();
         equip = character.GetComponent<Equipment>();
+        inventory = character.GetComponent<Inventory>();
         InventoryPanel.instance.equip = equip;
+    }
+
+    public bool Take(Item item)
+    {
+        if (InventoryPanel.instance.visible)
+        {
+            mouseItem = item;
+            return true;
+        }
+
+        return inventory.Put(item);
     }
 
     public Item mouseItem

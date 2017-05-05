@@ -18,8 +18,11 @@ public class MiscInfo : ItemInfo
     public string _alternateGfx;
     public string nameStr;
     public int _component;
-    [Datasheet.Sequence(length = 5)]
-    public string[] skipped;
+    public int _invWidth;
+    public int _invHeight;
+    public bool _hasInv;
+    public int _gemSockets;
+    public string _gemApplyType;
     public string _flippyFile;
     public string _invFile;
     public string _uniqueInvFile;

@@ -104,7 +104,8 @@ public class World : MonoBehaviour
         character.maxHealth = 10000;
         character.health = 10000;
 
-        var equip = player.AddComponent<Equipment>();
+        player.AddComponent<Equipment>();
+        var inventory = Inventory.Create(player, 10, 4);
         var body = player.AddComponent<Rigidbody2D>();
         body.isKinematic = true;
         var collider = player.AddComponent<CircleCollider2D>();

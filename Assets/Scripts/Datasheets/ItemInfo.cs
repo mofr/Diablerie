@@ -50,6 +50,8 @@ public class ItemInfo
             item.gambleCost = item._gambleCost;
             item.flippyFile = item._flippyFile;
             item.invFile = item._invFile;
+            item.invWidth = item._invWidth;
+            item.invHeight = item._invHeight;
             item.level = item._level;
             item.levelReq = item._levelReq;
             item.weapon = item;
@@ -76,6 +78,8 @@ public class ItemInfo
             item.gambleCost = item._gambleCost;
             item.flippyFile = item._flippyFile;
             item.invFile = item._invFile;
+            item.invWidth = item._invWidth;
+            item.invHeight = item._invHeight;
             item.level = item._level;
             item.levelReq = item._levelReq;
             item.armor = item;
@@ -102,6 +106,8 @@ public class ItemInfo
             item.gambleCost = item._gambleCost;
             item.flippyFile = item._flippyFile;
             item.invFile = item._invFile;
+            item.invWidth = item._invWidth;
+            item.invHeight = item._invHeight;
             item.level = item._level;
             item.levelReq = item._levelReq;
             item.misc = item;
@@ -150,6 +156,12 @@ public class ItemInfo
 
     [System.NonSerialized]
     public string invFile;
+
+    [System.NonSerialized]
+    public int invWidth;
+
+    [System.NonSerialized]
+    public int invHeight;
 
     [System.NonSerialized]
     public int level;
