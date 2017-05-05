@@ -400,6 +400,8 @@ public class DCC : Spritesheet
                 pixelBuffer[i].val[x] = dir.pixel_values[y];
             }
         }
+
+        pixelBuffer[pb_idx + 1].frame = -1;
     }
 
     static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, Sprite[] sprites)
