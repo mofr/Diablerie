@@ -14,12 +14,7 @@ public class InventorySlot :
     public Image highlighter;
     public Image itemImage;
 
-    private void Start()
-    {
-        highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
-    }
-
-    private bool Accept(Item item)
+    private bool CanAccept(Item item)
     {
         return item.info.type.body && (item.info.type.bodyLoc1 == bodyLoc || item.info.type.bodyLoc2 == bodyLoc);
     }
@@ -27,9 +22,11 @@ public class InventorySlot :
     public void OnPointerEnter(PointerEventData eventData)
     {
         var mouseItem = PlayerController.instance.mouseItem;
-        if (mouseItem != null && !Accept(mouseItem))
-            return;
-        highlighter.gameObject.SetActive(true);
+        if (mouseItem != null && !CanAccept(mouseItem))
+            highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
+        else
+            highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+        highlighter.gameObject.SetActive(mouseItem != null || item != null);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -40,7 +37,7 @@ public class InventorySlot :
     public void OnPointerDown(PointerEventData eventData)
     {
         var mouseItem = PlayerController.instance.mouseItem;
-        if (mouseItem != null && !Accept(mouseItem))
+        if (mouseItem != null && !CanAccept(mouseItem))
             return;
         item = null;
         Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);

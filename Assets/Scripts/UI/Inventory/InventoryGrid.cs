@@ -103,8 +103,9 @@ public class InventoryGrid :
         var cell = MouseCell();
         if (mouseItem != null)
         {
-            if (_inventory.Put(mouseItem, cell.x, cell.y))
-                PlayerController.instance.mouseItem = null;
+            Item poppedItem;
+            if (_inventory.Put(mouseItem, cell.x, cell.y, out poppedItem))
+                PlayerController.instance.mouseItem = poppedItem;
         }
         else
         {
@@ -151,13 +152,19 @@ public class InventoryGrid :
         if (mouseItem != null)
         {
             Highlight(cell.x, cell.y, mouseItem.info.invWidth, mouseItem.info.invHeight);
-            highlighter.gameObject.SetActive(_inventory.Fits(mouseItem, cell.x, cell.y));
+            List<Inventory.Entry> coveredEntries;
+            highlighter.gameObject.SetActive(_inventory.Fit(mouseItem, cell.x, cell.y, out coveredEntries));
+            if (coveredEntries.Count > 1)
+                highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
+            else
+                highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
         }
         else
         {
             Inventory.Entry entry = _inventory.At(cell.x, cell.y);
             if (entry.item != null)
                 Highlight(entry.x, entry.y, entry.item.info.invWidth, entry.item.info.invHeight);
+            highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
             highlighter.gameObject.SetActive(entry.item != null);
         }
     }

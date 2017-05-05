@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour
     public int sizeX;
     public int sizeY;
     Entry[] grid;
+    static List<Entry> coveredEntries = new List<Entry>();
 
     public delegate void OnUpdateHandler();
     public event OnUpdateHandler OnUpdate;
@@ -46,22 +47,23 @@ public class Inventory : MonoBehaviour
     public Item Take(int x, int y)
     {
         Entry entry = At(x, y);
-        Item item = entry.item;
-        if (item != null)
+        if (entry.item != null)
         {
-            entry.item = null;
-            Fill(entry, item.info.invWidth, item.info.invHeight);
-            entries.RemoveAll(e => e.item == item);
+            Remove(entry);
 
             if (OnUpdate != null)
                 OnUpdate();
         }
-        return item;
+        return entry.item;
     }
 
-    public bool Fits(Item item, int x0, int y0)
+    public bool Fit(Item item, int x0, int y0, out List<Entry> covered)
     {
-        if (x0 < 0 || y0 < 0 || x0 >= sizeX || y0 >= sizeY)
+        coveredEntries.Clear();
+        covered = coveredEntries;
+
+        if (x0 < 0 || y0 < 0 || 
+            x0 + item.info.invWidth > sizeX || y0 + item.info.invHeight > sizeY)
             return false;
         if (item.info.invHeight <= 0 || item.info.invWidth <= 0)
             return false;
@@ -71,14 +73,23 @@ public class Inventory : MonoBehaviour
         {
             for(int x = 0; x < item.info.invWidth; ++x)
             {
-                if (i + x >= grid.Length)
-                    return false;
-                if (grid[i + x].item != null)
-                    return false;
+                var entry = grid[i + x];
+                if (entry.item != null && !covered.Contains(entry))
+                {
+                    covered.Add(entry);
+                }
             }
             i += sizeX;
         }
         return true;
+    }
+
+    private void Remove(Entry entry)
+    {
+        Item item = entry.item;
+        entry.item = null;
+        Fill(entry, item.info.invWidth, item.info.invHeight);
+        entries.RemoveAll(e => e.item == item);
     }
 
     private void Fill(Entry entry, int width, int height)
@@ -94,10 +105,20 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool Put(Item item, int x0, int y0)
+    public bool Put(Item item, int x0, int y0, out Item poppedItem, int maxPops = 1)
     {
-        if (!Fits(item, x0, y0))
+        poppedItem = null;
+        if (!Fit(item, x0, y0, out coveredEntries))
             return false;
+
+        if (coveredEntries.Count > maxPops)
+            return false;
+
+        if (coveredEntries.Count > 0)
+        {
+            poppedItem = coveredEntries[0].item;
+            Remove(coveredEntries[0]);
+        }
 
         var entry = new Entry();
         entry.item = item;
@@ -114,11 +135,12 @@ public class Inventory : MonoBehaviour
 
     public bool Put(Item item)
     {
+        Item popped;
         for (int x = 0; x < sizeX; ++x)
         {
             for (int y = 0; y < sizeY; ++y)
             {
-                if (Put(item, x, y))
+                if (Put(item, x, y, out popped, maxPops: 0))
                     return true;
             }
         }
