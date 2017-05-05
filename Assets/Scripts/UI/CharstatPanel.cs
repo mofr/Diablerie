@@ -11,6 +11,11 @@ public class CharstatPanel : MonoBehaviour
         instance = this;
     }
 
+    public void ToggleVisibility()
+    {
+        visible ^= true;
+    }
+
     public bool visible
     {
         set { panel.SetActive(value); }

@@ -45,6 +45,11 @@ public class InventoryPanel : MonoBehaviour
         }
     }
 
+    public void ToggleVisibility()
+    {
+        visible ^= true;
+    }
+
     public bool visible
     {
         set { panel.SetActive(value); }

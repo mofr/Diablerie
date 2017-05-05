@@ -94,20 +94,19 @@ public class PlayerController : MonoBehaviour
         {
             InventoryPanel.instance.visible = false;
             CharstatPanel.instance.visible = false;
-            UpdateCamera();
         }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
             InventoryPanel.instance.visible ^= true;
-            UpdateCamera();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
             CharstatPanel.instance.visible ^= true;
-            UpdateCamera();
         }
+
+        UpdateCamera();
     }
 
     void ControlCharacter()
