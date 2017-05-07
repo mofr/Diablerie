@@ -13,7 +13,7 @@ public class ArmorInfo : ItemInfo
     public int reqStr;
     public int block;
     public int durability;
-    public string noDurability;
+    public bool noDurability;
     public int _level;
     public int _levelReq;
     public int _cost;

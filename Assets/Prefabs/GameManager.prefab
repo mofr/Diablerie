@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  equip: {fileID: 0}
+  inventory: {fileID: 0}
   cameraController: {fileID: 0}
 --- !u!114 &114846714760764304
 MonoBehaviour:
@@ -142,6 +144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   labelPrefab: {fileID: 114686259536176770, guid: c92188f0b754df944a85e32e98ed01ec,
     type: 2}
+  screenLabelPrefab: {fileID: 114295984166475262, guid: a962f7e68d2a1944ab42dfaf5937617e,
+    type: 2}
   enemyBarPrefab: {fileID: 114263015362939446, guid: 4768d32ab650c0a418b60f7b9883889a,
     type: 2}
   label: {fileID: 0}
+  screenLabel: {fileID: 0}

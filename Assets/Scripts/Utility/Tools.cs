@@ -24,4 +24,16 @@ public class Tools
         Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y), new Vector3(bounds.max.x, bounds.max.y));
         Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y), new Vector3(bounds.min.x, bounds.min.y));
     }
+
+    static Vector3[] rectTransformCorners = new Vector3[4];
+
+    static public Rect RectTransformToScreenRect(RectTransform transform)
+    {
+        transform.GetWorldCorners(rectTransformCorners);
+        var pos0 = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransformCorners[0]);
+        var pos1 = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransformCorners[1]);
+        var pos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransformCorners[2]);
+        var pos3 = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransformCorners[3]);
+        return new Rect(pos0.x, pos0.y, pos2.x - pos1.x, pos1.y - pos0.y);
+    }
 }

@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 public class InventoryGrid :
     MonoBehaviour,
-    IPointerDownHandler
+    IPointerDownHandler,
+    IPointerEnterHandler,
+    IPointerExitHandler
 {
     Inventory _inventory;
 
@@ -14,6 +16,7 @@ public class InventoryGrid :
 
     RawImage highlighter;
     RectTransform rectTransform;
+    bool pointerOver;
 
     List<Image> itemsImages = new List<Image>();
 
@@ -65,6 +68,7 @@ public class InventoryGrid :
         highlighter.rectTransform.localPosition = new Vector3(0, 0, 0);
         highlighter.rectTransform.anchorMin = new Vector2(0, 0);
         highlighter.rectTransform.anchorMax = new Vector2(0, 0);
+        highlighter.gameObject.SetActive(false);
 
         inventory = PlayerController.instance.inventory;
     }
@@ -114,6 +118,23 @@ public class InventoryGrid :
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        pointerOver = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        pointerOver = false;
+        highlighter.gameObject.SetActive(false);
+        UI.HideScreenLabel();
+    }
+
+    private void OnDisable()
+    {
+        pointerOver = false;
+    }
+
     private Vector2i MouseCell()
     {
         var mouseItem = PlayerController.instance.mouseItem;
@@ -144,7 +165,7 @@ public class InventoryGrid :
 
     private void Update()
     {
-        if (_inventory == null)
+        if (_inventory == null || !pointerOver)
             return;
         
         var cell = MouseCell();
@@ -158,12 +179,20 @@ public class InventoryGrid :
                 highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
             else
                 highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+            UI.HideScreenLabel();
         }
         else
         {
             Inventory.Entry entry = _inventory.At(cell.x, cell.y);
             if (entry.item != null)
+            {
                 Highlight(entry.x, entry.y, entry.item.info.invWidth, entry.item.info.invHeight);
+                UI.ShowScreenLabel(Input.mousePosition, entry.item.GetDescription());
+            }
+            else
+            {
+                UI.HideScreenLabel();
+            }
             highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
             highlighter.gameObject.SetActive(entry.item != null);
         }

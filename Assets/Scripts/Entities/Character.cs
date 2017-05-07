@@ -221,6 +221,10 @@ public class Character : Entity
             {
                 step = path[0].direction;
             }
+            else
+            {
+                break;
+            }
         }
         if (path.Count > 0)
         {

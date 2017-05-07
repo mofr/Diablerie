@@ -13,6 +13,7 @@ public class InventorySlot :
     public Image placeholder;
     public Image highlighter;
     public Image itemImage;
+    private bool pointerOver = false;
 
     private bool CanAccept(Item item)
     {
@@ -21,6 +22,7 @@ public class InventorySlot :
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        pointerOver = true;
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null && !CanAccept(mouseItem))
             highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
@@ -29,9 +31,18 @@ public class InventorySlot :
         highlighter.gameObject.SetActive(mouseItem != null || item != null);
     }
 
+    private void ShowLabel()
+    {
+        var rect = Tools.RectTransformToScreenRect(GetComponent<RectTransform>());
+        var pos = new Vector2(rect.center.x, rect.yMax);
+        UI.ShowScreenLabel(pos, item.GetDescription());
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
+        pointerOver = false;
         highlighter.gameObject.SetActive(false);
+        UI.HideScreenLabel();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -39,11 +50,32 @@ public class InventorySlot :
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null && !CanAccept(mouseItem))
             return;
-        item = null;
         Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
         PlayerController.instance.mouseItem = unequipped[0];
         if (unequipped[1] != null)
             if (!PlayerController.instance.inventory.Put(unequipped[1]))
                 Pickup.Create(PlayerController.instance.character.transform.position, unequipped[1]);
+    }
+
+    private void OnDisable()
+    {
+        pointerOver = false;
+        highlighter.gameObject.SetActive(false);
+    }
+    
+    private void Update()
+    {
+        if (!pointerOver)
+            return;
+
+        var mouseItem = PlayerController.instance.mouseItem;
+        if (item != null && mouseItem == null)
+        {
+            ShowLabel();
+        }
+        else
+        {
+            UI.HideScreenLabel();
+        }
     }
 }

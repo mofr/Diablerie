@@ -75,4 +75,9 @@ public class InventoryPanel : MonoBehaviour
             slots[i].item = item;
         }
     }
+
+    private void OnDisable()
+    {
+        UI.HideScreenLabel();
+    }
 }
