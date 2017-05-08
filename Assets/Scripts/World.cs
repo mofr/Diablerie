@@ -102,8 +102,8 @@ public class World : MonoBehaviour
         character.run = true;
         character.walkSpeed = 7;
         character.runSpeed = 15;
-        character.maxHealth = 10000;
-        character.health = 10000;
+        character.maxHealth = 1000;
+        character.health = 1000;
 
         var equip = player.AddComponent<Equipment>();
         var inventory = Inventory.Create(player, 10, 4);

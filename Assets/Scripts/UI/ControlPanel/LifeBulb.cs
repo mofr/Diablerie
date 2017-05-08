@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class LifeBulb : MonoBehaviour
 {
+    [SerializeField]
+    private Text label;
     private Image imgHealthBar;
 
     void Start()
@@ -15,5 +17,6 @@ public class LifeBulb : MonoBehaviour
         float currHealth = PlayerController.instance.character.health;
         float maxHealth = PlayerController.instance.character.maxHealth;
         imgHealthBar.fillAmount = currHealth / maxHealth;
+        label.text = "Life: " + currHealth + "/" + maxHealth;
     }
 }

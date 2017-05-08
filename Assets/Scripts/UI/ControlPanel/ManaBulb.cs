@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ManaBulb : MonoBehaviour
 {
+    [SerializeField]
+    private Text label;
     private Image imgManaBar;
 
     void Start()
@@ -16,5 +18,6 @@ public class ManaBulb : MonoBehaviour
         float currHealth = PlayerController.instance.character.health;
         float maxHealth = PlayerController.instance.character.maxHealth;
         imgManaBar.fillAmount = currHealth / maxHealth;
+        label.text = "Mana: " + currHealth + "/" + maxHealth;
     }
 }
