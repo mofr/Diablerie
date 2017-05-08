@@ -222,6 +222,7 @@ class COFAnimator : MonoBehaviour
         int sortingOrder = Iso.SortingOrder(transform.position);
         int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
         int spriteIndex = frameStart + frameIndex;
+        direction %= _cof.directionCount;
         int priority = (direction * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
         for (int i = 0; i < _cof.layerCount; ++i)
         {
