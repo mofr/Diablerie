@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 222977769432321768}
   - component: {fileID: 114749966266839906}
   - component: {fileID: 114518930975183074}
+  - component: {fileID: 114206836293595802}
   m_Layer: 0
   m_Name: GoldButton
   m_TagString: Untagged
@@ -652,6 +653,7 @@ GameObject:
   - component: {fileID: 222885430317195206}
   - component: {fileID: 114051471108799068}
   - component: {fileID: 114755678805829340}
+  - component: {fileID: 114412836211617882}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -916,6 +918,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1693964196795508}
+--- !u!114 &114206836293595802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695490020834672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371dd4dd5595a3b46bc35996b3c6be92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Drop Gold
 --- !u!114 &114248589376320806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1024,6 +1038,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114412836211617882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855200778916716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371dd4dd5595a3b46bc35996b3c6be92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: Close
 --- !u!114 &114429361123154884
 MonoBehaviour:
   m_ObjectHideFlags: 1
