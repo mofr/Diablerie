@@ -19,6 +19,7 @@ public class InventoryGrid :
     bool pointerOver;
 
     List<Image> itemsImages = new List<Image>();
+    List<RawImage> itemsBackgrounds = new List<RawImage>();
 
     public Inventory inventory
     {
@@ -59,18 +60,24 @@ public class InventoryGrid :
     {
         rectTransform = transform as RectTransform;
 
-        GameObject highlighterObject = new GameObject("highlighter");
-        highlighter = highlighterObject.AddComponent<RawImage>();
-        highlighter.transform.SetParent(transform);
-        highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
-        highlighter.rectTransform.pivot = new Vector2(0, 0);
-        highlighter.rectTransform.localScale = new Vector3(1, 1, 1);
-        highlighter.rectTransform.localPosition = new Vector3(0, 0, 0);
-        highlighter.rectTransform.anchorMin = new Vector2(0, 0);
-        highlighter.rectTransform.anchorMax = new Vector2(0, 0);
+        highlighter = CreateHighlighter();
         highlighter.gameObject.SetActive(false);
 
         inventory = PlayerController.instance.inventory;
+    }
+
+    RawImage CreateHighlighter()
+    {
+        GameObject gameObject = new GameObject("highlighter");
+        var image = gameObject.AddComponent<RawImage>();
+        image.transform.SetParent(transform);
+        image.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+        image.rectTransform.pivot = new Vector2(0, 0);
+        image.rectTransform.localScale = new Vector3(1, 1, 1);
+        image.rectTransform.localPosition = new Vector3(0, 0, 0);
+        image.rectTransform.anchorMin = new Vector2(0, 0);
+        image.rectTransform.anchorMax = new Vector2(0, 0);
+        return image;
     }
 
     void OnInventoryUpdate()
@@ -79,13 +86,18 @@ public class InventoryGrid :
         {
             var entry = _inventory.entries[i];
             Image image;
+            RawImage bg;
             if (i >= itemsImages.Count)
             {
+                bg = CreateHighlighter();
+                itemsBackgrounds.Add(bg);
                 image = CreateItemImage(entry.item);
                 itemsImages.Add(image);
             }
             else
             {
+                bg = itemsBackgrounds[i];
+                bg.gameObject.SetActive(true);
                 image = itemsImages[i];
                 image.gameObject.SetActive(true);
             }
@@ -93,11 +105,15 @@ public class InventoryGrid :
             image.rectTransform.localPosition = new Vector2(entry.x * cellSizeX, entry.y * cellSizeY);
             image.sprite = entry.item.invSprite;
             image.SetNativeSize();
+
+            bg.color = new Color(0.1f, 0.1f, 0.3f, 0.3f);
+            SetRect(bg, entry.x, entry.y, entry.item.info.invWidth, entry.item.info.invHeight);
         }
 
         for (int i = _inventory.entries.Count; i < itemsImages.Count; ++i)
         {
             itemsImages[i].gameObject.SetActive(false);
+            itemsBackgrounds[i].gameObject.SetActive(false);
         }
     }
 
@@ -157,45 +173,61 @@ public class InventoryGrid :
         return new Vector2i(cellX, cellY);
     }
 
-    private void Highlight(int x, int y, int width, int height)
+    private void SetRect(Graphic graphic, int x, int y, int width, int height)
     {
-        highlighter.rectTransform.offsetMin = Vector2.zero;
-        highlighter.rectTransform.offsetMax = new Vector2(width * cellSizeX, height * cellSizeY);
-        highlighter.rectTransform.localPosition = new Vector2(x * cellSizeX, y * cellSizeY);
+        graphic.rectTransform.offsetMin = Vector2.zero;
+        graphic.rectTransform.offsetMax = new Vector2(width * cellSizeX, height * cellSizeY);
+        graphic.rectTransform.localPosition = new Vector2(x * cellSizeX, y * cellSizeY);
     }
 
     private void Update()
     {
         if (_inventory == null || !pointerOver)
             return;
+
+        for(int i = 0; i < _inventory.entries.Count; ++i)
+        {
+            RawImage bg = itemsBackgrounds[i];
+            bg.color = new Color(0.1f, 0.1f, 0.3f, 0.3f);
+        }
         
         var cell = MouseCell();
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null)
         {
-            Highlight(cell.x, cell.y, mouseItem.info.invWidth, mouseItem.info.invHeight);
-            List<Inventory.Entry> coveredEntries;
+            SetRect(highlighter, cell.x, cell.y, mouseItem.info.invWidth, mouseItem.info.invHeight);
+            List<int> coveredEntries;
             highlighter.gameObject.SetActive(_inventory.Fit(mouseItem, cell.x, cell.y, out coveredEntries));
             if (coveredEntries.Count > 1)
+            {
                 highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
+            }
             else
+            {
                 highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+                foreach(int entryIndex in coveredEntries)
+                {
+                    RawImage bg = itemsBackgrounds[entryIndex];
+                    bg.color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+                }
+            }
             UI.HideScreenLabel();
         }
         else
         {
-            Inventory.Entry entry = _inventory.At(cell.x, cell.y);
-            if (entry.item != null)
+            int entryIndex = _inventory.At(cell.x, cell.y);
+            if (entryIndex != -1)
             {
-                Highlight(entry.x, entry.y, entry.item.info.invWidth, entry.item.info.invHeight);
+                RawImage bg = itemsBackgrounds[entryIndex];
+                bg.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+                Inventory.Entry entry = _inventory.entries[entryIndex];
                 UI.ShowScreenLabel(Input.mousePosition, entry.item.GetDescription());
             }
             else
             {
                 UI.HideScreenLabel();
             }
-            highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
-            highlighter.gameObject.SetActive(entry.item != null);
+            highlighter.gameObject.SetActive(false);
         }
     }
 }

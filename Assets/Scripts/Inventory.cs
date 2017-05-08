@@ -5,8 +5,8 @@ public class Inventory : MonoBehaviour
 {
     public int sizeX;
     public int sizeY;
-    Entry[] grid;
-    static List<Entry> coveredEntries = new List<Entry>();
+    int[] grid;
+    static List<int> coveredEntries = new List<int>();
 
     public delegate void OnUpdateHandler();
     public event OnUpdateHandler OnUpdate;
@@ -16,7 +16,11 @@ public class Inventory : MonoBehaviour
         var inventory = gameObject.AddComponent<Inventory>();
         inventory.sizeX = sizeX;
         inventory.sizeY = sizeY;
-        inventory.grid = new Entry[sizeX * sizeY];
+        inventory.grid = new int[sizeX * sizeY];
+        for(int i = 0; i < inventory.grid.Length; ++i)
+        {
+            inventory.grid[i] = -1;
+        }
         return inventory;
     }
 
@@ -37,27 +41,29 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public Entry At(int x, int y)
+    public int At(int x, int y)
     {
         if (x < 0 || y < 0 || x >= sizeX || y >= sizeY)
-            return new Entry() { item = null };
+            return -1;
         return grid[y * sizeX + x];
     }
 
     public Item Take(int x, int y)
     {
-        Entry entry = At(x, y);
-        if (entry.item != null)
-        {
-            Remove(entry);
+        int index = At(x, y);
+        if (index == -1)
+            return null;
 
-            if (OnUpdate != null)
-                OnUpdate();
-        }
+        Entry entry = _entries[index];
+        Remove(index);
+
+        if (OnUpdate != null)
+            OnUpdate();
+
         return entry.item;
     }
 
-    public bool Fit(Item item, int x0, int y0, out List<Entry> covered)
+    public bool Fit(Item item, int x0, int y0, out List<int> covered)
     {
         coveredEntries.Clear();
         covered = coveredEntries;
@@ -73,10 +79,10 @@ public class Inventory : MonoBehaviour
         {
             for(int x = 0; x < item.info.invWidth; ++x)
             {
-                var entry = grid[i + x];
-                if (entry.item != null && !covered.Contains(entry))
+                var index = grid[i + x];
+                if (index != -1 && !covered.Contains(index))
                 {
-                    covered.Add(entry);
+                    covered.Add(index);
                 }
             }
             i += sizeX;
@@ -84,22 +90,26 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    private void Remove(Entry entry)
+    private void Remove(int index)
     {
-        Item item = entry.item;
-        entry.item = null;
-        Fill(entry, item.info.invWidth, item.info.invHeight);
-        entries.RemoveAll(e => e.item == item);
+        Entry entry = _entries[index];
+        Fill(-1, entry.x, entry.y, entry.item.info.invWidth, entry.item.info.invHeight);
+        _entries.RemoveAt(index);
+        for(int i = 0; i < grid.Length; ++i)
+        {
+            if (grid[i] > index)
+                grid[i] -= 1;
+        }
     }
 
-    private void Fill(Entry entry, int width, int height)
+    private void Fill(int index, int x0, int y0, int width, int height)
     {
-        int i = entry.y * sizeX + entry.x;
+        int i = y0 * sizeX + x0;
         for (int y = 0; y < height; ++y)
         {
             for (int x = 0; x < width; ++x)
             {
-                grid[i + x] = entry;
+                grid[i + x] = index;
             }
             i += sizeX;
         }
@@ -116,7 +126,8 @@ public class Inventory : MonoBehaviour
 
         if (coveredEntries.Count > 0)
         {
-            poppedItem = coveredEntries[0].item;
+            var poppedEntry = _entries[coveredEntries[0]];
+            poppedItem = poppedEntry.item;
             Remove(coveredEntries[0]);
         }
 
@@ -124,8 +135,9 @@ public class Inventory : MonoBehaviour
         entry.item = item;
         entry.x = x0;
         entry.y = y0;
+        int index = _entries.Count;
         _entries.Add(entry);
-        Fill(entry, item.info.invWidth, item.info.invHeight);
+        Fill(index, x0, y0, item.info.invWidth, item.info.invHeight);
 
         if (OnUpdate != null)
             OnUpdate();
