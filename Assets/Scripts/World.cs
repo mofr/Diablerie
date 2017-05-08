@@ -17,7 +17,7 @@ public class World : MonoBehaviour
         doe.Instantiate(doeOffset);
 
         var entry = town.FindEntry();
-        SpawnPlayer(Iso.MapTileToWorld(entry + townOffset));
+        SpawnPlayer("Sorceress", Iso.MapTileToWorld(entry + townOffset));
     }
 
     LevelBuilder CreateDenOfEvil()
@@ -88,15 +88,16 @@ public class World : MonoBehaviour
         return bloodMoor;
     }
 
-    static void SpawnPlayer(Vector3 pos)
+    static void SpawnPlayer(string className, Vector3 pos)
     {
+        CharStatsInfo info = CharStatsInfo.Find(className);
         var player = new GameObject("Player");
         player.tag = "Player";
         player.transform.position = pos;
         var character = player.AddComponent<Character>();
         character.basePath = @"data\global\chars";
-        character.token = "SO";
-        character.weaponClass = "HTH";
+        character.token = info.token;
+        character.weaponClass = info.baseWClass;
         character.directionCount = 16;
         character.run = true;
         character.walkSpeed = 7;
@@ -104,7 +105,7 @@ public class World : MonoBehaviour
         character.maxHealth = 10000;
         character.health = 10000;
 
-        player.AddComponent<Equipment>();
+        var equip = player.AddComponent<Equipment>();
         var inventory = Inventory.Create(player, 10, 4);
         var body = player.AddComponent<Rigidbody2D>();
         body.isKinematic = true;
@@ -112,6 +113,27 @@ public class World : MonoBehaviour
         collider.radius = Iso.tileSizeY;
 
         PlayerController.instance.SetCharacter(character);
+
+        foreach(var startingItem in info.startingItems)
+        {
+            if (startingItem.code == null)
+                continue;
+
+            var itemInfo = ItemInfo.Find(startingItem.code);
+            for (int i = 0; i < startingItem.count; ++i)
+            {
+                var item = new Item(itemInfo);
+                if (startingItem.loc != null)
+                {
+                    int loc = BodyLoc.GetIndex(startingItem.loc);
+                    equip.Equip(item, loc);
+                }
+                else
+                {
+                    PlayerController.instance.Take(item);
+                }
+            }
+        }
     }
 
     public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null)
