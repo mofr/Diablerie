@@ -142,14 +142,24 @@ public class InventoryGrid :
     public void OnPointerExit(PointerEventData eventData)
     {
         pointerOver = false;
-        highlighter.gameObject.SetActive(false);
-        UI.HideScreenLabel();
+        ClearHighlights();
     }
 
     private void OnDisable()
     {
         pointerOver = false;
+        ClearHighlights();
+    }
+
+    private void ClearHighlights()
+    {
         highlighter.gameObject.SetActive(false);
+        UI.HideScreenLabel();
+        for (int i = 0; i < _inventory.entries.Count; ++i)
+        {
+            RawImage bg = itemsBackgrounds[i];
+            bg.color = new Color(0.1f, 0.1f, 0.3f, 0.3f);
+        }
     }
 
     private Vector2i MouseCell()
@@ -185,12 +195,8 @@ public class InventoryGrid :
         if (_inventory == null || !pointerOver)
             return;
 
-        for(int i = 0; i < _inventory.entries.Count; ++i)
-        {
-            RawImage bg = itemsBackgrounds[i];
-            bg.color = new Color(0.1f, 0.1f, 0.3f, 0.3f);
-        }
-        
+        ClearHighlights();
+
         var cell = MouseCell();
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null)
@@ -211,7 +217,6 @@ public class InventoryGrid :
                     bg.color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
                 }
             }
-            UI.HideScreenLabel();
         }
         else
         {
@@ -223,11 +228,6 @@ public class InventoryGrid :
                 Inventory.Entry entry = _inventory.entries[entryIndex];
                 UI.ShowScreenLabel(Input.mousePosition, entry.item.GetDescription());
             }
-            else
-            {
-                UI.HideScreenLabel();
-            }
-            highlighter.gameObject.SetActive(false);
         }
     }
 }
