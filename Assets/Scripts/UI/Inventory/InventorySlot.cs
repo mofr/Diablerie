@@ -61,6 +61,7 @@ public class InventorySlot :
     {
         pointerOver = false;
         highlighter.gameObject.SetActive(false);
+        UI.HideScreenLabel();
     }
     
     private void Update()

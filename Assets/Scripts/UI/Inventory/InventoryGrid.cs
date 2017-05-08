@@ -133,6 +133,7 @@ public class InventoryGrid :
     private void OnDisable()
     {
         pointerOver = false;
+        highlighter.gameObject.SetActive(false);
     }
 
     private Vector2i MouseCell()
