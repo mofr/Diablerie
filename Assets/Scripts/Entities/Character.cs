@@ -265,7 +265,9 @@ public class Character : Entity
         {
             var dir = (targetPoint - iso.pos).normalized;
             float speed = run ? runSpeed : walkSpeed;
-            var movement = dir * speed * Time.deltaTime;
+            float distance = speed * Time.deltaTime;
+            distance = Mathf.Min(distance, Vector2.Distance(iso.pos, targetPoint));
+            var movement = dir * distance;
 
             if (Move(movement))
                 desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
@@ -423,7 +425,7 @@ public class Character : Entity
     }
 
     void OnRenderObject()
-    {
+    {   
         if (!dead && !dying)
             MouseSelection.Submit(this);
     }
