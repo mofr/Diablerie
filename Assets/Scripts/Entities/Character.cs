@@ -201,9 +201,6 @@ public class Character : Entity
 
     void MoveAlongPath()
     {
-        if (path.Count == 0 || !moving || attack || takingDamage || dead || dying || ressurecting)
-            return;
-
         Vector2 step = path[0].direction;
         float stepLen = step.magnitude;
         Vector2 movement = new Vector3();
@@ -220,6 +217,7 @@ public class Character : Entity
             if (path.Count > 0)
             {
                 step = path[0].direction;
+                stepLen = step.magnitude;
             }
             else
             {
@@ -246,7 +244,7 @@ public class Character : Entity
 
     void MoveToTargetPoint()
     {
-        if (!moving)
+        if (!moving || attack || takingDamage || dead || dying || ressurecting)
             return;
 
         var newPath = Pathing.BuildPath(iso.pos, targetPoint, self: gameObject);
@@ -263,19 +261,14 @@ public class Character : Entity
         Pathing.DebugDrawPath(iso.pos, path);
         if (path.Count == 1 && Vector2.Distance(path[0].pos, targetPoint) < 1.0f)
         {
-            var dir = (targetPoint - iso.pos).normalized;
-            float speed = run ? runSpeed : walkSpeed;
-            float distance = speed * Time.deltaTime;
-            distance = Mathf.Min(distance, Vector2.Distance(iso.pos, targetPoint));
-            var movement = dir * distance;
+            // smooth straightforward movement
+            var pathStep = path[0];
+            pathStep.pos = targetPoint;
+            pathStep.direction = targetPoint - iso.pos;
+            path[0] = pathStep;
+        }
 
-            if (Move(movement))
-                desiredDirection = Iso.Direction(iso.pos, targetPoint, directionCount);
-        }
-        else
-        {
-            MoveAlongPath();
-        }
+        MoveAlongPath();
     }
 
     bool Move(Vector2 movement)
