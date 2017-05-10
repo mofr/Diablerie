@@ -130,8 +130,6 @@ public class PlayerController : MonoBehaviour
         if (character == null)
             return;
 
-        character.LookAt(IsoInput.mousePosition);
-
         DrawDebugPath();
 
         if (_mouseItem != null)
@@ -156,7 +154,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-
             if (MouseSelection.current != null)
             {
                 character.target = MouseSelection.current;
@@ -165,6 +162,10 @@ public class PlayerController : MonoBehaviour
             {
                 character.GoTo(IsoInput.mousePosition);
             }
+        }
+        else
+        {
+            character.LookAt(IsoInput.mousePosition);
         }
 
         if (Input.GetKeyDown(KeyCode.R))

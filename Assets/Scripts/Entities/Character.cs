@@ -57,13 +57,14 @@ public class Character : Entity
     bool dying = false;
     bool dead = false;
     public bool ressurecting = false;
-    Entity targetEntity;
-    Character targetCharacter;
     public int attackDamage = 30;
     public int health = 100;
     public int maxHealth = 100;
-    Vector2 targetPoint;
     bool hasMoved = false;
+
+    Entity targetEntity;
+    Character attackTarget;
+    Vector2 targetPoint;
 
     void Awake()
     {
@@ -83,8 +84,7 @@ public class Character : Entity
             return;
         targetPoint = Iso.MapToIso(entity.transform.position);
         targetEntity = entity;
-        targetCharacter = null;
-        moving = true;
+        attackTarget = null;
     }
 
     public void GoTo(Vector2 target)
@@ -98,7 +98,7 @@ public class Character : Entity
         moving = true;
         targetPoint = target;
         targetEntity = null;
-        targetCharacter = null;
+        attackTarget = null;
     }
 
     public void Teleport(Vector2 target)
@@ -124,19 +124,18 @@ public class Character : Entity
         {
             attack = true;
             targetPoint = target;
+            attackTarget = null;
+            targetEntity = null;
         }
     }
 
-    public void Attack(Character targetCharacter)
+    public void Attack(Character target)
     {
         if (attack || takingDamage || dead || dying || ressurecting)
             return;
 
-        Iso targetIso = targetCharacter.GetComponent<Iso>();
-        targetPoint = targetIso.pos;
-        this.targetCharacter = targetCharacter;
+        attackTarget = target;
         targetEntity = null;
-        moving = true;
     }
 
     void AbortPath()
@@ -145,44 +144,54 @@ public class Character : Entity
         traveled = 0;
     }
 
-    void Update()
+    void OperateWithTarget()
     {
-        if (!takingDamage && !dead && !dying && !ressurecting)
+        if (takingDamage || dead || dying || ressurecting)
+            return;
+        
+        if (targetEntity)
         {
-            if (targetEntity)
+            var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
+            if (distance <= diameter + targetEntity.operateRange)
             {
-                var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
-                if (distance <= diameter + targetEntity.operateRange)
-                {
-                    var localEntity = targetEntity;
-                    moving = false;
-                    targetEntity = null;
-                    localEntity.Operate(this);
-                    PlayerController.instance.FlushInput();
-                }
+                var localEntity = targetEntity;
+                moving = false;
+                targetEntity = null;
+                localEntity.Operate(this);
+                PlayerController.instance.FlushInput();
             }
-            if (targetCharacter && !attack)
+            else
             {
-                Vector2 target = targetCharacter.GetComponent<Iso>().pos;
-                if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + targetCharacter.diameter / 2)
-                {
-                    moving = false;
-                    attack = true;
-                    LookAtImmidietly(target);
-                }
-                else
-                {
-                    targetPoint = target;
-                }
+                moving = true;
             }
         }
 
+        if (attackTarget && !attack)
+        {
+            Vector2 target = attackTarget.iso.pos;
+            if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + attackTarget.diameter / 2)
+            {
+                moving = false;
+                attack = true;
+                LookAtImmidietly(target);
+            }
+            else
+            {
+                moving = true;
+                targetPoint = target;
+            }
+        }
+    }
+
+    void Update()
+    {
+        OperateWithTarget();
         hasMoved = false;
         MoveToTargetPoint();
         Turn();
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         UpdateAnimation();
     }
@@ -320,7 +329,7 @@ public class Character : Entity
         {
             mode = "NU";
         }
-        
+
         animator.cof = COF.Load(basePath, token, weaponClass, mode);
         animator.direction = directionIndex;
     }
@@ -351,7 +360,7 @@ public class Character : Entity
                 takingDamage = true;
                 attack = false;
                 moving = false;
-                targetCharacter = null;
+                attackTarget = null;
             }
         }
         else
@@ -361,7 +370,7 @@ public class Character : Entity
             dying = true;
             attack = false;
             moving = false;
-            targetCharacter = null;
+            attackTarget = null;
             if (OnDeath != null)
                 OnDeath(this, originator);
         }
@@ -369,32 +378,21 @@ public class Character : Entity
 
     void OnAnimationMiddle()
     {
-        if (attack)
+        if (attack && attackTarget)
         {
-            if (targetCharacter == null)
+            Vector2 target = attackTarget.iso.pos;
+            if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + attackTarget.diameter / 2)
             {
-                var hit = CollisionMap.Raycast(iso.pos, targetPoint, rayLength: diameter / 2 + attackRange, ignore: gameObject, debug: true);
-                if (hit.gameObject != null)
-                {
-                    targetCharacter = hit.gameObject.GetComponent<Character>();
-                }
-            }
-
-            if (targetCharacter)
-            {
-                Vector2 target = targetCharacter.GetComponent<Iso>().pos;
-                if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + targetCharacter.diameter / 2)
-                {
-                    targetCharacter.TakeDamage(attackDamage, this);
-                }
-                targetCharacter = null;
+                //attackTarget.TakeDamage(attackDamage, this);
             }
         }
     }
 
     void OnAnimationFinish()
     {
+        attackTarget = null;
         attack = false;
+
         takingDamage = false;
         ressurecting = false;
         if (dying)
@@ -403,7 +401,6 @@ public class Character : Entity
             dead = true;
             CollisionMap.SetPassable(Iso.Snap(iso.pos), true);
         }
-        UpdateAnimation();
     }
 
     public override Vector2 titleOffset
