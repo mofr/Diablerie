@@ -143,9 +143,11 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.F4))
+        if (Input.GetKey(KeyCode.F4))
         {
-            character.Teleport(IsoInput.mouseTile);
+            var teleport = SkillInfo.Find("Teleport");
+            var newPos = IsoInput.mouseTile;
+            character.SpellCast(teleport, newPos);
         }
 
         if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))

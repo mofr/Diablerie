@@ -4,11 +4,20 @@
 public class SpriteAnimator : MonoBehaviour
 {
     public bool loop = true;
+    public float fps = 25;
 
     new SpriteRenderer renderer;
     Sprite[] _sprites;
     float time = 0;
-    float fps = 25;
+    bool _finished = false;
+
+    public bool finished
+    {
+        get
+        {
+            return _finished;
+        }
+    }
 
     public Sprite[] sprites
     {
@@ -26,9 +35,10 @@ public class SpriteAnimator : MonoBehaviour
     public void Restart()
     {
         time = 0;
+        _finished = false;
     }
 
-    void Start()
+    private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
         renderer.material = Materials.normal;
@@ -43,7 +53,10 @@ public class SpriteAnimator : MonoBehaviour
         if (frameCounter >= sprites.Length)
         {
             if (!loop)
+            {
+                _finished = true;
                 return;
+            }
 
             frameCounter = frameCounter % sprites.Length;
         }

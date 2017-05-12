@@ -82,7 +82,7 @@ public class Warp : Entity
         ScreenFader.SetToBlack();
         ScreenFader.FadeToClear();
         var target = Iso.MapToIso(targetWarp.transform.position);
-        character.Teleport(target);
+        character.InstantMove(target);
         character.GoTo(target + new Vector3(targetWarp.info.exitWalkX, targetWarp.info.exitWalkY));
     }
 }
