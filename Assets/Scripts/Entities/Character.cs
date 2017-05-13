@@ -46,7 +46,7 @@ public class Character : Entity
     public int directionIndex = 0;
     float direction = 0;
 
-    Iso iso;
+    public Iso iso; // readonly
     COFAnimator animator;
     List<Pathing.Step> path = new List<Pathing.Step>();
     float traveled = 0;

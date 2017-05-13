@@ -5,6 +5,7 @@ public abstract class Spritesheet
 {
     static Dictionary<string, Spritesheet> cache = new Dictionary<string, Spritesheet>();
 
+    public int directionCount;
     public abstract Sprite[] GetSprites(int direction);
 
     public static Spritesheet Load(string filename)
@@ -18,11 +19,15 @@ public abstract class Spritesheet
         Spritesheet spritesheet = null;
         try
         {
-            spritesheet = DCC.Load(filename + ".dcc");
+            var dcc = DCC.Load(filename + ".dcc");
+            spritesheet = dcc;
+            spritesheet.directionCount = dcc.directionCount;
         }
         catch (System.IO.FileNotFoundException)
         {
-            spritesheet = DC6.Load(filename + ".dc6");
+            var dc6 = DC6.Load(filename + ".dc6");
+            spritesheet = dc6;
+            spritesheet.directionCount = dc6.directionCount;
         }
 
         cache.Add(lowerFilename, spritesheet);

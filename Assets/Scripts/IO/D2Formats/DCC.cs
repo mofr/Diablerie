@@ -630,6 +630,7 @@ public class DCC : Spritesheet
             ReadHeader(reader, dcc.header);
         }
 
+        dcc.directionCount = dcc.header.directionCount;
         dcc.framesPerDirection = dcc.header.framesPerDir;
         dcc.sprites = new Sprite[dcc.header.directionCount][];
 

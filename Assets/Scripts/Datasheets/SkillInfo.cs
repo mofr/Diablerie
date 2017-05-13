@@ -83,5 +83,10 @@ public class SkillInfo
             // teleport
             character.InstantMove(target);
         }
+
+        if (clientMissile != null)
+        {
+            Missile.Create(clientMissile, character.iso.pos, target);
+        }
     }
 }

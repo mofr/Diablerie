@@ -36,9 +36,16 @@ public struct Datasheet
             if (lineIndex < headerLines)
                 continue;
 
-            T obj = new T();
-            ReadObject(obj, members, fields);
-            sheet.Add(obj);
+            try
+            {
+                T obj = new T();
+                ReadObject(obj, members, fields);
+                sheet.Add(obj);
+            }
+            catch (System.Exception e)
+            {
+                throw new System.Exception("Datasheet parsing error at line " + lineIndex + ", first field " + fields[0], e);
+            }
         }
         Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
         return sheet;
@@ -79,9 +86,9 @@ public struct Datasheet
             {
                 fieldIndex = ReadMember(obj, member, fields, fieldIndex);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                throw new System.Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member);
+                throw new System.Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member, e);
             }
         }
         return fieldIndex;

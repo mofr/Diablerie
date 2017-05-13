@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
-[RequireComponent(typeof(SpriteRenderer))]
 public class Iso : MonoBehaviour
 {
     public const int SubTileCount = 5;
@@ -15,7 +11,7 @@ public class Iso : MonoBehaviour
     public bool macro = false;
     public bool sort = true;
 
-    SpriteRenderer spriteRenderer;
+    new Renderer renderer;
 
     static public Vector3 MapToWorld(float x, float y)
     {
@@ -125,14 +121,14 @@ public class Iso : MonoBehaviour
     void Awake()
     {
         pos = MapToIso(transform.position);
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        renderer = GetComponent<Renderer>();
     }
 
     void Update()
     {
         transform.position = MapToWorld(pos);
 
-        if (sort)
-            spriteRenderer.sortingOrder = SortingOrder(transform.position);
+        if (sort && renderer)
+            renderer.sortingOrder = SortingOrder(transform.position);
     }
 }
