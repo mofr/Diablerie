@@ -147,6 +147,7 @@ public class Character : Entity
         spellCasting = true;
         spellCastOverlay = Overlay.Create(gameObject, skillInfo.castOverlay);
         this.skillInfo = skillInfo;
+        targetPoint = target;
 
         LookAtImmidietly(target);
     }
@@ -332,7 +333,6 @@ public class Character : Entity
         else if (takingDamage)
         {
             mode = "GH";
-            animator.loop = false;
         }
         else if (hasMoved)
         {
@@ -340,7 +340,7 @@ public class Character : Entity
         }
         else if (spellCasting)
         {
-            mode = "SC";
+            mode = skillInfo.anim;
         }
         else
         {
@@ -407,7 +407,7 @@ public class Character : Entity
         }
         else if (spellCasting)
         {
-            skillInfo.Do(this);
+            skillInfo.Do(this, targetPoint);
         }
     }
 
