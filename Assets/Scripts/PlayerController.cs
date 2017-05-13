@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     bool flush = false;
     Iso iso;
     Item _mouseItem;
+    Dictionary<KeyCode, SkillInfo> skillMap;
 
     void Awake()
     {
@@ -24,6 +26,13 @@ public class PlayerController : MonoBehaviour
             if (player != null)
                 SetCharacter(player.GetComponent<Character>());
         }
+
+        skillMap = new Dictionary<KeyCode, SkillInfo> {
+            { KeyCode.F1, SkillInfo.Find("Fire Ball") },
+            { KeyCode.F2, SkillInfo.Find("Charged Bolt") },
+            { KeyCode.F3, SkillInfo.Find("Glacial Spike") },
+            { KeyCode.F4, SkillInfo.Find("Teleport") }
+        };
     }
 
     public void FlushInput()
@@ -143,11 +152,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.F4))
+        foreach(var skill in skillMap)
         {
-            var teleport = SkillInfo.Find("Teleport");
-            var newPos = IsoInput.mouseTile;
-            character.SpellCast(teleport, newPos);
+            if (Input.GetKey(skill.Key))
+            {
+                character.UseSkill(skill.Value, IsoInput.mouseTile);
+            }
         }
 
         if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))

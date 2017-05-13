@@ -56,13 +56,13 @@ public class Character : Entity
     bool takingDamage = false;
     bool dying = false;
     bool dead = false;
-    bool spellCasting = false;
+    bool usingSkill = false;
     public bool ressurecting = false;
     public int attackDamage = 30;
     public int health = 100;
     public int maxHealth = 100;
     bool hasMoved = false;
-    Overlay spellCastOverlay;
+    Overlay castOverlay;
     SkillInfo skillInfo;
 
     Entity targetEntity;
@@ -83,7 +83,7 @@ public class Character : Entity
 
     public void Use(Entity entity)
     {
-        if (attack || takingDamage || dying || dead || ressurecting || spellCasting)
+        if (attack || takingDamage || dying || dead || ressurecting || usingSkill)
             return;
         targetPoint = Iso.MapToIso(entity.transform.position);
         targetEntity = entity;
@@ -92,7 +92,7 @@ public class Character : Entity
 
     public void GoTo(Vector2 target)
     {
-        if (attack || takingDamage || dying || dead || ressurecting || spellCasting)
+        if (attack || takingDamage || dying || dead || ressurecting || usingSkill)
             return;
 
         if (monStat != null && !monStat.ext.hasMode[2])
@@ -121,7 +121,7 @@ public class Character : Entity
 
     public void Attack(Vector3 target)
     {
-        if (dead || dying && attack && takingDamage && directionIndex != desiredDirection || moving || ressurecting || spellCasting)
+        if (dead || dying && attack && takingDamage && directionIndex != desiredDirection || moving || ressurecting || usingSkill)
             return;
 
         attack = true;
@@ -132,20 +132,21 @@ public class Character : Entity
 
     public void Attack(Character target)
     {
-        if (attack || takingDamage || dead || dying || ressurecting || spellCasting)
+        if (attack || takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
         attackTarget = target;
         targetEntity = null;
     }
 
-    public void SpellCast(SkillInfo skillInfo, Vector3 target)
+    public void UseSkill(SkillInfo skillInfo, Vector3 target)
     {
-        if (attack || takingDamage || dead || dying || ressurecting || spellCasting)
+        if (attack || takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
-        spellCasting = true;
-        spellCastOverlay = Overlay.Create(gameObject, skillInfo.castOverlay);
+        usingSkill = true;
+        moving = false;
+        castOverlay = Overlay.Create(gameObject, skillInfo.castOverlay);
         this.skillInfo = skillInfo;
         targetPoint = target;
 
@@ -160,7 +161,7 @@ public class Character : Entity
 
     void OperateWithTarget()
     {
-        if (takingDamage || dead || dying || ressurecting || spellCasting)
+        if (takingDamage || dead || dying || ressurecting || usingSkill)
             return;
         
         if (targetEntity)
@@ -212,7 +213,7 @@ public class Character : Entity
 
     void Turn()
     {
-        if (!dead && !dying && !attack && !takingDamage && directionIndex != desiredDirection && !ressurecting && !spellCasting)
+        if (!dead && !dying && !attack && !takingDamage && directionIndex != desiredDirection && !ressurecting && !usingSkill)
         {
             float diff = Tools.ShortestDelta(directionIndex, desiredDirection, directionCount);
             float delta = Mathf.Abs(diff);
@@ -267,7 +268,7 @@ public class Character : Entity
 
     void MoveToTargetPoint()
     {
-        if (!moving || attack || takingDamage || dead || dying || ressurecting || spellCasting)
+        if (!moving || attack || takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
         var newPath = Pathing.BuildPath(iso.pos, targetPoint, self: gameObject);
@@ -338,7 +339,7 @@ public class Character : Entity
         {
             mode = run ? "RN" : "WL";
         }
-        else if (spellCasting)
+        else if (usingSkill)
         {
             mode = skillInfo.anim;
         }
@@ -378,7 +379,7 @@ public class Character : Entity
                 attack = false;
                 attackTarget = null;
                 moving = false;
-                spellCasting = false;
+                usingSkill = false;
             }
         }
         else
@@ -389,7 +390,7 @@ public class Character : Entity
             attack = false;
             attackTarget = null;
             moving = false;
-            spellCasting = false;
+            usingSkill = false;
             if (OnDeath != null)
                 OnDeath(this, originator);
         }
@@ -405,7 +406,7 @@ public class Character : Entity
                 attackTarget.TakeDamage(attackDamage, this);
             }
         }
-        else if (spellCasting)
+        else if (usingSkill)
         {
             skillInfo.Do(this, targetPoint);
         }
@@ -415,7 +416,7 @@ public class Character : Entity
     {
         attackTarget = null;
         attack = false;
-        spellCasting = false;
+        usingSkill = false;
         takingDamage = false;
         ressurecting = false;
         if (dying)

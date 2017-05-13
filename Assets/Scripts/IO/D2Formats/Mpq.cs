@@ -18,7 +18,7 @@ public class Mpq
     {
         var file = fs.FindFile(filename);
         if (file == null)
-            throw new System.IO.FileNotFoundException("file not found", filename);
+            throw new System.IO.FileNotFoundException("file not found " + filename, filename);
         return ReadAllBytes(file);
     }
 
