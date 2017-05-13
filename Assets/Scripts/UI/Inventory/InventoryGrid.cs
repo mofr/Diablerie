@@ -71,7 +71,7 @@ public class InventoryGrid :
         GameObject gameObject = new GameObject("highlighter");
         var image = gameObject.AddComponent<RawImage>();
         image.transform.SetParent(transform);
-        image.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+        image.color = Colors.InvItemHighlight;
         image.rectTransform.pivot = new Vector2(0, 0);
         image.rectTransform.localScale = new Vector3(1, 1, 1);
         image.rectTransform.localPosition = new Vector3(0, 0, 0);
@@ -106,7 +106,7 @@ public class InventoryGrid :
             image.sprite = entry.item.invSprite;
             image.SetNativeSize();
 
-            bg.color = new Color(0.1f, 0.1f, 0.3f, 0.3f);
+            bg.color = Colors.InvItemBackground;
             SetRect(bg, entry.x, entry.y, entry.item.info.invWidth, entry.item.info.invHeight);
         }
 
@@ -158,7 +158,7 @@ public class InventoryGrid :
         for (int i = 0; i < _inventory.entries.Count; ++i)
         {
             RawImage bg = itemsBackgrounds[i];
-            bg.color = new Color(0.1f, 0.1f, 0.3f, 0.3f);
+            bg.color = Colors.InvItemBackground;
         }
     }
 
@@ -206,15 +206,15 @@ public class InventoryGrid :
             highlighter.gameObject.SetActive(_inventory.Fit(mouseItem, cell.x, cell.y, out coveredEntries));
             if (coveredEntries.Count > 1)
             {
-                highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
+                highlighter.color = Colors.InvItemHighlightForbid;
             }
             else
             {
-                highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+                highlighter.color = Colors.InvItemHighlight;
                 foreach(int entryIndex in coveredEntries)
                 {
                     RawImage bg = itemsBackgrounds[entryIndex];
-                    bg.color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+                    bg.color = Colors.InvItemHighlightSwap;
                 }
             }
         }
@@ -224,7 +224,7 @@ public class InventoryGrid :
             if (entryIndex != -1)
             {
                 RawImage bg = itemsBackgrounds[entryIndex];
-                bg.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+                bg.color = Colors.InvItemHighlight;
                 Inventory.Entry entry = _inventory.entries[entryIndex];
                 UI.ShowScreenLabel(Input.mousePosition, entry.item.GetDescription());
             }

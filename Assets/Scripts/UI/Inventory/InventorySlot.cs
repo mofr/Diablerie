@@ -25,9 +25,9 @@ public class InventorySlot :
         pointerOver = true;
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null && !CanAccept(mouseItem))
-            highlighter.color = new Color(0.3f, 0.1f, 0.1f, 0.3f);
+            highlighter.color = Colors.InvItemHighlightForbid;
         else
-            highlighter.color = new Color(0.1f, 0.3f, 0.1f, 0.3f);
+            highlighter.color = Colors.InvItemHighlight;
         highlighter.gameObject.SetActive(mouseItem != null || item != null);
     }
 
