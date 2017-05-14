@@ -105,22 +105,62 @@ public class MissileInfo
     public int hitShift;
     public bool applyMastery;
     public int srcDamage;
-    [Datasheet.Sequence(length = 33)]
-    public string[] skipped;
+    public int half2HSrc;
+    public int srcMissDamage;
+
+    // todo move damage fields to separate structure and share it with SkillInfo
+    public int minDamage;
+    [Datasheet.Sequence(length = 5)]
+    public int[] minDamagePerLevel;
+    public int maxDamage;
+    [Datasheet.Sequence(length = 5)]
+    public int[] maxDamagePerLevel;
+    public string damageSymPerCalc;
+    public string eType;
+    public int eMin;
+    [Datasheet.Sequence(length = 5)]
+    public int[] minEDamagePerLevel;
+    public int eMax;
+    [Datasheet.Sequence(length = 5)]
+    public int[] maxEDamagePerLevel;
+    public string eDamageSymPerCalc;
+
+    public int eLen;
+    [Datasheet.Sequence(length = 3)]
+    public int[] eLenPerLevel;
     public int hitClass;
     public int numDirections;
     public bool localBlood;
     public int damageRate;
     public string travelSoundId;
     public string hitSoundId;
-    [Datasheet.Sequence(length = 18)]
-    public string[] skipped2;
+    public string progSoundId;
+    public string progOverlayId;
+    public string explosionMissileId;
+    [Datasheet.Sequence(length = 3)]
+    public string[] subMissileId;
+    [Datasheet.Sequence(length = 4)]
+    public string[] hitSubMissileId;
+    [Datasheet.Sequence(length = 3)]
+    public string[] clientSubMissileId;
+    [Datasheet.Sequence(length = 4)]
+    public string[] clientHitSubMissileId;
+    public string eol;
 
     [System.NonSerialized]
     public string spritesheetFilename;
 
     [System.NonSerialized]
     public Material material;
+
+    [System.NonSerialized]
+    public float lifeTime;
+
+    [System.NonSerialized]
+    public float fps;
+
+    [System.NonSerialized]
+    public MissileInfo explosionMissile;
 
     public static List<MissileInfo> sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
     static Dictionary<string, MissileInfo> map = new Dictionary<string, MissileInfo>();
@@ -134,12 +174,17 @@ public class MissileInfo
 
             row.spritesheetFilename = @"data\global\missiles\" + row.celFile;
             row.material = row.trans == 0 ? Materials.normal : Materials.softAdditive;
+            row.lifeTime = row.range / 25.0f;
+            row.explosionMissile = Find(row.explosionMissileId);
+            row.fps = row.animSpeed * 1.5f;
             map.Add(row.missile, row);
         }
     }
 
     public static MissileInfo Find(string id)
     {
+        if (id == null)
+            return null;
         return map.GetValueOrDefault(id);
     }
 }

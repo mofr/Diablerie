@@ -50,8 +50,36 @@ public class SkillInfo
     public string anim;
     public string seqTrans;
     public string monAnim;
-    [Datasheet.Sequence(length = 129)]
+    [Datasheet.Sequence(length = 91)]
     public string[] unused3;
+    public int hitShift;
+    public int srcDamage;
+
+    // todo move damage fields to separate structure and share it with MissileInfo
+    public int minDamage;
+    [Datasheet.Sequence(length = 5)]
+    public int[] minDamagePerLevel;
+    public int maxDamage;
+    [Datasheet.Sequence(length = 5)]
+    public int[] maxDamagePerLevel;
+    public string damageSymPerCalc;
+    public string eType;
+    public int eMin;
+    [Datasheet.Sequence(length = 5)]
+    public int[] minEDamagePerLevel;
+    public int eMax;
+    [Datasheet.Sequence(length = 5)]
+    public int[] maxEDamagePerLevel;
+    public string eDamageSymPerCalc;
+
+    public int eLen;
+    [Datasheet.Sequence(length = 3)]
+    public int[] eLenPerLevel;
+    public string eLenSymPerCalc;
+    public int aiType;
+    public int aiBonus;
+    public int costMult;
+    public int costAdd;
 
     [System.NonSerialized]
     public OverlayInfo castOverlay;
@@ -73,6 +101,8 @@ public class SkillInfo
 
     public static SkillInfo Find(string id)
     {
+        if (id == null)
+            return null;
         return map.GetValueOrDefault(id);
     }
 
@@ -86,7 +116,7 @@ public class SkillInfo
 
         if (clientMissile != null)
         {
-            Missile.Create(clientMissile, character.iso.pos, target);
+            Missile.Create(clientMissile, character.iso.pos, target, character);
         }
     }
 }

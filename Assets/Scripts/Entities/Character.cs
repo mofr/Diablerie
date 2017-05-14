@@ -78,7 +78,7 @@ public class Character : Entity
     protected override void Start()
     {
         base.Start();
-        CollisionMap.SetPassable(Iso.Snap(iso.pos), false);
+        CollisionMap.Move(iso.pos, iso.pos, gameObject);
     }
 
     public void Use(Entity entity)

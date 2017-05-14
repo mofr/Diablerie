@@ -72,26 +72,26 @@ public class CollisionMap : MonoBehaviour
         return instance.map[index];
     }
 
-    public static bool Passable(Vector3 pos, int radius = 0, bool debug = false, GameObject ignore = null)
+    public static bool Passable(Vector3 pos, int size = 1, bool debug = false, GameObject ignore = null)
     {
-        return Passable(Iso.Snap(pos), radius, debug, ignore);
+        return Passable(Iso.Snap(pos), size, debug, ignore);
     }
 
-    public static bool Passable(Vector2i pos, int radius = 0, bool debug = false, GameObject ignore = null)
+    public static bool Passable(Vector2i pos, int size = 1, bool debug = false, GameObject ignore = null)
     {
         int index = instance.MapToIndex(pos);
-        return Passable(index, radius, debug, ignore);
+        return Passable(index, size, debug, ignore);
     }
 
-    public static bool Passable(int index, int radius = 0, bool debug = false, GameObject ignore = null)
+    public static bool Passable(int index, int size = 1, bool debug = false, GameObject ignore = null)
     {
         UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
-        if (index - radius - radius * instance.width < 0 || index + radius + radius * instance.width >= instance.map.Length)
+        if (index - size - size * instance.width < 0 || index + size + size * instance.width >= instance.map.Length)
             return false;
 
         var c0 = instance.map[index];
         bool passable = c0.passable || (ignore != null && ignore == c0.gameObject);
-        if (radius > 0)
+        if (size > 1)
         {
             var c1 = instance.map[index - 1];
             var c2 = instance.map[index + 1];
@@ -161,7 +161,7 @@ public class CollisionMap : MonoBehaviour
         }
     }
 
-    static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, GameObject ignore = null, bool debug = false)
+    static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, int size = 1, GameObject ignore = null, bool debug = false)
     {
         var hit = new RaycastHit();
         var diff = to - from;
@@ -177,11 +177,12 @@ public class CollisionMap : MonoBehaviour
             if (debug)
                 Iso.DebugDrawTile(Iso.Snap(pos), margin: 0.3f, duration: 0.5f);
             Cell cell = GetCell(pos);
-            bool passable = Passable(pos, 2, debug, ignore);
+            bool passable = Passable(pos, size, debug, ignore);
             if (!passable)
             {
                 hit.hit = !passable;
                 hit.gameObject = cell.gameObject;
+                hit.pos = pos;
                 break;
             }
         }

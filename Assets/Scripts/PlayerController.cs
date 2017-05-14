@@ -28,9 +28,9 @@ public class PlayerController : MonoBehaviour
         }
 
         skillMap = new Dictionary<KeyCode, SkillInfo> {
-            { KeyCode.F1, SkillInfo.Find("Fire Ball") },
+            { KeyCode.F1, SkillInfo.Find("Fire Bolt") },
             { KeyCode.F2, SkillInfo.Find("Charged Bolt") },
-            { KeyCode.F3, SkillInfo.Find("Glacial Spike") },
+            { KeyCode.F3, SkillInfo.Find("Ice Bolt") },
             { KeyCode.F4, SkillInfo.Find("Teleport") }
         };
     }

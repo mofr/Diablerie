@@ -114,7 +114,7 @@ public class Pathing
         {
             int dir = i % 8;
             Vector2i pos = node.pos + directions[dir];
-            bool passable = CollisionMap.Passable(pos, 2, ignore: self);
+            bool passable = CollisionMap.Passable(pos, size: 2, ignore: self);
 
             if (passable)
             {
@@ -145,7 +145,7 @@ public class Pathing
     {
         while (node.parent != null && node.parent.parent != null)
         {
-            if (CollisionMap.Raycast(node.pos, node.parent.parent.pos, ignore: self))
+            if (CollisionMap.Raycast(node.pos, node.parent.parent.pos, size: 2, ignore: self))
             {
                 break;
             }
