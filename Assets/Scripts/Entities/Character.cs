@@ -146,7 +146,10 @@ public class Character : Entity
 
         usingSkill = true;
         moving = false;
-        castOverlay = Overlay.Create(gameObject, skillInfo.castOverlay);
+        if (skillInfo.castOverlay != null)
+            castOverlay = Overlay.Create(gameObject, skillInfo.castOverlay);
+        else
+            castOverlay = null;
         this.skillInfo = skillInfo;
         targetPoint = target;
 

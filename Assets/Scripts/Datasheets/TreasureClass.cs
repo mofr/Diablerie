@@ -8,6 +8,8 @@ public class TreasureClass
 
     public static TreasureClass Find(string name)
     {
+        if (name == null)
+            return null;
         return byName.GetValueOrDefault(name);
     }
 
