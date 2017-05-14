@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Iso iso;
     Item _mouseItem;
     Dictionary<KeyCode, SkillInfo> skillMap;
+    bool usingSkills = false;
 
     void Awake()
     {
@@ -152,11 +153,22 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        usingSkills = false;
         foreach(var skill in skillMap)
         {
             if (Input.GetKey(skill.Key))
             {
-                character.UseSkill(skill.Value, IsoInput.mouseTile);
+                usingSkills = true;
+                Vector2 target = IsoInput.mousePosition;
+                if (MouseSelection.current != null)
+                {
+                    var character = MouseSelection.current.GetComponent<Character>();
+                    if (character != null)
+                        target = character.iso.pos;
+                    else
+                        target = Iso.MapToIso(MouseSelection.current.transform.position);
+                }
+                character.UseSkill(skill.Value, target);
             }
         }
 
@@ -184,6 +196,11 @@ public class PlayerController : MonoBehaviour
         {
             character.run ^= true;
         }
+    }
+
+    public bool FixedSelection()
+    {
+        return Input.GetMouseButton(0) || _mouseItem != null || EventSystem.current.IsPointerOverGameObject() || usingSkills;
     }
 
     void Update()

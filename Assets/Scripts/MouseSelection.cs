@@ -34,7 +34,7 @@ class MouseSelection : MonoBehaviour
             UI.HideLabel();
         }
 
-        if (Input.GetMouseButton(0))
+        if (PlayerController.instance.FixedSelection())
         {
             return;
         }
@@ -60,7 +60,7 @@ class MouseSelection : MonoBehaviour
 
         Bounds bounds = entity.bounds;
 
-        if (Input.GetMouseButton(0) || PlayerController.instance.mouseItem != null || EventSystem.current.IsPointerOverGameObject())
+        if (PlayerController.instance.FixedSelection())
         {
             if (entity == current)
             {
