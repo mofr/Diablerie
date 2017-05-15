@@ -409,7 +409,7 @@ public class Character : Entity
                 attackTarget.TakeDamage(attackDamage, this);
             }
         }
-        else if (usingSkill)
+        else if (usingSkill && animator.cof.mode == skillInfo.anim)
         {
             skillInfo.Do(this, targetPoint);
         }
