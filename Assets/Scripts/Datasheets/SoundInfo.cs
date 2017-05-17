@@ -20,17 +20,29 @@ public class SoundInfo
 
     static SoundInfo()
     {
-        foreach(var sound in sheet)
+        for(int i = 0; i < sheet.Count; ++i)
         {
+            var sound = sheet[i];
             if (sound.sound == null)
                 continue;
 
+            GatherVariations(sound, i);
             sound.volume = sound._volume / 255f;
             map.Add(sound.sound, sound);
         }
 
         itemPickup = Find("item_pickup");
         itemFlippy = Find("item_flippy");
+    }
+
+    static void GatherVariations(SoundInfo sound, int index)
+    {
+        if (sound.groupSize > 0)
+        {
+            sound.variations = new SoundInfo[sound.groupSize];
+            for (int i = 0; i < sound.groupSize; ++i)
+                sound.variations[i] = sheet[i + index];
+        }
     }
 
     public AudioClip clip
@@ -81,4 +93,7 @@ public class SoundInfo
 
     [System.NonSerialized]
     public float volume;
+
+    [System.NonSerialized]
+    public SoundInfo[] variations;
 }

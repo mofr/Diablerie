@@ -1,0 +1,142 @@
+Id	Attack1	Weapon1	Att1Del	Wea1Del	Att1Prb	Wea1Vol	Attack2	Weapon2	Att2Del	Wea2Del	Att2Prb	Wea2Vol	HitSound	DeathSound	HitDelay	DeaDelay	Skill1	Skill2	Skill3	Skill4	Footstep	FootstepLayer	FsCnt	FsOff	FsPrb	Neutral	NeuTime	Init	Taunt	Flee	CvtMo1	CvtSk1	CvtTgt1	CvtMo2	CvtSk2	CvtTgt2	CvtMo3	CvtSk3	CvtTgt3	EOL
+																																								0
+act1hire													rogue_hit_1	rogue_death_1	0	0					medium_walk_dirt_1		2	0	100															0
+act2hire		weapon_2ht_1		8		255		weapon_2ht_1		8		255	guard_hit_1	guard_death_1	0	0					medium_walk_dirt_1		2	0	100															0
+act3hire		weapon_1ht_1		5		255		weapon_1ht_1		5		255	ironwolf_hit_1	ironwolf_death_1	0	0					medium_walk_dirt_1		2	0	100															0
+ancient		weapon_1hs_large_1		5		255		weapon_1hs_large_1		5		255	barbarian_hit_1	barbarian_death_1	2	0																								0
+andariel	andariel_attack_1	weapon_giant_1	0	5	70	180	andariel_attack_1	weapon_giant_1	0	5	70	180	andariel_hit_1	andariel_death	2	1						walk_hoof_1	2	0	100				monster_andariel_taunt_1											0
+arach	spider_attack_1	spider_swish_1	2	4	100	255	spider_attack_1	spider_swish_1	2	4	100	255	spider_hit_1	spider_death_1	2	1					light_walk_dirt_1		3	0	100	spider_neutral_1	150													0
+baal	baal_attack_1		0		100		baal_attack_2		2		100		baal_hit_1	baal_death	2	0	baal_missilecast	baal_summon	baal_novacast		heavy_walk_dirt_1	walk_hoof_1	2	0	100				monster_baal_taunt_1											0
+baalcrab	baal_attack_1		0		100		baal_attack_2		2		100		baal_hit_1	baal_death	2	0	baal_missilecast	baal_summon	baal_novacast		heavy_walk_dirt_1	walk_hoof_1	2	0	100				monster_baal_taunt_3											0
+baalminion	baalminion_attack_1	weapon_2ht_1	2	5	100	255	baalminion_attack_1	weapon_giant_1	2	4	100	255	baalminion_hit_1	baalminion_death_1	2	0					heavy_walk_dirt_1		2	0	100															0
+baaltentacle	baaltentacle_attack_1		0		100								impact_stone_1	baaltentacle_death_1	2	0	baaltentacle_appear_1																							0
+baboon	baboondemon_attack_1	weapon_kick_1	0	4	100	180	baboondemon_attack_1	weapon_kick_1	0	4	100	180	baboondemon_hit_1	baboondemon_death_1	2	1					medium_walk_dirt_1		2	0	100	baboondemon_neutral_1	150													0
+barricadedoor														barricadedoor_1		0																								0
+bat																										creature_bat_1	600													0
+batdemon	batdemon_attack_1		0		100		batdemon_shock_1		0	0	100	255	batdemon_hit_1	batdemon_death_1	2	1		batdemon_unhide_1				hawk_wing_1	2	0	100															0
+bear	druidbear_attack_1	weapon_1ht_1	0	5	80	180	druidbear_attack_1	weapon_2hs_small_1	0	6	80	170	druidbear_hit_1		2		druidbear_emerge				heavy_walk_dirt_1	walk_ginormous_low_1	2	0	100	druidbear_neutral_1	1800													0
+bighead	bighead_attack_1		0		100		bighead_cast		0	0	100	255	bighead_hit_1	bighead_death_1	2	1					heavy_walk_dirt_1		2	0	100	bighead_neutral_1	150													0
+bladecreeper														bladecreeper_death_1		1																								0
+bloodgolem	golemblood_attack_1		0		100		golemblood_attack_1		0		100		golemblood_hit_1	golemblood_death	0	0	golemblood_spawn				heavy_walk_dirt_1	golemblood_walk_1	2	0	100															0
+bloodlord	bloodlord_attack_1	weapon_giant_1	0	4	95	255	bloodlord_attack_1	weapon_giant_1	0	6	95	255	bloodlord_hit_1	bloodlord_death_1	2	0					heavy_walk_dirt_1	walk_ginormous_high_1	2	0	100	megademon_neutral_1	150													0
+bloodraven													bloodraven_hit_1	bloodraven_death	2	1	bloodraven_cast_raise				medium_walk_dirt_1		2	0	100				monster_bloodraven_taunt_1											0
+bonefetish	bonefetish_attack_1		0		100		bonefetish_attack_1		0		100		bonefetish_hit_1	bonefetish_death_1	0	0	bonefetish_raise				light_walk_dirt_1	bonefetish_walk_1	2	0	100															0
+boneprison														diablo_boneprison_death_1		1																								0
+bonewall													skeleton_hit_1	necromancer_bonewall_death	0	0	skeleton_raise_1																							0
+brute	yeti_attack_1	weapon_kick_1	0	3	60	180	yeti_attack_1	weapon_kick_1	0	6	60	180	yeti_hit_1	yeti_death_1	2	1					heavy_walk_dirt_1		2	0	100	yeti_neutral_1	150													0
+bug														creature_bug_1		0																								0
+bunny														creature_rat_1		0																								0
+cantor	zakarumzealot_attack_1	weapon_1hs_large_1	0	5	80	160	zakarumzealot_attack_1	weapon_1hs_large_1	0	5	80	160	zakarumpriest_hit_1	zakarumpriest_death_1	2	1	zakarumpriest_cast_1				medium_walk_dirt_1	zakarumzealot_neutral_1	2	0	10	zakarumzealot_neutral_1	300													0
+catapult	catapult_attack		0		100								catapult_hit_1	catapult_death_1	2	0																								0
+charsi																	charsi_work				medium_walk_dirt_1		2	0	100															0
+chicken																	creature_chicken_1																							0
+clawviper	serpentdemon_tail_1		0		100		serpentdemon_attack_1		3		100		serpentdemon_hit_1	serpentdemon_death_1	2	1										serpentdemon_neutral_1	150				WL	Charge	A2							0
+claygolem	golemclay_attack_1		0		100		golemclay_attack_1		0		100		golemclay_hit_1	golemclay_death	0	0	golemclay_spawn				heavy_walk_dirt_1	golemclay_walk_1	2	0	100															0
+compellingorb														compellingorb_death		0												compellingorb_loop												0
+corruptrogue	corrupt_attack_1	weapon_1hs_large_1	5	7	70	180	corrupt_attack_1	weapon_1hs_large_1	5	7	70	180	corrupt_hit_1	corrupt_death_1	2	1					medium_walk_dirt_1		2	0	100	corrupt_neutral_1	150													0
+councilmember	zakarumhigh_attack_1	weapon_1hs_large_1	0	5	80	160	zakarumhigh_attack_1	weapon_1hs_large_1	0	5	80	160	zakarumhigh_hit_1	zakarumhigh_death_1	2	1					medium_walk_dirt_1		2	0	100	zakarumhigh_neutral_1	150													0
+countess	countess_attack_1	weapon_1hs_large_1	5	7	70	180	countess_attack_1	weapon_1hs_large_1	5	7	70	180	countess_hit_1	countess_death	2	1					medium_walk_dirt_1		2	0	100				monster_countess_taunt_1											0
+cow																										creature_cow_1	150													0
+cr_archer		weapon_bow_draw_1		0		255		weapon_bow_draw_1		0		255	corrupt_hit_1	corrupt_death_1	2	1					medium_walk_dirt_1		2	0	100	corrupt_neutral_1	150													0
+cr_lancer	corrupt_attack_1	weapon_2ht_1	5	7	70	180	corrupt_attack_1	weapon_2ht_1	5	7	70	180	corrupt_hit_1	corrupt_death_1	2	1					medium_walk_dirt_1		2	0	100	corrupt_neutral_1	150													0
+crownest														hawknest_death_1		1	hawknest_spawn_1											hawknest_loop												0
+darkwanderer														darkwanderer_death		1					heavy_walk_dirt_1		2	0	100															0
+deathmauler	deathmauler_attack_1	weapon_2hs_small_1	0	3	80	190	deathmauler_spikethrow_1		5		100		deathmauler_hit_1	deathmauler_death_1	0	0					medium_walk_dirt_1		1	0	100	deathmauler_neutral_1	90													0
+diablo	diablo_attack_1	weapon_giant_1	0	6	100	120	diablo_attack_1	weapon_giant_1	0	10	100	120	diablo_hit_1	diablo_death	2	0			diablo_boneprison_cast	diablo_yell	heavy_walk_dirt_1		2	0	100	diablo_neutral_1	150													0
+doomknight	undeadhorror_attack_1	weapon_1hs_large_1	4	8	90	120	undeadhorror_attack_1	weapon_1hs_large_1	4	8	90	120	undeadhorror_hit_1	undeadhorror_death_1	2	1					heavy_walk_dirt_1		2	0	100	undeadhorror_neutral_1	150													0
+dopplezon													amazon_hit_1	hydra_death_1	2	1					medium_walk_dirt_1		2	0	100			hydra_appear_1												0
+drognan																	drognan_read_scroll				medium_walk_dirt_1		2	0	100															0
+druidspirit														druidspirit_death_1		1	druidspirit_hit_1																							0
+duriel	duriel_attack_1	weapon_giant_1	0	5	100	120	duriel_attack_1	weapon_giant_1	0	5	100	120	duriel_hit_1	duriel_death	2	1						duriel_walk_1	1	6	100				monster_duriel_taunt_1											0
+evilhut														guardtower_1		0												object_fire_loop_house												0
+fallen	fallen_attack_1	weapon_punch_1	0	5	60	160	fallen_attack_1	weapon_punch_1	0	5	60	160	fallen_hit_1	fallen_death_1	2	1	fallenshaman_resurrect	fallen_warcry_1			light_walk_dirt_1		2	0	100	fallen_neutral_1	300			fallen_flee_1										0
+fallenshaman	fallenshaman_attack_1	weapon_punch_1	3	7	70	160	fallenshaman_attack_1	weapon_punch_1	3	7	70	160	fallenshaman_hit_1	fallenshaman_death_1	2	1	fallenshaman_resurrect_cast				light_walk_dirt_1		2	0	100	fallenshaman_neutral_1	300				A2	Resurrect	S1							0
+fara																	fara_hammer				medium_walk_dirt_1		2	0	100															0
+fetish	pygmy_attack_1	weapon_punch_1	0	5	60	160	pygmy_attack_1	weapon_punch_1	0	5	60	160	pygmy_hit_1	pygmy_death_1	2	1	fallenshaman_resurrect				light_walk_dirt_1		2	0	100	pygmy_neutral_1	600													0
+fetishblow	pygmy_blowgun_1		0		100		pygmy_blowgun_1		0		100		pygmy_hit_1	pygmy_death_1	2	1	fallenshaman_resurrect				light_walk_dirt_1		2	0	100															0
+fetishshaman	pygmyshaman_spell_1		0		60		pygmyshaman_spell_1		0		60		pygmyshaman_hit_1	pygmyshaman_death_1	2	1	fallenshaman_resurrect_cast				light_walk_dirt_1		2	0	100	pygmyshaman_neutral_1	300				SC	Resurrect	S1							0
+fingermage	fingermage_attack_1		0		100		fingermage_attack_1		0		100		fingermage_hit_1	fingermage_death_1	2	1												fingermage_loop												0
+firegolem	golemfire_attack_1		0		100		golemfire_attack_1		0		100		golemfire_hit_1	golemfire_death	0	0	golemfire_spawn				heavy_walk_dirt_1	golemfire_walk_1	2	0	100			object_fire_loop_brazier												0
+flyingscimitar	scimitar_attack_1		10		100		scimitar_attack_1		10		100		scimitar_hit_1	scimitar_death_1	2	1												scimitar_loop												0
+foulcrow	hawk_attack_1	weapon_punch_1	0	5	70	120	hawk_attack_1	weapon_punch_1	0	5	70	120	hawk_hit_1	hawk_death_1	2	1						hawk_wing_1	2	0	100															0
+frogdemon	frogdemon_attack_1		0		100		frogdemon_attack_1		0		100		frogdemon_hit_1	frogdemon_death_1	2	1						walk_flesh_1	1	0	100	frogdemon_neutral_1	150													0
+frozenhorror	frozenhorror_attack_1	weapon_2hs_small_1	0	6	100	190							frozenhorror_hit_1		0						heavy_walk_dirt_1		1	0	100	frozenhorror_neutral_1	150													0
+gargoyletrap													impact_stone_1	gargoyletrap_death_1	1	1																								0
+goatman	goatman_attack_1	weapon_1hs_large_1	5	8	70	190	goatman_attack_1	weapon_1hs_large_1	5	8	70	190	goatman_hit_1	goatman_death_1	2	1					medium_walk_dirt_1		2	0	100															0
+guardtower													impact_stone_1	guardtower_1	1	0																								0
+halbu																	halbu_pray	jamella_spell			medium_walk_dirt_1		2	0	100															0
+heavynpc																					heavy_walk_dirt_1		2	0	100															0
+hellbovine	moo_attack_1	weapon_2hs_small_1	0	6	100	190	moo_attack_1	weapon_2hs_small_1	0	6	100	190	moo_hit_1	moo_death_1	2	1					medium_walk_dirt_1		2	0	100	moo_neutral_1	150													0
+hydra														hydra_death_1		1		hydra_appear_1										object_fire_loop_brazier												0
+imp	imp_cast		0		100								imp_hit_1	imp_death_1	1	1	imp_attack_1				light_walk_dirt_1		2	0	100	imp_neutral_1	90													0
+irongolem	golemiron_attack_1		0		100		golemiron_attack_1		0		100		golemiron_hit_1	golemiron_death	0	0	golemiron_spawn				heavy_walk_dirt_1	golemiron_walk_1	2	0	100															0
+izual	izual_attack_1		0		100		izual_attack_1		0		100		izual_hit_1	izual_death	2	1					medium_walk_dirt_1		2	0	100				monster_izual_taunt_1											0
+izualspirit														izual_spirit_disappear		1												izual_spirit_appear												0
+jamella																	jamella_read	jamella_spell			medium_walk_dirt_1		2	0	100															0
+larva														creature_larva_1		0																								0
+lightningorb	lightningorb_attack_1		0		100		lightningorb_attack_1		0		100			lightningorb_death_1		0																								0
+lightningsentry														lightninggenerator_death_1		1	lightninggenerator_emerge_1	lightninggenerator_launch_1										lightninggenerator_loop												0
+lightnpc																					light_walk_dirt_1		2	0	100															0
+maggotbaby	sandmaggotbaby_attack_1		0		100		sandmaggotbaby_attack_1		0		100		sandmaggotbaby_hit_1	sandmaggotbaby_death_1	2	1										sandmaggotbaby_neutral_1	150													0
+maggotegg														sandmaggotegg_death_1		1										sandmaggotegg_neutral_1	150													0
+maggotqueen													sandmaggot_hit_1	sandmaggotmama_death	2	1																								0
+mednpc																					medium_walk_dirt_1		2	0	100															0
+megademon	megademon_attack_1	weapon_2hs_small_1	6	8	80	180	megademon_attack_1	weapon_2hs_small_1	6	8	80	180	megademon_hit_1	megademon_death_1	2	1					heavy_walk_dirt_1		2	0	100	megademon_neutral_1	150													0
+mephisto	mephisto_attack_1		0		100		mephisto_attack_1		0		100		mephisto_hit_1	mephisto_death	2	1												mephisto_loop	monster_mephisto_taunt_1											0
+minion	minion_attack_1	weapon_2hs_small_1	7	3	100	190	minion_attack_1	weapon_2hs_small_1	7	3	100	190	minion_hit_1		2						heavy_walk_dirt_1		2	0	100	minion_neutral_1	150													0
+mosquito	mosquito_attack_1		0		100		mosquito_attack_1		0		100		mosquito_hit_1	mosquito_death_1	2	1	mosquito_longattack_1											mosquito_loop			A2	Mosquito	S1							0
+mummy	mummy_attack_1		0		100		mummy_attack_1		0		100		mummy_hit_1	mummy_death_1	2	1					light_walk_dirt_1		2	0	100	mummy_neutral_1	300													0
+necromage		skeleton_cast_fire		0		255		skeleton_cast_fire		0		255	skeleton_hit_1	skeleton_death_1	0	0	skeleton_raise_1				light_walk_dirt_1	skeleton_necro_walk_1	2	0	100															0
+necroskeleton		weapon_1hs_large_1		6		190		weapon_1hs_large_1		6		190	skeleton_hit_1	skeleton_death_1	0	0	skeleton_raise_1				light_walk_dirt_1	skeleton_necro_walk_1	2	0	100															0
+nihlathak		weapon_1hs_large_1		6		190		weapon_1hs_large_1		6		190																	monster_nihlathak_taunt_1											0
+overseer	overseer_attack_1	weapon_2hs_large_1	0	4	100	190	overseer_whip_1	overseer_whipcrack_1	0	9	100	255	overseer_hit_1	overseer_death_1	2	1	overseer_attract_1	overseer_healcast_1			heavy_walk_dirt_1	walk_ginormous_low_1	2	0	100	overseer_neutral_1	150													0
+pantherwoman	pantherwoman_attack_1	weapon_1hs_small_1	0	12	60	160	pantherwoman_attack_1	weapon_1hs_small_1	0	12	60	160	pantherwoman_hit_1	pantherwoman_death_1	2	1					medium_walk_dirt_1		2	0	100	pantherwoman_neutral_1	150													0
+pinhead	pinhead_attack_1	weapon_2hs_small_1	0	4	80	120	pinhead_attack_1	weapon_2hs_small_1	0	4	80	120	pinhead_hit_1	pinhead_death_1	2	1					heavy_walk_dirt_1	walk_ginormous_high_1	2	0	100	pinhead_neutral_1	150													0
+putriddefiler	putriddefiler_attack_1	weapon_punch_1	0	4	100	190							putriddefiler_hit_1	putriddefiler_death_1	2	1	putriddefiler_impregnate	putriddefiler_zap								putriddefiler_neutral_1	150													0
+quillrat	spikefiend_attack_1		0		100		spikefiend_shoot_1		0		100		spikefiend_hit_1	spikefiend_death_1	5	4										spikefiend_neutral_1	150													0
+radament	greatermummy_attack_1	weapon_2hs_large_1	0	4	100	190	greatermummy_gas_1		0		100		greatermummy_hit_1	greatermummy_death_1	2	1	greatermummy_unholybolt_cast	greatermummy_bestow	greatermummy_resurrect_1		heavy_walk_dirt_1	walk_ginormous_low_1	2	0	100	greatermummy_neutral_1	150		monster_radament_taunt_1		SC	UnHolyBolt	S1	SC	Bestow	S2	SC	Resurrect	S3	0
+rat														creature_rat_1		0																								0
+raven	druidraven_attack_1		3		100		druidraven_attack_1		3		100			druidraven_poof		1						hawk_wing_1	2	0	100															0
+reanimatedhorde	reanimatedhorde_attack_1	weapon_2hs_small_1	0	2	80	255	reanimatedhorde_attack_1	weapon_2hs_large_1	0	2	100	255	reanimatedhorde_hit_1	reanimatedhorde_death_1	2	1	reanimatedhorde_getup_1	zombie_neutral_2			medium_walk_dirt_1		2	0	100	reanimatedhorde_neutral_1	300													0
+regurgitator	regurgitator_attack_1		0		100		regurgitator_attack_1		3		100		regurgitator_hit_1	regurgitator_death_1	2	1										regurgitator_neutral_1	150													0
+sandleaper	leaper_attack_1	weapon_punch_1	0	5	70	120	leaper_attack_1	weapon_punch_1	0	5	70	120	leaper_hit_1	leaper_death_1	2	1	leaper_attack_1				light_walk_dirt_1		2	0	100	leaper_neutral_1	300				A1	Leap	S1							0
+sandmaggot	sandmaggot_attack_1		0		100		sandmaggot_attack_1		0		100		sandmaggot_hit_1	sandmaggot_death_1	2	1										sandmaggot_neutral_1	150													0
+sandraider	sandraider_attack_1	weapon_1hs_large_1	0	5	100	190	sandraider_attack_1	weapon_1hs_large_1	0	5	100	190	sandraider_hit_1	sandraider_death_1	2	1					medium_walk_dirt_1		2	0	100	sandraider_neutral_1	150													0
+sarcophagus														mummy_generator_death		1	object_casket																							0
+scarab	beetle_attack_1	weapon_2ht_1	0	7	70	190	beetle_attack_1	weapon_1hs_large_1	0	5	70	190	beetle_hit_1	beetle_death_1	2	1					light_walk_dirt_1		2	0	100	beetle_neutral_1	150													0
+shadow		weapon_2ht_1		8		255		weapon_2ht_1		8		255	assassin_shadow_hit_1	assassin_shadow_death_1	2	1				assassin_shadow_kick_1	medium_walk_dirt_1		2	0	100															0
+siegebeast	siegebeast_attack_1	weapon_1ht_1	0	5	100	190	siegebeast_attack_1		0		100		siegebeast_hit_1	siegebeast_death_1	1	1	siegebeast_attack_1	siegebeast_attack_1			heavy_walk_dirt_1	walk_ginormous_high_1	2	0	100	siegebeast_neutral_1	150													0
+sk_archer		weapon_bow_draw_1		4		255		weapon_bow_draw_1		4		255	skeleton_hit_1	skeleton_death_1	0	0	skeleton_raise_1				light_walk_dirt_1	skeleton_walk_1	2	0	100															0
+sk_mage		skeleton_cast_fire		0		255		skeleton_cast_fire		0		255	skeleton_hit_1	skeleton_death_1	0	0	skeleton_raise_1				light_walk_dirt_1	skeleton_walk_1	2	0	100															0
+skeleton		weapon_1hs_large_1		6		190		weapon_1hs_large_1		6		190	skeleton_hit_1	skeleton_death_1	0	0	skeleton_raise_1				light_walk_dirt_1	skeleton_walk_1	2	0	100															0
+slinger													pantherwoman_hit_1	pantherwoman_death_1	2	1					medium_walk_dirt_1		2	0	100	pantherwoman_neutral_1	150													0
+smith	smith_attack_1	weapon_2hs_large_1	0	2	80	170	smith_attack_1	weapon_2hs_large_1	0	2	80	170	smith_hit_1	smith_death	2	1					heavy_walk_dirt_1		2	0	100	smith_neutral_1	150		monster_smith_taunt_2											0
+smithdeath																												object_fire_loop_magic												0
+smithdemon	smith_attack_1	weapon_2hs_large_1	0	2	80	170	smith_attack_1	weapon_2hs_large_1	0	2	80	170	smith_hit_1	smith_death	2	1					heavy_walk_dirt_1		2	0	100	smith_neutral_1	150		monster_smith_taunt_1											0
+spider														creature_spider_1		0																								0
+stainedglass														object_glass_break_1	2	1																								0
+succubus	succubus_attack_1		3		100		succubus_attack_1		3		100		succubus_hit_1	succubus_death_1	2	1		succubus_cast				hawk_wing_1	2	0	30															0
+suicideminion													minion_hit_1	hawknest_death_1	2	1	minion_morph_1				heavy_walk_dirt_1	minionsuicide_neutral_1	2	0	30															0
+summoner													summoner_hit_1	summoner_death	2	1					medium_walk_dirt_1		2	0	100				monster_summoner_taunt_1											0
+swarm	swarm_attack_1		0		100		swarm_attack_1		0		100		swarm_hit_1	swarm_hit_1	2	1												swarm_loop												0
+tentacle	tentacle_attack_1		0		100		tentacle_attack_1		0		100		tentacle_hit_1	tentacle_death_1	2	1																								0
+tentaclehead	tentaclehead_attack_1		0		100		tentaclehead_attack_1		0		100		tentaclehead_hit_1	tentaclehead_death_1	2	1										tentaclehead_neutral_1	150													0
+thornhulk	thornhulk_attack_1	weapon_2hs_small_1	0	3	80	120	thornhulk_attack_1	weapon_2hs_small_1	0	7	80	120	thornhulk_hit_1	thornhulk_death_1	2	1					heavy_walk_dirt_1	walk_ginormous_high_1	2	0	100	thornhulk_neutral_1	300													0
+trappedsoul1	trappedsoul_attack_1		6		100		trappedsoul_attack_1		6		100		trappedsoul_hit_1	trappedsoul_up_1	2	1										trappedsoul_neutral_1	150													0
+trappedsoul2	trappedsoul_attack_1		6		100		trappedsoul_attack_1		6		100		trappedsoul_hit_1	trappedsoul_down_1	2	1										trappedsoul_neutral_1	150													0
+turret														turret_death_1		1																								0
+unraveler	greatermummy_attack_1	weapon_2hs_large_1	0	4	100	190	greatermummy_gas_1		0		100		greatermummy_hit_1	greatermummy_death_1	2	1	greatermummy_unholybolt_cast	greatermummy_bestow	greatermummy_resurrect_1		heavy_walk_dirt_1	walk_ginormous_low_1	2	0	100	greatermummy_neutral_1	150				SC	UnHolyBolt	S1	SC	Bestow	S2	SC	Resurrect	S3	0
+valkyrie	amazon_valkyrie_attack_1	weapon_2ht_1	4	8	100	255	amazon_valkyrie_attack_1	weapon_2ht_1	4	8	100	255	amazon_valkyrie_hit_1	amazon_valkyrie_death	2	1					medium_walk_dirt_1		2	0	100			amazon_valkyrie_appear												0
+vampire	vampire_attack_1		0		100		vampire_attack_1		0		100		vampire_hit_1	vampire_death_1	2	1	vampire_cast									vampire_neutral_1	150				SC		S1							0
+vilechild	vilechild_attack_1		8		100		vilechild_attack_1		8		100		vilechild_hit_1	vilechild_death_1	2	1					light_walk_dirt_1	vilechild_walk_1	2	0	15															0
+vilemother	vilemother_attack_1	weapon_1hs_large_1	0	7	100	190	vilemother_attack_1	weapon_1hs_large_1	0	7	100	190	vilemother_hit_1	vilemother_death_1	2	1	vilemother_birth_1					walk_flesh_1	2	3	100	vilemother_neutral_1	150													0
+vulture	vulturedemon_attack_1		0		100		vulturedemon_attack_1		0		100		vulturedemon_hit_1	vulturedemon_death_1	2	1						vulturedemon_wing_1	1	0	100	vulturedemon_neutral_1	300													0
+werebear	druidwerebear_attack_1	weapon_2hs_small_1	5	4	80	120	druidwerebear_attack_1	weapon_2hs_small_1	6	4	80	120	druidwerebear_hit_1		2				druidwerebear_bite_1		heavy_walk_dirt_1	walk_ginormous_low_1	2	0	100	druidwerebear_neutral_1	150													0
+werewolf	druidwerewolf_attack_1	weapon_kick_1	5	5	85	150	druidwerewolf_attack_1	weapon_kick_1	5	5	85	150	druidwerewolf_hit_1		2				druidwerewolf_bite_1		heavy_walk_dirt_1		2	0	100	druidwerewolf_neutral_1	150													0
+willowisp	willowisp_attack_1		0		100		willowisp_attack_1		0		100		willowisp_hit_1	willowisp_death_1	2	1	willowisp_appear_1	willowisp_lightning_cast_1										willowisp_loop			SC		S2							0
+wolf	druidwolf_attack_1	weapon_1ht_1	6	3	100	255	druidwolf_attack_1	weapon_1ht_1	6	3	100	255	druidwolf_hit_1	druidbear_emerge	2	1					light_walk_dirt_1		2	0	100	druidwolf_neutral_1	1600													0
+wraith	wraith_attack_1		0		100		wraith_attack_1		0		100		wraith_hit_1	wraith_death_1	2	1										wraith_neutral_1	150													0
+zealot	zakarumzealot_attack_1	weapon_1hs_large_1	0	7	80	160	zakarumzealot_attack_1	weapon_1hs_large_1	0	3	80	160	zakarumzealot_hit_1	zakarumzealot_death_1	2	1					medium_walk_dirt_1		2	0	100	zakarumzealot_neutral_1	300													0
+zombie	zombie_attack_1		0		100		zombie_attack_1		0		100		zombie_hit_1	zombie_death_1	2	1	zombie_raise_1				light_walk_dirt_1		2	0	100	zombie_neutral_1	300													0
+zombieunique	zombie_attack_1		0		100		zombie_attack_1		0		100		zombie_hit_1	zombie_death_1	2	1	zombie_raise_1				light_walk_dirt_1		2	0	100	zombie_unique_neutral_1	300													0
+diabloclone	diablo_attack_1	weapon_giant_1	0	6	100	120	diablo_attack_1	weapon_giant_1	0	10	100	120	diablo_hit_1	diablo_death	2	0			diablo_boneprison_cast	diablo_yell	heavy_walk_dirt_1		2	0	100	diablo_neutral_1	150		monster_diablo_taunt_ex											0

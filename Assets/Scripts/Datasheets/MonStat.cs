@@ -38,8 +38,8 @@ public class MonStat
     public string Rarity;
     [Datasheet.Sequence(length = DifficultyCount)]
     public string[] level;
-    public string MonSound;
-    public string UMonSound;
+    public string monSoundId;
+    public string uMonSoundId;
     public string threat;
     [Datasheet.Sequence(length = DifficultyCount)]
     public string[] aidel;
@@ -148,6 +148,12 @@ public class MonStat
     [System.NonSerialized]
     public MonStat minion2;
 
+    [System.NonSerialized]
+    public MonSound sound;
+
+    [System.NonSerialized]
+    public MonSound uniqueSound;
+
     public static List<MonStat> sheet = Datasheet.Load<MonStat>("data/global/excel/monstats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
@@ -165,6 +171,8 @@ public class MonStat
             stat.name = stat.nameStr == null ? null : Translation.Find(stat.nameStr);
             stat.minion1 = stat.minion1Id == null ? null : Find(stat.minion1Id);
             stat.minion2 = stat.minion2Id == null ? null : Find(stat.minion2Id);
+            stat.sound = MonSound.Find(stat.monSoundId);
+            stat.uniqueSound = MonSound.Find(stat.uMonSoundId);
         }
     }
 

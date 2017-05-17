@@ -194,6 +194,12 @@ public class Character : Entity
                 moving = false;
                 attack = true;
                 LookAtImmidietly(target);
+
+                if (monStat != null)
+                {
+                    AudioManager.instance.Play(monStat.sound.weapon1, transform);
+                    AudioManager.instance.Play(monStat.sound.attack1, transform);
+                }
             }
             else
             {
@@ -378,7 +384,7 @@ public class Character : Entity
         {
             if (OnTakeDamage != null)
                 OnTakeDamage(originator, damage);
-            if (damage > maxHealth * 0.3f)
+            if (damage > maxHealth * 0.1f)
             {
                 takingDamage = true;
                 attack = false;
@@ -386,6 +392,9 @@ public class Character : Entity
                 moving = false;
                 usingSkill = false;
             }
+
+            if (monStat != null)
+                AudioManager.instance.Play(monStat.sound.hit, transform);
         }
         else
         {
@@ -398,6 +407,9 @@ public class Character : Entity
             usingSkill = false;
             if (OnDeath != null)
                 OnDeath(this, originator);
+
+            if (monStat != null)
+                AudioManager.instance.Play(monStat.sound.death, transform);
         }
     }
 
