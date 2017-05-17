@@ -171,6 +171,9 @@ public class MissileInfo
     [System.NonSerialized]
     public SoundInfo progSound;
 
+    [System.NonSerialized]
+    public OverlayInfo progOverlay;
+
     public static List<MissileInfo> sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
     static Dictionary<string, MissileInfo> map = new Dictionary<string, MissileInfo>();
 
@@ -189,6 +192,7 @@ public class MissileInfo
             row.travelSound = SoundInfo.Find(row.travelSoundId);
             row.hitSound = SoundInfo.Find(row.hitSoundId);
             row.progSound = SoundInfo.Find(row.progSoundId);
+            row.progOverlay = OverlayInfo.Find(row.progOverlayId);
             map.Add(row.missile, row);
         }
     }

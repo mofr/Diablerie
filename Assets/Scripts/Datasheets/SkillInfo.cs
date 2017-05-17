@@ -118,6 +118,24 @@ public class SkillInfo
             character.InstantMove(target);
         }
 
+        if (srvDoFunc == 17)
+        {
+            // charged bold, bolt sentry
+            int boltCount = 7;
+            for (int i = 0; i < boltCount; ++i)
+            {
+                var offset = new Vector3(Random.Range(-boltCount / 2f, boltCount / 2f), Random.Range(-boltCount / 2f, boltCount / 2f));
+                Missile.Create(clientMissileA, character.iso.pos, target + offset, character);
+            }
+        }
+        else
+        {
+            if (clientMissileA != null)
+            {
+                Missile.Create(clientMissileA, character.iso.pos, target, character);
+            }
+        }
+
         if (clientMissile != null)
         {
             Missile.Create(clientMissile, character.iso.pos, target, character);

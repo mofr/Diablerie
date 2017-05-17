@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
             { KeyCode.F2, SkillInfo.Find("Charged Bolt") },
             { KeyCode.F3, SkillInfo.Find("Ice Bolt") },
             { KeyCode.F4, SkillInfo.Find("Teleport") },
-            { KeyCode.F5, SkillInfo.Find("Bone Spear") }
+            { KeyCode.F5, SkillInfo.Find("Glacial Spike") }
         };
     }
 

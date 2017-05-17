@@ -70,7 +70,8 @@ public class Missile : MonoBehaviour
     {
         speed += info.accel * Time.deltaTime;
         float distance = speed * Time.deltaTime;
-        var newPos = iso.pos + dir * distance;
+        var posDiff = dir * distance;
+        var newPos = iso.pos + posDiff;
         var hit = CollisionMap.Raycast(iso.pos, newPos, distance, size: info.size, ignore: originator.gameObject);
         if (hit)
         {
@@ -81,15 +82,30 @@ public class Missile : MonoBehaviour
                 {
                     int damage = CalcDamage();
                     character.TakeDamage(damage, originator);
+                    if (info.progOverlay != null)
+                        Overlay.Create(character.gameObject, info.progOverlay);
                 }
             }
             if (info.explosionMissile != null)
                 Missile.Create(info.explosionMissile, hit.pos, hit.pos, originator);
+
             AudioManager.Play(info.hitSound, Iso.MapToWorld(hit.pos));
+
+            if (info.clientHitFunc == "14")
+            {
+                // glacial spike, freezing arrow
+                Missile.Create(info.clientHitSubMissileId[0], hit.pos, hit.pos, originator);
+                int subMissileCount = Random.Range(3, 5);
+                for (int i = 0; i < subMissileCount; ++i)
+                {
+                    var offset = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                    Missile.Create(info.clientHitSubMissileId[1], hit.pos, hit.pos - offset, originator);
+                }
+            }
+
             if (info.collideKill)
             {
                 Destroy(gameObject);
-                return;
             }
         }
 
