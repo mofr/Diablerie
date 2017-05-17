@@ -60,6 +60,9 @@ public class ItemInfo
             item.type2Code = item._type2;
             item.component = item._component;
             item.alternateGfx = item._alternateGfx;
+            item.dropSound = SoundInfo.Find(item._dropSound);
+            item.dropSoundFrame = item._dropSoundFrame;
+            item.useSound = SoundInfo.Find(item._useSound);
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -88,6 +91,9 @@ public class ItemInfo
             item.type2Code = item._type2;
             item.component = item._component;
             item.alternateGfx = item._alternateGfx;
+            item.dropSound = SoundInfo.Find(item._dropSound);
+            item.dropSoundFrame = item._dropSoundFrame;
+            item.useSound = SoundInfo.Find(item._useSound);
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -116,6 +122,9 @@ public class ItemInfo
             item.type2Code = item._type2;
             item.component = item._component;
             item.alternateGfx = item._alternateGfx;
+            item.dropSound = SoundInfo.Find(item._dropSound);
+            item.dropSoundFrame = item._dropSoundFrame;
+            item.useSound = SoundInfo.Find(item._useSound);
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -196,4 +205,13 @@ public class ItemInfo
 
     [System.NonSerialized]
     public ItemType type2;
+
+    [System.NonSerialized]
+    public SoundInfo dropSound;
+
+    [System.NonSerialized]
+    public int dropSoundFrame;
+
+    [System.NonSerialized]
+    public SoundInfo useSound;
 }

@@ -111,6 +111,10 @@ public class World : MonoBehaviour
         body.isKinematic = true;
         var collider = player.AddComponent<CircleCollider2D>();
         collider.radius = Iso.tileSizeY;
+        var listenerObject = new GameObject("Audio Listener");
+        listenerObject.AddComponent<AudioListener>();
+        listenerObject.transform.SetParent(player.transform, true);
+        listenerObject.transform.localPosition = new Vector3(0, 0, -1);
 
         PlayerController.instance.SetCharacter(character);
 

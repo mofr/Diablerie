@@ -51,6 +51,9 @@ public class ArmorInfo : ItemInfo
     public int maxStack;
     public string _type1;
     public string _type2;
-    [Datasheet.Sequence(length = 114)]
+    public string _dropSound;
+    public int _dropSoundFrame;
+    public string _useSound;
+    [Datasheet.Sequence(length = 111)]
     public string[] skipped2;
 }

@@ -14,6 +14,7 @@ using System.IO.Compression;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.BZip2;
 using LZMA = SevenZip.Compression.LZMA;
+using Foole.Mpq;
 
 namespace CrystalMpq
 {
@@ -81,11 +82,22 @@ namespace CrystalMpq
 					case 0x40: // Mono IMA ADPCM
 						throw new MpqCompressionNotSupportedException(0x40, "Mono IMA ADPCM");
 					case 0x41: // Mono IMA ADPCM + Huffman
-						throw new MpqCompressionNotSupportedException(0x41, "Mono IMA ADPCM + Huffman");
+                        using (var inStream = new MemoryStream(inBuffer, 1, inLength - 1, false, false))
+                        {
+                            var decompressedStream = MpqHuffman.Decompress(inStream);
+                            byte[] decompressed = MpqWavCompression.Decompress(decompressedStream, 1);
+                            Buffer.BlockCopy(decompressed, 0, outBuffer, 0, decompressed.Length);
+                            return decompressed.Length;
+                        }
 					case 0x48: // Mono IMA ADPCM + Implode
 						throw new MpqCompressionNotSupportedException(0x48, "Mono IMA ADPCM + Implode");
 					case 0x80: // Stereo IMA ADPCM
-						throw new MpqCompressionNotSupportedException(0x80, "Stereo IMA ADPCM");
+                        using (var inStream = new MemoryStream(inBuffer, 1, inLength - 1, false, false))
+                        {
+                            byte[] decompressed = MpqWavCompression.Decompress(inStream, 2);
+                            Buffer.BlockCopy(decompressed, 0, outBuffer, 0, decompressed.Length);
+                            return decompressed.Length;
+                        }
 					case 0x81: // Stereo IMA ADPCM + Huffman
 						throw new MpqCompressionNotSupportedException(0x81, "Stereo IMA ADPCM + Huffman");
 					case 0x88: // Stereo IMA ADPCM + Implode

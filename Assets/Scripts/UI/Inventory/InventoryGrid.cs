@@ -125,12 +125,16 @@ public class InventoryGrid :
         {
             Item poppedItem;
             if (_inventory.Put(mouseItem, cell.x, cell.y, out poppedItem))
+            {
+                AudioManager.Play(mouseItem.info.useSound);
                 PlayerController.instance.mouseItem = poppedItem;
+            }
         }
         else
         {
             Item item = _inventory.Take(cell.x, cell.y);
             PlayerController.instance.mouseItem = item;
+            AudioManager.Play(SoundInfo.itemPickup);
         }
     }
 

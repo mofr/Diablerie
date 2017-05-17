@@ -51,6 +51,12 @@ public class InventorySlot :
         if (mouseItem != null && !CanAccept(mouseItem))
             return;
         Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
+
+        if (mouseItem != null)
+            AudioManager.Play(mouseItem.info.useSound);
+        else if (unequipped[0] != null)
+            AudioManager.Play(SoundInfo.itemPickup);
+
         PlayerController.instance.mouseItem = unequipped[0];
         if (unequipped[1] != null)
             if (!PlayerController.instance.inventory.Put(unequipped[1]))

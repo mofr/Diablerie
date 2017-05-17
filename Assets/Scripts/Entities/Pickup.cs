@@ -33,6 +33,10 @@ public class Pickup : Entity
         var title = item.info.name;
         var pickup = Create(position, item.info.flippyFile, item.info.name, title);
         pickup.item = item;
+        pickup.animator.SetTrigger(item.info.dropSoundFrame, () => {
+            AudioManager.Play(item.info.dropSound, pickup.transform.position);
+        });
+        pickup.Flip();
         return pickup;
     }
 
@@ -79,6 +83,12 @@ public class Pickup : Entity
         get { return renderer.bounds; }
     }
 
+    void Flip()
+    {
+        AudioManager.Play(SoundInfo.itemFlippy, transform.position);
+        animator.Restart();
+    }
+
     public override void Operate(Character character = null)
     {
         if (item == null)
@@ -86,12 +96,13 @@ public class Pickup : Entity
 
         if (PlayerController.instance.Take(item))
         {
+            AudioManager.Play(SoundInfo.itemPickup);
             Destroy(gameObject);
         }
         else
         {
             // I can't!
-            animator.Restart();
+            Flip();
         }
     }
 

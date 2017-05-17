@@ -5,6 +5,9 @@ public class Mpq
     static public MpqArchive d2exp = new MpqArchive("d2exp.mpq");
     static public MpqArchive d2data = new MpqArchive("d2data.mpq");
     static public MpqArchive d2char = new MpqArchive("d2char.mpq");
+    static public MpqArchive d2sfx = new MpqArchive("d2sfx.mpq");
+    static public MpqArchive d2music = new MpqArchive("d2music.mpq");
+    static public MpqArchive d2xMusic = new MpqArchive("d2xMusic.mpq");
     static public MpqFileSystem fs = new MpqFileSystem();
 
     static Mpq()
@@ -12,6 +15,9 @@ public class Mpq
         fs.Archives.Add(d2exp);
         fs.Archives.Add(d2data);
         fs.Archives.Add(d2char);
+        fs.Archives.Add(d2sfx);
+        fs.Archives.Add(d2music);
+        fs.Archives.Add(d2xMusic);
     }
 
     public static byte[] ReadAllBytes(string filename)

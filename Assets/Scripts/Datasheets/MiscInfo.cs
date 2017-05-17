@@ -35,6 +35,9 @@ public class MiscInfo : ItemInfo
     public bool _throwable;
     public string _type1;
     public string _type2;
-    [Datasheet.Sequence(length = 134)]
+    public string _dropSound;
+    public int _dropSoundFrame;
+    public string _useSound;
+    [Datasheet.Sequence(length = 131)]
     public string[] skipped2;
 }

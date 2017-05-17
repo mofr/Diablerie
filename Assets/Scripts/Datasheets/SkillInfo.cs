@@ -12,7 +12,7 @@ public class SkillInfo
     public int srvDoFunc;
     [Datasheet.Sequence(length = 71)]
     public string[] unused;
-    public string stsound;
+    public string _stsound;
     [Datasheet.Sequence(length = 10)]
     public string[] unused2;
     public string castOverlayId;
@@ -84,6 +84,9 @@ public class SkillInfo
     [System.NonSerialized]
     public OverlayInfo castOverlay;
 
+    [System.NonSerialized]
+    public SoundInfo startSound;
+
     public static List<SkillInfo> sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
     static Dictionary<string, SkillInfo> map = new Dictionary<string, SkillInfo>();
 
@@ -95,6 +98,7 @@ public class SkillInfo
                 continue;
 
             row.castOverlay = OverlayInfo.Find(row.castOverlayId);
+            row.startSound = SoundInfo.Find(row._stsound);
             map.Add(row.skill, row);
         }
     }

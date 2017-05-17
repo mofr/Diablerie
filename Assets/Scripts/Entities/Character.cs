@@ -45,9 +45,10 @@ public class Character : Entity
     [HideInInspector]
     public int directionIndex = 0;
     float direction = 0;
-
+    
     public Iso iso; // readonly
     COFAnimator animator;
+    AudioSource audioSource;
     List<Pathing.Step> path = new List<Pathing.Step>();
     float traveled = 0;
     int desiredDirection = 0;
@@ -73,6 +74,8 @@ public class Character : Entity
     {
         iso = GetComponent<Iso>();
         animator = GetComponent<COFAnimator>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 1;
     }
 
     protected override void Start()
@@ -154,6 +157,8 @@ public class Character : Entity
         targetPoint = target;
 
         LookAtImmidietly(target);
+
+        AudioManager.Play(skillInfo.startSound, audioSource);
     }
 
     void AbortPath()

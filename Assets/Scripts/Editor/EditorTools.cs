@@ -208,6 +208,9 @@ public class EditorTools
         Debug.Log(ItemInfo.Find("gth").name);
         Debug.Log(ItemInfo.Find("gsc").name);
         Debug.Log(ItemInfo.Find("gld").name);
+        
+        var sound = SoundInfo.Find("sorceress_teleport");
+        Debug.Log(sound.sound + " " + sound._filename + " " + sound.clip);
     }
 }
 

@@ -16,4 +16,6 @@ Bilian Belichev - DCC file format documentation and sample decoder.
 
 Fabien BARBIER - CrystalMpq.
 
+Foole (fooleau@gmail.com) - MpqHuffman and MpqWavCompression.
+
 [Phrozen Keep](http://d2mods.info) - A lot of various information about diablo 2 files.

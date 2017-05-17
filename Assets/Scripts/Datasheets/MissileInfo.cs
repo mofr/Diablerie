@@ -162,6 +162,15 @@ public class MissileInfo
     [System.NonSerialized]
     public MissileInfo explosionMissile;
 
+    [System.NonSerialized]
+    public SoundInfo travelSound;
+
+    [System.NonSerialized]
+    public SoundInfo hitSound;
+
+    [System.NonSerialized]
+    public SoundInfo progSound;
+
     public static List<MissileInfo> sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
     static Dictionary<string, MissileInfo> map = new Dictionary<string, MissileInfo>();
 
@@ -177,6 +186,9 @@ public class MissileInfo
             row.lifeTime = row.range / 25.0f;
             row.explosionMissile = Find(row.explosionMissileId);
             row.fps = row.animSpeed * 1.5f;
+            row.travelSound = SoundInfo.Find(row.travelSoundId);
+            row.hitSound = SoundInfo.Find(row.hitSoundId);
+            row.progSound = SoundInfo.Find(row.progSoundId);
             map.Add(row.missile, row);
         }
     }

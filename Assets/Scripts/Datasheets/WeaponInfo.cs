@@ -50,6 +50,16 @@ public class WeaponInfo : ItemInfo
     public int spawnStack;
     public string _flippyFile;
     public string _invFile;
-    [Datasheet.Sequence(length = 117)]
+    public string _uniqueInvFile;
+    public string _setInvFile;
+    public bool _hasInv;
+    public int _gemSockets;
+    public string _gemApplyType;
+    public string special;
+    public bool _useable;
+    public string _dropSound;
+    public int _dropSoundFrame;
+    public string _useSound;
+    [Datasheet.Sequence(length = 107)]
     public string[] skipped2;
 }

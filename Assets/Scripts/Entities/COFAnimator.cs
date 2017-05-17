@@ -235,7 +235,7 @@ class COFAnimator : MonoBehaviour
             layer.renderer.sortingOrder = sortingOrder;
             layer.shadow.sprite = layer.renderer.sprite;
             var pos = layer.transform.position;
-            pos.z = -i * 0.1f;
+            pos.z = -i * 0.01f;
             layer.transform.position = pos;
         }
     }
