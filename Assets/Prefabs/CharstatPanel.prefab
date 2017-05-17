@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 114934314946438362}
   - component: {fileID: 114230320698019174}
   - component: {fileID: 114272374721566020}
+  - component: {fileID: 114600378131339818}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -517,6 +518,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Stamina
+--- !u!114 &114600378131339818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1446228674440672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b3d197ea020144db925442c12a8a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114653982079881572
 MonoBehaviour:
   m_ObjectHideFlags: 1

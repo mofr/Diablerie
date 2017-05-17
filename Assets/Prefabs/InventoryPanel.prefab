@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 114749966266839906}
   - component: {fileID: 114518930975183074}
   - component: {fileID: 114206836293595802}
+  - component: {fileID: 114406076421669818}
   m_Layer: 0
   m_Name: GoldButton
   m_TagString: Untagged
@@ -654,6 +655,7 @@ GameObject:
   - component: {fileID: 114051471108799068}
   - component: {fileID: 114755678805829340}
   - component: {fileID: 114412836211617882}
+  - component: {fileID: 114877606729404040}
   m_Layer: 0
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1038,6 +1040,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114406076421669818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695490020834672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b3d197ea020144db925442c12a8a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114412836211617882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1656,6 +1669,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114877606729404040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1855200778916716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b3d197ea020144db925442c12a8a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114897669799075364
 MonoBehaviour:
   m_ObjectHideFlags: 1

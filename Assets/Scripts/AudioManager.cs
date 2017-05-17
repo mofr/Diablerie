@@ -1,8 +1,20 @@
 ﻿using UnityEngine;
 
-public class AudioManager
+public class AudioManager : MonoBehaviour
 {
-    public static AudioSource Play(SoundInfo sound)
+    public static AudioManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void Play(string soundId)
+    {
+        Play(SoundInfo.Find(soundId));
+    }
+
+    public AudioSource Play(SoundInfo sound)
     {
         if (sound == null || sound.clip == null)
             return null;
@@ -15,7 +27,7 @@ public class AudioManager
         return audioSource;
     }
 
-    public static AudioSource Play(SoundInfo sound, Vector3 position)
+    public AudioSource Play(SoundInfo sound, Vector3 position)
     {
         if (sound == null || sound.clip == null)
             return null;
@@ -26,7 +38,18 @@ public class AudioManager
         return audioSource;
     }
 
-    public static void Play(SoundInfo sound, AudioSource audioSource)
+    public AudioSource Play(SoundInfo sound, Transform parent)
+    {
+        if (sound == null || sound.clip == null)
+            return null;
+
+        AudioSource audioSource = Play(sound);
+        audioSource.transform.SetParent(parent, false);
+        audioSource.spatialBlend = 1;
+        return audioSource;
+    }
+
+    public void Play(SoundInfo sound, AudioSource audioSource)
     {
         if (sound == null || sound.clip == null)
             return;

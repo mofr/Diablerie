@@ -4,7 +4,6 @@ public class Missile : MonoBehaviour
 {
     new SpriteRenderer renderer;
     SpriteAnimator animator;
-    AudioSource audioSource;
     Iso iso;
     Vector2 dir;
     float speed;
@@ -31,8 +30,6 @@ public class Missile : MonoBehaviour
         missile.animator = gameObject.AddComponent<SpriteAnimator>();
         missile.renderer = gameObject.GetComponent<SpriteRenderer>();
         missile.iso = gameObject.AddComponent<Iso>();
-        missile.audioSource = gameObject.AddComponent<AudioSource>();
-        missile.audioSource.spatialBlend = 1;
         Destroy(gameObject, missileInfo.lifeTime);
         
         missile.info = missileInfo;
@@ -49,7 +46,7 @@ public class Missile : MonoBehaviour
         missile.animator.loop = missileInfo.loopAnim != 0;
         missile.animator.fps = missileInfo.fps;
         
-        AudioManager.Play(missileInfo.travelSound, missile.audioSource);
+        AudioManager.instance.Play(missileInfo.travelSound, missile.transform);
 
         return missile;
     }
@@ -89,7 +86,7 @@ public class Missile : MonoBehaviour
             if (info.explosionMissile != null)
                 Missile.Create(info.explosionMissile, hit.pos, hit.pos, originator);
 
-            AudioManager.Play(info.hitSound, Iso.MapToWorld(hit.pos));
+            AudioManager.instance.Play(info.hitSound, Iso.MapToWorld(hit.pos));
 
             if (info.clientHitFunc == "14")
             {

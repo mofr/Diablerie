@@ -34,7 +34,7 @@ public class Pickup : Entity
         var pickup = Create(position, item.info.flippyFile, item.info.name, title);
         pickup.item = item;
         pickup.animator.SetTrigger(item.info.dropSoundFrame, () => {
-            AudioManager.Play(item.info.dropSound, pickup.transform.position);
+            AudioManager.instance.Play(item.info.dropSound, pickup.transform.position);
         });
         pickup.Flip();
         return pickup;
@@ -85,7 +85,7 @@ public class Pickup : Entity
 
     void Flip()
     {
-        AudioManager.Play(SoundInfo.itemFlippy, transform.position);
+        AudioManager.instance.Play(SoundInfo.itemFlippy, transform.position);
         animator.Restart();
     }
 
@@ -96,7 +96,7 @@ public class Pickup : Entity
 
         if (PlayerController.instance.Take(item))
         {
-            AudioManager.Play(SoundInfo.itemPickup);
+            AudioManager.instance.Play(SoundInfo.itemPickup);
             Destroy(gameObject);
         }
         else
