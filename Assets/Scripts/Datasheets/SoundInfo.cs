@@ -51,6 +51,8 @@ public class SoundInfo
 
             GatherVariations(sound, i);
             sound.volume = sound._volume / 255f;
+            sound.fadeInDuration = sound._fadeIn / 25f;
+            sound.fadeOutDuration = sound._fadeOut / 25f;
             map.Add(sound.sound, sound);
         }
 
@@ -100,8 +102,8 @@ public class SoundInfo
     public int _volume;
     public int groupSize;
     public bool loop;
-    public int fadeIn;
-    public int fadeOut;
+    public int _fadeIn;
+    public int _fadeOut;
     public bool deferInst;
     public bool stopInst;
     public int duration;
@@ -125,6 +127,12 @@ public class SoundInfo
 
     [System.NonSerialized]
     public float volume;
+
+    [System.NonSerialized]
+    public float fadeOutDuration;
+
+    [System.NonSerialized]
+    public float fadeInDuration;
 
     [System.NonSerialized]
     public SoundInfo[] variations;

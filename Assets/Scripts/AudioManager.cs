@@ -1,12 +1,35 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    Dictionary<LevelInfo, AudioSource> songs = new Dictionary<LevelInfo, AudioSource>();
+    const float CrossfadeDuration = 10;
 
     private void Awake()
     {
         instance = this;
+        Level.OnLevelChange += OnLevelChange;
+    }
+
+    private void OnLevelChange(Level level, Level previous)
+    {
+        AudioSource song;
+        if (previous != null)
+        {
+            song = songs.GetValueOrDefault(previous.info);
+            if (song != null)
+                AudioFader.Fade(song, previous.info.soundEnv.song.volume, 0, CrossfadeDuration);
+        }
+        song = songs.GetValueOrDefault(level.info);
+        if (song == null)
+        {
+            song = Play(level.info.soundEnv.song);
+            song.volume = 0;
+            songs[level.info] = song;
+        }
+        AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, CrossfadeDuration);
     }
 
     public void Play(string soundId)
