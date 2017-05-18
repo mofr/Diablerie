@@ -87,6 +87,7 @@ public class Missile : MonoBehaviour
                 Missile.Create(info.explosionMissile, hit.pos, hit.pos, originator);
 
             AudioManager.instance.Play(info.hitSound, Iso.MapToWorld(hit.pos));
+            AudioManager.instance.Play(SoundInfo.GetHitSound(info.hitClass), Iso.MapToWorld(hit.pos));
 
             if (info.clientHitFunc == "14")
             {

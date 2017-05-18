@@ -19,6 +19,27 @@ public class SoundInfo
         return map.GetValueOrDefault(soundCode);
     }
 
+    public static SoundInfo GetHitSound(int hitClass)
+    {
+        if (hitClass == 10)
+            return SoundInfo.Find("impact_arrow_1");
+        if (hitClass == 32)
+            return SoundInfo.Find("impact_fire_1");
+        if (hitClass == 48)
+            return SoundInfo.Find("impact_cold_1");
+        if (hitClass == 64)
+            return SoundInfo.Find("impact_lightning_1");
+        if (hitClass == 80)
+            return SoundInfo.Find("impact_poison_1");
+        if (hitClass == 96)
+            return SoundInfo.Find("impact_stun_1");
+        if (hitClass == 112)
+            return SoundInfo.Find("impact_bash");
+        if (hitClass == 176)
+            return SoundInfo.Find("impact_goo_1");
+        return null;
+    }
+
     static SoundInfo()
     {
         for(int i = 0; i < sheet.Count; ++i)
