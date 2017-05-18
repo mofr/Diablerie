@@ -19,6 +19,7 @@ public class SoundEnvironment
             env.nightAmbience = SoundInfo.sheet[env.nightAmbienceId];
             env.dayEvent = SoundInfo.sheet[env.dayEventId];
             env.nightEvent = SoundInfo.sheet[env.nightEventId];
+            env.eventDelay = env._eventDelay / 25f;
         }
     }
 
@@ -29,7 +30,7 @@ public class SoundEnvironment
     public int nightAmbienceId;
     public int dayEventId;
     public int nightEventId;
-    public int eventDelay;
+    public int _eventDelay;
     public bool indoors;
     public int material1;
     public int material2;
@@ -57,4 +58,6 @@ public class SoundEnvironment
     public SoundInfo dayEvent;
     [System.NonSerialized]
     public SoundInfo nightEvent;
+    [System.NonSerialized]
+    public float eventDelay;
 }

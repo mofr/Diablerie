@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     Dictionary<LevelInfo, AudioSource> songs = new Dictionary<LevelInfo, AudioSource>();
     const float CrossfadeDuration = 10;
+    Coroutine eventsCoroutine;
 
     private void Awake()
     {
@@ -30,6 +32,22 @@ public class AudioManager : MonoBehaviour
             songs[level.info] = song;
         }
         AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, CrossfadeDuration);
+
+        if (eventsCoroutine != null)
+            StopCoroutine(eventsCoroutine);
+        if (level != null)
+            eventsCoroutine = StartCoroutine(PlayEnvEvents());
+        else
+            eventsCoroutine = null;
+    }
+
+    IEnumerator PlayEnvEvents()
+    {
+        while(isActiveAndEnabled)
+        {
+            yield return new WaitForSeconds(Level.current.info.soundEnv.eventDelay);
+            Play(Level.current.info.soundEnv.dayEvent);
+        }
     }
 
     public void Play(string soundId)
