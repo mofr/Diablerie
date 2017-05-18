@@ -9,6 +9,7 @@ public class SoundInfo
 
     public static SoundInfo itemPickup;
     public static SoundInfo itemFlippy;
+    public static SoundInfo cursorButtonClick;
 
     public static SoundInfo Find(string soundCode)
     {
@@ -33,6 +34,7 @@ public class SoundInfo
 
         itemPickup = Find("item_pickup");
         itemFlippy = Find("item_flippy");
+        cursorButtonClick = Find("cursor_button_click");
     }
 
     static void GatherVariations(SoundInfo sound, int index)

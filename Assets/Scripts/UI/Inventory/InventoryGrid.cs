@@ -133,8 +133,11 @@ public class InventoryGrid :
         else
         {
             Item item = _inventory.Take(cell.x, cell.y);
-            PlayerController.instance.mouseItem = item;
-            AudioManager.instance.Play(SoundInfo.itemPickup);
+            if (item != null)
+            {
+                PlayerController.instance.mouseItem = item;
+                AudioManager.instance.Play(SoundInfo.itemPickup);
+            }
         }
     }
 

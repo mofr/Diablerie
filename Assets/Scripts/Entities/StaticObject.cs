@@ -81,8 +81,13 @@ public class StaticObject : Entity
 
     public override void Operate(Character character)
     {
-        Debug.Log(character.name + " use " + name);
+        Debug.Log(character.name + " use " + name + " (operateFn " + objectInfo.operateFn + ")");
         SetMode("OP");
+
+        if (objectInfo.operateFn == 23)
+        {
+            AudioManager.instance.Play("object_waypoint_open");
+        }
     }
 
     void OnRenderObject()
