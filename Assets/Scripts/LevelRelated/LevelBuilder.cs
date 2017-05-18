@@ -587,9 +587,9 @@ public class LevelBuilder
             foreach (var cells in ds1.walls)
             {
                 int i = 0;
-                for (int y = 0; y < ds1.height - 1; ++y)
+                for (int y = 0; y < ds1.height; ++y)
                 {
-                    for (int x = 0; x < ds1.width - 1; ++x, ++i)
+                    for (int x = 0; x < ds1.width; ++x, ++i)
                     {
                         var cell = cells[i];
                         if (cell.tileIndex == mapEntryIndex)
