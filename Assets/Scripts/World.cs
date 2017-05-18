@@ -173,9 +173,13 @@ public class World : MonoBehaviour
         character.run = false;
         character.walkSpeed = monStat.speed;
         character.runSpeed = monStat.runSpeed;
-        int health = Random.Range(monStat.minHP, monStat.maxHP + 1);
-        character.health = health;
-        character.maxHealth = health;
+
+        var monLvl = MonLvl.Find(monStat.level[0]);
+        if (monLvl != null && !monStat.noRatio)
+            character.health = Random.Range(monLvl.hp[0] * monStat.minHP, monLvl.hp[0] * monStat.maxHP + 1) / 100;
+        else
+            character.health = Random.Range(monStat.minHP, monStat.maxHP + 1);
+        character.maxHealth = character.health;
 
         var animator = character.GetComponent<COFAnimator>();
         animator.equip = new string[monStat.ext.gearVariants.Length];

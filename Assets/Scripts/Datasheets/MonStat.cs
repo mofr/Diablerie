@@ -37,7 +37,7 @@ public class MonStat
     public int runSpeed;
     public string Rarity;
     [Datasheet.Sequence(length = DifficultyCount)]
-    public string[] level;
+    public int[] level;
     public string monSoundId;
     public string uMonSoundId;
     public string threat;
@@ -102,7 +102,7 @@ public class MonStat
 
     public string DamageRegen;
     public string skillDamage;
-    public string noRatio;
+    public bool noRatio;
     public string NoShldBlock;
     [Datasheet.Sequence(length = DifficultyCount)]
     public string[] toBlock;
