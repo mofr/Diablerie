@@ -47,31 +47,27 @@ public class Wav
         return s / 32768.0F;
     }
 
-    public static AudioClip Load(string name, byte[] bytes)
+    public static AudioClip Load(string name, bool stream, Stream wavStream)
     {
-        using (var stream = new MemoryStream(bytes))
-        using (var reader = new BinaryReader(stream))
+        var reader = new BinaryReader(wavStream);
+        var header = ReadHeader(reader);
+
+        if (header.bitsPerSample != 16)
         {
-            var header = ReadHeader(reader);
+            Debug.LogWarning("Only 16bit wav loading is implemented (" + name + ")");
+            return null;
+        }
 
-            if (header.bitsPerSample != 16)
-            {
-                Debug.LogWarning("Only 16bit wav loading is implemented (" + name + ")");
-                return null;
-            }
-
-            int sampleCount = (int)header.dataSize / header.bitsPerSample * 8;
-            var audioClip = AudioClip.Create(name, sampleCount, header.channels, (int)header.sampleRate, false);
-            float[] data = new float[sampleCount];
+        int sampleCount = (int)header.dataSize / header.bitsPerSample * 8;
+        var audioClip = AudioClip.Create(name, sampleCount, header.channels, (int)header.sampleRate, stream, (float[] data) => {
             for (int i = 0; i < data.Length; ++i)
             {
                 byte byte1 = reader.ReadByte();
                 byte byte2 = reader.ReadByte();
                 data[i] = BytesToFloat(byte1, byte2);
             }
-
-            audioClip.SetData(data, 0);
-            return audioClip;
-        }
+        });
+        
+        return audioClip;
     }
 }

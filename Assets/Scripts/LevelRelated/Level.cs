@@ -14,6 +14,10 @@ public class Level : MonoBehaviour
         if (current != null)
             LevelEntryTitle.Show("Entering " + info.levelName);
 
+        // todo implement crossfade to the new level song
+        if (current == null)
+            AudioManager.instance.Play(info.soundEnv.song);
+
         current = this;
     }
 }

@@ -76,7 +76,7 @@ public class LevelInfo
     [Datasheet.Sequence(length = 4)]
     public int[] camt;
     public int themes;
-    public int soundEnv;
+    public int soundEnvId;
     public int waypoint;
     public string levelName;
     public string levelWarp;
@@ -99,6 +99,9 @@ public class LevelInfo
     [System.NonSerialized]
     public List<string> monsters = new List<string>();
 
+    [System.NonSerialized]
+    public SoundEnvironment soundEnv;
+
     public static List<LevelInfo> sheet = Datasheet.Load<LevelInfo>("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
     static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
@@ -117,6 +120,7 @@ public class LevelInfo
                 if (mon != null && mon != "")
                     levelInfo.monsters.Add(mon);
             }
+            levelInfo.soundEnv = SoundEnvironment.Find(levelInfo.soundEnvId);
             nameIndex.Add(levelInfo.name, levelInfo);
             idMap.Add(levelInfo.id, levelInfo);
         }

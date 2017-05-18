@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [System.Serializable]
@@ -77,10 +78,18 @@ public class SoundInfo
             var filename = @"data\global\sfx\" + _filename;
             var file = Mpq.fs.FindFile(filename);
             if (file == null)
+            {
+                filename = @"data\global\music\" + _filename;
+                file = Mpq.fs.FindFile(filename);
+            }
+
+            if (file == null)
                 return null;
 
-            var bytes = Mpq.ReadAllBytes(file);
-            audioClip = Wav.Load(sound, bytes);
+            Stream wavStream = file.Open();
+            audioClip = Wav.Load(sound, stream, wavStream);
+            if (!stream)
+                wavStream.Close();
             return audioClip;
         }
     }
@@ -102,7 +111,7 @@ public class SoundInfo
     public bool cache;
     public bool asyncOnly;
     public int priority;
-    public int stream;
+    public bool stream;
     public int stereo;
     public int tracking;
     public int solo;
