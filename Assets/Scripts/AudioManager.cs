@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     Dictionary<LevelInfo, AudioSource> songs = new Dictionary<LevelInfo, AudioSource>();
     const float CrossfadeDuration = 10;
     Coroutine eventsCoroutine;
+    AudioSource ambient;
 
     private void Awake()
     {
@@ -31,7 +32,11 @@ public class AudioManager : MonoBehaviour
             song.volume = 0;
             songs[level.info] = song;
         }
-        AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, CrossfadeDuration);
+        AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, previous == null ? 0 : CrossfadeDuration);
+
+        if (ambient == null)
+            ambient = Create("Ambient sound");
+        Play(level.info.soundEnv.dayAmbience, ambient);
 
         if (eventsCoroutine != null)
             StopCoroutine(eventsCoroutine);
@@ -55,17 +60,23 @@ public class AudioManager : MonoBehaviour
         Play(SoundInfo.Find(soundId));
     }
 
+    public AudioSource Create(string name)
+    {
+        var gameObject = new GameObject(name);
+        var audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.minDistance = 1.5f;
+        return audioSource;
+    }
+
     public AudioSource Play(SoundInfo sound)
     {
         if (sound == null)
             return null;
 
-        var gameObject = new GameObject("Sound " + sound.sound);
-        var audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.minDistance = 1.5f;
+        var audioSource = Create("Sound " + sound.sound);
         Play(sound, audioSource);
         if (!sound.loop)
-            Object.Destroy(gameObject, sound.clip != null ? sound.clip.length + 0.1f : 0);
+            Object.Destroy(audioSource.gameObject, sound.clip != null ? sound.clip.length + 0.1f : 0);
         return audioSource;
     }
 

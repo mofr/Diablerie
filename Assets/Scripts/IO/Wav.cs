@@ -51,6 +51,7 @@ public class Wav
     {
         var reader = new BinaryReader(wavStream);
         var header = ReadHeader(reader);
+        long startPosition = wavStream.Position;
 
         if (header.bitsPerSample != 16)
         {
@@ -58,7 +59,7 @@ public class Wav
             return null;
         }
 
-        int sampleCount = (int)header.dataSize / header.bitsPerSample * 8;
+        int sampleCount = (int)header.dataSize / header.blockAlign;
         var audioClip = AudioClip.Create(name, sampleCount, header.channels, (int)header.sampleRate, stream, (float[] data) => {
             for (int i = 0; i < data.Length; ++i)
             {
@@ -66,6 +67,8 @@ public class Wav
                 byte byte2 = reader.ReadByte();
                 data[i] = BytesToFloat(byte1, byte2);
             }
+        }, (int pos) => {
+            wavStream.Seek(startPosition + pos * header.blockAlign, SeekOrigin.Begin);
         });
         
         return audioClip;

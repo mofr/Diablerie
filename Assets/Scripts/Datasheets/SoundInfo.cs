@@ -89,10 +89,14 @@ public class SoundInfo
                 return null;
 
             Stream wavStream = file.Open();
-            audioClip = Wav.Load(sound, stream, wavStream);
+            var clip = Wav.Load(sound, stream, wavStream);
             if (!stream)
+            {
                 wavStream.Close();
-            return audioClip;
+                audioClip = clip;
+            }
+    
+            return clip;
         }
     }
     
