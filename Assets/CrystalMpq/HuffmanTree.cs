@@ -312,11 +312,11 @@ namespace CrystalMpq
 
 		public void DecompressBlock(byte[] inBuffer, int index, int count, byte[] outBuffer)
 		{
-			BitBuffer buffer;
+//			BitBuffer buffer;
 			byte compressionType;
 
 			compressionType = inBuffer[index++];
-			buffer = new BitBuffer(inBuffer, index, count - 1);
+//			buffer = new BitBuffer(inBuffer, index, count - 1);
 
 			BuildTree(HuffmanTree.data[compressionType]);
 		}

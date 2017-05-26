@@ -34,8 +34,6 @@ namespace CrystalMpq
 
 		public static int DecompressBlock(byte[] inBuffer, int inLength, byte[] outBuffer, bool multi)
 		{
-			byte[] tempBuffer;
-
 			if (!multi) return DclCompression.DecompressBlock(inBuffer, 0, inLength, outBuffer);
 			else // Examinate first byte for finding compression methods used
 			{

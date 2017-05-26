@@ -264,7 +264,6 @@ namespace CrystalMpq
 			b = inBuffer[index++];
 			if (b < 4 || b > 6) throw new InvalidDataException();
 
-			int dictSize = 0x40 << b; // Calculate dictionnary size
 			int lowOffsetSize = b;
 
 			var bitBuffer = new BitBuffer(inBuffer, index, count - 2);

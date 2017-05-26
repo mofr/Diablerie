@@ -5,7 +5,7 @@ using UnityEngine;
 public class DCC : Spritesheet
 {
     public List<Texture2D> textures;
-    public int directionCount;
+    new public int directionCount;
     public int framesPerDirection;
 
     string filename;

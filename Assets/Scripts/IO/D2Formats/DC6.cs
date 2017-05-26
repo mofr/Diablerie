@@ -23,7 +23,7 @@ public class DC6 : Spritesheet
         public Sprite[] sprites;
     }
 
-    public int directionCount;
+    new public int directionCount;
     public int framesPerDirection;
     public Direction[] directions;
     public List<Texture2D> textures = new List<Texture2D>();

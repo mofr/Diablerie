@@ -18,7 +18,7 @@ namespace CrystalMpq
 
 		private static uint[] BuildEncryptionTable()
 		{
-			int q, r = 0x100001;
+			int r = 0x100001;
 			uint seed;
 
 			uint[] encryptionTable = new uint[0x500];
@@ -28,9 +28,9 @@ namespace CrystalMpq
 				{
 					unchecked
 					{
-						q = Math.DivRem(r * 125 + 3, 0x2AAAAB, out r);
+						Math.DivRem(r * 125 + 3, 0x2AAAAB, out r);
 						seed = (uint)(r & 0xFFFF) << 16;
-						q = Math.DivRem(r * 125 + 3, 0x2AAAAB, out r);
+						Math.DivRem(r * 125 + 3, 0x2AAAAB, out r);
 						seed |= (uint)(r & 0xFFFF);
 						encryptionTable[0x100 * j + i] = seed;
 					}
@@ -42,7 +42,6 @@ namespace CrystalMpq
 		public static uint Hash(string text, uint hashOffset)
 		{
 			uint hash = 0x7FED7FED, seed = 0xEEEEEEEE;
-			byte[] buffer = new byte[text.Length];
 			char c;
 			byte b;
 

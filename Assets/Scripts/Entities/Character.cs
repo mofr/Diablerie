@@ -62,7 +62,6 @@ public class Character : Entity
     public int health = 100;
     public int maxHealth = 100;
     bool hasMoved = false;
-    Overlay castOverlay;
     SkillInfo skillInfo;
 
     Entity targetEntity;
@@ -147,9 +146,7 @@ public class Character : Entity
         usingSkill = true;
         moving = false;
         if (skillInfo.castOverlay != null)
-            castOverlay = Overlay.Create(gameObject, skillInfo.castOverlay);
-        else
-            castOverlay = null;
+            Overlay.Create(gameObject, skillInfo.castOverlay);
         this.skillInfo = skillInfo;
         targetPoint = target;
 
