@@ -23,11 +23,6 @@ public class CollisionMap : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
-    {
-        DrawDebugCellGrid();
-    }
-
     void DrawDebugCellGrid()
     {
         Color color = new Color(1, 0, 0, 0.3f);
