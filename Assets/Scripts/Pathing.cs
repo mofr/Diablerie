@@ -86,6 +86,7 @@ public class Pathing
         new Vector2i(1, 0), new Vector2i(1, 1), new Vector2i(0, 1), new Vector2i(-1, 1),
         new Vector2i(-1, 0), new Vector2i(-1, -1), new Vector2i(0, -1), new Vector2i(1, -1),
     };
+    static private int size;
     static private GameObject self;
 
     static private void StepTo(Node node)
@@ -114,7 +115,7 @@ public class Pathing
         {
             int dir = i % 8;
             Vector2i pos = node.pos + directions[dir];
-            bool passable = CollisionMap.Passable(pos, size: 2, ignore: self);
+            bool passable = CollisionMap.Passable(pos, size: size, ignore: self);
 
             if (passable)
             {
@@ -145,7 +146,7 @@ public class Pathing
     {
         while (node.parent != null && node.parent.parent != null)
         {
-            if (CollisionMap.Raycast(node.pos, node.parent.parent.pos, size: 2, ignore: self))
+            if (CollisionMap.Raycast(node.pos, node.parent.parent.pos, size: size, ignore: self))
             {
                 break;
             }
@@ -169,11 +170,11 @@ public class Pathing
         UnityEngine.Profiling.Profiler.EndSample();
     }
 
-    static public List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, GameObject self = null, int depth = 100)
+    static public List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, int size = 2, GameObject self = null, int depth = 100)
     {
         UnityEngine.Profiling.Profiler.BeginSample("BuildPath");
-        Vector2i from = (Vector2i)Iso.Snap(from_);
-        target = (Vector2i)Iso.Snap(target_);
+        Vector2i from = Iso.Snap(from_);
+        target = Iso.Snap(target_);
         path.Clear();
         if (from == target)
         {
@@ -183,6 +184,7 @@ public class Pathing
         openNodes.Clear();
         Node.Recycle(closeNodes);
 
+        Pathing.size = size;
         Pathing.self = self;
         Node startNode = Node.Get();
         startNode.parent = null;

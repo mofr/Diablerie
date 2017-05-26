@@ -63,7 +63,7 @@ public class StaticObject : Entity
             }
 
             if (objectInfo.hasCollision[mode])
-                CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, true);
+                CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, true, gameObject);
 
             mode = newMode;
 
@@ -75,7 +75,7 @@ public class StaticObject : Entity
             animator.frameDuration = objectInfo.frameDuration[mode];
 
             if (objectInfo.hasCollision[mode])
-                CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false);
+                CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);
         }
     }
 

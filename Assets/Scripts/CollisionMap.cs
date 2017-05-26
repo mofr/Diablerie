@@ -23,6 +23,11 @@ public class CollisionMap : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        DrawDebugCellGrid();
+    }
+
     void DrawDebugCellGrid()
     {
         Color color = new Color(1, 0, 0, 0.3f);
@@ -89,33 +94,33 @@ public class CollisionMap : MonoBehaviour
         if (index - size - size * instance.width < 0 || index + size + size * instance.width >= instance.map.Length)
             return false;
 
-        var c0 = instance.map[index];
-        bool passable = c0.passable || (ignore != null && ignore == c0.gameObject);
-        if (size > 1)
+        index = index - size / 2 - size / 2 * instance.height;
+        int step = instance.width - size;
+        for (int y = 0; y < size; ++y)
         {
-            var c1 = instance.map[index - 1];
-            var c2 = instance.map[index + 1];
-            var c3 = instance.map[index - instance.width];
-            var c4 = instance.map[index + instance.width];
+            int end = index + size;
+            while (index < end)
+            {
+                if (debug)
+                {
+                    var tilePos = instance.MapToIso(index);
+                    Iso.DebugDrawTile(tilePos, 0.1f);
+                }
 
-            passable = passable && (c1.passable || (ignore != null && ignore == c1.gameObject));
-            passable = passable && (c2.passable || (ignore != null && ignore == c2.gameObject));
-            passable = passable && (c3.passable || (ignore != null && ignore == c3.gameObject));
-            passable = passable && (c4.passable || (ignore != null && ignore == c4.gameObject));
+                var cell = instance.map[index];
+                if (!cell.passable && (ignore == null || ignore != cell.gameObject))
+                {
+                    UnityEngine.Profiling.Profiler.EndSample();
+                    return false;
+                }
+                ++index;
+            }
+            index += step;
         }
 
         UnityEngine.Profiling.Profiler.EndSample();
 
-        if (debug)
-        {
-            var tilePos = instance.MapToIso(index);
-            Iso.DebugDrawTile(tilePos, 0.1f);
-            Iso.DebugDrawTile(tilePos + new Vector3(1, 0), 0.1f);
-            Iso.DebugDrawTile(tilePos + new Vector3(-1, 0), 0.1f);
-            Iso.DebugDrawTile(tilePos + new Vector3(0, 1), 0.1f);
-            Iso.DebugDrawTile(tilePos + new Vector3(0, -1), 0.1f);
-        }
-        return passable;
+        return true;
     }
 
     public static void SetPassable(Vector3 pos, bool passable)
@@ -129,12 +134,12 @@ public class CollisionMap : MonoBehaviour
         instance.map[index].passable = passable;
     }
 
-    public static void SetPassable(Vector3 pos, int sizeX, int sizeY, bool passable)
+    public static void SetPassable(Vector3 pos, int sizeX, int sizeY, bool passable, GameObject gameObject)
     {
-        SetPassable(Iso.Snap(pos), sizeX, sizeY, passable);
+        SetPassable(Iso.Snap(pos), sizeX, sizeY, passable, gameObject);
     }
 
-    public static void SetPassable(Vector2i pos, int sizeX, int sizeY, bool passable)
+    public static void SetPassable(Vector2i pos, int sizeX, int sizeY, bool passable, GameObject gameObject)
     {
         int index = instance.MapToIndex(pos) - sizeX / 2 - sizeY / 2 * instance.height;
         int step = instance.width - sizeX;
@@ -143,7 +148,20 @@ public class CollisionMap : MonoBehaviour
             int end = index + sizeX;
             while (index < end)
             {
-                instance.map[index++].passable = passable;
+                Cell cell = instance.map[index];
+                if (passable && cell.gameObject == gameObject)
+                {
+                    cell.passable = true;
+                    cell.gameObject = null;
+                    instance.map[index] = cell;
+                }
+                else if (!passable && cell.passable)
+                {
+                    cell.passable = false;
+                    cell.gameObject = gameObject;
+                    instance.map[index] = cell;
+                }
+                ++index;
             }
             index += step;
         }
@@ -215,16 +233,10 @@ public class CollisionMap : MonoBehaviour
         return count;
     }
 
-    static public void Move(Vector2 from, Vector2 to, GameObject gameObject)
+    static public void Move(Vector2 from, Vector2 to, int size, GameObject gameObject)
     {
-        int indexFrom = instance.MapToIndex(from);
-        int indexTo = instance.MapToIndex(to);
-
-        instance.map[indexFrom].passable = true;
-        instance.map[indexFrom].gameObject = null;
-
-        instance.map[indexTo].passable = false;
-        instance.map[indexTo].gameObject = gameObject;
+        SetPassable(from, size, size, true, gameObject);
+        SetPassable(to, size, size, false, gameObject);
     }
 
     static public bool Fit(Vector3 pos, out Vector3 result, int size = 1)

@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             targetPosition = IsoInput.mousePosition;
         }
-        var path = Pathing.BuildPath(iso.pos, targetPosition, self: iso.gameObject);
+        var path = Pathing.BuildPath(iso.pos, targetPosition, size: character.size, self: iso.gameObject);
         Pathing.DebugDrawPath(iso.pos, path);
     }
 

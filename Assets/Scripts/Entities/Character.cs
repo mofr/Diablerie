@@ -13,7 +13,7 @@ public class Character : Entity
     public float runSpeed = 6f;
     public float attackSpeed = 1.0f;
     public float attackRange = 1.5f;
-    public float diameter = 2f;
+    public int size = 2;
     public bool run = false;
 
     public string basePath;
@@ -77,7 +77,7 @@ public class Character : Entity
     protected override void Start()
     {
         base.Start();
-        CollisionMap.Move(iso.pos, iso.pos, gameObject);
+        CollisionMap.Move(iso.pos, iso.pos, size, gameObject);
     }
 
     public void Use(Entity entity)
@@ -106,10 +106,10 @@ public class Character : Entity
     public void InstantMove(Vector2 target)
     {
         Vector3 newPos;
-        if (CollisionMap.Fit(target, out newPos, (int)diameter))
+        if (CollisionMap.Fit(target, out newPos, size))
         {
+            CollisionMap.Move(iso.pos, newPos, size, gameObject);
             iso.pos = newPos;
-            CollisionMap.Move(iso.pos, newPos, gameObject);
             moving = false;
         }
         else
@@ -169,7 +169,7 @@ public class Character : Entity
         if (targetEntity)
         {
             var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
-            if (distance <= diameter + targetEntity.operateRange)
+            if (distance <= size + targetEntity.operateRange)
             {
                 var localEntity = targetEntity;
                 moving = false;
@@ -186,7 +186,7 @@ public class Character : Entity
         if (attackTarget && !attack)
         {
             Vector2 target = attackTarget.iso.pos;
-            if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + attackTarget.diameter / 2)
+            if (Vector2.Distance(target, iso.pos) <= attackRange + size / 2 + attackTarget.size / 2)
             {
                 moving = false;
                 attack = true;
@@ -212,6 +212,7 @@ public class Character : Entity
         hasMoved = false;
         MoveToTargetPoint();
         Turn();
+        Iso.DebugDrawTile(iso.pos, 0.3f);
     }
 
     private void LateUpdate()
@@ -261,7 +262,7 @@ public class Character : Entity
             traveled += distance;
             movement += step.normalized * distance;
         }
-
+        
         Move(movement);
 
         if (path.Count == 0)
@@ -279,7 +280,7 @@ public class Character : Entity
         if (!moving || attack || takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
-        var newPath = Pathing.BuildPath(iso.pos, targetPoint, self: gameObject);
+        var newPath = Pathing.BuildPath(iso.pos, targetPoint, size: size, self: gameObject);
         if (newPath.Count == 0)
         {
             moving = false;
@@ -290,7 +291,7 @@ public class Character : Entity
             AbortPath();
             path.AddRange(newPath);
         }
-        Pathing.DebugDrawPath(iso.pos, path);
+        
         if (path.Count == 1 && Vector2.Distance(path[0].pos, targetPoint) < 1.0f)
         {
             // smooth straightforward movement
@@ -306,7 +307,7 @@ public class Character : Entity
     bool Move(Vector2 movement)
     {
         var newPos = iso.pos + movement;
-        CollisionMap.Move(iso.pos, newPos, gameObject);
+        CollisionMap.Move(iso.pos, newPos, size, gameObject);
         iso.pos = newPos;
         hasMoved = true;
         return true;
@@ -415,7 +416,7 @@ public class Character : Entity
         if (attack && attackTarget)
         {
             Vector2 target = attackTarget.iso.pos;
-            if (Vector2.Distance(target, iso.pos) <= attackRange + diameter / 2 + attackTarget.diameter / 2)
+            if (Vector2.Distance(target, iso.pos) <= attackRange + size / 2 + attackTarget.size / 2)
             {
                 attackTarget.TakeDamage(attackDamage, this);
             }
@@ -437,7 +438,7 @@ public class Character : Entity
         {
             dying = false;
             dead = true;
-            CollisionMap.SetPassable(Iso.Snap(iso.pos), true);
+            CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
         }
     }
 

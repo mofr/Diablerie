@@ -104,6 +104,7 @@ public class World : MonoBehaviour
         character.runSpeed = 15;
         character.maxHealth = 1000;
         character.health = 1000;
+        character.size = 2;
 
         var equip = player.AddComponent<Equipment>();
         Inventory.Create(player, 10, 4);
@@ -173,6 +174,7 @@ public class World : MonoBehaviour
         character.run = false;
         character.walkSpeed = monStat.speed;
         character.runSpeed = monStat.runSpeed;
+        character.size = monStat.ext.sizeX;
 
         var monLvl = MonLvl.Find(monStat.level[0]);
         if (monLvl != null && !monStat.noRatio)
