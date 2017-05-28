@@ -423,8 +423,8 @@ public class LevelBuilder
         offsetY *= Iso.SubTileCount;
         foreach (var info in ds1.objects)
         {
-            var gameObject = CreateObject(info.obj, offsetX + info.x, offsetY + info.y, root);
-            if (gameObject == null)
+            bool created = CreateObject(info.obj, offsetX + info.x, offsetY + info.y, root);
+            if (!created)
                 Debug.LogWarning("Object not instantiated " + info.obj.description);
         }
     }
@@ -528,19 +528,19 @@ public class LevelBuilder
         return meshRenderer;
     }
 
-    static GameObject CreateObject(SpawnPreset obj, int x, int y, Transform root)
+    static bool CreateObject(SpawnPreset obj, int x, int y, Transform root)
     {
         var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)
         {
             if (obj.objectId >= ObjectInfo.sheet.Count)
             {
-                return null;
+                return false;
             }
             ObjectInfo objectInfo = ObjectInfo.sheet[obj.objectId];
             var staticObject = World.SpawnObject(objectInfo, pos, parent: root);
             staticObject.modeName = obj.mode;
-            return staticObject.gameObject;
+            return true;
         }
         else
         {
@@ -560,7 +560,10 @@ public class LevelBuilder
             }
 
             if (monStat != null)
-                return World.SpawnMonster(monStat, pos, root).gameObject;
+            {
+                World.SpawnMonster(monStat, pos, root);
+                return true;
+            }
 
             if (superUnique != null)
             {
@@ -570,10 +573,34 @@ public class LevelBuilder
                 int minionCount = Random.Range(superUnique.minGrp, superUnique.maxGrp + 1);
                 for (int i = 0; i < minionCount; ++i)
                     World.SpawnMonster(superUnique.monStat, pos, root);
-                return monster.gameObject;
+                return true;
             }
-            
-            return null;
+
+            if (obj.id == 10)
+            {
+                // Fallens
+                for (int i = 0; i < 4; ++i)
+                    World.SpawnMonster("fallen1", pos, root);
+                return true;
+            }
+
+            if (obj.id == 11)
+            {
+                // Fallen shaman + fallens
+                Spawn(MonStat.Find("fallenshaman1"), x, y, root);
+                for (int i = 0; i < 4; ++i)
+                    World.SpawnMonster("fallen1", pos, root);
+                return true;
+            }
+
+            if (obj.id == 27)
+            {
+                // Fallen shaman
+                Spawn(MonStat.Find("fallenshaman1"), x, y, root);
+                return true;
+            }
+
+            return false;
         }
     }
 

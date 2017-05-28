@@ -149,7 +149,7 @@ public class World : MonoBehaviour
             Debug.LogWarning("Monster id not found: " + id);
             return null;
         }
-        return SpawnMonster(monStat, pos);
+        return SpawnMonster(monStat, pos, parent);
     }
 
     public static Character SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null)
