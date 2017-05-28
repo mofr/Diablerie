@@ -102,6 +102,9 @@ public class LevelInfo
     [System.NonSerialized]
     public SoundEnvironment soundEnv;
 
+    [System.NonSerialized]
+    public LevelMazeInfo maze;
+
     public static List<LevelInfo> sheet = Datasheet.Load<LevelInfo>("data/global/excel/Levels.txt");
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
     static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
@@ -121,6 +124,7 @@ public class LevelInfo
                     levelInfo.monsters.Add(mon);
             }
             levelInfo.soundEnv = SoundEnvironment.Find(levelInfo.soundEnvId);
+            levelInfo.maze = LevelMazeInfo.Find(levelInfo.id);
             nameIndex.Add(levelInfo.name, levelInfo);
             idMap.Add(levelInfo.id, levelInfo);
         }

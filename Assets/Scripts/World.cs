@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class World : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class World : MonoBehaviour
 
     LevelBuilder CreateDenOfEvil()
     {
-        var builder = new LevelBuilder("Act 1 - Cave 1", 24, 24);
+        var builder = new LevelBuilder("Act 1 - Cave 1");
         var palette = new Maze.Palette();
         palette.special = new LevelPreset[][] {
             new LevelPreset[] {

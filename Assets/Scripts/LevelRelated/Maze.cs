@@ -29,7 +29,7 @@ public class Maze
     public static void Generate(LevelBuilder builder, Palette palette)
     {
         Clear();
-        GenerateRooms(2);
+        GenerateRooms(builder.info.maze.rooms[0]);
         GenerateSpecialRooms(palette);
         Build(builder, palette);
     }

@@ -8,7 +8,7 @@ public class LevelBuilder
     public readonly int gridWidth;
     public readonly int gridHeight;
 
-    LevelInfo info;
+    public LevelInfo info;
     string name;
     DS1[] grid;
     List<Popup> popups = new List<Popup>();
@@ -45,10 +45,18 @@ public class LevelBuilder
         }
         else
         {
-            this.gridX = gridX;
-            this.gridY = gridY;
-            gridWidth = info.sizeX / gridX;
-            gridHeight = info.sizeY / gridY;
+            if (info.maze != null)
+            {
+                this.gridX = info.maze.sizeX;
+                this.gridY = info.maze.sizeY;
+            }
+            else
+            {
+                this.gridX = gridX;
+                this.gridY = gridY;
+            }
+            gridWidth = info.sizeX / this.gridX;
+            gridHeight = info.sizeY / this.gridY;
             grid = new DS1[gridWidth * gridHeight];
         }
 

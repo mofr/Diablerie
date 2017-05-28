@@ -1,0 +1,83 @@
+Name	Level	Rooms	Rooms(N)	Rooms(H)	SizeX	SizeY	Merge	Beta
+Act 1 - Cave 1	8	1	1	1	24	24	500	1
+Act 1 - Cave 2	9	4	4	4	24	24	500	1
+Act 1 - Cave 3	10	6	6	6	24	24	500	1
+Act 1 - Cave 4	11	4	4	4	24	24	500	1
+Act 1 - Cave 5	12	4	4	4	24	24	500	1
+Act 1 - Cave 1 Treasure	0	1	1	1	24	24	0	1
+Act 1 - Cave 2 Treasure	13	1	1	1	24	24	0	1
+Act 1 - Cave 3 Treasure	14	1	1	1	24	24	0	1
+Act 1 - Cave 4 Treasure	15	1	1	1	24	24	0	1
+Act 1 - Cave 5 Treasure	16	1	1	1	24	24	0	1
+Act 1 - Crypt 1 A	18	12	24	36	8	8	500	1
+Act 1 - Crypt 2 A	19	12	24	36	8	8	500	1
+Act 1 - Crypt 3 A	21	6	12	24	8	8	500	1
+Act 1 - Crypt 3 B	22	6	12	20	8	8	500	1
+Act 1 - Crypt 3 C	23	6	12	16	8	8	500	1
+Act 1 - Crypt 3 D	24	6	12	12	8	8	500	1
+Act 1 - Crypt 3 E	25	6	6	6	8	8	500	1
+Act 1 - Barracks	28	10	10	10	10	14	500	1
+Act 1 - Jail 1	29	12	12	12	12	12	500	1
+Act 1 - Jail 2	30	14	14	14	12	12	500	1
+Act 1 - Jail 3	31	16	16	16	12	12	500	1
+Act 1 - Catacombs 1	34	12	12	12	12	12	500	1
+Act 1 - Catacombs 2	35	14	14	14	12	12	500	1
+Act 1 - Catacombs 3	36	16	16	16	12	12	500	1
+Act 1 - Catacombs 4	37	18	18	18	12	12	500	1
+Act 2 - Sewer 1	47	6	6	6	12	12	500	0
+Act 2 - Sewer 2	48	12	12	12	12	12	500	0
+Act 2 - Sewer 3	49	14	14	14	12	12	500	0
+Act 2 - Corrupt Harem 1	51	4	4	4	16	16	1000	0
+Act 2 - Basement  1	52	4	4	4	16	16	1000	0
+Act 2 - Basement  2	53	4	4	4	16	16	1000	0
+Act 2 - Basement  3	54	4	4	4	16	16	1000	0
+Act 2 - Tomb 1 A	55	4	4	4	16	16	500	0
+Act 2 - Tomb 2 A	56	6	6	6	16	16	500	0
+Act 2 - Tomb 2 B	57	6	6	6	16	16	500	0
+Act 2 - Tomb 3 A	58	12	12	12	16	16	500	0
+Act 2 - Tomb 1 Treasure	59	4	4	4	16	16	500	0
+Act 2 - Tomb 2 Treasure	60	6	6	6	16	16	500	0
+Act 2 - Tomb 3 Treasure	61	6	6	6	16	16	500	0
+Act 2 - Lair 1 A	62	18	18	18	10	10	500	0
+Act 2 - Lair 1 B	63	14	14	14	10	10	500	0
+Act 2 - Lair 1 Treasure	64	10	10	10	10	10	500	0
+Act 2 - Sewer 4	65	10	10	10	12	12	500	0
+Act 2 - Tomb Tal 1	66	6	6	6	16	16	500	0
+Act 2 - Tomb Tal 2	67	6	6	6	16	16	500	0
+Act 2 - Tomb Tal 3	68	6	6	6	16	16	500	0
+Act 2 - Tomb Tal 4	69	6	6	6	16	16	500	0
+Act 2 - Tomb Tal 5	70	6	6	6	16	16	500	0
+Act 2 - Tomb Tal 6	71	6	6	6	16	16	500	0
+Act 2 - Tomb Tal 7	72	6	6	6	16	16	500	0
+Act 2 - Arcane	74	61	61	61	12	12	1000	0
+Act 3 - Spider 1	84	4	4	4	16	16	500	0
+Act 3 - Spider 2	85	4	4	4	16	16	500	0
+Act 3 - Dungeon 1 A	86	4	4	4	14	14	500	0
+Act 3 - Dungeon 1 B	87	4	4	4	14	14	500	0
+Act 3 - Dungeon 2 A	88	4	4	4	14	14	500	0
+Act 3 - Dungeon 2 B	89	4	4	4	14	14	500	0
+Act 3 - Dungeon 1 Treasure	90	4	4	4	14	14	500	0
+Act 3 - Dungeon 2 Treasure	91	4	4	4	14	14	500	0
+Act 3 - Sewer 1	92	32	32	32	12	12	800	0
+Act 3 - Sewer 2	93	6	6	6	12	12	800	0
+Act 3 - Mephisto 1	100	10	16	16	12	12	500	0
+Act 3 - Mephisto 2	101	12	48	48	12	12	500	0
+Act 4 - Lava 1	107	6	6	6	24	24	500	0
+Expansion								
+Act 5 - Ice Caves 1	113	10	10	10	16	16	500	0
+Act 5 - Ice Caves 2	115	10	10	10	16	16	500	0
+Act 5 - Ice Caves 3	118	15	15	15	16	16	500	0
+Act 5 - Ice Caves 1A	114	1	1	1	64	64	500	0
+Act 5 - Ice Caves 2A	116	1	1	1	32	32	500	0
+Act 5 - Ice Caves 3A	119	1	1	1	32	32	500	0
+Act 5 - Temple 1	122	4	4	4	40	40	500	0
+Act 5 - Temple 2	123	4	4	4	40	40	500	0
+Act 5 - Hell 1	125	3	3	3	24	24	500	0
+Act 5 - Hell 2	126	3	3	3	24	24	500	0
+Act 5 - Hell 3	127	3	3	3	24	24	500	0
+Act 5 - Baal 1	128	9	9	9	16	16	500	0
+Act 5 - Baal 1	129	9	9	9	16	16	500	0
+Act 5 - Baal 1	130	9	9	9	16	16	500	0
+Act 5 - Baal 1	132	9	9	9	16	16	500	0
+Act 5 - Pandemonium Run 1	133	12	24	36	8	8	500	0
+Act 5 - Pandemonium Run 3	135	3	3	3	24	24	500	0
