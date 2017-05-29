@@ -8,6 +8,28 @@ The game is at a very early stage of development - work in progress.
 
 No commercial use is intended. All images and sounds used are from Diablo 2 and are property of the original game creators.
 
+# How to run the game
+
+Requirements:
+- Unity 5.6.0f3 (other versions are not tested)
+- Diablo 2 Lord of Destruction v1.14
+- Diablerie source code
+
+Only windows version is tested at the moment.
+
+How to build and run:
+* git clone https://github.com/mofr/Diablerie.git
+* Put following files to the Diablerie directory:
+  - d2exp.mpq
+  - d2data.mpq
+  - d2char.mpq
+  - d2sfx.mpq
+  - d2music.mpq
+  - d2xMusic.mpq
+* Run Unity Editor and open Diablerie folder as a project
+* In Assets folder open `Scenes/Scene1.scene` file
+* Press `Play`
+
 # Credits
 
 Paul Siramy - ds1edit editor, great thanks for source code. Very helpful and detailed tutorials related to diablo 2 internals.
