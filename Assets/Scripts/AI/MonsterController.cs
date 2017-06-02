@@ -63,7 +63,7 @@ public class MonsterController : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(0.5f, 0.7f));
             }
 
-            character.Attack(target);
+            character.UseSkill(SkillInfo.Attack, target);
             yield return new WaitForSeconds(Random.Range(1.5f, 2f));
 
             Iso targetIso = target.GetComponent<Iso>();

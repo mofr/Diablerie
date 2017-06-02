@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SkillInfo
 {
+    public static SkillInfo Attack;
+
     public enum Range
     {
         NoRestrictions,
@@ -136,6 +138,8 @@ public class SkillInfo
                 throw new System.Exception("Unknown skill range " + row._range);
             map.Add(row.skill, row);
         }
+
+        Attack = Find("Attack");
     }
 
     public static SkillInfo Find(string id)

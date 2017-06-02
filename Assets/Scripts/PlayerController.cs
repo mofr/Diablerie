@@ -177,8 +177,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // move to PlayerController members once Datasheets loading done not in static section
-        SkillInfo leftSkill = SkillInfo.Find("Attack");
-        SkillInfo rightSkill = SkillInfo.Find("Attack");
+        SkillInfo leftSkill = SkillInfo.Attack;
+        SkillInfo rightSkill = SkillInfo.Attack;
 
         if (!usingSkills)
         {
