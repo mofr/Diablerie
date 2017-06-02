@@ -4,6 +4,14 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SkillInfo
 {
+    public enum Range
+    {
+        NoRestrictions,
+        Melee,
+        Ranged,
+        Both
+    }
+
     public string skill;
     public int id = -1;
     public string charClass;
@@ -35,7 +43,7 @@ public class SkillInfo
     public bool enhanceable;
     public int attackRank;
     public bool noAmmo;
-    public string range;
+    public string _range;
     public int weapSel;
     public string itemTypeA1;
     public string itemTypeA2;
@@ -50,7 +58,21 @@ public class SkillInfo
     public string anim;
     public string seqTrans;
     public string monAnim;
-    [Datasheet.Sequence(length = 91)]
+    public int seqNum;
+    public string seqInput;
+    public bool durability;
+    public bool useAttackRate;
+    public int lineOfSight;
+    public bool targetableOnly;
+    public bool searchEnemyXY;
+    public bool searchEnemyNear;
+    public bool searchOpenXY;
+    public int selectProc;
+    public bool targetCorpse;
+    public bool targetPet;
+    public bool targetAlly;
+    public bool targetItem;
+    [Datasheet.Sequence(length = 77)]
     public string[] unused3;
     public int hitShift;
     public int srcDamage;
@@ -87,6 +109,9 @@ public class SkillInfo
     [System.NonSerialized]
     public SoundInfo startSound;
 
+    [System.NonSerialized]
+    public Range range;
+
     public static List<SkillInfo> sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
     static Dictionary<string, SkillInfo> map = new Dictionary<string, SkillInfo>();
 
@@ -99,6 +124,16 @@ public class SkillInfo
 
             row.castOverlay = OverlayInfo.Find(row.castOverlayId);
             row.startSound = SoundInfo.Find(row._stsound);
+            if (row._range == "none")
+                row.range = Range.NoRestrictions;
+            else if (row._range == "h2h")
+                row.range = Range.Melee;
+            else if (row._range == "rng")
+                row.range = Range.Ranged;
+            else if (row._range == "both")
+                row.range = Range.Both;
+            else
+                throw new System.Exception("Unknown skill range " + row._range);
             map.Add(row.skill, row);
         }
     }
@@ -110,35 +145,51 @@ public class SkillInfo
         return map.GetValueOrDefault(id);
     }
 
-    public void Do(Character character, Vector3 target)
+    public bool IsRangeOk(Character self, Character targetCharacter, Vector2 targetPoint)
+    {
+        if (targetCharacter != null)
+        {
+            targetPoint = targetCharacter.iso.pos;
+        }
+
+        return range == SkillInfo.Range.NoRestrictions ||
+            Vector2.Distance(self.iso.pos, targetPoint) <= self.attackRange + self.size / 2 + targetCharacter.size / 2;
+    }
+
+    public void Do(Character self, Character targetCharacter, Vector3 target)
     {
         if (srvDoFunc == 27)
         {
             // teleport
-            character.InstantMove(target);
+            self.InstantMove(target);
         }
 
-        if (srvDoFunc == 17)
+        if (srvDoFunc == 1)
+        {
+            if (IsRangeOk(self, targetCharacter, target))
+                targetCharacter.TakeDamage(self.attackDamage, self);
+        }
+        else if (srvDoFunc == 17)
         {
             // charged bold, bolt sentry
             int boltCount = 7;
             for (int i = 0; i < boltCount; ++i)
             {
                 var offset = new Vector3(Random.Range(-boltCount / 2f, boltCount / 2f), Random.Range(-boltCount / 2f, boltCount / 2f));
-                Missile.Create(clientMissileA, character.iso.pos, target + offset, character);
+                Missile.Create(clientMissileA, self.iso.pos, target + offset, self);
             }
         }
         else
         {
             if (clientMissileA != null)
             {
-                Missile.Create(clientMissileA, character.iso.pos, target, character);
+                Missile.Create(clientMissileA, self.iso.pos, target, self);
             }
         }
 
         if (clientMissile != null)
         {
-            Missile.Create(clientMissile, character.iso.pos, target, character);
+            Missile.Create(clientMissile, self.iso.pos, target, self);
         }
     }
 }

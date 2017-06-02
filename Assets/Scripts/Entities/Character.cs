@@ -11,7 +11,6 @@ public class Character : Entity
     public int directionCount = 8;
     public float walkSpeed = 3.5f;
     public float runSpeed = 6f;
-    public float attackSpeed = 1.0f;
     public float attackRange = 1.5f;
     public int size = 2;
     public bool run = false;
@@ -27,20 +26,6 @@ public class Character : Entity
 
     public delegate void DeathHandler(Character target, Character killer);
     public static event DeathHandler OnDeath;
-
-    [HideInInspector]
-    public Entity target
-    {
-        set
-        {
-            var character = value.GetComponent<Character>();
-
-            if (character)
-                Attack(character);
-            else
-                Use(value);
-        }
-    }
 
     [HideInInspector]
     public int directionIndex = 0;
@@ -65,7 +50,7 @@ public class Character : Entity
     SkillInfo skillInfo;
 
     Entity targetEntity;
-    Character attackTarget;
+    Character targetCharacter;
     Vector2 targetPoint;
 
     void Awake()
@@ -86,7 +71,8 @@ public class Character : Entity
             return;
         targetPoint = Iso.MapToIso(entity.transform.position);
         targetEntity = entity;
-        attackTarget = null;
+        targetCharacter = null;
+        skillInfo = null;
     }
 
     public void GoTo(Vector2 target)
@@ -100,7 +86,8 @@ public class Character : Entity
         moving = true;
         targetPoint = target;
         targetEntity = null;
-        attackTarget = null;
+        targetCharacter = null;
+        skillInfo = null;
     }
 
     public void InstantMove(Vector2 target)
@@ -125,8 +112,9 @@ public class Character : Entity
 
         attack = true;
         targetPoint = target;
-        attackTarget = null;
+        targetCharacter = null;
         targetEntity = null;
+        skillInfo = null;
     }
 
     public void Attack(Character target)
@@ -134,8 +122,9 @@ public class Character : Entity
         if (attack || takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
-        attackTarget = target;
+        targetCharacter = target;
         targetEntity = null;
+        skillInfo = null;
     }
 
     public void UseSkill(SkillInfo skillInfo, Vector3 target)
@@ -143,16 +132,24 @@ public class Character : Entity
         if (attack || takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
-        usingSkill = true;
-        moving = false;
-        if (skillInfo.castOverlay != null)
-            Overlay.Create(gameObject, skillInfo.castOverlay);
-        this.skillInfo = skillInfo;
+        if (skillInfo.targetableOnly)
+        {
+            GoTo(target);
+            return;
+        }
+
         targetPoint = target;
+        this.skillInfo = skillInfo;
+    }
 
-        LookAtImmidietly(target);
+    public void UseSkill(SkillInfo skillInfo, Character target)
+    {
+        if (attack || takingDamage || dead || dying || ressurecting || usingSkill)
+            return;
 
-        AudioManager.instance.Play(skillInfo.startSound, transform);
+        targetEntity = null;
+        targetCharacter = target;
+        this.skillInfo = skillInfo;
     }
 
     void AbortPath()
@@ -163,7 +160,7 @@ public class Character : Entity
 
     void OperateWithTarget()
     {
-        if (takingDamage || dead || dying || ressurecting || usingSkill)
+        if (takingDamage || dead || dying || ressurecting || usingSkill || attack)
             return;
         
         if (targetEntity)
@@ -183,10 +180,11 @@ public class Character : Entity
             }
         }
 
-        if (attackTarget && !attack)
+        if (targetCharacter && skillInfo == null)
         {
-            Vector2 target = attackTarget.iso.pos;
-            if (Vector2.Distance(target, iso.pos) <= attackRange + size / 2 + attackTarget.size / 2)
+            Vector2 target = targetCharacter.iso.pos;
+
+            if (Vector2.Distance(target, iso.pos) <= attackRange + size / 2 + targetCharacter.size / 2)
             {
                 moving = false;
                 attack = true;
@@ -206,8 +204,34 @@ public class Character : Entity
         }
     }
 
+    void TryUseSkill()
+    {
+        if (takingDamage || dead || dying || ressurecting || usingSkill || attack || skillInfo == null)
+            return;
+
+        if (targetCharacter != null)
+        {
+            targetPoint = targetCharacter.iso.pos;
+        }
+
+        if (skillInfo.IsRangeOk(this, targetCharacter, targetPoint))
+        {
+            LookAtImmidietly(targetPoint);
+            usingSkill = true;
+            moving = false;
+            if (skillInfo.castOverlay != null)
+                Overlay.Create(gameObject, skillInfo.castOverlay);
+            AudioManager.instance.Play(skillInfo.startSound, transform);
+        }
+        else
+        {
+            moving = true;
+        }
+    }
+
     void Update()
     {
+        TryUseSkill();
         OperateWithTarget();
         hasMoved = false;
         MoveToTargetPoint();
@@ -338,7 +362,6 @@ public class Character : Entity
         else if (attack)
         {
             mode = "A1";
-            animator.speed = attackSpeed;
         }
         else if (takingDamage)
         {
@@ -386,9 +409,10 @@ public class Character : Entity
             {
                 takingDamage = true;
                 attack = false;
-                attackTarget = null;
+                targetCharacter = null;
                 moving = false;
                 usingSkill = false;
+                skillInfo = null;
             }
 
             if (monStat != null)
@@ -400,9 +424,11 @@ public class Character : Entity
                 LookAtImmidietly(originator.iso.pos);
             dying = true;
             attack = false;
-            attackTarget = null;
+            targetCharacter = null;
             moving = false;
             usingSkill = false;
+            skillInfo = null;
+
             if (OnDeath != null)
                 OnDeath(this, originator);
 
@@ -413,27 +439,28 @@ public class Character : Entity
 
     void OnAnimationMiddle()
     {
-        if (attack && attackTarget)
+        if (attack && targetCharacter)
         {
-            Vector2 target = attackTarget.iso.pos;
-            if (Vector2.Distance(target, iso.pos) <= attackRange + size / 2 + attackTarget.size / 2)
+            Vector2 target = targetCharacter.iso.pos;
+            if (Vector2.Distance(target, iso.pos) <= attackRange + size / 2 + targetCharacter.size / 2)
             {
-                attackTarget.TakeDamage(attackDamage, this);
+                targetCharacter.TakeDamage(attackDamage, this);
             }
         }
         else if (usingSkill && animator.cof.mode == skillInfo.anim)
         {
-            skillInfo.Do(this, targetPoint);
+            skillInfo.Do(this, targetCharacter, targetPoint);
         }
     }
 
     void OnAnimationFinish()
     {
-        attackTarget = null;
+        targetCharacter = null;
         attack = false;
         usingSkill = false;
         takingDamage = false;
         ressurecting = false;
+        skillInfo = null;
         if (dying)
         {
             dying = false;

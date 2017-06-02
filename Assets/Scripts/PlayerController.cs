@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
             { KeyCode.F2, SkillInfo.Find("Charged Bolt") },
             { KeyCode.F3, SkillInfo.Find("Ice Bolt") },
             { KeyCode.F4, SkillInfo.Find("Teleport") },
-            { KeyCode.F5, SkillInfo.Find("Glacial Spike") }
+            { KeyCode.F5, SkillInfo.Find("Glacial Spike") },
+            { KeyCode.F6, SkillInfo.Find("Attack") }
         };
     }
 
@@ -160,37 +161,50 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(skill.Key))
             {
                 usingSkills = true;
-                Vector2 target = IsoInput.mousePosition;
                 if (MouseSelection.current != null)
                 {
-                    var character = MouseSelection.current.GetComponent<Character>();
-                    if (character != null)
-                        target = character.iso.pos;
+                    var targetCharacter = MouseSelection.current.GetComponent<Character>();
+                    if (targetCharacter != null)
+                        character.UseSkill(skill.Value, targetCharacter);
                     else
-                        target = Iso.MapToIso(MouseSelection.current.transform.position);
+                        character.UseSkill(skill.Value, Iso.MapToIso(MouseSelection.current.transform.position));
                 }
-                character.UseSkill(skill.Value, target);
+                else
+                {
+                    character.UseSkill(skill.Value, IsoInput.mousePosition);
+                }
             }
         }
 
-        if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
+        // move to PlayerController members once Datasheets loading done not in static section
+        SkillInfo leftSkill = SkillInfo.Find("Attack");
+        SkillInfo rightSkill = SkillInfo.Find("Attack");
+
+        if (!usingSkills)
         {
-            character.Attack(IsoInput.mousePosition);
-        }
-        else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
-        {
-            if (MouseSelection.current != null)
+            if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
             {
-                character.target = MouseSelection.current;
+                character.UseSkill(rightSkill, IsoInput.mousePosition);
+            }
+            else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                if (MouseSelection.current != null)
+                {
+                    var targetCharacter = MouseSelection.current.GetComponent<Character>();
+                    if (targetCharacter != null)
+                        character.UseSkill(leftSkill, targetCharacter);
+                    else
+                        character.Use(MouseSelection.current);
+                }
+                else
+                {
+                    character.GoTo(IsoInput.mousePosition);
+                }
             }
             else
             {
-                character.GoTo(IsoInput.mousePosition);
+                character.LookAt(IsoInput.mousePosition);
             }
-        }
-        else
-        {
-            character.LookAt(IsoInput.mousePosition);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
