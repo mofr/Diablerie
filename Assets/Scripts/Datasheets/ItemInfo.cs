@@ -45,6 +45,8 @@ public class ItemInfo
             if (item._code == null)
                 continue;
 
+            item.hitClass = WeaponHitClass.Find(item._hitClass);
+
             item.code = item._code;
             item.cost = item._cost;
             item.gambleCost = item._gambleCost;

@@ -105,7 +105,7 @@ public class World : MonoBehaviour
         character.health = 1000;
         character.size = 2;
 
-        var equip = player.AddComponent<Equipment>();
+        character.equip = player.AddComponent<Equipment>();
         Inventory.Create(player, 10, 4);
         var body = player.AddComponent<Rigidbody2D>();
         body.isKinematic = true;
@@ -130,7 +130,7 @@ public class World : MonoBehaviour
                 if (startingItem.loc != null)
                 {
                     int loc = BodyLoc.GetIndex(startingItem.loc);
-                    equip.Equip(item, loc);
+                    character.equip.Equip(item, loc);
                 }
                 else
                 {

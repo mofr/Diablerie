@@ -61,6 +61,17 @@ public class Equipment : MonoBehaviour
         return unequippedItems;
     }
 
+    public Item GetWeapon()
+    {
+        foreach(var item in items)
+        {
+            if (item != null && item.info.weapon != null)
+                return item;
+        }
+
+        return null;
+    }
+
     void UpdateAnimator()
     {
         character.weaponClass = "HTH";

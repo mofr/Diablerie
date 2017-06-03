@@ -8,6 +8,7 @@ public class Character : Entity
 {
     [System.NonSerialized]
     public MonStat monStat;
+    public Equipment equip;
     public int directionCount = 8;
     public float walkSpeed = 3.5f;
     public float runSpeed = 6f;
@@ -177,10 +178,21 @@ public class Character : Entity
                 Overlay.Create(gameObject, skillInfo.castOverlay);
             AudioManager.instance.Play(skillInfo.startSound, transform);
 
-            if (monStat != null && skillInfo == SkillInfo.Attack)
+            if (skillInfo == SkillInfo.Attack)
             {
-                AudioManager.instance.Play(monStat.sound.weapon1, transform);
-                AudioManager.instance.Play(monStat.sound.attack1, transform);
+                if (monStat != null)
+                {
+                    AudioManager.instance.Play(monStat.sound.weapon1, transform);
+                    AudioManager.instance.Play(monStat.sound.attack1, transform);
+                }
+                else
+                {
+                    Item weapon = equip == null ? null : equip.GetWeapon();
+                    WeaponHitClass hitClass = WeaponHitClass.HandToHand;
+                    if (weapon != null)
+                        hitClass = weapon.info.weapon.hitClass;
+                    AudioManager.instance.Play(hitClass.sound, targetCharacter.transform.position);
+                }
             }
         }
         else

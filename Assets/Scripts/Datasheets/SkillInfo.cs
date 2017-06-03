@@ -170,8 +170,23 @@ public class SkillInfo
 
         if (srvDoFunc == 1)
         {
+            Item weapon = self.equip == null ? null : self.equip.GetWeapon();
+            int damage = 10;
+            WeaponHitClass hitClass = WeaponHitClass.HandToHand;
+            if (weapon != null)
+            {
+                WeaponInfo weaponInfo = weapon.info.weapon;
+                hitClass = weaponInfo.hitClass;
+                if (weaponInfo.twoHanded)
+                    damage = Random.Range(weaponInfo.twoHandedMinDamage, weaponInfo.twoHandedMaxDamage + 1);
+                else
+                    damage = Random.Range(weaponInfo.minDamage, weaponInfo.maxDamage + 1);
+            }
+            
+            AudioManager.instance.Play(hitClass.hitSound, targetCharacter.transform.position);
+
             if (IsRangeOk(self, targetCharacter, target))
-                targetCharacter.TakeDamage(self.attackDamage, self);
+                targetCharacter.TakeDamage(damage, self);
         }
         else if (srvDoFunc == 17)
         {

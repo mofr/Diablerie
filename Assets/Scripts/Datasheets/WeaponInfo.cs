@@ -41,7 +41,7 @@ public class WeaponInfo : ItemInfo
     public string wClass;
     public string twoHandedWClass;
     public int _component;
-    public string hitClass;
+    public string _hitClass;
     public int _invWidth;
     public int _invHeight;
     public bool _stackable;
@@ -62,4 +62,7 @@ public class WeaponInfo : ItemInfo
     public string _useSound;
     [Datasheet.Sequence(length = 107)]
     public string[] skipped2;
+
+    [System.NonSerialized]
+    public WeaponHitClass hitClass;
 }
