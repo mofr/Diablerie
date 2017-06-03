@@ -182,8 +182,10 @@ public class Character : Entity
             {
                 if (monStat != null)
                 {
-                    AudioManager.instance.Play(monStat.sound.weapon1, transform);
-                    AudioManager.instance.Play(monStat.sound.attack1, transform);
+                    AudioManager.instance.Play(monStat.sound.weapon1, transform, 
+                        delay: monStat.sound.weapon1Delay, volume: monStat.sound.weapon1Volume);
+                    AudioManager.instance.Play(monStat.sound.attack1, transform, 
+                        delay: monStat.sound.attack1Delay);
                 }
                 else
                 {
@@ -383,7 +385,7 @@ public class Character : Entity
             }
 
             if (monStat != null)
-                AudioManager.instance.Play(monStat.sound.hit, transform);
+                AudioManager.instance.Play(monStat.sound.hit, transform, monStat.sound.hitDelay);
         }
         else
         {
@@ -399,7 +401,7 @@ public class Character : Entity
                 OnDeath(this, originator);
 
             if (monStat != null)
-                AudioManager.instance.Play(monStat.sound.death, transform);
+                AudioManager.instance.Play(monStat.sound.death, transform, monStat.sound.deathDelay);
         }
     }
 

@@ -27,6 +27,14 @@ public class MonSound
             sound.attack2 = SoundInfo.Find(sound._attack2);
             sound.weapon1 = SoundInfo.Find(sound._weapon1);
             sound.weapon2 = SoundInfo.Find(sound._weapon2);
+            sound.attack1Delay = sound._attack1Delay / 25f;
+            sound.attack2Delay = sound._attack2Delay / 25f;
+            sound.weapon1Delay = sound._weapon1Delay / 25f;
+            sound.weapon2Delay = sound._weapon2Delay / 25f;
+            sound.weapon1Volume = sound._weapon1Volume / 255f;
+            sound.weapon2Volume = sound._weapon2Volume / 255f;
+            sound.hitDelay = sound._hitDelay / 25f;
+            sound.deathDelay = sound._deathDelay / 25f;
             map.Add(sound.id, sound);
         }
     }
@@ -34,20 +42,20 @@ public class MonSound
     public string id;
     public string _attack1;
     public string _weapon1;
-    public int attack1Delay;
-    public int weapon1Delay;
+    public int _attack1Delay;
+    public int _weapon1Delay;
     public int attack1Prob;
-    public int weapon1Volume;
+    public int _weapon1Volume;
     public string _attack2;
     public string _weapon2;
-    public int attack2Delay;
-    public int weapon2Delay;
+    public int _attack2Delay;
+    public int _weapon2Delay;
     public int attack2Prob;
-    public int weapon2Volume;
+    public int _weapon2Volume;
     public string _hitSound;
     public string _deathSound;
-    public string _hitDelay;
-    public string _deathDelay;
+    public int _hitDelay;
+    public int _deathDelay;
     public string _skill1;
     public string _skill2;
     public string _skill3;
@@ -90,4 +98,28 @@ public class MonSound
 
     [System.NonSerialized]
     public SoundInfo death;
+
+    [System.NonSerialized]
+    public float attack1Delay;
+
+    [System.NonSerialized]
+    public float attack2Delay;
+
+    [System.NonSerialized]
+    public float weapon1Delay;
+
+    [System.NonSerialized]
+    public float weapon2Delay;
+
+    [System.NonSerialized]
+    public float weapon1Volume;
+
+    [System.NonSerialized]
+    public float weapon2Volume;
+
+    [System.NonSerialized]
+    public float hitDelay;
+
+    [System.NonSerialized]
+    public float deathDelay;
 }

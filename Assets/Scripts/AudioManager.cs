@@ -68,41 +68,41 @@ public class AudioManager : MonoBehaviour
         return audioSource;
     }
 
-    public AudioSource Play(SoundInfo sound)
+    public AudioSource Play(SoundInfo sound, float delay = 0, float volume = -1)
     {
         if (sound == null)
             return null;
 
         var audioSource = Create("Sound " + sound.sound);
-        Play(sound, audioSource);
+        Play(sound, audioSource, delay: delay, volume: volume);
         if (!sound.loop)
             Object.Destroy(audioSource.gameObject, sound.clip != null ? sound.clip.length + 0.1f : 0);
         return audioSource;
     }
 
-    public AudioSource Play(SoundInfo sound, Vector3 position)
+    public AudioSource Play(SoundInfo sound, Vector3 position, float delay = 0, float volume = -1)
     {
         if (sound == null)
             return null;
 
-        AudioSource audioSource = Play(sound);
+        AudioSource audioSource = Play(sound, delay: delay, volume: volume);
         audioSource.transform.position = position;
         audioSource.spatialBlend = 1;
         return audioSource;
     }
 
-    public AudioSource Play(SoundInfo sound, Transform parent)
+    public AudioSource Play(SoundInfo sound, Transform parent, float delay = 0, float volume = -1)
     {
         if (sound == null)
             return null;
 
-        AudioSource audioSource = Play(sound);
+        AudioSource audioSource = Play(sound, delay: delay, volume: volume);
         audioSource.transform.SetParent(parent, false);
         audioSource.spatialBlend = 1;
         return audioSource;
     }
 
-    public void Play(SoundInfo sound, AudioSource audioSource)
+    public void Play(SoundInfo sound, AudioSource audioSource, float delay = 0, float volume = -1)
     {
         if (sound == null)
             return;
@@ -116,7 +116,15 @@ public class AudioManager : MonoBehaviour
 
         audioSource.clip = sound.clip;
         audioSource.loop = sound.loop;
-        audioSource.volume = sound.volume;
-        audioSource.Play();
+
+        if (volume >= 0)
+            audioSource.volume = volume;
+        else
+            audioSource.volume = sound.volume;
+
+        if (delay > 0)
+            audioSource.PlayDelayed(delay);
+        else
+            audioSource.Play();
     }
 }
