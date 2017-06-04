@@ -63,6 +63,8 @@ public class Character : Entity
     {
         base.Start();
         CollisionMap.Move(iso.pos, iso.pos, size, gameObject);
+        if (monStat != null)
+            AudioManager.instance.Play(monStat.sound.init, transform);
     }
 
     public void Use(Entity entity)

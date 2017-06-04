@@ -8,6 +8,7 @@ public class MonsterController : MonoBehaviour
     Character target;
     readonly float viewRadius = 6f;
     readonly float maxAgroDistance = 15f;
+    bool tauntSaid = false;
 
     static Collider2D[] visibleColliders = new Collider2D[100];
 
@@ -35,6 +36,11 @@ public class MonsterController : MonoBehaviour
                     continue;
                 if (visibleCharacter.tag == "Player")
                 {
+                    if (!tauntSaid)
+                    {
+                        AudioManager.instance.Play(character.monStat.sound.taunt, character.transform);
+                        tauntSaid = true;
+                    }
                     Attack(visibleCharacter);
                     yield break;
                 }

@@ -27,6 +27,11 @@ public class MonSound
             sound.attack2 = SoundInfo.Find(sound._attack2);
             sound.weapon1 = SoundInfo.Find(sound._weapon1);
             sound.weapon2 = SoundInfo.Find(sound._weapon2);
+            sound.taunt = SoundInfo.Find(sound._taunt);
+            sound.init = SoundInfo.Find(sound._init);
+            sound.neutral = SoundInfo.Find(sound._neutral);
+            sound.footstep = SoundInfo.Find(sound._footstep);
+            sound.footstepLayer = SoundInfo.Find(sound._footstepLayer);
             sound.attack1Delay = sound._attack1Delay / 25f;
             sound.attack2Delay = sound._attack2Delay / 25f;
             sound.weapon1Delay = sound._weapon1Delay / 25f;
@@ -98,6 +103,21 @@ public class MonSound
 
     [System.NonSerialized]
     public SoundInfo death;
+
+    [System.NonSerialized]
+    public SoundInfo taunt;
+
+    [System.NonSerialized]
+    public SoundInfo init;
+
+    [System.NonSerialized]
+    public SoundInfo neutral;
+
+    [System.NonSerialized]
+    public SoundInfo footstep;
+
+    [System.NonSerialized]
+    public SoundInfo footstepLayer;
 
     [System.NonSerialized]
     public float attack1Delay;
