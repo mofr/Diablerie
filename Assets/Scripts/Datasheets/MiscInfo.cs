@@ -38,6 +38,7 @@ public class MiscInfo : ItemInfo
     public string _dropSound;
     public int _dropSoundFrame;
     public string _useSound;
-    [Datasheet.Sequence(length = 131)]
+    public bool _alwaysUnique;
+    [Datasheet.Sequence(length = 130)]
     public string[] skipped2;
 }

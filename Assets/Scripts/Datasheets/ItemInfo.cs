@@ -65,6 +65,10 @@ public class ItemInfo
             item.dropSound = SoundInfo.Find(item._dropSound);
             item.dropSoundFrame = item._dropSoundFrame;
             item.useSound = SoundInfo.Find(item._useSound);
+            item.alwaysUnique = item._alwaysUnique;
+            item.normCode = item._normCode;
+            item.uberCode = item._uberCode;
+            item.ultraCode = item._ultraCode;
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -96,6 +100,10 @@ public class ItemInfo
             item.dropSound = SoundInfo.Find(item._dropSound);
             item.dropSoundFrame = item._dropSoundFrame;
             item.useSound = SoundInfo.Find(item._useSound);
+            item.alwaysUnique = item._alwaysUnique;
+            item.normCode = item._normCode;
+            item.uberCode = item._uberCode;
+            item.ultraCode = item._ultraCode;
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -127,6 +135,8 @@ public class ItemInfo
             item.dropSound = SoundInfo.Find(item._dropSound);
             item.dropSoundFrame = item._dropSoundFrame;
             item.useSound = SoundInfo.Find(item._useSound);
+            item.alwaysUnique = item._alwaysUnique;
+            item.normCode = item.code;
 
             if (!byCode.ContainsKey(item.code))
                 byCode.Add(item.code, item);
@@ -216,4 +226,16 @@ public class ItemInfo
 
     [System.NonSerialized]
     public SoundInfo useSound;
+
+    [System.NonSerialized]
+    public bool alwaysUnique;
+
+    [System.NonSerialized]
+    public string normCode;
+
+    [System.NonSerialized]
+    public string uberCode;
+
+    [System.NonSerialized]
+    public string ultraCode;
 }

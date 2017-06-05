@@ -24,9 +24,9 @@ public class ArmorInfo : ItemInfo
     public string autoPrefix;
     public string _alternateGfx;
     public string openBetaGfx;
-    public string normCode;
-    public string uberCode;
-    public string ultraCode;
+    public string _normCode;
+    public string _uberCode;
+    public string _ultraCode;
     public int spellOffset;
     public int _component;
     public int _invWidth;
@@ -54,6 +54,7 @@ public class ArmorInfo : ItemInfo
     public string _dropSound;
     public int _dropSoundFrame;
     public string _useSound;
-    [Datasheet.Sequence(length = 111)]
+    public bool _alwaysUnique;
+    [Datasheet.Sequence(length = 110)]
     public string[] skipped2;
 }

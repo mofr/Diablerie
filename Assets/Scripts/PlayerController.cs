@@ -239,7 +239,8 @@ public class PlayerController : MonoBehaviour
                 var tc = TreasureClass.sheet[Random.Range(0, TreasureClass.sheet.Count)];
                 if (tc.name == null)
                     continue;
-                ItemDrop.Drop(tc.name, Iso.MapToWorld(IsoInput.mouseTile));
+                int itemLevel = Random.Range(1, 100);
+                ItemDrop.Drop(tc.name, Iso.MapToWorld(IsoInput.mouseTile), itemLevel);
             }
         }
 

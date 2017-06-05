@@ -3,7 +3,20 @@ using UnityEngine;
 
 public class Item
 {
+    public enum Quality
+    {
+        Unique,
+        Set,
+        Rare,
+        Magic,
+        HiQuality,
+        Normal,
+        LowQuality
+    }
+
     public readonly ItemInfo info;
+    public Quality quality = Quality.Normal;
+    public int level;
     Sprite _invSprite;
     int invFileIndex;
 
@@ -53,10 +66,39 @@ public class Item
         }
     }
 
+    void AppendColored(StringBuilder sb, string str, string color)
+    {
+        sb.Append("<color=#");
+        sb.Append(color);
+        sb.Append(">");
+        sb.Append(str);
+        sb.Append("</color>");
+    }
+
+    public string GetTitle()
+    {
+        var sb = new StringBuilder();
+        string color = Colors.ItemNormalHex;
+        switch (quality)
+        {
+            case Quality.Unique: color = Colors.ItemUniqueHex; break;
+            case Quality.Rare: color = Colors.ItemRareHex; break;
+            case Quality.Set: color = Colors.ItemSetHex; break;
+            case Quality.Magic: color = Colors.ItemMagicHex; break;
+            case Quality.LowQuality: color = Colors.ItemLowQualityHex; break;
+        }
+        if (quality == Quality.HiQuality)
+            AppendColored(sb, Translation.Find("Hiquality") + " ", color);
+        if (quality == Quality.LowQuality)
+            AppendColored(sb, Translation.Find("Low Quality") + " ", color);
+        AppendColored(sb, info.name, color);
+        return sb.ToString();
+    }
+
     public string GetDescription()
     {
         var sb = new StringBuilder();
-        sb.Append(info.name);
+        sb.Append(GetTitle());
 
         if (info.weapon != null)
         {
@@ -83,6 +125,13 @@ public class Item
 
         if (info.levelReq > 0)
             sb.Append("\nRequired Level: " + info.levelReq);
+
+        if (quality == Quality.Unique || quality == Quality.Rare || 
+            quality == Quality.Set || quality == Quality.Magic)
+        {
+            AppendColored(sb, "\nUnidentified", Colors.ItemRedHex);
+        }
+
         return sb.ToString();
     }
 }

@@ -35,9 +35,9 @@ public class WeaponInfo : ItemInfo
     public int _magicLvl;
     public string autoPrefix;
     public string openBetaGfx;
-    public string normCode;
-    public string uberCode;
-    public string ultraCode;
+    public string _normCode;
+    public string _uberCode;
+    public string _ultraCode;
     public string wClass;
     public string twoHandedWClass;
     public int _component;
@@ -60,7 +60,8 @@ public class WeaponInfo : ItemInfo
     public string _dropSound;
     public int _dropSoundFrame;
     public string _useSound;
-    [Datasheet.Sequence(length = 107)]
+    public bool _alwaysUnique;
+    [Datasheet.Sequence(length = 106)]
     public string[] skipped2;
 
     [System.NonSerialized]
