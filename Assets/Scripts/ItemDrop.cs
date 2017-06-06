@@ -19,9 +19,10 @@ public class ItemDrop : MonoBehaviour
     {
         if (target.monStat == null)
             return;
-
-        int itemLevel = 80; // todo depending on which monster dropped them
-        Drop(target.monStat.treasureClass[0], target.transform.position, itemLevel);
+        
+        TreasureClass tc = target.monStat.treasureClass[0].normal;
+        tc = tc.Upgraded(target.level);
+        Drop(tc, target.transform.position, target.level);
     }
 
     public static bool TestQuality(Item item, int baseChance, int divisor, int qualityFactor, int mf, int mfFactor, int minChance = 0)
@@ -103,15 +104,23 @@ public class ItemDrop : MonoBehaviour
         if (treasureClass == null)
         {
             var item = Item.Create(code);
+            if (item == null)
+            {
+                Debug.LogWarning("Item wasn't spawned: " + code);
+                return;
+            }
             item.level = itemLevel;
             SelectItemQuality(item, qualityFactors, mf: 1000);
-            if (item == null)
-                Debug.LogWarning("Item wasn't spawned: " + code);
-            else
-                Pickup.Create(pos, item);
-            return;
+            Pickup.Create(pos, item);
         }
+        else
+        {
+            Drop(treasureClass, pos, itemLevel, qualityFactors);
+        }
+    }
 
+    static void Drop(TreasureClass treasureClass, Vector3 pos, int itemLevel, QualityFactors qualityFactors = new QualityFactors())
+    {
         qualityFactors.unique = Mathf.Max(qualityFactors.unique, treasureClass.unique);
         qualityFactors.set = Mathf.Max(qualityFactors.set, treasureClass.set);
         qualityFactors.rare = Mathf.Max(qualityFactors.rare, treasureClass.rare);

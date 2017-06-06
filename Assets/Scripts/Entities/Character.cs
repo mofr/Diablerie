@@ -15,6 +15,7 @@ public class Character : Entity
     public float attackRange = 1.5f;
     public int size = 2;
     public bool run = false;
+    public int level = 1;
 
     public string basePath;
     public string token;

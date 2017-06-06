@@ -3,6 +3,27 @@
 [System.Serializable]
 public class MonStat
 {
+    [System.Serializable]
+    public class TreasureClassInfo
+    {
+        public string _normal;
+        public string _champion;
+        public string _unique;
+        public string _quest;
+
+        [System.NonSerialized]
+        public TreasureClass normal;
+
+        [System.NonSerialized]
+        public TreasureClass champion;
+
+        [System.NonSerialized]
+        public TreasureClass unique;
+
+        [System.NonSerialized]
+        public TreasureClass quest;
+    }
+
     const int DifficultyCount = 3;
 
     public string id;
@@ -126,8 +147,8 @@ public class MonStat
 
     [Datasheet.Sequence(length = 3 * (2 + 4 * DifficultyCount))]
     public string[] elementalDamage;
-    [Datasheet.Sequence(length = 3 * 4)]
-    public string[] treasureClass;
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public TreasureClassInfo[] treasureClass;
     public string TCQuestId;
     public string TCQuestCP;
     public string SplEndDeath;
@@ -173,6 +194,13 @@ public class MonStat
             stat.minion2 = stat.minion2Id == null ? null : Find(stat.minion2Id);
             stat.sound = MonSound.Find(stat.monSoundId);
             stat.uniqueSound = MonSound.Find(stat.uMonSoundId);
+            foreach(var tcInfo in stat.treasureClass)
+            {
+                tcInfo.normal = TreasureClass.Find(tcInfo._normal);
+                tcInfo.champion = TreasureClass.Find(tcInfo._champion);
+                tcInfo.unique = TreasureClass.Find(tcInfo._unique);
+                tcInfo.quest = TreasureClass.Find(tcInfo._quest);
+            }
         }
     }
 

@@ -89,7 +89,7 @@ public class Item
         }
         if (quality == Quality.HiQuality)
             AppendColored(sb, Translation.Find("Hiquality") + " ", color);
-        if (quality == Quality.LowQuality)
+        else if (quality == Quality.LowQuality)
             AppendColored(sb, Translation.Find("Low Quality") + " ", color);
         AppendColored(sb, info.name, color);
         return sb.ToString();

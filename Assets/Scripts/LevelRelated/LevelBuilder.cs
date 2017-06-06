@@ -204,12 +204,12 @@ public class LevelBuilder
                     continue;
 
                 var monStat = monStats[Random.Range(0, monStats.Length)];
-                Spawn(monStat, x, y, root);
+                Spawn(monStat, x, y, info.id, root);
             }
         }
     }
 
-    private static void Spawn(MonStat monStat, int x, int y, Transform root)
+    private static void Spawn(MonStat monStat, int x, int y, int level, Transform root)
     {
         if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
             return;
@@ -217,7 +217,8 @@ public class LevelBuilder
         int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
         for (int i = 0; i < count; ++i)
         {
-            World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y), root);
+            var mon = World.SpawnMonster(monStat, Iso.MapTileToWorld(x, y), root);
+            mon.level = level;
         }
 
         if (monStat.minion1 != null)
@@ -225,7 +226,8 @@ public class LevelBuilder
             int minionCount = Random.Range(monStat.partyMin, monStat.partyMax);
             for (int i = 0; i < minionCount; ++i)
             {
-                World.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
+                var mon = World.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
+                mon.level = level;
             }
         }
     }
@@ -429,11 +431,12 @@ public class LevelBuilder
     {
         offsetX *= Iso.SubTileCount;
         offsetY *= Iso.SubTileCount;
-        foreach (var info in ds1.objects)
+        int monsterLevel = info != null ? info.id : 1;
+        foreach (var spawnInfo in ds1.objects)
         {
-            bool created = CreateObject(info.obj, offsetX + info.x, offsetY + info.y, root);
+            bool created = CreateObject(spawnInfo.preset, offsetX + spawnInfo.x, offsetY + spawnInfo.y, monsterLevel, root);
             if (!created)
-                Debug.LogWarning("Object not instantiated " + info.obj.description);
+                Debug.LogWarning("Object not instantiated " + spawnInfo.preset.description);
         }
     }
 
@@ -536,7 +539,7 @@ public class LevelBuilder
         return meshRenderer;
     }
 
-    static bool CreateObject(SpawnPreset obj, int x, int y, Transform root)
+    static bool CreateObject(SpawnPreset obj, int x, int y, int level, Transform root)
     {
         var pos = Iso.MapToWorld(x - 2, y - 2);
         if (obj.type == 2)
@@ -578,9 +581,13 @@ public class LevelBuilder
                 var monster = World.SpawnMonster(superUnique.monStat, pos, root);
                 monster.gameObject.name = superUnique.nameStr;
                 monster.title = superUnique.name;
+                monster.level = level;
                 int minionCount = Random.Range(superUnique.minGrp, superUnique.maxGrp + 1);
                 for (int i = 0; i < minionCount; ++i)
-                    World.SpawnMonster(superUnique.monStat, pos, root);
+                {
+                    var minion = World.SpawnMonster(superUnique.monStat, pos, root);
+                    minion.level = level;
+                }
                 return true;
             }
 
@@ -595,16 +602,19 @@ public class LevelBuilder
             if (obj.id == 11)
             {
                 // Fallen shaman + fallens
-                Spawn(MonStat.Find("fallenshaman1"), x, y, root);
+                Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
                 for (int i = 0; i < 4; ++i)
-                    World.SpawnMonster("fallen1", pos, root);
+                {
+                    var fallen = World.SpawnMonster("fallen1", pos, root);
+                    fallen.level = level;
+                }
                 return true;
             }
 
             if (obj.id == 27)
             {
                 // Fallen shaman
-                Spawn(MonStat.Find("fallenshaman1"), x, y, root);
+                Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
                 return true;
             }
 

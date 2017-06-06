@@ -19,7 +19,7 @@ public class DS1
     {
         public int x;
         public int y;
-        public SpawnPreset obj;
+        public SpawnPreset preset;
     }
 
     public struct Group
@@ -176,7 +176,7 @@ public class DS1
                 reader.ReadInt32(); // flags
             }
 
-            info.obj = SpawnPreset.Find(act, type, id);
+            info.preset = SpawnPreset.Find(act, type, id);
             ds1.objects[i] = info;
         }
     }

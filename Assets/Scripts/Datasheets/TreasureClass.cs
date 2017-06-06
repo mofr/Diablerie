@@ -13,17 +13,32 @@ public class TreasureClass
         return byName.GetValueOrDefault(name);
     }
 
+    public TreasureClass Upgraded(int targetLevel)
+    {
+        if (group == -1)
+            return this;
+
+        int i = index;
+        while(i < sheet.Count - 1 && sheet[i + 1].level <= targetLevel && sheet[i + 1].group == group)
+        {
+            ++i;
+        }
+        return sheet[i];
+    }
+
     static TreasureClass()
     {
         GenerateFromItemTypes();
 
-        foreach (TreasureClass tc in sheet)
+        for (int i = 0; i < sheet.Count; ++i)
         {
+            TreasureClass tc = sheet[i];
             if (tc.name == null)
                 continue;
             if (byName.ContainsKey(tc.name))
                 continue;
             byName.Add(tc.name, tc);
+            tc.index = i;
         }
 
         foreach (TreasureClass tc in sheet)
@@ -84,7 +99,7 @@ public class TreasureClass
     }
 
     public string name;
-    public int group;
+    public int group = -1;
     public int level;
     public int picks;
     public int unique;
@@ -101,4 +116,7 @@ public class TreasureClass
 
     [System.NonSerialized]
     public int probSum;
+
+    [System.NonSerialized]
+    public int index;
 }
