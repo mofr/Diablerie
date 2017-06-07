@@ -2,6 +2,8 @@
 
 public class Missile : MonoBehaviour
 {
+    public int weaponDamage = 0;
+
     new SpriteRenderer renderer;
     SpriteAnimator animator;
     Iso iso;
@@ -10,6 +12,11 @@ public class Missile : MonoBehaviour
     MissileInfo info;
     SkillInfo skillInfo;
     Character originator;
+
+    static public Missile Create(string missileId, Vector3 target, Character originator)
+    {
+        return Create(missileId, originator.iso.pos, target, originator);
+    }
 
     static public Missile Create(string missileId, Vector3 start, Vector3 target, Character originator)
     {
@@ -53,14 +60,18 @@ public class Missile : MonoBehaviour
 
     int CalcDamage()
     {
+        int damage = weaponDamage;
+
         if (skillInfo != null)
         {
-            return Random.Range(skillInfo.eMin, skillInfo.eMax + 1) + Random.Range(skillInfo.minDamage, skillInfo.maxDamage + 1);
+            damage += Random.Range(skillInfo.eMin, skillInfo.eMax + 1) + Random.Range(skillInfo.minDamage, skillInfo.maxDamage + 1);
         }
         else
         {
-            return Random.Range(info.eMin, info.eMax + 1) + Random.Range(info.minDamage, info.maxDamage + 1);
+            damage += Random.Range(info.eMin, info.eMax + 1) + Random.Range(info.minDamage, info.maxDamage + 1);
         }
+
+        return damage;
     }
 
     void Update()
@@ -72,22 +83,23 @@ public class Missile : MonoBehaviour
         var hit = CollisionMap.Raycast(iso.pos, newPos, distance, size: info.size, ignore: originator.gameObject);
         if (hit)
         {
+            Character hitCharacter = null;
             if (hit.gameObject != null)
             {
-                Character character = hit.gameObject.GetComponent<Character>();
-                if (character != null)
+                hitCharacter = hit.gameObject.GetComponent<Character>();
+                if (hitCharacter != null)
                 {
                     int damage = CalcDamage();
-                    character.TakeDamage(damage, originator);
+                    hitCharacter.TakeDamage(damage, originator);
                     if (info.progOverlay != null)
-                        Overlay.Create(character.gameObject, info.progOverlay);
+                        Overlay.Create(hitCharacter.gameObject, info.progOverlay);
                 }
             }
             if (info.explosionMissile != null)
                 Missile.Create(info.explosionMissile, hit.pos, hit.pos, originator);
 
             AudioManager.instance.Play(info.hitSound, Iso.MapToWorld(hit.pos));
-            AudioManager.instance.Play(SoundInfo.GetHitSound(info.hitClass), Iso.MapToWorld(hit.pos));
+            AudioManager.instance.Play(SoundInfo.GetHitSound(info.hitClass, hitCharacter), Iso.MapToWorld(hit.pos));
 
             if (info.clientHitFunc == "14")
             {
@@ -100,8 +112,9 @@ public class Missile : MonoBehaviour
                     Missile.Create(info.clientHitSubMissileId[1], hit.pos, hit.pos - offset, originator);
                 }
             }
-
-            if (info.collideKill)
+            
+            // todo pierce is actually is pierce skill with a chance to pierce
+            if ((!info.pierce || hitCharacter == null) && info.collideKill)
             {
                 Destroy(gameObject);
             }

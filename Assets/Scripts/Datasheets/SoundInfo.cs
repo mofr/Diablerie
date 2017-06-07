@@ -20,9 +20,9 @@ public class SoundInfo
         return map.GetValueOrDefault(soundCode);
     }
 
-    public static SoundInfo GetHitSound(int hitClass)
+    public static SoundInfo GetHitSound(int hitClass, Character hitCharacter)
     {
-        if (hitClass == 10)
+        if (hitClass == 10 && hitCharacter != null)
             return SoundInfo.Find("impact_arrow_1");
         if (hitClass == 32)
             return SoundInfo.Find("impact_fire_1");

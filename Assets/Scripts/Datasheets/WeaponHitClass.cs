@@ -59,12 +59,12 @@ public class WeaponHitClass
         });
         map.Add("bow", new WeaponHitClass()
         {
-            sound = SoundInfo.Find("weapon_bow_1"),
+            sound = null,
             hitSound = null
         });
         map.Add("xbow", new WeaponHitClass()
         {
-            sound = SoundInfo.Find("weapon_xbow_1"),
+            sound = null,
             hitSound = null
         });
         map.Add("claw", new WeaponHitClass()

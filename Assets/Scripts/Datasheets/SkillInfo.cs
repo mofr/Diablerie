@@ -156,8 +156,12 @@ public class SkillInfo
             targetPoint = targetCharacter.iso.pos;
         }
 
+        float radius = self.attackRange + self.size / 2;
+        if (targetCharacter != null)
+            radius += targetCharacter.size / 2;
+
         return range == SkillInfo.Range.NoRestrictions ||
-            Vector2.Distance(self.iso.pos, targetPoint) <= self.attackRange + self.size / 2 + targetCharacter.size / 2;
+            Vector2.Distance(self.iso.pos, targetPoint) <= radius;
     }
 
     public void Do(Character self, Character targetCharacter, Vector3 target)
@@ -173,6 +177,7 @@ public class SkillInfo
             Item weapon = self.equip == null ? null : self.equip.GetWeapon();
             int damage = 10;
             WeaponHitClass hitClass = WeaponHitClass.HandToHand;
+            bool ranged = false;
             if (weapon != null)
             {
                 WeaponInfo weaponInfo = weapon.info.weapon;
@@ -181,12 +186,20 @@ public class SkillInfo
                     damage = Random.Range(weaponInfo.twoHandedMinDamage, weaponInfo.twoHandedMaxDamage + 1);
                 else
                     damage = Random.Range(weaponInfo.minDamage, weaponInfo.maxDamage + 1);
-            }
-            
-            AudioManager.instance.Play(hitClass.hitSound, targetCharacter.transform.position);
 
-            if (IsRangeOk(self, targetCharacter, target))
+                ranged = weapon.info.type.shoots != null;
+            }
+
+            if (ranged)
+            {
+                var missile = Missile.Create("arrow", target, self);
+                missile.weaponDamage = damage;
+            }
+            else if (targetCharacter != null && IsRangeOk(self, targetCharacter, target))
+            {
+                AudioManager.instance.Play(hitClass.hitSound, targetCharacter.transform.position);
                 targetCharacter.TakeDamage(damage, self);
+            }
         }
         else if (srvDoFunc == 17)
         {

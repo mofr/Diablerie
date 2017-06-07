@@ -49,6 +49,7 @@ public class Character : Entity
     public int maxHealth = 100;
     bool hasMoved = false;
     SkillInfo skillInfo;
+    Item skillWeapon;
 
     Entity targetEntity;
     Character targetCharacter;
@@ -113,12 +114,7 @@ public class Character : Entity
         if (takingDamage || dead || dying || ressurecting || usingSkill)
             return;
 
-        if (skillInfo.targetableOnly)
-        {
-            GoTo(target);
-            return;
-        }
-
+        skillWeapon = equip.GetWeapon();
         targetPoint = target;
         this.skillInfo = skillInfo;
     }
@@ -172,7 +168,9 @@ public class Character : Entity
             targetPoint = targetCharacter.iso.pos;
         }
 
-        if (skillInfo.IsRangeOk(this, targetCharacter, targetPoint))
+        bool ranged = skillWeapon != null && skillWeapon.info.type.shoots != null;
+
+        if (ranged || skillInfo.IsRangeOk(this, targetCharacter, targetPoint))
         {
             LookAtImmidietly(targetPoint);
             usingSkill = true;
@@ -196,7 +194,7 @@ public class Character : Entity
                     WeaponHitClass hitClass = WeaponHitClass.HandToHand;
                     if (weapon != null)
                         hitClass = weapon.info.weapon.hitClass;
-                    AudioManager.instance.Play(hitClass.sound, targetCharacter.transform.position);
+                    AudioManager.instance.Play(hitClass.sound, transform);
                 }
             }
         }
