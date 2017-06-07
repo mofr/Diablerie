@@ -79,14 +79,46 @@ public class StaticObject : Entity
         }
     }
 
+    static string[] treasureClassLetters = new string[] { "A", "B", "C" };
+
     public override void Operate(Character character)
     {
         Debug.Log(character.name + " use " + name + " (operateFn " + objectInfo.operateFn + ")");
-        SetMode("OP");
 
-        if (objectInfo.operateFn == 23)
+        if (objectInfo.operateFn == 1 // bed, caskets
+            || objectInfo.operateFn == 3 // urns
+            || objectInfo.operateFn == 4 // chests
+            || objectInfo.operateFn == 5 // barrels
+            || objectInfo.operateFn == 14 // crates
+            || objectInfo.operateFn == 51 // jungle objects
+            )
         {
-            AudioManager.instance.Play("object_waypoint_open");
+            AudioManager.instance.Play("object_chest_large");
+
+            var levelInfo = LevelInfo.sheet[85]; // todo determine current level
+            string tc = "Act " + (levelInfo.act + 1);
+            var actLevels = LevelInfo.byAct[levelInfo.act];
+            int lowest = actLevels[0].id;
+            int highest = actLevels[actLevels.Count - 1].id;
+            int letterIndex = (levelInfo.id - lowest) / ((highest - lowest + 1) / 3);
+            string letter = treasureClassLetters[letterIndex];
+            tc += " Chest " + letter;
+            Debug.Log(tc);
+            ItemDrop.Drop(tc, transform.position, levelInfo.id);
+            SetMode("OP");
+        }
+        else if (objectInfo.operateFn == 23)
+        {
+            // waypoint
+            if (COF.ModeNames[2][mode] != "OP")
+            {
+                AudioManager.instance.Play("object_waypoint_open");
+                SetMode("OP");
+            }
+        }
+        else
+        {
+            SetMode("OP");
         }
     }
 

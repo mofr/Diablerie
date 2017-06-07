@@ -106,6 +106,7 @@ public class LevelInfo
     public LevelMazeInfo maze;
 
     public static List<LevelInfo> sheet = Datasheet.Load<LevelInfo>("data/global/excel/Levels.txt");
+    public static List<List<LevelInfo>> byAct = new List<List<LevelInfo>>();
     static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
     static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
 
@@ -127,6 +128,9 @@ public class LevelInfo
             levelInfo.maze = LevelMazeInfo.Find(levelInfo.id);
             nameIndex.Add(levelInfo.name, levelInfo);
             idMap.Add(levelInfo.id, levelInfo);
+            while (byAct.Count <= levelInfo.act)
+                byAct.Add(new List<LevelInfo>());
+            byAct[levelInfo.act].Add(levelInfo);
         }
     }
 
