@@ -176,6 +176,7 @@ public class MissileInfo
 
     public static List<MissileInfo> sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
     static Dictionary<string, MissileInfo> map = new Dictionary<string, MissileInfo>();
+    static Dictionary<int, MissileInfo> idMap = new Dictionary<int, MissileInfo>();
 
     static MissileInfo()
     {
@@ -194,6 +195,7 @@ public class MissileInfo
             row.progSound = SoundInfo.Find(row.progSoundId);
             row.progOverlay = OverlayInfo.Find(row.progOverlayId);
             map.Add(row.missile, row);
+            idMap.Add(row.id, row);
         }
     }
 
@@ -202,5 +204,12 @@ public class MissileInfo
         if (id == null)
             return null;
         return map.GetValueOrDefault(id);
+    }
+
+    public static MissileInfo Find(int id)
+    {
+        if (id == 0)
+            return null;
+        return idMap.GetValueOrDefault(id);
     }
 }

@@ -46,6 +46,7 @@ public class ItemInfo
                 continue;
 
             item.hitClass = WeaponHitClass.Find(item._hitClass);
+            item.missileType = MissileInfo.Find(item.missileTypeId);
 
             item.code = item._code;
             item.cost = item._cost;

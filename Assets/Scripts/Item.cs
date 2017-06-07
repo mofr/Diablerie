@@ -102,6 +102,8 @@ public class Item
 
         if (info.weapon != null)
         {
+            if (info.weapon.missileType != null)
+                sb.Append("\nThrow Damage: " + info.weapon.missileMinDamage + " to " + info.weapon.missileMaxDamage);
             if (!info.weapon.twoHanded || info.weapon.oneOrTwoHanded)
                 sb.Append("\nOne-Hand Damage: " + info.weapon.minDamage + " to " + info.weapon.maxDamage);
             if (info.weapon.twoHanded)

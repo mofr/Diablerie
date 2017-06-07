@@ -61,9 +61,24 @@ public class WeaponInfo : ItemInfo
     public int _dropSoundFrame;
     public string _useSound;
     public bool _alwaysUnique;
-    [Datasheet.Sequence(length = 106)]
+    public int transparent;
+    public int transTbl;
+    public bool quivered;
+    public int lightRadius;
+    public bool belt;
+    public int quest;
+    public int questDiffCheck;
+    public int missileTypeId;
+    public int durabilityWarning;
+    public int quantityWarning;
+    public int gemOffset;
+    public int bitfield1;
+    [Datasheet.Sequence(length = 94)]
     public string[] skipped2;
 
     [System.NonSerialized]
     public WeaponHitClass hitClass;
+
+    [System.NonSerialized]
+    public MissileInfo missileType;
 }
