@@ -155,7 +155,7 @@ public class ItemInfo
                 item.type2 = ItemType.Find(item.type2Code);
 
             item.type = item.type1 != null ? item.type1 : item.type2;
-            item.flippyFile = @"data\global\items\" + item.flippyFile + ".dc6";
+            item.uniques = UniqueItem.sheet.FindAll(uniq => uniq.code == item.code);
         }
     }
 
@@ -239,4 +239,7 @@ public class ItemInfo
 
     [System.NonSerialized]
     public string ultraCode;
+
+    [System.NonSerialized]
+    public List<UniqueItem> uniques;
 }

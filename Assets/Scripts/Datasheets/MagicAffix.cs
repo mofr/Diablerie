@@ -36,7 +36,7 @@ public class MagicAffix
     public struct Mod
     {
         public string code;
-        public int param;
+        public string param;
         public int min;
         public int max;
     }

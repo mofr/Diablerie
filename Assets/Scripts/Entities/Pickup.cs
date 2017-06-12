@@ -31,10 +31,10 @@ public class Pickup : Entity
     public static Pickup Create(Vector3 position, Item item)
     {
         var title = item.GetTitle();
-        var pickup = Create(position, item.info.flippyFile, item.info.name, title);
+        var pickup = Create(position, item.flippyFile, item.info.name, title);
         pickup.item = item;
-        pickup.animator.SetTrigger(item.info.dropSoundFrame, () => {
-            AudioManager.instance.Play(item.info.dropSound, pickup.transform.position);
+        pickup.animator.SetTrigger(item.dropSoundFrame, () => {
+            AudioManager.instance.Play(item.dropSound, pickup.transform.position);
         });
         pickup.Flip();
         return pickup;

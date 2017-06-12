@@ -152,7 +152,15 @@ public class SkillInfo
     {
         if (id == null)
             return null;
-        return map.GetValueOrDefault(id);
+        var result = map.GetValueOrDefault(id);
+        if (result != null)
+            return result;
+
+        int intId;
+        if (int.TryParse(id, out intId))
+            return Find(intId);
+
+        return null;
     }
 
     public static SkillInfo Find(int id)

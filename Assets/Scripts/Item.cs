@@ -18,7 +18,7 @@ public class Item
     public struct Property
     {
         public ItemPropertyInfo info;
-        public int param;
+        public string param;
         public int value;
         public int min;
         public int max;
@@ -29,9 +29,12 @@ public class Item
     public string name;
     public Quality quality = Quality.Normal;
     public int level;
+    public int levelReq;
     public List<Property> properties = new List<Property>();
     public bool identified = true;
+    public UniqueItem unique;
     Sprite _invSprite;
+    bool _invSpriteIdentified;
     int invFileIndex;
 
     static public Item Create(string code)
@@ -46,7 +49,8 @@ public class Item
     public Item(ItemInfo info)
     {
         this.info = info;
-        this.name = info.name;
+        name = info.name;
+        levelReq = info.levelReq;
         if (info.type.varInvGfx > 0)
         {
             invFileIndex = Random.Range(0, info.type.varInvGfx);
@@ -58,10 +62,18 @@ public class Item
         get
         {
             string filename;
-            if (info.type.varInvGfx > 0)
+            if (unique != null && unique.invFile != null && identified)
+            {
+                filename = unique.invFile;
+            }
+            else if (info.type.varInvGfx > 0)
+            {
                 filename = info.type.invGfx[invFileIndex];
+            }
             else
+            {
                 filename = info.invFile;
+            }
 
             filename = @"data\global\items\" + filename + ".dc6";
             return filename;
@@ -72,12 +84,77 @@ public class Item
     {
         get
         {
-            if (_invSprite == null)
+            if (_invSprite == null || _invSpriteIdentified != identified)
             {
                 var dc6 = DC6.Load(invFile);
                 _invSprite = dc6.GetSprites(0)[0];
+                _invSpriteIdentified = identified;
             }
             return _invSprite;
+        }
+    }
+
+    public string flippyFile
+    {
+        get
+        {
+            string filename;
+            if (unique != null && unique.flippyFile != null)
+            {
+                filename = unique.flippyFile;
+            }
+            else
+            {
+                filename = info.flippyFile;
+            }
+
+            filename = @"data\global\items\" + filename + ".dc6";
+            return filename;
+        }
+    }
+
+    public SoundInfo useSound
+    {
+        get
+        {
+            if (unique != null && unique.useSound != null)
+            {
+                return unique.useSound;
+            }
+            else
+            {
+                return info.useSound;
+            }
+        }
+    }
+
+    public SoundInfo dropSound
+    {
+        get
+        {
+            if (unique != null && unique.useSound != null)
+            {
+                return unique.dropSound;
+            }
+            else
+            {
+                return info.dropSound;
+            }
+        }
+    }
+
+    public int dropSoundFrame
+    {
+        get
+        {
+            if (unique != null && unique.dropSoundFrame != -1)
+            {
+                return unique.dropSoundFrame;
+            }
+            else
+            {
+                return info.dropSoundFrame;
+            }
         }
     }
 
@@ -119,6 +196,10 @@ public class Item
         if (identified)
         {
             AppendColored(sb, name, color);
+            if (quality == Quality.Unique)
+            {
+                AppendColored(sb, "\n" + info.name, color);
+            }
         }
         else
         {
@@ -157,8 +238,8 @@ public class Item
                 sb.Append("\nRequired Strength: " + info.armor.reqStr);
         }
 
-        if (info.levelReq > 0)
-            sb.Append("\nRequired Level: " + info.levelReq);
+        if (levelReq > 0)
+            sb.Append("\nRequired Level: " + levelReq);
 
         if (identified)
         {
@@ -214,7 +295,8 @@ public class Item
                 else if (block.func == 17)
                 {
                     int characterLevel = 10;
-                    value = prop.param * characterLevel;
+                    int perLevel = int.Parse(prop.param);
+                    value = perLevel * characterLevel;
                 }
                 if (block.stat == null)
                     continue;
@@ -339,18 +421,20 @@ public class Item
                 }
                 else if (block.stat.descFunc == 14)
                 {
-                    int skillTabId = prop.param;
+                    string skillTabId = prop.param;
+                    var charStat = CharStatsInfo.FindByCode(prop.classSpecific);
+                    string className = charStat != null ? charStat.className : "NULL";
                     sb.Append(sign);
                     sb.Append(value);
                     sb.Append(" to ");
                     sb.Append("skilltab" + skillTabId);
                     sb.Append(" Skill Levels (");
-                    sb.Append(CharStatsInfo.FindByCode(prop.classSpecific).className);
+                    sb.Append(className);
                     sb.Append(" Only)");
                 }
                 else if (block.stat.descFunc == 15)
                 {
-                    int skillId = prop.param;
+                    string skillId = prop.param;
                     var skillInfo = SkillInfo.Find(skillId);
                     int chance = prop.min;
                     int skillLevel = prop.max;
@@ -402,7 +486,7 @@ public class Item
                 {
                     int chargeCount = -prop.min;
                     int skillLevel = -prop.max;
-                    int skillId = prop.param;
+                    string skillId = prop.param;
                     var skillInfo = SkillInfo.Find(skillId);
                     sb.Append("Level ");
                     sb.Append(skillLevel);
@@ -416,9 +500,9 @@ public class Item
                 }
                 else if (block.stat.descFunc == 27)
                 {
-                    int skillId = prop.param;
+                    string skillId = prop.param;
                     var skillInfo = SkillInfo.Find(skillId);
-                    var className = CharStatsInfo.FindByCode(skillInfo.charClass);
+                    var className = CharStatsInfo.FindByCode(skillInfo.charClass).className;
                     sb.Append("+");
                     sb.Append(value);
                     sb.Append(" to ");
@@ -429,7 +513,7 @@ public class Item
                 }
                 else if (block.stat.descFunc == 28)
                 {
-                    int skillId = prop.param;
+                    string skillId = prop.param;
                     var skillInfo = SkillInfo.Find(skillId);
                     sb.Append("+");
                     sb.Append(value);

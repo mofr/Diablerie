@@ -128,7 +128,7 @@ public class InventoryGrid :
                 Item poppedItem;
                 if (_inventory.Put(mouseItem, cell.x, cell.y, out poppedItem))
                 {
-                    AudioManager.instance.Play(mouseItem.info.useSound);
+                    AudioManager.instance.Play(mouseItem.useSound);
                     PlayerController.instance.mouseItem = poppedItem;
                 }
             }
@@ -151,6 +151,7 @@ public class InventoryGrid :
                 {
                     AudioManager.instance.Play("cursor_identify_item");
                     item.identified = true;
+                    OnInventoryUpdate();
                 }
             }
         }

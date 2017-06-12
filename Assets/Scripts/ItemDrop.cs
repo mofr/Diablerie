@@ -93,8 +93,64 @@ public class ItemDrop : MonoBehaviour
         }
     }
 
+    static UniqueItem SelectUniqueForItem(Item item)
+    {
+        int probSum = 0;
+        foreach (var unique in item.info.uniques)
+        {
+            probSum += unique.rarity;
+        }
+        int sample = Random.Range(0, probSum);
+        foreach (var unique in item.info.uniques)
+        {
+            if (sample < unique.rarity && item.level >= unique.level)
+            {
+                return unique;
+            }
+
+            sample -= unique.rarity;
+        }
+
+        return null;
+    }
+
+    static bool GenerateUnique(Item item)
+    {
+        if (item.info.uniques.Count == 0)
+            return false;
+
+        UniqueItem unique = SelectUniqueForItem(item);
+        if (unique == null)
+            return false;
+
+        item.name = unique.name;
+        item.unique = unique;
+        item.levelReq = unique.levelReq;
+
+        foreach (var mod in unique.props)
+        {
+            if (mod.prop == null)
+                break;
+
+            var prop = new Item.Property();
+            prop.info = ItemPropertyInfo.Find(mod.prop);
+            prop.param = mod.param;
+            prop.value = Random.Range(mod.min, mod.max + 1);
+            prop.min = mod.min;
+            prop.max = mod.max;
+            item.properties.Add(prop);
+        }
+
+        return true;
+    }
+
     static void GenerateItemProperties(Item item)
     {
+        if (item.quality == Item.Quality.Unique && !GenerateUnique(item))
+        {
+            item.quality = Item.Quality.Rare;
+        }
+
         if (item.quality == Item.Quality.Magic)
         {
             int rand = Random.Range(0, 4);
@@ -159,7 +215,8 @@ public class ItemDrop : MonoBehaviour
             }
             item.level = itemLevel;
             SelectItemQuality(item, qualityFactors, mf: 1000);
-            if (item.quality != Item.Quality.HiQuality && item.quality != Item.Quality.Normal &&
+            if (item.quality != Item.Quality.HiQuality && 
+                item.quality != Item.Quality.Normal &&
                 item.quality != Item.Quality.LowQuality)
             {
                 item.identified = false;
