@@ -10,6 +10,11 @@ public class CharStatsInfo
         return sheet.Find(info => info.className == className);
     }
 
+    public static CharStatsInfo FindByCode(string code)
+    {
+        return sheet.Find(info => info.code == code);
+    }
+
     [System.Serializable]
     public struct StartingItem
     {
@@ -29,12 +34,24 @@ public class CharStatsInfo
         { "Assassin", "AI" },
     };
 
+    static Dictionary<string, string> codes = new Dictionary<string, string>
+    {
+        { "Amazon", "ama" },
+        { "Sorceress", "sor" },
+        { "Necromancer", "nec" },
+        { "Paladin", "pal" },
+        { "Barbarian", "bar" },
+        { "Druid", "dru" },
+        { "Assassin", "ass" },
+    };
+
     static CharStatsInfo()
     {
         sheet.RemoveAll(row => row.baseWClass == null);
         foreach(var info in sheet)
         {
             info.token = tokens[info.className];
+            info.code = codes[info.className];
         }
     }
 
@@ -84,4 +101,7 @@ public class CharStatsInfo
 
     [System.NonSerialized]
     public string token;
+
+    [System.NonSerialized]
+    public string code;
 }

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Item
@@ -14,9 +15,22 @@ public class Item
         LowQuality
     }
 
+    public struct Property
+    {
+        public ItemPropertyInfo info;
+        public int param;
+        public int value;
+        public int min;
+        public int max;
+        public string classSpecific;
+    }
+
     public readonly ItemInfo info;
+    public string name;
     public Quality quality = Quality.Normal;
     public int level;
+    public List<Property> properties = new List<Property>();
+    public bool identified = true;
     Sprite _invSprite;
     int invFileIndex;
 
@@ -32,6 +46,7 @@ public class Item
     public Item(ItemInfo info)
     {
         this.info = info;
+        this.name = info.name;
         if (info.type.varInvGfx > 0)
         {
             invFileIndex = Random.Range(0, info.type.varInvGfx);
@@ -66,13 +81,23 @@ public class Item
         }
     }
 
-    void AppendColored(StringBuilder sb, string str, string color)
+    void StartColor(StringBuilder sb, string color)
     {
         sb.Append("<color=#");
         sb.Append(color);
         sb.Append(">");
-        sb.Append(str);
+    }
+
+    void EndColor(StringBuilder sb)
+    {
         sb.Append("</color>");
+    }
+
+    void AppendColored(StringBuilder sb, string str, string color)
+    {
+        StartColor(sb, color);
+        sb.Append(str);
+        EndColor(sb);
     }
 
     public string GetTitle()
@@ -91,7 +116,14 @@ public class Item
             AppendColored(sb, Translation.Find("Hiquality") + " ", color);
         else if (quality == Quality.LowQuality)
             AppendColored(sb, Translation.Find("Low Quality") + " ", color);
-        AppendColored(sb, info.name, color);
+        if (identified)
+        {
+            AppendColored(sb, name, color);
+        }
+        else
+        {
+            AppendColored(sb, info.name, color);
+        }
         return sb.ToString();
     }
 
@@ -128,12 +160,288 @@ public class Item
         if (info.levelReq > 0)
             sb.Append("\nRequired Level: " + info.levelReq);
 
-        if (quality == Quality.Unique || quality == Quality.Rare || 
-            quality == Quality.Set || quality == Quality.Magic)
+        if (identified)
+        {
+            DescribeProperties(sb);
+        }
+        else
         {
             AppendColored(sb, "\nUnidentified", Colors.ItemRedHex);
         }
 
         return sb.ToString();
+    }
+
+    private void DescribeProperties(StringBuilder sb)
+    {
+        StartColor(sb, Colors.ItemMagicHex);
+        foreach (var prop in properties)
+        {
+            foreach (var block in prop.info.blocks)
+            {
+                int value = prop.value;
+
+                if (block.func == 5)
+                {
+                    sb.Append("\n");
+                    sb.Append("+");
+                    sb.Append(value);
+                    sb.Append(" To Minimum Damage");
+                    continue;
+                }
+                else if (block.func == 6)
+                {
+                    sb.Append("\n");
+                    sb.Append("+");
+                    sb.Append(value);
+                    sb.Append(" To Maximum Damage");
+                    continue;
+                }
+                else if (block.func == 7)
+                {
+                    sb.Append("\n");
+                    sb.Append("+");
+                    sb.Append(value);
+                    sb.Append("% Enhanced Damage");
+                    continue;
+                }
+                else if (block.func == 14)
+                {
+                    sb.Append("\nSocketed (");
+                    sb.Append(prop.value);
+                    sb.Append(")");
+                }
+                else if (block.func == 17)
+                {
+                    int characterLevel = 10;
+                    value = prop.param * characterLevel;
+                }
+                if (block.stat == null)
+                    continue;
+
+                string sign = value > 0 ? "+" : "";
+                string str1 = value > 0 ? block.stat.descPositive : block.stat.descNegative;
+                sb.Append("\n");
+                if (block.stat.descFunc == 1 || block.stat.descFunc == 12)
+                {
+                    if (block.stat.descVal == 1)
+                    {
+                        sb.Append(sign);
+                        sb.Append(value);
+                        sb.Append(" ");
+                    }
+                    sb.Append(str1);
+                    if (block.stat.descVal == 2)
+                    {
+                        sb.Append(" ");
+                        sb.Append(sign);
+                        sb.Append(value);
+                    }
+                }
+                else if (block.stat.descFunc == 2)
+                {
+                    if (block.stat.descVal == 1)
+                    {
+                        sb.Append(value);
+                        sb.Append("% ");
+                    }
+                    sb.Append(str1);
+                    if (block.stat.descVal == 2)
+                    {
+                        sb.Append(" ");
+                        sb.Append(value);
+                        sb.Append("%");
+                    }
+                }
+                else if (block.stat.descFunc == 3)
+                {
+                    if (block.stat.descVal == 1)
+                    {
+                        sb.Append(value);
+                        sb.Append(" ");
+                    }
+                    sb.Append(str1);
+                    if (block.stat.descVal == 2)
+                    {
+                        sb.Append(" ");
+                        sb.Append(value);
+                    }
+                }
+                else if (block.stat.descFunc == 4)
+                {
+                    sb.Append(sign);
+                    sb.Append(value);
+                    sb.Append(" ");
+                    sb.Append(str1);
+                }
+                else if (block.stat.descFunc == 5)
+                {
+                    sb.Append(value * 100 / 128);
+                    sb.Append("% ");
+                    sb.Append(str1);
+                }
+                else if (block.stat.descFunc == 6)
+                {
+                    sb.Append(sign);
+                    sb.Append(value);
+                    sb.Append(" ");
+                    sb.Append(str1);
+                    sb.Append(" ");
+                    sb.Append(block.stat.desc2);
+                }
+                else if (block.stat.descFunc == 7)
+                {
+                    sb.Append(value);
+                    sb.Append("% ");
+                    sb.Append(str1);
+                    sb.Append(" ");
+                    sb.Append(block.stat.desc2);
+                }
+                else if (block.stat.descFunc == 8)
+                {
+                    sb.Append(sign);
+                    sb.Append(value);
+                    sb.Append("% ");
+                    sb.Append(str1);
+                    sb.Append(" ");
+                    sb.Append(block.stat.desc2);
+                }
+                else if (block.stat.descFunc == 9)
+                {
+                    sb.Append(value);
+                    sb.Append(" ");
+                    sb.Append(str1);
+                    sb.Append(" ");
+                    sb.Append(block.stat.desc2);
+                }
+                else if (block.stat.descFunc == 10)
+                {
+                    sb.Append(value * 100 / 128);
+                    sb.Append("% ");
+                    sb.Append(str1);
+                    sb.Append(" ");
+                    sb.Append(block.stat.desc2);
+                }
+                else if (block.stat.descFunc == 11)
+                {
+                    sb.Append("Repairs 1 Durability In ");
+                    sb.Append(100 / value);
+                    sb.Append(" Seconds");
+                }
+                else if (block.stat.descFunc == 13)
+                {
+                    sb.Append("+");
+                    sb.Append(value);
+                    sb.Append(" to ");
+                    string className = CharStatsInfo.sheet[block.value].className;
+                    sb.Append(className);
+                    sb.Append(" Skill Levels");
+                }
+                else if (block.stat.descFunc == 14)
+                {
+                    int skillTabId = prop.param;
+                    sb.Append(sign);
+                    sb.Append(value);
+                    sb.Append(" to ");
+                    sb.Append("skilltab" + skillTabId);
+                    sb.Append(" Skill Levels (");
+                    sb.Append(CharStatsInfo.FindByCode(prop.classSpecific).className);
+                    sb.Append(" Only)");
+                }
+                else if (block.stat.descFunc == 15)
+                {
+                    int skillId = prop.param;
+                    var skillInfo = SkillInfo.Find(skillId);
+                    int chance = prop.min;
+                    int skillLevel = prop.max;
+                    sb.Append(chance);
+                    sb.Append("% to cast Level ");
+                    sb.Append(skillLevel);
+                    sb.Append(" ");
+                    sb.Append(skillInfo.name);
+                    sb.Append(" on ");
+                    sb.Append(block.stat.itemEvent1);
+                }
+                else if (block.stat.descFunc == 16)
+                {
+                    sb.Append("Level [sLvl] [skill] Aura When Equipped");
+                }
+                else if (block.stat.descFunc == 17)
+                {
+                    sb.Append("[value] [string1] (Increases near [time]) ");
+                }
+                else if (block.stat.descFunc == 18)
+                {
+                    sb.Append("[value]% [string1] (Increases near [time])");
+                }
+                else if (block.stat.descFunc == 19)
+                {
+                    sb.Append("sprintf");
+                }
+                else if (block.stat.descFunc == 20)
+                {
+                    sb.Append(-value);
+                    sb.Append("% ");
+                    sb.Append(str1);
+                }
+                else if (block.stat.descFunc == 21)
+                {
+                    sb.Append(-value);
+                    sb.Append(" ");
+                    sb.Append(str1);
+                }
+                else if (block.stat.descFunc == 22)
+                {
+                    sb.Append("[value]% [string1] [montype]");
+                }
+                else if (block.stat.descFunc == 23)
+                {
+                    sb.Append("[value]% [string1] [monster]");
+                }
+                else if (block.stat.descFunc == 24)
+                {
+                    int chargeCount = -prop.min;
+                    int skillLevel = -prop.max;
+                    int skillId = prop.param;
+                    var skillInfo = SkillInfo.Find(skillId);
+                    sb.Append("Level ");
+                    sb.Append(skillLevel);
+                    sb.Append(" ");
+                    sb.Append(skillInfo.name);
+                    sb.Append(" (");
+                    sb.Append(chargeCount);
+                    sb.Append("/");
+                    sb.Append(chargeCount);
+                    sb.Append(" Charges)");
+                }
+                else if (block.stat.descFunc == 27)
+                {
+                    int skillId = prop.param;
+                    var skillInfo = SkillInfo.Find(skillId);
+                    var className = CharStatsInfo.FindByCode(skillInfo.charClass);
+                    sb.Append("+");
+                    sb.Append(value);
+                    sb.Append(" to ");
+                    sb.Append(skillInfo.name);
+                    sb.Append(" (");
+                    sb.Append(className);
+                    sb.Append(" Only)");
+                }
+                else if (block.stat.descFunc == 28)
+                {
+                    int skillId = prop.param;
+                    var skillInfo = SkillInfo.Find(skillId);
+                    sb.Append("+");
+                    sb.Append(value);
+                    sb.Append(" to ");
+                    sb.Append(skillInfo.name);
+                }
+                else
+                {
+                    AppendColored(sb, block.statId + "(descFunc " + block.stat.descFunc + ")" + ": " + str1, Colors.ItemLowQualityHex);
+                }
+            }
+        }
+        EndColor(sb);
     }
 }

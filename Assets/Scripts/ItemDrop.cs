@@ -93,6 +93,54 @@ public class ItemDrop : MonoBehaviour
         }
     }
 
+    static void GenerateItemProperties(Item item)
+    {
+        if (item.quality == Item.Quality.Magic)
+        {
+            int rand = Random.Range(0, 4);
+            if (rand < 2)
+            {
+                var prefixes = MagicAffix.GetSpawnableAffixes(item, MagicAffix.prefixes);
+                var prefix = prefixes[Random.Range(0, prefixes.Count)];
+                AddAffix(item, prefix);
+                item.name = prefix.name + " " + item.name;
+            }
+            if (rand != 1)
+            {
+                var suffixes = MagicAffix.GetSpawnableAffixes(item, MagicAffix.suffixes);
+                var suffix = suffixes[Random.Range(0, suffixes.Count)];
+                AddAffix(item, suffix);
+                item.name += " " + suffix.name;
+            }
+        }
+        else if (item.quality == Item.Quality.Rare)
+        {
+            var affixes = MagicAffix.GetSpawnableAffixes(item, MagicAffix.all);
+            for (int i = 0; i < 4; ++i)
+            {
+                var affix = affixes[Random.Range(0, affixes.Count)];
+                AddAffix(item, affix);
+            }
+        }
+    }
+
+    private static void AddAffix(Item item, MagicAffix affix)
+    {
+        foreach (var mod in affix.mods)
+        {
+            if (mod.code == null)
+                break;
+            var prop = new Item.Property();
+            prop.info = ItemPropertyInfo.Find(mod.code);
+            prop.param = mod.param;
+            prop.value = Random.Range(mod.min, mod.max + 1);
+            prop.min = mod.min;
+            prop.max = mod.max;
+            prop.classSpecific = affix.classSpecific;
+            item.properties.Add(prop);
+        }
+    }
+
     public static void Drop(string code, Vector3 pos, int itemLevel)
     {
         Drop(code, pos, itemLevel, new QualityFactors());
@@ -111,6 +159,12 @@ public class ItemDrop : MonoBehaviour
             }
             item.level = itemLevel;
             SelectItemQuality(item, qualityFactors, mf: 1000);
+            if (item.quality != Item.Quality.HiQuality && item.quality != Item.Quality.Normal &&
+                item.quality != Item.Quality.LowQuality)
+            {
+                item.identified = false;
+            }
+            GenerateItemProperties(item);
             Pickup.Create(pos, item);
         }
         else

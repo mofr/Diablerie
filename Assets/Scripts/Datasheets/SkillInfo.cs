@@ -114,8 +114,12 @@ public class SkillInfo
     [System.NonSerialized]
     public Range range;
 
+    [System.NonSerialized]
+    public string name;
+
     public static List<SkillInfo> sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
     static Dictionary<string, SkillInfo> map = new Dictionary<string, SkillInfo>();
+    static Dictionary<int, SkillInfo> idMap = new Dictionary<int, SkillInfo>();
 
     static SkillInfo()
     {
@@ -124,6 +128,7 @@ public class SkillInfo
             if (row.id == -1)
                 continue;
 
+            row.name = Translation.Find("skillname" + row.id);
             row.castOverlay = OverlayInfo.Find(row.castOverlayId);
             row.startSound = SoundInfo.Find(row._stsound);
             if (row._range == "none")
@@ -137,6 +142,7 @@ public class SkillInfo
             else
                 throw new System.Exception("Unknown skill range " + row._range);
             map.Add(row.skill, row);
+            idMap.Add(row.id, row);
         }
 
         Attack = Find("Attack");
@@ -147,6 +153,11 @@ public class SkillInfo
         if (id == null)
             return null;
         return map.GetValueOrDefault(id);
+    }
+
+    public static SkillInfo Find(int id)
+    {
+        return idMap.GetValueOrDefault(id);
     }
 
     public bool IsRangeOk(Character self, Character targetCharacter, Vector2 targetPoint)

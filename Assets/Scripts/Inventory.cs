@@ -48,6 +48,16 @@ public class Inventory : MonoBehaviour
         return grid[y * sizeX + x];
     }
 
+    public Item ItemAt(int x, int y)
+    {
+        int index = At(x, y);
+        if (index == -1)
+            return null;
+
+        Entry entry = _entries[index];
+        return entry.item;
+    }
+
     public Item Take(int x, int y)
     {
         int index = At(x, y);

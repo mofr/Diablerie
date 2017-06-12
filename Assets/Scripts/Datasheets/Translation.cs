@@ -9,6 +9,7 @@ public class Translation
     static Dictionary<string, string> map = new Dictionary<string, string>();
     public static List<Translation> sheet = Datasheet.Load<Translation>("data/local/string.txt", headerLines: 0);
     public static List<Translation> expansionSheet = Datasheet.Load<Translation>("data/local/expansionstring.txt", headerLines: 0);
+    public static List<Translation> patchSheet = Datasheet.Load<Translation>("data/local/patchstring.txt", headerLines: 0);
 
     public static string Find(string key)
     {
@@ -24,6 +25,12 @@ public class Translation
 
     static Translation()
     {
+        foreach (var translation in patchSheet)
+        {
+            if (!map.ContainsKey(translation.key))
+                map.Add(translation.key, translation.value);
+        }
+
         foreach (var translation in expansionSheet)
         {
             if (!map.ContainsKey(translation.key))

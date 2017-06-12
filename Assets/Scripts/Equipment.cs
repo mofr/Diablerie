@@ -16,6 +16,9 @@ public class Equipment : MonoBehaviour
 
     public bool Equip(Item item)
     {
+        if (!item.identified)
+            return false;
+
         if (!item.info.type.body)
             return false;
         

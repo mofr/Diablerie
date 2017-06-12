@@ -17,7 +17,9 @@ public class InventorySlot :
 
     private bool CanAccept(Item item)
     {
-        return item.info.type.body && (item.info.type.bodyLoc1 == bodyLoc || item.info.type.bodyLoc2 == bodyLoc);
+        return item.identified &&
+            item.info.type.body && 
+            (item.info.type.bodyLoc1 == bodyLoc || item.info.type.bodyLoc2 == bodyLoc);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
