@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
@@ -184,6 +185,34 @@ public class ItemDrop : MonoBehaviour
             prop.min = mod.min;
             prop.max = mod.max;
             item.properties.Add(prop);
+        }
+
+        for (int i = 0; i < setItem.additionalProps.Length; ++i)
+        {
+            var mod = setItem.additionalProps[i];
+            if (mod.prop == null)
+                continue;
+
+            var prop = new Item.Property();
+            prop.info = ItemPropertyInfo.Find(mod.prop);
+            prop.param = mod.param;
+            prop.value = Random.Range(mod.min, mod.max + 1);
+            prop.min = mod.min;
+            prop.max = mod.max;
+            if (setItem.addFunc == 0)
+            {
+                item.properties.Add(prop);
+            }
+            else
+            {
+                int blockSize = 2;
+                int blockIndex = i / blockSize;
+                while (blockIndex >= item.setItemProperties.Count)
+                {
+                    item.setItemProperties.Add(new List<Item.Property>());
+                }
+                item.setItemProperties[blockIndex].Add(prop);
+            }
         }
 
         return true;

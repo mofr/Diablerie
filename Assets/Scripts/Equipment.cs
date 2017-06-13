@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Equipment : MonoBehaviour
 {
@@ -73,6 +74,19 @@ public class Equipment : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool IsEquipped(ItemInfo itemInfo)
+    {
+        Item item1 = items[itemInfo.type.bodyLoc1];
+        if (item1 != null && item1.info == itemInfo)
+            return true;
+
+        Item item2 = items[itemInfo.type.bodyLoc2];
+        if (item2 != null && item2.info == itemInfo)
+            return true;
+
+        return false;
     }
 
     void UpdateAnimator()

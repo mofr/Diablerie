@@ -25,6 +25,17 @@ public class ItemSet
         public string param;
         public int min;
         public int max;
+
+        public Item.Property GetItemProperty()
+        {
+            var prop = new Item.Property();
+            prop.info = ItemPropertyInfo.Find(this.prop);
+            prop.param = param;
+            prop.value = max;
+            prop.min = min;
+            prop.max = max;
+            return prop;
+        }
     }
 
     public string id;
@@ -34,7 +45,7 @@ public class ItemSet
     [Datasheet.Sequence(length = 8)]
     public Prop[] props;
     [Datasheet.Sequence(length = 8)]
-    public Prop[] fProps;
+    public Prop[] fullProps;
     public string eol;
 
     [System.NonSerialized]

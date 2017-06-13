@@ -16,6 +16,7 @@ public class SetItem
             item.dropSound = SoundInfo.Find(item._dropSound);
             item.dropSoundFrame = item._dropSoundFrame;
             item.useSound = SoundInfo.Find(item._useSound);
+            item.itemInfo = ItemInfo.Find(item.itemCode);
             item.set = ItemSet.Find(item.setId);
             item.set.items.Add(item);
         }
@@ -50,7 +51,7 @@ public class SetItem
     [Datasheet.Sequence(length = 9)]
     public Prop[] props;
     [Datasheet.Sequence(length = 10)]
-    public Prop[] aProps;
+    public Prop[] additionalProps;
     public string eol;
 
     [System.NonSerialized]
@@ -67,4 +68,7 @@ public class SetItem
 
     [System.NonSerialized]
     public ItemSet set;
+
+    [System.NonSerialized]
+    public ItemInfo itemInfo;
 }
