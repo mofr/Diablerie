@@ -156,6 +156,7 @@ public class ItemInfo
 
             item.type = item.type1 != null ? item.type1 : item.type2;
             item.uniques = UniqueItem.sheet.FindAll(uniq => uniq.code == item.code);
+            item.setItems = SetItem.sheet.FindAll(setItem => setItem.itemCode == item.code);
         }
     }
 
@@ -242,4 +243,7 @@ public class ItemInfo
 
     [System.NonSerialized]
     public List<UniqueItem> uniques;
+
+    [System.NonSerialized]
+    public List<SetItem> setItems;
 }

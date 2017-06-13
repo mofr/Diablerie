@@ -33,6 +33,7 @@ public class Item
     public List<Property> properties = new List<Property>();
     public bool identified = true;
     public UniqueItem unique;
+    public SetItem setItem;
     Sprite _invSprite;
     bool _invSpriteIdentified;
     int invFileIndex;
@@ -65,6 +66,10 @@ public class Item
             if (unique != null && unique.invFile != null && identified)
             {
                 filename = unique.invFile;
+            }
+            else if (setItem != null && setItem.invFile != null && identified)
+            {
+                filename = setItem.invFile;
             }
             else if (info.type.varInvGfx > 0)
             {
@@ -99,7 +104,11 @@ public class Item
         get
         {
             string filename;
-            if (unique != null && unique.flippyFile != null)
+            if (setItem != null && setItem.flippyFile != null)
+            {
+                filename = setItem.flippyFile;
+            }
+            else if (unique != null && unique.flippyFile != null)
             {
                 filename = unique.flippyFile;
             }
@@ -117,7 +126,11 @@ public class Item
     {
         get
         {
-            if (unique != null && unique.useSound != null)
+            if (setItem != null && setItem.useSound != null)
+            {
+                return setItem.useSound;
+            }
+            else if (unique != null && unique.useSound != null)
             {
                 return unique.useSound;
             }
@@ -132,7 +145,11 @@ public class Item
     {
         get
         {
-            if (unique != null && unique.useSound != null)
+            if (setItem != null && setItem.dropSound != null)
+            {
+                return setItem.dropSound;
+            }
+            else if (unique != null && unique.useSound != null)
             {
                 return unique.dropSound;
             }
@@ -147,7 +164,11 @@ public class Item
     {
         get
         {
-            if (unique != null && unique.dropSoundFrame != -1)
+            if (setItem != null && setItem.dropSoundFrame != -1)
+            {
+                return setItem.dropSoundFrame;
+            }
+            else if(unique != null && unique.dropSoundFrame != -1)
             {
                 return unique.dropSoundFrame;
             }
@@ -196,7 +217,7 @@ public class Item
         if (identified)
         {
             AppendColored(sb, name, color);
-            if (quality == Quality.Unique)
+            if (quality == Quality.Unique || quality == Quality.Set)
             {
                 AppendColored(sb, "\n" + info.name, color);
             }
@@ -244,6 +265,7 @@ public class Item
         if (identified)
         {
             DescribeProperties(sb);
+            DescribeSet(sb);
         }
         else
         {
@@ -295,7 +317,7 @@ public class Item
                 else if (block.func == 17)
                 {
                     int characterLevel = 10;
-                    int perLevel = int.Parse(prop.param);
+                    int perLevel = prop.param != null ? int.Parse(prop.param) : 1;
                     value = perLevel * characterLevel;
                 }
                 if (block.stat == null)
@@ -527,5 +549,21 @@ public class Item
             }
         }
         EndColor(sb);
+    }
+
+    private void DescribeSet(StringBuilder sb)
+    {
+        if (setItem == null)
+            return;
+
+        sb.Append("\n\n");
+        AppendColored(sb, setItem.set.name, Colors.ItemUniqueHex);
+        foreach(var item in setItem.set.items)
+        {
+            sb.Append("\n");
+            bool collected = item.id == setItem.id;
+            string color = collected ? Colors.ItemSetHex : Colors.ItemRedHex;
+            AppendColored(sb, item.name, color);
+        }
     }
 }

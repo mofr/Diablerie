@@ -88,9 +88,26 @@ public class CommandPrompt : MonoBehaviour
             if (parts[1] == "item")
             {
                 string code = parts[2];
-                var item = Item.Create(code);
-                if (item != null)
-                    Pickup.Create(pos, item);
+                ItemDrop.Drop(code, pos, 100);
+                return;
+            }
+
+            if (parts[1] == "itemset")
+            {
+                string subname = parts[2];
+                var set = ItemSet.sheet.Find(s => s.id.ToLower().Contains(subname));
+                if (set != null)
+                {
+                    foreach(var setItem in set.items)
+                    {
+                        var item = Item.Create(setItem.itemCode);
+                        item.quality = Item.Quality.Set;
+                        item.level = setItem.level;
+                        item.identified = false;
+                        ItemDrop.GenerateSetItem(item);
+                        Pickup.Create(pos, item);
+                    }
+                }
                 return;
             }
 

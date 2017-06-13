@@ -1,0 +1,45 @@
+﻿using System.Collections.Generic;
+
+[System.Serializable]
+public class ItemSet
+{
+    public static List<ItemSet> sheet = Datasheet.Load<ItemSet>("data/global/excel/Sets.txt");
+
+    public static ItemSet Find(string id)
+    {
+        return sheet.Find(set => set.id == id);
+    }
+
+    static ItemSet()
+    {
+        foreach(var set in sheet)
+        {
+            set.name = Translation.Find(set.nameStr);
+        }
+    }
+
+    [System.Serializable]
+    public struct Prop
+    {
+        public string prop;
+        public string param;
+        public int min;
+        public int max;
+    }
+
+    public string id;
+    public string nameStr;
+    public string version;
+    public string level;
+    [Datasheet.Sequence(length = 8)]
+    public Prop[] props;
+    [Datasheet.Sequence(length = 8)]
+    public Prop[] fProps;
+    public string eol;
+
+    [System.NonSerialized]
+    public string name;
+
+    [System.NonSerialized]
+    public List<SetItem> items = new List<SetItem>();
+}

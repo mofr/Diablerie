@@ -53,12 +53,6 @@ public class ItemDrop : MonoBehaviour
             return;
         }
 
-        if (item.info.type.alwaysMagic)
-        {
-            item.quality = Item.Quality.Magic;
-            return;
-        }
-
         bool classSpecific = item.info.type.classCode != null;
         bool uber = item.info.code != item.info.normCode;
         var ratio = ItemRatio.sheet.Find(r => r.classSpecific == classSpecific && r.uber == uber);
@@ -75,7 +69,7 @@ public class ItemDrop : MonoBehaviour
         {
             item.quality = Item.Quality.Rare;
         }
-        else if (TestQuality(item, ratio.magic, ratio.magicDivisor, qualityFactors.magic, mf, mfFactor: 600, minChance: ratio.magicMin))
+        else if (item.info.type.alwaysMagic || TestQuality(item, ratio.magic, ratio.magicDivisor, qualityFactors.magic, mf, mfFactor: 600, minChance: ratio.magicMin))
         {
             item.quality = Item.Quality.Magic;
         }
@@ -114,7 +108,28 @@ public class ItemDrop : MonoBehaviour
         return null;
     }
 
-    static bool GenerateUnique(Item item)
+    static SetItem SelectSetItem(Item item)
+    {
+        int probSum = 0;
+        foreach (var setItem in item.info.setItems)
+        {
+            probSum += setItem.rarity;
+        }
+        int sample = Random.Range(0, probSum);
+        foreach (var setItem in item.info.setItems)
+        {
+            if (sample < setItem.rarity && item.level >= setItem.level)
+            {
+                return setItem;
+            }
+
+            sample -= setItem.rarity;
+        }
+
+        return null;
+    }
+
+    static public bool GenerateUnique(Item item)
     {
         if (item.info.uniques.Count == 0)
             return false;
@@ -144,9 +159,44 @@ public class ItemDrop : MonoBehaviour
         return true;
     }
 
+    static public bool GenerateSetItem(Item item)
+    {
+        if (item.info.setItems.Count == 0)
+            return false;
+
+        SetItem setItem = SelectSetItem(item);
+        if (setItem == null)
+            return false;
+
+        item.name = setItem.name;
+        item.setItem = setItem;
+        item.levelReq = setItem.levelReq;
+
+        foreach (var mod in setItem.props)
+        {
+            if (mod.prop == null)
+                break;
+
+            var prop = new Item.Property();
+            prop.info = ItemPropertyInfo.Find(mod.prop);
+            prop.param = mod.param;
+            prop.value = Random.Range(mod.min, mod.max + 1);
+            prop.min = mod.min;
+            prop.max = mod.max;
+            item.properties.Add(prop);
+        }
+
+        return true;
+    }
+
     static void GenerateItemProperties(Item item)
     {
         if (item.quality == Item.Quality.Unique && !GenerateUnique(item))
+        {
+            item.quality = Item.Quality.Rare;
+        }
+
+        if (item.quality == Item.Quality.Set && !GenerateSetItem(item))
         {
             item.quality = Item.Quality.Rare;
         }
