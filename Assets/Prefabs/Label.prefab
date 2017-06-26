@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 6
     m_Right: 6
-    m_Top: 4
+    m_Top: 0
     m_Bottom: 4
   m_ChildAlignment: 0
   m_Spacing: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 236
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 114273595409765936}
+  rectTransform: {fileID: 0}
 --- !u!114 &114798559012074690
 MonoBehaviour:
   m_ObjectHideFlags: 1

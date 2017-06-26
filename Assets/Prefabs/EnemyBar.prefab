@@ -135,7 +135,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 72
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 1
     m_RichText: 0
     m_HorizontalOverflow: 1
@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abcdc7d8adacd945a65aaac7af516da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   slider: {fileID: 114271331118592182}
   title: {fileID: 114251587169131086}
-  character: {fileID: 0}
 --- !u!114 &114271331118592182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,8 +312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2}
+  m_SizeDelta: {x: 200, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224442697452831560
 RectTransform:

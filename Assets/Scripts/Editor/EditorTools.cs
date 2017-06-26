@@ -139,7 +139,7 @@ public class EditorTools
         var characterInfo = new CharacterInfo[dc6.framesPerDirection];
         for (int i = 0; i < frames.Length; i++)
         {
-            int glyphHeight = int.Parse(metrics[i * 2].Trim());
+            //int glyphHeight = int.Parse(metrics[i * 2].Trim()); // font16 - all 10, should be used as a line height calculations (like advance for horizontal axis)
             int glyphWidth = int.Parse(metrics[i * 2 + 1].Trim());
             var frame = frames[i];
             characterInfo[i].index = i;
@@ -147,15 +147,15 @@ public class EditorTools
             characterInfo[i].minX = 0;
             characterInfo[i].maxX = glyphWidth;
             characterInfo[i].minY = 0;
-            characterInfo[i].maxY = frame.height;
+            characterInfo[i].maxY = frame.height; // doesn't seem to change anything
             characterInfo[i].glyphWidth = glyphWidth;
-            characterInfo[i].glyphHeight = glyphHeight;
+            characterInfo[i].glyphHeight = frame.height;
 
             var uv = new Rect(
                 frame.textureX / (float)textureSize,
                 (textureSize - frame.textureY - frame.height) / (float)textureSize,
                 glyphWidth / (float)textureSize,
-                glyphHeight / (float)textureSize);
+                frame.height / (float)textureSize);
             characterInfo[i].uvBottomLeft = new Vector2(uv.xMin, uv.yMin);
             characterInfo[i].uvBottomRight = new Vector2(uv.xMax, uv.yMin);
             characterInfo[i].uvTopLeft = new Vector2(uv.xMin, uv.yMax);
