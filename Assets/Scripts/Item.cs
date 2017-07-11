@@ -35,6 +35,7 @@ public class Item
     public bool identified = true;
     public UniqueItem unique;
     public SetItem setItem;
+    public int quantity = 1;
     Sprite _invSprite;
     bool _invSpriteIdentified;
     int invFileIndex;
@@ -215,6 +216,11 @@ public class Item
             AppendColored(sb, Translation.Find("Hiquality") + " ", color);
         else if (quality == Quality.LowQuality)
             AppendColored(sb, Translation.Find("Low Quality") + " ", color);
+        if (info.code == "gld")
+        {
+            AppendColored(sb, quantity.ToString(), color);
+            sb.Append(" ");
+        }
         if (identified)
         {
             AppendColored(sb, name, color);
