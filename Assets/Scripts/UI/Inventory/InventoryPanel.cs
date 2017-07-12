@@ -51,6 +51,17 @@ public class InventoryPanel : MonoBehaviour
         goldText.text = PlayerController.instance.inventory.gold.ToString();
     }
 
+    public void OnGoldButton()
+    {
+        if (PlayerController.instance.inventory.gold > 0)
+        {
+            var item = Item.Create("gld");
+            item.quantity = PlayerController.instance.inventory.gold;
+            Pickup.Create(PlayerController.instance.character.transform.position, item);
+            PlayerController.instance.inventory.gold = 0;
+        }
+    }
+
     public void ToggleVisibility()
     {
         visible ^= true;
