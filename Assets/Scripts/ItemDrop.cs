@@ -276,6 +276,14 @@ public class ItemDrop : MonoBehaviour
         }
     }
 
+    static void GenerateItemQuantity(Item item)
+    {
+        if (item.info.code == "gld")
+        {
+            item.quantity = Random.Range(1, 10 * item.level);
+        }
+    }
+
     public static void Drop(string code, Vector3 pos, int itemLevel)
     {
         Drop(code, pos, itemLevel, new QualityFactors());
@@ -301,6 +309,7 @@ public class ItemDrop : MonoBehaviour
                 item.identified = false;
             }
             GenerateItemProperties(item);
+            GenerateItemQuantity(item);
             Pickup.Create(pos, item);
         }
         else
