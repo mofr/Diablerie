@@ -8,7 +8,7 @@ public class Pickup : Entity
     bool _selected = false;
     Item item;
 
-    public static Pickup Create(Vector3 position, string flippyFile, string name, string title = null)
+    public static Pickup Create(Vector3 position, string flippyFile, string name, string title = null, int dir = 0)
     {
         position = Iso.MapToIso(position);
         if (!CollisionMap.Fit(position, out position))
@@ -21,7 +21,7 @@ public class Pickup : Entity
         gameObject.transform.position = position;
         var spritesheet = DC6.Load(flippyFile);
         var animator = gameObject.AddComponent<SpriteAnimator>();
-        animator.sprites = spritesheet.GetSprites(0);
+        animator.sprites = spritesheet.GetSprites(dir);
         animator.loop = false;
         var pickup = gameObject.AddComponent<Pickup>();
         pickup.title = title;
@@ -31,7 +31,17 @@ public class Pickup : Entity
     public static Pickup Create(Vector3 position, Item item)
     {
         var title = item.GetTitle();
-        var pickup = Create(position, item.flippyFile, item.info.name, title);
+        int dir = 0;
+        if (item.info.code == "gld")
+        {
+            if (item.quantity >= 5000)
+                dir = 3;
+            else if (item.quantity >= 500)
+                dir = 2;
+            else if (item.quantity >= 100)
+                dir = 1;
+        }
+        var pickup = Create(position, item.flippyFile, item.info.name, title, dir);
         pickup.item = item;
         pickup.animator.SetTrigger(item.dropSoundFrame, () => {
             AudioManager.instance.Play(item.dropSound, pickup.transform.position);
