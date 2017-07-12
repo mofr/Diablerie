@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour
 
     public bool Take(Item item)
     {
+        if (item.info.code == "gld")
+        {
+            inventory.gold += item.quantity;
+            return true;
+        }
+
         if (InventoryPanel.instance.visible)
         {
             mouseItem = item;

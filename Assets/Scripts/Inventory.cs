@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
+    public int gold = 0;
     public int sizeX;
     public int sizeY;
     int[] grid;

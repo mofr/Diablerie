@@ -6,6 +6,7 @@ public class InventoryPanel : MonoBehaviour
     static public InventoryPanel instance;
 
     public GameObject panel;
+    public Text goldText;
 
     public Equipment equip
     {
@@ -43,6 +44,11 @@ public class InventoryPanel : MonoBehaviour
             slot.bodyLoc = i;
             slots[i] = slot;
         }
+    }
+
+    public void Update()
+    {
+        goldText.text = PlayerController.instance.inventory.gold.ToString();
     }
 
     public void ToggleVisibility()
