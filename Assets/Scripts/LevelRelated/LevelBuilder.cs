@@ -283,7 +283,7 @@ public class LevelBuilder
                     Iso.MapTileToWorld(0, gridY),
                     Iso.MapTileToWorld(0, 0)
                 };
-                line.numPositions = corners.Length;
+                line.positionCount = corners.Length;
                 line.SetPositions(corners);
             }
         }
