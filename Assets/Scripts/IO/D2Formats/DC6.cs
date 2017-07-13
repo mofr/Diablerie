@@ -169,7 +169,6 @@ public class DC6 : Spritesheet
                     texture.Apply();
                 }
                 texture = new Texture2D(textureWidth, textureHeight, TextureFormat.ARGB32, false);
-                texture.alphaIsTransparency = true;
                 pixels = new Color32[textureWidth * textureHeight];
                 textures.Add(texture);
             }
