@@ -1,5 +1,7 @@
 # Diablerie
 
+[![Build Status](http://diablerie.zond.org/build/image/)](http://diablerie.zond.org/download/)
+
 ![alt tag](https://raw.github.com/mofr/Diablerie/master/Screenshots/rogue_camp.png)
 
 This is a recreation of Diablo 2 game from Blizzard.
