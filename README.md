@@ -13,13 +13,24 @@ No commercial use is intended. All images and sounds used are from Diablo 2 and 
 # How to run the game
 
 Requirements:
+- Diablo 2 Lord of Destruction v1.14
+
+* [Download latest version](http://diablerie.zond.org/download/) of Diablerie
+* Put following files to the Diablerie directory:
+  - d2exp.mpq
+  - d2data.mpq
+  - d2char.mpq
+  - d2sfx.mpq
+  - d2music.mpq
+  - d2xMusic.mpq
+
+# How to build and run from sources:
+
+Requirements:
 - Unity 5.6.0f3 (other versions are not tested)
 - Diablo 2 Lord of Destruction v1.14
 - Diablerie source code
 
-Only windows version is tested at the moment.
-
-How to build and run:
 * git clone https://github.com/mofr/Diablerie.git
 * Put following files to the Diablerie directory:
   - d2exp.mpq
