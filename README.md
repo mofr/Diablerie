@@ -13,10 +13,8 @@ No commercial use is intended. All images and sounds used are from Diablo 2 and 
 # How to run the game
 
 Requirements:
-- Diablo 2 Lord of Destruction v1.14
-
 * [Download latest version](http://diablerie.zond.org/download/) of Diablerie
-* Put following files to the Diablerie directory:
+* Put following files to the Diablerie directory from Diablo 2 LOD v1.14:
   - d2exp.mpq
   - d2data.mpq
   - d2char.mpq
