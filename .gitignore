@@ -36,3 +36,5 @@ UpgradeLog*
 
 # Diablo 2 resources
 *.mpq
+
+.idea

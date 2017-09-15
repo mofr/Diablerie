@@ -175,7 +175,7 @@ public class MonStat
     [System.NonSerialized]
     public MonSound uniqueSound;
 
-    public static List<MonStat> sheet = Datasheet.Load<MonStat>("data/global/excel/monstats.txt");
+    public static List<MonStat> sheet = Datasheet.Load<MonStat>("data/global/excel/MonStats.txt");
     static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
 
     static MonStat()
