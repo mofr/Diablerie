@@ -25,7 +25,7 @@ Requirements:
 # How to build and run from sources:
 
 Requirements:
-- Unity 5.6.0f3 (other versions are not tested)
+- Unity 2017.1.0f3 (other versions are not tested)
 - Diablo 2 Lord of Destruction v1.14
 - Diablerie source code
 
