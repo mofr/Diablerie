@@ -441,8 +441,11 @@ public class Character : Entity
     }
 
     void OnRenderObject()
-    {   
-        if (!dead && !dying)
+    {
+        bool selectable = !dead && !dying;
+        if (selectable && monStat != null)
+            selectable = monStat.interact || (!monStat.npc && monStat.killable);
+        if (selectable)
             MouseSelection.Submit(this);
     }
 }

@@ -198,9 +198,20 @@ public class PlayerController : MonoBehaviour
                 {
                     var targetCharacter = MouseSelection.current.GetComponent<Character>();
                     if (targetCharacter != null)
-                        character.UseSkill(leftSkill, targetCharacter);
+                    {
+                        if (targetCharacter.monStat != null && targetCharacter.monStat.npc)
+                        {
+                            // todo interact with npc
+                        }
+                        else
+                        {
+                            character.UseSkill(leftSkill, targetCharacter);
+                        }
+                    }
                     else
+                    {
                         character.Use(MouseSelection.current);
+                    }
                 }
                 else
                 {

@@ -16,22 +16,29 @@ class MouseSelection : MonoBehaviour
         if (current != null)
         {
             var character = current.GetComponent<Character>();
-            if (character && character.monStat != null && character.monStat.ai != "Npc")
+            if (character && character.monStat != null)
             {
-                EnemyBar.instance.character = character;
-                UI.HideLabel();
+                if (character.monStat.interact)
+                {
+                    ShowLabel();
+                }
+                else if (character.monStat.killable)
+                {
+                    ShowEnemyBar(character);
+                }
+                else
+                {
+                    ShowNothing();
+                }
             }
             else
             {
-                EnemyBar.instance.character = null;
-                var labelPosition = current.transform.position + (Vector3)current.titleOffset / Iso.pixelsPerUnit;
-                UI.ShowLabel(labelPosition, current.title);
+                ShowLabel();
             }
         }
         else
         {
-            EnemyBar.instance.character = null;
-            UI.HideLabel();
+            ShowNothing();
         }
 
         if (PlayerController.instance.FixedSelection())
@@ -51,6 +58,25 @@ class MouseSelection : MonoBehaviour
         current = null;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
+    }
+
+    static private void ShowLabel()
+    {
+        EnemyBar.instance.character = null;
+        var labelPosition = current.transform.position + (Vector3)current.titleOffset / Iso.pixelsPerUnit;
+        UI.ShowLabel(labelPosition, current.title);
+    }
+
+    static private void ShowEnemyBar(Character character)
+    {
+        EnemyBar.instance.character = character;
+        UI.HideLabel();
+    }
+
+    static private void ShowNothing()
+    {
+        EnemyBar.instance.character = null;
+        UI.HideLabel();
     }
 
     static public void Submit(Entity entity)
