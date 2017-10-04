@@ -71,20 +71,33 @@ public class SoundInfo
         }
     }
 
+    public CrystalMpq.MpqFile FindFile()
+    {
+        var filename = @"data\global\sfx\" + _filename;
+        var file = Mpq.fs.FindFile(filename);
+
+        if (file == null)
+        {
+            filename = @"data\global\music\" + _filename;
+            file = Mpq.fs.FindFile(filename);
+        }
+            
+        if (file == null)
+        {
+            filename = @"data\local\sfx\" + _filename;
+            file = Mpq.fs.FindFile(filename);
+        }
+
+        return file;
+    }
+
     public AudioClip clip
     {
         get {
             if (audioClip != null)
                 return audioClip;
 
-            var filename = @"data\global\sfx\" + _filename;
-            var file = Mpq.fs.FindFile(filename);
-            if (file == null)
-            {
-                filename = @"data\global\music\" + _filename;
-                file = Mpq.fs.FindFile(filename);
-            }
-
+            var file = FindFile();
             if (file == null)
                 return null;
 

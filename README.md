@@ -18,9 +18,12 @@ Requirements:
   - d2exp.mpq
   - d2data.mpq
   - d2char.mpq
-  - d2sfx.mpq
-  - d2music.mpq
-  - d2xMusic.mpq
+  - d2sfx.mpq (optional)
+  - d2music.mpq (optional)
+  - d2xMusic.mpq (optional)
+  - d2xtalk.mpq (optional)
+  - d2speech.mpq (optional)
+* Run Diablerie
 
 # How to build and run from sources:
 

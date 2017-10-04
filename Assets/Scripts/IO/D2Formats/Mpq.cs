@@ -2,22 +2,32 @@
 
 public class Mpq
 {
-    static public MpqArchive d2exp = new MpqArchive("d2exp.mpq");
-    static public MpqArchive d2data = new MpqArchive("d2data.mpq");
-    static public MpqArchive d2char = new MpqArchive("d2char.mpq");
-    static public MpqArchive d2sfx = new MpqArchive("d2sfx.mpq");
-    static public MpqArchive d2music = new MpqArchive("d2music.mpq");
-    static public MpqArchive d2xMusic = new MpqArchive("d2xMusic.mpq");
     static public MpqFileSystem fs = new MpqFileSystem();
 
     static Mpq()
     {
-        fs.Archives.Add(d2exp);
-        fs.Archives.Add(d2data);
-        fs.Archives.Add(d2char);
-        fs.Archives.Add(d2sfx);
-        fs.Archives.Add(d2music);
-        fs.Archives.Add(d2xMusic);
+        AddArchive("d2exp.mpq");
+        AddArchive("d2data.mpq");
+        AddArchive("d2char.mpq");
+        AddArchive("d2sfx.mpq", optional: true);
+        AddArchive("d2music.mpq", optional: true);
+        AddArchive("d2xMusic.mpq", optional: true);
+        AddArchive("d2xtalk.mpq", optional: true);
+        AddArchive("d2speech.mpq", optional: true);
+    }
+
+    static private void AddArchive(string filename, bool optional = false)
+    {
+        try
+        {
+            var archive = new MpqArchive(filename);
+            fs.Archives.Add(archive);
+        }
+        catch (System.IO.FileNotFoundException)
+        {
+            if (!optional)
+                throw;
+        }
     }
 
     public static byte[] ReadAllBytes(string filename)
