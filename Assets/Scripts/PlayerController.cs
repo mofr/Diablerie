@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     Item _mouseItem;
     Dictionary<KeyCode, SkillInfo> skillMap;
     bool usingSkills = false;
+    bool run = true;
 
     void Awake()
     {
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
         cameraController.horizontalShift = cameraShift;
     }
 
-    void ControlUI()
+    void HandleKeyboard()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
         {
@@ -130,17 +131,41 @@ public class PlayerController : MonoBehaviour
             CharstatPanel.instance.visible = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (!CommandPrompt.instance.visible)
         {
-            InventoryPanel.instance.visible ^= true;
-        }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                CommandPrompt.instance.visible = true;
+            }
 
-        if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                InventoryPanel.instance.visible ^= true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                CharstatPanel.instance.visible ^= true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                run ^= true;
+            }
+        }
+        else
         {
-            CharstatPanel.instance.visible ^= true;
-        }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                CommandPrompt.instance.visible = false;
+                CommandPrompt.instance.Execute();
+            }
 
-        UpdateCamera();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CommandPrompt.instance.visible = false;
+            }
+        }
     }
 
     void ControlCharacter()
@@ -224,10 +249,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            character.run ^= true;
-        }
+        character.run = run;
     }
 
     public bool FixedSelection()
@@ -237,7 +259,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        ControlUI();
+        HandleKeyboard();
+        UpdateCamera();
 
         if (flush && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
             return;
@@ -249,6 +272,7 @@ public class PlayerController : MonoBehaviour
 
         ControlCharacter();
 
+        // following section serves debugging purposes only
         if (Input.GetKeyDown(KeyCode.T))
         {
             for (int i = 0; i < 1; ++i)

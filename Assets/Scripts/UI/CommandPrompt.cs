@@ -1,54 +1,60 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CommandPrompt : MonoBehaviour
 {
+    static public CommandPrompt instance;
     public InputField inputField;
 
     List<string> history = new List<string>();
     int historyIndex = -1;
 
-    void Awake()
+    public bool visible
     {
-        inputField.gameObject.SetActive(false);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
+        get
         {
-            bool active = !inputField.gameObject.activeSelf;
-            inputField.gameObject.SetActive(active);
-            if (active)
+            return inputField.gameObject.activeSelf;
+        }
+        set
+        {
+            inputField.gameObject.SetActive(value);
+            if (value)
             {
                 historyIndex = -1;
                 inputField.text = "";
                 inputField.Select();
                 inputField.ActivateInputField();
             }
-            else
-            {
-                Process(inputField.text);
-            }
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            inputField.gameObject.SetActive(false);
-        }
+    public void Execute()
+    {
+        Execute(inputField.text);
+    }
 
-        if (inputField.gameObject.activeSelf && history.Count > 0 &&
-            (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
+    void Awake()
+    {
+        instance = this;
+        inputField.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        bool keyUp = Input.GetKeyDown(KeyCode.UpArrow);
+        bool keyDown = Input.GetKeyDown(KeyCode.DownArrow);
+        if (visible && history.Count > 0 && (keyUp || keyDown))
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (keyUp)
             {
                 if (historyIndex == -1)
                     historyIndex = history.Count - 1;
                 else
                     --historyIndex;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (keyDown)
             {
                 ++historyIndex;
             }
@@ -66,7 +72,7 @@ public class CommandPrompt : MonoBehaviour
         }
     }
 
-    void Process(string input)
+    void Execute(string input)
     {
         if (input == "")
             return;
