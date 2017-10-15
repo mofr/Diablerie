@@ -14,7 +14,7 @@ No commercial use is intended. All images and sounds used are from Diablo 2 and 
 
 Requirements:
 * [Download latest version](http://diablerie.zond.org/download/) of Diablerie
-* Put following files to the Diablerie directory from Diablo 2 LOD v1.14:
+* Copy following files from Diablo 2 LOD v1.14 to the Diablerie directory:
   - d2exp.mpq
   - d2data.mpq
   - d2char.mpq
@@ -28,18 +28,20 @@ Requirements:
 # How to build and run from sources:
 
 Requirements:
-- Unity 2017.1.0f3 (other versions are not tested)
+- Unity 2017.2.0f3 (other versions are not tested)
 - Diablo 2 Lord of Destruction v1.14
-- Diablerie source code
 
+Steps:
 * git clone https://github.com/mofr/Diablerie.git
-* Put following files to the Diablerie directory:
+* Copy following files from Diablo 2 LOD v1.14 to the Diablerie directory:
   - d2exp.mpq
   - d2data.mpq
   - d2char.mpq
-  - d2sfx.mpq
-  - d2music.mpq
-  - d2xMusic.mpq
+  - d2sfx.mpq (optional)
+  - d2music.mpq (optional)
+  - d2xMusic.mpq (optional)
+  - d2xtalk.mpq (optional)
+  - d2speech.mpq (optional)
 * Run Unity Editor and open Diablerie folder as a project
 * In Assets folder open `Scenes/Scene1.scene` file
 * Press `Play`
