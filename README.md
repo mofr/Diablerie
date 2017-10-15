@@ -1,6 +1,8 @@
 # Diablerie
 
-[![Build Status](http://diablerie.zond.org/build/image/)](http://diablerie.zond.org/download/)
+[![Windows Build Status](http://diablerie.zond.org/build/image/?target=win64)](http://diablerie.zond.org/download/?target=win64)
+
+[![Linux Build Status](http://diablerie.zond.org/build/image/?target=linux)](http://diablerie.zond.org/download/?target=linux)
 
 ![alt tag](https://raw.github.com/mofr/Diablerie/master/Screenshots/rogue_camp.png)
 
@@ -13,7 +15,7 @@ No commercial use is intended. All images and sounds used are from Diablo 2 and 
 # How to run the game
 
 Requirements:
-* [Download latest version](http://diablerie.zond.org/download/) of Diablerie
+* Download latest version of Diablerie ([Windows](http://diablerie.zond.org/download/?target=win64), [Linux](http://diablerie.zond.org/download/?target=linux))
 * Copy following files from Diablo 2 LOD v1.14 to the Diablerie directory:
   - d2exp.mpq
   - d2data.mpq
