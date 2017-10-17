@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: LowerWall
+    uniqueID: 2800100553
+    locked: 0
   - name: Floor
     uniqueID: 237075421
     locked: 0

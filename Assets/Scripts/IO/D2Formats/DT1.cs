@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DT1
 {
@@ -208,7 +210,7 @@ public class DT1
             }
             else if (tile.orientation > 15)
             {
-                Debug.Log("Lower wall, height=" + tile.height + ", " + tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation);
+                tile.textureY += Math.Min(96, -tile.height);
             }
 
             dt1.tiles[i] = tile;

@@ -519,6 +519,7 @@ public class LevelBuilder
                 new Vector2 ((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
                 new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
             };
+            meshRenderer.sortingLayerName = "LowerWall";
             meshRenderer.sortingOrder = orderInLayer;
             
             gameObject.name += " (lower wall)";

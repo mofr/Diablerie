@@ -4,7 +4,7 @@ public class World : MonoBehaviour
 {
     void Start()
     {
-        Vector2i playerPos = CreateAct4();
+        Vector2i playerPos = CreateAct1();
         SpawnPlayer("Sorceress", Iso.MapTileToWorld(playerPos));
     }
 
@@ -28,6 +28,13 @@ public class World : MonoBehaviour
     static Vector2i CreateAct4()
     {
         var town = new LevelBuilder("Act 4 - Town");
+        town.Instantiate(new Vector2i(0, 0));
+        return town.FindEntry();
+    }
+
+    static Vector2i CreateAct5()
+    {
+        var town = new LevelBuilder("Act 5 - Town");
         town.Instantiate(new Vector2i(0, 0));
         return town.FindEntry();
     }
