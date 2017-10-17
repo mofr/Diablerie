@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelBuilder
 {
@@ -478,6 +480,32 @@ public class LevelBuilder
             var topLeft = new Vector3(-1f, 0.5f);
             if (tile.orientation == 15)
                 topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
+            mesh.vertices = new Vector3[]
+            {
+                topLeft,
+                topLeft + new Vector3(0, -h),
+                topLeft + new Vector3(w, -h),
+                topLeft + new Vector3(w, 0)
+            };
+            mesh.triangles = new int[] {2, 1, 0, 3, 2, 0};
+            mesh.uv = new Vector2[]
+            {
+                new Vector2(x0 / texture.width, -y0 / texture.height),
+                new Vector2(x0 / texture.width, (-y0 + tile.height) / texture.height),
+                new Vector2((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
+                new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height)
+            };
+
+            meshRenderer.sortingLayerName = tile.orientation == 0 ? "Floor" : "Roof";
+            meshRenderer.sortingOrder = orderInLayer;
+
+            gameObject.name += tile.orientation == 0 ? " (floor)" : " (roof)";
+        }
+        else if (tile.orientation > 15)
+        {
+            int upperPart = Math.Min(96, -tile.height);
+            y0 -= upperPart;
+            var topLeft = new Vector3(-1f, upperPart / Iso.pixelsPerUnit - 0.5f);
             mesh.vertices = new Vector3[] {
                 topLeft,
                 topLeft + new Vector3(0, -h),
@@ -487,13 +515,13 @@ public class LevelBuilder
             mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
             mesh.uv = new Vector2[] {
                 new Vector2 (x0 / texture.width, -y0 / texture.height),
-                new Vector2 (x0 / texture.width, (-y0 +tile.height) / texture.height),
-                new Vector2 ((x0 + tile.width) / texture.width, (-y0 +tile.height) / texture.height),
+                new Vector2 (x0 / texture.width, (-y0 + tile.height) / texture.height),
+                new Vector2 ((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
                 new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
             };
-
-            meshRenderer.sortingLayerName = tile.orientation == 0 ? "Floor" : "Roof";
             meshRenderer.sortingOrder = orderInLayer;
+            
+            gameObject.name += " (lower wall)";
         }
         else
         {

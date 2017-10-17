@@ -206,6 +206,10 @@ public class DT1
             {
                 tile.textureY += (-tile.height);
             }
+            else if (tile.orientation > 15)
+            {
+                Debug.Log("Lower wall, height=" + tile.height + ", " + tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation);
+            }
 
             dt1.tiles[i] = tile;
 

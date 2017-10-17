@@ -4,6 +4,12 @@ public class World : MonoBehaviour
 {
     void Start()
     {
+        Vector2i playerPos = CreateAct4();
+        SpawnPlayer("Sorceress", Iso.MapTileToWorld(playerPos));
+    }
+
+    static Vector2i CreateAct1()
+    {
         var town = new LevelBuilder("Act 1 - Town");
         var bloodMoor = CreateBloodMoor();
 
@@ -15,11 +21,18 @@ public class World : MonoBehaviour
         var doeOffset = new Vector2i(120, 0);
         doe.Instantiate(doeOffset);
 
-        var entry = town.FindEntry();
-        SpawnPlayer("Sorceress", Iso.MapTileToWorld(entry + townOffset));
+        Vector2i entry = town.FindEntry();
+        return entry + townOffset;
+    }
+    
+    static Vector2i CreateAct4()
+    {
+        var town = new LevelBuilder("Act 4 - Town");
+        town.Instantiate(new Vector2i(0, 0));
+        return town.FindEntry();
     }
 
-    LevelBuilder CreateDenOfEvil()
+    static LevelBuilder CreateDenOfEvil()
     {
         var builder = new LevelBuilder("Act 1 - Cave 1");
         var palette = new Maze.Palette();
@@ -47,7 +60,7 @@ public class World : MonoBehaviour
         return builder;
     }
 
-    LevelBuilder CreateBloodMoor()
+    static LevelBuilder CreateBloodMoor()
     {
         var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", 8, 8);
         var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
