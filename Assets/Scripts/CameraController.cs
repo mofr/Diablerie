@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     {
         UpdateSize();
 
-        if (PlayerController.instance.character == null)
+        if (PlayerController.instance == null || PlayerController.instance.character == null)
             return;
 
         transform.position = CalcTargetPos();

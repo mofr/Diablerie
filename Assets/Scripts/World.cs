@@ -2,10 +2,12 @@
 
 public class World : MonoBehaviour
 {
+    public static string className = "Sorceress";
+
     void Start()
     {
         Vector2i playerPos = CreateAct1();
-        SpawnPlayer("Sorceress", Iso.MapTileToWorld(playerPos));
+        SpawnPlayer(className, Iso.MapTileToWorld(playerPos));
     }
 
     static Vector2i CreateAct1()
@@ -138,7 +140,7 @@ public class World : MonoBehaviour
 
         PlayerController.instance.SetCharacter(character);
 
-        foreach(var startingItem in info.startingItems)
+        foreach (var startingItem in info.startingItems)
         {
             if (startingItem.code == null)
                 continue;
