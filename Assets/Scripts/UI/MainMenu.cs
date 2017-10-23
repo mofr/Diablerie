@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CrystalMpq;
+using System.IO;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
@@ -7,8 +9,9 @@ public class MainMenu : MonoBehaviour
     public Text headerText;
     string defaultText;
     GameObject logo;
-    
-	void Start()
+    Stream musicStream;
+
+    void Start()
     {
         defaultText = headerText.text;
         logo = CreateLogo();
@@ -29,6 +32,38 @@ public class MainMenu : MonoBehaviour
         Vector3 pos = Camera.main.ScreenToWorldPoint(logoPlaceholder.position);
         pos.z = 0;
         logo.transform.position = pos;
+    }
+
+    private void OnEnable()
+    {
+        PlayMusic();
+    }
+
+    private void OnDisable()
+    {
+        StopMusic();
+    }
+
+    void PlayMusic()
+    {
+        MpqFile file = Mpq.fs.FindFile(@"data\global\music\introedit.wav");
+        if (file == null)
+            return;
+        musicStream = file.Open();
+        AudioClip clip = Wav.Load("intro music", true, musicStream);
+        var musicObject = new GameObject();
+        var audioSource = musicObject.AddComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    void StopMusic()
+    {
+        if (musicStream == null)
+            return;
+
+        musicStream.Close();
     }
 
     static GameObject CreateLogo()
