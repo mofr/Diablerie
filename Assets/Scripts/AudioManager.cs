@@ -71,6 +71,7 @@ public class AudioManager : MonoBehaviour
         var gameObject = new GameObject(name);
         var audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.minDistance = 1.5f;
+        audioSource.dopplerLevel = 0.0f;
         return audioSource;
     }
 
