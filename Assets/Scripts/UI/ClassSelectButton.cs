@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class ClassSelectButton : 
     MonoBehaviour, 
@@ -8,11 +7,13 @@ public class ClassSelectButton :
     IPointerEnterHandler, 
     IPointerExitHandler
 {
-    public delegate void PointerEnterHandler(CharStatsInfo classInfo);
-    public delegate void PointerExitHandler(CharStatsInfo classInfo);
+    public delegate void EnterHandler(CharStatsInfo classInfo);
+    public delegate void ExitHandler(CharStatsInfo classInfo);
+    public delegate void ClickHandler(CharStatsInfo classInfo);
 
-    public event PointerEnterHandler OnEnter;
-    public event PointerExitHandler OnExit;
+    public event EnterHandler OnEnter;
+    public event ExitHandler OnExit;
+    public event ClickHandler OnClick;
 
     RectTransform rectTransform;
     GameObject dummy;
@@ -41,8 +42,8 @@ public class ClassSelectButton :
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        World.className = className;
-        SceneManager.LoadScene("Game");
+        CharStatsInfo classInfo = CharStatsInfo.Find(className);
+        OnClick(classInfo);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

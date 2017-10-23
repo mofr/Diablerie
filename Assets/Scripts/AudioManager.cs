@@ -12,8 +12,14 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(this);
+            return;
+        }
         instance = this;
         Level.OnLevelChange += OnLevelChange;
+        DontDestroyOnLoad(this);
     }
 
     private void OnLevelChange(Level level, Level previous)

@@ -1,15 +1,25 @@
 ﻿using CrystalMpq;
+using System.Collections;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public RectTransform logoPlaceholder;
     public Text headerText;
+
+    static SoundInfo selectSound;
+
     string defaultText;
     GameObject logo;
     Stream musicStream;
+
+    private void Awake()
+    {
+        selectSound = SoundInfo.Find("cursor_pass");
+    }
 
     void Start()
     {
@@ -19,10 +29,17 @@ public class MainMenu : MonoBehaviour
         {
             classSelector.OnEnter += (CharStatsInfo info) => {
                 headerText.text = "Play " + info.className;
+                AudioManager.instance.Play(selectSound);
             };
 
             classSelector.OnExit += (CharStatsInfo info) => {
                 headerText.text = defaultText;
+            };
+
+            classSelector.OnClick += (CharStatsInfo info) =>
+            {
+                World.className = info.className;
+                SceneManager.LoadScene("Game");
             };
         }
 	}
