@@ -14,9 +14,16 @@ public class PlayerController : MonoBehaviour
     bool flush = false;
     Iso iso;
     Item _mouseItem;
-    Dictionary<KeyCode, SkillInfo> skillMap;
     bool usingSkills = false;
     bool run = true;
+
+    List<SkillInfo> hotSkills;
+    List<KeyCode> hotSkillsBindings = new List<KeyCode> {
+        KeyCode.F1,
+        KeyCode.F2,
+        KeyCode.F3,
+        KeyCode.F4,
+    };
 
     void Awake()
     {
@@ -29,14 +36,21 @@ public class PlayerController : MonoBehaviour
                 SetCharacter(player.GetComponent<Character>());
         }
 
-        skillMap = new Dictionary<KeyCode, SkillInfo> {
-            { KeyCode.F1, SkillInfo.Find("Fire Bolt") },
-            { KeyCode.F2, SkillInfo.Find("Charged Bolt") },
-            { KeyCode.F3, SkillInfo.Find("Ice Bolt") },
-            { KeyCode.F4, SkillInfo.Find("Teleport") },
-            { KeyCode.F5, SkillInfo.Find("Glacial Spike") },
-            { KeyCode.F6, SkillInfo.Find("Guided Arrow") }
+        hotSkills = new List<SkillInfo> {
+            SkillInfo.Find("Fire Bolt"),
+            SkillInfo.Find("Charged Bolt"),
+            SkillInfo.Find("Glacial Spike"),
+            SkillInfo.Find("Teleport"),
         };
+    }
+
+    void Start()
+    {
+        for (int i = 0; i < hotSkills.Count; ++i)
+        {
+            SkillPanel.instance.SetHotSkill(i, hotSkills[i]);
+            SkillPanel.instance.SetHotKey(i, hotSkillsBindings[i].ToString());
+        }
     }
 
     public void FlushInput()
@@ -187,23 +201,25 @@ public class PlayerController : MonoBehaviour
         }
 
         usingSkills = false;
-        foreach(var skill in skillMap)
+        for (int i = 0; i < hotSkills.Count; ++i)
         {
-            if (Input.GetKey(skill.Key))
+            SkillInfo skill = hotSkills[i];
+            KeyCode key = hotSkillsBindings[i];
+            if (skill == null || !Input.GetKey(key))
+                continue;
+            
+            usingSkills = true;
+            if (MouseSelection.current != null)
             {
-                usingSkills = true;
-                if (MouseSelection.current != null)
-                {
-                    var targetCharacter = MouseSelection.current.GetComponent<Character>();
-                    if (targetCharacter != null)
-                        character.UseSkill(skill.Value, targetCharacter);
-                    else
-                        character.UseSkill(skill.Value, Iso.MapToIso(MouseSelection.current.transform.position));
-                }
+                var targetCharacter = MouseSelection.current.GetComponent<Character>();
+                if (targetCharacter != null)
+                    character.UseSkill(skill, targetCharacter);
                 else
-                {
-                    character.UseSkill(skill.Value, IsoInput.mousePosition);
-                }
+                    character.UseSkill(skill, Iso.MapToIso(MouseSelection.current.transform.position));
+            }
+            else
+            {
+                character.UseSkill(skill, IsoInput.mousePosition);
             }
         }
 

@@ -117,18 +117,38 @@ public class SkillInfo
     [System.NonSerialized]
     public string name;
 
+    [System.NonSerialized]
+    public string iconSpritesheetFilename;
+
+    [System.NonSerialized]
+    public int iconIndex;
+
     public static List<SkillInfo> sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
     static Dictionary<string, SkillInfo> map = new Dictionary<string, SkillInfo>();
     static Dictionary<int, SkillInfo> idMap = new Dictionary<int, SkillInfo>();
 
     static SkillInfo()
     {
+        int charOffset = 0;
+        string charClass = null;
+
         foreach (var row in sheet)
         {
             if (row.id == -1)
                 continue;
 
+            if (charClass != row.charClass)
+            {
+                charClass = row.charClass;
+                charOffset = row.id;
+            }
+
             row.name = Translation.Find("skillname" + row.id);
+            if (row.charClass != null)
+                row.iconSpritesheetFilename = @"data\global\ui\spells\" + row.charClass.Substring(0, 2) + "Skillicon";
+            else
+                row.iconSpritesheetFilename = @"data\global\ui\spells\Skillicon";
+            row.iconIndex = row.id - charOffset;
             row.castOverlay = OverlayInfo.Find(row.castOverlayId);
             row.startSound = SoundInfo.Find(row._stsound);
             if (row._range == "none")
@@ -242,5 +262,17 @@ public class SkillInfo
         {
             Missile.Create(clientMissile, self.iso.pos, target, self);
         }
+    }
+
+    public Sprite GetIcon()
+    {
+        Sprite sprite = Spritesheet.Load(iconSpritesheetFilename).GetSprites(0)[iconIndex * 2];
+        return sprite;
+    }
+
+    public Sprite GetPressedIcon()
+    {
+        Sprite sprite = Spritesheet.Load(iconSpritesheetFilename).GetSprites(0)[iconIndex * 2 + 1];
+        return sprite;
     }
 }
