@@ -62,6 +62,7 @@ public class Missile : MonoBehaviour
     {
         int damage = weaponDamage;
 
+        // todo take skill level into account
         if (skillInfo != null)
         {
             damage += Random.Range(skillInfo.eMin, skillInfo.eMax + 1) + Random.Range(skillInfo.minDamage, skillInfo.maxDamage + 1);

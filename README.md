@@ -45,7 +45,7 @@ Steps:
   - d2xtalk.mpq (optional)
   - d2speech.mpq (optional)
 * Run Unity Editor and open Diablerie folder as a project
-* In Assets folder open `Scenes/Scene1.scene` file
+* In Assets folder open `Scenes/MainMenu.scene` file
 * Press `Play`
 
 # Credits
