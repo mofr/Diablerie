@@ -336,13 +336,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F8))
-        {
-            var pos = Iso.MapToWorld(IsoInput.mousePosition);
-            var teleport = World.SpawnObject("TP", pos);
-            teleport.modeName = "OP";
-        }
-
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift))
         {
