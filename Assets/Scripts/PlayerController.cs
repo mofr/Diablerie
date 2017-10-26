@@ -90,6 +90,14 @@ public class PlayerController : MonoBehaviour
                     character.mana += itemInfo.calc1;
                 break;
             case MiscInfo.UseFunction.RejuvPotion:
+                if (itemInfo.stat1 == "hitpoints")
+                    character.health += (int)(itemInfo.calc1 / 100.0f * character.maxHealth);
+                if (itemInfo.stat1 == "mana")
+                    character.mana += (int)(itemInfo.calc1 / 100.0f * character.maxMana);
+                if (itemInfo.stat2 == "hitpoints")
+                    character.health += (int)(itemInfo.calc2 / 100.0f * character.maxHealth);
+                if (itemInfo.stat2 == "mana")
+                    character.mana += (int)(itemInfo.calc2 / 100.0f * character.maxMana);
                 break;
             case MiscInfo.UseFunction.TemporaryPotion:
                 break;
