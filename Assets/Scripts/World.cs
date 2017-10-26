@@ -251,7 +251,7 @@ public class World : MonoBehaviour
         return staticObject;
     }
 
-    public static StaticObject SpawnObject(string token, Vector3 pos)
+    public static StaticObject SpawnObject(string token, Vector3 worldPos, bool fit = false)
     {
         ObjectInfo objectInfo = ObjectInfo.Find(token);
         if (objectInfo == null)
@@ -259,6 +259,6 @@ public class World : MonoBehaviour
             Debug.LogWarning("ObjectInfo with token'" + token + "' not found");
             return null;
         }
-        return SpawnObject(objectInfo, pos);
+        return SpawnObject(objectInfo, worldPos, fit: fit);
     }
 }

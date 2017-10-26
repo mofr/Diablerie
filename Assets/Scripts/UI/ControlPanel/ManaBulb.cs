@@ -7,17 +7,16 @@ public class ManaBulb : MonoBehaviour
     private Text label;
     private Image imgManaBar;
 
-    void Start()
+    void Awake()
     {
         imgManaBar = GetComponent<Image>();
     }
 
     void Update()
     {
-        //TODO change this to mana once it is available
-        float currHealth = PlayerController.instance.character.health;
-        float maxHealth = PlayerController.instance.character.maxHealth;
-        imgManaBar.fillAmount = currHealth / maxHealth;
-        label.text = "Mana: " + currHealth + "/" + maxHealth;
+        float currentMana = PlayerController.instance.character.mana;
+        float maxMana = PlayerController.instance.character.maxMana;
+        imgManaBar.fillAmount = currentMana / maxMana;
+        label.text = "Mana: " + currentMana + "/" + maxMana;
     }
 }

@@ -47,6 +47,8 @@ public class Character : Entity
     public int attackDamage = 30;
     public int health = 100;
     public int maxHealth = 100;
+    public int mana = 100;
+    public int maxMana = 100;
     bool hasMoved = false;
     SkillInfo skillInfo;
     Item skillWeapon;

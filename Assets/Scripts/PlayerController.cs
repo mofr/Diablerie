@@ -67,6 +67,41 @@ public class PlayerController : MonoBehaviour
         InventoryPanel.instance.equip = equip;
     }
 
+    public void Use(MiscInfo itemInfo)
+    {
+        Debug.Log("Use item " + itemInfo.name + ", function: " + itemInfo.useFunction);
+        switch (itemInfo.useFunction)
+        {
+            case MiscInfo.UseFunction.None:
+                break;
+            case MiscInfo.UseFunction.IdentifyItem:
+                break;
+            case MiscInfo.UseFunction.TownPortal:
+                var pos = Iso.MapToWorld(iso.pos);
+                var teleport = World.SpawnObject("TP", pos, fit: true);
+                teleport.modeName = "OP";
+                var sound = SoundInfo.Find("player_townportal_cast");
+                AudioManager.instance.Play(sound, pos);
+                break;
+            case MiscInfo.UseFunction.Potion:
+                if (itemInfo.stat1 == "hpregen")
+                    character.health += itemInfo.calc1;
+                if (itemInfo.stat1 == "manarecovery")
+                    character.mana += itemInfo.calc1;
+                break;
+            case MiscInfo.UseFunction.RejuvPotion:
+                break;
+            case MiscInfo.UseFunction.TemporaryPotion:
+                break;
+            case MiscInfo.UseFunction.HoradricCube:
+                break;
+            case MiscInfo.UseFunction.Elixir:
+                break;
+            case MiscInfo.UseFunction.StaminaPotion:
+                break;
+        }
+    }
+
     public bool Take(Item item)
     {
         if (item.info.code == "gld")

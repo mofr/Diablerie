@@ -7,7 +7,7 @@ public class LifeBulb : MonoBehaviour
     private Text label;
     private Image imgHealthBar;
 
-    void Start()
+    void Awake()
     {
         imgHealthBar = GetComponent<Image>();
     }

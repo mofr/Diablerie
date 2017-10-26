@@ -128,7 +128,7 @@ public class InventoryGrid :
                 Item poppedItem;
                 if (_inventory.Put(mouseItem, cell.x, cell.y, out poppedItem))
                 {
-                    AudioManager.instance.Play(mouseItem.useSound);
+                    AudioManager.instance.Play(mouseItem.dropSound);
                     PlayerController.instance.mouseItem = poppedItem;
                 }
             }
@@ -144,7 +144,7 @@ public class InventoryGrid :
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            var item = _inventory.ItemAt(cell.x, cell.y);
+            Item item = _inventory.ItemAt(cell.x, cell.y);
             if (item != null)
             {
                 if (!item.identified)
@@ -152,6 +152,12 @@ public class InventoryGrid :
                     AudioManager.instance.Play("cursor_identify_item");
                     item.identified = true;
                     OnInventoryUpdate();
+                }
+                else if (item.info.misc != null && item.info.misc.useable)
+                {
+                    AudioManager.instance.Play(item.useSound);
+                    _inventory.Take(cell.x, cell.y);
+                    PlayerController.instance.Use(item.info.misc);
                 }
             }
         }
@@ -217,7 +223,7 @@ public class InventoryGrid :
     {
         if (_inventory == null || !pointerOver)
             return;
-
+        
         ClearHighlights();
 
         var cell = MouseCell();

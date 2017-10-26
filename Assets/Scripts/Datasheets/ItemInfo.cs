@@ -113,7 +113,7 @@ public class ItemInfo
 
     private static void LoadMiscInfo()
     {
-        foreach (var item in miscSheet)
+        foreach (MiscInfo item in miscSheet)
         {
             if (item._code == null)
                 continue;
