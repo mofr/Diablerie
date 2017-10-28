@@ -24,6 +24,24 @@ public class MonStat
         public TreasureClass quest;
     }
 
+    [System.Serializable]
+    public class Stats
+    {
+        public int minHP;
+        public int maxHP;
+        public int armorClass; // AC
+        public uint exp;
+        public int A1MinDamage; // A1MinD
+        public int A1MaxDamage; // A1MaxD
+        public int A1ToHit; // A1TH
+        public int A2MinDamage;
+        public int A2MaxDamage;
+        public int A2ToHit;
+        public int S1MinDamage;
+        public int S1MaxDamage;
+        public int S1ToHit;
+    }
+
     const int DifficultyCount = 3;
 
     public string id;
@@ -129,21 +147,8 @@ public class MonStat
     public string[] toBlock;
     public string Crit;
 
-    public int minHP;
-    public int maxHP;
-    public string AC;
-    public string Exp;
-    public string A1MinD;
-    public string A1MaxD;
-    public string A1TH;
-    public string A2MinD;
-    public string A2MaxD;
-    public string A2TH;
-    public string S1MinD;
-    public string S1MaxD;
-    public string S1TH;
-    [Datasheet.Sequence(length = 13 * (DifficultyCount - 1))]
-    public string[] repeatedStruct;
+    [Datasheet.Sequence(length = DifficultyCount)]
+    public Stats[] stats;
 
     [Datasheet.Sequence(length = 3 * (2 + 4 * DifficultyCount))]
     public string[] elementalDamage;
@@ -176,18 +181,18 @@ public class MonStat
     public MonSound uniqueSound;
 
     public static List<MonStat> sheet = Datasheet.Load<MonStat>("data/global/excel/MonStats.txt");
-    static Dictionary<string, MonStat> stats = new Dictionary<string, MonStat>();
+    static Dictionary<string, MonStat> monStats = new Dictionary<string, MonStat>();
 
     static MonStat()
     {
         foreach(MonStat stat in sheet)
         {
             var key = stat.id.ToLower();
-            if (stats.ContainsKey(key))
+            if (monStats.ContainsKey(key))
             {
-                stats.Remove(key);
+                monStats.Remove(key);
             }
-            stats.Add(key, stat);
+            monStats.Add(key, stat);
             stat.ext = MonStatsExtended.Find(stat.monStatEx);
             stat.name = stat.nameStr == null ? null : Translation.Find(stat.nameStr);
             stat.minion1 = stat.minion1Id == null ? null : Find(stat.minion1Id);
@@ -208,6 +213,6 @@ public class MonStat
     {
         if (id == null)
             return null;
-        return stats.GetValueOrDefault(id, null);
+        return monStats.GetValueOrDefault(id, null);
     }
 }

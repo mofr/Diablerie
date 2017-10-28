@@ -8,6 +8,8 @@ public class Character : Entity
 {
     [System.NonSerialized]
     public MonStat monStat;
+    [System.NonSerialized]
+    public CharStat charStat;
     public Equipment equip;
     public int directionCount = 8;
     public float walkSpeed = 3.5f;

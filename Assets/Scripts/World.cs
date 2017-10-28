@@ -137,6 +137,8 @@ public class World : MonoBehaviour
         listenerObject.AddComponent<AudioListener>();
         listenerObject.transform.SetParent(player.transform, true);
         listenerObject.transform.localPosition = new Vector3(0, 0, -1);
+        character.charStat = player.AddComponent<CharStat>();
+        character.charStat.character = character;
 
         PlayerController.instance.SetCharacter(character);
 
@@ -199,9 +201,9 @@ public class World : MonoBehaviour
 
         var monLvl = MonLvl.Find(monStat.level[0]);
         if (monLvl != null && !monStat.noRatio)
-            character.health = Random.Range(monLvl.hp[0] * monStat.minHP, monLvl.hp[0] * monStat.maxHP + 1) / 100;
+            character.health = Random.Range(monLvl.hp[0] * monStat.stats[0].minHP, monLvl.hp[0] * monStat.stats[0].maxHP + 1) / 100;
         else
-            character.health = Random.Range(monStat.minHP, monStat.maxHP + 1);
+            character.health = Random.Range(monStat.stats[0].minHP, monStat.stats[0].maxHP + 1);
         character.maxHealth = character.health;
 
         var animator = character.GetComponent<COFAnimator>();

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114936715888369398}
   - component: {fileID: 114367382531674742}
   - component: {fileID: 114538117645717582}
+  - component: {fileID: 114565514041589954}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -94,6 +95,7 @@ MonoBehaviour:
   character: {fileID: 0}
   equip: {fileID: 0}
   inventory: {fileID: 0}
+  charStat: {fileID: 0}
   cameraController: {fileID: 0}
 --- !u!114 &114538117645717582
 MonoBehaviour:
@@ -104,6 +106,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8c5e9be2dfab9644a8a14b4a88109f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114565514041589954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576811083722074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc4c3b46ac722848b71009432f58673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114846714760764304
