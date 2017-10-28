@@ -11,10 +11,11 @@ public class ExperienceBar : MonoBehaviour
 
     void Update()
     {
+        int level = PlayerController.instance.charStat.level;
         uint currExp = PlayerController.instance.charStat.experience;
         uint currLevelExp = PlayerController.instance.charStat.currentLevelExp;
         uint nextLevelExp = PlayerController.instance.charStat.nextLevelExp;
         filler.fillAmount = (currExp - currLevelExp) / (float)(nextLevelExp - currLevelExp);
-        tooltip.text = "Experience: " + (currExp - currLevelExp) + " / " + (nextLevelExp - currLevelExp);
+        tooltip.text = "Level " + level + "\nExperience: " + (currExp - currLevelExp) + " / " + (nextLevelExp - currLevelExp);
     }
 }

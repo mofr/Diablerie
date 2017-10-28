@@ -15,7 +15,6 @@ public class SkillPanelSlot : MonoBehaviour
 
     public void Clear()
     {
-        image.sprite = null;
         image.color = new Color(0, 0, 0, 0);
 
         tooltip.enabled = false;

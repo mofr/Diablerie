@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
         KeyCode.F2,
         KeyCode.F3,
         KeyCode.F4,
+        KeyCode.F5,
+        KeyCode.F6,
     };
 
     void Awake()
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviour
             SkillInfo.Find("Charged Bolt"),
             SkillInfo.Find("Glacial Spike"),
             SkillInfo.Find("Teleport"),
+            null,
+            null,
         };
     }
 
