@@ -23,7 +23,7 @@ namespace StormLib
         public static extern bool SFileOpenFileEx(
             IntPtr archiveHandle,
             [MarshalAs(UnmanagedType.LPStr)] string fileName,
-            [MarshalAs(UnmanagedType.U4)] OpenFile searchScope,
+            [MarshalAs(UnmanagedType.U4)] OpenFileFlags searchScope,
             out IntPtr fileHandle);
 
         [DllImport("storm")]
@@ -31,9 +31,9 @@ namespace StormLib
         public static extern uint SFileGetFileSize(IntPtr fileHandle, out Int64 fileSizeHigh);
 
         [DllImport("storm")]
-        public static extern bool SFileReadFile(
+        public static unsafe extern bool SFileReadFile(
             IntPtr fileHandle,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] buffer,
+            [MarshalAs(UnmanagedType.LPArray)] byte* buffer,
             [MarshalAs(UnmanagedType.I8)] Int64 toRead,
             out Int64 read);
 
@@ -49,13 +49,18 @@ namespace StormLib
 
         [DllImport("storm")]
         public static extern bool SFileCloseArchive(IntPtr archiveHandle);
-        
+
+        [DllImport("storm")]
+        public static extern bool SFileHasFile(
+            IntPtr archiveHandle,
+            [MarshalAs(UnmanagedType.LPStr)] string filename);
+
         [DllImport("storm")]
         public static extern bool SFileExtractFile(
             IntPtr archiveHandle,
             [MarshalAs(UnmanagedType.LPStr)] string toExtract,
             [MarshalAs(UnmanagedType.LPStr)] string extracted,
-            [MarshalAs(UnmanagedType.U4)] OpenFile searchScope);
+            [MarshalAs(UnmanagedType.U4)] OpenFileFlags searchScope);
 
         [DllImport("storm")]
         public static extern bool SFileOpenPatchArchive(
@@ -110,7 +115,7 @@ namespace StormLib
         ENCRYPTED = 0x0200,   // Opens an encrypted MPQ archive (Example: Starcraft II installation)
     };
     
-    public enum OpenFile : uint
+    public enum OpenFileFlags : uint
     {
         FROM_MPQ = 0x00000000,   // Open the file from the MPQ archive
         PATCHED_FILE = 0x00000001,   // Open the file from the MPQ archive
