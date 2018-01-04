@@ -6,6 +6,7 @@ namespace StormLib
     public class MpqFileStream : Stream
     {
         IntPtr handle;
+        long position = 0;
 
         internal MpqFileStream(IntPtr handle)
         {
@@ -13,8 +14,8 @@ namespace StormLib
         }
 
         public sealed override bool CanRead { get { return true; } }
-        public sealed override bool CanWrite { get { return false; } }
         public sealed override bool CanSeek { get { return true; } }
+        public sealed override bool CanWrite { get { return false; } }
 
         public override long Length
         {
@@ -30,11 +31,11 @@ namespace StormLib
         {
             get
             {
-                throw new NotImplementedException();
+                return position;
             }
             set
             {
-                throw new NotImplementedException();
+                Seek(value, SeekOrigin.Begin);
             }
         }
 
@@ -47,13 +48,26 @@ namespace StormLib
                 long bytesRead;
                 if (!StormLib.SFileReadFile(handle, bufferPointer + offset, count, out bytesRead))
                     throw new IOException("SFileReadFile failed");
+                position += bytesRead;
                 return (int)bytesRead;
             }
         }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            throw new NotImplementedException();
+            MoveMethod moveMethod = MoveMethod.Begin;
+            switch (origin)
+            {
+                case SeekOrigin.Begin: moveMethod = MoveMethod.Begin; break;
+                case SeekOrigin.Current: moveMethod = MoveMethod.Current; break;
+                case SeekOrigin.End: moveMethod = MoveMethod.End; break;
+            }
+
+            var result = StormLib.SFileSetFilePointer(handle, offset, IntPtr.Zero, moveMethod);
+            if (result == StormLib.SFILE_INVALID_SIZE)
+                throw new IOException("SFileSetFilePointer failed");
+            position = result;
+            return position;
         }
 
         public override void SetLength(long value)
@@ -72,6 +86,7 @@ namespace StormLib
             if (handle != IntPtr.Zero)
             {
                 StormLib.SFileCloseFile(handle);
+                handle = IntPtr.Zero;
             }
         }
 

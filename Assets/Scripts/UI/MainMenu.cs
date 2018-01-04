@@ -1,6 +1,4 @@
-﻿using CrystalMpq;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -63,16 +61,19 @@ public class MainMenu : MonoBehaviour
 
     void PlayMusic()
     {
-        MpqFile file = Mpq.fs.FindFile(@"data\global\music\introedit.wav");
-        if (file == null)
-            return;
-        musicStream = file.Open();
-        AudioClip clip = Wav.Load("intro music", true, musicStream);
-        var musicObject = new GameObject();
-        var audioSource = musicObject.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.loop = true;
-        audioSource.Play();
+        try
+        {
+            musicStream = Mpq.fs.OpenFile(@"data\global\music\introedit.wav");
+            AudioClip clip = Wav.Load("intro music", true, musicStream);
+            var musicObject = new GameObject();
+            var audioSource = musicObject.AddComponent<AudioSource>();
+            audioSource.clip = clip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        catch (FileNotFoundException)
+        {
+        }
     }
 
     void StopMusic()

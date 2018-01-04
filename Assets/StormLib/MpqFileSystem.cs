@@ -25,7 +25,7 @@ namespace StormLib
             }
             return false;
         }
-
+        
         public MpqFileStream OpenFile(string filename)
         {
             foreach (var archive in archives)

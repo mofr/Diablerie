@@ -205,34 +205,16 @@ public class EditorTools
     static public void TestAction()
     {
         string filename = @"data\global\palette\ACT1\Pal.PL2";
-        System.IntPtr archiveHandle;
-        if (!StormLib.StormLib.SFileOpenArchive("d2data.mpq", 0, StormLib.OpenArchiveFlags.READ_ONLY, out archiveHandle))
-            Debug.Log("SFileOpenArchive failed");
 
-        var sw = System.Diagnostics.Stopwatch.StartNew();
-
-        System.IntPtr fileHandle;
-        if (!StormLib.StormLib.SFileOpenFileEx(archiveHandle, filename, StormLib.OpenFile.FROM_MPQ, out fileHandle))
-            Debug.Log("SFileOpenFileEx failed");
-
-        long fileSizeHigh;
-        long fileSize = StormLib.StormLib.SFileGetFileSize(fileHandle, out fileSizeHigh);
-
-        byte[] buffer = new byte[fileSize];
-        Debug.Log("File size " + fileSize + " bytes");
-        long bytesRead;
-        if (!StormLib.StormLib.SFileReadFile(fileHandle, buffer, buffer.Length, out bytesRead))
-            Debug.Log("SFileReadFile failed");
-        StormLib.StormLib.SFileCloseFile(fileHandle);
-        Debug.Log("StormLib " + sw.ElapsedMilliseconds + " ms");
-
-        StormLib.StormLib.SFileCloseArchive(archiveHandle);
-
-
-        var file = Mpq.fs.FindFile(filename);
-        sw = System.Diagnostics.Stopwatch.StartNew();
-        Mpq.ReadAllBytes(file);
-        Debug.Log("CrystalMpq " + sw.ElapsedMilliseconds + " ms");
+        {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            using (StormLib.MpqFileStream stream = Mpq.fs.OpenFile(filename))
+            {
+                Debug.Log("File size " + stream.Length + " bytes");
+                stream.ReadAllBytes();
+            }
+            Debug.Log("StormLib fs " + sw.ElapsedMilliseconds + " ms");
+        }
     }
 }
 

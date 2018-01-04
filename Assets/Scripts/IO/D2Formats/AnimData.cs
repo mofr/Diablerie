@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using System.IO;
 
 public struct AnimData
 {
@@ -47,8 +45,7 @@ public struct AnimData
 
     static AnimData()
     {
-        var file = Mpq.fs.FindFile(@"data\global\animdata.d2");
-        using (var stream = file.Open())
+        using (var stream = Mpq.fs.OpenFile(@"data\global\animdata.d2"))
         using (var reader = new BinaryReader(stream))
         {
             while (stream.Position < stream.Length)

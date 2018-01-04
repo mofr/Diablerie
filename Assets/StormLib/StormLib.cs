@@ -3,8 +3,10 @@ using System.Runtime.InteropServices;
 
 namespace StormLib
 {
-    public class StormLib
+    internal class StormLib
     {
+        public const uint SFILE_INVALID_SIZE = 0xFFFFFFFF;
+
         [DllImport("storm")]
         // Returns a handle to the MPQ Search Object
         public static extern IntPtr SFileFindFirstFile(
@@ -29,6 +31,13 @@ namespace StormLib
         [DllImport("storm")]
         // Returns low 32 bits of file size
         public static extern uint SFileGetFileSize(IntPtr fileHandle, out Int64 fileSizeHigh);
+
+        [DllImport("storm")]
+        public static extern uint SFileSetFilePointer(
+            IntPtr fileHandle, 
+            long filePos, 
+            IntPtr plFilePosHigh, 
+            MoveMethod moveMethod);
 
         [DllImport("storm")]
         public static unsafe extern bool SFileReadFile(
@@ -122,5 +131,12 @@ namespace StormLib
         BY_INDEX = 0x00000002,   // The 'szFileName' parameter is actually the file index
         ANY_LOCALE = 0xFFFFFFFE,   // Reserved for StormLib internal use
         LOCAL_FILE = 0xFFFFFFFF,   // Open the file from the MPQ archive
+    };
+
+    public enum MoveMethod : uint
+    {
+        Begin = 0,
+        Current = 1,
+        End = 2,
     };
 }

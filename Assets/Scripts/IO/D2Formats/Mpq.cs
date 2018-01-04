@@ -1,4 +1,4 @@
-﻿using CrystalMpq;
+﻿using StormLib;
 
 public class Mpq
 {
@@ -32,19 +32,10 @@ public class Mpq
 
     public static byte[] ReadAllBytes(string filename)
     {
-        var file = fs.FindFile(filename);
-        if (file == null)
-            throw new System.IO.FileNotFoundException("file not found " + filename, filename);
-        return ReadAllBytes(file);
-    }
-
-    public static byte[] ReadAllBytes(MpqFile file)
-    {
         UnityEngine.Profiling.Profiler.BeginSample("Mpq.ReadAllBytes");
-        using (var stream = file.Open())
+        using (var stream = fs.OpenFile(filename))
         {
-            byte[] bytes = new byte[file.Size];
-            stream.Read(bytes, 0, bytes.Length);
+            byte[] bytes = stream.ReadAllBytes();
             UnityEngine.Profiling.Profiler.EndSample();
             return bytes;
         }
@@ -53,10 +44,9 @@ public class Mpq
     public unsafe static string ReadAllText(string filename)
     {
         UnityEngine.Profiling.Profiler.BeginSample("Mpq.ReadAllText");
-        var file = fs.FindFile(filename);
-        using (var stream = file.Open())
+        using (var stream = fs.OpenFile(filename))
         {
-            byte[] bytes = new byte[file.Size];
+            byte[] bytes = new byte[stream.Length];
             stream.Read(bytes, 0, bytes.Length);
             string result;
             fixed (byte * pointer = bytes)
