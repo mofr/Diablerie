@@ -54,8 +54,6 @@ Paul Siramy - ds1edit editor, great thanks for source code. Very helpful and det
 
 Bilian Belichev - DCC file format documentation and sample decoder.
 
-Fabien BARBIER - CrystalMpq.
-
-Foole (fooleau@gmail.com) - MpqHuffman and MpqWavCompression.
+Ladislav Zezula - [StormLib](https://github.com/ladislav-zezula/StormLib) 
 
 [Phrozen Keep](http://d2mods.info) - A lot of various information about diablo 2 files.
