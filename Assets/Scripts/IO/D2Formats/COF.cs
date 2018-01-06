@@ -59,6 +59,8 @@ public class COF
             return cache[filename];
         }
 
+        UnityEngine.Profiling.Profiler.BeginSample("COF.Load");
+
         COF cof = new COF();
         cof.basePath = basePath;
         cof.token = token;
@@ -120,6 +122,8 @@ public class COF
         }
 
         cache.Add(filename, cof);
+
+        UnityEngine.Profiling.Profiler.EndSample();
         return cof;
     }
 

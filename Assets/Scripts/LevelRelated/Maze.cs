@@ -28,10 +28,12 @@ public class Maze
 
     public static void Generate(LevelBuilder builder, Palette palette)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("Maze.Generate");
         Clear();
         GenerateRooms(builder.info.maze.rooms[0]);
         GenerateSpecialRooms(palette);
         Build(builder, palette);
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     private static void Clear()

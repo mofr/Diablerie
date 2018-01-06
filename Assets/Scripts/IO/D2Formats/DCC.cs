@@ -552,7 +552,6 @@ public class DCC : Spritesheet
 
     void DecodeDirection(int d)
     {
-        sprites[d] = new Sprite[header.framesPerDir];
         int[] dirs = null;
         switch (header.directionCount)
         {
@@ -566,6 +565,9 @@ public class DCC : Spritesheet
                 return;
         }
 
+        UnityEngine.Profiling.Profiler.BeginSample("DCC.DecodeDirection");
+
+        sprites[d] = new Sprite[header.framesPerDir];
         var bitReader = new BitReader(bytes, header.dirOffset[dirs[d]] * 8);
         Direction dir = new Direction();
         ReadDirection(bitReader, dir);
@@ -608,12 +610,17 @@ public class DCC : Spritesheet
         FrameBuffer frameBuffer = CreateFrameBuffer(dir.box); // dcc_prepare_buffer_cells
         FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
         MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
+
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     static public DCC Load(string filename, bool loadAllDirections = false, bool mpq = true)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("DCC.Load");
         var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-        return Load(filename, bytes, loadAllDirections);
+        DCC dcc = Load(filename, bytes, loadAllDirections);
+        UnityEngine.Profiling.Profiler.EndSample();
+        return dcc;
     }
 
     static DCC Load(string filename, byte[] bytes, bool loadAllDirections = false)

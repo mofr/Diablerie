@@ -141,6 +141,7 @@ public class LevelBuilder
 
     public GameObject Instantiate(Vector2i offset)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.Instantiate");
         var root = new GameObject(name);
 
         if (info != null)
@@ -156,44 +157,29 @@ public class LevelBuilder
             SelectMonsterTypes();
         }
 
-        int i = 0;
-        for (int y = 0; y < gridHeight; ++y)
-        {
-            for (int x = 0; x < gridWidth; ++x, ++i)
-            {
-                var ds1 = grid[i];
-                int offsetX = offset.x + x * gridX;
-                int offsetY = offset.y + y * gridY;
-                if (ds1 != null)
-                {
-                    Instantiate(ds1, offsetX, offsetY, root.transform);
-                    InstantiateMonsters(offsetX, offsetY, root.transform);
-                }
-                else if (info != null && info.drlgType == 3)
-                {
-                    FillGap(offset, x, y, root.transform);
-                    InstantiateMonsters(offsetX, offsetY, root.transform);
-                }
-            }
-        }
-
+        InstantiateGrid(offset, root.transform);
         InstantiateDebugGrid(offset, root.transform);
 
+        UnityEngine.Profiling.Profiler.EndSample();
         return root;
     }
 
     private void Instantiate(DS1 ds1, int x, int y, Transform root)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateDS1");
         InstantiatePopups(ds1, x, y, root);
         InstantiateFloors(ds1, x, y, root);
         InstantiateWalls(ds1, x, y, root);
         InstantiateObjects(ds1, x, y, root);
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     private void InstantiateMonsters(int offsetX, int offsetY, Transform root)
     {
         if (info == null)
             return;
+
+        UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateMonsters");
 
         int density = info.monDen[0];
 
@@ -209,6 +195,7 @@ public class LevelBuilder
                 Spawn(monStat, x, y, info.id, root);
             }
         }
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     private static void Spawn(MonStat monStat, int x, int y, int level, Transform root)
@@ -257,8 +244,35 @@ public class LevelBuilder
         }
     }
 
+    private void InstantiateGrid(Vector2i offset, Transform root)
+    {
+        UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateGrid");
+        int i = 0;
+        for (int y = 0; y < gridHeight; ++y)
+        {
+            for (int x = 0; x < gridWidth; ++x, ++i)
+            {
+                var ds1 = grid[i];
+                int offsetX = offset.x + x * gridX;
+                int offsetY = offset.y + y * gridY;
+                if (ds1 != null)
+                {
+                    Instantiate(ds1, offsetX, offsetY, root.transform);
+                    InstantiateMonsters(offsetX, offsetY, root.transform);
+                }
+                else if (info != null && info.drlgType == 3)
+                {
+                    FillGap(offset, x, y, root.transform);
+                    InstantiateMonsters(offsetX, offsetY, root.transform);
+                }
+            }
+        }
+        UnityEngine.Profiling.Profiler.EndSample();
+    }
+
     private void InstantiateDebugGrid(Vector2i offset, Transform root)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateDebugGrid");
         var grid = new GameObject("debug grid");
         grid.transform.SetParent(root);
         grid.layer = UnityLayers.SpecialTiles;
@@ -289,6 +303,7 @@ public class LevelBuilder
                 line.SetPositions(corners);
             }
         }
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     private void InstantiateFloors(DS1 ds1, int offsetX, int offsetY, Transform root)
@@ -444,6 +459,7 @@ public class LevelBuilder
 
     private void FillGap(Vector2i offset, int x, int y, Transform root)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.FillGap");
         int offsetX = x * gridX;
         int offsetY = y * gridY;
 
@@ -456,6 +472,7 @@ public class LevelBuilder
                 CreateTile(tile, offset.x + x, offset.y + y, parent: root);
             }
         }
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     static Renderer CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0, Transform parent = null)

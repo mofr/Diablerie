@@ -33,6 +33,7 @@ public class DC6 : Spritesheet
 
     static public DC6 Load(string filename, bool mpq = true, int textureSize = -1, bool loadAllDirections = false)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("DC6.DecodeDirection");
         Palette.LoadPalette(0);
         var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
 
@@ -45,10 +46,13 @@ public class DC6 : Spritesheet
             if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
             {
                 Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
+                UnityEngine.Profiling.Profiler.EndSample();
                 return null;
             }
 
-            return Load(stream, reader, bytes, textureSize, loadAllDirections);
+            DC6 dc6 = Load(stream, reader, bytes, textureSize, loadAllDirections);
+            UnityEngine.Profiling.Profiler.EndSample();
+            return dc6;
         }
     }
 

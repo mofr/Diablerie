@@ -15,8 +15,15 @@ public struct Datasheet
 
     public static List<T> Load<T>(string filename, int headerLines = 1) where T : new()
     {
+        UnityEngine.Profiling.Profiler.BeginSample("Datasheet.Load");
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+        UnityEngine.Profiling.Profiler.BeginSample("File.ReadAllText");
+        var fileSw = System.Diagnostics.Stopwatch.StartNew();
         string csv = File.ReadAllText(Application.streamingAssetsPath + "/" + filename);
+        var fileReadMs = fileSw.ElapsedMilliseconds;
+        UnityEngine.Profiling.Profiler.EndSample();
+
         MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
         int expectedFieldCount = CalcFieldCount(typeof(T));
         var lines = csv.Split('\n');
@@ -47,7 +54,8 @@ public struct Datasheet
                 throw new System.Exception("Datasheet parsing error at line " + lineIndex + ", first field " + fields[0], e);
             }
         }
-        Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms)");
+        Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms, file read " + fileReadMs + " ms)");
+        UnityEngine.Profiling.Profiler.EndSample();
         return sheet;
     }
 
@@ -79,6 +87,7 @@ public struct Datasheet
 
     static int ReadObject(object obj, MemberInfo[] members, string[] fields, int fieldIndex = 0)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("Datasheet.ReadObject");
         for (int memberIndex = 0; memberIndex < members.Length; ++memberIndex)
         {
             MemberInfo member = members[memberIndex];
@@ -91,6 +100,7 @@ public struct Datasheet
                 throw new System.Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member, e);
             }
         }
+        UnityEngine.Profiling.Profiler.EndSample();
         return fieldIndex;
     }
 
