@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3df5885667ac94095980f7371d50bce7
-timeCreated: 1515403807
+guid: 11208b9ca37be433e8eda014d182ddd1
+timeCreated: 1515486930
 licenseType: Free
 PluginImporter:
   externalObjects: {}
@@ -17,8 +17,8 @@ PluginImporter:
       settings:
         Exclude Android: 0
         Exclude Editor: 0
-        Exclude Linux: 1
-        Exclude Linux64: 0
+        Exclude Linux: 0
+        Exclude Linux64: 1
         Exclude LinuxUniversal: 0
         Exclude OSXIntel: 1
         Exclude OSXIntel64: 1
@@ -45,9 +45,9 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-        CPU: AnyCPU
+        CPU: x86
         DefaultValueInitialized: true
-        OS: AnyOS
+        OS: Linux
   - first:
       Facebook: Win
     second:
@@ -69,21 +69,21 @@ PluginImporter:
   - first:
       Standalone: Linux
     second:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: None
+        CPU: x86
   - first:
       Standalone: Linux64
     second:
-      enabled: 1
+      enabled: 0
       settings:
-        CPU: x86_64
+        CPU: None
   - first:
       Standalone: LinuxUniversal
     second:
       enabled: 1
       settings:
-        CPU: x86_64
+        CPU: x86
   - first:
       Standalone: OSXIntel
     second:
