@@ -158,5 +158,7 @@ MonoBehaviour:
     type: 2}
   enemyBarPrefab: {fileID: 114263015362939446, guid: 4768d32ab650c0a418b60f7b9883889a,
     type: 2}
+  softwareCursorPrefab: {fileID: 114945849090957282, guid: adcf5bb86e5321041bd103d33177a95e,
+    type: 2}
   label: {fileID: 0}
   screenLabel: {fileID: 0}

@@ -152,11 +152,14 @@ public class PlayerController : MonoBehaviour
                 var texture = dc6.textures[0];
                 var frame = dc6.directions[0].frames[0];
                 var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
-                Cursor.SetCursor(texture, hotSpot, CursorMode.ForceSoftware);
+                
+                SoftwareCursor.SetCursor(texture, hotSpot);
+                Cursor.visible = false;
             }
             else
             {
-                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                SoftwareCursor.SetCursor(null);
+                Cursor.visible = true;
             }
         }
     }

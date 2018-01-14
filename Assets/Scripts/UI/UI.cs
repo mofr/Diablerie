@@ -8,6 +8,7 @@ public class UI : MonoBehaviour
     public Label labelPrefab;
     public Label screenLabelPrefab;
     public EnemyBar enemyBarPrefab;
+    public SoftwareCursor softwareCursorPrefab;
 
     [HideInInspector]
     public Label label;
@@ -23,6 +24,7 @@ public class UI : MonoBehaviour
         screenLabel = Instantiate(instance.screenLabelPrefab, canvas.transform);
         label.gameObject.SetActive(false);
         screenLabel.gameObject.SetActive(false);
+        Instantiate(instance.softwareCursorPrefab, canvas.transform);
     }
 
     static public void ShowLabel(Vector2 position, string text)
