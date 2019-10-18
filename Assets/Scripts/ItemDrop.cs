@@ -325,7 +325,7 @@ public class ItemDrop : MonoBehaviour
         qualityFactors.rare = Mathf.Max(qualityFactors.rare, treasureClass.rare);
         qualityFactors.magic = Mathf.Max(qualityFactors.magic, treasureClass.magic);
 
-        int noDrop = 0; // value is temporary just to increase drop for debugging purposes, should be treasureClass.noDrop
+        int noDrop = 0; // zero value is temporary just to increase drop for debugging purposes, should be treasureClass.noDrop
         for (int i = 0; i < treasureClass.picks; ++i)
         {
             int sample = Random.Range(0, treasureClass.probSum + noDrop);

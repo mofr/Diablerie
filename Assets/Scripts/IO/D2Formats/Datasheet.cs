@@ -148,14 +148,18 @@ public struct Datasheet
         {
             if (value == "1")
                 return true;
-            else if (value == "0")
+            
+            if (value == "0")
                 return false;
-            else
-                throw new System.FormatException("Unable to cast '" + value + "' to bool");
+
+            throw new System.FormatException("Unable to cast '" + value + "' to bool");
         }
-        else
+
+        if (type == typeof(float))
         {
-            return System.Convert.ChangeType(value, type);
+            return (float) System.Convert.ToDouble(value, System.Globalization.CultureInfo.InvariantCulture);
         }
+        
+        return System.Convert.ChangeType(value, type);
     }
 }
