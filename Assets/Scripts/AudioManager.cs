@@ -24,12 +24,17 @@ public class AudioManager : MonoBehaviour
 
     private void OnLevelChange(Level level, Level previous)
     {
+        var crossfadeDuration = CrossfadeDuration;
+        if (previous == null || level.info.act != previous.info.act)
+        {
+            crossfadeDuration = 0;
+        }
         AudioSource song;
         if (previous != null)
         {
             song = songs.GetValueOrDefault(previous.info);
             if (song != null)
-                AudioFader.Fade(song, previous.info.soundEnv.song.volume, 0, CrossfadeDuration);
+                AudioFader.Fade(song, previous.info.soundEnv.song.volume, 0, crossfadeDuration);
         }
         song = songs.GetValueOrDefault(level.info);
         if (song == null)
@@ -38,7 +43,7 @@ public class AudioManager : MonoBehaviour
             song.volume = 0;
             songs[level.info] = song;
         }
-        AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, previous == null ? 0 : CrossfadeDuration);
+        AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, crossfadeDuration);
 
         if (ambient == null)
             ambient = Create("Ambient sound");

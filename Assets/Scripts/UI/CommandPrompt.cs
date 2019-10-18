@@ -130,6 +130,13 @@ public class CommandPrompt : MonoBehaviour
             
             World.SpawnMonster(id, pos);
         }
+        if (parts.Length == 2 && parts[0] == "/act")
+        {
+            if (int.TryParse(parts[1], out int actNumber))
+            {
+                World.GoToAct(actNumber);
+            }
+        }
         else
         {
             Debug.LogWarning(input);
