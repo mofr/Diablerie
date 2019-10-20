@@ -262,6 +262,21 @@ public class Item
             sb.Append("\nDefense: " + info.armor.minAC);
             if (!info.armor.noDurability)
                 sb.Append("\nDurability: " + info.armor.durability);
+        }
+        
+        var onlyForClass = CharStatsInfo.FindByCode(info.type.classCode);
+        if (onlyForClass != null)
+        {
+            bool classMatched = CurrentCharacterClass() == onlyForClass;
+            if (!classMatched)
+                StartColor(sb, Colors.ItemRedHex);
+            sb.Append("\n(" + onlyForClass.className + " only)");
+            if (!classMatched)
+                EndColor(sb);
+        }
+
+        if (info.armor != null)
+        {
             if (info.armor.reqStr > 0)
                 sb.Append("\nRequired Strength: " + info.armor.reqStr);
         }
@@ -623,6 +638,11 @@ public class Item
             string color = collected ? Colors.ItemSetHex : Colors.ItemRedHex;
             AppendColored(sb, item.name, color);
         }
+    }
+
+    static private CharStatsInfo CurrentCharacterClass()
+    {
+        return PlayerController.instance.character.charStat.info;
     }
 
     static private int EquippedItemsCount(ItemSet set)

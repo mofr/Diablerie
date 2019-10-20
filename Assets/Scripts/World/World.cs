@@ -75,6 +75,7 @@ public class World : MonoBehaviour
         listenerObject.transform.localPosition = new Vector3(0, 0, -1);
         character.charStat = player.AddComponent<CharStat>();
         character.charStat.character = character;
+        character.charStat.info = info;
 
         PlayerController.instance.SetCharacter(character);
 
