@@ -153,10 +153,12 @@ public class World : MonoBehaviour
             animator.equip[i] = variants[Random.Range(0, variants.Length)];
         }
 
-        if (monStat.ai == "Npc")
+        if (monStat.ai == "Npc" || monStat.ai == "Towner" || monStat.ai == "Vendor" || monStat.ai == "Hireable")
             monster.AddComponent<NpcController>();
         else if (monStat.ai != "Idle" && monStat.ai != "NpcStationary")
+        {
             monster.AddComponent<MonsterController>();
+        }
 
         var body = monster.AddComponent<Rigidbody2D>();
         body.isKinematic = true;
