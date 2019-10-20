@@ -49,7 +49,12 @@ public class InventorySlot :
     {
         var mouseItem = PlayerController.instance.mouseItem;
         if (mouseItem != null && !CanEquip(mouseItem))
+        {
+            string charClass = PlayerController.instance.charStat.info.classNameLower;
+            AudioManager.instance.Play(charClass + "_impossible_1");
             return;
+        }
+
         Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
 
         if (mouseItem != null)

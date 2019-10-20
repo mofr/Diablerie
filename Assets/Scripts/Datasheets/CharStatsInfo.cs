@@ -52,6 +52,7 @@ public class CharStatsInfo
         {
             info.token = tokens[info.className];
             info.code = codes[info.className];
+            info.classNameLower = info.className.ToLower();
         }
     }
 
@@ -104,4 +105,7 @@ public class CharStatsInfo
 
     [System.NonSerialized]
     public string code;
+    
+    [System.NonSerialized]
+    public string classNameLower;
 }
