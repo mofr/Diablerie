@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -173,7 +173,7 @@ class COFAnimator : MonoBehaviour
                 layer.gameObject.SetActive(true);
                 layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
             }
-            catch (System.IO.FileNotFoundException e)
+            catch (FileNotFoundException e)
             {
                 Debug.LogWarning("File not found " + e.FileName);
                 layer.gameObject.SetActive(false);

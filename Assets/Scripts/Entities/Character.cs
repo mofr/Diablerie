@@ -431,6 +431,9 @@ public class Character : Entity
             dead = true;
             CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
         }
+        
+        // It's needed to call here, otherwise animator can loop the finished animation few frames more than needed
+        UpdateAnimation();
     }
 
     public override Vector2 titleOffset
