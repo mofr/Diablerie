@@ -218,6 +218,19 @@ public class PlayerController : MonoBehaviour
             {
                 run ^= true;
             }
+            
+            // following section serves debugging purposes only
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                for (int i = 0; i < 1; ++i)
+                {
+                    var tc = TreasureClass.sheet[Random.Range(0, TreasureClass.sheet.Count)];
+                    if (tc.name == null)
+                        continue;
+                    int itemLevel = Random.Range(50, 100);
+                    ItemDrop.Drop(tc.name, Iso.MapToWorld(IsoInput.mouseTile), itemLevel);
+                }
+            }
         }
         else
         {
@@ -339,19 +352,6 @@ public class PlayerController : MonoBehaviour
             return;
 
         ControlCharacter();
-
-        // following section serves debugging purposes only
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            for (int i = 0; i < 1; ++i)
-            {
-                var tc = TreasureClass.sheet[Random.Range(0, TreasureClass.sheet.Count)];
-                if (tc.name == null)
-                    continue;
-                int itemLevel = Random.Range(50, 100);
-                ItemDrop.Drop(tc.name, Iso.MapToWorld(IsoInput.mouseTile), itemLevel);
-            }
-        }
 
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift))
