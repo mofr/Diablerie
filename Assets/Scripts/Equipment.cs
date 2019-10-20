@@ -15,14 +15,33 @@ public class Equipment : MonoBehaviour
     static string[] defaultEquip = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "", "", "", "LIT", "LIT", "", "", "", "", "", "" };
     static Item[] unequippedItems = new Item[2];
 
-    public bool Equip(Item item)
+    public bool CanEquip(Item item)
     {
         if (!item.identified)
             return false;
 
         if (!item.info.type.body)
             return false;
-        
+
+        return true;
+    }
+
+    public bool CanEquip(Item item, int loc)
+    {
+        if (!CanEquip(item))
+            return false;
+
+        if (loc != item.info.type.bodyLoc1 && loc != item.info.type.bodyLoc2)
+            return false;
+
+        return true;
+    }
+
+    public bool Equip(Item item)
+    {
+        if (!CanEquip(item))
+            return false;
+
         if (items[item.info.type.bodyLoc1] != null || items[item.info.type.bodyLoc2] != null)
             return false;
         Equip(item, item.info.type.bodyLoc1);
@@ -37,6 +56,9 @@ public class Equipment : MonoBehaviour
     {
         unequippedItems[0] = null;
         unequippedItems[1] = null;
+
+        if (item != null && !CanEquip(item, loc))
+            return unequippedItems;
 
         if (items[loc] != null)
             unequippedItems[0] = items[loc];

@@ -15,18 +15,16 @@ public class InventorySlot :
     public Image itemImage;
     private bool pointerOver = false;
 
-    private bool CanAccept(Item item)
+    private bool CanEquip(Item item)
     {
-        return item.identified &&
-            item.info.type.body && 
-            (item.info.type.bodyLoc1 == bodyLoc || item.info.type.bodyLoc2 == bodyLoc);
+        return PlayerController.instance.equip.CanEquip(item, bodyLoc);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         pointerOver = true;
         var mouseItem = PlayerController.instance.mouseItem;
-        if (mouseItem != null && !CanAccept(mouseItem))
+        if (mouseItem != null && !CanEquip(mouseItem))
             highlighter.color = Colors.InvItemHighlightForbid;
         else
             highlighter.color = Colors.InvItemHighlight;
@@ -50,7 +48,7 @@ public class InventorySlot :
     public void OnPointerDown(PointerEventData eventData)
     {
         var mouseItem = PlayerController.instance.mouseItem;
-        if (mouseItem != null && !CanAccept(mouseItem))
+        if (mouseItem != null && !CanEquip(mouseItem))
             return;
         Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
 
