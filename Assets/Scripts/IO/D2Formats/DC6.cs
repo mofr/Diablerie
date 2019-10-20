@@ -170,7 +170,7 @@ public class DC6 : Spritesheet
                 if (texture != null)
                 {
                     texture.SetPixels32(pixels);
-                    texture.Apply();
+                    texture.Apply(false);
                 }
                 texture = new Texture2D(textureWidth, textureHeight, TextureFormat.ARGB32, false);
                 pixels = new Color32[textureWidth * textureHeight];
@@ -191,7 +191,7 @@ public class DC6 : Spritesheet
         if (texture != null)
         {
             texture.SetPixels32(pixels);
-            texture.Apply();
+            texture.Apply(false);
         }
     }
 

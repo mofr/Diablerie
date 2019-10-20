@@ -434,7 +434,7 @@ public class DCC : Spritesheet
                 if (texture != null)
                 {
                     texture.SetPixels32(pixels);
-                    texture.Apply();
+                    texture.Apply(false);
                 }
                 texture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGBA32, false);
                 pixels = new Color32[textureWidth * textureHeight];
@@ -530,7 +530,7 @@ public class DCC : Spritesheet
         if (texture != null)
         {
             texture.SetPixels32(pixels);
-            texture.Apply();
+            texture.Apply(false);
         }
     }
 

@@ -183,7 +183,7 @@ public class DT1
                 if (texture != null)
                 {
                     texture.SetPixels32(pixels);
-                    texture.Apply();
+                    texture.Apply(false);
                 }
 
                 texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
@@ -243,7 +243,7 @@ public class DT1
         if (texture != null)
         {
             texture.SetPixels32(pixels);
-            texture.Apply();
+            texture.Apply(false);
         }
     }
 
