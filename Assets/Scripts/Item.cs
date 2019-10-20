@@ -642,7 +642,7 @@ public class Item
 
     static private CharStatsInfo CurrentCharacterClass()
     {
-        return PlayerController.instance.character.charStat.info;
+        return PlayerController.instance.charStat.info;
     }
 
     static private int EquippedItemsCount(ItemSet set)

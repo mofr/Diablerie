@@ -23,6 +23,10 @@ public class Equipment : MonoBehaviour
         if (!item.info.type.body)
             return false;
 
+        var classCode = item.info.type.classCode;
+        if (character.charStat != null && classCode != null && character.charStat.info.code != classCode)
+            return false;
+
         return true;
     }
 
