@@ -111,7 +111,7 @@ public class Pickup : Entity
         }
         else
         {
-            // I can't!
+            AudioManager.instance.Play("druid_cantcarry_1");
             Flip();
         }
     }
