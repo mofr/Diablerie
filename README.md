@@ -31,7 +31,7 @@ Requirements:
 # How to build and run from sources:
 
 Requirements:
-- Unity 2017.2.0f3 (other versions are not tested)
+- Unity 2019.2.8f1 (other versions are not tested)
 - Diablo 2 Lord of Destruction v1.14
 
 Steps:
@@ -48,6 +48,21 @@ Steps:
 * Run Unity Editor and open Diablerie folder as a project
 * In Assets folder open `Scenes/MainMenu.scene` file
 * Press `Play`
+
+# In-game console
+
+Press enter to open the in-game console.
+Some commands to test:
+```
+/spawn itemset immortal
+/spawn diablo
+/spawn skeleton1
+/act 1
+/act 2
+/act 3
+/act 4
+/act 5
+```
 
 # Credits
 
