@@ -106,9 +106,8 @@ public class LevelBuilder
 
     void InstantiatePopups(DS1 ds1, int offsetX, int offsetY, Transform parent = null)
     {
-        bool firstFound = false;
-        int x1 = 0;
-        int y1 = 0;
+        var startPos = new Vector2i[7];
+        var firstFound = new bool[7];
 
         for (int layerIndex = 0; layerIndex < ds1.walls.Length; ++layerIndex)
         {
@@ -118,21 +117,45 @@ public class LevelBuilder
             {
                 for (int x = 0; x < ds1.width; ++x, ++i)
                 {
-                    if (walls[i].mainIndex == 8 && walls[i].orientation == 10)
+                    if (walls[i].orientation != 10)
+                        continue;
+                    int mainIndex = walls[i].mainIndex;
+                    int group;
+                    // TODO merge 8, 9, 10
+                    // TODO merge 12, 13
+                    if (mainIndex == 8)
+                        group = 0;
+                    else if (mainIndex == 9)
+                        group = 1;
+                    else if (mainIndex == 10)
+                        group = 2;
+                    else if (mainIndex == 12)
+                        group = 3;
+                    else if (mainIndex == 13)
+                        group = 4;
+                    else if (mainIndex == 16)
+                        group = 5;
+                    else if (mainIndex == 20)
+                        group = 6;
+                    else
+                        continue;
+                    
+                    if (firstFound[group])
                     {
-                        if (firstFound)
-                        {
-                            var scanArea = new IntRect(offsetX, offsetY, ds1.width, ds1.height);
-                            var triggerArea = new IntRect(x1 + offsetX, y1 + offsetY, x - x1, y - y1);
-                            var popup = Popup.Create(triggerArea, scanArea, walls[i].subIndex);
-                            popup.transform.SetParent(parent);
-                            popups.Add(popup);
-                            return;
-                        }
-
-                        x1 = x;
-                        y1 = y;
-                        firstFound = true;
+                        int x1 = startPos[group].x;
+                        int y1 = startPos[group].y;
+                        int width = x - x1;
+                        int height = y - y1;
+                        var triggerArea = new IntRect(x1 + offsetX, y1 + offsetY, width, height);
+                        var revealArea = new IntRect(offsetX, offsetY, ds1.width, ds1.height);
+                        var popup = Popup.Create(triggerArea, revealArea, walls[i].subIndex);
+                        popup.transform.SetParent(parent);
+                        popups.Add(popup);
+                    }
+                    else
+                    {
+                        startPos[group] = new Vector2i(x, y);
+                        firstFound[group] = true;
                     }
                 }
             }
@@ -396,24 +419,13 @@ public class LevelBuilder
 
     private void PutToPopup(DS1.Cell cell, Renderer renderer, int x, int y)
     {
-        Popup popup = null;
-        foreach (Popup iter in popups)
+        foreach (Popup popup in popups)
         {
-            if ((cell.orientation != 15 || iter.tileIndex == cell.mainIndex) && iter.scanArea.Contains(x, y))
+            if (popup.revealMainIndex == cell.mainIndex && popup.revealArea.Contains(x, y))
             {
-                popup = iter;
-                break;
+                popup.roofs.Add(renderer);
             }
         }
-
-        if (popup == null)
-            return;
-
-        if (cell.orientation == 15)
-            popup.roofs.Add(renderer);
-        else if (cell.orientation == 5 || cell.orientation == 6 ||
-            (x != popup.triggerArea.xMin && y != popup.triggerArea.yMax))
-            popup.walls.Add(renderer);
     }
 
     private void CreateSpecialTile(DS1.Cell cell, int x, int y, Transform parent)
