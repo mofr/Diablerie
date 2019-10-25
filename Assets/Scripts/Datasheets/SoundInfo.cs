@@ -53,6 +53,7 @@ public class SoundInfo
             sound.volume = sound._volume / 255f;
             sound.fadeInDuration = sound._fadeIn / 25f;
             sound.fadeOutDuration = sound._fadeOut / 25f;
+            sound.compoundDuration = sound.compound / 25f;
             map.Add(sound.sound, sound);
         }
 
@@ -150,4 +151,7 @@ public class SoundInfo
 
     [System.NonSerialized]
     public SoundInfo[] variations;
+    
+    [System.NonSerialized]
+    public float compoundDuration;
 }

@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     const float CrossfadeDuration = 10;
     Coroutine eventsCoroutine;
     AudioSource ambient;
+    private Dictionary<SoundInfo, float> lastStartedMap = new Dictionary<SoundInfo, float>();
 
     private void Awake()
     {
@@ -118,6 +119,14 @@ public class AudioManager : MonoBehaviour
     {
         if (sound == null)
             return;
+
+        float lastStarted;
+        if (lastStartedMap.TryGetValue(sound, out lastStarted))
+        {
+            if (Time.time - lastStarted < sound.compoundDuration)
+                return;
+        }
+        lastStartedMap[sound] = Time.time;
 
         if (sound.variations != null)
         {
