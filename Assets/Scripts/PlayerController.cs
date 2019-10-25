@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
             SkillInfo.Find("Charged Bolt"),
             SkillInfo.Find("Glacial Spike"),
             SkillInfo.Find("Teleport"),
-            null,
-            null,
+            SkillInfo.Find("Nova"),
+            SkillInfo.Find("Poison Nova"),
         };
     }
 

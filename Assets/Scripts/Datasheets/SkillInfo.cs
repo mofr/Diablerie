@@ -250,6 +250,20 @@ public class SkillInfo
                 Missile.Create(clientMissileA, self.iso.pos, target + offset, self);
             }
         }
+        else if (srvDoFunc == 22)
+        {
+            // nova, poison nova, howl
+            int missileCount = 60;
+            float angle = 0;
+            float angleStep = 360 / missileCount;
+            var dir = new Vector3(1, 0);
+            for (int i = 0; i < missileCount; ++i)
+            {
+                var rot = Quaternion.AngleAxis(angle, new Vector3(0, 0, 1));
+                Missile.Create(clientMissileA, self.iso.pos, self.iso.pos + (Vector2) (rot * dir), self);
+                angle += angleStep;
+            }
+        }
         else
         {
             if (clientMissileA != null)
