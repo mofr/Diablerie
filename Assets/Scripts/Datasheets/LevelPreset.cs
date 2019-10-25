@@ -16,8 +16,8 @@ public class LevelPreset
     public int sizeY;
     public int autoMap;
     public bool scan;
-    public string pops;
-    public string popPad;
+    public int pops;
+    public int popPad;
     public int fileCount;
     [Datasheet.Sequence(length = 6)]
     public string[] files;

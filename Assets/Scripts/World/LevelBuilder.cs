@@ -14,6 +14,7 @@ public class LevelBuilder
     string name;
     DS1[] grid;
     List<Popup> popups = new List<Popup>();
+    private int popPad = 0;
     DT1.Sampler tileSampler = new DT1.Sampler();
     MonStat[] monStats;
 
@@ -44,6 +45,7 @@ public class LevelBuilder
             gridWidth = 1;
             gridHeight = 1;
             grid = new DS1[1] { ds1 };
+            popPad = info.preset.popPad;
         }
         else
         {
@@ -154,6 +156,7 @@ public class LevelBuilder
                             height + 3
                             );
                         var popup = Popup.Create(triggerArea, revealArea, walls[i].subIndex);
+                        popup.gameObject.name += "_pad" + popPad;  // TODO use popPad to adjust triggerArea
                         popup.transform.SetParent(parent);
                         popups.Add(popup);
                     }
