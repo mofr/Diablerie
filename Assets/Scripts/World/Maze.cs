@@ -179,9 +179,4 @@ public class Maze
             default: return -1;
         }
     }
-
-    public static T RandomChoice<T>(List<T> array)
-    {
-        return array[Random.Range(0, array.Count)];
-    }
 }
