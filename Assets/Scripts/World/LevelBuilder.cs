@@ -147,7 +147,12 @@ public class LevelBuilder
                         int width = x - x1;
                         int height = y - y1;
                         var triggerArea = new IntRect(x1 + offsetX, y1 + offsetY, width, height);
-                        var revealArea = new IntRect(offsetX, offsetY, ds1.width, ds1.height);
+                        var revealArea = new IntRect(
+                            x1 + offsetX - 1, 
+                            y1 + offsetY - 1, 
+                            width + 3, 
+                            height + 3
+                            );
                         var popup = Popup.Create(triggerArea, revealArea, walls[i].subIndex);
                         popup.transform.SetParent(parent);
                         popups.Add(popup);
@@ -416,7 +421,7 @@ public class LevelBuilder
             }
         }
     }
-
+    
     private void PutToPopup(DS1.Cell cell, Renderer renderer, int x, int y)
     {
         foreach (Popup popup in popups)
