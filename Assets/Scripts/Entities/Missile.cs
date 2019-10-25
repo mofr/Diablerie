@@ -32,7 +32,7 @@ public class Missile : MonoBehaviour
 
     static public Missile Create(MissileInfo missileInfo, Vector3 start, Vector3 target, Character originator)
     {
-        var gameObject = new GameObject("missile");
+        var gameObject = new GameObject("missile_" + missileInfo.missile);
         var missile = gameObject.AddComponent<Missile>();
         missile.animator = gameObject.AddComponent<SpriteAnimator>();
         missile.renderer = gameObject.GetComponent<SpriteRenderer>();
@@ -77,7 +77,7 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        speed += info.accel * Time.deltaTime;
+        speed += Mathf.Clamp(info.accel * Time.deltaTime, 0, info.maxVelocity);
         float distance = speed * Time.deltaTime;
         var posDiff = dir * distance;
         var newPos = iso.pos + posDiff;
