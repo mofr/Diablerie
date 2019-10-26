@@ -42,10 +42,12 @@ public class PlayerController : MonoBehaviour
         hotSkills = new List<SkillInfo> {
             SkillInfo.Find("Fire Bolt"),
             SkillInfo.Find("Charged Bolt"),
-            SkillInfo.Find("Glacial Spike"),
+            SkillInfo.Find("Frost Nova"),
             SkillInfo.Find("Teleport"),
             SkillInfo.Find("Nova"),
-            SkillInfo.Find("Poison Nova"),
+            SkillInfo.Find("Frozen Orb"),
+//            SkillInfo.Find("Poison Nova"),
+//            SkillInfo.Find("Glacial Spike"),
         };
     }
 

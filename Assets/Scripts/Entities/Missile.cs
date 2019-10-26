@@ -31,6 +31,30 @@ public class Missile : MonoBehaviour
         return Create(missileInfo, start, target, originator);
     }
 
+    static public void CreateRadially(string missileId, Vector3 start, Character originator, int missileCount)
+    {
+        var missileInfo = MissileInfo.Find(missileId);
+        if (missileInfo == null)
+        {
+            Debug.LogWarning("missile not found: " + missileId);
+        }
+
+        CreateRadially(missileInfo, start, originator, missileCount);
+    }
+
+    static public void CreateRadially(MissileInfo missileInfo, Vector3 start, Character originator, int missileCount)
+    {
+        float angle = 0;
+        float angleStep = 360 / missileCount;
+        var dir = new Vector3(1, 0);
+        for (int i = 0; i < missileCount; ++i)
+        {
+            var rot = Quaternion.AngleAxis(angle, new Vector3(0, 0, 1));
+            Missile.Create(missileInfo, start, start + rot * dir, originator);
+            angle += angleStep;
+        }
+    }
+
     static public Missile Create(MissileInfo missileInfo, Vector3 start, Vector3 target, Character originator)
     {
         var gameObject = new GameObject("missile_" + missileInfo.missile);
@@ -80,7 +104,14 @@ public class Missile : MonoBehaviour
     {
         lifeTime += Time.deltaTime;
         if (lifeTime > info.lifeTime)
+        {
+            if (info.serverHitFunc == "29")
+            {
+                Missile.CreateRadially(info.clientHitSubMissileId[0], iso.pos, originator, 16);
+            }
             Destroy(gameObject);
+        }
+
         speed += Mathf.Clamp(info.accel * Time.deltaTime, 0, info.maxVelocity);
         float distance = speed * Time.deltaTime;
         var posDiff = dir * distance;
@@ -117,12 +148,27 @@ public class Missile : MonoBehaviour
                     Missile.Create(info.clientHitSubMissileId[1], hit.pos, hit.pos - offset, originator);
                 }
             }
+            else if (info.serverHitFunc == "29")
+            {
+                // Frozen orb
+                Missile.CreateRadially(info.clientHitSubMissileId[0], iso.pos, originator, 16);
+            }
             
             // todo pierce is actually is pierce skill with a chance to pierce
             if ((!info.pierce || hitCharacter == null) && info.collideKill)
             {
                 Destroy(gameObject);
             }
+        }
+
+        if (info.serverDoFunc == 15)
+        {
+            // Frozen orb
+            // TODO use parameters
+            int frequency = info.parameters[0].value; // how much per frame (1/25s)
+            int directionIncrement = info.parameters[1].value;
+            var offset = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            Missile.Create(info.clientSubMissileId[0], iso.pos, iso.pos + offset, originator);
         }
 
         iso.pos = newPos;
