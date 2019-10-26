@@ -12,6 +12,7 @@ public class Missile : MonoBehaviour
     MissileInfo info;
     SkillInfo skillInfo;
     Character originator;
+    private float lifeTime;
 
     static public Missile Create(string missileId, Vector3 target, Character originator)
     {
@@ -37,7 +38,6 @@ public class Missile : MonoBehaviour
         missile.animator = gameObject.AddComponent<SpriteAnimator>();
         missile.renderer = gameObject.GetComponent<SpriteRenderer>();
         missile.iso = gameObject.AddComponent<Iso>();
-        Destroy(gameObject, missileInfo.lifeTime);
         
         missile.info = missileInfo;
         missile.originator = originator;
@@ -46,6 +46,7 @@ public class Missile : MonoBehaviour
         missile.dir = (target - start).normalized;
         missile.renderer.material = missileInfo.material;
         missile.skillInfo = SkillInfo.Find(missileInfo.skill);
+        missile.lifeTime = 0;
 
         var spritesheet = Spritesheet.Load(missileInfo.spritesheetFilename);
         int direction = Iso.Direction(start, target, spritesheet.directionCount);
@@ -77,6 +78,9 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
+        lifeTime += Time.deltaTime;
+        if (lifeTime > info.lifeTime)
+            Destroy(gameObject);
         speed += Mathf.Clamp(info.accel * Time.deltaTime, 0, info.maxVelocity);
         float distance = speed * Time.deltaTime;
         var posDiff = dir * distance;
