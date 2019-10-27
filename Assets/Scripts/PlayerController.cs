@@ -48,6 +48,14 @@ public class PlayerController : MonoBehaviour
             SkillInfo.Find("Frozen Orb"),
 //            SkillInfo.Find("Poison Nova"),
 //            SkillInfo.Find("Glacial Spike"),
+//            SkillInfo.Find("Ice Bolt"),
+//            SkillInfo.Find("Ice Blast"),
+//            SkillInfo.Find("Fire Ball"),
+//            SkillInfo.Find("Shout"),
+//            SkillInfo.Find("Battle Cry"),
+//            SkillInfo.Find("Battle Orders"),
+//            SkillInfo.Find("Battle Command"),
+//            SkillInfo.Find("War Cry"),
         };
     }
 
