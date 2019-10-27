@@ -164,13 +164,17 @@ public class Missile : MonoBehaviour
         if (info.serverDoFunc == 15)
         {
             // Frozen orb
-            // TODO use frequency
-            int frequency = info.parameters[0].value; // how much per frame (1/25s)
+            int frequency = info.parameters[0].value * 25;
+            float spawnPeriod = 1.0f / frequency;
             float directionIncrement = info.parameters[1].value * 25 * Mathf.PI;
-            var dir = new Vector2(1, 0);
-            var rot = Quaternion.AngleAxis(lifeTime * directionIncrement, new Vector3(0, 0, 1));
-            var offset = (Vector2)(rot * dir);
-            Missile.Create(info.clientSubMissileId[0], iso.pos, iso.pos + offset, originator);
+            int missileToSpawn = (int)((lifeTime + Time.deltaTime) / spawnPeriod) - (int)(lifeTime / spawnPeriod);
+            for (int i = 0; i < missileToSpawn; ++i)
+            {
+                var dir = new Vector2(1, 0);
+                var rot = Quaternion.AngleAxis(lifeTime * directionIncrement, new Vector3(0, 0, 1));
+                var offset = (Vector2) (rot * dir);
+                Missile.Create(info.clientSubMissileId[0], iso.pos, iso.pos + offset, originator);
+            }
         }
 
         iso.pos = newPos;
