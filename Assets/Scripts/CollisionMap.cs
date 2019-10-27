@@ -85,7 +85,6 @@ public class CollisionMap : MonoBehaviour
 
     public static bool Passable(int index, int size = 1, bool debug = false, GameObject ignore = null)
     {
-        UnityEngine.Profiling.Profiler.BeginSample("PassableTile");
         if (index - size - size * instance.width < 0 || index + size + size * instance.width >= instance.map.Length)
             return false;
 
@@ -105,16 +104,13 @@ public class CollisionMap : MonoBehaviour
                 var cell = instance.map[index];
                 if (!cell.passable && (ignore == null || ignore != cell.gameObject))
                 {
-                    UnityEngine.Profiling.Profiler.EndSample();
                     return false;
                 }
                 ++index;
             }
             index += step;
         }
-
-        UnityEngine.Profiling.Profiler.EndSample();
-
+        
         return true;
     }
 
