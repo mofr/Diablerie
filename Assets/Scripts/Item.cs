@@ -623,6 +623,8 @@ public class Item
             {
                 foreach(var mod in setItem.set.fullProps)
                 {
+                    if (mod.prop == null)
+                        continue;
                     DescribeProperty(sb, mod.GetItemProperty());
                 }
             }
