@@ -125,10 +125,15 @@ public class CommandPrompt : MonoBehaviour
                 var obj = World.SpawnObject(objectInfo, pos, fit: true);
                 if (obj != null && parts.Length > 2)
                     obj.modeName = parts[2];
-                return;
             }
-            
-            World.SpawnMonster(id, pos);
+            else
+            {
+                int monsterCount = parts.Length > 2 ? int.Parse(parts[2]) : 1;
+                for (int i = 0; i < monsterCount; ++i)
+                {
+                    World.SpawnMonster(id, pos);
+                }
+            }
         }
         if (parts.Length == 2 && parts[0] == "/act")
         {

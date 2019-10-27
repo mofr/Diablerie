@@ -119,11 +119,12 @@ public class World : MonoBehaviour
         {
             return null;
         }
-        pos = Iso.MapToWorld(pos);
 
         var monster = new GameObject(monStat.nameStr);
         monster.transform.SetParent(parent);
-        monster.transform.position = pos;
+        monster.transform.position = Iso.MapToWorld(pos);
+        
+        CollisionMap.Move(pos, pos, monStat.ext.sizeX, monster);
 
         var character = monster.AddComponent<Character>();
         character.monStat = monStat;
