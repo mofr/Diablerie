@@ -164,10 +164,12 @@ public class Missile : MonoBehaviour
         if (info.serverDoFunc == 15)
         {
             // Frozen orb
-            // TODO use parameters
+            // TODO use frequency
             int frequency = info.parameters[0].value; // how much per frame (1/25s)
-            int directionIncrement = info.parameters[1].value;
-            var offset = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            float directionIncrement = info.parameters[1].value * 25 * Mathf.PI;
+            var dir = new Vector2(1, 0);
+            var rot = Quaternion.AngleAxis(lifeTime * directionIncrement, new Vector3(0, 0, 1));
+            var offset = (Vector2)(rot * dir);
             Missile.Create(info.clientSubMissileId[0], iso.pos, iso.pos + offset, originator);
         }
 
