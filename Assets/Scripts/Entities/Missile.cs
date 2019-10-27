@@ -45,7 +45,7 @@ public class Missile : MonoBehaviour
     static public void CreateRadially(MissileInfo missileInfo, Vector3 start, Character originator, int missileCount)
     {
         float angle = 0;
-        float angleStep = 360 / missileCount;
+        float angleStep = 360.0f / missileCount;
         var dir = new Vector3(1, 0);
         for (int i = 0; i < missileCount; ++i)
         {

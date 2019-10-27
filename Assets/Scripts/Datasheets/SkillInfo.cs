@@ -253,7 +253,13 @@ public class SkillInfo
         else if (srvDoFunc == 22)
         {
             // nova, poison nova, howl
-            int missileCount = 60;
+            int missileCount = 64;
+            Missile.CreateRadially(clientMissileA, self.iso.pos, self, missileCount);
+        }
+        else if (srvDoFunc == 68)
+        {
+            // barbarian howls
+            int missileCount = 64;
             Missile.CreateRadially(clientMissileA, self.iso.pos, self, missileCount);
         }
         else
