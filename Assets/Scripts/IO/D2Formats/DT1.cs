@@ -103,7 +103,7 @@ public class DT1
         public int mainIndex;
         public int subIndex;
         public int rarity;
-        public byte[] flags;
+        public byte[] flags;  // BlockFlags
         public int blockHeaderPointer;
         public int blockDatasLength;
         public int blockCount;

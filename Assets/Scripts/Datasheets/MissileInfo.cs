@@ -11,6 +11,15 @@ public class MissileInfo
         public string description;
     }
 
+    public enum CollideType
+    {
+        No = 0,
+        OnlyUnits = 1,
+        WallsAndUnits = 3,
+        OnlyWalls = 6,
+        UnitsWallsFloor = 8,
+    }
+
     public string missile;
     public int id = -1;
     public int clientDoFunc;
@@ -66,7 +75,7 @@ public class MissileInfo
     public bool subLoop;
     public int subStart;
     public int subStop;
-    public int collideType;
+    public int _collideType;
     public bool collideKill;
     public bool collideFriend;
     public bool lastCollide;
@@ -174,6 +183,9 @@ public class MissileInfo
     [System.NonSerialized]
     public OverlayInfo progOverlay;
 
+    [System.NonSerialized]
+    public CollideType collideType;
+
     public static List<MissileInfo> sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
     static Dictionary<string, MissileInfo> map = new Dictionary<string, MissileInfo>();
     static Dictionary<int, MissileInfo> idMap = new Dictionary<int, MissileInfo>();
@@ -194,6 +206,7 @@ public class MissileInfo
             row.hitSound = SoundInfo.Find(row.hitSoundId);
             row.progSound = SoundInfo.Find(row.progSoundId);
             row.progOverlay = OverlayInfo.Find(row.progOverlayId);
+            row.collideType = (CollideType)row._collideType;
             map.Add(row.missile, row);
             idMap.Add(row.id, row);
         }
