@@ -14,7 +14,7 @@ public class DT1
     {
         public const byte Walk = 1; // both player and mercenary
         public const byte Light = 2; // and line of sight
-        public const byte Jump = 4;
+        public const byte Jump = 4; // and teleport probably
         public const byte PlayerWalk = 8;
         public const byte LightOnly = 32; // but not line of sight
     }
