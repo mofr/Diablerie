@@ -11,7 +11,7 @@ public class Pickup : Entity
     public static Pickup Create(Vector3 position, string flippyFile, string name, string title = null, int dir = 0)
     {
         position = Iso.MapToIso(position);
-        if (!CollisionMap.Fit(position, out position))
+        if (!CollisionMap.Fit(position, out position, mask: CollisionLayers.Item))
         {
             Debug.LogError("Can't fit pickup");
             return null;
@@ -54,13 +54,13 @@ public class Pickup : Entity
     {
         if (materialProperties == null)
             materialProperties = new MaterialPropertyBlock();
-        CollisionMap.SetPassable(Iso.MapToIso(transform.position), false);
+        CollisionMap.SetBlocked(Iso.MapToIso(transform.position), CollisionLayers.Item);
         animator = GetComponent<SpriteAnimator>();
     }
 
     private void OnDisable()
     {
-        CollisionMap.SetPassable(Iso.MapToIso(transform.position), true);
+        CollisionMap.SetBlocked(Iso.MapToIso(transform.position), CollisionLayers.None);
     }
 
     protected override void Start()

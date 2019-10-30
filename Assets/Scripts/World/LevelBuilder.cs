@@ -231,7 +231,8 @@ public class LevelBuilder
 
     private static void Spawn(MonStat monStat, int x, int y, int level, Transform root)
     {
-        if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
+        CollisionLayers collisionMask = CollisionLayers.Walk;
+        if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, collisionMask, monStat.ext.sizeX))
             return;
 
         int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
@@ -588,15 +589,16 @@ public class LevelBuilder
         {
             for (int dx = -2; dx < 3; ++dx, ++flagIndex)
             {
-                var subCellPos = collisionMapOffset + new Vector2i(dx, dy);
+                Vector2i subCellPos = collisionMapOffset + new Vector2i(dx, dy);
                 bool passable = (tile.flags[flagIndex] & mask) == 0;
+                CollisionLayers blockedLayers = passable ? CollisionLayers.None : CollisionLayers.Walk;
                 if (tile.orientation == 0)
                 {
-                    CollisionMap.SetPassable(subCellPos, passable);
+                    CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }
-                else if (CollisionMap.Passable(subCellPos) && !passable)
+                else if (CollisionMap.Passable(subCellPos, CollisionLayers.Walk) && !passable)
                 {
-                    CollisionMap.SetPassable(subCellPos, false);
+                    CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }
             }
         }
