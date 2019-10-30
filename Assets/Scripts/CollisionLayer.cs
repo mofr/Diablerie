@@ -10,4 +10,5 @@ public enum CollisionLayer
     PlayerWalk = 8,
     LightOnly = 32, // but not line of sight
     Item = 64, // used by Diablerie because it was free
+    All = 255,
 }

@@ -19,6 +19,10 @@ public class CollisionMap : MonoBehaviour
     void OnEnable()
     {
         map = new Cell[width * height];
+        for (int i = 0; i < map.Length; ++i)
+        {
+            map[i].value = CollisionLayer.All;
+        }
         origin = width * 5 + 5;
         instance = this;
     }

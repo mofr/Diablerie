@@ -588,7 +588,7 @@ public class LevelBuilder
         {
             for (int dx = -2; dx < 3; ++dx, ++flagIndex)
             {
-                var subCellPos = collisionMapOffset + new Vector2i(dx, dy);
+                Vector2i subCellPos = collisionMapOffset + new Vector2i(dx, dy);
                 bool passable = (tile.flags[flagIndex] & mask) == 0;
                 if (tile.orientation == 0)
                 {
