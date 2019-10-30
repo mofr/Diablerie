@@ -401,6 +401,8 @@ public class Character : Entity
             moving = false;
             usingSkill = false;
             skillInfo = null;
+            
+            CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
 
             if (OnDeath != null)
                 OnDeath(this, originator);
@@ -429,7 +431,6 @@ public class Character : Entity
         {
             dying = false;
             dead = true;
-            CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
         }
         
         // It's needed to call here, otherwise animator can loop the finished animation few frames more than needed
