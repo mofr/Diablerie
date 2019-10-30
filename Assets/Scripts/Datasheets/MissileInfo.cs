@@ -201,7 +201,7 @@ public class MissileInfo
             row.material = row.trans == 0 ? Materials.normal : Materials.softAdditive;
             row.lifeTime = row.range / 25.0f;
             row.explosionMissile = Find(row.explosionMissileId);
-            row.fps = row.animSpeed * 1.5f;
+            row.fps = row.animSpeed;
             row.travelSound = SoundInfo.Find(row.travelSoundId);
             row.hitSound = SoundInfo.Find(row.hitSoundId);
             row.progSound = SoundInfo.Find(row.progSoundId);
