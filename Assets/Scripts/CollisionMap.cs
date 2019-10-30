@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class CollisionMap : MonoBehaviour
@@ -25,32 +25,6 @@ public class CollisionMap : MonoBehaviour
         }
         origin = width * 5 + 5;
         instance = this;
-    }
-
-    void DrawDebugCellGrid()
-    {
-        CollisionLayer layer = CollisionLayer.Walk;
-        Color occupiedColor = new Color(1, 0, 0, 0.3f);
-        Color passableColor = new Color(1, 1, 1, 0.03f);
-        Vector2i pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
-        int debugWidth = 100;
-        int debugHeight = 100;
-        pos.x -= debugWidth / 2;
-        pos.y -= debugHeight / 2;
-        int index = instance.MapToIndex(pos);
-        for (int y = 0; y < debugHeight; ++y)
-        {
-            for (int x = 0; x < debugWidth; ++x)
-            {
-                if (index + x < 0 || index + x >= instance.map.Length)
-                    continue;
-
-                bool passable = (instance.map[index + x].value & layer) == 0;
-                Color color = passable ? passableColor : occupiedColor;
-                Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
-            }
-            index += width;
-        }
     }
 
     private int MapToIndex(Vector3 pos)
