@@ -7,7 +7,7 @@ public class CollisionMap : MonoBehaviour
 
     public struct Cell
     {
-        public bool passable;
+        public CollisionLayer value;
         public GameObject gameObject;
     }
 
@@ -25,8 +25,9 @@ public class CollisionMap : MonoBehaviour
 
     void DrawDebugCellGrid()
     {
-        Color color = new Color(1, 0, 0, 0.3f);
-        Color freeColor = new Color(1, 1, 1, 0.03f);
+        CollisionLayer layer = CollisionLayer.Walk;
+        Color occupiedColor = new Color(1, 0, 0, 0.3f);
+        Color passableColor = new Color(1, 1, 1, 0.03f);
         Vector2i pos = Iso.Snap(Iso.MapToIso(Camera.main.transform.position));
         int debugWidth = 100;
         int debugHeight = 100;
@@ -40,10 +41,9 @@ public class CollisionMap : MonoBehaviour
                 if (index + x < 0 || index + x >= instance.map.Length)
                     continue;
 
-                if (!instance.map[index + x].passable)
-                    Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
-                else
-                    Iso.DebugDrawTile(pos + new Vector3(x, y), freeColor, 0.9f);
+                bool passable = (instance.map[index + x].value & layer) == 0;
+                Color color = passable ? passableColor : occupiedColor;
+                Iso.DebugDrawTile(pos + new Vector3(x, y), color, 0.9f);
             }
             index += width;
         }
@@ -87,6 +87,8 @@ public class CollisionMap : MonoBehaviour
     {
         if (index - size - size * instance.width < 0 || index + size + size * instance.width >= instance.map.Length)
             return false;
+        
+        CollisionLayer layer = CollisionLayer.Walk;
 
         index = index - size / 2 - size / 2 * instance.height;
         int step = instance.width - size;
@@ -102,7 +104,8 @@ public class CollisionMap : MonoBehaviour
                 }
 
                 var cell = instance.map[index];
-                if (!cell.passable && (ignore == null || ignore != cell.gameObject))
+                bool passable = (cell.value & layer) == 0;
+                if (!passable && (ignore == null || ignore != cell.gameObject))
                 {
                     return false;
                 }
@@ -121,8 +124,9 @@ public class CollisionMap : MonoBehaviour
 
     public static void SetPassable(Vector2i pos, bool passable)
     {
+        CollisionLayer value = passable ? CollisionLayer.None : CollisionLayer.Walk;
         int index = instance.MapToIndex(pos);
-        instance.map[index].passable = passable;
+        instance.map[index].value = value;
     }
 
     public static void SetPassable(Vector3 pos, int sizeX, int sizeY, bool passable, GameObject gameObject)
@@ -132,6 +136,7 @@ public class CollisionMap : MonoBehaviour
 
     public static void SetPassable(Vector2i pos, int sizeX, int sizeY, bool passable, GameObject gameObject)
     {
+        CollisionLayer layer = CollisionLayer.Walk;
         int index = instance.MapToIndex(pos) - sizeX / 2 - sizeY / 2 * instance.height;
         int step = instance.width - sizeX;
         for (int y = 0; y < sizeY; ++y)
@@ -142,13 +147,13 @@ public class CollisionMap : MonoBehaviour
                 Cell cell = instance.map[index];
                 if (passable && cell.gameObject == gameObject)
                 {
-                    cell.passable = true;
+                    cell.value = CollisionLayer.None;
                     cell.gameObject = null;
                     instance.map[index] = cell;
                 }
-                else if (!passable && cell.passable)
+                else if (!passable && cell.value == CollisionLayer.None)
                 {
-                    cell.passable = false;
+                    cell.value = layer;
                     cell.gameObject = gameObject;
                     instance.map[index] = cell;
                 }
