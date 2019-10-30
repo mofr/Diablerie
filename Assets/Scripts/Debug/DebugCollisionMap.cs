@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DebugCollisionMap : MonoBehaviour
 {
-    public CollisionLayer layers = CollisionLayer.All;
+    public CollisionLayers layers = CollisionLayers.All;
     
     public void Update()
     {

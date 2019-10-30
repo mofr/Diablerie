@@ -91,7 +91,7 @@ public class Pathing
 
     static private void StepTo(Node node)
     {
-        CollisionLayer collisionMask = CollisionLayer.Walk;
+        CollisionLayers collisionMask = CollisionLayers.Walk;
         Node newNode = null;
 
         int dirStart;

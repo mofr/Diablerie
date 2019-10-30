@@ -231,7 +231,7 @@ public class LevelBuilder
 
     private static void Spawn(MonStat monStat, int x, int y, int level, Transform root)
     {
-        CollisionLayer collisionMask = CollisionLayer.Walk;
+        CollisionLayers collisionMask = CollisionLayers.Walk;
         if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, collisionMask, monStat.ext.sizeX))
             return;
 
@@ -591,12 +591,12 @@ public class LevelBuilder
             {
                 Vector2i subCellPos = collisionMapOffset + new Vector2i(dx, dy);
                 bool passable = (tile.flags[flagIndex] & mask) == 0;
-                CollisionLayer blockedLayers = passable ? CollisionLayer.None : CollisionLayer.Walk;
+                CollisionLayers blockedLayers = passable ? CollisionLayers.None : CollisionLayers.Walk;
                 if (tile.orientation == 0)
                 {
                     CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }
-                else if (CollisionMap.Passable(subCellPos, CollisionLayer.Walk) && !passable)
+                else if (CollisionMap.Passable(subCellPos, CollisionLayers.Walk) && !passable)
                 {
                     CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }

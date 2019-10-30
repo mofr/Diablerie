@@ -1,7 +1,7 @@
 using System;
 
 [Flags]
-public enum CollisionLayer
+public enum CollisionLayers
 {
     None = 0,
     Walk = 1, // both player and mercenary

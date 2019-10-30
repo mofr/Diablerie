@@ -7,7 +7,7 @@ public class CollisionMap : MonoBehaviour
 
     public struct Cell
     {
-        public CollisionLayer value;
+        public CollisionLayers blocked;
         public GameObject gameObject;
     }
 
@@ -21,7 +21,7 @@ public class CollisionMap : MonoBehaviour
         map = new Cell[width * height];
         for (int i = 0; i < map.Length; ++i)
         {
-            map[i].value = CollisionLayer.All;
+            map[i].blocked = CollisionLayers.All;
         }
         origin = width * 5 + 5;
         instance = this;
@@ -50,18 +50,18 @@ public class CollisionMap : MonoBehaviour
         return instance.map[index];
     }
 
-    public static bool Passable(Vector3 pos, CollisionLayer mask, int size = 1, GameObject ignore = null)
+    public static bool Passable(Vector3 pos, CollisionLayers mask, int size = 1, GameObject ignore = null)
     {
         return Passable(Iso.Snap(pos), mask, size, ignore);
     }
 
-    public static bool Passable(Vector2i pos, CollisionLayer mask, int size = 1, GameObject ignore = null)
+    public static bool Passable(Vector2i pos, CollisionLayers mask, int size = 1, GameObject ignore = null)
     {
         int index = instance.MapToIndex(pos);
         return Passable(index, mask, size, ignore);
     }
 
-    public static bool Passable(int index, CollisionLayer mask, int size = 1, GameObject ignore = null)
+    public static bool Passable(int index, CollisionLayers mask, int size = 1, GameObject ignore = null)
     {
         if (index - size - size * instance.width < 0 || index + size + size * instance.width >= instance.map.Length)
             return false;
@@ -74,7 +74,7 @@ public class CollisionMap : MonoBehaviour
             while (index < end)
             {
                 var cell = instance.map[index];
-                bool passable = (cell.value & mask) == 0;
+                bool passable = (cell.blocked & mask) == 0;
                 if (!passable && (ignore == null || ignore != cell.gameObject))
                 {
                     return false;
@@ -87,15 +87,15 @@ public class CollisionMap : MonoBehaviour
         return true;
     }
 
-    public static void SetBlocked(Vector3 pos, CollisionLayer value)
+    public static void SetBlocked(Vector3 pos, CollisionLayers value)
     {
         SetBlocked(Iso.Snap(pos), value);
     }
 
-    public static void SetBlocked(Vector2i pos, CollisionLayer value)
+    public static void SetBlocked(Vector2i pos, CollisionLayers value)
     {
         int index = instance.MapToIndex(pos);
-        instance.map[index].value = value;
+        instance.map[index].blocked = value;
     }
 
     public static void SetPassable(Vector3 pos, int sizeX, int sizeY, bool passable, GameObject gameObject)
@@ -105,7 +105,7 @@ public class CollisionMap : MonoBehaviour
 
     public static void SetPassable(Vector2i pos, int sizeX, int sizeY, bool passable, GameObject gameObject)
     {
-        CollisionLayer layer = CollisionLayer.Walk;
+        CollisionLayers layers = CollisionLayers.Walk;
         int index = instance.MapToIndex(pos) - sizeX / 2 - sizeY / 2 * instance.height;
         int step = instance.width - sizeX;
         for (int y = 0; y < sizeY; ++y)
@@ -116,13 +116,13 @@ public class CollisionMap : MonoBehaviour
                 Cell cell = instance.map[index];
                 if (passable && cell.gameObject == gameObject)
                 {
-                    cell.value = CollisionLayer.None;
+                    cell.blocked = CollisionLayers.None;
                     cell.gameObject = null;
                     instance.map[index] = cell;
                 }
-                else if (!passable && cell.value == CollisionLayer.None)
+                else if (!passable && cell.blocked == CollisionLayers.None)
                 {
-                    cell.value = layer;
+                    cell.blocked = layers;
                     cell.gameObject = gameObject;
                     instance.map[index] = cell;
                 }
@@ -146,7 +146,7 @@ public class CollisionMap : MonoBehaviour
 
     static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, int size = 1, GameObject ignore = null)
     {
-        CollisionLayer mask = CollisionLayer.Walk;
+        CollisionLayers mask = CollisionLayers.Walk;
         var hit = new RaycastHit();
         var diff = to - from;
         var stepLen = 0.2f;
@@ -203,7 +203,7 @@ public class CollisionMap : MonoBehaviour
         SetPassable(to, size, size, false, gameObject);
     }
 
-    static public bool Fit(Vector3 pos, out Vector3 result, int size = 1, CollisionLayer mask = CollisionLayer.Walk)
+    static public bool Fit(Vector3 pos, out Vector3 result, int size = 1, CollisionLayers mask = CollisionLayers.Walk)
     {
         int index = instance.MapToIndex(pos);
 
