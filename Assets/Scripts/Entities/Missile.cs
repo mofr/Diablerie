@@ -79,7 +79,6 @@ public class Missile : MonoBehaviour
         missile.animator.fps = missileInfo.fps;
         
         AudioManager.instance.Play(missileInfo.travelSound, missile.transform);
-        Debug.Log(missileInfo.missile + " " + missileInfo.collideType);
 
         return missile;
     }

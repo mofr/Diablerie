@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,13 +11,14 @@ public class DT1
     public Tile[] tiles;
     public List<Texture2D> textures = new List<Texture2D>();
 
-    public class BlockFlags
+    [Flags]
+    public enum BlockFlags : byte
     {
-        public const byte Walk = 1; // both player and mercenary
-        public const byte Light = 2; // and line of sight
-        public const byte Jump = 4; // and teleport probably
-        public const byte PlayerWalk = 8;
-        public const byte LightOnly = 32; // but not line of sight
+        Walk = 1, // both player and mercenary
+        Light = 2, // and line of sight
+        Jump = 4, // and teleport probably
+        PlayerWalk = 8,
+        LightOnly = 32, // but not line of sight
     }
 
     public class Sampler
@@ -103,7 +105,7 @@ public class DT1
         public int mainIndex;
         public int subIndex;
         public int rarity;
-        public byte[] flags;  // BlockFlags
+        public BlockFlags[] flags;
         public int blockHeaderPointer;
         public int blockDatasLength;
         public int blockCount;
@@ -112,8 +114,8 @@ public class DT1
         public Texture2D texture;
         public int textureX;
         public int textureY;
-        public int index;        
-
+        public int index;
+        
         public void Read(BinaryReader reader)
         {
             direction = reader.ReadInt32();
@@ -128,7 +130,8 @@ public class DT1
             subIndex = reader.ReadInt32();
             rarity = reader.ReadInt32();
             reader.ReadBytes(4); // unknown
-            flags = reader.ReadBytes(25); // Left to Right, and Bottom to Up
+            byte[] flags = reader.ReadBytes(25); // Left to Right, and Bottom to Up
+            this.flags = flags.Cast<BlockFlags>().ToArray();
             reader.ReadBytes(7); // unused
             blockHeaderPointer = reader.ReadInt32();
             blockDatasLength = reader.ReadInt32();

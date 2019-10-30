@@ -583,7 +583,7 @@ public class LevelBuilder
 
         int flagIndex = 0;
         var collisionMapOffset = Iso.Snap(Iso.MapToIso(pos));
-        byte mask = DT1.BlockFlags.Walk | DT1.BlockFlags.PlayerWalk;
+        DT1.BlockFlags mask = DT1.BlockFlags.Walk | DT1.BlockFlags.PlayerWalk;
         for (int dy = 2; dy > -3; --dy)
         {
             for (int dx = -2; dx < 3; ++dx, ++flagIndex)
