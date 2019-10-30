@@ -50,24 +50,22 @@ public class CollisionMap : MonoBehaviour
         return instance.map[index];
     }
 
-    public static bool Passable(Vector3 pos, int size = 1, bool debug = false, GameObject ignore = null)
+    public static bool Passable(Vector3 pos, CollisionLayer mask, int size = 1, GameObject ignore = null)
     {
-        return Passable(Iso.Snap(pos), size, debug, ignore);
+        return Passable(Iso.Snap(pos), mask, size, ignore);
     }
 
-    public static bool Passable(Vector2i pos, int size = 1, bool debug = false, GameObject ignore = null)
+    public static bool Passable(Vector2i pos, CollisionLayer mask, int size = 1, GameObject ignore = null)
     {
         int index = instance.MapToIndex(pos);
-        return Passable(index, size, debug, ignore);
+        return Passable(index, mask, size, ignore);
     }
 
-    public static bool Passable(int index, int size = 1, bool debug = false, GameObject ignore = null)
+    public static bool Passable(int index, CollisionLayer mask, int size = 1, GameObject ignore = null)
     {
         if (index - size - size * instance.width < 0 || index + size + size * instance.width >= instance.map.Length)
             return false;
         
-        CollisionLayer layer = CollisionLayer.Walk;
-
         index = index - size / 2 - size / 2 * instance.height;
         int step = instance.width - size;
         for (int y = 0; y < size; ++y)
@@ -75,14 +73,8 @@ public class CollisionMap : MonoBehaviour
             int end = index + size;
             while (index < end)
             {
-                if (debug)
-                {
-                    var tilePos = instance.MapToIso(index);
-                    Iso.DebugDrawTile(tilePos, 0.1f);
-                }
-
                 var cell = instance.map[index];
-                bool passable = (cell.value & layer) == 0;
+                bool passable = (cell.value & mask) == 0;
                 if (!passable && (ignore == null || ignore != cell.gameObject))
                 {
                     return false;
@@ -95,9 +87,8 @@ public class CollisionMap : MonoBehaviour
         return true;
     }
 
-    public static void SetPassable(Vector3 pos, bool passable)
+    public static void SetBlocked(Vector3 pos, CollisionLayer value)
     {
-        CollisionLayer value = passable ? CollisionLayer.None : CollisionLayer.Walk;
         SetBlocked(Iso.Snap(pos), value);
     }
 
@@ -153,8 +144,9 @@ public class CollisionMap : MonoBehaviour
         }
     }
 
-    static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, int size = 1, GameObject ignore = null, bool debug = false)
+    static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, int size = 1, GameObject ignore = null)
     {
+        CollisionLayer mask = CollisionLayer.Walk;
         var hit = new RaycastHit();
         var diff = to - from;
         var stepLen = 0.2f;
@@ -166,10 +158,8 @@ public class CollisionMap : MonoBehaviour
         for (int i = 0; i < stepCount; ++i)
         {
             pos += step;
-            if (debug)
-                Iso.DebugDrawTile(Iso.Snap(pos), margin: 0.3f, duration: 0.5f);
             Cell cell = GetCell(pos);
-            bool passable = Passable(pos, size, debug, ignore);
+            bool passable = Passable(pos, mask, size, ignore);
             if (!passable)
             {
                 hit.hit = !passable;
@@ -213,7 +203,7 @@ public class CollisionMap : MonoBehaviour
         SetPassable(to, size, size, false, gameObject);
     }
 
-    static public bool Fit(Vector3 pos, out Vector3 result, int size = 1)
+    static public bool Fit(Vector3 pos, out Vector3 result, int size = 1, CollisionLayer mask = CollisionLayer.Walk)
     {
         int index = instance.MapToIndex(pos);
 
@@ -224,7 +214,7 @@ public class CollisionMap : MonoBehaviour
             int end = index + sign * i;
             for (; index != end && index > size && index < instance.map.Length - size - 1; index += sign)
             {
-                if (Passable(index, size))
+                if (Passable(index, mask, size))
                 {
                     result = instance.MapToIso(index);
                     return true;
@@ -235,7 +225,7 @@ public class CollisionMap : MonoBehaviour
             int step = -sign * instance.width;
             for (; index != end && index > size && index < instance.map.Length - size - 1; index += step)
             {
-                if (Passable(index, size))
+                if (Passable(index, mask, size))
                 {
                     result = instance.MapToIso(index);
                     return true;

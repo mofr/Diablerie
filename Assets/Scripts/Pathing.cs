@@ -91,6 +91,7 @@ public class Pathing
 
     static private void StepTo(Node node)
     {
+        CollisionLayer collisionMask = CollisionLayer.Walk;
         Node newNode = null;
 
         int dirStart;
@@ -115,7 +116,7 @@ public class Pathing
         {
             int dir = i % 8;
             Vector2i pos = node.pos + directions[dir];
-            bool passable = CollisionMap.Passable(pos, size: size, ignore: self);
+            bool passable = CollisionMap.Passable(pos, collisionMask, size: size, ignore: self);
 
             if (passable)
             {

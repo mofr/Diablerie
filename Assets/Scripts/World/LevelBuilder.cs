@@ -231,7 +231,8 @@ public class LevelBuilder
 
     private static void Spawn(MonStat monStat, int x, int y, int level, Transform root)
     {
-        if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, monStat.ext.sizeX))
+        CollisionLayer collisionMask = CollisionLayer.Walk;
+        if (!CollisionMap.Passable(new Vector2i(x, y) * Iso.SubTileCount, collisionMask, monStat.ext.sizeX))
             return;
 
         int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
@@ -595,7 +596,7 @@ public class LevelBuilder
                 {
                     CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }
-                else if (CollisionMap.Passable(subCellPos) && !passable)
+                else if (CollisionMap.Passable(subCellPos, CollisionLayer.Walk) && !passable)
                 {
                     CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }

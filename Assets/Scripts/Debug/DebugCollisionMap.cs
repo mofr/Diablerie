@@ -23,7 +23,7 @@ public class DebugCollisionMap : MonoBehaviour
             for (int x = 0; x < debugWidth; ++x)
             {
                 var pos = origin + new Vector2i(x, y);
-                bool passable = CollisionMap.Passable(pos, mask: layers);
+                bool passable = CollisionMap.Passable(pos, layers);
                 Color color = passable ? passableColor : occupiedColor;
                 Iso.DebugDrawTile(pos, color, 0.9f);
             }
