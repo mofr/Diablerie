@@ -175,3 +175,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb47e6b3df904645ae896e080406b6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layers: -1
