@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [ExecuteInEditMode]
 public class CollisionMap : MonoBehaviour
@@ -123,12 +123,12 @@ public class CollisionMap : MonoBehaviour
 
     public static void SetPassable(Vector3 pos, bool passable)
     {
-        SetPassable(Iso.Snap(pos), passable);
+        CollisionLayer value = passable ? CollisionLayer.None : CollisionLayer.Walk;
+        SetBlocked(Iso.Snap(pos), value);
     }
 
-    public static void SetPassable(Vector2i pos, bool passable)
+    public static void SetBlocked(Vector2i pos, CollisionLayer value)
     {
-        CollisionLayer value = passable ? CollisionLayer.None : CollisionLayer.Walk;
         int index = instance.MapToIndex(pos);
         instance.map[index].value = value;
     }

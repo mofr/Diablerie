@@ -590,13 +590,14 @@ public class LevelBuilder
             {
                 Vector2i subCellPos = collisionMapOffset + new Vector2i(dx, dy);
                 bool passable = (tile.flags[flagIndex] & mask) == 0;
+                CollisionLayer blockedLayers = passable ? CollisionLayer.None : CollisionLayer.Walk;
                 if (tile.orientation == 0)
                 {
-                    CollisionMap.SetPassable(subCellPos, passable);
+                    CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }
                 else if (CollisionMap.Passable(subCellPos) && !passable)
                 {
-                    CollisionMap.SetPassable(subCellPos, false);
+                    CollisionMap.SetBlocked(subCellPos, blockedLayers);
                 }
             }
         }
