@@ -22,6 +22,9 @@ public class ItemDrop : MonoBehaviour
             return;
         
         TreasureClass tc = target.monStat.treasureClass[0].normal;
+        if (tc == null)
+            return;
+        
         tc = tc.Upgraded(target.level);
         Drop(tc, target.transform.position, target.level);
     }

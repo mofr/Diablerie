@@ -34,7 +34,7 @@ public class ObjectInfo
     public int[] start;
     public int envEffect;
     public bool isDoor;
-    public bool blocksVis;
+    public bool blockVis;
     public int orientation;
     public int trans;
     [Datasheet.Sequence(length = 8)]
