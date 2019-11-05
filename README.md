@@ -53,16 +53,22 @@ Steps:
 
 Press enter to open the in-game console.
 Some commands to test:
-```
-/spawn itemset immortal
-/spawn diablo
-/spawn skeleton1
-/act 1
-/act 2
-/act 3
-/act 4
-/act 5
-```
+
+Spawn Immortal King Set under the cursor `/spawn itemset immortal`
+
+Spawn diablo under the cursor `/spawn diablo`
+
+Spawn 100 skeletons under the cursor `/spawn skeleton1 100`
+
+Go to act 1 `/act 1`
+
+Go to act 2 `/act 2`
+
+Go to act 3 `/act 3`
+
+Go to act 4 `/act 4`
+
+Go to act 5 `/act 5`
 
 # Credits
 
