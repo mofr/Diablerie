@@ -1,0 +1,186 @@
+state	id	group	remhit	nosend	transform	aura	curable	curse	active	immed	restrict	disguise	blue	attblue	damblue	armblue	rfblue	rlblue	rcblue	stambarblue	rpblue	attred	damred	armred	rfred	rlred	rcred	rpred	exp	plrstaydeath	monstaydeath	bossstaydeath	hide	shatter	udead	life	green	pgsv	nooverlays	noclear	bossinv	meleeonly	notondead	overlay1	overlay2	overlay3	overlay4	pgsvoverlay	castoverlay	removerlay	stat	setfunc	remfunc	missile	skill	itemtype	itemtrans	colorpri	colorshift	light-r	light-g	light-b	onsound	offsound	gfxtype	gfxclass	cltevent	clteventfunc	cltactivefunc	srvactivefunc	eol
+none	0																																																																						0
+freeze	1												1																		1		1	1	1																							100	108	150	215	255	impact_bluemotize_1								0
+poison	2																																			1	1												poisonhit									95	104	128	255	128	impact_poison_1								0
+resistfire	3					1				1							1																											aura_resistfire					cast_resistfire		fireresist												paladin_aura_resistfire								0
+resistcold	4					1				1									1																									aura_resistcold					cast_resistcold		coldresist												paladin_aura_resistcold								0
+resistlight	5					1				1								1																										aura_resistlight					cast_resistlight		lightresist												paladin_aura_resistlightning								0
+resistmagic	6																																																																						0
+playerbody	7																																																																						0
+resistall	8					1				1							1	1	1																									aura_resistall_front	aura_resistall_back				cast_resistall		lightresist												paladin_aura_salvation								0
+amplifydamage	9						1	1																																				curseamplifydamage					curse_hit		damageresist												necromancer_amplifydamage								0
+frozenarmor	10	1														1																												frozenarmor							skill_armor_percent																				0
+cold	11												1																																						velocitypercent							100	108	150	215	255	impact_bluemotize_1								0
+inferno	12			1																																																																			0
+blaze	13																																																			3																			0
+bonearmor	14	1																																					1	1				bonearmor_front	bonearmor_back	bonearmor_null1	bonearmor_null2		bonearmor_cast			6	3																		0
+concentrate	15															1																																			skill_armor_percent																				0
+enchant	16													1									1																										enchant		skill_enchant					weap	cred														0
+innersight	17																							1																				innersight							armorclass																				0
+skill_move	18																																																																						0
+weaken	19						1	1															1																					curseweaken					curse_hit		damagepercent												necromancer_weaken								0
+chillingarmor	20	1														1																												chillarmor							skill_armor_percent																hitbymissile	1			0
+stunned	21																																											stun																											0
+spiderlay	22																																																																						0
+dimvision	23						1	1																																				cursedimvision					curse_hit														necromancer_dimvision								0
+slowed	24																																																																						0
+fetishaura	25																																											fetish_aura							attackrate																				0
+shout	26					1										1																												shout					shoutstart		skill_armor_percent																				0
+taunt	27						1	1						1	1																													taunt																			barbarian_battlecry_state								0
+conviction	28					1																																						convictionfront	convictionback																		paladin_aura_purification								0
+convicted	29					1																		1	1	1	1																	convictionfront	convictionback						skill_conviction																				0
+energyshield	30																																											energyshield																											0
+venomclaws	31																																																		poisonmindam					mele	cgrn														0
+battleorders	32					1																																						battleorders					battleorderscast		maxmana																				0
+might	33					1				1					1																													aura_might_front	aura_might_back						damagepercent												paladin_aura_might								0
+prayer	34					1																																						aura_prayer_front	aura_prayer_back																		paladin_aura_prayer								0
+holyfire	35					1																																						aura_holyfire_front	aura_holyfire_back																		paladin_aura_holyfire								0
+thorns	36					1																																						aura_thorns_front	aura_thorns_back																		paladin_aura_thorns								0
+defiance	37					1				1						1																												aura_defiance_front	aura_defiance_back						skill_armor_percent												paladin_aura_defiance								0
+thunderstorm	38																																												thunderstormback				thunderstormcast																						0
+lightningbolt	39																																																																						0
+blessedaim	40					1				1				1																														blessedaimfront	blessedaimback						item_tohit_percent												paladin_aura_blessedaim								0
+stamina	41					1				1																																		staminafront	staminaback						maxstamina												paladin_aura_stamina								0
+concentration	42					1				1					1																													concentrationfront	concentrationback						damagepercent												paladin_aura_concentration								0
+holywind	43					1																																						holyfreeze																			paladin_aura_holywind								0
+holywindcold	44					1							1																															null					ice_explode		velocitypercent							100	108	150	215	255	impact_bluemotize_1								0
+cleansing	45					1																																						cleansingfront	cleansingback																		paladin_aura_cleansing								0
+holyshock	46					1																																						holyshockfront	holyshockback						lightmaxdam												paladin_aura_holylight								0
+sanctuary	47					1			1																																			sanctuaryfront	sanctuaryback						skill_staminapercent												paladin_aura_sanctuary						86		0
+meditation	48					1				1																																		meditationfront	meditationback																		paladin_aura_meditation								0
+fanaticism	49					1				1				1	1																													fanaticismfront	fanaticismback						attackrate												paladin_aura_fanatacism								0
+redemption	50					1																																						redemptionfront	redemptionback																		paladin_aura_redemption								0
+battlecommand	51					1																																						battlecommand					battlecommandcast																						0
+preventheal	52									1																										1																																			0
+conversion	53																												1															conversionaura																			paladin_conversion								0
+uninterruptable	54																																																				7																		0
+ironmaiden	55						1	1																																				curseironmaiden					curse_hit														necromancer_ironmaiden								0
+terror	56						1	1																																				curseterror					curse_hit														necromancer_taint								0
+attract	57						1	1																					1															curseattract					curse_hit														necromancer_attract								0
+lifetap	58						1	1																																				cursereversevampire					curse_hit														necromancer_reversevampire								0
+confuse	59						1	1																					1															curseconfuse					curse_hit														necromancer_confuse								0
+decrepify	60						1	1															1																					cursedecrepify					curse_hit		skill_decrepify												necromancer_decrepify								0
+lowerresist	61						1	1																	1	1	1	1																curselowerresist					curse_hit		lightresist																				0
+openwounds	62								1																											1																																	85		0
+dopplezon	63				1							1																			1	1	1		1						1																								2	0					0
+criticalstrike	64			1																																																																			0
+dodge	65			1																																																																			0
+avoid	66			1																																																																			0
+penetrate	67																																																																						0
+evade	68			1																																																																			0
+pierce	69																																																																						0
+warmth	70			1																																																																			0
+firemastery	71																																																																						0
+lightningmastery	72																																																																						0
+coldmastery	73																																																																						0
+swordmastery	74																																																																						0
+axemastery	75																																																																						0
+macemastery	76																																																																						0
+polearmmastery	77																																																																						0
+throwingmastery	78																																																																						0
+spearmastery	79																																																																						0
+increasedstamina	80																																																																						0
+ironskin	81																																																																						0
+increasedspeed	82																																																		velocitypercent																				0
+naturalresistance	83																																																																						0
+fingermagecurse	84																																											fingermagecurse																											0
+nomanaregen	85			1																																																																			0
+justhit	86	1		1																																																																			0
+slowmissiles	87																																											innersight							skill_handofathena																				0
+shiverarmor	88	1							1							1																												shiverarmor							skill_armor_percent																		87		0
+battlecry	89							1							1	1																												battlecry							skill_armor_percent												barbarian_battlecry_state								0
+blue	90												1																																													100	108	150	215	255									0
+red	91																																																									70	100	255	255	255									0
+death_delay	92																																																																						0
+valkyrie	93				1							1																																valkyrie					valkyriestart																2	0					0
+frenzy	94																																												frenzy						skill_frenzy																				0
+berserk	95															1																												berserkfront	berserkback																										0
+revive	96																														1	1			1																	15						85	73	255	255	255									0
+skel_mastery	97			1																																																																			0
+sourceunit	98																														1	1																				4	2																		0
+redeemed	99																														1	1	1		1																	10			redemption								paladin_redeemed_soul								0
+healthpot	100																																																																						0
+holyshield	101				1																																														skill_armor_percent				Holy Shield																0
+just_portaled	102																																																																						0
+monfrenzy	103																																												monfrenzy						skill_frenzy																				0
+corpse_nodraw	104																														1	1	1		1																																				0
+alignment	105																													1	1	1																																							0
+manapot	106																																																																						0
+shatter	107																														1	1	1	1	1																																				0
+sync_warped	108																													1																																									0
+conversion_save	109																																																																						0
+pregnant	110																																											impregnated									10																		0
+golem_mastery	111			1																																																																			0
+rabies	112																																											rabiesplague																											0
+defense_curse	113						1	1																1																				defense_curse							skill_armor_percent																				0
+blood_mana	114						1	1																																				blood_mana																											0
+burning	115																																											burning																											0
+dragonflight	116																																																																						0
+maul	117	3													1																								1					maul1	maul5	maul1back	maul5back				damagepercent	16	11																		0
+corpse_noselect	118																													1	1	1			1																																				0
+shadowwarrior	119				1							1																					1		1																														2	6					0
+feralrage	120	3																																					1					feralrage1	feralrage5	feralrage1back	feralrage5back				attackrate	16	11																		0
+skilldelay	121																																																			19	12																		0
+progressive_damage	122																																					1										progressive_damage_1			progressive_damage	1	1																		0
+progressive_steal	123																																					1										progressive_steal_1			progressive_steal	1	1																		0
+progressive_other	124																																					1										progressive_other_1			progressive_other	1	1																		0
+progressive_fire	125																																					1										progressive_fire_1			progressive_fire	1	1																		0
+progressive_cold	126																																					1										progressive_cold_1			progressive_cold	1	1																		0
+progressive_lightning	127																																					1										progressive_lightning_1			progressive_lightning	1	1																		0
+shrine_armor	128							1								1																												shrine_armor	shrine_shimmer00						armorclass																				0
+shrine_combat	129							1						1	1																													shrine_combat	shrine_shimmer00						tohit																				0
+shrine_resist_lightning	130							1										1																										shrine_resist_lightning	shrine_shimmer01						lightresist																				0
+shrine_resist_fire	131							1									1																											shrine_resist_fire	shrine_shimmer00						fireresist																				0
+shrine_resist_cold	132							1											1																									shrine_resist_cold	shrine_shimmer01						coldresist																				0
+shrine_resist_poison	133							1													1																							shrine_resist_poison	shrine_shimmer01						poisonresist																				0
+shrine_skill	134							1																																				shrine_skill	shrine_shimmer00							9	6																		0
+shrine_mana_regen	135							1																																				shrine_mana_regen	shrine_shimmer01																										0
+shrine_stamina	136							1												1																								shrine_stamina	shrine_shimmer01						stamina																				0
+shrine_experience	137							1																																				shrine_experience	shrine_shimmer00																										0
+fenris_rage	138																																											direwolfcharged	direwolfcharged																										0
+wolf	139	3			1						1	1		1																												1										14											druid_morph	druid_morph	1	430					0
+bear	140	3			1						1	1			1	1																										1										14											druid_morph	druid_morph	1	431					0
+bloodlust	141							1																																				bloodlust_state	bloodlust_state																										0
+changeclass	142																																																			5																			0
+attached	143								1																						1	1			1																	13	9																88	147	0
+hurricane	144								1																																											7	4																90	145	0
+armageddon	145																																																																					146	0
+invis	146																																																			12	8																		0
+barbs	147					1																																							spirit_of_barbs																										0
+wolverine	148					1								1	1																														heart_of_wolverine						item_tohit_percent																				0
+oaksage	149					1																																							oak_sage																										0
+vine_beast	150								1																																											11																	89		0
+cyclonearmor	151																																						1	1				cyclonearmor1front	cyclonearmor2front	cyclonearmor3front						8	5																		0
+clawmastery	152																																																																						0
+cloak_of_shadows	153		1													1																																				2											assassin_cloakofdarkness								0
+recycled	154																														1	1	1		1																																				0
+weaponblock	155																																																																						0
+cloaked	156							1																1																				cloaked							skill_armor_percent																				0
+quickness	157	2				1																																						quickness							attackrate																				0
+bladeshield	158																																											bladeshield																											0
+fade	159	2															1	1	1		1																							fade							poisonresist																				0
+summonresist	160			1																																																																			0
+oaksagecontrol	161					1																																																																	0
+wolverinecontrol	162					1																																																																	0
+barbscontrol	163					1																																																																	0
+debugcontrol	164																																																																						0
+itemset1	165																																																																						0
+itemset2	166																																																																						0
+itemset3	167																																																																						0
+itemset4	168																																																																						0
+itemset5	169																																																																						0
+itemset6	170			1																																																																			0
+runeword	171			1																																																																			0
+restinpeace	172																														1	1			1								1									17		redemption									paladin_redeemed_soul								0
+corpseexp	173																														1	1	1		1								1									18		corpseexplosion									necromancer_corpseexp_1								0
+whirlwind	174																																											whirlwind																											0
+fullsetgeneric	175																																											aura_fanatic																											0
+monsterset	176	3			1							1																																					fire_cast_2																1	135					0
+delerium	177	3			1						1	1																																					teleport	teleport															1	212					0
+antidote	178																				1																																																		0
+thawing	179																		1																																																				0
+staminapot	180																			1																																																			0
+passive_resistfire	181																																																																						0
+passive_resistcold	182																																																																						0
+passive_resistltng	183																																																																						0
+uberminion	184																														1		1	1	1																												impact_bluemotize_1								0

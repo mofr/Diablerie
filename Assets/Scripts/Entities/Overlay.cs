@@ -5,7 +5,7 @@ public class Overlay : MonoBehaviour
     new SpriteRenderer renderer;
     SpriteAnimator animator;
 
-    public static Overlay Create(GameObject gameObject, string overlayId)
+    public static Overlay Create(GameObject gameObject, string overlayId, float speed = 1.0f)
     {
         var overlayInfo = OverlayInfo.Find(overlayId);
         if (overlayInfo == null)
@@ -14,10 +14,10 @@ public class Overlay : MonoBehaviour
             return null;
         }
 
-        return Create(gameObject, overlayInfo);
+        return Create(gameObject, overlayInfo, speed);
     }
 
-    public static Overlay Create(GameObject gameObject, OverlayInfo overlayInfo)
+    public static Overlay Create(GameObject gameObject, OverlayInfo overlayInfo, float speed = 1.0f)
     {
         // todo overlay objects recycler
         var overlayObject = new GameObject(overlayInfo.id + " (overlay)");
@@ -28,7 +28,7 @@ public class Overlay : MonoBehaviour
         overlay.animator = overlayObject.AddComponent<SpriteAnimator>();
         overlay.animator.loop = false;
         overlay.animator.sprites = spritesheet.GetSprites(0);
-        overlay.animator.fps = overlayInfo.fps * 1.5f; // todo connect to spell cast rate
+        overlay.animator.fps = overlayInfo.fps * speed;
         overlay.animator.OnFinish += overlay.OnAnimationFinish;
         overlay.renderer = overlayObject.GetComponent<SpriteRenderer>();
         overlay.renderer.material = Materials.softAdditive;

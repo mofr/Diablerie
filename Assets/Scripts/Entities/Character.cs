@@ -180,7 +180,11 @@ public class Character : Entity
             usingSkill = true;
             moving = false;
             if (skillInfo.castOverlay != null)
+            {
+                // TODO set overlay speed to spell cast rate
                 Overlay.Create(gameObject, skillInfo.castOverlay);
+            }
+
             AudioManager.instance.Play(skillInfo.startSound, transform);
 
             if (skillInfo == SkillInfo.Attack)
