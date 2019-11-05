@@ -128,7 +128,7 @@ public class Missile : MonoBehaviour
                     int damage = CalcDamage();
                     hitCharacter.TakeDamage(damage, originator);
                     if (info.progOverlay != null)
-                        Overlay.Create(hitCharacter.gameObject, info.progOverlay);
+                        Overlay.Create(hitCharacter.gameObject, info.progOverlay, false);
                 }
             }
             if (info.explosionMissile != null)

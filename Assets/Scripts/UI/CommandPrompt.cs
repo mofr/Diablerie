@@ -142,6 +142,20 @@ public class CommandPrompt : MonoBehaviour
                 World.GoToAct(actNumber);
             }
         }
+        if (parts.Length == 2 && parts[0] == "/addstate")
+        {
+            string stateCode = parts[1];
+            var stateInfo = StateInfo.FindByCode(stateCode);
+            if (stateInfo != null)
+            {
+                var player = PlayerController.instance.character.gameObject;
+                Overlay.Create(player, stateInfo.castoverlay, loop: false);
+                Overlay.Create(player, stateInfo.overlay1, loop: true);
+                Overlay.Create(player, stateInfo.overlay2, loop: true);
+                Overlay.Create(player, stateInfo.overlay3, loop: true);
+                Overlay.Create(player, stateInfo.overlay4, loop: true);
+            }
+        }
         else
         {
             Debug.LogWarning(input);
