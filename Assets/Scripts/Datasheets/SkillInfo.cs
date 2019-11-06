@@ -273,6 +273,14 @@ public class SkillInfo
             monster.overrideMode = summode;
             Missile.Create(clientMissileA, target, target, self);
         }
+        else if (srvDoFunc == 119)
+        {
+            // summon grizzly
+            var pos = Iso.MapToWorld(target);
+            var monster = World.SpawnMonster(summon, pos);
+            monster.overrideMode = summode;
+            Missile.Create(clientMissileA, target, target, self);
+        }
         else if (srvDoFunc == 68)
         {
             // barbarian howls
