@@ -269,7 +269,8 @@ public class SkillInfo
         {
             // raise skeleton, raise skeletal mage
             var pos = Iso.MapToWorld(target);
-            World.SpawnMonster(summon, pos);
+            var monster = World.SpawnMonster(summon, pos);
+            monster.overrideMode = summode;
             Missile.Create(clientMissileA, target, target, self);
         }
         else if (srvDoFunc == 68)

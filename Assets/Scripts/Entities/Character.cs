@@ -46,6 +46,7 @@ public class Character : Entity
     bool dead = false;
     bool usingSkill = false;
     public bool ressurecting = false;
+    public string overrideMode;
     public int attackDamage = 30;
     public int health = 100;
     public int maxHealth = 100;
@@ -75,7 +76,7 @@ public class Character : Entity
 
     public void Use(Entity entity)
     {
-        if (takingDamage || dying || dead || ressurecting || usingSkill)
+        if (takingDamage || dying || dead || ressurecting || usingSkill || overrideMode != null)
             return;
         targetPoint = Iso.MapToIso(entity.transform.position);
         targetEntity = entity;
@@ -85,7 +86,7 @@ public class Character : Entity
 
     public void GoTo(Vector2 target)
     {
-        if (takingDamage || dying || dead || ressurecting || usingSkill)
+        if (takingDamage || dying || dead || ressurecting || usingSkill || overrideMode != null)
             return;
 
         if (monStat != null && !monStat.ext.hasMode[2])
@@ -115,7 +116,7 @@ public class Character : Entity
 
     public void UseSkill(SkillInfo skillInfo, Vector3 target)
     {
-        if (takingDamage || dead || dying || ressurecting || usingSkill)
+        if (takingDamage || dead || dying || ressurecting || usingSkill || overrideMode != null)
             return;
 
         skillWeapon = equip.GetWeapon();
@@ -125,7 +126,7 @@ public class Character : Entity
 
     public void UseSkill(SkillInfo skillInfo, Character target)
     {
-        if (takingDamage || dead || dying || ressurecting || usingSkill)
+        if (takingDamage || dead || dying || ressurecting || usingSkill || overrideMode != null)
             return;
 
         targetEntity = null;
@@ -141,7 +142,7 @@ public class Character : Entity
 
     void OperateWithTarget()
     {
-        if (takingDamage || dead || dying || ressurecting || usingSkill)
+        if (takingDamage || dead || dying || ressurecting || usingSkill || overrideMode != null)
             return;
         
         if (targetEntity)
@@ -164,7 +165,7 @@ public class Character : Entity
 
     void TryUseSkill()
     {
-        if (takingDamage || dead || dying || ressurecting || usingSkill || skillInfo == null)
+        if (takingDamage || dead || dying || ressurecting || usingSkill || skillInfo == null || overrideMode != null)
             return;
 
         if (targetCharacter != null)
@@ -284,7 +285,7 @@ public class Character : Entity
 
     void MoveToTargetPoint()
     {
-        if (!moving || takingDamage || dead || dying || ressurecting || usingSkill)
+        if (!moving || takingDamage || dead || dying || ressurecting || usingSkill || overrideMode != null)
             return;
 
         var newPath = Pathing.BuildPath(iso.pos, targetPoint, size: size, self: gameObject);
@@ -354,6 +355,10 @@ public class Character : Entity
         {
             mode = skillInfo.anim;
         }
+        else if (overrideMode != null)
+        {
+            mode = overrideMode;
+        }
         else
         {
             mode = "NU";
@@ -376,7 +381,7 @@ public class Character : Entity
 
     public void TakeDamage(int damage, Character originator = null)
     {
-        if (dying || dead || ressurecting)
+        if (dying || dead || ressurecting || overrideMode != null)
             return;
 
         health -= damage;
@@ -431,6 +436,7 @@ public class Character : Entity
         takingDamage = false;
         ressurecting = false;
         skillInfo = null;
+        overrideMode = null;
         if (dying)
         {
             dying = false;
