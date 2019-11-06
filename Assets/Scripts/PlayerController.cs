@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,14 +13,14 @@ public class PlayerController : MonoBehaviour
     public CharStat charStat;
     public CameraController cameraController;
 
-    bool flush = false;
-    Iso iso;
-    Item _mouseItem;
-    bool usingSkills = false;
-    bool run = true;
-
-    List<SkillInfo> hotSkills;
-    List<KeyCode> hotSkillsBindings = new List<KeyCode> {
+    private bool flush = false;
+    private Iso iso;
+    private Item _mouseItem;
+    private bool usingSkills = false;
+    private bool run = true;
+    
+    private List<SkillInfo> availableSkills;
+    private List<KeyCode> hotSkillsBindings = new List<KeyCode> {
         KeyCode.F1,
         KeyCode.F2,
         KeyCode.F3,
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour
         KeyCode.F5,
         KeyCode.F6,
     };
+    private List<SkillInfo> hotSkills;
+
+    private int selectingSkillIndex = 0;
 
     void Awake()
     {
@@ -39,38 +43,68 @@ public class PlayerController : MonoBehaviour
                 SetCharacter(player.GetComponent<Character>());
         }
 
-        hotSkills = new List<SkillInfo> {
+        hotSkills = new List<SkillInfo>();
+        hotSkills.AddRange(Enumerable.Repeat((SkillInfo)null, 6));
+        availableSkills = new List<SkillInfo> {
             SkillInfo.Find("Fire Bolt"),
             SkillInfo.Find("Charged Bolt"),
             SkillInfo.Find("Frost Nova"),
             SkillInfo.Find("Teleport"),
             SkillInfo.Find("Nova"),
             SkillInfo.Find("Frozen Orb"),
-//            SkillInfo.Find("Poison Nova"),
-//            SkillInfo.Find("Glacial Spike"),
-//            SkillInfo.Find("Ice Bolt"),
-//            SkillInfo.Find("Ice Blast"),
-//            SkillInfo.Find("Fire Ball"),
-//            SkillInfo.Find("Shout"),
-//            SkillInfo.Find("Battle Cry"),
-//            SkillInfo.Find("Battle Orders"),
-//            SkillInfo.Find("Battle Command"),
-//            SkillInfo.Find("War Cry"),
+            SkillInfo.Find("Poison Nova"),
+            SkillInfo.Find("Glacial Spike"),
+            SkillInfo.Find("Ice Bolt"),
+            SkillInfo.Find("Ice Blast"),
+            SkillInfo.Find("Fire Ball"),
+            SkillInfo.Find("Shout"),
+            SkillInfo.Find("Battle Cry"),
+            SkillInfo.Find("Battle Orders"),
+            SkillInfo.Find("Battle Command"),
+            SkillInfo.Find("War Cry"),
+            SkillInfo.Find("Raise Skeleton"),
         };
     }
 
     void Start()
     {
+        SkillPanel.instance.OnClick += index =>
+        {
+            selectingSkillIndex = index;
+            AvailableSkillsPanel.instance.Toggle();
+        };
+        AvailableSkillsPanel.instance.OnSkillSelected += skillInfo =>
+        {
+            SetHotSkill(selectingSkillIndex, skillInfo);
+        };
+        foreach (var skillInfo in availableSkills)
+        {
+            AvailableSkillsPanel.instance.AddSkill(skillInfo);
+        }
+        AvailableSkillsPanel.instance.Hide();
         for (int i = 0; i < hotSkills.Count; ++i)
         {
             SkillPanel.instance.SetHotSkill(i, hotSkills[i]);
             SkillPanel.instance.SetHotKey(i, hotSkillsBindings[i].ToString());
         }
+
+        SetHotSkill(0, SkillInfo.Find("Fire Bolt"));
+        SetHotSkill(1, SkillInfo.Find("Raise Skeleton"));
+        SetHotSkill(2, SkillInfo.Find("Frost Nova"));
+        SetHotSkill(3, SkillInfo.Find("Teleport"));
+        SetHotSkill(4, SkillInfo.Find("Nova"));
+        SetHotSkill(5, SkillInfo.Find("Frozen Orb"));
     }
 
     public void FlushInput()
     {
         flush = true;
+    }
+
+    public void SetHotSkill(int index, SkillInfo skillInfo)
+    {
+        hotSkills[index] = skillInfo;
+        SkillPanel.instance.SetHotSkill(index, skillInfo);
     }
 
     public void SetCharacter(Character character)
