@@ -20,8 +20,17 @@ public class SkillInfo
     public string skillDesc;
     public int srvStartFunc;
     public int srvDoFunc;
-    [Datasheet.Sequence(length = 71)]
+    [Datasheet.Sequence(length = 54)]
     public string[] unused;
+    public string summon;
+    public string pettype;
+    public string petmax; // formula
+    public string summode;
+    [Datasheet.Sequence(length = 10)]
+    public string[] sumcalcs;
+    public string sumumod;
+    public string sumoverlay;
+    public bool stsuccessonly;
     public string _stsound;
     [Datasheet.Sequence(length = 10)]
     public string[] unused2;
@@ -255,6 +264,13 @@ public class SkillInfo
             // nova, poison nova, howl
             int missileCount = 64;
             Missile.CreateRadially(clientMissileA, self.iso.pos, self, missileCount);
+        }
+        else if (srvDoFunc == 31)
+        {
+            // raise skeleton, raise skeletal mage
+            var pos = Iso.MapToWorld(target);
+            World.SpawnMonster(summon, pos);
+            Missile.Create(clientMissileA, target, target, self);
         }
         else if (srvDoFunc == 68)
         {

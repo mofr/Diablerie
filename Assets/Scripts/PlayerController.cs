@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
             SkillInfo.Find("Battle Command"),
             SkillInfo.Find("War Cry"),
             SkillInfo.Find("Raise Skeleton"),
+            SkillInfo.Find("Raise Skeletal Mage"),
         };
     }
 
