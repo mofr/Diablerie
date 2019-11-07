@@ -64,7 +64,14 @@ public class PlayerController : MonoBehaviour
             SkillInfo.Find("War Cry"),
             SkillInfo.Find("Raise Skeleton"),
             SkillInfo.Find("Raise Skeletal Mage"),
+            SkillInfo.Find("Clay Golem"),
+            SkillInfo.Find("IronGolem"),
+            SkillInfo.Find("FireGolem"),
+            SkillInfo.Find("BloodGolem"),
+            SkillInfo.Find("Raven"),
+            SkillInfo.Find("Summon Fenris"),
             SkillInfo.Find("Summon Grizzly"),
+            SkillInfo.Find("Oak Sage"),
         };
     }
 

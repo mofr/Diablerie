@@ -213,6 +213,6 @@ public class MonStat
     {
         if (id == null)
             return null;
-        return monStats.GetValueOrDefault(id, null);
+        return monStats.GetValueOrDefault(id.ToLower(), null);
     }
 }

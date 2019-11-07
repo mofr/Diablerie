@@ -273,6 +273,30 @@ public class SkillInfo
             monster.overrideMode = summode;
             Missile.Create(clientMissileA, target, target, self);
         }
+        else if (srvDoFunc == 45)
+        {
+            // traps
+            var pos = Iso.MapToWorld(target);
+            var monster = World.SpawnMonster(summon, pos, summoner: self);
+            monster.overrideMode = summode;
+            Missile.Create(clientMissileA, target, target, self);
+        }
+        else if (srvDoFunc == 56 || srvDoFunc == 57)
+        {
+            // 57 iron golem, 56 other golems
+            var pos = Iso.MapToWorld(target);
+            var monster = World.SpawnMonster(summon, pos, summoner: self);
+            monster.overrideMode = summode;
+            Missile.Create(clientMissileA, target, target, self);
+        }
+        else if (srvDoFunc == 114)
+        {
+            // raven
+            var pos = Iso.MapToWorld(target);
+            var monster = World.SpawnMonster(summon, pos, summoner: self);
+            monster.overrideMode = summode;
+            Missile.Create(clientMissileA, target, target, self);
+        }
         else if (srvDoFunc == 119)
         {
             // summon grizzly
