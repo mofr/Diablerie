@@ -34,7 +34,7 @@ public class MonsterController : MonoBehaviour
                 var visibleCharacter = collider.GetComponent<Character>();
                 if (visibleCharacter == null)
                     continue;
-                if (visibleCharacter.tag == "Player")
+                if (visibleCharacter.party != character.party)
                 {
                     if (!tauntSaid)
                     {

@@ -18,6 +18,7 @@ public class Character : Entity
     public int size = 2;
     public bool run = false;
     public int level = 1;
+    public Party party = Party.Good;
 
     public string basePath;
     public string token;
@@ -220,7 +221,7 @@ public class Character : Entity
         hasMoved = false;
         MoveToTargetPoint();
         Turn();
-        Iso.DebugDrawTile(iso.pos, 0.3f);
+        Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
     }
 
     private void LateUpdate()

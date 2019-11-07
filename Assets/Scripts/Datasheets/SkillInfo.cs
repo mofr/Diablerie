@@ -269,7 +269,7 @@ public class SkillInfo
         {
             // raise skeleton, raise skeletal mage
             var pos = Iso.MapToWorld(target);
-            var monster = World.SpawnMonster(summon, pos);
+            var monster = World.SpawnMonster(summon, pos, summoner: self);
             monster.overrideMode = summode;
             Missile.Create(clientMissileA, target, target, self);
         }
@@ -277,7 +277,7 @@ public class SkillInfo
         {
             // summon grizzly
             var pos = Iso.MapToWorld(target);
-            var monster = World.SpawnMonster(summon, pos);
+            var monster = World.SpawnMonster(summon, pos, summoner: self);
             monster.overrideMode = summode;
             Missile.Create(clientMissileA, target, target, self);
         }

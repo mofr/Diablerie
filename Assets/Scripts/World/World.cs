@@ -62,6 +62,7 @@ public class World : MonoBehaviour
         character.maxHealth = 1000;
         character.health = 1000;
         character.size = 2;
+        character.party = Party.Good;
 
         character.equip = player.AddComponent<Equipment>();
         Inventory.Create(player, 10, 4);
@@ -101,7 +102,7 @@ public class World : MonoBehaviour
         }
     }
 
-    public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null)
+    public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null, Character summoner = null)
     {
         MonStat monStat = MonStat.Find(id);
         if (monStat == null)
@@ -109,10 +110,10 @@ public class World : MonoBehaviour
             Debug.LogWarning("Monster id not found: " + id);
             return null;
         }
-        return SpawnMonster(monStat, pos, parent);
+        return SpawnMonster(monStat, pos, parent, summoner);
     }
 
-    public static Character SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null)
+    public static Character SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null, Character summoner = null)
     {
         pos = Iso.MapToIso(pos);
         if (!CollisionMap.Fit(pos, out pos, monStat.ext.sizeX))
@@ -154,10 +155,19 @@ public class World : MonoBehaviour
             animator.equip[i] = variants[Random.Range(0, variants.Length)];
         }
 
-        if (monStat.ai == "Npc" || monStat.ai == "Towner" || monStat.ai == "Vendor" || monStat.ai == "Hireable")
+        if (summoner != null)
+        {
+            character.party = summoner.party;
+            monster.AddComponent<MonsterController>(); // TODO use PetController instead
+        }
+        else if (monStat.ai == "Npc" || monStat.ai == "Towner" || monStat.ai == "Vendor" || monStat.ai == "Hireable")
+        {
+            character.party = Party.Good;
             monster.AddComponent<NpcController>();
+        }
         else if (monStat.ai != "Idle" && monStat.ai != "NpcStationary")
         {
+            character.party = Party.Evil;
             monster.AddComponent<MonsterController>();
         }
 
