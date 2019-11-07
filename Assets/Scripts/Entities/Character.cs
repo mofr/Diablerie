@@ -322,47 +322,52 @@ public class Character : Entity
         return true;
     }
 
+    public string Mode
+    {
+        get
+        {
+            if (ressurecting && monStat != null)
+            {
+                return monStat.ext.resurrectMode;
+            }
+            if (dying)
+            {
+                return "DT";
+            }
+            if (dead)
+            {
+                return "DD";
+            }
+            if (takingDamage)
+            {
+                return "GH";
+            }
+            if (hasMoved)
+            {
+                return run ? "RN" : "WL";
+            }
+            if (usingSkill)
+            {
+                return skillInfo.anim;
+            }
+            if (overrideMode != null)
+            {
+                return overrideMode;
+            }
+            return "NU";
+        }
+    }
+
     void UpdateAnimation()
     {
-        string mode;
+        string mode = Mode;
         string weaponClass = this.weaponClass;
         animator.speed = 1.0f;
         animator.loop = true;
-        if (ressurecting && monStat != null)
+        if (mode == "DT" || mode == "DD")
         {
-            mode = monStat.ext.resurrectMode;
-        }
-        else if (dying)
-        {
-            mode = "DT";
             weaponClass = "HTH";
             animator.loop = false;
-        }
-        else if (dead)
-        {
-            mode = "DD";
-            weaponClass = "HTH";
-            animator.loop = false;
-        }
-        else if (takingDamage)
-        {
-            mode = "GH";
-        }
-        else if (hasMoved)
-        {
-            mode = run ? "RN" : "WL";
-        }
-        else if (usingSkill)
-        {
-            mode = skillInfo.anim;
-        }
-        else if (overrideMode != null)
-        {
-            mode = overrideMode;
-        }
-        else
-        {
-            mode = "NU";
         }
 
         animator.cof = COF.Load(basePath, token, weaponClass, mode);

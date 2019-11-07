@@ -23,7 +23,7 @@ public class MonsterController : MonoBehaviour
         StartCoroutine(Roam());
     }
 
-    IEnumerator Roam()
+    private IEnumerator Roam()
     {
         while (!this.target)
         {
@@ -34,7 +34,7 @@ public class MonsterController : MonoBehaviour
                 var visibleCharacter = collider.GetComponent<Character>();
                 if (visibleCharacter == null)
                     continue;
-                if (visibleCharacter.party != character.party)
+                if (IsAttackable(visibleCharacter))
                 {
                     if (!tauntSaid)
                     {
@@ -53,13 +53,21 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    void Attack(Character target)
+    private bool IsAttackable(Character target)
+    {
+        bool targetTooFar = Vector2.Distance(target.iso.pos, iso.pos) > maxAgroDistance;
+        bool targetDead = target.Mode == "DT" || target.Mode == "DD";
+        bool allied = target.party == character.party;
+        return !targetTooFar && !targetDead && !allied;
+    }
+    
+    private void Attack(Character target)
     {
         this.target = target;
         StartCoroutine(Attack());
     }
 
-    IEnumerator Attack()
+    private IEnumerator Attack()
     {
         while (true)
         {
@@ -72,8 +80,7 @@ public class MonsterController : MonoBehaviour
             character.UseSkill(SkillInfo.Attack, target);
             yield return new WaitForSeconds(Random.Range(1.5f, 2f));
 
-            Iso targetIso = target.GetComponent<Iso>();
-            if (Vector2.Distance(targetIso.pos, iso.pos) > maxAgroDistance)
+            if (!IsAttackable(target))
             {
                 yield return new WaitForSeconds(Random.Range(0.5f, 1f));
                 target = null;
