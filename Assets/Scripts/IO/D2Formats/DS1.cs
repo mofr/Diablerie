@@ -57,23 +57,27 @@ public class DS1
 
     static public DS1 Load(string filename, bool mpq = true)
     {
-        UnityEngine.Profiling.Profiler.BeginSample("DS1.Load");
-
         string lowerFilename = filename.ToLower();
         if (cache.ContainsKey(lowerFilename))
         {
-            UnityEngine.Profiling.Profiler.EndSample();
             return cache[lowerFilename];
         }
-
-        var sw = System.Diagnostics.Stopwatch.StartNew();
-        byte[] bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-        var ds1 = Load(bytes);
-        ds1.filename = filename;
-        Debug.Log(Path.GetFileName(filename) + " loaded in " + sw.ElapsedMilliseconds + " ms");
-        cache[lowerFilename] = ds1;
-        UnityEngine.Profiling.Profiler.EndSample();
-        return ds1;
+        
+        UnityEngine.Profiling.Profiler.BeginSample("DS1.Load");
+        try
+        {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            byte[] bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
+            var ds1 = Load(bytes);
+            ds1.filename = filename;
+            Debug.Log(Path.GetFileName(filename) + " loaded in " + sw.ElapsedMilliseconds + " ms");
+            cache[lowerFilename] = ds1;
+            return ds1;
+        }
+        finally
+        {
+            UnityEngine.Profiling.Profiler.EndSample();
+        }
     }
 
     static DS1 Load(byte[] bytes)

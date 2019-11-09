@@ -52,17 +52,23 @@ public class Mpq
     public unsafe static string ReadAllText(string filename)
     {
         UnityEngine.Profiling.Profiler.BeginSample("Mpq.ReadAllText");
-        using (var stream = fs.OpenFile(filename))
+        try
         {
-            byte[] bytes = new byte[stream.Length];
-            stream.Read(bytes, 0, bytes.Length);
-            string result;
-            fixed (byte * pointer = bytes)
+            using (var stream = fs.OpenFile(filename))
             {
-                result = new string((sbyte*)pointer);
+                byte[] bytes = new byte[stream.Length];
+                stream.Read(bytes, 0, bytes.Length);
+                string result;
+                fixed (byte* pointer = bytes)
+                {
+                    result = new string((sbyte*) pointer);
+                }
+                return result;
             }
+        }
+        finally
+        {
             UnityEngine.Profiling.Profiler.EndSample();
-            return result;
         }
     }
 }

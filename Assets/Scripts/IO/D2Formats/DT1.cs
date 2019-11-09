@@ -252,39 +252,44 @@ public class DT1
 
     static public DT1 Load(string filename, bool mpq = true)
     {
-        UnityEngine.Profiling.Profiler.BeginSample("DT1.Load");
-
         string lowerFilename = filename.ToLower();
         if(cache.ContainsKey(lowerFilename))
         {
-            UnityEngine.Profiling.Profiler.EndSample();
             return cache[lowerFilename];
         }
 
-        var sw = System.Diagnostics.Stopwatch.StartNew();
-        var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-        var dt1 = new DT1();
-        dt1.filename = filename;
-
-        using (var stream = new MemoryStream(bytes))
-        using (var reader = new BinaryReader(stream))
+        UnityEngine.Profiling.Profiler.BeginSample("DT1.Load");
+        try
         {
-            int version1 = reader.ReadInt32();
-            int version2 = reader.ReadInt32();
-            if (version1 != 7 || version2 != 6)
-            {
-                Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
-                UnityEngine.Profiling.Profiler.EndSample();
-                return dt1;
-            }
-            stream.Seek(260, SeekOrigin.Current);
-            ReadTiles(dt1, stream, reader, bytes);
-        }
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
+            var dt1 = new DT1();
+            dt1.filename = filename;
 
-        cache[lowerFilename] = dt1;
-        Debug.Log(dt1.filename + ", tiles " + dt1.tiles.Length + ", " + dt1.textures.Count + " textures, " + sw.ElapsedMilliseconds + " ms");
-        UnityEngine.Profiling.Profiler.EndSample();
-        return dt1;
+            using (var stream = new MemoryStream(bytes))
+            using (var reader = new BinaryReader(stream))
+            {
+                int version1 = reader.ReadInt32();
+                int version2 = reader.ReadInt32();
+                if (version1 != 7 || version2 != 6)
+                {
+                    Debug.Log(string.Format("Can't read dt1 file, bad version ({0}.{1})", version1, version2));
+                    return dt1;
+                }
+
+                stream.Seek(260, SeekOrigin.Current);
+                ReadTiles(dt1, stream, reader, bytes);
+            }
+
+            cache[lowerFilename] = dt1;
+            Debug.Log(dt1.filename + ", tiles " + dt1.tiles.Length + ", " + dt1.textures.Count + " textures, " +
+                      sw.ElapsedMilliseconds + " ms");
+            return dt1;
+        }
+        finally
+        {
+            UnityEngine.Profiling.Profiler.EndSample();
+        }
     }
 
     static void drawBlockNormal(Color32[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)

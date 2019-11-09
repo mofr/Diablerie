@@ -175,7 +175,7 @@ class COFAnimator : MonoBehaviour
             }
             catch (FileNotFoundException e)
             {
-                Debug.LogWarning("File not found " + e.FileName);
+                Debug.LogWarning("Spreadsheet file not found \"" + spritesheetFilename + "\"");
                 layer.gameObject.SetActive(false);
             }
         }

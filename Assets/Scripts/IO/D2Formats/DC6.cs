@@ -34,25 +34,30 @@ public class DC6 : Spritesheet
     static public DC6 Load(string filename, bool mpq = true, int textureSize = -1, bool loadAllDirections = false)
     {
         UnityEngine.Profiling.Profiler.BeginSample("DC6.DecodeDirection");
-        Palette.LoadPalette(0);
-        var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-
-        using (var stream = new MemoryStream(bytes))
-        using (var reader = new BinaryReader(stream))
+        try
         {
-            int dc6_ver1 = reader.ReadInt32();
-            var dc6_ver2 = reader.ReadInt32();
-            var dc6_ver3 = reader.ReadInt32();
-            if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
-            {
-                Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
-                UnityEngine.Profiling.Profiler.EndSample();
-                return null;
-            }
+            Palette.LoadPalette(0);
+            var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
 
-            DC6 dc6 = Load(stream, reader, bytes, textureSize, loadAllDirections);
+            using (var stream = new MemoryStream(bytes))
+            using (var reader = new BinaryReader(stream))
+            {
+                int dc6_ver1 = reader.ReadInt32();
+                var dc6_ver2 = reader.ReadInt32();
+                var dc6_ver3 = reader.ReadInt32();
+                if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
+                {
+                    Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
+                    return null;
+                }
+
+                DC6 dc6 = Load(stream, reader, bytes, textureSize, loadAllDirections);
+                return dc6;
+            }
+        }
+        finally
+        {
             UnityEngine.Profiling.Profiler.EndSample();
-            return dc6;
         }
     }
 
