@@ -59,12 +59,14 @@ public class MonsterController : MonoBehaviour
     {
         while (true)
         {
-            character.UseSkill(SkillInfo.Attack, target);
-            yield return new WaitForSeconds(Random.Range(1.5f, 2f));
-
-            if (!IsAttackable(target))
+            if (IsAttackable(target))
             {
+                character.UseSkill(SkillInfo.Attack, target);
                 yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+            }
+            else
+            {
+                yield return null;
                 target = null;
                 StartCoroutine(Roam());
                 yield break;
