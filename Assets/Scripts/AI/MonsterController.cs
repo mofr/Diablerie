@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    Character character;
-    Iso iso;
-    Character target;
+    private Character character;
+    private Character target;
     readonly float viewRadius = 6f;
     readonly float maxAgroDistance = 15f;
     bool tauntSaid = false;
 
 	void Awake()
     {
-        iso = GetComponent<Iso>();
         character = GetComponent<Character>();
     }
 
@@ -32,7 +30,7 @@ public class MonsterController : MonoBehaviour
                 yield break;
             }
 
-            var newPosition = iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
+            var newPosition = character.iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
             character.GoTo(newPosition);
             yield return new WaitForSeconds(Random.Range(1f, 2f));
             while (!isActiveAndEnabled) yield return null;
@@ -53,7 +51,7 @@ public class MonsterController : MonoBehaviour
 
     private bool IsAttackable(Character target)
     {
-        bool targetTooFar = Vector2.Distance(target.iso.pos, iso.pos) > maxAgroDistance;
+        bool targetTooFar = Vector2.Distance(target.iso.pos, character.iso.pos) > maxAgroDistance;
         return !targetTooFar && AIUtils.IsAttackable(character, target);
     }
     
@@ -63,7 +61,7 @@ public class MonsterController : MonoBehaviour
         {
             if (Random.Range(0, 100) > 60)
             {
-                character.GoTo(iso.pos);
+                character.GoTo(character.iso.pos);
                 yield return new WaitForSeconds(Random.Range(0.5f, 0.7f));
             }
 
