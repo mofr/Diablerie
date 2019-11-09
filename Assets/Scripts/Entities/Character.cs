@@ -177,7 +177,7 @@ public class Character : Entity
 
         if (ranged || skillInfo.IsRangeOk(this, targetCharacter, targetPoint))
         {
-            LookAtImmidietly(targetPoint);
+            LookAtImmediately(targetPoint);
             usingSkill = true;
             moving = false;
             if (skillInfo.castOverlay != null)
@@ -375,7 +375,7 @@ public class Character : Entity
             desiredDirection = Iso.Direction(iso.pos, target, directionCount);
     }
 
-    public void LookAtImmidietly(Vector3 target)
+    public void LookAtImmediately(Vector3 target)
     {
         directionIndex = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
     }
@@ -405,7 +405,7 @@ public class Character : Entity
         else
         {
             if (originator)
-                LookAtImmidietly(originator.iso.pos);
+                LookAtImmediately(originator.iso.pos);
             dying = true;
             targetCharacter = null;
             moving = false;
