@@ -158,7 +158,8 @@ public class World : MonoBehaviour
         if (summoner != null)
         {
             character.party = summoner.party;
-            monster.AddComponent<MonsterController>(); // TODO use PetController instead
+            var petController = monster.AddComponent<PetController>();
+            petController.owner = summoner;
         }
         else if (monStat.ai == "Npc" || monStat.ai == "Towner" || monStat.ai == "Vendor" || monStat.ai == "Hireable")
         {
