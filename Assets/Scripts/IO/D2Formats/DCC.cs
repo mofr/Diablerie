@@ -617,10 +617,16 @@ public class DCC : Spritesheet
     static public DCC Load(string filename, bool loadAllDirections = false, bool mpq = true)
     {
         UnityEngine.Profiling.Profiler.BeginSample("DCC.Load");
-        var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-        DCC dcc = Load(filename, bytes, loadAllDirections);
-        UnityEngine.Profiling.Profiler.EndSample();
-        return dcc;
+        try
+        {
+            var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
+            DCC dcc = Load(filename, bytes, loadAllDirections);
+            return dcc;
+        }
+        finally
+        {
+            UnityEngine.Profiling.Profiler.EndSample();
+        }
     }
 
     static DCC Load(string filename, byte[] bytes, bool loadAllDirections = false)

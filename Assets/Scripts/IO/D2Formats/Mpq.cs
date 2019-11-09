@@ -34,12 +34,18 @@ public class Mpq
     {
         UnityEngine.Profiling.Profiler.BeginSample("Mpq.ReadAllBytes");
         var sw = System.Diagnostics.Stopwatch.StartNew();
-        using (var stream = fs.OpenFile(filename))
+        try
         {
-            byte[] bytes = stream.ReadAllBytes();
-            UnityEngine.Debug.Log("Mpq.ReadAllBytes " + filename + " " + sw.ElapsedMilliseconds + " ms");
+            using (var stream = fs.OpenFile(filename))
+            {
+                byte[] bytes = stream.ReadAllBytes();
+                UnityEngine.Debug.Log("Mpq.ReadAllBytes " + filename + " " + sw.ElapsedMilliseconds + " ms");
+                return bytes;
+            }
+        }
+        finally
+        {
             UnityEngine.Profiling.Profiler.EndSample();
-            return bytes;
         }
     }
 
