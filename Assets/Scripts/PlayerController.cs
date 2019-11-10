@@ -86,16 +86,16 @@ public class PlayerController : MonoBehaviour
         {
             SetHotSkill(selectingSkillIndex, skillInfo);
         };
+        for (int i = 0; i < hotSkills.Count; ++i)
+        {
+            SkillPanel.instance.SetHotKey(i, hotSkillsBindings[i].ToString());
+        }
+
         foreach (var skillInfo in availableSkills)
         {
             AvailableSkillsPanel.instance.AddSkill(skillInfo);
         }
-        AvailableSkillsPanel.instance.Hide();
-        for (int i = 0; i < hotSkills.Count; ++i)
-        {
-            SkillPanel.instance.SetHotSkill(i, hotSkills[i]);
-            SkillPanel.instance.SetHotKey(i, hotSkillsBindings[i].ToString());
-        }
+        AvailableSkillsPanel.instance.Hide();  // TODO This line affects newly added skills with AddSkill, fix it
 
         SetHotSkill(0, SkillInfo.Find("Fire Bolt"));
         SetHotSkill(1, SkillInfo.Find("Raise Skeleton"));
