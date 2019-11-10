@@ -37,7 +37,7 @@ public class SkillPanelSlot : MonoBehaviour
             image.color = Color.white;
 
             tooltip.enabled = true;
-            tooltip.text = skill.name;
+            tooltip.text = skill.name + "\n" + skill.shortDescription;
 
             button.enabled = true;
             var spriteState = button.spriteState;

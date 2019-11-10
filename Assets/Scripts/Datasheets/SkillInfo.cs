@@ -127,6 +127,15 @@ public class SkillInfo
     public string name;
 
     [System.NonSerialized]
+    public string shortDescription;
+
+    [System.NonSerialized]
+    public string longDescription;
+
+    [System.NonSerialized]
+    public string shortName;
+
+    [System.NonSerialized]
     private string _iconSpritesheetFilename;
 
     [System.NonSerialized]
@@ -151,9 +160,16 @@ public class SkillInfo
             row.startSound = SoundInfo.Find(row._stsound);
             row._description = SkillDescription.Find(row.skillDescId);
             if (row._description != null)
+            {
                 row.name = Translation.Find(row._description.strName);
+                row.shortDescription = Translation.Find(row._description.strShort);
+                row.longDescription = Translation.Find(row._description.strLong);
+                row.shortName = Translation.Find(row._description.strAlt);
+            }
             else
+            {
                 row.name = row.skill;
+            }
             if (row._range == "none")
                 row.range = Range.NoRestrictions;
             else if (row._range == "h2h")
