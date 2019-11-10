@@ -47,7 +47,6 @@ public class Character : Entity
     bool usingSkill = false;
     public bool ressurecting = false;
     public string overrideMode;
-    public int attackDamage = 30;
     public int health = 100;
     public int maxHealth = 100;
     public int mana = 100;
