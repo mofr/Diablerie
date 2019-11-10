@@ -27,6 +27,8 @@ public class Entity : MonoBehaviour
         get { return _title == null ? name : _title; }
     }
 
+    public virtual bool isAttackable => false;
+
     public virtual Vector2 titleOffset
     {
         get { return new Vector2(0, 0); }

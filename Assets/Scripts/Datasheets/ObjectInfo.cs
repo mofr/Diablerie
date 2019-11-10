@@ -29,7 +29,7 @@ public class ObjectInfo
     public bool[] blocksLight;
     [Datasheet.Sequence(length = 8)]
     public bool[] hasCollision;
-    public int isAttackable;
+    public bool isAttackable;
     [Datasheet.Sequence(length = 8)]
     public int[] start;
     public int envEffect;

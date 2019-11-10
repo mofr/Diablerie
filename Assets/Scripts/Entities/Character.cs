@@ -57,6 +57,7 @@ public class Character : Entity
     Item skillWeapon;
 
     Entity targetEntity;
+    Entity operatingWithEntity;
     Character targetCharacter;
     Vector2 targetPoint;
 
@@ -150,11 +151,18 @@ public class Character : Entity
             var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
             if (distance <= size + targetEntity.operateRange)
             {
-                var localEntity = targetEntity;
                 moving = false;
+                if (targetEntity.isAttackable)
+                {
+                    operatingWithEntity = targetEntity;
+                    overrideMode = "KK";
+                }
+                else
+                {
+                    targetEntity.Operate(this);
+                }
                 targetEntity = null;
-                localEntity.Operate(this);
-                PlayerController.instance.FlushInput();
+                PlayerController.instance.FlushInput();  // Very strange to see it here, remove
             }
             else
             {
@@ -428,10 +436,15 @@ public class Character : Entity
         {
             skillInfo.Do(this, targetCharacter, targetPoint);
         }
+        else if (operatingWithEntity != null && overrideMode == "KK")
+        {
+            operatingWithEntity.Operate(this);
+        }
     }
 
     void OnAnimationFinish()
     {
+        operatingWithEntity = null;
         targetCharacter = null;
         usingSkill = false;
         ressurecting = false;

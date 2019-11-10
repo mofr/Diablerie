@@ -20,6 +20,8 @@ public class StaticObject : Entity
         get { return objectInfo; }
     }
 
+    public override bool isAttackable => objectInfo.isAttackable;
+
     public override Vector2 titleOffset
     {
         get { return new Vector2(0, -objectInfo.nameOffset); }
