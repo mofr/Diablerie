@@ -222,8 +222,8 @@ class COFAnimator : MonoBehaviour
         int sortingOrder = Iso.SortingOrder(transform.position);
         int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
         int spriteIndex = frameStart + frameIndex;
-        int sheetDirection = direction * _cof.directionCount / Character.DirectionCount;
-        int priority = (sheetDirection * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
+        int cofDirection = direction * _cof.directionCount / Character.DirectionCount;
+        int priority = (cofDirection * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
         for (int i = 0; i < _cof.layerCount; ++i)
         {
             int layerIndex = _cof.priority[priority + i];
@@ -231,6 +231,7 @@ class COFAnimator : MonoBehaviour
             Layer layer = layers[cofLayer.index];
             if (!layer.gameObject.activeSelf)
                 continue;
+            int sheetDirection = direction * layer.spritesheet.directionCount / Character.DirectionCount;
             layer.renderer.sprite = layer.spritesheet.GetSprites(sheetDirection)[spriteIndex];
             layer.renderer.sortingOrder = sortingOrder;
             layer.shadow.sprite = layer.renderer.sprite;
