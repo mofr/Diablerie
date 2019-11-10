@@ -7,6 +7,7 @@ public class PetController : MonoBehaviour
     public float roamRadius = 12f;
     public float agroRadius = 3f;
     public float agroOwnerRadius = 5f;
+    public float maxOwnerDistance = 32f;
     private Character character;
     private Character target;
     private Vector2 _maintainOffset;
@@ -56,18 +57,27 @@ public class PetController : MonoBehaviour
         {
             if (owner == null)
                 yield return null;
-            Character nearestEnemy = AIUtils.GetNearestEnemy(character, agroRadius);
-            if (nearestEnemy == null)
-                nearestEnemy = AIUtils.GetNearestEnemy(owner, agroOwnerRadius);
-            if (nearestEnemy != null)
+            if (!IsOwnerTooFar())
             {
-                Attack(nearestEnemy);
-                yield break;
+                Character nearestEnemy = AIUtils.GetNearestEnemy(character, agroRadius);
+                if (nearestEnemy == null)
+                    nearestEnemy = AIUtils.GetNearestEnemy(owner, agroOwnerRadius);
+                if (nearestEnemy != null)
+                {
+                    Attack(nearestEnemy);
+                    yield break;
+                }
             }
+
             var newPosition = owner.iso.pos + _maintainOffset;
             character.GoTo(newPosition);
             yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
         }
+    }
+
+    private bool IsOwnerTooFar()
+    {
+        return Vector2.Distance(character.iso.pos, owner.iso.pos) > maxOwnerDistance;
     }
 
     private void Attack(Character target)
@@ -80,7 +90,7 @@ public class PetController : MonoBehaviour
     {
         while (true)
         {
-            if (AIUtils.IsAttackable(character, target))
+            if (AIUtils.IsAttackable(character, target) && !IsOwnerTooFar())
             {
                 character.UseSkill(SkillInfo.Attack, target);
                 yield return new WaitForSeconds(0.1f);
