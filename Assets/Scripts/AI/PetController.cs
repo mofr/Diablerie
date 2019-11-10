@@ -4,20 +4,41 @@ using UnityEngine;
 public class PetController : MonoBehaviour
 {
     public Character owner;
-    public float roamRadius = 15f;
+    public float roamRadius = 12f;
     public float agroRadius = 3f;
     public float agroOwnerRadius = 5f;
     private Character character;
     private Character target;
+    private Vector2 _maintainOffset;
 
-	void Awake()
+    void Awake()
     {
         character = GetComponent<Character>();
     }
 
     void OnEnable()
     {
+        StartCoroutine(UpdateOffset());
+        StartCoroutine(LookAround());
         StartCoroutine(Roam());
+    }
+
+    private IEnumerator UpdateOffset()
+    {
+        while (!target)
+        {
+            _maintainOffset = new Vector2(Random.Range(-roamRadius, roamRadius), Random.Range(-roamRadius, roamRadius));
+            yield return new WaitForSeconds(Random.Range(10f, 15f));
+        }
+    }
+
+    private IEnumerator LookAround()
+    {
+        while (!target)
+        {
+            character.LookAt(character.iso.pos + new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
+            yield return new WaitForSeconds(Random.Range(1f, 2f));
+        }
     }
 
     private IEnumerator Roam()
@@ -34,13 +55,12 @@ public class PetController : MonoBehaviour
                 Attack(nearestEnemy);
                 yield break;
             }
-            var newPosition = owner.iso.pos + new Vector2(Random.Range(-roamRadius, roamRadius), Random.Range(-roamRadius, roamRadius));
+            var newPosition = owner.iso.pos + _maintainOffset;
             character.GoTo(newPosition);
-            yield return new WaitForSeconds(Random.Range(1f, 2f));
-            while (!isActiveAndEnabled) yield return null;
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
         }
     }
-    
+
     private void Attack(Character target)
     {
         this.target = target;
@@ -59,6 +79,8 @@ public class PetController : MonoBehaviour
             else
             {
                 target = null;
+                StartCoroutine(UpdateOffset());
+                StartCoroutine(LookAround());
                 StartCoroutine(Roam());
                 yield break;
             }
