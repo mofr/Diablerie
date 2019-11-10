@@ -17,7 +17,7 @@ public class SkillInfo
     public string skill;
     public int id = -1;
     public string charClass;
-    public string skillDesc;
+    public string skillDescId;
     public int srvStartFunc;
     public int srvDoFunc;
     [Datasheet.Sequence(length = 54)]
@@ -127,10 +127,10 @@ public class SkillInfo
     public string name;
 
     [System.NonSerialized]
-    public string iconSpritesheetFilename;
+    private string _iconSpritesheetFilename;
 
     [System.NonSerialized]
-    public int iconIndex;
+    private SkillDescription _description;
 
     public static List<SkillInfo> sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
     static Dictionary<string, SkillInfo> map = new Dictionary<string, SkillInfo>();
@@ -138,28 +138,22 @@ public class SkillInfo
 
     static SkillInfo()
     {
-        int charOffset = 0;
-        string charClass = null;
-
         foreach (var row in sheet)
         {
             if (row.id == -1)
                 continue;
-
-            if (charClass != row.charClass)
-            {
-                charClass = row.charClass;
-                charOffset = row.id;
-            }
-
-            row.name = Translation.Find("skillname" + row.id);
+            
             if (row.charClass != null)
-                row.iconSpritesheetFilename = @"data\global\ui\spells\" + row.charClass.Substring(0, 2) + "Skillicon";
+                row._iconSpritesheetFilename = @"data\global\ui\spells\" + row.charClass.Substring(0, 2) + "Skillicon";
             else
-                row.iconSpritesheetFilename = @"data\global\ui\spells\Skillicon";
-            row.iconIndex = row.id - charOffset;
+                row._iconSpritesheetFilename = @"data\global\ui\spells\Skillicon";
             row.castOverlay = OverlayInfo.Find(row.castOverlayId);
             row.startSound = SoundInfo.Find(row._stsound);
+            row._description = SkillDescription.Find(row.skillDescId);
+            if (row._description != null)
+                row.name = Translation.Find(row._description.strName);
+            else
+                row.name = row.skill;
             if (row._range == "none")
                 row.range = Range.NoRestrictions;
             else if (row._range == "h2h")
@@ -324,13 +318,17 @@ public class SkillInfo
 
     public Sprite GetIcon()
     {
-        Sprite sprite = Spritesheet.Load(iconSpritesheetFilename).GetSprites(0)[iconIndex * 2];
+        if (_description == null)
+            return null;
+        Sprite sprite = Spritesheet.Load(_iconSpritesheetFilename).GetSprites(0)[_description.iconIndex];
         return sprite;
     }
 
     public Sprite GetPressedIcon()
     {
-        Sprite sprite = Spritesheet.Load(iconSpritesheetFilename).GetSprites(0)[iconIndex * 2 + 1];
+        if (_description == null)
+            return null;
+        Sprite sprite = Spritesheet.Load(_iconSpritesheetFilename).GetSprites(0)[_description.iconIndex + 1];
         return sprite;
     }
 }
