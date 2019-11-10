@@ -472,9 +472,10 @@ public class LevelBuilder
         int monsterLevel = info != null ? info.id : 1;
         foreach (var spawnInfo in ds1.objects)
         {
-            bool created = CreateObject(spawnInfo.preset, offsetX + spawnInfo.x, offsetY + spawnInfo.y, monsterLevel, root);
+            var preset = spawnInfo.preset;
+            bool created = CreateObject(preset, offsetX + spawnInfo.x, offsetY + spawnInfo.y, monsterLevel, root);
             if (!created)
-                Debug.LogWarning("Object not instantiated " + spawnInfo.preset.description);
+                Debug.LogWarning("Failed to instantiate objects from \"" + ds1.filename + "\" act " + preset.act + ", type " + preset.type + ", id " + preset.id);
         }
     }
 
@@ -614,6 +615,8 @@ public class LevelBuilder
         {
             if (obj.objectId >= ObjectInfo.sheet.Count)
             {
+                var go = new GameObject("spawn failure");
+                go.transform.position = pos;
                 return false;
             }
             ObjectInfo objectInfo = ObjectInfo.sheet[obj.objectId];
@@ -621,73 +624,71 @@ public class LevelBuilder
             staticObject.modeName = obj.mode;
             return true;
         }
+
+        string monPreset = MonPreset.Find(obj.act, obj.id);
+        MonStat monStat = null;
+        SuperUnique superUnique = null;
+
+        if (monPreset != null)
+        {
+            monStat = MonStat.Find(monPreset);
+            if (monStat == null)
+                superUnique = SuperUnique.Find(monPreset);
+        }
         else
         {
-            string monPreset = MonPreset.Find(obj.act, obj.id);
-            MonStat monStat = null;
-            SuperUnique superUnique = null;
-
-            if (monPreset != null)
-            {
-                monStat = MonStat.Find(monPreset);
-                if (monStat == null)
-                    superUnique = SuperUnique.Find(monPreset);
-            }
-            else
-            {
-                monStat = MonStat.sheet[obj.id];
-            }
-
-            if (monStat != null)
-            {
-                World.SpawnMonster(monStat, pos, root);
-                return true;
-            }
-
-            if (superUnique != null)
-            {
-                var monster = World.SpawnMonster(superUnique.monStat, pos, root);
-                monster.gameObject.name = superUnique.nameStr;
-                monster.title = superUnique.name;
-                monster.level = level;
-                int minionCount = Random.Range(superUnique.minGrp, superUnique.maxGrp + 1);
-                for (int i = 0; i < minionCount; ++i)
-                {
-                    var minion = World.SpawnMonster(superUnique.monStat, pos, root);
-                    minion.level = level;
-                }
-                return true;
-            }
-
-            if (obj.id == 10)
-            {
-                // Fallens
-                for (int i = 0; i < 4; ++i)
-                    World.SpawnMonster("fallen1", pos, root);
-                return true;
-            }
-
-            if (obj.id == 11)
-            {
-                // Fallen shaman + fallens
-                Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
-                for (int i = 0; i < 4; ++i)
-                {
-                    var fallen = World.SpawnMonster("fallen1", pos, root);
-                    fallen.level = level;
-                }
-                return true;
-            }
-
-            if (obj.id == 27)
-            {
-                // Fallen shaman
-                Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
-                return true;
-            }
-
-            return false;
+            monStat = MonStat.sheet[obj.id];
         }
+
+        if (monStat != null)
+        {
+            World.SpawnMonster(monStat, pos, root);
+            return true;
+        }
+
+        if (superUnique != null)
+        {
+            var monster = World.SpawnMonster(superUnique.monStat, pos, root);
+            monster.gameObject.name = superUnique.nameStr;
+            monster.title = superUnique.name;
+            monster.level = level;
+            int minionCount = Random.Range(superUnique.minGrp, superUnique.maxGrp + 1);
+            for (int i = 0; i < minionCount; ++i)
+            {
+                var minion = World.SpawnMonster(superUnique.monStat, pos, root);
+                minion.level = level;
+            }
+            return true;
+        }
+
+        if (obj.id == 10)
+        {
+            // Fallens
+            for (int i = 0; i < 4; ++i)
+                World.SpawnMonster("fallen1", pos, root);
+            return true;
+        }
+
+        if (obj.id == 11)
+        {
+            // Fallen shaman + fallens
+            Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
+            for (int i = 0; i < 4; ++i)
+            {
+                var fallen = World.SpawnMonster("fallen1", pos, root);
+                fallen.level = level;
+            }
+            return true;
+        }
+
+        if (obj.id == 27)
+        {
+            // Fallen shaman
+            Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
+            return true;
+        }
+
+        return false;
     }
 
     public Vector2i FindEntry()
