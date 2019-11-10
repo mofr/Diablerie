@@ -287,7 +287,6 @@ public class SkillInfo
             var pos = Iso.MapToWorld(target);
             var monster = World.SpawnMonster(summon, pos, summoner: self);
             monster.overrideMode = summode;
-            Missile.Create(clientMissileA, target, target, self);
         }
         else if (srvDoFunc == 114)
         {
@@ -295,15 +294,13 @@ public class SkillInfo
             var pos = Iso.MapToWorld(target);
             var monster = World.SpawnMonster(summon, pos, summoner: self);
             monster.overrideMode = summode;
-            Missile.Create(clientMissileA, target, target, self);
         }
         else if (srvDoFunc == 119)
         {
-            // summon grizzly
+            // summon grizzly, wolves, spirits
             var pos = Iso.MapToWorld(target);
             var monster = World.SpawnMonster(summon, pos, summoner: self);
             monster.overrideMode = summode;
-            Missile.Create(clientMissileA, target, target, self);
         }
         else if (srvDoFunc == 68)
         {

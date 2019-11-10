@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         hotSkills = new List<SkillInfo>();
         hotSkills.AddRange(Enumerable.Repeat((SkillInfo)null, 6));
         availableSkills = new List<SkillInfo> {
+            // Sorceress
             SkillInfo.Find("Fire Bolt"),
             SkillInfo.Find("Charged Bolt"),
             SkillInfo.Find("Frost Nova"),
@@ -57,21 +58,33 @@ public class PlayerController : MonoBehaviour
             SkillInfo.Find("Ice Bolt"),
             SkillInfo.Find("Ice Blast"),
             SkillInfo.Find("Fire Ball"),
+            // Barbarian
             SkillInfo.Find("Shout"),
             SkillInfo.Find("Battle Cry"),
             SkillInfo.Find("Battle Orders"),
             SkillInfo.Find("Battle Command"),
             SkillInfo.Find("War Cry"),
+            // Necromancer
             SkillInfo.Find("Raise Skeleton"),
             SkillInfo.Find("Raise Skeletal Mage"),
             SkillInfo.Find("Clay Golem"),
             SkillInfo.Find("IronGolem"),
             SkillInfo.Find("FireGolem"),
             SkillInfo.Find("BloodGolem"),
+            // Druid
             SkillInfo.Find("Raven"),
+            SkillInfo.Find("Summon Spirit Wolf"),
             SkillInfo.Find("Summon Fenris"),
             SkillInfo.Find("Summon Grizzly"),
             SkillInfo.Find("Oak Sage"),
+            SkillInfo.Find("Heart of Wolverine"),
+            SkillInfo.Find("Spirit of Barbs"),
+            // Assassin
+            SkillInfo.Find("Charged Bolt Sentry"),
+            SkillInfo.Find("Wake of Fire Sentry"),
+            SkillInfo.Find("Lightning Sentry"),
+            SkillInfo.Find("Inferno Sentry"),
+            SkillInfo.Find("Death Sentry"),
         };
     }
 
