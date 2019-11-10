@@ -25,7 +25,7 @@ public class Character : Entity
     public string token;
     public string weaponClass;
 
-    static float turnSpeed = 3.5f; // full rotations per second
+    static private float turnSpeed = 3.5f; // full rotations per second
 
     public delegate void TakeDamageHandler(Character originator, int damage);
     public event TakeDamageHandler OnTakeDamage;
@@ -33,38 +33,36 @@ public class Character : Entity
     public delegate void DeathHandler(Character target, Character killer);
     public static event DeathHandler OnDeath;
 
-    [HideInInspector]
-    public int directionIndex = 0;
-    float direction = 0;
+    private int _directionIndex = 0;
+    private float _direction = 0;
     
     public Iso iso; // readonly
-    COFAnimator animator;
-    List<Pathing.Step> path = new List<Pathing.Step>();
-    float traveled = 0;
-    int desiredDirection = 0;
-    bool moving = false;
-    bool dying = false;
-    bool dead = false;
-    bool usingSkill = false;
-    public bool ressurecting = false;
+    private COFAnimator _animator;
+    private List<Pathing.Step> path = new List<Pathing.Step>();
+    private float _traveled = 0;
+    private int _desiredDirection = 0;
+    private bool _moving = false;
+    private bool _dying = false;
+    private bool _dead = false;
+    private bool _usingSkill = false;
+    private bool _resurrecting = false;
     public string overrideMode;
     public int health = 100;
     public int maxHealth = 100;
     public int mana = 100;
     public int maxMana = 100;
-    bool hasMoved = false;
-    SkillInfo skillInfo;
-    Item skillWeapon;
-
-    Entity targetEntity;
-    Entity operatingWithEntity;
-    Character targetCharacter;
-    Vector2 targetPoint;
+    private bool _hasMoved = false;
+    private SkillInfo _skillInfo;
+    private Item _skillWeapon;
+    private Entity _targetEntity;
+    private Entity _operatingWithEntity;
+    private Character _targetCharacter;
+    private Vector2 _targetPoint;
 
     void Awake()
     {
         iso = GetComponent<Iso>();
-        animator = GetComponent<COFAnimator>();
+        _animator = GetComponent<COFAnimator>();
     }
 
     protected override void Start()
@@ -77,27 +75,27 @@ public class Character : Entity
 
     public void Use(Entity entity)
     {
-        if (dying || dead || ressurecting || usingSkill || overrideMode != null)
+        if (_dying || _dead || _resurrecting || _usingSkill || overrideMode != null)
             return;
-        targetPoint = Iso.MapToIso(entity.transform.position);
-        targetEntity = entity;
-        targetCharacter = null;
-        skillInfo = null;
+        _targetPoint = Iso.MapToIso(entity.transform.position);
+        _targetEntity = entity;
+        _targetCharacter = null;
+        _skillInfo = null;
     }
 
     public void GoTo(Vector2 target)
     {
-        if (dying || dead || ressurecting || usingSkill || overrideMode != null)
+        if (_dying || _dead || _resurrecting || _usingSkill || overrideMode != null)
             return;
 
         if (monStat != null && !monStat.ext.hasMode[2])
             return;
 
-        moving = true;
-        targetPoint = target;
-        targetEntity = null;
-        targetCharacter = null;
-        skillInfo = null;
+        _moving = true;
+        _targetPoint = target;
+        _targetEntity = null;
+        _targetCharacter = null;
+        _skillInfo = null;
     }
 
     public void InstantMove(Vector2 target)
@@ -107,7 +105,7 @@ public class Character : Entity
         {
             CollisionMap.Move(iso.pos, newPos, size, gameObject);
             iso.pos = newPos;
-            moving = false;
+            _moving = false;
         }
         else
         {
@@ -117,86 +115,86 @@ public class Character : Entity
 
     public void UseSkill(SkillInfo skillInfo, Vector3 target)
     {
-        if (dead || dying || ressurecting || usingSkill || overrideMode != null)
+        if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
             return;
 
-        skillWeapon = equip.GetWeapon();
-        targetPoint = target;
-        this.skillInfo = skillInfo;
+        _skillWeapon = equip.GetWeapon();
+        _targetPoint = target;
+        _skillInfo = skillInfo;
     }
 
     public void UseSkill(SkillInfo skillInfo, Character target)
     {
-        if (dead || dying || ressurecting || usingSkill || overrideMode != null)
+        if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
             return;
 
-        targetEntity = null;
-        targetCharacter = target;
-        this.skillInfo = skillInfo;
+        _targetEntity = null;
+        _targetCharacter = target;
+        _skillInfo = skillInfo;
     }
 
     void AbortPath()
     {
         path.Clear();
-        traveled = 0;
+        _traveled = 0;
     }
 
     void OperateWithTarget()
     {
-        if (dead || dying || ressurecting || usingSkill || overrideMode != null)
+        if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
             return;
         
-        if (targetEntity)
+        if (_targetEntity)
         {
-            var distance = Vector2.Distance(iso.pos, Iso.MapToIso(targetEntity.transform.position));
-            if (distance <= size + targetEntity.operateRange)
+            var distance = Vector2.Distance(iso.pos, Iso.MapToIso(_targetEntity.transform.position));
+            if (distance <= size + _targetEntity.operateRange)
             {
-                moving = false;
-                if (targetEntity.isAttackable)
+                _moving = false;
+                if (_targetEntity.isAttackable)
                 {
-                    operatingWithEntity = targetEntity;
+                    _operatingWithEntity = _targetEntity;
                     overrideMode = "KK";
                 }
                 else
                 {
-                    targetEntity.Operate(this);
+                    _targetEntity.Operate(this);
                 }
-                targetEntity = null;
+                _targetEntity = null;
                 PlayerController.instance.FlushInput();  // Very strange to see it here, remove
             }
             else
             {
-                moving = true;
+                _moving = true;
             }
         }
     }
 
     void TryUseSkill()
     {
-        if (dead || dying || ressurecting || usingSkill || skillInfo == null || overrideMode != null)
+        if (_dead || _dying || _resurrecting || _usingSkill || _skillInfo == null || overrideMode != null)
             return;
 
-        if (targetCharacter != null)
+        if (_targetCharacter != null)
         {
-            targetPoint = targetCharacter.iso.pos;
+            _targetPoint = _targetCharacter.iso.pos;
         }
 
-        bool ranged = skillWeapon != null && skillWeapon.info.type.shoots != null;
+        bool ranged = _skillWeapon != null && _skillWeapon.info.type.shoots != null;
 
-        if (ranged || skillInfo.IsRangeOk(this, targetCharacter, targetPoint))
+        if (ranged || _skillInfo.IsRangeOk(this, _targetCharacter, _targetPoint))
         {
-            LookAtImmediately(targetPoint);
-            usingSkill = true;
-            moving = false;
-            if (skillInfo.castOverlay != null)
+            LookAtImmediately(_targetPoint);
+            _usingSkill = true;
+            _moving = false;
+            if (_skillInfo.castOverlay != null)
             {
                 // TODO set overlay speed to spell cast rate
-                Overlay.Create(gameObject, loop: false, overlayInfo: skillInfo.castOverlay);
+                Overlay.Create(gameObject, loop: false, overlayInfo: _skillInfo.castOverlay);
             }
 
-            AudioManager.instance.Play(skillInfo.startSound, transform);
+            AudioManager.instance.Play(_skillInfo.startSound, transform);
 
-            if (skillInfo == SkillInfo.Attack)
+            if (_skillInfo == SkillInfo.Attack)
             {
                 if (monStat != null)
                 {
@@ -217,7 +215,7 @@ public class Character : Entity
         }
         else
         {
-            moving = true;
+            _moving = true;
         }
     }
 
@@ -225,7 +223,7 @@ public class Character : Entity
     {
         TryUseSkill();
         OperateWithTarget();
-        hasMoved = false;
+        _hasMoved = false;
         MoveToTargetPoint();
         Turn();
         Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
@@ -238,13 +236,13 @@ public class Character : Entity
 
     void Turn()
     {
-        if (!dead && !dying && !ressurecting && !usingSkill && overrideMode == null && directionIndex != desiredDirection)
+        if (!_dead && !_dying && !_resurrecting && !_usingSkill && overrideMode == null && _directionIndex != _desiredDirection)
         {
-            float diff = Tools.ShortestDelta(directionIndex, desiredDirection, DirectionCount);
+            float diff = Tools.ShortestDelta(_directionIndex, _desiredDirection, DirectionCount);
             float delta = Mathf.Abs(diff);
-            direction += Mathf.Clamp(Mathf.Sign(diff) * turnSpeed * Time.deltaTime * DirectionCount, -delta, delta);
-            direction = Tools.Mod(direction + DirectionCount, DirectionCount);
-            directionIndex = Mathf.RoundToInt(direction) % DirectionCount;
+            _direction += Mathf.Clamp(Mathf.Sign(diff) * turnSpeed * Time.deltaTime * DirectionCount, -delta, delta);
+            _direction = Tools.Mod(_direction + DirectionCount, DirectionCount);
+            _directionIndex = Mathf.RoundToInt(_direction) % DirectionCount;
         }
     }
 
@@ -256,12 +254,12 @@ public class Character : Entity
         float speed = run ? runSpeed : walkSpeed;
         float distance = speed * Time.deltaTime;
 
-        while (traveled + distance >= stepLen)
+        while (_traveled + distance >= stepLen)
         {
-            float part = stepLen - traveled;
+            float part = stepLen - _traveled;
             movement += step.normalized * part;
             distance -= part;
-            traveled = 0;
+            _traveled = 0;
             path.RemoveAt(0);
             if (path.Count > 0)
             {
@@ -275,7 +273,7 @@ public class Character : Entity
         }
         if (path.Count > 0)
         {
-            traveled += distance;
+            _traveled += distance;
             movement += step.normalized * distance;
         }
         
@@ -283,23 +281,23 @@ public class Character : Entity
 
         if (path.Count == 0)
         {
-            traveled = 0;
+            _traveled = 0;
         }
-        else if (moving)
+        else if (_moving)
         {
-            desiredDirection = Iso.Direction(iso.pos, iso.pos + step, DirectionCount);
+            _desiredDirection = Iso.Direction(iso.pos, iso.pos + step, DirectionCount);
         }
     }
 
     void MoveToTargetPoint()
     {
-        if (!moving || dead || dying || ressurecting || usingSkill || overrideMode != null)
+        if (!_moving || _dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
             return;
 
-        var newPath = Pathing.BuildPath(iso.pos, targetPoint, size: size, self: gameObject);
+        var newPath = Pathing.BuildPath(iso.pos, _targetPoint, size: size, self: gameObject);
         if (newPath.Count == 0)
         {
-            moving = false;
+            _moving = false;
             return;
         }
         if (path.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
@@ -308,12 +306,12 @@ public class Character : Entity
             path.AddRange(newPath);
         }
         
-        if (path.Count == 1 && Vector2.Distance(path[0].pos, targetPoint) < 1.0f)
+        if (path.Count == 1 && Vector2.Distance(path[0].pos, _targetPoint) < 1.0f)
         {
             // smooth straightforward movement
             var pathStep = path[0];
-            pathStep.pos = targetPoint;
-            pathStep.direction = targetPoint - iso.pos;
+            pathStep.pos = _targetPoint;
+            pathStep.direction = _targetPoint - iso.pos;
             path[0] = pathStep;
         }
 
@@ -325,7 +323,7 @@ public class Character : Entity
         var newPos = iso.pos + movement;
         CollisionMap.Move(iso.pos, newPos, size, gameObject);
         iso.pos = newPos;
-        hasMoved = true;
+        _hasMoved = true;
         return true;
     }
 
@@ -333,25 +331,25 @@ public class Character : Entity
     {
         get
         {
-            if (ressurecting && monStat != null)
+            if (_resurrecting && monStat != null)
             {
                 return monStat.ext.resurrectMode;
             }
-            if (dying)
+            if (_dying)
             {
                 return "DT";
             }
-            if (dead)
+            if (_dead)
             {
                 return "DD";
             }
-            if (hasMoved)
+            if (_hasMoved)
             {
                 return run ? "RN" : "WL";
             }
-            if (usingSkill)
+            if (_usingSkill)
             {
-                return skillInfo.anim;
+                return _skillInfo.anim;
             }
             if (overrideMode != null)
             {
@@ -365,32 +363,32 @@ public class Character : Entity
     {
         string mode = Mode;
         string weaponClass = this.weaponClass;
-        animator.speed = 1.0f;
-        animator.loop = true;
+        _animator.speed = 1.0f;
+        _animator.loop = true;
         if (mode == "DT" || mode == "DD")
         {
             weaponClass = "HTH";
-            animator.loop = false;
+            _animator.loop = false;
         }
 
-        animator.cof = COF.Load(basePath, token, weaponClass, mode);
-        animator.direction = directionIndex;
+        _animator.cof = COF.Load(basePath, token, weaponClass, mode);
+        _animator.direction = _directionIndex;
     }
 
     public void LookAt(Vector3 target)
     {
-        if (!moving)
-            desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
+        if (!_moving)
+            _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
     }
 
     public void LookAtImmediately(Vector3 target)
     {
-        directionIndex = desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
+        _directionIndex = _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
     }
 
     public void TakeDamage(int damage, Character originator = null)
     {
-        if (dying || dead || ressurecting)
+        if (_dying || _dead || _resurrecting)
             return;
 
         health -= damage;
@@ -401,10 +399,10 @@ public class Character : Entity
             if (damage > maxHealth * 0.1f)
             {
                 overrideMode = "GH";
-                targetCharacter = null;
-                moving = false;
-                usingSkill = false;
-                skillInfo = null;
+                _targetCharacter = null;
+                _moving = false;
+                _usingSkill = false;
+                _skillInfo = null;
             }
 
             if (monStat != null)
@@ -414,11 +412,11 @@ public class Character : Entity
         {
             if (originator)
                 LookAtImmediately(originator.iso.pos);
-            dying = true;
-            targetCharacter = null;
-            moving = false;
-            usingSkill = false;
-            skillInfo = null;
+            _dying = true;
+            _targetCharacter = null;
+            _moving = false;
+            _usingSkill = false;
+            _skillInfo = null;
             
             CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
 
@@ -432,28 +430,28 @@ public class Character : Entity
 
     void OnAnimationMiddle()
     {
-        if (usingSkill && animator.cof.mode == skillInfo.anim)
+        if (_usingSkill && _animator.cof.mode == _skillInfo.anim)
         {
-            skillInfo.Do(this, targetCharacter, targetPoint);
+            _skillInfo.Do(this, _targetCharacter, _targetPoint);
         }
-        else if (operatingWithEntity != null && overrideMode == "KK")
+        else if (_operatingWithEntity != null && overrideMode == "KK")
         {
-            operatingWithEntity.Operate(this);
+            _operatingWithEntity.Operate(this);
         }
     }
 
     void OnAnimationFinish()
     {
-        operatingWithEntity = null;
-        targetCharacter = null;
-        usingSkill = false;
-        ressurecting = false;
-        skillInfo = null;
+        _operatingWithEntity = null;
+        _targetCharacter = null;
+        _usingSkill = false;
+        _resurrecting = false;
+        _skillInfo = null;
         overrideMode = null;
-        if (dying)
+        if (_dying)
         {
-            dying = false;
-            dead = true;
+            _dying = false;
+            _dead = true;
         }
         
         // It's needed to call here, otherwise animator can loop the finished animation few frames more than needed
@@ -473,7 +471,7 @@ public class Character : Entity
 
     void OnRenderObject()
     {
-        bool selectable = !dead && !dying;
+        bool selectable = !_dead && !_dying;
         if (selectable && monStat != null)
             selectable = monStat.interact || (!monStat.npc && monStat.killable);
         if (selectable)
