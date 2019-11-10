@@ -27,7 +27,16 @@ public class PetController : MonoBehaviour
     {
         while (!target)
         {
-            _maintainOffset = new Vector2(Random.Range(-roamRadius, roamRadius), Random.Range(-roamRadius, roamRadius));
+            if (_maintainOffset == Vector2.zero)
+            {
+                if (owner == null)
+                    yield return null;
+                _maintainOffset = character.iso.pos - owner.iso.pos;
+            }
+            else
+            {
+                _maintainOffset = new Vector2(Random.Range(-roamRadius, roamRadius), Random.Range(-roamRadius, roamRadius));
+            }
             yield return new WaitForSeconds(Random.Range(10f, 15f));
         }
     }
@@ -57,7 +66,7 @@ public class PetController : MonoBehaviour
             }
             var newPosition = owner.iso.pos + _maintainOffset;
             character.GoTo(newPosition);
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
         }
     }
 
