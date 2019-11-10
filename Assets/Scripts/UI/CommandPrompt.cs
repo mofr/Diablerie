@@ -135,14 +135,14 @@ public class CommandPrompt : MonoBehaviour
                 }
             }
         }
-        if (parts.Length == 2 && parts[0] == "/act")
+        else if (parts.Length == 2 && parts[0] == "/act")
         {
             if (int.TryParse(parts[1], out int actNumber))
             {
                 World.GoToAct(actNumber);
             }
         }
-        if (parts.Length == 2 && parts[0] == "/addstate")
+        else if (parts.Length == 2 && parts[0] == "/addstate")
         {
             string stateCode = parts[1];
             var stateInfo = StateInfo.FindByCode(stateCode);
