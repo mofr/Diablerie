@@ -6,12 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(COFAnimator))]
 public class Character : Entity
 {
+    public const int DirectionCount = 32;
+    
     [System.NonSerialized]
     public MonStat monStat;
     [System.NonSerialized]
     public CharStat charStat;
     public Equipment equip;
-    public int directionCount = 8;
     public float walkSpeed = 3.5f;
     public float runSpeed = 6f;
     public float attackRange = 1.5f;
@@ -231,11 +232,11 @@ public class Character : Entity
     {
         if (!dead && !dying && !ressurecting && !usingSkill && overrideMode == null && directionIndex != desiredDirection)
         {
-            float diff = Tools.ShortestDelta(directionIndex, desiredDirection, directionCount);
+            float diff = Tools.ShortestDelta(directionIndex, desiredDirection, DirectionCount);
             float delta = Mathf.Abs(diff);
-            direction += Mathf.Clamp(Mathf.Sign(diff) * turnSpeed * Time.deltaTime * directionCount, -delta, delta);
-            direction = Tools.Mod(direction + directionCount, directionCount);
-            directionIndex = Mathf.RoundToInt(direction) % directionCount;
+            direction += Mathf.Clamp(Mathf.Sign(diff) * turnSpeed * Time.deltaTime * DirectionCount, -delta, delta);
+            direction = Tools.Mod(direction + DirectionCount, DirectionCount);
+            directionIndex = Mathf.RoundToInt(direction) % DirectionCount;
         }
     }
 
@@ -278,7 +279,7 @@ public class Character : Entity
         }
         else if (moving)
         {
-            desiredDirection = Iso.Direction(iso.pos, iso.pos + step, directionCount);
+            desiredDirection = Iso.Direction(iso.pos, iso.pos + step, DirectionCount);
         }
     }
 
@@ -371,12 +372,12 @@ public class Character : Entity
     public void LookAt(Vector3 target)
     {
         if (!moving)
-            desiredDirection = Iso.Direction(iso.pos, target, directionCount);
+            desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
     }
 
     public void LookAtImmediately(Vector3 target)
     {
-        directionIndex = desiredDirection = Iso.Direction(iso.pos, target, directionCount);
+        directionIndex = desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
     }
 
     public void TakeDamage(int damage, Character originator = null)

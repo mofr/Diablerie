@@ -55,7 +55,6 @@ public class World : MonoBehaviour
         character.basePath = @"data\global\chars";
         character.token = info.token;
         character.weaponClass = info.baseWClass;
-        character.directionCount = 16;
         character.run = true;
         character.walkSpeed = 7;
         character.runSpeed = 15;
