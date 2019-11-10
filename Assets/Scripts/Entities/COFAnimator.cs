@@ -5,24 +5,24 @@ using UnityEngine;
 [ExecuteInEditMode]
 class COFAnimator : MonoBehaviour
 {
-    COF _cof;
     public int direction = 0;
     public bool loop = true;
     public float speed = 1.0f;
     public float frameDuration = 1.0f / 12.0f;
     public bool shadow = true;
-    string[] _equip;
-
-    float time = 0;
-    int frameCounter = 0;
-    int frameCount = 0;
-    int frameStart = 0;
-    List<Layer> layers = new List<Layer>();
-    bool _selected = false;
-    Material shadowMaterial;
-    static MaterialPropertyBlock materialProperties;
-    bool configChanged = false;
-    bool modeChanged = false;
+    
+    private COF _cof;
+    private string[] _equip;
+    private float time = 0;
+    private int frameCounter = 0;
+    private int frameCount = 0;
+    private int frameStart = 0;
+    private List<Layer> layers = new List<Layer>();
+    private bool _selected = false;
+    private Material shadowMaterial;
+    private static MaterialPropertyBlock materialProperties;
+    private bool configChanged = false;
+    private bool modeChanged = false;
 
     struct Layer
     {
