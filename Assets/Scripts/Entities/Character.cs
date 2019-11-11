@@ -138,7 +138,11 @@ public class Character : Entity
     
     public bool CanUseSkill(SkillInfo skillInfo, Character target)
     {
-        return skillInfo.targetAlly || target.party != party;
+        if (!skillInfo.targetAlly && target.party == party)
+            return false;
+        if (!skillInfo.targetCorpse && (target._dead || target._dying))
+            return false;
+        return true;
     }
 
     void AbortPath()
