@@ -136,6 +136,7 @@ public class World : MonoBehaviour
         character.walkSpeed = monStat.speed;
         character.runSpeed = monStat.runSpeed;
         character.size = monStat.ext.sizeX;
+        character.killable = monStat.killable;
 
         var monLvl = MonLvl.Find(monStat.level[0]);
         if (monLvl != null && !monStat.noRatio)

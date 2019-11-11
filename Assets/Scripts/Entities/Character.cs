@@ -47,6 +47,7 @@ public class Character : Entity
     private bool _usingSkill = false;
     private bool _resurrecting = false;
     public string overrideMode;
+    public bool killable = true;
     public int health = 100;
     public int maxHealth = 100;
     public int mana = 100;
@@ -401,6 +402,9 @@ public class Character : Entity
     public void TakeDamage(int damage, Character originator = null)
     {
         if (_dying || _dead || _resurrecting)
+            return;
+
+        if (!killable)
             return;
 
         if (originator != null && originator.party == party)

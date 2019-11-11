@@ -26,6 +26,6 @@ public class AIUtils
     {
         bool targetDead = target.Mode == "DT" || target.Mode == "DD";
         bool allied = target.party == attacker.party;
-        return !targetDead && !allied;
+        return !targetDead && !allied && target.killable;
     }
 }
