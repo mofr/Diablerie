@@ -6,7 +6,7 @@ class MouseSelection : MonoBehaviour
     static readonly Vector3 Expand = new Vector3(25, 20) / Iso.pixelsPerUnit;
 
     [HideInInspector]
-    static public Entity current;
+    public static Entity current;
     static Entity previous;
     static Vector3 mousePos;
     static Vector3 currentPosition;

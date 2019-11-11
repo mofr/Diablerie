@@ -128,9 +128,17 @@ public class Character : Entity
         if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
             return;
 
+        if (!CanUseSkill(skillInfo, target))
+            return;
+
         _targetEntity = null;
         _targetCharacter = target;
         _skillInfo = skillInfo;
+    }
+    
+    public bool CanUseSkill(SkillInfo skillInfo, Character target)
+    {
+        return skillInfo.targetAlly || target.party != party;
     }
 
     void AbortPath()
@@ -389,6 +397,9 @@ public class Character : Entity
     public void TakeDamage(int damage, Character originator = null)
     {
         if (_dying || _dead || _resurrecting)
+            return;
+
+        if (originator != null && originator.party == party)
             return;
 
         health -= damage;
