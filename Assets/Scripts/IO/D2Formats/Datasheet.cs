@@ -118,7 +118,9 @@ public struct Datasheet
             {
                 if (elementMembers.Length == 0)
                 {
-                    array[i] = CastValue(fields[fieldIndex], elementType, array[i]);
+                    object value = CastValue(fields[fieldIndex], elementType);
+                    if (value != null)
+                        array[i] = value;
                     ++fieldIndex;
                 }
                 else
@@ -131,18 +133,19 @@ public struct Datasheet
         }
         else
         {
-            var value = CastValue(fields[fieldIndex], fi.FieldType, fi.GetValue(obj));
-            fi.SetValue(obj, value);
+            object value = CastValue(fields[fieldIndex], fi.FieldType);
+            if (value != null)
+                fi.SetValue(obj, value);
             ++fieldIndex;
         }
 
         return fieldIndex;
     }
 
-    static object CastValue(string value, System.Type type, object defaultValue)
+    static object CastValue(string value, System.Type type)
     {
         if (value == "" || value == "xxx")
-            return defaultValue;
+            return null;
 
         if (type == typeof(bool))
         {
