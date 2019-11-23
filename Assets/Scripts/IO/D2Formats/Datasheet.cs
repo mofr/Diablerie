@@ -87,7 +87,6 @@ public struct Datasheet
 
     static int ReadObject(object obj, MemberInfo[] members, string[] fields, int fieldIndex = 0)
     {
-        UnityEngine.Profiling.Profiler.BeginSample("Datasheet.ReadObject");
         for (int memberIndex = 0; memberIndex < members.Length; ++memberIndex)
         {
             MemberInfo member = members[memberIndex];
@@ -100,7 +99,6 @@ public struct Datasheet
                 throw new System.Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member, e);
             }
         }
-        UnityEngine.Profiling.Profiler.EndSample();
         return fieldIndex;
     }
 
