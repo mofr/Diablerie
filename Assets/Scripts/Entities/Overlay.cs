@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Overlay : MonoBehaviour
 {
@@ -22,7 +22,8 @@ public class Overlay : MonoBehaviour
         // todo overlay objects recycler
         var overlayObject = new GameObject(overlayInfo.id + " (overlay)");
         overlayObject.transform.SetParent(gameObject.transform, false);
-        overlayObject.transform.localPosition = new Vector3(0, 0, -0.5f);
+        float zOffset = overlayInfo.preDraw ? 0.5f : -0.5f;
+        overlayObject.transform.localPosition = new Vector3(0, 0, zOffset);
         var spritesheet = Spritesheet.Load(overlayInfo.spritesheetFilename);
         var overlay = overlayObject.AddComponent<Overlay>();
         overlay.animator = overlayObject.AddComponent<SpriteAnimator>();
