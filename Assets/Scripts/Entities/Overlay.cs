@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Overlay : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class Overlay : MonoBehaviour
         overlay.animator = overlayObject.AddComponent<SpriteAnimator>();
         overlay.animator.loop = loop;
         overlay.animator.sprites = spritesheet.GetSprites(0);
-        overlay.animator.fps = overlayInfo.fps * speed;
+        overlay.animator.fps = overlayInfo.fps * speed * 1.5f; // 1.5 multiplier is set to match original animation speed
         if (!loop)
             overlay.animator.OnFinish += overlay.OnAnimationFinish;
         overlay.renderer = overlayObject.GetComponent<SpriteRenderer>();
