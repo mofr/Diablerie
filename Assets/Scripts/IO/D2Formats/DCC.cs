@@ -536,11 +536,6 @@ public class DCC : Spritesheet
 
     readonly static int[] widthTable = { 0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32 };
     readonly static int[] nb_pix_table = { 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4 };
-    readonly static int[] dirs1 = new int[] { 0 };
-    readonly static int[] dirs4 = new int[] { 0, 1, 2, 3 };
-    readonly static int[] dirs8 = new int[] { 4, 0, 5, 1, 6, 2, 7, 3 };
-    readonly static int[] dirs16 = new int[] { 4, 8, 0, 9, 5, 10, 1, 11, 6, 12, 2, 13, 7, 14, 3, 15 };
-    readonly static int[] dirs32 = new int[] { 4, 16, 8, 17, 0, 18, 9, 19, 5, 20, 10, 21, 1, 22, 11, 23, 6, 24, 12, 25, 2, 26, 13, 27, 7, 28, 14, 29, 3, 30, 15, 31 };
 
     public override Sprite[] GetSprites(int d)
     {
@@ -550,25 +545,12 @@ public class DCC : Spritesheet
         return sprites[d];
     }
 
-    void DecodeDirection(int d)
+    void DecodeDirection(int directionIndex)
     {
-        int[] dirs = null;
-        switch (header.directionCount)
-        {
-            case 1: dirs = dirs1; break;
-            case 4: dirs = dirs4; break;
-            case 8: dirs = dirs8; break;
-            case 16: dirs = dirs16; break;
-            case 32: dirs = dirs32; break;
-            default:
-                Debug.LogError("Invalid DCC direction count: " + header.directionCount);
-                return;
-        }
-
         UnityEngine.Profiling.Profiler.BeginSample("DCC.DecodeDirection");
-
-        sprites[d] = new Sprite[header.framesPerDir];
-        var bitReader = new BitReader(bytes, header.dirOffset[dirs[d]] * 8);
+        int internalIndex = DirectionMapping.MapToInternal(header.directionCount, directionIndex);
+        sprites[directionIndex] = new Sprite[header.framesPerDir];
+        var bitReader = new BitReader(bytes, header.dirOffset[internalIndex] * 8);
         Direction dir = new Direction();
         ReadDirection(bitReader, dir);
 
@@ -609,7 +591,7 @@ public class DCC : Spritesheet
 
         FrameBuffer frameBuffer = CreateFrameBuffer(dir.box); // dcc_prepare_buffer_cells
         FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
-        MakeFrames(header, dir, frameBuffer, streams, textures, sprites[d]); // dcc_make_frames
+        MakeFrames(header, dir, frameBuffer, streams, textures, sprites[directionIndex]); // dcc_make_frames
 
         UnityEngine.Profiling.Profiler.EndSample();
     }

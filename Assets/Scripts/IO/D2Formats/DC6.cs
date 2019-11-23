@@ -42,12 +42,12 @@ public class DC6 : Spritesheet
             using (var stream = new MemoryStream(bytes))
             using (var reader = new BinaryReader(stream))
             {
-                int dc6_ver1 = reader.ReadInt32();
-                var dc6_ver2 = reader.ReadInt32();
-                var dc6_ver3 = reader.ReadInt32();
-                if ((dc6_ver1 != 6) || (dc6_ver2 != 1) || (dc6_ver3 != 0))
+                int version1 = reader.ReadInt32();
+                var version2 = reader.ReadInt32();
+                var version3 = reader.ReadInt32();
+                if (version1 != 6 || version2 != 1 || version3 != 0)
                 {
-                    Debug.LogWarning("Unknown dc6 version " + dc6_ver1 + " " + dc6_ver2 + " " + dc6_ver3);
+                    Debug.LogWarning("Unknown dc6 version " + version1 + " " + version2 + " " + version3);
                     return null;
                 }
 
@@ -112,6 +112,7 @@ public class DC6 : Spritesheet
 
     private Direction ReadFrames(Stream stream, BinaryReader reader, int dirIndex)
     {
+        int internalIndex = DirectionMapping.MapToInternal(directionCount, dirIndex);
         var dir = new Direction();
         dir.frames = new Frame[framesPerDirection];
         dir.sprites = new Sprite[framesPerDirection];
@@ -120,7 +121,7 @@ public class DC6 : Spritesheet
 
         for (int frameIndex = 0; frameIndex < framesPerDirection; frameIndex++)
         {
-            int offset = offsets[dirIndex * framesPerDirection + frameIndex];
+            int offset = offsets[internalIndex * framesPerDirection + frameIndex];
             stream.Seek(offset, SeekOrigin.Begin);
 
             var frame = new Frame();
