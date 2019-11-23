@@ -7,7 +7,7 @@ using UnityEngine;
 
 public struct Datasheet
 {
-    [System.AttributeUsage(System.AttributeTargets.Field)]
+    [System.AttributeUsage(System.AttributeTargets.Field | System.AttributeTargets.Property)]
     public class Sequence : System.Attribute
     {
         public int length;
@@ -155,11 +155,26 @@ public struct Datasheet
             throw new System.FormatException("Unable to cast '" + value + "' to bool");
         }
 
+        if (type == typeof(string))
+        {
+            return value;
+        }
+
+        if (type == typeof(int))
+        {
+            return StringTools.ParseInt(value);
+        }
+        
+        if (type == typeof(uint))
+        {
+            return StringTools.ParseUInt(value);
+        }
+        
         if (type == typeof(float))
         {
             return (float) System.Convert.ToDouble(value, System.Globalization.CultureInfo.InvariantCulture);
         }
-        
-        return System.Convert.ChangeType(value, type);
+
+        throw new System.FormatException("Unable to cast '" + value + "' to " + type);
     }
 }
