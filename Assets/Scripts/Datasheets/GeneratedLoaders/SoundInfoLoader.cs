@@ -1,31 +1,34 @@
-public class SoundInfoLoader : Datasheet.Loader<SoundInfo>
+
+// It's generated file. DO NOT MODIFY IT!
+class SoundInfoLoader : Datasheet.Loader<SoundInfo>
 {
-    public void LoadRecord(ref SoundInfo record, string[] fields)
+    public void LoadRecord(ref SoundInfo record, string[] values)
     {
-        record.sound = fields[0];
-        record.index = Datasheet.ParseInt(fields[1]);
-        record._filename = fields[2];
-        record._volume = Datasheet.ParseInt(fields[3]);
-        record.groupSize = Datasheet.ParseInt(fields[4]);
-        record.loop = Datasheet.ParseBool(fields[5]);
-        record._fadeIn = Datasheet.ParseInt(fields[6]);
-        record._fadeOut = Datasheet.ParseInt(fields[7]);
-        record.deferInst = Datasheet.ParseBool(fields[8]);
-        record.stopInst = Datasheet.ParseBool(fields[9]);
-        record.duration = Datasheet.ParseInt(fields[10]);
-        record.compound = Datasheet.ParseInt(fields[11]);
-        record.reverb = Datasheet.ParseInt(fields[12]);
-        record.falloff = Datasheet.ParseInt(fields[13]);
-        record.cache = Datasheet.ParseBool(fields[14]);
-        record.asyncOnly = Datasheet.ParseBool(fields[15]);
-        record.priority = Datasheet.ParseInt(fields[16]);
-        record.stream = Datasheet.ParseBool(fields[17]);
-        record.stereo = Datasheet.ParseInt(fields[18]);
-        record.tracking = Datasheet.ParseInt(fields[19]);
-        record.solo = Datasheet.ParseInt(fields[20]);
-        record.musicVol = Datasheet.ParseInt(fields[21]);
-        record.block1 = Datasheet.ParseInt(fields[22]);
-        record.block2 = Datasheet.ParseInt(fields[23]);
-        record.block3 = Datasheet.ParseInt(fields[24]);
+        int index = 0;
+            record.sound = values[index++];
+            record.index = Datasheet.ParseInt(values[index++]);
+            record._filename = values[index++];
+            record._volume = Datasheet.ParseInt(values[index++]);
+            record.groupSize = Datasheet.ParseInt(values[index++]);
+            record.loop = Datasheet.ParseBool(values[index++]);
+            record._fadeIn = Datasheet.ParseInt(values[index++]);
+            record._fadeOut = Datasheet.ParseInt(values[index++]);
+            record.deferInst = Datasheet.ParseBool(values[index++]);
+            record.stopInst = Datasheet.ParseBool(values[index++]);
+            record.duration = Datasheet.ParseInt(values[index++]);
+            record.compound = Datasheet.ParseInt(values[index++]);
+            record.reverb = Datasheet.ParseInt(values[index++]);
+            record.falloff = Datasheet.ParseInt(values[index++]);
+            record.cache = Datasheet.ParseBool(values[index++]);
+            record.asyncOnly = Datasheet.ParseBool(values[index++]);
+            record.priority = Datasheet.ParseInt(values[index++]);
+            record.stream = Datasheet.ParseBool(values[index++]);
+            record.stereo = Datasheet.ParseInt(values[index++]);
+            record.tracking = Datasheet.ParseInt(values[index++]);
+            record.solo = Datasheet.ParseInt(values[index++]);
+            record.musicVol = Datasheet.ParseInt(values[index++]);
+            record.block1 = Datasheet.ParseInt(values[index++]);
+            record.block2 = Datasheet.ParseInt(values[index++]);
+            record.block3 = Datasheet.ParseInt(values[index++]);
     }
 }

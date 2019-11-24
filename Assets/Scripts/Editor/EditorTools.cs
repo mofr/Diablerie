@@ -216,6 +216,18 @@ public class EditorTools
             Debug.Log("StormLib fs " + sw.ElapsedMilliseconds + " ms");
         }
     }
+    
+    [MenuItem("Assets/Generate Datasheet Parsers")]
+    static public void GenerateDatasheetLoaders()
+    {
+        var generator = new DatasheetLoaderGenerator();
+        var recordTypes = new System.Type[] { typeof(BodyLoc), typeof(SoundInfo)};
+        foreach (var recordType in recordTypes)
+        {
+            var filename = generator.GenerateToDirectory(recordType, "Assets/Scripts/Datasheets/GeneratedLoaders/");
+            AssetDatabase.ImportAsset(filename);
+        }
+    }
 }
 
 public static class ScriptableObjectUtility

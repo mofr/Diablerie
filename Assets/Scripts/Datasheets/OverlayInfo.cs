@@ -31,10 +31,11 @@ public class OverlayInfo
     public string spritesheetFilename;
 
     public static List<OverlayInfo> sheet = Datasheet.Load<OverlayInfo>("data/global/excel/Overlay.txt");
-    static Dictionary<string, OverlayInfo> map = new Dictionary<string, OverlayInfo>();
+    static Dictionary<string, OverlayInfo> map;
 
     static OverlayInfo()
     {
+        map = new Dictionary<string, OverlayInfo>(sheet.Count);
         foreach (var row in sheet)
         {
             if (row.filename == null)
