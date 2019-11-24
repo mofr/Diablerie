@@ -221,7 +221,7 @@ public class EditorTools
     static public void GenerateDatasheetLoaders()
     {
         var generator = new DatasheetLoaderGenerator();
-        var recordTypes = new System.Type[] { typeof(BodyLoc), typeof(SoundInfo), typeof(OverlayInfo), typeof(MonSound), typeof(LevelType)};
+        var recordTypes = new System.Type[] { typeof(BodyLoc), typeof(SoundInfo), typeof(OverlayInfo), typeof(MonSound), typeof(LevelType), typeof(SkillInfo)};
         foreach (var recordType in recordTypes)
         {
             var filename = generator.GenerateToDirectory(recordType, "Assets/Scripts/Datasheets/GeneratedLoaders/");
