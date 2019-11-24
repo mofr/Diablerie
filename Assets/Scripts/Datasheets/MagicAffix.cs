@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class MagicAffix
 {
     public static List<MagicAffix> prefixes = Datasheet.Load<MagicAffix>("data/global/excel/MagicPrefix.txt");
@@ -33,6 +34,7 @@ public class MagicAffix
     }
 
     [System.Serializable]
+    [Datasheet.Record]
     public struct Mod
     {
         public string code;

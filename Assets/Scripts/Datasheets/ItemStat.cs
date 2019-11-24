@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class ItemStat
 {
     public static List<ItemStat> sheet = Datasheet.Load<ItemStat>("data/global/excel/ItemStatCost.txt");

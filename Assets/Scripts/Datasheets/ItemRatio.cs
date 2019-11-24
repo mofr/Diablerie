@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class ItemRatio
 {
     public static List<ItemRatio> sheet = Datasheet.Load<ItemRatio>("data/global/excel/ItemRatio.txt");

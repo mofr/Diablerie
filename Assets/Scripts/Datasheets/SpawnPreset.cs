@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class SpawnPreset
 {
     public int act;
@@ -18,7 +19,7 @@ public class SpawnPreset
     public string[] gear;
     public string colormap;
     public string index;
-    string eol;
+    public string eol;
 
     public static List<SpawnPreset> sheet = Datasheet.Load<SpawnPreset>("/obj.txt");
     static Dictionary<long, SpawnPreset> lookup = new Dictionary<long, SpawnPreset>();

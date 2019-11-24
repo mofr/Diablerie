@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class SuperUnique
 {
     public static List<SuperUnique> sheet = Datasheet.Load<SuperUnique>("data/global/excel/SuperUniques.txt");

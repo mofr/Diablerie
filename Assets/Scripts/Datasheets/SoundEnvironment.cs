@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class SoundEnvironment
 {
     public static List<SoundEnvironment> sheet = Datasheet.Load<SoundEnvironment>("data/global/excel/SoundEnviron.txt");

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class ItemSet
 {
     public static List<ItemSet> sheet = Datasheet.Load<ItemSet>("data/global/excel/Sets.txt");
@@ -19,6 +20,7 @@ public class ItemSet
     }
 
     [System.Serializable]
+    [Datasheet.Record]
     public struct Prop
     {
         public string prop;

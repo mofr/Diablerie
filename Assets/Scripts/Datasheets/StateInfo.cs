@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class StateInfo
 {
     public static List<StateInfo> sheet = Datasheet.Load<StateInfo>("data/global/excel/States.txt");

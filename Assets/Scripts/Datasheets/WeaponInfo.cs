@@ -1,4 +1,5 @@
 ﻿[System.Serializable]
+[Datasheet.Record]
 public class WeaponInfo : ItemInfo
 {
     public string _name;

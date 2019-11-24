@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class CharStatsInfo
 {
     public static List<CharStatsInfo> sheet = Datasheet.Load<CharStatsInfo>("data/global/excel/CharStats.txt");
@@ -16,6 +17,7 @@ public class CharStatsInfo
     }
 
     [System.Serializable]
+    [Datasheet.Record]
     public struct StartingItem
     {
         public string code;

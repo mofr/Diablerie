@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class TreasureClass
 {
     public static List<TreasureClass> sheet = Datasheet.Load<TreasureClass>("data/global/excel/TreasureClassEx.txt");
@@ -92,6 +93,7 @@ public class TreasureClass
     }
 
     [System.Serializable]
+    [Datasheet.Record]
     public struct Node
     {
         public string code;

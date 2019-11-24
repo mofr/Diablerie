@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class LevelMazeInfo
 {
     public static List<LevelMazeInfo> sheet = Datasheet.Load<LevelMazeInfo>("data/global/excel/LvlMaze.txt");

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class ItemInfo
 {
     public static List<ArmorInfo> armorSheet = Datasheet.Load<ArmorInfo>("data/global/excel/armor.txt");

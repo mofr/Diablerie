@@ -1,4 +1,5 @@
 ﻿[System.Serializable]
+[Datasheet.Record]
 public class MiscInfo : ItemInfo
 {
     public enum UseFunction

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class ItemType
 {
     public static List<ItemType> sheet = Datasheet.Load<ItemType>("data/global/excel/ItemTypes.txt");

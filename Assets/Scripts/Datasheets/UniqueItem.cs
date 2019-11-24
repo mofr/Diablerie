@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class UniqueItem
 {
     public static List<UniqueItem> sheet = Datasheet.Load<UniqueItem>("data/global/excel/UniqueItems.txt");
@@ -17,6 +18,7 @@ public class UniqueItem
     }
 
     [System.Serializable]
+    [Datasheet.Record]
     public struct Prop
     {
         public string prop;

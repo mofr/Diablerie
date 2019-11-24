@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class ItemPropertyInfo
 {
     public static List<ItemPropertyInfo> sheet = Datasheet.Load<ItemPropertyInfo>("data/global/excel/Properties.txt");
@@ -31,6 +32,7 @@ public class ItemPropertyInfo
     }
 
     [System.Serializable]
+    [Datasheet.Record]
     public struct Block
     {
         public string set;

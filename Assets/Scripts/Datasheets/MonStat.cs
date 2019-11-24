@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class MonStat
 {
     [System.Serializable]
-    public class TreasureClassInfo
+    [Datasheet.Record]
+    public struct TreasureClassInfo
     {
         public string _normal;
         public string _champion;
@@ -25,7 +27,8 @@ public class MonStat
     }
 
     [System.Serializable]
-    public class Stats
+    [Datasheet.Record]
+    public struct Stats
     {
         public int minHP;
         public int maxHP;
@@ -160,7 +163,7 @@ public class MonStat
     public string SplGetModeChart;
     public string SplEndGeneric;
     public string SplClientEnd;
-    string eol;
+    public string eol;
 
     [System.NonSerialized]
     public MonStatsExtended ext;
@@ -199,12 +202,12 @@ public class MonStat
             stat.minion2 = stat.minion2Id == null ? null : Find(stat.minion2Id);
             stat.sound = MonSound.Find(stat.monSoundId);
             stat.uniqueSound = MonSound.Find(stat.uMonSoundId);
-            foreach(var tcInfo in stat.treasureClass)
+            for(int i = 0; i < stat.treasureClass.Length; ++i)
             {
-                tcInfo.normal = TreasureClass.Find(tcInfo._normal);
-                tcInfo.champion = TreasureClass.Find(tcInfo._champion);
-                tcInfo.unique = TreasureClass.Find(tcInfo._unique);
-                tcInfo.quest = TreasureClass.Find(tcInfo._quest);
+                stat.treasureClass[i].normal = TreasureClass.Find(stat.treasureClass[i]._normal);
+                stat.treasureClass[i].champion = TreasureClass.Find(stat.treasureClass[i]._champion);
+                stat.treasureClass[i].unique = TreasureClass.Find(stat.treasureClass[i]._unique);
+                stat.treasureClass[i].quest = TreasureClass.Find(stat.treasureClass[i]._quest);
             }
         }
     }

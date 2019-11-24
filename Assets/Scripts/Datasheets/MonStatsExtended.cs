@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class MonStatsExtended
 {
     public string id;
@@ -71,7 +72,7 @@ public class MonStatsExtended
     public int infernoRollback;
     public string resurrectMode;
     public string resurrectSkill;
-    string eol;
+    public string eol;
 
     [System.NonSerialized]
     public string[][] gearVariants = new string[16][];

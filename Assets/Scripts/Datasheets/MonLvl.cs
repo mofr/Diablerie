@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class MonLvl
 {
     public static List<MonLvl> sheet = Datasheet.Load<MonLvl>("data/global/excel/MonLvl.txt");
