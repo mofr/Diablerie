@@ -2,6 +2,7 @@
 // It's generated file. DO NOT MODIFY IT!
 class SkillInfoLoader : Datasheet.Loader<SkillInfo>
 {
+
     public void LoadRecord(ref SkillInfo record, Datasheet.Stream stream)
     {
                 Datasheet.Parse(stream.NextString(), ref record.skill);

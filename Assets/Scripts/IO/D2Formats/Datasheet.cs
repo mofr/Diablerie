@@ -215,15 +215,15 @@ public struct Datasheet
         throw new FormatException("Unable to cast '" + value + "' to " + type);
     }
 
-    public struct Stream
+    public class Stream
     {
         private string[] values;
         private int index;
         
-        public Stream(string[] values)
+        public Stream(string[] values, int offset = 0)
         {
             this.values = values;
-            index = 0;
+            index = offset;
         }
 
         public string NextString()

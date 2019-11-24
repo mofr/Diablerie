@@ -2,6 +2,7 @@
 // It's generated file. DO NOT MODIFY IT!
 class LevelTypeLoader : Datasheet.Loader<LevelType>
 {
+
     public void LoadRecord(ref LevelType record, Datasheet.Stream stream)
     {
                 Datasheet.Parse(stream.NextString(), ref record.name);

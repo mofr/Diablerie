@@ -2,6 +2,7 @@
 // It's generated file. DO NOT MODIFY IT!
 class MonSoundLoader : Datasheet.Loader<MonSound>
 {
+
     public void LoadRecord(ref MonSound record, Datasheet.Stream stream)
     {
                 Datasheet.Parse(stream.NextString(), ref record.id);

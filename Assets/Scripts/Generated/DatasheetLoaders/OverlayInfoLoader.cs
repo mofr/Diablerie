@@ -2,6 +2,7 @@
 // It's generated file. DO NOT MODIFY IT!
 class OverlayInfoLoader : Datasheet.Loader<OverlayInfo>
 {
+
     public void LoadRecord(ref OverlayInfo record, Datasheet.Stream stream)
     {
                 Datasheet.Parse(stream.NextString(), ref record.id);
