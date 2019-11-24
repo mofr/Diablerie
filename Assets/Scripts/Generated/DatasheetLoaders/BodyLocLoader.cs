@@ -5,7 +5,7 @@ class BodyLocLoader : Datasheet.Loader<BodyLoc>
     public void LoadRecord(ref BodyLoc record, string[] values)
     {
         int index = 0;
-            Datasheet.Parse(values[index++], ref record.name);
-            Datasheet.Parse(values[index++], ref record.code);
+                Datasheet.Parse(values[index++], ref record.name);
+                Datasheet.Parse(values[index++], ref record.code);
     }
 }

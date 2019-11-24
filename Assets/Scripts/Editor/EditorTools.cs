@@ -224,7 +224,7 @@ public class EditorTools
         var recordTypes = new System.Type[] { typeof(BodyLoc), typeof(SoundInfo), typeof(OverlayInfo), typeof(MonSound), typeof(LevelType), typeof(SkillInfo)};
         foreach (var recordType in recordTypes)
         {
-            var filename = generator.GenerateToDirectory(recordType, "Assets/Scripts/Datasheets/GeneratedLoaders/");
+            var filename = generator.GenerateToDirectory(recordType, "Assets/Scripts/Generated/DatasheetLoaders/");
             AssetDatabase.ImportAsset(filename);
         }
     }

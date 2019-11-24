@@ -73,12 +73,12 @@ class {{ type.name }}Loader : Datasheet.Loader<{{ type.name }}>
         int index = 0;
         {{~ for field in type.fields ~}}
             {{~ if field.is_array ~}}
-            record.{{ field.name }} = new {{ field.element.name }}[{{ field.array_size }}];
-            {{~ for item_index in 0..(field.array_size-1) ~}}
-            Datasheet.Parse(values[index++], ref record.{{ field.name }}[{{ item_index }}]);
-            {{~ end ~}}
+                record.{{ field.name }} = new {{ field.element.name }}[{{ field.array_size }}];
+                {{~ for item_index in 0..(field.array_size-1) ~}}
+                    Datasheet.Parse(values[index++], ref record.{{ field.name }}[{{ item_index }}]);
+                {{~ end ~}}
             {{~ else ~}}
-            Datasheet.Parse(values[index++], ref record.{{ field.name }});
+                Datasheet.Parse(values[index++], ref record.{{ field.name }});
             {{~ end ~}}
         {{~ end ~}}
     }

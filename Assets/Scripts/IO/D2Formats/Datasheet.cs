@@ -238,6 +238,13 @@ public struct Datasheet
         result = ParseBool(value);
     }
 
+    public static void Parse(string value, ref float result)
+    {
+        if (value == "" || value == "xxx")
+            return;
+        result = (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
+    }
+
     public static int ParseInt(string str)
     {
         if (str.Length == 0)
