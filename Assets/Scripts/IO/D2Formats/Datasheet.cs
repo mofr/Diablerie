@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -30,11 +29,6 @@ public struct Datasheet
 
     private static Dictionary<Type, object> loaders = new Dictionary<Type, object>();
 
-    public static void RegisterLoader<T>(Loader<T> loader)
-    {
-        loaders.Add(typeof(T), loader);
-    }
-    
     private static void RegisterLoader(Type recordType, object loader)
     {
         loaders.Add(recordType, loader);
@@ -62,8 +56,9 @@ public struct Datasheet
         Profiler.EndSample();
 
         Loader<T> loader = GetLoader<T>();
+        if (loader == null)
+            throw new Exception("Datasheet loader for " + typeof(T) + " not found");
 
-        MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T));
         int expectedFieldCount = CalcFieldCount(typeof(T));
         var lines = csv.Split('\n');
         var sheet = new List<T>(lines.Length);
@@ -85,15 +80,8 @@ public struct Datasheet
             try
             {
                 T obj = new T();
-                if (loader != null)
-                {
-                    var stream = new Stream(fields);
-                    loader.LoadRecord(ref obj, stream);
-                }
-                else
-                {
-                    ReadObject(obj, members, fields);
-                }
+                var stream = new Stream(fields);
+                loader.LoadRecord(ref obj, stream);
                 sheet.Add(obj);
             }
             catch (Exception e)
@@ -130,94 +118,6 @@ public struct Datasheet
         }
 
         return fieldCount;
-    }
-
-    static int ReadObject(object obj, MemberInfo[] members, string[] fields, int fieldIndex = 0)
-    {
-        for (int memberIndex = 0; memberIndex < members.Length; ++memberIndex)
-        {
-            MemberInfo member = members[memberIndex];
-            try
-            {
-                fieldIndex = ReadMember(obj, member, fields, fieldIndex);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Datasheet parsing error at column " + (fieldIndex + 1) + " memberIndex " + memberIndex + " member " + member, e);
-            }
-        }
-        return fieldIndex;
-    }
-
-    static int ReadMember(object obj, MemberInfo member, string[] fields, int fieldIndex)
-    {
-        FieldInfo fi = (FieldInfo)member;
-        if (fi.FieldType.IsArray)
-        {
-            var elementType = fi.FieldType.GetElementType();
-            var seq = (Sequence)Attribute.GetCustomAttribute(fi, typeof(Sequence), true);
-            var array = (IList)Array.CreateInstance(elementType, seq.length);
-            fi.SetValue(obj, array);
-            var elementMembers = FormatterServices.GetSerializableMembers(elementType);
-            for (int i = 0; i < array.Count; ++i)
-            {
-                if (elementMembers.Length == 0)
-                {
-                    object value = CastValue(fields[fieldIndex], elementType);
-                    if (value != null)
-                        array[i] = value;
-                    ++fieldIndex;
-                }
-                else
-                {
-                    object element = Activator.CreateInstance(elementType);
-                    fieldIndex = ReadObject(element, elementMembers, fields, fieldIndex);
-                    array[i] = element;
-                }
-            }
-        }
-        else
-        {
-            object value = CastValue(fields[fieldIndex], fi.FieldType);
-            if (value != null)
-                fi.SetValue(obj, value);
-            ++fieldIndex;
-        }
-
-        return fieldIndex;
-    }
-
-    static object CastValue(string value, Type type)
-    {
-        if (value == "" || value == "xxx")
-            return null;
-
-        if (type == typeof(bool))
-        {
-            return ParseBool(value);
-        }
-
-        if (type == typeof(string))
-        {
-            return value;
-        }
-
-        if (type == typeof(int))
-        {
-            return ParseInt(value);
-        }
-        
-        if (type == typeof(uint))
-        {
-            return ParseUInt(value);
-        }
-        
-        if (type == typeof(float))
-        {
-            return (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
-        }
-
-        throw new FormatException("Unable to cast '" + value + "' to " + type);
     }
 
     public class Stream
