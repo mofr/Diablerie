@@ -5,80 +5,55 @@ class SoundInfoLoader : Datasheet.Loader<SoundInfo>
     public void LoadRecord(ref SoundInfo record, string[] values)
     {
         int index = 0;
-            if (values[index] != "")
-                record.sound = values[index];
+            Datasheet.Parse(values[index], ref record.sound);
             index++;
-            if (values[index] != "")
-                record.index = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.index);
             index++;
-            if (values[index] != "")
-                record._filename = values[index];
+            Datasheet.Parse(values[index], ref record._filename);
             index++;
-            if (values[index] != "")
-                record._volume = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record._volume);
             index++;
-            if (values[index] != "")
-                record.groupSize = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.groupSize);
             index++;
-            if (values[index] != "")
-                record.loop = Datasheet.ParseBool(values[index]);
+            Datasheet.Parse(values[index], ref record.loop);
             index++;
-            if (values[index] != "")
-                record._fadeIn = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record._fadeIn);
             index++;
-            if (values[index] != "")
-                record._fadeOut = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record._fadeOut);
             index++;
-            if (values[index] != "")
-                record.deferInst = Datasheet.ParseBool(values[index]);
+            Datasheet.Parse(values[index], ref record.deferInst);
             index++;
-            if (values[index] != "")
-                record.stopInst = Datasheet.ParseBool(values[index]);
+            Datasheet.Parse(values[index], ref record.stopInst);
             index++;
-            if (values[index] != "")
-                record.duration = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.duration);
             index++;
-            if (values[index] != "")
-                record.compound = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.compound);
             index++;
-            if (values[index] != "")
-                record.reverb = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.reverb);
             index++;
-            if (values[index] != "")
-                record.falloff = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.falloff);
             index++;
-            if (values[index] != "")
-                record.cache = Datasheet.ParseBool(values[index]);
+            Datasheet.Parse(values[index], ref record.cache);
             index++;
-            if (values[index] != "")
-                record.asyncOnly = Datasheet.ParseBool(values[index]);
+            Datasheet.Parse(values[index], ref record.asyncOnly);
             index++;
-            if (values[index] != "")
-                record.priority = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.priority);
             index++;
-            if (values[index] != "")
-                record.stream = Datasheet.ParseBool(values[index]);
+            Datasheet.Parse(values[index], ref record.stream);
             index++;
-            if (values[index] != "")
-                record.stereo = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.stereo);
             index++;
-            if (values[index] != "")
-                record.tracking = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.tracking);
             index++;
-            if (values[index] != "")
-                record.solo = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.solo);
             index++;
-            if (values[index] != "")
-                record.musicVol = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.musicVol);
             index++;
-            if (values[index] != "")
-                record.block1 = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.block1);
             index++;
-            if (values[index] != "")
-                record.block2 = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.block2);
             index++;
-            if (values[index] != "")
-                record.block3 = Datasheet.ParseInt(values[index]);
+            Datasheet.Parse(values[index], ref record.block3);
             index++;
     }
 }

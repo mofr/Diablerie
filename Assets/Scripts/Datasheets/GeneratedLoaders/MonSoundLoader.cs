@@ -1,0 +1,91 @@
+
+// It's generated file. DO NOT MODIFY IT!
+class MonSoundLoader : Datasheet.Loader<MonSound>
+{
+    public void LoadRecord(ref MonSound record, string[] values)
+    {
+        int index = 0;
+            Datasheet.Parse(values[index], ref record.id);
+            index++;
+            Datasheet.Parse(values[index], ref record._attack1);
+            index++;
+            Datasheet.Parse(values[index], ref record._weapon1);
+            index++;
+            Datasheet.Parse(values[index], ref record._attack1Delay);
+            index++;
+            Datasheet.Parse(values[index], ref record._weapon1Delay);
+            index++;
+            Datasheet.Parse(values[index], ref record.attack1Prob);
+            index++;
+            Datasheet.Parse(values[index], ref record._weapon1Volume);
+            index++;
+            Datasheet.Parse(values[index], ref record._attack2);
+            index++;
+            Datasheet.Parse(values[index], ref record._weapon2);
+            index++;
+            Datasheet.Parse(values[index], ref record._attack2Delay);
+            index++;
+            Datasheet.Parse(values[index], ref record._weapon2Delay);
+            index++;
+            Datasheet.Parse(values[index], ref record.attack2Prob);
+            index++;
+            Datasheet.Parse(values[index], ref record._weapon2Volume);
+            index++;
+            Datasheet.Parse(values[index], ref record._hitSound);
+            index++;
+            Datasheet.Parse(values[index], ref record._deathSound);
+            index++;
+            Datasheet.Parse(values[index], ref record._hitDelay);
+            index++;
+            Datasheet.Parse(values[index], ref record._deathDelay);
+            index++;
+            Datasheet.Parse(values[index], ref record._skill1);
+            index++;
+            Datasheet.Parse(values[index], ref record._skill2);
+            index++;
+            Datasheet.Parse(values[index], ref record._skill3);
+            index++;
+            Datasheet.Parse(values[index], ref record._skill4);
+            index++;
+            Datasheet.Parse(values[index], ref record._footstep);
+            index++;
+            Datasheet.Parse(values[index], ref record._footstepLayer);
+            index++;
+            Datasheet.Parse(values[index], ref record._fsCnt);
+            index++;
+            Datasheet.Parse(values[index], ref record._fsOff);
+            index++;
+            Datasheet.Parse(values[index], ref record._fsPrb);
+            index++;
+            Datasheet.Parse(values[index], ref record._neutral);
+            index++;
+            Datasheet.Parse(values[index], ref record._neuTime);
+            index++;
+            Datasheet.Parse(values[index], ref record._init);
+            index++;
+            Datasheet.Parse(values[index], ref record._taunt);
+            index++;
+            Datasheet.Parse(values[index], ref record._flee);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtMo1);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtSk1);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtTgt1);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtMo2);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtSk2);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtTgt2);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtMo3);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtSk3);
+            index++;
+            Datasheet.Parse(values[index], ref record._cvtTgt3);
+            index++;
+            Datasheet.Parse(values[index], ref record.eol);
+            index++;
+    }
+}

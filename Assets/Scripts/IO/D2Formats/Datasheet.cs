@@ -210,6 +210,34 @@ public struct Datasheet
         throw new FormatException("Unable to cast '" + value + "' to " + type);
     }
 
+    public static void Parse(string value, ref int result)
+    {
+        if (value == "" || value == "xxx")
+            return;
+        result = ParseInt(value);
+    }
+
+    public static void Parse(string value, ref uint result)
+    {
+        if (value == "" || value == "xxx")
+            return;
+        result = ParseUInt(value);
+    }
+
+    public static void Parse(string value, ref string result)
+    {
+        if (value == "" || value == "xxx")
+            return;
+        result = value;
+    }
+
+    public static void Parse(string value, ref bool result)
+    {
+        if (value == "" || value == "xxx")
+            return;
+        result = ParseBool(value);
+    }
+
     public static int ParseInt(string str)
     {
         if (str.Length == 0)

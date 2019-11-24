@@ -75,21 +75,8 @@ class {{ type.name }}Loader : Datasheet.Loader<{{ type.name }}>
             {{~ if field.is_array ~}}
             record.{{ field.name }} = new {{ field.element.name }}[{{ field.array_size }}];
             index += {{ field.array_size }};  // TODO implement arrays
-            {{~ else if field.type == 'int' ~}}
-            if (values[index] != """")
-                record.{{ field.name }} = Datasheet.ParseInt(values[index]);
-            index++;
-            {{~ else if field.type == 'uint' ~}}
-            if (values[index] != """")
-                record.{{ field.name }} = Datasheet.ParseUInt(values[index]);
-            index++;
-            {{~ else if field.type == 'bool' ~}}
-            if (values[index] != """")
-                record.{{ field.name }} = Datasheet.ParseBool(values[index]);
-            index++;
             {{~ else ~}}
-            if (values[index] != """")
-                record.{{ field.name }} = values[index];
+            Datasheet.Parse(values[index], ref record.{{ field.name }});
             index++;
             {{~ end ~}}
         {{~ end ~}}
