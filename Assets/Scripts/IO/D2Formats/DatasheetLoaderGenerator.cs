@@ -34,6 +34,8 @@ public class DatasheetLoaderGenerator
                 return "float";
             if (type == typeof(string))
                 return "string";
+            if (type.IsNested)
+                return type.ReflectedType.Name + "." + type.Name;
             return type.Name;
         }
     }
@@ -68,17 +70,16 @@ public class DatasheetLoaderGenerator
 // It's generated file. DO NOT MODIFY IT!
 class {{ type.name }}Loader : Datasheet.Loader<{{ type.name }}>
 {
-    public void LoadRecord(ref {{ type.name }} record, string[] values)
+    public void LoadRecord(ref {{ type.name }} record, Datasheet.Stream stream)
     {
-        int index = 0;
         {{~ for field in type.fields ~}}
             {{~ if field.is_array ~}}
                 record.{{ field.name }} = new {{ field.element.name }}[{{ field.array_size }}];
                 {{~ for item_index in 0..(field.array_size-1) ~}}
-                    Datasheet.Parse(values[index++], ref record.{{ field.name }}[{{ item_index }}]);
+                    Datasheet.Parse(stream.NextString(), ref record.{{ field.name }}[{{ item_index }}]);
                 {{~ end ~}}
             {{~ else ~}}
-                Datasheet.Parse(values[index++], ref record.{{ field.name }});
+                Datasheet.Parse(stream.NextString(), ref record.{{ field.name }});
             {{~ end ~}}
         {{~ end ~}}
     }

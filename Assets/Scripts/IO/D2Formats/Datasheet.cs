@@ -20,7 +20,7 @@ public struct Datasheet
 
     public interface Loader<T>
     {
-        void LoadRecord(ref T record, string[] fields);
+        void LoadRecord(ref T record, Stream stream);
     }
 
     private static Dictionary<Type, object> loaders = new Dictionary<Type, object>();
@@ -81,9 +81,14 @@ public struct Datasheet
             {
                 T obj = new T();
                 if (loader != null)
-                    loader.LoadRecord(ref obj, fields);
+                {
+                    var stream = new Stream(fields);
+                    loader.LoadRecord(ref obj, stream);
+                }
                 else
+                {
                     ReadObject(obj, members, fields);
+                }
                 sheet.Add(obj);
             }
             catch (Exception e)
@@ -208,6 +213,23 @@ public struct Datasheet
         }
 
         throw new FormatException("Unable to cast '" + value + "' to " + type);
+    }
+
+    public struct Stream
+    {
+        private string[] values;
+        private int index;
+        
+        public Stream(string[] values)
+        {
+            this.values = values;
+            index = 0;
+        }
+
+        public string NextString()
+        {
+            return values[index++];
+        }
     }
 
     public static void Parse(string value, ref int result)
