@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class MonSound
 {
     public static List<MonSound> sheet = Datasheet.Load<MonSound>("data/global/excel/MonSounds.txt");

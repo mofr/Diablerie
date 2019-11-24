@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class BodyLoc
 {
     public static List<BodyLoc> sheet = Datasheet.Load<BodyLoc>("data/global/excel/bodylocs.txt");

@@ -9,3 +9,4 @@ class BodyLocLoader : Datasheet.Loader<BodyLoc>
                 Datasheet.Parse(stream.NextString(), ref record.code);
     }
 }
+    

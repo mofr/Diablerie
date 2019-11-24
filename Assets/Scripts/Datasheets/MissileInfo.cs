@@ -2,9 +2,11 @@
 using UnityEngine;
 
 [System.Serializable]
+[Datasheet.Record]
 public class MissileInfo
 {
     [System.Serializable]
+    [Datasheet.Record]
     public struct Param
     {
         public int value;

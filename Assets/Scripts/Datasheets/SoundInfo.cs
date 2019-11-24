@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 
 [System.Serializable]
+[Datasheet.Record]
 public class SoundInfo
 {
     public static List<SoundInfo> sheet = Datasheet.Load<SoundInfo>("data/global/excel/Sounds.txt");

@@ -18,6 +18,11 @@ public struct Datasheet
         public int length;
     }
 
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+    public class Record : Attribute
+    {
+    }
+
     public interface Loader<T>
     {
         void LoadRecord(ref T record, Stream stream);

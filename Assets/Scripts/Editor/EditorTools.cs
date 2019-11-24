@@ -221,9 +221,22 @@ public class EditorTools
     static public void GenerateDatasheetLoaders()
     {
         var generator = new DatasheetLoaderGenerator();
-        var recordTypes = new System.Type[] { typeof(BodyLoc), typeof(SoundInfo), typeof(OverlayInfo), typeof(MonSound), typeof(LevelType), typeof(SkillInfo), typeof(MissileInfo), typeof(MissileInfo.Param)};
+        var recordTypes = new List<System.Type>();
+        foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+        {
+            var types = assembly.GetTypes();
+            foreach (var type in types)
+            {
+                var recordAttributes = type.GetCustomAttributes(typeof(Datasheet.Record), true);
+                if (recordAttributes.Length > 0)
+                {
+                    recordTypes.Add(type);
+                }
+            }
+        }
         foreach (var recordType in recordTypes)
         {
+            Debug.Log("Generating loader for " + recordType);
             var filename = generator.GenerateToDirectory(recordType, "Assets/Scripts/Generated/DatasheetLoaders/");
             AssetDatabase.ImportAsset(filename);
         }

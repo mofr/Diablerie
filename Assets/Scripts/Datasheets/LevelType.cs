@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class LevelType
 {
     public string name;

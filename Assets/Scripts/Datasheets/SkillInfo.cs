@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 [System.Serializable]
+[Datasheet.Record]
 public class SkillInfo
 {
     public static SkillInfo Attack;
