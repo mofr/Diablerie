@@ -2,7 +2,7 @@
 
 [![Windows Build Status](http://diablerie.zond.org/build/image/?target=win64)](http://diablerie.zond.org/download/?target=win64)
 
-[![Linux Build Status](http://diablerie.zond.org/build/image/?target=linux)](http://diablerie.zond.org/download/?target=linux)
+[![Linux Build Status](http://diablerie.zond.org/build/image/?target=linux)](http://diablerie.zond.org/download/?target=linux) (Unity cloud build doesn't provide latest Unity versions for Linux yet)
 
 ![alt tag](https://raw.github.com/mofr/Diablerie/master/Screenshots/rogue_camp.png)
 
