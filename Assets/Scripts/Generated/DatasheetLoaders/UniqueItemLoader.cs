@@ -6,27 +6,27 @@ class UniqueItemLoader : Datasheet.Loader<UniqueItem>
 
     public void LoadRecord(ref UniqueItem record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.nameStr);
-                Datasheet.Parse(stream.NextString(), ref record.version);
-                Datasheet.Parse(stream.NextString(), ref record.enabled);
-                Datasheet.Parse(stream.NextString(), ref record.ladder);
-                Datasheet.Parse(stream.NextString(), ref record.rarity);
-                Datasheet.Parse(stream.NextString(), ref record.noLimit);
-                Datasheet.Parse(stream.NextString(), ref record.level);
-                Datasheet.Parse(stream.NextString(), ref record.levelReq);
-                Datasheet.Parse(stream.NextString(), ref record.code);
-                Datasheet.Parse(stream.NextString(), ref record.type);
-                Datasheet.Parse(stream.NextString(), ref record.uber);
-                Datasheet.Parse(stream.NextString(), ref record.carry1);
-                Datasheet.Parse(stream.NextString(), ref record.costMult);
-                Datasheet.Parse(stream.NextString(), ref record.costAdd);
-                Datasheet.Parse(stream.NextString(), ref record.chrTransform);
-                Datasheet.Parse(stream.NextString(), ref record.invTransform);
-                Datasheet.Parse(stream.NextString(), ref record.flippyFile);
-                Datasheet.Parse(stream.NextString(), ref record.invFile);
-                Datasheet.Parse(stream.NextString(), ref record._dropSound);
-                Datasheet.Parse(stream.NextString(), ref record._dropSoundFrame);
-                Datasheet.Parse(stream.NextString(), ref record._useSound);
+                stream.Read(ref record.nameStr);
+                stream.Read(ref record.version);
+                stream.Read(ref record.enabled);
+                stream.Read(ref record.ladder);
+                stream.Read(ref record.rarity);
+                stream.Read(ref record.noLimit);
+                stream.Read(ref record.level);
+                stream.Read(ref record.levelReq);
+                stream.Read(ref record.code);
+                stream.Read(ref record.type);
+                stream.Read(ref record.uber);
+                stream.Read(ref record.carry1);
+                stream.Read(ref record.costMult);
+                stream.Read(ref record.costAdd);
+                stream.Read(ref record.chrTransform);
+                stream.Read(ref record.invTransform);
+                stream.Read(ref record.flippyFile);
+                stream.Read(ref record.invFile);
+                stream.Read(ref record._dropSound);
+                stream.Read(ref record._dropSoundFrame);
+                stream.Read(ref record._useSound);
                 record.props = new UniqueItem.Prop[12];
                     uniqueitemproploader.LoadRecord(ref record.props[0], stream);
                     uniqueitemproploader.LoadRecord(ref record.props[1], stream);
@@ -40,6 +40,6 @@ class UniqueItemLoader : Datasheet.Loader<UniqueItem>
                     uniqueitemproploader.LoadRecord(ref record.props[9], stream);
                     uniqueitemproploader.LoadRecord(ref record.props[10], stream);
                     uniqueitemproploader.LoadRecord(ref record.props[11], stream);
-                Datasheet.Parse(stream.NextString(), ref record.eol);
+                stream.Read(ref record.eol);
     }
 }

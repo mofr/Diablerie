@@ -5,9 +5,9 @@ class MagicAffixModLoader : Datasheet.Loader<MagicAffix.Mod>
 
     public void LoadRecord(ref MagicAffix.Mod record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.code);
-                Datasheet.Parse(stream.NextString(), ref record.param);
-                Datasheet.Parse(stream.NextString(), ref record.min);
-                Datasheet.Parse(stream.NextString(), ref record.max);
+                stream.Read(ref record.code);
+                stream.Read(ref record.param);
+                stream.Read(ref record.min);
+                stream.Read(ref record.max);
     }
 }

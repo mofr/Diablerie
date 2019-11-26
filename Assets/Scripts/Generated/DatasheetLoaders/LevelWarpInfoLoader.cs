@@ -5,19 +5,19 @@ class LevelWarpInfoLoader : Datasheet.Loader<LevelWarpInfo>
 
     public void LoadRecord(ref LevelWarpInfo record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.name);
-                Datasheet.Parse(stream.NextString(), ref record.id);
-                Datasheet.Parse(stream.NextString(), ref record.selectX);
-                Datasheet.Parse(stream.NextString(), ref record.selectY);
-                Datasheet.Parse(stream.NextString(), ref record.selectDX);
-                Datasheet.Parse(stream.NextString(), ref record.selectDY);
-                Datasheet.Parse(stream.NextString(), ref record.exitWalkX);
-                Datasheet.Parse(stream.NextString(), ref record.exitWalkY);
-                Datasheet.Parse(stream.NextString(), ref record.offsetX);
-                Datasheet.Parse(stream.NextString(), ref record.offsetY);
-                Datasheet.Parse(stream.NextString(), ref record.litVersion);
-                Datasheet.Parse(stream.NextString(), ref record.tiles);
-                Datasheet.Parse(stream.NextString(), ref record.direction);
-                Datasheet.Parse(stream.NextString(), ref record.beta);
+                stream.Read(ref record.name);
+                stream.Read(ref record.id);
+                stream.Read(ref record.selectX);
+                stream.Read(ref record.selectY);
+                stream.Read(ref record.selectDX);
+                stream.Read(ref record.selectDY);
+                stream.Read(ref record.exitWalkX);
+                stream.Read(ref record.exitWalkY);
+                stream.Read(ref record.offsetX);
+                stream.Read(ref record.offsetY);
+                stream.Read(ref record.litVersion);
+                stream.Read(ref record.tiles);
+                stream.Read(ref record.direction);
+                stream.Read(ref record.beta);
     }
 }

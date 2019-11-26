@@ -64,34 +64,42 @@ public struct Datasheet
         var sheet = new List<T>(lines.Length);
         for (int lineIndex = 0; lineIndex < lines.Length; ++lineIndex)
         {
+            if (lineIndex < headerLines)
+                continue;
+            
             string line = lines[lineIndex];
             line = line.Replace("\r", "");
             if (line.Length == 0)
                 continue;
 
-            var fields = line.Split('\t');
-
-            if (fields.Length != expectedFieldCount)
-                throw new Exception("Field count mismatch " + typeof(T) + " (" + expectedFieldCount + " expected) at " + filename + ":" + (lineIndex + 1) + " (" + fields.Length + " fields)");
-
-            if (lineIndex < headerLines)
-                continue;
+            var fieldCount = CalcFieldCount(line);
+            if (fieldCount != expectedFieldCount)
+                throw new Exception("Field count " + fieldCount + ", expected " + expectedFieldCount + ") at " + filename + ":" + (lineIndex + 1));
 
             try
             {
+                var stream = new Stream(line);
                 T obj = new T();
-                var stream = new Stream(fields);
                 loader.LoadRecord(ref obj, stream);
                 sheet.Add(obj);
             }
             catch (Exception e)
             {
-                throw new Exception("Datasheet parsing error at line " + lineIndex + ", first field " + fields[0], e);
+                throw new Exception("Datasheet parsing error at line " + lineIndex + ", first field " + line.Substring(0, 16), e);
             }
         }
         Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms, file read " + fileReadMs + " ms)");
         Profiler.EndSample();
         return sheet;
+    }
+
+    private static int CalcFieldCount(string line)
+    {
+        int count = 0;
+        for (int i = 0; i < line.Length; ++i)
+            if (line[i] == '\t')
+                count++;
+        return count + 1;
     }
 
     private static int CalcFieldCount(Type type)
@@ -122,54 +130,64 @@ public struct Datasheet
 
     public class Stream
     {
-        private string[] values;
+        private string line;
         private int index;
         
-        public Stream(string[] values, int offset = 0)
+        public Stream(string line)
         {
-            this.values = values;
-            index = offset;
+            this.line = line;
+            index = 0;
         }
 
         public string NextString()
         {
-            return values[index++];
+            int endIndex = index;
+            while (endIndex < line.Length && line[endIndex] != '\t')
+                endIndex++;
+            string result = line.Substring(index, endIndex - index);
+            index = endIndex + 1;
+            return result;
         }
-    }
 
-    public static void Parse(string value, ref int result)
-    {
-        if (value == "" || value == "xxx")
-            return;
-        result = ParseInt(value);
-    }
+        public void Read(ref int result)
+        {
+            var value = NextString();
+            if (value == "" || value == "xxx")
+                return;
+            result = ParseInt(value);
+        }
 
-    public static void Parse(string value, ref uint result)
-    {
-        if (value == "" || value == "xxx")
-            return;
-        result = ParseUInt(value);
-    }
+        public void Read(ref uint result)
+        {
+            var value = NextString();
+            if (value == "" || value == "xxx")
+                return;
+            result = ParseUInt(value);
+        }
+        
+        public void Read(ref string result)
+        {
+            var value = NextString();
+            if (value == "" || value == "xxx")
+                return;
+            result = value;
+        }
 
-    public static void Parse(string value, ref string result)
-    {
-        if (value == "" || value == "xxx")
-            return;
-        result = value;
-    }
+        public void Read(ref bool result)
+        {
+            var value = NextString();
+            if (value == "" || value == "xxx")
+                return;
+            result = ParseBool(value);
+        }
 
-    public static void Parse(string value, ref bool result)
-    {
-        if (value == "" || value == "xxx")
-            return;
-        result = ParseBool(value);
-    }
-
-    public static void Parse(string value, ref float result)
-    {
-        if (value == "" || value == "xxx")
-            return;
-        result = (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
+        public void Read(ref float result)
+        {
+            var value = NextString();
+            if (value == "" || value == "xxx")
+                return;
+            result = (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
+        }
     }
 
     public static int ParseInt(string str)

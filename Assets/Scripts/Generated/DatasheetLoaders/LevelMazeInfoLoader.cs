@@ -5,15 +5,15 @@ class LevelMazeInfoLoader : Datasheet.Loader<LevelMazeInfo>
 
     public void LoadRecord(ref LevelMazeInfo record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.name);
-                Datasheet.Parse(stream.NextString(), ref record.levelId);
+                stream.Read(ref record.name);
+                stream.Read(ref record.levelId);
                 record.rooms = new int[3];
-                    Datasheet.Parse(stream.NextString(), ref record.rooms[0]);
-                    Datasheet.Parse(stream.NextString(), ref record.rooms[1]);
-                    Datasheet.Parse(stream.NextString(), ref record.rooms[2]);
-                Datasheet.Parse(stream.NextString(), ref record.sizeX);
-                Datasheet.Parse(stream.NextString(), ref record.sizeY);
-                Datasheet.Parse(stream.NextString(), ref record.merge);
-                Datasheet.Parse(stream.NextString(), ref record.beta);
+                    stream.Read(ref record.rooms[0]);
+                    stream.Read(ref record.rooms[1]);
+                    stream.Read(ref record.rooms[2]);
+                stream.Read(ref record.sizeX);
+                stream.Read(ref record.sizeY);
+                stream.Read(ref record.merge);
+                stream.Read(ref record.beta);
     }
 }

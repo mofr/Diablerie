@@ -5,7 +5,7 @@ class MonPresetLoader : Datasheet.Loader<MonPreset>
 
     public void LoadRecord(ref MonPreset record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.act);
-                Datasheet.Parse(stream.NextString(), ref record.place);
+                stream.Read(ref record.act);
+                stream.Read(ref record.place);
     }
 }

@@ -6,15 +6,15 @@ class TreasureClassLoader : Datasheet.Loader<TreasureClass>
 
     public void LoadRecord(ref TreasureClass record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.name);
-                Datasheet.Parse(stream.NextString(), ref record.group);
-                Datasheet.Parse(stream.NextString(), ref record.level);
-                Datasheet.Parse(stream.NextString(), ref record.picks);
-                Datasheet.Parse(stream.NextString(), ref record.unique);
-                Datasheet.Parse(stream.NextString(), ref record.set);
-                Datasheet.Parse(stream.NextString(), ref record.rare);
-                Datasheet.Parse(stream.NextString(), ref record.magic);
-                Datasheet.Parse(stream.NextString(), ref record.noDrop);
+                stream.Read(ref record.name);
+                stream.Read(ref record.group);
+                stream.Read(ref record.level);
+                stream.Read(ref record.picks);
+                stream.Read(ref record.unique);
+                stream.Read(ref record.set);
+                stream.Read(ref record.rare);
+                stream.Read(ref record.magic);
+                stream.Read(ref record.noDrop);
                 record.nodeArray = new TreasureClass.Node[10];
                     treasureclassnodeloader.LoadRecord(ref record.nodeArray[0], stream);
                     treasureclassnodeloader.LoadRecord(ref record.nodeArray[1], stream);
@@ -26,9 +26,9 @@ class TreasureClassLoader : Datasheet.Loader<TreasureClass>
                     treasureclassnodeloader.LoadRecord(ref record.nodeArray[7], stream);
                     treasureclassnodeloader.LoadRecord(ref record.nodeArray[8], stream);
                     treasureclassnodeloader.LoadRecord(ref record.nodeArray[9], stream);
-                Datasheet.Parse(stream.NextString(), ref record.sumItems);
-                Datasheet.Parse(stream.NextString(), ref record.totalProb);
-                Datasheet.Parse(stream.NextString(), ref record.dropChance);
-                Datasheet.Parse(stream.NextString(), ref record.term);
+                stream.Read(ref record.sumItems);
+                stream.Read(ref record.totalProb);
+                stream.Read(ref record.dropChance);
+                stream.Read(ref record.term);
     }
 }

@@ -5,8 +5,8 @@ class CharStatsInfoStartingItemLoader : Datasheet.Loader<CharStatsInfo.StartingI
 
     public void LoadRecord(ref CharStatsInfo.StartingItem record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.code);
-                Datasheet.Parse(stream.NextString(), ref record.loc);
-                Datasheet.Parse(stream.NextString(), ref record.count);
+                stream.Read(ref record.code);
+                stream.Read(ref record.loc);
+                stream.Read(ref record.count);
     }
 }

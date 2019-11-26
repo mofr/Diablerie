@@ -5,7 +5,7 @@ class BodyLocLoader : Datasheet.Loader<BodyLoc>
 
     public void LoadRecord(ref BodyLoc record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.name);
-                Datasheet.Parse(stream.NextString(), ref record.code);
+                stream.Read(ref record.name);
+                stream.Read(ref record.code);
     }
 }

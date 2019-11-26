@@ -5,29 +5,29 @@ class SoundEnvironmentLoader : Datasheet.Loader<SoundEnvironment>
 
     public void LoadRecord(ref SoundEnvironment record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.handle);
-                Datasheet.Parse(stream.NextString(), ref record.index);
-                Datasheet.Parse(stream.NextString(), ref record.songId);
-                Datasheet.Parse(stream.NextString(), ref record.dayAmbienceId);
-                Datasheet.Parse(stream.NextString(), ref record.nightAmbienceId);
-                Datasheet.Parse(stream.NextString(), ref record.dayEventId);
-                Datasheet.Parse(stream.NextString(), ref record.nightEventId);
-                Datasheet.Parse(stream.NextString(), ref record._eventDelay);
-                Datasheet.Parse(stream.NextString(), ref record.indoors);
-                Datasheet.Parse(stream.NextString(), ref record.material1);
-                Datasheet.Parse(stream.NextString(), ref record.material2);
-                Datasheet.Parse(stream.NextString(), ref record.EAXEnviron);
-                Datasheet.Parse(stream.NextString(), ref record.EAXEnvSize);
-                Datasheet.Parse(stream.NextString(), ref record.EAXEnvDiff);
-                Datasheet.Parse(stream.NextString(), ref record.EAXRoomVol);
-                Datasheet.Parse(stream.NextString(), ref record.EAXRoomHF);
-                Datasheet.Parse(stream.NextString(), ref record.EAXDecayTime);
-                Datasheet.Parse(stream.NextString(), ref record.EAXDecayHF);
-                Datasheet.Parse(stream.NextString(), ref record.EAXReflect);
-                Datasheet.Parse(stream.NextString(), ref record.EAXReflectDelay);
-                Datasheet.Parse(stream.NextString(), ref record.EAXReverb);
-                Datasheet.Parse(stream.NextString(), ref record.EAXRevDelay);
-                Datasheet.Parse(stream.NextString(), ref record.EAXRoomRoll);
-                Datasheet.Parse(stream.NextString(), ref record.EAXAirAbsorb);
+                stream.Read(ref record.handle);
+                stream.Read(ref record.index);
+                stream.Read(ref record.songId);
+                stream.Read(ref record.dayAmbienceId);
+                stream.Read(ref record.nightAmbienceId);
+                stream.Read(ref record.dayEventId);
+                stream.Read(ref record.nightEventId);
+                stream.Read(ref record._eventDelay);
+                stream.Read(ref record.indoors);
+                stream.Read(ref record.material1);
+                stream.Read(ref record.material2);
+                stream.Read(ref record.EAXEnviron);
+                stream.Read(ref record.EAXEnvSize);
+                stream.Read(ref record.EAXEnvDiff);
+                stream.Read(ref record.EAXRoomVol);
+                stream.Read(ref record.EAXRoomHF);
+                stream.Read(ref record.EAXDecayTime);
+                stream.Read(ref record.EAXDecayHF);
+                stream.Read(ref record.EAXReflect);
+                stream.Read(ref record.EAXReflectDelay);
+                stream.Read(ref record.EAXReverb);
+                stream.Read(ref record.EAXRevDelay);
+                stream.Read(ref record.EAXRoomRoll);
+                stream.Read(ref record.EAXAirAbsorb);
     }
 }

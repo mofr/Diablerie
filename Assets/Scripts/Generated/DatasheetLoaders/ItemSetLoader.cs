@@ -6,10 +6,10 @@ class ItemSetLoader : Datasheet.Loader<ItemSet>
 
     public void LoadRecord(ref ItemSet record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.id);
-                Datasheet.Parse(stream.NextString(), ref record.nameStr);
-                Datasheet.Parse(stream.NextString(), ref record.version);
-                Datasheet.Parse(stream.NextString(), ref record.level);
+                stream.Read(ref record.id);
+                stream.Read(ref record.nameStr);
+                stream.Read(ref record.version);
+                stream.Read(ref record.level);
                 record.props = new ItemSet.Prop[8];
                     itemsetproploader.LoadRecord(ref record.props[0], stream);
                     itemsetproploader.LoadRecord(ref record.props[1], stream);
@@ -28,6 +28,6 @@ class ItemSetLoader : Datasheet.Loader<ItemSet>
                     itemsetproploader.LoadRecord(ref record.fullProps[5], stream);
                     itemsetproploader.LoadRecord(ref record.fullProps[6], stream);
                     itemsetproploader.LoadRecord(ref record.fullProps[7], stream);
-                Datasheet.Parse(stream.NextString(), ref record.eol);
+                stream.Read(ref record.eol);
     }
 }

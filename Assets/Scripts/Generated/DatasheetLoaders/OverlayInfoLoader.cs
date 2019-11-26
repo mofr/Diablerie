@@ -5,33 +5,33 @@ class OverlayInfoLoader : Datasheet.Loader<OverlayInfo>
 
     public void LoadRecord(ref OverlayInfo record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.id);
-                Datasheet.Parse(stream.NextString(), ref record.filename);
+                stream.Read(ref record.id);
+                stream.Read(ref record.filename);
                 record.unused = new string[3];
-                    Datasheet.Parse(stream.NextString(), ref record.unused[0]);
-                    Datasheet.Parse(stream.NextString(), ref record.unused[1]);
-                    Datasheet.Parse(stream.NextString(), ref record.unused[2]);
-                Datasheet.Parse(stream.NextString(), ref record.preDraw);
+                    stream.Read(ref record.unused[0]);
+                    stream.Read(ref record.unused[1]);
+                    stream.Read(ref record.unused[2]);
+                stream.Read(ref record.preDraw);
                 record.unused2 = new string[4];
-                    Datasheet.Parse(stream.NextString(), ref record.unused2[0]);
-                    Datasheet.Parse(stream.NextString(), ref record.unused2[1]);
-                    Datasheet.Parse(stream.NextString(), ref record.unused2[2]);
-                    Datasheet.Parse(stream.NextString(), ref record.unused2[3]);
-                Datasheet.Parse(stream.NextString(), ref record.xOffset);
-                Datasheet.Parse(stream.NextString(), ref record.yOffset);
-                Datasheet.Parse(stream.NextString(), ref record.height1);
-                Datasheet.Parse(stream.NextString(), ref record.height2);
-                Datasheet.Parse(stream.NextString(), ref record.height3);
-                Datasheet.Parse(stream.NextString(), ref record.height4);
-                Datasheet.Parse(stream.NextString(), ref record.fps);
-                Datasheet.Parse(stream.NextString(), ref record.loopWaitTime);
-                Datasheet.Parse(stream.NextString(), ref record.trans);
-                Datasheet.Parse(stream.NextString(), ref record.initRadius);
-                Datasheet.Parse(stream.NextString(), ref record.radius);
-                Datasheet.Parse(stream.NextString(), ref record.red);
-                Datasheet.Parse(stream.NextString(), ref record.green);
-                Datasheet.Parse(stream.NextString(), ref record.blue);
-                Datasheet.Parse(stream.NextString(), ref record.numDirections);
-                Datasheet.Parse(stream.NextString(), ref record.localBlood);
+                    stream.Read(ref record.unused2[0]);
+                    stream.Read(ref record.unused2[1]);
+                    stream.Read(ref record.unused2[2]);
+                    stream.Read(ref record.unused2[3]);
+                stream.Read(ref record.xOffset);
+                stream.Read(ref record.yOffset);
+                stream.Read(ref record.height1);
+                stream.Read(ref record.height2);
+                stream.Read(ref record.height3);
+                stream.Read(ref record.height4);
+                stream.Read(ref record.fps);
+                stream.Read(ref record.loopWaitTime);
+                stream.Read(ref record.trans);
+                stream.Read(ref record.initRadius);
+                stream.Read(ref record.radius);
+                stream.Read(ref record.red);
+                stream.Read(ref record.green);
+                stream.Read(ref record.blue);
+                stream.Read(ref record.numDirections);
+                stream.Read(ref record.localBlood);
     }
 }

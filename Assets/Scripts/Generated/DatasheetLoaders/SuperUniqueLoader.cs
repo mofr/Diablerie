@@ -5,28 +5,28 @@ class SuperUniqueLoader : Datasheet.Loader<SuperUnique>
 
     public void LoadRecord(ref SuperUnique record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.superUnique);
-                Datasheet.Parse(stream.NextString(), ref record.nameStr);
-                Datasheet.Parse(stream.NextString(), ref record.monStatId);
-                Datasheet.Parse(stream.NextString(), ref record.hcIdx);
-                Datasheet.Parse(stream.NextString(), ref record.monSound);
-                Datasheet.Parse(stream.NextString(), ref record.mod1);
-                Datasheet.Parse(stream.NextString(), ref record.mod2);
-                Datasheet.Parse(stream.NextString(), ref record.mod3);
-                Datasheet.Parse(stream.NextString(), ref record.minGrp);
-                Datasheet.Parse(stream.NextString(), ref record.maxGrp);
-                Datasheet.Parse(stream.NextString(), ref record.eClass);
-                Datasheet.Parse(stream.NextString(), ref record.autoPos);
-                Datasheet.Parse(stream.NextString(), ref record.stacks);
-                Datasheet.Parse(stream.NextString(), ref record.replacable);
+                stream.Read(ref record.superUnique);
+                stream.Read(ref record.nameStr);
+                stream.Read(ref record.monStatId);
+                stream.Read(ref record.hcIdx);
+                stream.Read(ref record.monSound);
+                stream.Read(ref record.mod1);
+                stream.Read(ref record.mod2);
+                stream.Read(ref record.mod3);
+                stream.Read(ref record.minGrp);
+                stream.Read(ref record.maxGrp);
+                stream.Read(ref record.eClass);
+                stream.Read(ref record.autoPos);
+                stream.Read(ref record.stacks);
+                stream.Read(ref record.replacable);
                 record.uTrans = new int[3];
-                    Datasheet.Parse(stream.NextString(), ref record.uTrans[0]);
-                    Datasheet.Parse(stream.NextString(), ref record.uTrans[1]);
-                    Datasheet.Parse(stream.NextString(), ref record.uTrans[2]);
+                    stream.Read(ref record.uTrans[0]);
+                    stream.Read(ref record.uTrans[1]);
+                    stream.Read(ref record.uTrans[2]);
                 record.treasureClass = new string[3];
-                    Datasheet.Parse(stream.NextString(), ref record.treasureClass[0]);
-                    Datasheet.Parse(stream.NextString(), ref record.treasureClass[1]);
-                    Datasheet.Parse(stream.NextString(), ref record.treasureClass[2]);
-                Datasheet.Parse(stream.NextString(), ref record.eol);
+                    stream.Read(ref record.treasureClass[0]);
+                    stream.Read(ref record.treasureClass[1]);
+                    stream.Read(ref record.treasureClass[2]);
+                stream.Read(ref record.eol);
     }
 }

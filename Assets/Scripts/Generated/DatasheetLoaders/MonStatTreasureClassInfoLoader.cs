@@ -5,9 +5,9 @@ class MonStatTreasureClassInfoLoader : Datasheet.Loader<MonStat.TreasureClassInf
 
     public void LoadRecord(ref MonStat.TreasureClassInfo record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record._normal);
-                Datasheet.Parse(stream.NextString(), ref record._champion);
-                Datasheet.Parse(stream.NextString(), ref record._unique);
-                Datasheet.Parse(stream.NextString(), ref record._quest);
+                stream.Read(ref record._normal);
+                stream.Read(ref record._champion);
+                stream.Read(ref record._unique);
+                stream.Read(ref record._quest);
     }
 }

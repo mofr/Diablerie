@@ -6,8 +6,8 @@ class ItemPropertyInfoLoader : Datasheet.Loader<ItemPropertyInfo>
 
     public void LoadRecord(ref ItemPropertyInfo record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.code);
-                Datasheet.Parse(stream.NextString(), ref record._done);
+                stream.Read(ref record.code);
+                stream.Read(ref record._done);
                 record._blocks = new ItemPropertyInfo.Block[7];
                     itempropertyinfoblockloader.LoadRecord(ref record._blocks[0], stream);
                     itempropertyinfoblockloader.LoadRecord(ref record._blocks[1], stream);
@@ -16,11 +16,11 @@ class ItemPropertyInfoLoader : Datasheet.Loader<ItemPropertyInfo>
                     itempropertyinfoblockloader.LoadRecord(ref record._blocks[4], stream);
                     itempropertyinfoblockloader.LoadRecord(ref record._blocks[5], stream);
                     itempropertyinfoblockloader.LoadRecord(ref record._blocks[6], stream);
-                Datasheet.Parse(stream.NextString(), ref record._desc);
-                Datasheet.Parse(stream.NextString(), ref record._param);
-                Datasheet.Parse(stream.NextString(), ref record._min);
-                Datasheet.Parse(stream.NextString(), ref record._max);
-                Datasheet.Parse(stream.NextString(), ref record._notes);
-                Datasheet.Parse(stream.NextString(), ref record._eol);
+                stream.Read(ref record._desc);
+                stream.Read(ref record._param);
+                stream.Read(ref record._min);
+                stream.Read(ref record._max);
+                stream.Read(ref record._notes);
+                stream.Read(ref record._eol);
     }
 }

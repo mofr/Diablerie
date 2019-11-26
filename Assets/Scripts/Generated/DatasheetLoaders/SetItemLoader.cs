@@ -6,23 +6,23 @@ class SetItemLoader : Datasheet.Loader<SetItem>
 
     public void LoadRecord(ref SetItem record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.id);
-                Datasheet.Parse(stream.NextString(), ref record.setId);
-                Datasheet.Parse(stream.NextString(), ref record.itemCode);
-                Datasheet.Parse(stream.NextString(), ref record._item);
-                Datasheet.Parse(stream.NextString(), ref record.rarity);
-                Datasheet.Parse(stream.NextString(), ref record.level);
-                Datasheet.Parse(stream.NextString(), ref record.levelReq);
-                Datasheet.Parse(stream.NextString(), ref record.chrTransform);
-                Datasheet.Parse(stream.NextString(), ref record.invTransform);
-                Datasheet.Parse(stream.NextString(), ref record.invFile);
-                Datasheet.Parse(stream.NextString(), ref record.flippyFile);
-                Datasheet.Parse(stream.NextString(), ref record._dropSound);
-                Datasheet.Parse(stream.NextString(), ref record._dropSoundFrame);
-                Datasheet.Parse(stream.NextString(), ref record._useSound);
-                Datasheet.Parse(stream.NextString(), ref record.costMult);
-                Datasheet.Parse(stream.NextString(), ref record.costAdd);
-                Datasheet.Parse(stream.NextString(), ref record.addFunc);
+                stream.Read(ref record.id);
+                stream.Read(ref record.setId);
+                stream.Read(ref record.itemCode);
+                stream.Read(ref record._item);
+                stream.Read(ref record.rarity);
+                stream.Read(ref record.level);
+                stream.Read(ref record.levelReq);
+                stream.Read(ref record.chrTransform);
+                stream.Read(ref record.invTransform);
+                stream.Read(ref record.invFile);
+                stream.Read(ref record.flippyFile);
+                stream.Read(ref record._dropSound);
+                stream.Read(ref record._dropSoundFrame);
+                stream.Read(ref record._useSound);
+                stream.Read(ref record.costMult);
+                stream.Read(ref record.costAdd);
+                stream.Read(ref record.addFunc);
                 record.props = new SetItem.Prop[9];
                     setitemproploader.LoadRecord(ref record.props[0], stream);
                     setitemproploader.LoadRecord(ref record.props[1], stream);
@@ -44,6 +44,6 @@ class SetItemLoader : Datasheet.Loader<SetItem>
                     setitemproploader.LoadRecord(ref record.additionalProps[7], stream);
                     setitemproploader.LoadRecord(ref record.additionalProps[8], stream);
                     setitemproploader.LoadRecord(ref record.additionalProps[9], stream);
-                Datasheet.Parse(stream.NextString(), ref record.eol);
+                stream.Read(ref record.eol);
     }
 }

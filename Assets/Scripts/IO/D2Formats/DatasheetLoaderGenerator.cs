@@ -173,11 +173,11 @@ class {{ type.name }}Loader : Datasheet.Loader<{{ type.declaration }}>
                     {{~ if field.element.is_custom ~}}
                     {{ field.element.name | string.downcase }}loader.LoadRecord(ref record.{{ field.name }}[{{ item_index }}], stream);
                     {{~ else ~}}
-                    Datasheet.Parse(stream.NextString(), ref record.{{ field.name }}[{{ item_index }}]);
+                    stream.Read(ref record.{{ field.name }}[{{ item_index }}]);
                     {{~ end ~}}
                 {{~ end ~}}
             {{~ else ~}}
-                Datasheet.Parse(stream.NextString(), ref record.{{ field.name }});
+                stream.Read(ref record.{{ field.name }});
             {{~ end ~}}
         {{~ end ~}}
     }

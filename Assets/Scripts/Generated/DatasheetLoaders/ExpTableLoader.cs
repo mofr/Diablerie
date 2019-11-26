@@ -5,13 +5,13 @@ class ExpTableLoader : Datasheet.Loader<ExpTable>
 
     public void LoadRecord(ref ExpTable record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.maxLevel);
-                Datasheet.Parse(stream.NextString(), ref record.amazon);
-                Datasheet.Parse(stream.NextString(), ref record.sorceress);
-                Datasheet.Parse(stream.NextString(), ref record.necromancer);
-                Datasheet.Parse(stream.NextString(), ref record.paladin);
-                Datasheet.Parse(stream.NextString(), ref record.barbarian);
-                Datasheet.Parse(stream.NextString(), ref record.druid);
-                Datasheet.Parse(stream.NextString(), ref record.assassin);
+                stream.Read(ref record.maxLevel);
+                stream.Read(ref record.amazon);
+                stream.Read(ref record.sorceress);
+                stream.Read(ref record.necromancer);
+                stream.Read(ref record.paladin);
+                stream.Read(ref record.barbarian);
+                stream.Read(ref record.druid);
+                stream.Read(ref record.assassin);
     }
 }

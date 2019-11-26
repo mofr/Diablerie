@@ -5,7 +5,7 @@ class TranslationLoader : Datasheet.Loader<Translation>
 
     public void LoadRecord(ref Translation record, Datasheet.Stream stream)
     {
-                Datasheet.Parse(stream.NextString(), ref record.key);
-                Datasheet.Parse(stream.NextString(), ref record.value);
+                stream.Read(ref record.key);
+                stream.Read(ref record.value);
     }
 }
