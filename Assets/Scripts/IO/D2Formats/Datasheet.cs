@@ -187,10 +187,25 @@ public struct Datasheet
 
         public void Read(ref uint result)
         {
-            var value = NextString();
-            if (value == "" || value == "xxx")
+            if (index >= line.Length)
+            {
                 return;
-            result = ParseUInt(value);
+            }
+            if (line[index] == Separator)
+            {
+                index++;
+                return;
+            }
+
+            if (index < line.Length && line[index] != Separator)
+                result = 0;
+            while (index < line.Length && line[index] != Separator)
+            {
+                result = result * 10 + (uint)(line[index] - '0');
+                index++;
+            }
+
+            index++; // skip tab
         }
         
         public void Read(ref string result)
@@ -203,10 +218,18 @@ public struct Datasheet
 
         public void Read(ref bool result)
         {
-            var value = NextString();
-            if (value == "" || value == "xxx")
+            if (index >= line.Length)
+            {
                 return;
-            result = ParseBool(value);
+            }
+            if (line[index] == Separator)
+            {
+                index++;
+                return;
+            }
+            
+            result = line[index] != '0';
+            index += 2; // skip tab
         }
 
         public void Read(ref float result)
@@ -216,27 +239,6 @@ public struct Datasheet
                 return;
             result = (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }
-    }
-
-    public static uint ParseUInt(string str)
-    {
-        uint result = 0;
-        for (int i = 0; i < str.Length; i++)
-        {
-            result = result * 10 + (uint)(str[i] - '0');
-        }
-        return result;
-    }
-
-    public static bool ParseBool(string value)
-    {
-        if (value == "1")
-            return true;
-            
-        if (value == "0")
-            return false;
-
-        throw new System.FormatException("Unable to cast '" + value + "' to bool");
     }
 
     private static void DiscoverLoaders()
