@@ -61,7 +61,6 @@ public struct Datasheet
         if (loader == null)
             throw new Exception("Datasheet loader for " + typeof(T) + " not found");
 
-        int expectedFieldCount = CalcFieldCount(typeof(T));
         var lines = csv.Split('\n');
         var sheet = new List<T>(lines.Length);
         for (int lineIndex = 0; lineIndex < lines.Length; ++lineIndex)
@@ -73,10 +72,6 @@ public struct Datasheet
             line = line.Replace("\r", "");
             if (line.Length == 0)
                 continue;
-
-            var fieldCount = CalcFieldCount(line);
-            if (fieldCount != expectedFieldCount)
-                throw new Exception("Field count " + fieldCount + ", expected " + expectedFieldCount + ") at " + filename + ":" + (lineIndex + 1));
 
             try
             {
@@ -95,41 +90,6 @@ public struct Datasheet
         return sheet;
     }
 
-    private static int CalcFieldCount(string line)
-    {
-        int count = 0;
-        for (int i = 0; i < line.Length; ++i)
-            if (line[i] == Separator)
-                count++;
-        return count + 1;
-    }
-
-    private static int CalcFieldCount(Type type)
-    {
-        MemberInfo[] members = FormatterServices.GetSerializableMembers(type);
-        if (members.Length == 0)
-            return 1;
-
-        int fieldCount = 0;
-        foreach (MemberInfo member in members)
-        {
-            FieldInfo fi = (FieldInfo)member;
-            if (fi.FieldType.IsArray)
-            {
-                var seq = (Sequence)Attribute.GetCustomAttribute(member, typeof(Sequence), true);
-                var elementType = fi.FieldType.GetElementType();
-                int elementFieldCount = CalcFieldCount(elementType);
-                fieldCount += seq.length * elementFieldCount;
-            }
-            else
-            {
-                fieldCount += 1;
-            }
-        }
-
-        return fieldCount;
-    }
-
     public class Stream
     {
         private string line;
@@ -146,7 +106,10 @@ public struct Datasheet
             int endIndex = index;
             while (endIndex < line.Length && line[endIndex] != Separator)
                 endIndex++;
-            string result = line.Substring(index, endIndex - index);
+            int length = endIndex - index;
+            string result = null;
+            if (length != 0)
+                result = line.Substring(index, length);
             index = endIndex + 1;
             return result;
         }
@@ -211,7 +174,7 @@ public struct Datasheet
         public void Read(ref string result)
         {
             var value = NextString();
-            if (value == "" || value == "xxx")
+            if (value == null || value == "xxx")
                 return;
             result = value;
         }
@@ -235,7 +198,7 @@ public struct Datasheet
         public void Read(ref float result)
         {
             var value = NextString();
-            if (value == "" || value == "xxx")
+            if (value == null || value == "xxx")
                 return;
             result = (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }

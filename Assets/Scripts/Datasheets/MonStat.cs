@@ -51,7 +51,7 @@ public class MonStat
     public int hcIndex;
     public string baseId;
     public string nextInClass;
-    public string transLvl;
+    public uint transLvl;
     public string nameStr;
     public string monStatEx;
     public string monProp;
