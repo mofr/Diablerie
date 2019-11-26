@@ -45,15 +45,15 @@ class MonStatLoader : Datasheet.Loader<MonStat>
                 stream.Read(ref record.monSoundId);
                 stream.Read(ref record.uMonSoundId);
                 stream.Read(ref record.threat);
-                record.aidel = new string[3];
+                record.aidel = new int[3];
                     stream.Read(ref record.aidel[0]);
                     stream.Read(ref record.aidel[1]);
                     stream.Read(ref record.aidel[2]);
-                record.aidist = new string[3];
+                record.aidist = new int[3];
                     stream.Read(ref record.aidist[0]);
                     stream.Read(ref record.aidist[1]);
                     stream.Read(ref record.aidist[2]);
-                record.aip1 = new string[24];
+                record.aip1 = new int[24];
                     stream.Read(ref record.aip1[0]);
                     stream.Read(ref record.aip1[1]);
                     stream.Read(ref record.aip1[2]);
