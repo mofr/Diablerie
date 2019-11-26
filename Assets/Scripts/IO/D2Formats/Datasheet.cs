@@ -11,6 +11,8 @@ using Debug = UnityEngine.Debug;
 
 public struct Datasheet
 {
+    private static readonly char Separator = '\t';
+    
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class Sequence : Attribute
     {
@@ -85,7 +87,7 @@ public struct Datasheet
             }
             catch (Exception e)
             {
-                throw new Exception("Datasheet parsing error at line " + lineIndex + ", first field " + line.Substring(0, 16), e);
+                throw new Exception("Datasheet parsing error at line " + lineIndex + ": " + line.Substring(0, 32), e);
             }
         }
         Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms, file read " + fileReadMs + " ms)");
@@ -97,7 +99,7 @@ public struct Datasheet
     {
         int count = 0;
         for (int i = 0; i < line.Length; ++i)
-            if (line[i] == '\t')
+            if (line[i] == Separator)
                 count++;
         return count + 1;
     }
@@ -142,7 +144,7 @@ public struct Datasheet
         public string NextString()
         {
             int endIndex = index;
-            while (endIndex < line.Length && line[endIndex] != '\t')
+            while (endIndex < line.Length && line[endIndex] != Separator)
                 endIndex++;
             string result = line.Substring(index, endIndex - index);
             index = endIndex + 1;
@@ -151,10 +153,36 @@ public struct Datasheet
 
         public void Read(ref int result)
         {
-            var value = NextString();
-            if (value == "" || value == "xxx")
+            if (index >= line.Length)
+            {
                 return;
-            result = ParseInt(value);
+            }
+            if (line[index] == Separator)
+            {
+                index++;
+                return;
+            }
+            int sign;
+            char c = line[index++];
+            if (c == '-')
+            {
+                sign = -1;
+                result = 0;
+            }
+            else
+            {
+                sign = 1;
+                result = c - '0';
+            }
+
+            while (index < line.Length && line[index] != Separator)
+            {
+                result = result * 10 + (line[index] - '0');
+                index++;
+            }
+
+            result *= sign;
+            index++; // skip tab
         }
 
         public void Read(ref uint result)
@@ -188,31 +216,6 @@ public struct Datasheet
                 return;
             result = (float) Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }
-    }
-
-    public static int ParseInt(string str)
-    {
-        if (str.Length == 0)
-            return 0;
-        int result;
-        int sign;
-        if (str[0] == '-')
-        {
-            sign = -1;
-            result = 0;
-        }
-        else
-        {
-            sign = 1;
-            result = str[0] - '0';
-        }
-
-        for (int i = 1; i < str.Length; i++)
-        {
-            result = result * 10 + (str[i] - '0');
-        }
-
-        return result * sign;
     }
 
     public static uint ParseUInt(string str)
