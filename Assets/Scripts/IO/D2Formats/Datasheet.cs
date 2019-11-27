@@ -61,15 +61,16 @@ public struct Datasheet
 
         var splitter = new DatasheetLineSplitter(csv);
         splitter.Skip(headerLines);
-        var sheet = new List<T>(1024);
+        var records = new List<T>(1024);
         int lineIndex = headerLines;
         StringSpan line = new StringSpan();
+        var stream = new Stream();
         while(splitter.ReadLine(ref line))
         {
             if (line.length == 0)
                 continue;
-            
-            var stream = new Stream(line);
+
+            stream.SetSource(line);
             T obj = new T();
             try
             {
@@ -79,56 +80,52 @@ public struct Datasheet
             {
                 throw new Exception("Datasheet parsing error at line " + lineIndex + ": " + line.str.Substring(0, 32), e);
             }
-            sheet.Add(obj);
+            records.Add(obj);
         }
-        Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms, file read " + fileReadMs + " ms)");
+        Debug.Log("Load " + filename + " (" + records.Count + " records, elapsed " + stopwatch.Elapsed.Milliseconds + " ms, file read " + fileReadMs + " ms)");
         Profiler.EndSample();
-        return sheet;
+        return records;
     }
 
     public class Stream
     {
-        private string line;
-        private int index;
+        private string _data;
+        private int _index;
         private int _end;
-        
-        public Stream(string line, int start = 0, int end = -1)
-        {
-            this.line = line;
-            index = start;
-            _end = end == -1 ? line.Length : end;
-        }
 
-        public Stream(StringSpan span) : this(span.str, span.index, span.index + span.length)
+        public void SetSource(StringSpan span)
         {
+            _data = span.str;
+            _index = span.index;
+            _end = span.index + span.length;
         }
 
         public string NextString()
         {
-            int endIndex = index;
-            while (endIndex < _end && line[endIndex] != Separator)
+            int endIndex = _index;
+            while (endIndex < _end && _data[endIndex] != Separator)
                 endIndex++;
-            int length = endIndex - index;
+            int length = endIndex - _index;
             string result = null;
             if (length != 0)
-                result = line.Substring(index, length);
-            index = endIndex + 1;
+                result = _data.Substring(_index, length);
+            _index = endIndex + 1;
             return result;
         }
 
         public void Read(ref int result)
         {
-            if (index >= _end)
+            if (_index >= _end)
             {
                 return;
             }
-            if (line[index] == Separator)
+            if (_data[_index] == Separator)
             {
-                index++;
+                _index++;
                 return;
             }
             int sign;
-            char c = line[index++];
+            char c = _data[_index++];
             if (c == '-')
             {
                 sign = -1;
@@ -140,37 +137,37 @@ public struct Datasheet
                 result = c - '0';
             }
 
-            while (index < _end && line[index] != Separator)
+            while (_index < _end && _data[_index] != Separator)
             {
-                result = result * 10 + (line[index] - '0');
-                index++;
+                result = result * 10 + (_data[_index] - '0');
+                _index++;
             }
 
             result *= sign;
-            index++; // skip tab
+            _index++; // skip tab
         }
 
         public void Read(ref uint result)
         {
-            if (index >= _end)
+            if (_index >= _end)
             {
                 return;
             }
-            if (line[index] == Separator)
+            if (_data[_index] == Separator)
             {
-                index++;
+                _index++;
                 return;
             }
 
-            if (index < _end && line[index] != Separator)
+            if (_index < _end && _data[_index] != Separator)
                 result = 0;
-            while (index < _end && line[index] != Separator)
+            while (_index < _end && _data[_index] != Separator)
             {
-                result = result * 10 + (uint)(line[index] - '0');
-                index++;
+                result = result * 10 + (uint)(_data[_index] - '0');
+                _index++;
             }
 
-            index++; // skip tab
+            _index++; // skip tab
         }
         
         public void Read(ref string result)
@@ -183,18 +180,18 @@ public struct Datasheet
 
         public void Read(ref bool result)
         {
-            if (index >= _end)
+            if (_index >= _end)
             {
                 return;
             }
-            if (line[index] == Separator)
+            if (_data[_index] == Separator)
             {
-                index++;
+                _index++;
                 return;
             }
             
-            result = line[index] != '0';
-            index += 2; // skip tab
+            result = _data[_index] != '0';
+            _index += 2; // skip tab
         }
 
         public void Read(ref float result)
