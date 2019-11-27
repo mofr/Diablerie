@@ -61,15 +61,12 @@ public struct Datasheet
         if (loader == null)
             throw new Exception("Datasheet loader for " + typeof(T) + " not found");
 
-        var lines = csv.Split('\n');
+        var lines = csv.Split('\r', '\n');
         var sheet = new List<T>(lines.Length);
-        for (int lineIndex = 0; lineIndex < lines.Length; ++lineIndex)
+        int startLineIndex = headerLines;
+        for (int lineIndex = startLineIndex; lineIndex < lines.Length; ++lineIndex)
         {
-            if (lineIndex < headerLines)
-                continue;
-            
             string line = lines[lineIndex];
-            line = line.Replace("\r", "");
             if (line.Length == 0)
                 continue;
 
