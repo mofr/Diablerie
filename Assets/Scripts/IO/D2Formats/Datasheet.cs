@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Runtime.Serialization;
-using System.Reflection;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -61,26 +59,27 @@ public struct Datasheet
         if (loader == null)
             throw new Exception("Datasheet loader for " + typeof(T) + " not found");
 
-        var lines = csv.Split('\r', '\n');
-        var sheet = new List<T>(lines.Length);
-        int startLineIndex = headerLines;
-        for (int lineIndex = startLineIndex; lineIndex < lines.Length; ++lineIndex)
+        var splitter = new DatasheetLineSplitter(csv);
+        splitter.Skip(headerLines);
+        var sheet = new List<T>(1024);
+        int lineIndex = headerLines;
+        StringSpan line = new StringSpan();
+        while(splitter.ReadLine(ref line))
         {
-            string line = lines[lineIndex];
-            if (line.Length == 0)
+            if (line.length == 0)
                 continue;
-
+            
+            var stream = new Stream(line);
+            T obj = new T();
             try
             {
-                var stream = new Stream(line);
-                T obj = new T();
                 loader.LoadRecord(ref obj, stream);
-                sheet.Add(obj);
             }
             catch (Exception e)
             {
-                throw new Exception("Datasheet parsing error at line " + lineIndex + ": " + line.Substring(0, 32), e);
+                throw new Exception("Datasheet parsing error at line " + lineIndex + ": " + line.str.Substring(0, 32), e);
             }
+            sheet.Add(obj);
         }
         Debug.Log("Load " + filename + " (" + sheet.Count + " items, elapsed " + stopwatch.Elapsed.Milliseconds + " ms, file read " + fileReadMs + " ms)");
         Profiler.EndSample();
@@ -91,17 +90,23 @@ public struct Datasheet
     {
         private string line;
         private int index;
+        private int _end;
         
-        public Stream(string line)
+        public Stream(string line, int start = 0, int end = -1)
         {
             this.line = line;
-            index = 0;
+            index = start;
+            _end = end == -1 ? line.Length : end;
+        }
+
+        public Stream(StringSpan span) : this(span.str, span.index, span.index + span.length)
+        {
         }
 
         public string NextString()
         {
             int endIndex = index;
-            while (endIndex < line.Length && line[endIndex] != Separator)
+            while (endIndex < _end && line[endIndex] != Separator)
                 endIndex++;
             int length = endIndex - index;
             string result = null;
@@ -113,7 +118,7 @@ public struct Datasheet
 
         public void Read(ref int result)
         {
-            if (index >= line.Length)
+            if (index >= _end)
             {
                 return;
             }
@@ -135,7 +140,7 @@ public struct Datasheet
                 result = c - '0';
             }
 
-            while (index < line.Length && line[index] != Separator)
+            while (index < _end && line[index] != Separator)
             {
                 result = result * 10 + (line[index] - '0');
                 index++;
@@ -147,7 +152,7 @@ public struct Datasheet
 
         public void Read(ref uint result)
         {
-            if (index >= line.Length)
+            if (index >= _end)
             {
                 return;
             }
@@ -157,9 +162,9 @@ public struct Datasheet
                 return;
             }
 
-            if (index < line.Length && line[index] != Separator)
+            if (index < _end && line[index] != Separator)
                 result = 0;
-            while (index < line.Length && line[index] != Separator)
+            while (index < _end && line[index] != Separator)
             {
                 result = result * 10 + (uint)(line[index] - '0');
                 index++;
@@ -178,7 +183,7 @@ public struct Datasheet
 
         public void Read(ref bool result)
         {
-            if (index >= line.Length)
+            if (index >= _end)
             {
                 return;
             }
