@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Diablerie.Engine.Utility;
 using NUnit.Framework;
 
 public class BinaryHeapTest
