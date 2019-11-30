@@ -160,6 +160,10 @@ namespace Diablerie.Engine.IO.D2Formats
     
         private static readonly Scriban.Template template = Scriban.Template.Parse(@"
 // It's generated file. DO NOT MODIFY IT!
+
+using Diablerie.Engine.Datasheets;
+using Diablerie.Engine.IO.D2Formats;
+
 class {{ type.name }}Loader : Datasheet.Loader<{{ type.declaration }}>
 {
     {{~ for dependency in dependencies ~}}
