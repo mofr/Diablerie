@@ -2,23 +2,11 @@
 
 namespace Diablerie.Engine.IO.D2Formats
 {
-    public class Mpq
+    public static class Mpq
     {
         public static MpqFileSystem fs = new MpqFileSystem();
 
-        static Mpq()
-        {
-            AddArchive("d2exp.mpq");
-            AddArchive("d2data.mpq");
-            AddArchive("d2char.mpq");
-            AddArchive("d2sfx.mpq", optional: true);
-            AddArchive("d2music.mpq", optional: true);
-            AddArchive("d2xMusic.mpq", optional: true);
-            AddArchive("d2xtalk.mpq", optional: true);
-            AddArchive("d2speech.mpq", optional: true);
-        }
-
-        private static void AddArchive(string filename, bool optional = false)
+        public static void AddArchive(string filename, bool optional = false)
         {
             try
             {
