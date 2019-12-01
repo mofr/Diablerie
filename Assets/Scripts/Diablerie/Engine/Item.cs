@@ -44,7 +44,7 @@ namespace Diablerie.Engine
         bool _invSpriteIdentified;
         int invFileIndex;
 
-        static public Item Create(string code)
+        public static Item Create(string code)
         {
             var info = ItemInfo.Find(code);
             if (info == null)
@@ -646,12 +646,12 @@ namespace Diablerie.Engine
             }
         }
 
-        static private CharStatsInfo CurrentCharacterClass()
+        private static CharStatsInfo CurrentCharacterClass()
         {
             return PlayerController.instance.charStat.info;
         }
 
-        static private int EquippedItemsCount(ItemSet set)
+        private static int EquippedItemsCount(ItemSet set)
         {
             int result = 0;
             Equipment equip = PlayerController.instance.equip;

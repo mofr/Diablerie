@@ -17,12 +17,12 @@ namespace Diablerie.Engine.Entities
         Character originator;
         private float lifeTime;
 
-        static public Missile Create(string missileId, Vector3 target, Character originator)
+        public static Missile Create(string missileId, Vector3 target, Character originator)
         {
             return Create(missileId, originator.iso.pos, target, originator);
         }
 
-        static public Missile Create(string missileId, Vector3 start, Vector3 target, Character originator)
+        public static Missile Create(string missileId, Vector3 start, Vector3 target, Character originator)
         {
             var missileInfo = MissileInfo.Find(missileId);
             if (missileInfo == null)
@@ -34,7 +34,7 @@ namespace Diablerie.Engine.Entities
             return Create(missileInfo, start, target, originator);
         }
 
-        static public void CreateRadially(string missileId, Vector3 start, Character originator, int missileCount)
+        public static void CreateRadially(string missileId, Vector3 start, Character originator, int missileCount)
         {
             var missileInfo = MissileInfo.Find(missileId);
             if (missileInfo == null)
@@ -45,7 +45,7 @@ namespace Diablerie.Engine.Entities
             CreateRadially(missileInfo, start, originator, missileCount);
         }
 
-        static public void CreateRadially(MissileInfo missileInfo, Vector3 start, Character originator, int missileCount)
+        public static void CreateRadially(MissileInfo missileInfo, Vector3 start, Character originator, int missileCount)
         {
             float angle = 0;
             float angleStep = 360.0f / missileCount;
@@ -58,7 +58,7 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        static public Missile Create(MissileInfo missileInfo, Vector3 start, Vector3 target, Character originator)
+        public static Missile Create(MissileInfo missileInfo, Vector3 start, Vector3 target, Character originator)
         {
             var gameObject = new GameObject("missile_" + missileInfo.missile);
             var missile = gameObject.AddComponent<Missile>();

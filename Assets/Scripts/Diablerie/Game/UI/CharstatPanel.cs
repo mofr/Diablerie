@@ -4,7 +4,7 @@ namespace Diablerie.Game.UI
 {
     public class CharstatPanel : MonoBehaviour
     {
-        static public CharstatPanel instance;
+        public static CharstatPanel instance;
 
         public GameObject panel;
 

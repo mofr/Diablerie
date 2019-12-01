@@ -137,7 +137,7 @@ namespace Diablerie.Engine
             return null;
         }
 
-        static public bool GenerateUnique(Item item)
+        public static bool GenerateUnique(Item item)
         {
             if (item.info.uniques.Count == 0)
                 return false;
@@ -167,7 +167,7 @@ namespace Diablerie.Engine
             return true;
         }
 
-        static public bool GenerateSetItem(Item item)
+        public static bool GenerateSetItem(Item item)
         {
             if (item.info.setItems.Count == 0)
                 return false;

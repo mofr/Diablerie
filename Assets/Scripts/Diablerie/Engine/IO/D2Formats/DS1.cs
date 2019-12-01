@@ -53,12 +53,12 @@ namespace Diablerie.Engine.IO.D2Formats
 
         static Dictionary<string, DS1> cache = new Dictionary<string, DS1>();
 
-        static public void ResetCache()
+        public static void ResetCache()
         {
             cache.Clear();
         }
 
-        static public DS1 Load(string filename, bool mpq = true)
+        public static DS1 Load(string filename, bool mpq = true)
         {
             string lowerFilename = filename.ToLower();
             if (cache.ContainsKey(lowerFilename))

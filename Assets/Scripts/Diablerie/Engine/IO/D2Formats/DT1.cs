@@ -144,7 +144,7 @@ namespace Diablerie.Engine.IO.D2Formats
                 index = Index(mainIndex, subIndex, orientation);
             }
 
-            static public int Index(int mainIndex, int subIndex, int orientation)
+            public static int Index(int mainIndex, int subIndex, int orientation)
             {
                 return (((mainIndex << 6) + subIndex) << 5) + orientation;
             }
@@ -152,7 +152,7 @@ namespace Diablerie.Engine.IO.D2Formats
 
         static Dictionary<string, DT1> cache = new Dictionary<string, DT1>();
 
-        static public void ResetCache()
+        public static void ResetCache()
         {
             cache.Clear();
         }
@@ -254,7 +254,7 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        static public DT1 Load(string filename, bool mpq = true)
+        public static DT1 Load(string filename, bool mpq = true)
         {
             string lowerFilename = filename.ToLower();
             if(cache.ContainsKey(lowerFilename))

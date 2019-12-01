@@ -16,32 +16,32 @@ namespace Diablerie.Engine
 
         new Renderer renderer;
 
-        static public Vector3 MapToWorld(float x, float y)
+        public static Vector3 MapToWorld(float x, float y)
         {
             return new Vector3(x - y, -(x + y) / 2) * tileSize;
         }
 
-        static public Vector3 MapToWorld(Vector3 iso)
+        public static Vector3 MapToWorld(Vector3 iso)
         {
             return MapToWorld(iso.x, iso.y);
         }
 
-        static public Vector3 MapTileToWorld(Vector2 iso)
+        public static Vector3 MapTileToWorld(Vector2 iso)
         {
             return MapToWorld(iso) / tileSize;
         }
 
-        static public Vector3 MapTileToWorld(int x, int y)
+        public static Vector3 MapTileToWorld(int x, int y)
         {
             return MapTileToWorld(new Vector3(x, y));
         }
 
-        static public Vector3 MapToIso(Vector3 world)
+        public static Vector3 MapToIso(Vector3 world)
         {
             return new Vector3(-world.y + world.x / 2, -world.y - world.x / 2) / tileSize;
         }
 
-        static public int SortingOrder(Vector3 worldPosition)
+        public static int SortingOrder(Vector3 worldPosition)
         {
             var macroTile = MacroTile(MapToIso(worldPosition));
             var macroY = (MapToWorld(macroTile)).y / tileSizeY;
@@ -51,7 +51,7 @@ namespace Diablerie.Engine
             return sortingOrder;
         }
 
-        static public void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f)
+        public static void DebugDrawTile(Vector3 pos, Color color, float margin = 0, float duration = 0f)
         {
             float d = 0.5f - margin;
             var topRight = MapToWorld(pos + new Vector3(d, d));
@@ -64,12 +64,12 @@ namespace Diablerie.Engine
             Debug.DrawLine(bottomRight, bottomLeft, color, duration);
         }
 
-        static public void DebugDrawLine(Vector3 from, Vector3 to)
+        public static void DebugDrawLine(Vector3 from, Vector3 to)
         {
             Debug.DrawLine(MapToWorld(from), MapToWorld(to));
         }
 
-        static public void GizmosDrawTile(Vector3 pos, float size = 1.0f)
+        public static void GizmosDrawTile(Vector3 pos, float size = 1.0f)
         {
             float d = 0.5f * size;
             var topRight = MapToWorld(pos + new Vector3(d, d));
@@ -82,19 +82,19 @@ namespace Diablerie.Engine
             Gizmos.DrawLine(bottomRight, bottomLeft);
         }
 
-        static public void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f)
+        public static void DebugDrawTile(Vector3 pos, float margin = 0, float duration = 0f)
         {
             DebugDrawTile(pos, Color.white, margin, duration);
         }
 
-        static public Vector2i Snap(Vector3 pos)
+        public static Vector2i Snap(Vector3 pos)
         {
             return new Vector2i(
                 Mathf.RoundToInt(pos.x),
                 Mathf.RoundToInt(pos.y));
         }
 
-        static public Vector3 MacroTile(Vector3 pos)
+        public static Vector3 MacroTile(Vector3 pos)
         {
             var macroTile = pos;
             macroTile.x = Mathf.Round(pos.x / 5);
@@ -102,7 +102,7 @@ namespace Diablerie.Engine
             return macroTile;
         }
 
-        static public int Direction(Vector2 from, Vector3 target, int directionCount)
+        public static int Direction(Vector2 from, Vector3 target, int directionCount)
         {
             var dir = target - (Vector3)from;
             var angle = Vector3.Angle(new Vector3(1, 1), dir) * Mathf.Sign(dir.y - dir.x);
@@ -110,7 +110,7 @@ namespace Diablerie.Engine
             return Mathf.RoundToInt((angle + 360) % 360 / directionDegrees) % directionCount;
         }
 
-        static public Vector2[] CreateTileRectPoints(int width, int height)
+        public static Vector2[] CreateTileRectPoints(int width, int height)
         {
             var offset = MapToWorld(-2, -2);
             return new Vector2[] {

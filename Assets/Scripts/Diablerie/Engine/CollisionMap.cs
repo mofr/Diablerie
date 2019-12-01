@@ -6,7 +6,7 @@ namespace Diablerie.Engine
     [ExecuteInEditMode]
     public class CollisionMap : MonoBehaviour
     {
-        static private CollisionMap instance;
+        private static CollisionMap instance;
 
         public struct Cell
         {
@@ -147,7 +147,7 @@ namespace Diablerie.Engine
             }
         }
 
-        static public RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, int size = 1, GameObject ignore = null)
+        public static RaycastHit Raycast(Vector2 from, Vector2 to, float rayLength = Mathf.Infinity, float maxRayLength = Mathf.Infinity, int size = 1, GameObject ignore = null)
         {
             CollisionLayers mask = CollisionLayers.Walk;
             var hit = new RaycastHit();
@@ -174,7 +174,7 @@ namespace Diablerie.Engine
             return hit;
         }
 
-        static public int OverlapBox(Vector2 center, Vector2 size, GameObject[] result)
+        public static int OverlapBox(Vector2 center, Vector2 size, GameObject[] result)
         {
             int count = 0;
             if (result.Length == 0)
@@ -200,13 +200,13 @@ namespace Diablerie.Engine
             return count;
         }
 
-        static public void Move(Vector2 from, Vector2 to, int size, GameObject gameObject)
+        public static void Move(Vector2 from, Vector2 to, int size, GameObject gameObject)
         {
             SetPassable(from, size, size, true, gameObject);
             SetPassable(to, size, size, false, gameObject);
         }
 
-        static public bool Fit(Vector3 pos, out Vector3 result, int size = 1, CollisionLayers mask = CollisionLayers.Walk)
+        public static bool Fit(Vector3 pos, out Vector3 result, int size = 1, CollisionLayers mask = CollisionLayers.Walk)
         {
             int index = instance.MapToIndex(pos);
 

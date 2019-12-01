@@ -33,7 +33,7 @@ namespace Diablerie.Engine.IO.D2Formats
             new string[] { "DT", "NU", "WL", "GH", "A1", "A2", "BL", "SC", "S1", "S2", "S3", "S4", "DD", "GH", "xx", "RN" }, // monsters (monmode.txt)
             new string[] { "NU", "OP", "ON", "S1", "S2", "S3", "S4", "S5" } // objects (objmode.txt)
         };
-        static public readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
+        public static readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
         static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
         // values from charstats.txt
@@ -54,7 +54,7 @@ namespace Diablerie.Engine.IO.D2Formats
             {"AIRN", 4},
         };
 
-        static public COF Load(string basePath, string token, string weaponClass, string mode)
+        public static COF Load(string basePath, string token, string weaponClass, string mode)
         {
             var filename = basePath + @"\" + token + @"\cof\" + token + mode + weaponClass + ".cof";
             if (cache.ContainsKey(filename))

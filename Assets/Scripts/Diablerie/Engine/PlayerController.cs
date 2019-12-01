@@ -15,7 +15,7 @@ namespace Diablerie.Engine
 {
     public class PlayerController : MonoBehaviour
     {
-        static public PlayerController instance;
+        public static PlayerController instance;
 
         public Character character;
         public Equipment equip;

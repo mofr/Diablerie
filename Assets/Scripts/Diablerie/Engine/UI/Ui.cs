@@ -5,8 +5,8 @@ namespace Diablerie.Engine.UI
 {
     public class Ui : MonoBehaviour
     {
-        static public Ui instance;
-        static public Canvas canvas;
+        public static Ui instance;
+        public static Canvas canvas;
     
         public Label labelPrefab;
         public Label screenLabelPrefab;
@@ -30,26 +30,26 @@ namespace Diablerie.Engine.UI
             Instantiate(instance.softwareCursorPrefab, canvas.transform);
         }
 
-        static public void ShowLabel(Vector2 position, string text)
+        public static void ShowLabel(Vector2 position, string text)
         {
             instance.label.text.text = text;
             instance.label.transform.position = position;
             instance.label.gameObject.SetActive(true);
         }
 
-        static public void HideLabel()
+        public static void HideLabel()
         {
             instance.label.gameObject.SetActive(false);
         }
 
-        static public void ShowScreenLabel(Vector2 position, string text)
+        public static void ShowScreenLabel(Vector2 position, string text)
         {
             instance.screenLabel.text.text = text;
             instance.screenLabel.rectTransform.anchoredPosition = position;
             instance.screenLabel.gameObject.SetActive(true);
         }
 
-        static public void HideScreenLabel()
+        public static void HideScreenLabel()
         {
             instance.screenLabel.gameObject.SetActive(false);
         }

@@ -6,7 +6,7 @@ namespace Diablerie.Game.UI
 {
     public class EnemyBar : MonoBehaviour
     {
-        static public EnemyBar instance;
+        public static EnemyBar instance;
 
         [HideInInspector]
         public Character character;

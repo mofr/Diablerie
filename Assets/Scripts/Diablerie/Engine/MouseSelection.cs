@@ -65,26 +65,26 @@ namespace Diablerie.Engine
             mousePos.z = 0;
         }
 
-        static private void ShowLabel()
+        private static void ShowLabel()
         {
             EnemyBar.instance.character = null;
             var labelPosition = current.transform.position + (Vector3)current.titleOffset / Iso.pixelsPerUnit;
             Ui.ShowLabel(labelPosition, current.title);
         }
 
-        static private void ShowEnemyBar(Character character)
+        private static void ShowEnemyBar(Character character)
         {
             EnemyBar.instance.character = character;
             Ui.HideLabel();
         }
 
-        static private void ShowNothing()
+        private static void ShowNothing()
         {
             EnemyBar.instance.character = null;
             Ui.HideLabel();
         }
 
-        static public void Submit(Entity entity)
+        public static void Submit(Entity entity)
         {
             if (entity == PlayerController.instance.character)
                 return;

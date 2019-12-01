@@ -34,7 +34,7 @@ namespace Diablerie.Engine.IO.D2Formats
         byte[] bytes;
         int textureSize = -1;
 
-        static public DC6 Load(string filename, bool mpq = true, int textureSize = -1, bool loadAllDirections = false)
+        public static DC6 Load(string filename, bool mpq = true, int textureSize = -1, bool loadAllDirections = false)
         {
             UnityEngine.Profiling.Profiler.BeginSample("DC6.DecodeDirection");
             try

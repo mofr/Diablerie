@@ -37,7 +37,7 @@ namespace Diablerie.Engine.Datasheets
             }
         }
 
-        static public LevelWarpInfo Find(int id)
+        public static LevelWarpInfo Find(int id)
         {
             return idMap[id];
         }

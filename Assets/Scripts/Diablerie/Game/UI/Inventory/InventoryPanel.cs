@@ -9,7 +9,7 @@ namespace Diablerie.Game.UI.Inventory
 {
     public class InventoryPanel : MonoBehaviour
     {
-        static public InventoryPanel instance;
+        public static InventoryPanel instance;
 
         public GameObject panel;
         public Text goldText;

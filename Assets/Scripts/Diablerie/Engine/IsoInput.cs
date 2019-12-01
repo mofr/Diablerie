@@ -4,8 +4,8 @@ namespace Diablerie.Engine
 {
     public class IsoInput : MonoBehaviour
     {
-        static public Vector2 mousePosition;
-        static public Vector3 mouseTile;
+        public static Vector2 mousePosition;
+        public static Vector3 mouseTile;
 
         void Update()
         {

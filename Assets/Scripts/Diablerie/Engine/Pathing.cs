@@ -43,7 +43,7 @@ namespace Diablerie.Engine
                 return (pos.x * 73856093) ^ (pos.y * 83492791);
             }
 
-            static private List<Node> pool = new List<Node>(InitialCapacity);
+            private static List<Node> pool = new List<Node>(InitialCapacity);
 
             static Node()
             {
@@ -53,7 +53,7 @@ namespace Diablerie.Engine
                 }
             }
 
-            static public Node Get()
+            public static Node Get()
             {
                 Node node;
                 if (pool.Count > 0)
@@ -69,7 +69,7 @@ namespace Diablerie.Engine
                 return node;
             }
 
-            static public void Recycle(ICollection<Node> nodes)
+            public static void Recycle(ICollection<Node> nodes)
             {
                 pool.AddRange(nodes);
                 nodes.Clear();
@@ -81,18 +81,18 @@ namespace Diablerie.Engine
             }
         }
 
-        static private List<Step> path = new List<Step>();
-        static private Vector2i target;
-        static private BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
-        static private HashSet<Node> closeNodes = new HashSet<Node>();
-        static private Vector2i[] directions = {
+        private static List<Step> path = new List<Step>();
+        private static Vector2i target;
+        private static BinaryHeap<Node> openNodes = new BinaryHeap<Node>(4096);
+        private static HashSet<Node> closeNodes = new HashSet<Node>();
+        private static Vector2i[] directions = {
             new Vector2i(1, 0), new Vector2i(1, 1), new Vector2i(0, 1), new Vector2i(-1, 1),
             new Vector2i(-1, 0), new Vector2i(-1, -1), new Vector2i(0, -1), new Vector2i(1, -1),
         };
-        static private int size;
-        static private GameObject self;
+        private static int size;
+        private static GameObject self;
 
-        static private void StepTo(Node node)
+        private static void StepTo(Node node)
         {
             CollisionLayers collisionMask = CollisionLayers.Walk;
             Node newNode = null;
@@ -146,7 +146,7 @@ namespace Diablerie.Engine
                 newNode.Recycle();
         }
 
-        static private void Collapse(Node node)
+        private static void Collapse(Node node)
         {
             while (node.parent != null && node.parent.parent != null)
             {
@@ -159,7 +159,7 @@ namespace Diablerie.Engine
             }
         }
 
-        static private void TraverseBack(Node node)
+        private static void TraverseBack(Node node)
         {
             UnityEngine.Profiling.Profiler.BeginSample("TraverseBack");
             while (node.parent != null)
@@ -174,7 +174,7 @@ namespace Diablerie.Engine
             UnityEngine.Profiling.Profiler.EndSample();
         }
 
-        static public List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, int size = 2, GameObject self = null, int depth = 100)
+        public static List<Step> BuildPath(Vector2 from_, Vector2 target_, float minRange = 0.1f, int size = 2, GameObject self = null, int depth = 100)
         {
             UnityEngine.Profiling.Profiler.BeginSample("BuildPath");
             Vector2i from = Iso.Snap(from_);
@@ -232,7 +232,7 @@ namespace Diablerie.Engine
             return path;
         }
 
-        static public void DebugDrawPath(Vector2 from, List<Step> path)
+        public static void DebugDrawPath(Vector2 from, List<Step> path)
         {
             if (path.Count > 0)
             {

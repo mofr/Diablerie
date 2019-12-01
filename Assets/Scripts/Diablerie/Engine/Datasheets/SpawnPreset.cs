@@ -48,7 +48,7 @@ namespace Diablerie.Engine.Datasheets
             return key;
         }
 
-        static public SpawnPreset Find(int act, int type, int id)
+        public static SpawnPreset Find(int act, int type, int id)
         {
             SpawnPreset obj = null;
             lookup.TryGetValue(Key(act, type, id), out obj);

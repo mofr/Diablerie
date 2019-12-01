@@ -14,7 +14,7 @@ namespace Diablerie.Engine
         public delegate void OnUpdateHandler();
         public event OnUpdateHandler OnUpdate;
 
-        static public Inventory Create(GameObject gameObject, int sizeX, int sizeY)
+        public static Inventory Create(GameObject gameObject, int sizeX, int sizeY)
         {
             var inventory = gameObject.AddComponent<Inventory>();
             inventory.sizeX = sizeX;

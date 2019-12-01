@@ -4,7 +4,7 @@ namespace Diablerie.Engine.IO.D2Formats
 {
     public class Mpq
     {
-        static public MpqFileSystem fs = new MpqFileSystem();
+        public static MpqFileSystem fs = new MpqFileSystem();
 
         static Mpq()
         {
@@ -18,7 +18,7 @@ namespace Diablerie.Engine.IO.D2Formats
             AddArchive("d2speech.mpq", optional: true);
         }
 
-        static private void AddArchive(string filename, bool optional = false)
+        private static void AddArchive(string filename, bool optional = false)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        public unsafe static string ReadAllText(string filename)
+        public static unsafe string ReadAllText(string filename)
         {
             UnityEngine.Profiling.Profiler.BeginSample("Mpq.ReadAllText");
             try

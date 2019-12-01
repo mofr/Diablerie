@@ -10,7 +10,7 @@ namespace Diablerie.Game.UI
 {
     public class CommandPrompt : MonoBehaviour
     {
-        static public CommandPrompt instance;
+        public static CommandPrompt instance;
         public InputField inputField;
 
         List<string> history = new List<string>();

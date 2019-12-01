@@ -5,10 +5,10 @@ namespace Diablerie.Engine.IO.D2Formats
 {
     public class Palette
     {
-        static public Color32[] palette;
-        static public Dictionary<int, Color32[]> palettes = new Dictionary<int, Color32[]>();
+        public static Color32[] palette;
+        public static Dictionary<int, Color32[]> palettes = new Dictionary<int, Color32[]>();
 
-        static public Color32[] LoadPalette(int act)
+        public static Color32[] LoadPalette(int act)
         {
             if (palettes.ContainsKey(act))
             {

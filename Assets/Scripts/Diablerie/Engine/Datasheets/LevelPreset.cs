@@ -52,12 +52,12 @@ namespace Diablerie.Engine.Datasheets
             }
         }
 
-        static public LevelPreset Find(int levelId)
+        public static LevelPreset Find(int levelId)
         {
             return levelIdMap.GetValueOrDefault(levelId);
         }
 
-        static public LevelPreset Find(string name)
+        public static LevelPreset Find(string name)
         {
             return nameMap.GetValueOrDefault(name);
         }

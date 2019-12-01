@@ -599,7 +599,7 @@ namespace Diablerie.Engine.IO.D2Formats
             UnityEngine.Profiling.Profiler.EndSample();
         }
 
-        static public DCC Load(string filename, bool loadAllDirections = false, bool mpq = true)
+        public static DCC Load(string filename, bool loadAllDirections = false, bool mpq = true)
         {
             UnityEngine.Profiling.Profiler.BeginSample("DCC.Load");
             try

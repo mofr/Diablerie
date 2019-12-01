@@ -30,7 +30,7 @@ namespace Diablerie.Engine.Entities
         public string token;
         public string weaponClass;
 
-        static private float turnSpeed = 3.5f; // full rotations per second
+        private static float turnSpeed = 3.5f; // full rotations per second
 
         public delegate void TakeDamageHandler(Character originator, int damage);
         public event TakeDamageHandler OnTakeDamage;
