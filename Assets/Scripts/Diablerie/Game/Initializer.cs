@@ -8,7 +8,7 @@ namespace Diablerie.Game
     {
         public MainMenu mainMenuPrefab;
         
-        public void Awake()
+        void Awake()
         {
             try
             {
@@ -23,12 +23,26 @@ namespace Diablerie.Game
             }
             catch (System.IO.FileNotFoundException e)
             {
-                // TODO Show the error to the user
-                Debug.Log(e);
+                string message = BuildMessage(e.Message);
+                ScreenMessage.Show(message);
                 return;
             }
             
             Instantiate(mainMenuPrefab);
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+        }
+
+        private string BuildMessage(string missingFile)
+        {
+            string message = "File not found: " + missingFile;
+            message += "\n\nBlizzard Diablo II resources are required";
+            message += "\n\nCopy MPQ files to the Diablerie folder";
+            return message;
         }
     }
 }
