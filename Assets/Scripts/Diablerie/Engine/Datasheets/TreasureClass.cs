@@ -8,8 +8,8 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class TreasureClass
     {
-        public static List<TreasureClass> sheet = Datasheet.Load<TreasureClass>("data/global/excel/TreasureClassEx.txt");
-        static Dictionary<string, TreasureClass> byName = new Dictionary<string, TreasureClass>();
+        public static List<TreasureClass> sheet;
+        static Dictionary<string, TreasureClass> byName;
 
         public static TreasureClass Find(string name)
         {
@@ -31,8 +31,10 @@ namespace Diablerie.Engine.Datasheets
             return sheet[i];
         }
 
-        static TreasureClass()
+        public static void Load()
         {
+            sheet = Datasheet.Load<TreasureClass>("data/global/excel/TreasureClassEx.txt");
+            byName = new Dictionary<string, TreasureClass>();
             GenerateFromItemTypes();
 
             for (int i = 0; i < sheet.Count; ++i)

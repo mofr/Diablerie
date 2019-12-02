@@ -8,7 +8,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class ItemStat
     {
-        public static List<ItemStat> sheet = Datasheet.Load<ItemStat>("data/global/excel/ItemStatCost.txt");
+        public static List<ItemStat> sheet;
         static Dictionary<string, ItemStat> map = new Dictionary<string, ItemStat>();
 
         public static ItemStat Find(string code)
@@ -18,8 +18,9 @@ namespace Diablerie.Engine.Datasheets
             return map.GetValueOrDefault(code);
         }
 
-        static ItemStat()
+        public static void Load()
         {
+            sheet = Datasheet.Load<ItemStat>("data/global/excel/ItemStatCost.txt");
             foreach(var prop in sheet)
             {
                 prop.descPositive = Translation.Find(prop.descStrPositive);

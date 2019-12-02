@@ -7,15 +7,16 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class ItemSet
     {
-        public static List<ItemSet> sheet = Datasheet.Load<ItemSet>("data/global/excel/Sets.txt");
+        public static List<ItemSet> sheet;
 
         public static ItemSet Find(string id)
         {
             return sheet.Find(set => set.id == id);
         }
 
-        static ItemSet()
+        public static void Load()
         {
+            sheet = Datasheet.Load<ItemSet>("data/global/excel/Sets.txt");
             foreach(var set in sheet)
             {
                 set.name = Translation.Find(set.nameStr);

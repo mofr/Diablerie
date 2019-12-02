@@ -7,12 +7,15 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class MagicAffix
     {
-        public static List<MagicAffix> prefixes = Datasheet.Load<MagicAffix>("data/global/excel/MagicPrefix.txt");
-        public static List<MagicAffix> suffixes = Datasheet.Load<MagicAffix>("data/global/excel/MagicSuffix.txt");
-        public static List<MagicAffix> all = new List<MagicAffix>();
+        public static List<MagicAffix> prefixes;
+        public static List<MagicAffix> suffixes;
+        public static List<MagicAffix> all;
 
-        static MagicAffix()
+        public static void Load()
         {
+            prefixes = Datasheet.Load<MagicAffix>("data/global/excel/MagicPrefix.txt");
+            suffixes = Datasheet.Load<MagicAffix>("data/global/excel/MagicSuffix.txt");
+            all = new List<MagicAffix>();
             foreach (var affix in prefixes)
             {
                 affix.prefix = true;

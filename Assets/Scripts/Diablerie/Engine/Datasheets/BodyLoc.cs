@@ -7,7 +7,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class BodyLoc
     {
-        public static List<BodyLoc> sheet = Datasheet.Load<BodyLoc>("data/global/excel/bodylocs.txt");
+        public static List<BodyLoc> sheet;
 
         public static int GetIndex(string code)
         {
@@ -19,8 +19,9 @@ namespace Diablerie.Engine.Datasheets
             return -1;
         }
 
-        static BodyLoc()
+        public static void Load()
         {
+            sheet = Datasheet.Load<BodyLoc>();
             sheet.RemoveAll(loc => loc.code == null);
         }
     

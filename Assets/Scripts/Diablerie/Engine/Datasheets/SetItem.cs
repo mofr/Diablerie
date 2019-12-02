@@ -7,10 +7,11 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class SetItem
     {
-        public static List<SetItem> sheet = Datasheet.Load<SetItem>("data/global/excel/SetItems.txt");
+        public static List<SetItem> sheet;
 
-        static SetItem()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SetItem>("data/global/excel/SetItems.txt");
             foreach(var item in sheet)
             {
                 if (item.itemCode == null)

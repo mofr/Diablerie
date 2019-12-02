@@ -12,24 +12,15 @@ namespace Diablerie.Engine.Datasheets
         public string value;
 
         static Dictionary<string, string> map = new Dictionary<string, string>();
-        public static List<Translation> sheet = Datasheet.Load<Translation>("data/local/string.txt", headerLines: 0);
-        public static List<Translation> expansionSheet = Datasheet.Load<Translation>("data/local/expansionstring.txt", headerLines: 0);
-        public static List<Translation> patchSheet = Datasheet.Load<Translation>("data/local/patchstring.txt", headerLines: 0);
+        public static List<Translation> sheet;
+        public static List<Translation> expansionSheet;
+        public static List<Translation> patchSheet;
 
-        public static string Find(string key)
+        public static void Load()
         {
-            return Find(key, key);
-        }
-
-        public static string Find(string key, string defaultValue = null)
-        {
-            if (key == null)
-                return null;
-            return map.GetValueOrDefault(key, defaultValue);
-        }
-
-        static Translation()
-        {
+            sheet = Datasheet.Load<Translation>("data/local/string.txt", headerLines: 0);
+            expansionSheet = Datasheet.Load<Translation>("data/local/expansionstring.txt", headerLines: 0);
+            patchSheet = Datasheet.Load<Translation>("data/local/patchstring.txt", headerLines: 0);
             foreach (var translation in patchSheet)
             {
                 if (!map.ContainsKey(translation.key))
@@ -47,6 +38,18 @@ namespace Diablerie.Engine.Datasheets
                 if (!map.ContainsKey(translation.key))
                     map.Add(translation.key, translation.value);
             }
+        }
+
+        public static string Find(string key)
+        {
+            return Find(key, key);
+        }
+
+        public static string Find(string key, string defaultValue = null)
+        {
+            if (key == null)
+                return null;
+            return map.GetValueOrDefault(key, defaultValue);
         }
     }
 }

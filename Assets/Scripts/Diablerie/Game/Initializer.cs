@@ -1,3 +1,5 @@
+using Diablerie.Engine;
+using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Game.UI;
 using UnityEngine;
@@ -27,7 +29,10 @@ namespace Diablerie.Game
                 ScreenMessage.Show(message);
                 return;
             }
-            
+
+            Datasheet.SetLocation(typeof(BodyLoc), "data/global/excel/bodylocs.txt");
+            Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
+            EngineData.LoadAll();
             Instantiate(mainMenuPrefab);
         }
 

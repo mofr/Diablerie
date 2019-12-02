@@ -8,16 +8,18 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class MonLvl
     {
-        public static List<MonLvl> sheet = Datasheet.Load<MonLvl>("data/global/excel/MonLvl.txt");
-        static Dictionary<int, MonLvl> map = new Dictionary<int, MonLvl>();
+        public static List<MonLvl> sheet;
+        static Dictionary<int, MonLvl> map;
 
         public static MonLvl Find(int level)
         {
             return map.GetValueOrDefault(level);
         }
 
-        static MonLvl()
+        public static void Load()
         {
+            sheet = Datasheet.Load<MonLvl>("data/global/excel/MonLvl.txt");
+            map = new Dictionary<int, MonLvl>();
             foreach(var monLvl in sheet)
             {
                 map.Add(monLvl.level, monLvl);

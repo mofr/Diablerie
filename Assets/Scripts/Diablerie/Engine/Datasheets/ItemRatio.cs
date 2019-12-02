@@ -7,10 +7,11 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class ItemRatio
     {
-        public static List<ItemRatio> sheet = Datasheet.Load<ItemRatio>("data/global/excel/ItemRatio.txt");
+        public static List<ItemRatio> sheet;
 
-        static ItemRatio()
+        public static void Load()
         {
+            sheet = Datasheet.Load<ItemRatio>("data/global/excel/ItemRatio.txt");
             sheet.RemoveAll(ratio => ratio.version == 0);
         }
 

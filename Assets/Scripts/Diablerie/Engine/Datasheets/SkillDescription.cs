@@ -27,11 +27,13 @@ namespace Diablerie.Engine.Datasheets
 
         public string eol;
 
-        public static List<SkillDescription> sheet = Datasheet.Load<SkillDescription>("data/global/excel/SkillDesc.txt");
-        static Dictionary<string, SkillDescription> map = new Dictionary<string, SkillDescription>();
+        public static List<SkillDescription> sheet;
+        static Dictionary<string, SkillDescription> map;
 
-        static SkillDescription()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SkillDescription>("data/global/excel/SkillDesc.txt");
+            map = new Dictionary<string, SkillDescription>();
             foreach (var row in sheet)
             {
                 map.Add(row.id, row);

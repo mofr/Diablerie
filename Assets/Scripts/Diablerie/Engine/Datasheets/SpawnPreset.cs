@@ -24,11 +24,13 @@ namespace Diablerie.Engine.Datasheets
         public string index;
         public string eol;
 
-        public static List<SpawnPreset> sheet = Datasheet.Load<SpawnPreset>("/obj.txt");
-        static Dictionary<long, SpawnPreset> lookup = new Dictionary<long, SpawnPreset>();
+        public static List<SpawnPreset> sheet;
+        static Dictionary<long, SpawnPreset> lookup;
 
-        static SpawnPreset()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SpawnPreset>("/obj.txt");
+            lookup = new Dictionary<long, SpawnPreset>();
             foreach (SpawnPreset obj in sheet)
             {
                 lookup.Add(Key(obj.act - 1, obj.type, obj.id), obj);

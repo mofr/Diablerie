@@ -95,11 +95,13 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public string name;
 
-        public static List<ObjectInfo> sheet = Datasheet.Load<ObjectInfo>("data/global/excel/objects.txt");
-        static Dictionary<string, ObjectInfo> byToken = new Dictionary<string, ObjectInfo>();
+        public static List<ObjectInfo> sheet;
+        static Dictionary<string, ObjectInfo> byToken;
 
-        static ObjectInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<ObjectInfo>("data/global/excel/objects.txt");
+            byToken = new Dictionary<string, ObjectInfo>();
             foreach(var info in sheet)
             {
                 for(int i = 0; i < 8; ++i)

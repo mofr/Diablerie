@@ -7,10 +7,11 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class UniqueItem
     {
-        public static List<UniqueItem> sheet = Datasheet.Load<UniqueItem>("data/global/excel/UniqueItems.txt");
+        public static List<UniqueItem> sheet;
 
-        static UniqueItem()
+        public static void Load()
         {
+            sheet = Datasheet.Load<UniqueItem>("data/global/excel/UniqueItems.txt");
             foreach(var unique in sheet)
             {
                 unique.name = Translation.Find(unique.nameStr);

@@ -32,12 +32,13 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public List<string> ds1Files = new List<string>();
 
-        public static List<LevelPreset> sheet = Datasheet.Load<LevelPreset>("data/global/excel/LvlPrest.txt");
+        public static List<LevelPreset> sheet;
         static Dictionary<int, LevelPreset> levelIdMap = new Dictionary<int, LevelPreset>();
         static Dictionary<string, LevelPreset> nameMap = new Dictionary<string, LevelPreset>();
 
-        static LevelPreset()
+        public static void Load()
         {
+            sheet = Datasheet.Load<LevelPreset>("data/global/excel/LvlPrest.txt");
             foreach (var preset in sheet)
             {
                 if (preset.levelId != 0)

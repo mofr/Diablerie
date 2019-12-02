@@ -8,16 +8,18 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class SuperUnique
     {
-        public static List<SuperUnique> sheet = Datasheet.Load<SuperUnique>("data/global/excel/SuperUniques.txt");
-        static Dictionary<string, SuperUnique> map = new Dictionary<string, SuperUnique>();
+        public static List<SuperUnique> sheet;
+        static Dictionary<string, SuperUnique> map;
 
         public static SuperUnique Find(string key)
         {
             return map.GetValueOrDefault(key);
         }
 
-        static SuperUnique()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SuperUnique>("data/global/excel/SuperUniques.txt");
+            map = new Dictionary<string, SuperUnique>();
             foreach (var row in sheet)
             {
                 row.monStat = MonStat.Find(row.monStatId);

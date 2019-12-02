@@ -29,6 +29,7 @@ namespace Diablerie.Engine.IO.D2Formats
         }
 
         private static Dictionary<Type, object> loaders = new Dictionary<Type, object>();
+        private static Dictionary<Type, string> locations = new Dictionary<Type, string>();
 
         private static void RegisterLoader(Type recordType, object loader)
         {
@@ -45,8 +46,10 @@ namespace Diablerie.Engine.IO.D2Formats
             DiscoverLoaders();
         }
 
-        public static List<T> Load<T>(string filename, int headerLines = 1) where T : new()
+        public static List<T> Load<T>(string filename = null, int headerLines = 1) where T : new()
         {
+            if (filename == null)
+                filename = locations[typeof(T)];
             Profiler.BeginSample("Datasheet.Load");
             var stopwatch = Stopwatch.StartNew();
 
@@ -112,6 +115,11 @@ namespace Diablerie.Engine.IO.D2Formats
                     }
                 }
             }
+        }
+
+        public static void SetLocation(Type recordType, string filename)
+        {
+            locations.Add(recordType, filename);
         }
     }
 }

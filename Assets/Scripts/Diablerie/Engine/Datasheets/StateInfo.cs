@@ -8,11 +8,13 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class StateInfo
     {
-        public static List<StateInfo> sheet = Datasheet.Load<StateInfo>("data/global/excel/States.txt");
-        private static Dictionary<string, StateInfo> byCode = new Dictionary<string, StateInfo>();
+        public static List<StateInfo> sheet;
+        private static Dictionary<string, StateInfo> byCode;
 
-        static StateInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<StateInfo>("data/global/excel/States.txt");
+            byCode = new Dictionary<string, StateInfo>();
             foreach(var row in sheet)
             {
                 byCode.Add(row.code, row);

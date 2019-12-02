@@ -7,15 +7,16 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class SoundEnvironment
     {
-        public static List<SoundEnvironment> sheet = Datasheet.Load<SoundEnvironment>("data/global/excel/SoundEnviron.txt");
+        public static List<SoundEnvironment> sheet;
 
         public static SoundEnvironment Find(int index)
         {
             return sheet[index];
         }
 
-        static SoundEnvironment()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SoundEnvironment>("data/global/excel/SoundEnviron.txt");
             foreach(var env in sheet)
             {
                 env.song = SoundInfo.sheet[env.songId];

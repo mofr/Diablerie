@@ -110,13 +110,14 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public LevelMazeInfo maze;
 
-        public static List<LevelInfo> sheet = Datasheet.Load<LevelInfo>("data/global/excel/Levels.txt");
+        public static List<LevelInfo> sheet;
         public static List<List<LevelInfo>> byAct = new List<List<LevelInfo>>();
         static Dictionary<string, LevelInfo> nameIndex = new Dictionary<string, LevelInfo>();
         static Dictionary<int, LevelInfo> idMap = new Dictionary<int, LevelInfo>();
 
-        static LevelInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<LevelInfo>("data/global/excel/Levels.txt");
             foreach(var levelInfo in sheet)
             {
                 if (levelInfo.id == 0)

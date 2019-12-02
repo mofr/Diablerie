@@ -17,10 +17,11 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public List<string> dt1Files = new List<string>();
 
-        public static List<LevelType> sheet = Datasheet.Load<LevelType>("data/global/excel/LvlTypes.txt");
+        public static List<LevelType> sheet;
 
-        static LevelType()
+        public static void Load()
         {
+            sheet = Datasheet.Load<LevelType>("data/global/excel/LvlTypes.txt");
             foreach (var levelType in sheet)
             {
                 foreach (var file in levelType.files)

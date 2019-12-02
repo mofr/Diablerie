@@ -8,8 +8,8 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class MonSound
     {
-        public static List<MonSound> sheet = Datasheet.Load<MonSound>("data/global/excel/MonSounds.txt");
-        static Dictionary<string, MonSound> map = new Dictionary<string, MonSound>();
+        public static List<MonSound> sheet;
+        static Dictionary<string, MonSound> map;
 
         public static MonSound Find(string id)
         {
@@ -19,8 +19,10 @@ namespace Diablerie.Engine.Datasheets
             return map.GetValueOrDefault(id);
         }
 
-        static MonSound()
+        public static void Load()
         {
+            sheet = Datasheet.Load<MonSound>("data/global/excel/MonSounds.txt");
+            map = new Dictionary<string, MonSound>();
             foreach(var sound in sheet)
             {
                 if (sound.id == null)

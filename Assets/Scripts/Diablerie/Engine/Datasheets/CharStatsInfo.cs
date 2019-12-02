@@ -7,7 +7,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class CharStatsInfo
     {
-        public static List<CharStatsInfo> sheet = Datasheet.Load<CharStatsInfo>("data/global/excel/CharStats.txt");
+        public static List<CharStatsInfo> sheet;
 
         public static CharStatsInfo Find(string className)
         {
@@ -50,8 +50,9 @@ namespace Diablerie.Engine.Datasheets
             { "Assassin", "ass" },
         };
 
-        static CharStatsInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<CharStatsInfo>("data/global/excel/CharStats.txt");
             sheet.RemoveAll(row => row.baseWClass == null);
             foreach(var info in sheet)
             {

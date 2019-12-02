@@ -8,7 +8,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class ItemPropertyInfo
     {
-        public static List<ItemPropertyInfo> sheet = Datasheet.Load<ItemPropertyInfo>("data/global/excel/Properties.txt");
+        public static List<ItemPropertyInfo> sheet;
         static Dictionary<string, ItemPropertyInfo> map = new Dictionary<string, ItemPropertyInfo>();
 
         public static ItemPropertyInfo Find(string code)
@@ -16,8 +16,9 @@ namespace Diablerie.Engine.Datasheets
             return map.GetValueOrDefault(code);
         }
 
-        static ItemPropertyInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<ItemPropertyInfo>("data/global/excel/Properties.txt");
             sheet.RemoveAll(row => !row._done);
 
             foreach (var prop in sheet)

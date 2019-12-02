@@ -187,11 +187,13 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public MonSound uniqueSound;
 
-        public static List<MonStat> sheet = Datasheet.Load<MonStat>("data/global/excel/MonStats.txt");
-        static Dictionary<string, MonStat> monStats = new Dictionary<string, MonStat>();
+        public static List<MonStat> sheet;
+        static Dictionary<string, MonStat> monStats;
 
-        static MonStat()
+        public static void Load()
         {
+            sheet = Datasheet.Load<MonStat>("data/global/excel/MonStats.txt");
+            monStats = new Dictionary<string, MonStat>();
             foreach(MonStat stat in sheet)
             {
                 var key = stat.id.ToLower();

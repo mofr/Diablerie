@@ -8,7 +8,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class ItemType
     {
-        public static List<ItemType> sheet = Datasheet.Load<ItemType>("data/global/excel/ItemTypes.txt");
+        public static List<ItemType> sheet;
         static Dictionary<string, ItemType> byCode = new Dictionary<string, ItemType>();
 
         public static ItemType Find(string code)
@@ -16,8 +16,9 @@ namespace Diablerie.Engine.Datasheets
             return byCode.GetValueOrDefault(code);
         }
 
-        static ItemType()
+        public static void Load()
         {
+            sheet = Datasheet.Load<ItemType>("data/global/excel/ItemTypes.txt");
             foreach (ItemType type in sheet)
             {
                 if (type.code == null)
@@ -39,17 +40,6 @@ namespace Diablerie.Engine.Datasheets
                 if (type._equiv2 != null)
                     type.equiv2 = Find(type._equiv2);
             }
-        }
-
-        public void GatherTypes(IList<ItemType> result)
-        {
-            result.Add(this);
-
-            if (equiv1 != null)
-                equiv1.GatherTypes(result);
-
-            if (equiv2 != null)
-                equiv2.GatherTypes(result);
         }
 
         public bool Is(ItemType type)

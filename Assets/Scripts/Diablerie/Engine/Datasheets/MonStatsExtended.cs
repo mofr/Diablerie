@@ -81,11 +81,13 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public string[][] gearVariants = new string[16][];
 
-        public static List<MonStatsExtended> sheet = Datasheet.Load<MonStatsExtended>("data/global/excel/MonStats2.txt");
-        static Dictionary<string, MonStatsExtended> stats = new Dictionary<string, MonStatsExtended>();
+        public static List<MonStatsExtended> sheet;
+        static Dictionary<string, MonStatsExtended> stats;
 
-        static MonStatsExtended()
+        public static void Load()
         {
+            sheet = Datasheet.Load<MonStatsExtended>("data/global/excel/MonStats2.txt");
+            stats = new Dictionary<string, MonStatsExtended>();
             foreach (var stat in sheet)
             {
                 for(int i = 0; i < stat.gearVariantsStr.Length; ++i)

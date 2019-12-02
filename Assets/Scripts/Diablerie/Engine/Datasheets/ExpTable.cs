@@ -18,7 +18,12 @@ namespace Diablerie.Engine.Datasheets
         public uint druid;
         public uint assassin;
     
-        static List<ExpTable> sheet = Datasheet.Load<ExpTable>("data/global/excel/experience.txt", headerLines: 2);
+        static List<ExpTable> sheet;
+
+        public static void Load()
+        {
+            sheet = Datasheet.Load<ExpTable>("data/global/excel/experience.txt", headerLines: 2);
+        }
 
         public static uint GetExperienceRequired(int level)
         {

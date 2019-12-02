@@ -8,7 +8,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class LevelMazeInfo
     {
-        public static List<LevelMazeInfo> sheet = Datasheet.Load<LevelMazeInfo>("data/global/excel/LvlMaze.txt");
+        public static List<LevelMazeInfo> sheet;
         static Dictionary<int, LevelMazeInfo> map = new Dictionary<int, LevelMazeInfo>();
 
         public static LevelMazeInfo Find(int levelId)
@@ -16,8 +16,9 @@ namespace Diablerie.Engine.Datasheets
             return map.GetValueOrDefault(levelId);
         }
 
-        static LevelMazeInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<LevelMazeInfo>("data/global/excel/LvlMaze.txt");
             foreach(var info in sheet)
             {
                 if (info.levelId == -1)

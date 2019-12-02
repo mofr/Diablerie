@@ -26,11 +26,12 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public Warp instance;
 
-        public static List<LevelWarpInfo> sheet = Datasheet.Load<LevelWarpInfo>("data/global/excel/LvlWarp.txt");
+        public static List<LevelWarpInfo> sheet;
         static Dictionary<int, LevelWarpInfo> idMap = new Dictionary<int, LevelWarpInfo>();
 
-        static LevelWarpInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<LevelWarpInfo>("data/global/excel/LvlWarp.txt");
             foreach(var warpInfo in sheet)
             {
                 idMap[warpInfo.id] = warpInfo;

@@ -11,7 +11,7 @@ namespace Diablerie.Engine.Datasheets
     [Datasheet.Record]
     public class SoundInfo
     {
-        public static List<SoundInfo> sheet = Datasheet.Load<SoundInfo>("data/global/excel/Sounds.txt");
+        public static List<SoundInfo> sheet;
         static Dictionary<string, SoundInfo> map = new Dictionary<string, SoundInfo>();
 
         public static SoundInfo itemPickup;
@@ -47,8 +47,9 @@ namespace Diablerie.Engine.Datasheets
             return null;
         }
 
-        static SoundInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SoundInfo>();
             for(int i = 0; i < sheet.Count; ++i)
             {
                 var sound = sheet[i];
@@ -68,7 +69,7 @@ namespace Diablerie.Engine.Datasheets
             cursorButtonClick = Find("cursor_button_click");
         }
 
-        static void GatherVariations(SoundInfo sound, int index)
+        private static void GatherVariations(SoundInfo sound, int index)
         {
             if (sound.groupSize > 0)
             {
@@ -76,23 +77,6 @@ namespace Diablerie.Engine.Datasheets
                 for (int i = 0; i < sound.groupSize; ++i)
                     sound.variations[i] = sheet[i + index];
             }
-        }
-
-        public string FindFile()
-        {
-            var filename = @"data\global\sfx\" + _filename;
-            if (Mpq.fs.HasFile(filename))
-                return filename;
-
-            filename = @"data\global\music\" + _filename;
-            if (Mpq.fs.HasFile(filename))
-                return filename;
-            
-            filename = @"data\local\sfx\" + _filename;
-            if (Mpq.fs.HasFile(filename))
-                return filename;
-    
-            return null;
         }
 
         public AudioClip clip
@@ -116,7 +100,24 @@ namespace Diablerie.Engine.Datasheets
                 return clip;
             }
         }
+
+        private string FindFile()
+        {
+            var filename = @"data\global\sfx\" + _filename;
+            if (Mpq.fs.HasFile(filename))
+                return filename;
+
+            filename = @"data\global\music\" + _filename;
+            if (Mpq.fs.HasFile(filename))
+                return filename;
+            
+            filename = @"data\local\sfx\" + _filename;
+            if (Mpq.fs.HasFile(filename))
+                return filename;
     
+            return null;
+        }
+
         public string sound;
         public uint index;
         public string _filename;

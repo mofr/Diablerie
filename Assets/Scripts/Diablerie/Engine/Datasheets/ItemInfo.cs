@@ -20,15 +20,6 @@ namespace Diablerie.Engine.Datasheets
             return byCode.GetValueOrDefault(code);
         }
 
-        public void GatherTypes(IList<ItemType> result)
-        {
-            if (type1 != null)
-                type1.GatherTypes(result);
-
-            if (type2 != null)
-                type2.GatherTypes(result);
-        }
-
         public bool HasType(ItemType type)
         {
             return (type1 != null && type1.Is(type)) || (type2 != null && type2.Is(type));

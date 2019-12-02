@@ -35,11 +35,12 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public string spritesheetFilename;
 
-        public static List<OverlayInfo> sheet = Datasheet.Load<OverlayInfo>("data/global/excel/Overlay.txt");
+        public static List<OverlayInfo> sheet;
         static Dictionary<string, OverlayInfo> map;
 
-        static OverlayInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<OverlayInfo>("data/global/excel/Overlay.txt");
             map = new Dictionary<string, OverlayInfo>(sheet.Count);
             foreach (var row in sheet)
             {

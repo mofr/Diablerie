@@ -147,12 +147,15 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         private SkillDescription _description;
 
-        public static List<SkillInfo> sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
-        static Dictionary<string, SkillInfo> map = new Dictionary<string, SkillInfo>();
-        static Dictionary<int, SkillInfo> idMap = new Dictionary<int, SkillInfo>();
+        public static List<SkillInfo> sheet;
+        static Dictionary<string, SkillInfo> map;
+        static Dictionary<int, SkillInfo> idMap;
 
-        static SkillInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<SkillInfo>("data/global/excel/Skills.txt");
+            map = new Dictionary<string, SkillInfo>();
+            idMap = new Dictionary<int, SkillInfo>();
             foreach (var row in sheet)
             {
                 if (row.id == -1)

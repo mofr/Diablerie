@@ -192,12 +192,15 @@ namespace Diablerie.Engine.Datasheets
         [System.NonSerialized]
         public CollideType collideType;
 
-        public static List<MissileInfo> sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
-        static Dictionary<string, MissileInfo> map = new Dictionary<string, MissileInfo>();
-        static Dictionary<int, MissileInfo> idMap = new Dictionary<int, MissileInfo>();
+        public static List<MissileInfo> sheet;
+        static Dictionary<string, MissileInfo> map;
+        static Dictionary<int, MissileInfo> idMap;
 
-        static MissileInfo()
+        public static void Load()
         {
+            sheet = Datasheet.Load<MissileInfo>("data/global/excel/Missiles.txt");
+            map = new Dictionary<string, MissileInfo>();
+            idMap = new Dictionary<int, MissileInfo>();
             foreach (var row in sheet)
             {
                 if (row.id == -1)

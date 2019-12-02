@@ -12,11 +12,14 @@ namespace Diablerie.Engine.Datasheets
         public int act;
         public string place;
 
-        public static List<MonPreset> sheet = Datasheet.Load<MonPreset>("data/global/excel/MonPreset.txt");
-        static List<MonPreset>[] presets = new List<MonPreset>[ActCount + 1];
+        public static List<MonPreset> sheet;
+        static List<MonPreset>[] presets;
 
-        static MonPreset()
+        public static void Load()
         {
+            sheet = Datasheet.Load<MonPreset>("data/global/excel/MonPreset.txt");
+            presets = new List<MonPreset>[ActCount + 1];
+            
             for(int act = 0; act < presets.Length; ++act)
             {
                 presets[act] = new List<MonPreset>();
