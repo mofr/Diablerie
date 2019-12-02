@@ -1,4 +1,5 @@
 using Diablerie.Engine.Datasheets;
+using UnityEngine;
 
 namespace Diablerie.Engine
 {
@@ -6,6 +7,7 @@ namespace Diablerie.Engine
     {
         public static void LoadAll()
         {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
             Translation.Load();
             SoundInfo.Load();
             SoundEnvironment.Load();
@@ -39,6 +41,7 @@ namespace Diablerie.Engine
             SkillInfo.Load();
             SpawnPreset.Load();
             StateInfo.Load();
+            Debug.Log("All txt files loaded in " + sw.ElapsedMilliseconds + " ms");
         }
     }
 }
