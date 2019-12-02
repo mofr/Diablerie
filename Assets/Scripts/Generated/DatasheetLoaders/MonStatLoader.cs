@@ -9,7 +9,7 @@ class MonStatLoader : Datasheet.Loader<MonStat>
     private MonStatStatsLoader monstatstatsloader = new MonStatStatsLoader();
     private MonStatTreasureClassInfoLoader monstattreasureclassinfoloader = new MonStatTreasureClassInfoLoader();
 
-    public void LoadRecord(ref MonStat record, Datasheet.Stream stream)
+    public void LoadRecord(ref MonStat record, DatasheetStream stream)
     {
                 stream.Read(ref record.id);
                 stream.Read(ref record.hcIndex);

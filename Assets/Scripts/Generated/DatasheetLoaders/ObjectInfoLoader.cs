@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class ObjectInfoLoader : Datasheet.Loader<ObjectInfo>
 {
 
-    public void LoadRecord(ref ObjectInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref ObjectInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.nameStr);
                 stream.Read(ref record.description);

@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class OverlayInfoLoader : Datasheet.Loader<OverlayInfo>
 {
 
-    public void LoadRecord(ref OverlayInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref OverlayInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.id);
                 stream.Read(ref record.filename);

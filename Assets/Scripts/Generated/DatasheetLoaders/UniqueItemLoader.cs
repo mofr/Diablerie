@@ -8,7 +8,7 @@ class UniqueItemLoader : Datasheet.Loader<UniqueItem>
 {
     private UniqueItemPropLoader uniqueitemproploader = new UniqueItemPropLoader();
 
-    public void LoadRecord(ref UniqueItem record, Datasheet.Stream stream)
+    public void LoadRecord(ref UniqueItem record, DatasheetStream stream)
     {
                 stream.Read(ref record.nameStr);
                 stream.Read(ref record.version);

@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MonStatStatsLoader : Datasheet.Loader<MonStat.Stats>
 {
 
-    public void LoadRecord(ref MonStat.Stats record, Datasheet.Stream stream)
+    public void LoadRecord(ref MonStat.Stats record, DatasheetStream stream)
     {
                 stream.Read(ref record.minHP);
                 stream.Read(ref record.maxHP);

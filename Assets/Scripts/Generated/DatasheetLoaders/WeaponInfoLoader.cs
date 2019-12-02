@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class WeaponInfoLoader : Datasheet.Loader<WeaponInfo>
 {
 
-    public void LoadRecord(ref WeaponInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref WeaponInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record._name);
                 stream.Read(ref record._type1);

@@ -8,7 +8,7 @@ class ItemPropertyInfoLoader : Datasheet.Loader<ItemPropertyInfo>
 {
     private ItemPropertyInfoBlockLoader itempropertyinfoblockloader = new ItemPropertyInfoBlockLoader();
 
-    public void LoadRecord(ref ItemPropertyInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref ItemPropertyInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.code);
                 stream.Read(ref record._done);

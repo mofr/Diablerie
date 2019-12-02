@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MonSoundLoader : Datasheet.Loader<MonSound>
 {
 
-    public void LoadRecord(ref MonSound record, Datasheet.Stream stream)
+    public void LoadRecord(ref MonSound record, DatasheetStream stream)
     {
                 stream.Read(ref record.id);
                 stream.Read(ref record._attack1);

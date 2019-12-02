@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class LevelTypeLoader : Datasheet.Loader<LevelType>
 {
 
-    public void LoadRecord(ref LevelType record, Datasheet.Stream stream)
+    public void LoadRecord(ref LevelType record, DatasheetStream stream)
     {
                 stream.Read(ref record.name);
                 stream.Read(ref record.id);

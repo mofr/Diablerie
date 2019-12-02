@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class LevelMazeInfoLoader : Datasheet.Loader<LevelMazeInfo>
 {
 
-    public void LoadRecord(ref LevelMazeInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref LevelMazeInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.name);
                 stream.Read(ref record.levelId);

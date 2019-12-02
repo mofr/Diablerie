@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class ItemSetPropLoader : Datasheet.Loader<ItemSet.Prop>
 {
 
-    public void LoadRecord(ref ItemSet.Prop record, Datasheet.Stream stream)
+    public void LoadRecord(ref ItemSet.Prop record, DatasheetStream stream)
     {
                 stream.Read(ref record.prop);
                 stream.Read(ref record.param);

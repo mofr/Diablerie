@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class SuperUniqueLoader : Datasheet.Loader<SuperUnique>
 {
 
-    public void LoadRecord(ref SuperUnique record, Datasheet.Stream stream)
+    public void LoadRecord(ref SuperUnique record, DatasheetStream stream)
     {
                 stream.Read(ref record.superUnique);
                 stream.Read(ref record.nameStr);

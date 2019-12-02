@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class SkillInfoLoader : Datasheet.Loader<SkillInfo>
 {
 
-    public void LoadRecord(ref SkillInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref SkillInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.skill);
                 stream.Read(ref record.id);

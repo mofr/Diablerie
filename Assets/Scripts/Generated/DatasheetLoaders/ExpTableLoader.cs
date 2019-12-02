@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class ExpTableLoader : Datasheet.Loader<ExpTable>
 {
 
-    public void LoadRecord(ref ExpTable record, Datasheet.Stream stream)
+    public void LoadRecord(ref ExpTable record, DatasheetStream stream)
     {
                 stream.Read(ref record.maxLevel);
                 stream.Read(ref record.amazon);

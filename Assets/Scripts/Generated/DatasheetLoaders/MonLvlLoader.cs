@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MonLvlLoader : Datasheet.Loader<MonLvl>
 {
 
-    public void LoadRecord(ref MonLvl record, Datasheet.Stream stream)
+    public void LoadRecord(ref MonLvl record, DatasheetStream stream)
     {
                 stream.Read(ref record.level);
                 record.armor = new int[6];

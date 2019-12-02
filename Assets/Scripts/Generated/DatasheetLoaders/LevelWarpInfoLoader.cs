@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class LevelWarpInfoLoader : Datasheet.Loader<LevelWarpInfo>
 {
 
-    public void LoadRecord(ref LevelWarpInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref LevelWarpInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.name);
                 stream.Read(ref record.id);

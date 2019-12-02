@@ -8,7 +8,7 @@ class ItemSetLoader : Datasheet.Loader<ItemSet>
 {
     private ItemSetPropLoader itemsetproploader = new ItemSetPropLoader();
 
-    public void LoadRecord(ref ItemSet record, Datasheet.Stream stream)
+    public void LoadRecord(ref ItemSet record, DatasheetStream stream)
     {
                 stream.Read(ref record.id);
                 stream.Read(ref record.nameStr);

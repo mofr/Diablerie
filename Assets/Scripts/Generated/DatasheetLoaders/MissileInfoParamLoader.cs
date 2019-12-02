@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MissileInfoParamLoader : Datasheet.Loader<MissileInfo.Param>
 {
 
-    public void LoadRecord(ref MissileInfo.Param record, Datasheet.Stream stream)
+    public void LoadRecord(ref MissileInfo.Param record, DatasheetStream stream)
     {
                 stream.Read(ref record.value);
                 stream.Read(ref record.description);

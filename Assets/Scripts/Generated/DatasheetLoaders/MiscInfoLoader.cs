@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MiscInfoLoader : Datasheet.Loader<MiscInfo>
 {
 
-    public void LoadRecord(ref MiscInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref MiscInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.name1);
                 stream.Read(ref record.name2);

@@ -8,7 +8,7 @@ class CharStatsInfoLoader : Datasheet.Loader<CharStatsInfo>
 {
     private CharStatsInfoStartingItemLoader charstatsinfostartingitemloader = new CharStatsInfoStartingItemLoader();
 
-    public void LoadRecord(ref CharStatsInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref CharStatsInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.className);
                 stream.Read(ref record.str);

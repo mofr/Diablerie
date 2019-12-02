@@ -8,7 +8,7 @@ class SetItemLoader : Datasheet.Loader<SetItem>
 {
     private SetItemPropLoader setitemproploader = new SetItemPropLoader();
 
-    public void LoadRecord(ref SetItem record, Datasheet.Stream stream)
+    public void LoadRecord(ref SetItem record, DatasheetStream stream)
     {
                 stream.Read(ref record.id);
                 stream.Read(ref record.setId);

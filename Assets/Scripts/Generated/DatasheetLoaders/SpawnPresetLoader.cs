@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class SpawnPresetLoader : Datasheet.Loader<SpawnPreset>
 {
 
-    public void LoadRecord(ref SpawnPreset record, Datasheet.Stream stream)
+    public void LoadRecord(ref SpawnPreset record, DatasheetStream stream)
     {
                 stream.Read(ref record.act);
                 stream.Read(ref record.type);

@@ -8,7 +8,7 @@ class MissileInfoLoader : Datasheet.Loader<MissileInfo>
 {
     private MissileInfoParamLoader missileinfoparamloader = new MissileInfoParamLoader();
 
-    public void LoadRecord(ref MissileInfo record, Datasheet.Stream stream)
+    public void LoadRecord(ref MissileInfo record, DatasheetStream stream)
     {
                 stream.Read(ref record.missile);
                 stream.Read(ref record.id);

@@ -8,7 +8,7 @@ class TreasureClassLoader : Datasheet.Loader<TreasureClass>
 {
     private TreasureClassNodeLoader treasureclassnodeloader = new TreasureClassNodeLoader();
 
-    public void LoadRecord(ref TreasureClass record, Datasheet.Stream stream)
+    public void LoadRecord(ref TreasureClass record, DatasheetStream stream)
     {
                 stream.Read(ref record.name);
                 stream.Read(ref record.group);

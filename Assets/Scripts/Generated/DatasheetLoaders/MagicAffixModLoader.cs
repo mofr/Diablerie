@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MagicAffixModLoader : Datasheet.Loader<MagicAffix.Mod>
 {
 
-    public void LoadRecord(ref MagicAffix.Mod record, Datasheet.Stream stream)
+    public void LoadRecord(ref MagicAffix.Mod record, DatasheetStream stream)
     {
                 stream.Read(ref record.code);
                 stream.Read(ref record.param);

@@ -170,7 +170,7 @@ class {{ type.name }}Loader : Datasheet.Loader<{{ type.declaration }}>
     private {{ dependency.name }}Loader {{ dependency.name | string.downcase }}loader = new {{ dependency.name }}Loader();
     {{~ end ~}}
 
-    public void LoadRecord(ref {{ type.declaration }} record, Datasheet.Stream stream)
+    public void LoadRecord(ref {{ type.declaration }} record, DatasheetStream stream)
     {
         {{~ for field in type.fields ~}}
             {{~ if field.is_array ~}}

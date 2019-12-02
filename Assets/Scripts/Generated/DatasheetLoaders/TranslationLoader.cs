@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class TranslationLoader : Datasheet.Loader<Translation>
 {
 
-    public void LoadRecord(ref Translation record, Datasheet.Stream stream)
+    public void LoadRecord(ref Translation record, DatasheetStream stream)
     {
                 stream.Read(ref record.key);
                 stream.Read(ref record.value);

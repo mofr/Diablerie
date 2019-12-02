@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class ItemRatioLoader : Datasheet.Loader<ItemRatio>
 {
 
-    public void LoadRecord(ref ItemRatio record, Datasheet.Stream stream)
+    public void LoadRecord(ref ItemRatio record, DatasheetStream stream)
     {
                 stream.Read(ref record.function);
                 stream.Read(ref record.version);

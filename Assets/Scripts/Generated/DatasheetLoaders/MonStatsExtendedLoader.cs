@@ -7,7 +7,7 @@ using Diablerie.Engine.IO.D2Formats;
 class MonStatsExtendedLoader : Datasheet.Loader<MonStatsExtended>
 {
 
-    public void LoadRecord(ref MonStatsExtended record, Datasheet.Stream stream)
+    public void LoadRecord(ref MonStatsExtended record, DatasheetStream stream)
     {
                 stream.Read(ref record.id);
                 stream.Read(ref record.height);

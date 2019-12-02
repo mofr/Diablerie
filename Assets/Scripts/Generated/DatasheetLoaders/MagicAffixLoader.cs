@@ -8,7 +8,7 @@ class MagicAffixLoader : Datasheet.Loader<MagicAffix>
 {
     private MagicAffixModLoader magicaffixmodloader = new MagicAffixModLoader();
 
-    public void LoadRecord(ref MagicAffix record, Datasheet.Stream stream)
+    public void LoadRecord(ref MagicAffix record, DatasheetStream stream)
     {
                 stream.Read(ref record.nameStr);
                 stream.Read(ref record.version);
