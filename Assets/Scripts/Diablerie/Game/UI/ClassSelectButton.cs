@@ -1,4 +1,5 @@
-﻿using Diablerie.Engine.Datasheets;
+﻿using System.Collections;
+using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.IO.D2Formats;
 using UnityEngine;
@@ -27,22 +28,19 @@ namespace Diablerie.Game.UI
 
         private void Awake()
         {
+            Canvas.ForceUpdateCanvases();
             rectTransform = GetComponent<RectTransform>();
             className = name;
-        }
-
-        void Start()
-        {
             CharStatsInfo classInfo = CharStatsInfo.Find(className);
-            dummy = CreateDummy(classInfo, new Vector3(0, 0));
+            dummy = CreateDummy(classInfo);
+            dummy.transform.position = Camera.main.ScreenToWorldPoint(rectTransform.position);
             dummyAnimator = dummy.GetComponent<COFAnimator>();
             dummyAnimator.cof = GetCof(classInfo, "TN");
         }
-	
-        void Update()
+
+        void LateUpdate()
         {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(rectTransform.position);
-            dummy.transform.position = pos;
+            dummy.transform.position = Camera.main.ScreenToWorldPoint(rectTransform.position);
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -67,14 +65,11 @@ namespace Diablerie.Game.UI
             OnExit(classInfo);
         }
 
-        static GameObject CreateDummy(CharStatsInfo info, Vector3 pos)
+        static GameObject CreateDummy(CharStatsInfo info)
         {
             var gameObject = new GameObject(info.className);
-            gameObject.transform.position = pos;
-
             var animator = gameObject.AddComponent<COFAnimator>();
             animator.equip = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "", "", "", "LIT", "LIT", "", "", "", "", "", "" };
-
             return gameObject;
         }
 

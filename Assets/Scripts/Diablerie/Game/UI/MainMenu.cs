@@ -24,10 +24,6 @@ namespace Diablerie.Game.UI
         private void Awake()
         {
             selectSound = SoundInfo.Find("cursor_pass");
-        }
-
-        void Start()
-        {
             defaultText = headerText.text;
             logo = CreateLogo();
             foreach (ClassSelectButton classSelector in FindObjectsOfType<ClassSelectButton>())
@@ -49,7 +45,7 @@ namespace Diablerie.Game.UI
             }
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(logoPlaceholder.position);
             pos.z = 0;

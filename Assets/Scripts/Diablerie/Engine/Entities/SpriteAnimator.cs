@@ -80,9 +80,15 @@ namespace Diablerie.Engine.Entities
                     triggerAction();
                 frameIndex = newFrameIndex;
             }
-
-            renderer.sprite = _sprites[frameIndex];
+            
             time += Time.deltaTime;
+        }
+
+        void LateUpdate()
+        {
+            if (_sprites == null || _finished)
+                return;
+            renderer.sprite = _sprites[frameIndex];
         }
     }
 }
