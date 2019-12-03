@@ -1,3 +1,4 @@
+using System.IO;
 using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
@@ -9,6 +10,7 @@ namespace Diablerie.Game
     public class Initializer : MonoBehaviour
     {
         public MainMenu mainMenuPrefab;
+        private EngineData.LoadProgress loadProgress;
         
         void Awake()
         {
@@ -23,7 +25,7 @@ namespace Diablerie.Game
                 Mpq.AddArchive("d2xtalk.mpq", optional: true);
                 Mpq.AddArchive("d2speech.mpq", optional: true);
             }
-            catch (System.IO.FileNotFoundException e)
+            catch (FileNotFoundException e)
             {
                 string message = BuildMessage(e.Message);
                 ScreenMessage.Show(message);
@@ -32,14 +34,21 @@ namespace Diablerie.Game
 
             Datasheet.SetLocation(typeof(BodyLoc), "data/global/excel/bodylocs.txt");
             Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
-            EngineData.LoadAll();
-            Instantiate(mainMenuPrefab);
+            loadProgress = EngineData.LoadAll();
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-                Application.Quit();
+            if (loadProgress.finished)
+            {
+                Instantiate(mainMenuPrefab);
+                Destroy(this);
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                    Application.Quit();
+            }
         }
 
         private string BuildMessage(string missingFile)
