@@ -41,11 +41,13 @@ namespace Diablerie.Game
         {
             if (loadProgress.finished)
             {
+                ScreenMessage.Hide();
                 Instantiate(mainMenuPrefab);
                 Destroy(this);
             }
             else
             {
+                ScreenMessage.Show("Loading... ");
                 if (Input.GetKeyDown(KeyCode.Escape))
                     Application.Quit();
             }

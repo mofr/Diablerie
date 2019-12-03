@@ -63,10 +63,8 @@ namespace Diablerie.Engine
             progress.totalCount = actions.Count;
             foreach (Action action in actions)
             {
-                UnityEngine.Profiling.Profiler.BeginSample("LoadDatasheet " + progress.doneCount);
                 action();
                 progress.doneCount++;
-                UnityEngine.Profiling.Profiler.EndSample();
             }
             progress.finished = true;
             Debug.Log("All txt files loaded in " + sw.ElapsedMilliseconds + " ms");
