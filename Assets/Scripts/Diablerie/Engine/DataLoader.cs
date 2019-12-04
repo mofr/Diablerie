@@ -12,7 +12,14 @@ namespace Diablerie.Engine
     {
         public struct Paths
         {
+            public MpqLocation[] mpq;
             public string animData;
+        }
+
+        public struct MpqLocation
+        {
+            public string filename;
+            public bool optional;
         }
         
         public class LoadProgress
@@ -41,6 +48,10 @@ namespace Diablerie.Engine
         {
             var sw = Stopwatch.StartNew();
             List<Action> actions = new List<Action>();
+            foreach (var mpqLocation in paths.mpq)
+            {
+                actions.Add(() => Mpq.AddArchive(mpqLocation.filename, mpqLocation.optional));
+            }
             actions.Add(() => AnimData.Load(paths.animData));
             actions.Add(Translation.Load);
             actions.Add(SoundInfo.Load);

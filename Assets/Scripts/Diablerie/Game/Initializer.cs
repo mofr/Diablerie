@@ -14,29 +14,22 @@ namespace Diablerie.Game
         private DataLoader.LoadProgress loadProgress;
         private static DataLoader.Paths paths = new DataLoader.Paths
         {
+            mpq = new []
+            {
+                new DataLoader.MpqLocation{filename="d2exp.mpq", optional=false}, 
+                new DataLoader.MpqLocation{filename="d2data.mpq", optional=false}, 
+                new DataLoader.MpqLocation{filename="d2char.mpq", optional=false}, 
+                new DataLoader.MpqLocation{filename="d2sfx.mpq", optional=true}, 
+                new DataLoader.MpqLocation{filename="d2music.mpq", optional=true}, 
+                new DataLoader.MpqLocation{filename="d2xMusic.mpq", optional=true}, 
+                new DataLoader.MpqLocation{filename="d2xtalk.mpq", optional=true}, 
+                new DataLoader.MpqLocation{filename="d2speech.mpq", optional=true}, 
+            },
             animData=@"data\global\animdata.d2",
         }; 
         
         void Awake()
         {
-            try
-            {
-                Mpq.AddArchive("d2exp.mpq");
-                Mpq.AddArchive("d2data.mpq");
-                Mpq.AddArchive("d2char.mpq");
-                Mpq.AddArchive("d2sfx.mpq", optional: true);
-                Mpq.AddArchive("d2music.mpq", optional: true);
-                Mpq.AddArchive("d2xMusic.mpq", optional: true);
-                Mpq.AddArchive("d2xtalk.mpq", optional: true);
-                Mpq.AddArchive("d2speech.mpq", optional: true);
-            }
-            catch (FileNotFoundException e)
-            {
-                string message = BuildMessage(e.Message);
-                ScreenMessage.Show(message);
-                return;
-            }
-
             Datasheet.SetLocation(typeof(BodyLoc), "data/global/excel/bodylocs.txt");
             Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
             var dataLoader = new DataLoader(paths);
