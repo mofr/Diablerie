@@ -10,7 +10,11 @@ namespace Diablerie.Game
     public class Initializer : MonoBehaviour
     {
         public MainMenu mainMenuPrefab;
-        private EngineData.LoadProgress loadProgress;
+        private DataLoader.LoadProgress loadProgress;
+        private static DataLoader.Paths paths = new DataLoader.Paths
+        {
+            animData=@"data\global\animdata.d2",
+        }; 
         
         void Awake()
         {
@@ -34,7 +38,8 @@ namespace Diablerie.Game
 
             Datasheet.SetLocation(typeof(BodyLoc), "data/global/excel/bodylocs.txt");
             Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
-            loadProgress = EngineData.LoadAll();
+            var dataLoader = new DataLoader(paths);
+            loadProgress = dataLoader.LoadAll();
         }
 
         void Update()

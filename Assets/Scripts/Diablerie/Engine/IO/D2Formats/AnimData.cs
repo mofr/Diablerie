@@ -45,9 +45,9 @@ namespace Diablerie.Engine.IO.D2Formats
             return (byte)(hash & 0xff);
         }
 
-        static AnimData()
+        public static void Load(string filename)
         {
-            using (var stream = Mpq.fs.OpenFile(@"data\global\animdata.d2"))
+            using (var stream = Mpq.fs.OpenFile(filename))
             using (var reader = new BinaryReader(stream))
             {
                 while (stream.Position < stream.Length)

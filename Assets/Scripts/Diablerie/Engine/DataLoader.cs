@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Diablerie.Engine.Datasheets;
+using Diablerie.Engine.IO.D2Formats;
 using Debug = UnityEngine.Debug;
 
 namespace Diablerie.Engine
 {
-    public static class EngineData
+    public class DataLoader
     {
+        public struct Paths
+        {
+            public string animData;
+        }
+        
         public class LoadProgress
         {
             public int totalCount;
@@ -16,17 +22,25 @@ namespace Diablerie.Engine
             public bool finished;
         }
 
-        public static LoadProgress LoadAll()
+        private Paths paths;
+
+        public DataLoader(Paths paths)
+        {
+            this.paths = paths;
+        }
+
+        public LoadProgress LoadAll()
         {
             var progress = new LoadProgress();
             Task.Run(() => LoadDatasheets(progress));
             return progress;
         }
 
-        private static void LoadDatasheets(LoadProgress progress)
+        private void LoadDatasheets(LoadProgress progress)
         {
             var sw = Stopwatch.StartNew();
             List<Action> actions = new List<Action>();
+            actions.Add(() => AnimData.Load(paths.animData));
             actions.Add(Translation.Load);
             actions.Add(SoundInfo.Load);
             actions.Add(SoundEnvironment.Load);
