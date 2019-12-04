@@ -20,6 +20,7 @@ namespace Diablerie.Engine
             public int totalCount;
             public int doneCount;
             public bool finished;
+            public Exception exception;
         }
 
         private Paths paths;
@@ -32,11 +33,11 @@ namespace Diablerie.Engine
         public LoadProgress LoadAll()
         {
             var progress = new LoadProgress();
-            Task.Run(() => LoadDatasheets(progress));
+            Task.Run(() => LoadAdd(progress));
             return progress;
         }
 
-        private void LoadDatasheets(LoadProgress progress)
+        private void LoadAdd(LoadProgress progress)
         {
             var sw = Stopwatch.StartNew();
             List<Action> actions = new List<Action>();
@@ -75,13 +76,20 @@ namespace Diablerie.Engine
             actions.Add(SpawnPreset.Load);
             actions.Add(StateInfo.Load);
             progress.totalCount = actions.Count;
-            foreach (Action action in actions)
+            try
             {
-                action();
-                progress.doneCount++;
+                foreach (Action action in actions)
+                {
+                    action();
+                    progress.doneCount++;
+                }
+            }
+            catch (Exception e)
+            {
+                progress.exception = e;
             }
             progress.finished = true;
-            Debug.Log("All txt files loaded in " + sw.ElapsedMilliseconds + " ms");
+            Debug.Log("DataLoader finished in " + sw.ElapsedMilliseconds + " ms");
         }
     }
 }

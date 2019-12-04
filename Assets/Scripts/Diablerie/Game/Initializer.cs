@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
@@ -46,8 +47,16 @@ namespace Diablerie.Game
         {
             if (loadProgress.finished)
             {
-                ScreenMessage.Hide();
-                Instantiate(mainMenuPrefab);
+                if (loadProgress.exception != null)
+                {
+                    string message = BuildExceptionMessage(loadProgress.exception);
+                    ScreenMessage.Show(message);
+                }
+                else
+                {
+                    ScreenMessage.Hide();
+                    Instantiate(mainMenuPrefab);
+                }
                 Destroy(this);
             }
             else
@@ -55,6 +64,18 @@ namespace Diablerie.Game
                 ScreenMessage.Show("Loading... ");
                 if (Input.GetKeyDown(KeyCode.Escape))
                     Application.Quit();
+            }
+        }
+
+        private string BuildExceptionMessage(Exception exception)
+        {
+            if (exception is FileNotFoundException)
+            {
+                return BuildMessage(exception.Message);
+            }
+            else
+            {
+                return exception.Message;
             }
         }
 
