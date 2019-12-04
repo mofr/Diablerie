@@ -25,7 +25,6 @@ Requirements:
   - d2xMusic.mpq (optional)
   - d2xtalk.mpq (optional)
   - d2speech.mpq (optional)
-* (Windows-only) Install [Microsoft Visual C++ Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=52685)
 * Run Diablerie
 
 # How to build and run from sources:
