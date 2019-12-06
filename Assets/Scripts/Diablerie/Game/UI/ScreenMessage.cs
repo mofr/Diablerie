@@ -11,43 +11,49 @@ namespace Diablerie.Game.UI
         
         public static void Show(string message)
         {
-            if (instance == null)
-                instance = Create();
-            instance.text.text = message;
-            instance.gameObject.SetActive(true);
+            GetInstance().ShowInternal(message);
         }
 
         public static void Hide()
         {
-            if (instance == null)
-                return;
-            instance.gameObject.SetActive(false);
+            GetInstance().HideInternal();
         }
 
-        private static ScreenMessage Create()
+        private static ScreenMessage GetInstance()
         {
-            var root = new GameObject("Canvas");
-            var canvas = root.AddComponent<Canvas>();
+            if (instance == null)
+                instance = new ScreenMessage();
+            return instance;
+        }
+
+        private ScreenMessage()
+        {
+            gameObject = new GameObject("Screen Message");
+            var canvas = gameObject.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
-            var font = Resources.Load<Font>("Fonts/font30");
-
             var textGameObject = new GameObject("Text");
-            var text = textGameObject.AddComponent<Text>();
+            text = textGameObject.AddComponent<Text>();
             var textRectTransform = textGameObject.GetComponent<RectTransform>();
-            textRectTransform.SetParent(root.transform);
+            textRectTransform.SetParent(gameObject.transform);
             textRectTransform.anchorMin = new Vector2(0, 0);
             textRectTransform.anchorMax = new Vector2(1, 1);
             textRectTransform.pivot = new Vector2(0.5f, 0.5f);
             textRectTransform.anchoredPosition = new Vector2(0, 0);
             text.alignment = TextAnchor.MiddleCenter;
             text.color = Color.white;
-            text.font = font;
-            
-            instance = new ScreenMessage();
-            instance.gameObject = root;
-            instance.text = text;
-            return instance;
+            text.font = Fonts.GetFont30();
+        }
+
+        private void ShowInternal(string message)
+        {
+            text.text = message;
+            gameObject.SetActive(true);
+        }
+        
+        private void HideInternal()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

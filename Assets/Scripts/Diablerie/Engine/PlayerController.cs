@@ -267,10 +267,17 @@ namespace Diablerie.Engine
 
         void HandleKeyboard()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
+            if (InventoryPanel.instance.visible || CharstatPanel.instance.visible)
             {
-                InventoryPanel.instance.visible = false;
-                CharstatPanel.instance.visible = false;
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
+                {
+                    InventoryPanel.instance.visible = false;
+                    CharstatPanel.instance.visible = false;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameMenu.Show();
             }
 
             if (!CommandPrompt.instance.visible)
