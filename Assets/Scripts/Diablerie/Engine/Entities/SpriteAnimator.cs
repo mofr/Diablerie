@@ -7,6 +7,7 @@ namespace Diablerie.Engine.Entities
     {
         public bool loop = true;
         public float fps = 25;
+        public bool reversed = false;
         public event System.Action OnFinish;
 
         new SpriteRenderer renderer;
@@ -50,6 +51,11 @@ namespace Diablerie.Engine.Entities
             triggerAction = action;
         }
 
+        public void OffsetTime(float offset)
+        {
+            time += offset;
+        }
+
         void Update()
         {
             if (_sprites == null || _finished)
@@ -88,7 +94,10 @@ namespace Diablerie.Engine.Entities
         {
             if (_sprites == null || _finished)
                 return;
-            renderer.sprite = _sprites[frameIndex];
+            int spriteIndex = frameIndex;
+            if (reversed)
+                spriteIndex = _sprites.Length - spriteIndex - 1;
+            renderer.sprite = _sprites[spriteIndex];
         }
     }
 }

@@ -423,8 +423,12 @@ namespace Diablerie.Engine
 
         void Update()
         {
+            if (GameMenu.IsVisible())
+                return;
+            
             HandleKeyboard();
             UpdateCamera();
+            
 
             if (flush && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
                 return;
