@@ -127,6 +127,7 @@ namespace Diablerie.Game.UI
 
             private void UpdateSelectedItem()
             {
+                // TODO implement it
                 List<RaycastResult> results = new List<RaycastResult>();
                 var pointerEventData = new PointerEventData(EventSystem.current);
                 pointerEventData.position = Input.mousePosition;
@@ -135,6 +136,7 @@ namespace Diablerie.Game.UI
 
             private void UpdateStarsPositions()
             {
+                // TODO do it only when selected item is changed
                 MenuItem selectedItem = menu.items[menu.selectedIndex];
                 menu.leftStar.transform.SetParent(selectedItem.gameObject.transform, false);
                 menu.rightStar.transform.SetParent(selectedItem.gameObject.transform, false);
