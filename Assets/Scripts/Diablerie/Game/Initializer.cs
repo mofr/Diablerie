@@ -56,7 +56,7 @@ namespace Diablerie.Game
             {
                 ScreenMessage.Show("Loading... ");
                 if (Input.GetKeyDown(KeyCode.Escape))
-                    Application.Quit();
+                    GameManager.QuitGame();
             }
         }
 

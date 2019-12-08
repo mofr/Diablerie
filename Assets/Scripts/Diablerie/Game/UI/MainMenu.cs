@@ -50,6 +50,9 @@ namespace Diablerie.Game.UI
             Vector3 pos = Camera.main.ScreenToWorldPoint(logoPlaceholder.position);
             pos.z = 0;
             logo.transform.position = pos;
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+                GameManager.QuitGame();
         }
 
         private void OnEnable()
