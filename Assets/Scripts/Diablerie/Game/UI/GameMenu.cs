@@ -3,6 +3,7 @@ using Diablerie.Engine;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.IO.D2Formats;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Diablerie.Game.UI
@@ -10,10 +11,14 @@ namespace Diablerie.Game.UI
     public class GameMenu
     {
         private static GameMenu instance;
-        private GameObject gameObject;
+        private GraphicRaycaster raycaster;
+        private GameObject root;
+        private GameObject layoutGroupObject;
         private GameObject leftStar;
         private GameObject rightStar;
         private List<MenuItem> items = new List<MenuItem>();
+        private int selectedIndex = 0;
+        private int itemHeight = 50; // Use it
 
         public static void Show()
         {
@@ -27,7 +32,7 @@ namespace Diablerie.Game.UI
 
         public static bool IsVisible()
         {
-            return GetInstance().gameObject.activeSelf;
+            return GetInstance().root.activeSelf;
         }
 
         private static GameMenu GetInstance()
@@ -39,18 +44,28 @@ namespace Diablerie.Game.UI
 
         private GameMenu()
         {
-            gameObject = new GameObject("Game Menu");
-            var canvas = gameObject.AddComponent<Canvas>();
-            var behaviour = gameObject.AddComponent<InternalBehaviour>();
+            root = new GameObject("Game Menu");
+            var canvas = root.AddComponent<Canvas>();
+            raycaster = root.AddComponent<GraphicRaycaster>();
+            var behaviour = root.AddComponent<InternalBehaviour>();
             behaviour.menu = this;
-            var layoutGroup = gameObject.AddComponent<VerticalLayoutGroup>();
-            layoutGroup.spacing = 60;
-            layoutGroup.childForceExpandHeight = false;
+            layoutGroupObject = new GameObject("Vertical Layout");
+            layoutGroupObject.transform.SetParent(root.transform);
+            var layoutGroup = layoutGroupObject.AddComponent<VerticalLayoutGroup>();
+            layoutGroup.spacing = 0;
+            layoutGroup.childForceExpandHeight = true;
             layoutGroup.childAlignment = TextAnchor.MiddleCenter;
+            layoutGroup.childControlHeight = true;
+            var layoutGroupTransform = layoutGroupObject.GetComponent<RectTransform>();
+            layoutGroupTransform.anchorMin = new Vector2(0, 0.5f);
+            layoutGroupTransform.anchorMax = new Vector2(1, 0.5f);
+            layoutGroupTransform.pivot = new Vector2(0.5f, 0.5f);
+            layoutGroupTransform.anchoredPosition = new Vector2(0, 0);
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             AddMenuItem("OPTIONS", enabled: false);
             AddMenuItem("EXIT GAME");
             AddMenuItem("RETURN TO GAME");
+            layoutGroupTransform.sizeDelta = new Vector2(0, itemHeight * items.Count);
             HideInternal();
             leftStar = CreateStar(true);
             rightStar = CreateStar(false);
@@ -58,18 +73,18 @@ namespace Diablerie.Game.UI
         
         private void ShowInternal()
         {
-            gameObject.SetActive(true);
+            root.SetActive(true);
         }
 
         private void HideInternal()
         {
-            gameObject.SetActive(false);
+            root.SetActive(false);
         }
 
         private void AddMenuItem(string itemName, bool enabled = true)
         {
             var menuItem = new MenuItem(itemName, enabled);
-            menuItem.rectTransform.SetParent(gameObject.transform);
+            menuItem.rectTransform.SetParent(layoutGroupObject.transform);
             items.Add(menuItem);
         }
 
@@ -83,6 +98,8 @@ namespace Diablerie.Game.UI
             animator.fps = 20;
             animator.reversed = reversed;
             animator.OffsetTime(Random.Range(0, 2));
+            var spriteRenderer = star.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingLayerName = "UI";
             return star;
         }
 
@@ -92,13 +109,27 @@ namespace Diablerie.Game.UI
             
             void Update()
             {
-                int selectedIndex = 0;
-                MenuItem selectedItem = menu.items[selectedIndex];
-                var position = Camera.main.ScreenToWorldPoint(selectedItem.rectTransform.position);
-                position.z = 0;
-                menu.leftStar.transform.position = position;
+                List<RaycastResult> results = new List<RaycastResult>();
+                var pointerEventData = new PointerEventData(EventSystem.current);
+                pointerEventData.position = Input.mousePosition;
+                menu.raycaster.Raycast(pointerEventData, results);
+                Debug.Log(Input.mousePosition + " raycast hits " + results.Count);
+                if (results.Count > 0)
+                    Debug.Log(results[0].gameObject);
+                UpdateStarsPositions();
                 if (Input.GetKeyDown(KeyCode.Escape))
                     Hide();
+            }
+
+            private void UpdateStarsPositions()
+            {
+                MenuItem selectedItem = menu.items[menu.selectedIndex];
+                var leftPosition = Camera.main.ScreenToWorldPoint(selectedItem.rectTransform.position - new Vector3(100, 0));
+                var rightPosition = Camera.main.ScreenToWorldPoint(selectedItem.rectTransform.position + new Vector3(100, 0));
+                leftPosition.z = 0;
+                rightPosition.z = 0;
+                menu.leftStar.transform.position = leftPosition;
+                menu.rightStar.transform.position = rightPosition;
             }
         }
 
@@ -116,7 +147,7 @@ namespace Diablerie.Game.UI
                 rectTransform.anchorMax = new Vector2(1, 1);
                 rectTransform.pivot = new Vector2(0.5f, 0.5f);
                 rectTransform.anchoredPosition = new Vector2(0, 0);
-                text.alignment = TextAnchor.MiddleCenter;
+                text.alignment = TextAnchor.LowerCenter;
                 text.color = enabled ? Color.white : Color.grey;
                 text.font = Fonts.GetFont42();
                 text.text = name;
