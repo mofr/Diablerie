@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using Diablerie.Engine;
-using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.IO.D2Formats;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -21,7 +19,7 @@ namespace Diablerie.Game.UI
         private GameObject rightStar;
         private List<MenuItem> items = new List<MenuItem>();
         private int selectedIndex = 0;
-        private int itemHeight = 50; // Use it
+        private int itemHeight = 50;
 
         public static void Show()
         {
@@ -49,11 +47,14 @@ namespace Diablerie.Game.UI
         {
             root = new GameObject("Game Menu");
             var canvas = root.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            canvas.worldCamera = Camera.main;
+            canvas.sortingLayerName = "UI";
             raycaster = root.AddComponent<GraphicRaycaster>();
             var behaviour = root.AddComponent<InternalBehaviour>();
             behaviour.menu = this;
             var layoutGroupObject = new GameObject("Vertical Layout");
-            layoutGroupObject.transform.SetParent(root.transform);
+            layoutGroupObject.transform.SetParent(root.transform, false);
             var layoutGroup = layoutGroupObject.AddComponent<VerticalLayoutGroup>();
             layoutGroup.spacing = 0;
             layoutGroup.childForceExpandHeight = true;
@@ -64,13 +65,13 @@ namespace Diablerie.Game.UI
             layoutGroupTransform.anchorMax = new Vector2(1, 0.5f);
             layoutGroupTransform.pivot = new Vector2(0.5f, 0.5f);
             layoutGroupTransform.anchoredPosition = new Vector2(0, 0);
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             AddMenuItem("OPTIONS", enabled: false);
             AddMenuItem("EXIT GAME", GameManager.QuitGame);
             AddMenuItem("RETURN TO GAME", HideInternal);
             HideInternal();
             leftStar = CreateStar(true);
             rightStar = CreateStar(false);
+            selectedIndex = 1;
         }
         
         private void ShowInternal()
@@ -86,22 +87,27 @@ namespace Diablerie.Game.UI
         private void AddMenuItem(string itemName, UnityAction action = null, bool enabled = true)
         {
             var menuItem = new MenuItem(itemName, enabled);
-            menuItem.rectTransform.SetParent(layoutGroupTransform);
+            menuItem.rectTransform.SetParent(layoutGroupTransform, false);
             menuItem.action = action;
             items.Add(menuItem);
             layoutGroupTransform.sizeDelta = new Vector2(0, itemHeight * items.Count);
         }
 
-        private GameObject CreateStar(bool reversed)
+        private GameObject CreateStar(bool left)
         {
             Palette.LoadPalette(0);
             var spritesheet = Spritesheet.Load(@"data\global\ui\CURSOR\pentspin");
+            var sprites = spritesheet.GetSprites(0);
+            float width = sprites[0].rect.width;
+            float height = sprites[0].rect.height;
             var star = new GameObject("star");
+            star.transform.localScale = new Vector3(Iso.pixelsPerUnit, Iso.pixelsPerUnit);
+            star.transform.localPosition = new Vector3((left ? -250 : 250) - width / 2, -height / 2); // TODO remove hardcoded offset
             var animator = star.AddComponent<SpriteAnimator>();
-            animator.sprites = spritesheet.GetSprites(0);
+            animator.sprites = sprites;
             animator.fps = 20;
-            animator.reversed = reversed;
-            animator.OffsetTime(Random.Range(0, 2));
+            animator.reversed = left;
+            animator.OffsetTime(left ? 0.1f : 0);
             var spriteRenderer = star.GetComponent<SpriteRenderer>();
             spriteRenderer.sortingLayerName = "UI";
             return star;
@@ -129,14 +135,9 @@ namespace Diablerie.Game.UI
 
             private void UpdateStarsPositions()
             {
-                // TODO incorporate SpriteAnimator functionality into the UI
                 MenuItem selectedItem = menu.items[menu.selectedIndex];
-                var leftPosition = Camera.main.ScreenToWorldPoint(selectedItem.rectTransform.position - new Vector3(200, 0));
-                var rightPosition = Camera.main.ScreenToWorldPoint(selectedItem.rectTransform.position + new Vector3(200, 0));
-                leftPosition.z = 0;
-                rightPosition.z = 0;
-                menu.leftStar.transform.position = leftPosition;
-                menu.rightStar.transform.position = rightPosition;
+                menu.leftStar.transform.SetParent(selectedItem.gameObject.transform, false);
+                menu.rightStar.transform.SetParent(selectedItem.gameObject.transform, false);
             }
         }
 
