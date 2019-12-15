@@ -144,12 +144,14 @@ namespace Diablerie.Game.UI
                     longestItem = items[i].name;
                 }
             }
-            
-            TextGenerationSettings settings = new TextGenerationSettings();
-            settings.textAnchor = TextAnchor.MiddleCenter;
-            settings.generationExtents = new Vector2(1000.0F, 1000.0F);
-            settings.pivot = Vector2.zero;
-            settings.font = Fonts.GetFont42();
+
+            var settings = new TextGenerationSettings
+            {
+                textAnchor = TextAnchor.MiddleCenter,
+                generationExtents = new Vector2(1000.0F, 1000.0F),
+                pivot = Vector2.zero,
+                font = Fonts.GetFont42()
+            };
             TextGenerator generator = new TextGenerator();
             return generator.GetPreferredWidth(longestItem, settings);
         }
