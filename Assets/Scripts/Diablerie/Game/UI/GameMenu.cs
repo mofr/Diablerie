@@ -18,7 +18,7 @@ namespace Diablerie.Game.UI
         private GameObject leftStar;
         private GameObject rightStar;
         private List<MenuItem> items = new List<MenuItem>();
-        private int selectedIndex = 0;
+        private int selectedIndex = -1;
         private int itemHeight = 50;
 
         public static void Show()
@@ -71,7 +71,7 @@ namespace Diablerie.Game.UI
             HideInternal();
             leftStar = CreateStar(true);
             rightStar = CreateStar(false);
-            selectedIndex = 1;
+            SetSelectedIndex(1);
         }
         
         private void ShowInternal()
@@ -113,33 +113,67 @@ namespace Diablerie.Game.UI
             return star;
         }
 
+        private void SetSelectedIndex(int selectedIndex)
+        {
+            if (this.selectedIndex != selectedIndex)
+            {
+                if (!items[selectedIndex].enabled)
+                    return;
+                this.selectedIndex = selectedIndex;
+                UpdateStarsPositions();
+            }
+        }
+        
+        private void UpdateStarsPositions()
+        {
+            MenuItem selectedItem = items[selectedIndex];
+            leftStar.transform.SetParent(selectedItem.gameObject.transform, false);
+            rightStar.transform.SetParent(selectedItem.gameObject.transform, false);
+        }
+
         private class InternalBehaviour : MonoBehaviour
         {
             public GameMenu menu;
+            private List<RaycastResult> raycastResults = new List<RaycastResult>();
+            private PointerEventData pointerEventData;
+
+            void Start()
+            {
+                pointerEventData = new PointerEventData(EventSystem.current);
+            }
             
             void Update()
             {
                 UpdateSelectedItem();
-                UpdateStarsPositions();
                 if (Input.GetKeyDown(KeyCode.Escape))
                     Hide();
             }
 
             private void UpdateSelectedItem()
             {
-                // TODO implement it
-                List<RaycastResult> results = new List<RaycastResult>();
-                var pointerEventData = new PointerEventData(EventSystem.current);
+                raycastResults.Clear();
                 pointerEventData.position = Input.mousePosition;
-                menu.raycaster.Raycast(pointerEventData, results);
+                menu.raycaster.Raycast(pointerEventData, raycastResults);
+                if (raycastResults.Count != 0)
+                {
+                    int itemIndex = GetItemIndex(raycastResults[0].gameObject);
+                    if (itemIndex != -1)
+                    {
+                        menu.SetSelectedIndex(itemIndex);
+                    }
+                }
             }
 
-            private void UpdateStarsPositions()
+            private int GetItemIndex(GameObject gameObject)
             {
-                // TODO do it only when selected item is changed
-                MenuItem selectedItem = menu.items[menu.selectedIndex];
-                menu.leftStar.transform.SetParent(selectedItem.gameObject.transform, false);
-                menu.rightStar.transform.SetParent(selectedItem.gameObject.transform, false);
+                for (int i = 0; i < menu.items.Count; ++i)
+                {
+                    if (menu.items[i].gameObject == gameObject)
+                    {
+                        return i;
+                    }
+                }
+                return -1;
             }
         }
 
@@ -148,6 +182,7 @@ namespace Diablerie.Game.UI
             public GameObject gameObject;
             public RectTransform rectTransform;
             public UnityAction action;
+            public bool enabled;
             
             public MenuItem(string name, bool enabled)
             {
@@ -162,6 +197,7 @@ namespace Diablerie.Game.UI
                 text.color = enabled ? Color.white : Color.grey;
                 text.font = Fonts.GetFont42();
                 text.text = name;
+                this.enabled = enabled;
                 
                 if (enabled)
                 {
