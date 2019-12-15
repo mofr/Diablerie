@@ -11,6 +11,9 @@ namespace Diablerie.Game.UI
 {
     public class GameMenu
     {
+        private static readonly float StarPadding = 70;
+        private static readonly int ItemHeight = 50;
+        
         private static GameMenu instance;
         private GraphicRaycaster raycaster;
         private GameObject root;
@@ -19,7 +22,6 @@ namespace Diablerie.Game.UI
         private GameObject rightStar;
         private List<MenuItem> items = new List<MenuItem>();
         private int selectedIndex = -1;
-        private int itemHeight = 50;
 
         public static void Show()
         {
@@ -90,7 +92,7 @@ namespace Diablerie.Game.UI
             menuItem.rectTransform.SetParent(layoutGroupTransform, false);
             menuItem.action = action;
             items.Add(menuItem);
-            layoutGroupTransform.sizeDelta = new Vector2(0, itemHeight * items.Count);
+            layoutGroupTransform.sizeDelta = new Vector2(0, ItemHeight * items.Count);
         }
 
         private GameObject CreateStar(bool left)
@@ -102,7 +104,8 @@ namespace Diablerie.Game.UI
             float height = sprites[0].rect.height;
             var star = new GameObject("star");
             star.transform.localScale = new Vector3(Iso.pixelsPerUnit, Iso.pixelsPerUnit);
-            star.transform.localPosition = new Vector3((left ? -250 : 250) - width / 2, -height / 2); // TODO remove hardcoded offset
+            float offset = GetMenuWidth() / 2 + StarPadding;
+            star.transform.localPosition = new Vector3((left ? -offset : offset) - width / 2, -height / 2);
             var animator = star.AddComponent<SpriteAnimator>();
             animator.sprites = sprites;
             animator.fps = 20;
@@ -129,6 +132,26 @@ namespace Diablerie.Game.UI
             MenuItem selectedItem = items[selectedIndex];
             leftStar.transform.SetParent(selectedItem.gameObject.transform, false);
             rightStar.transform.SetParent(selectedItem.gameObject.transform, false);
+        }
+
+        private float GetMenuWidth()
+        {
+            string longestItem = "";
+            for (int i = 0; i < items.Count; ++i)
+            {
+                if (items[i].name.Length > longestItem.Length)
+                {
+                    longestItem = items[i].name;
+                }
+            }
+            
+            TextGenerationSettings settings = new TextGenerationSettings();
+            settings.textAnchor = TextAnchor.MiddleCenter;
+            settings.generationExtents = new Vector2(1000.0F, 1000.0F);
+            settings.pivot = Vector2.zero;
+            settings.font = Fonts.GetFont42();
+            TextGenerator generator = new TextGenerator();
+            return generator.GetPreferredWidth(longestItem, settings);
         }
 
         private class InternalBehaviour : MonoBehaviour
@@ -183,6 +206,7 @@ namespace Diablerie.Game.UI
             public RectTransform rectTransform;
             public UnityAction action;
             public bool enabled;
+            public string name;
             
             public MenuItem(string name, bool enabled)
             {
@@ -198,6 +222,7 @@ namespace Diablerie.Game.UI
                 text.font = Fonts.GetFont42();
                 text.text = name;
                 this.enabled = enabled;
+                this.name = name;
                 
                 if (enabled)
                 {
