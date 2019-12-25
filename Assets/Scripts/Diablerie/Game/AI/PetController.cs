@@ -10,8 +10,8 @@ namespace Diablerie.Game.AI
     {
         public Character owner;
         public float roamRadius = 12f;
-        public float agroRadius = 3f;
-        public float agroOwnerRadius = 5f;
+        public float agroRadius = 15f;
+        public float agroOwnerRadius = 25f;
         public float maxOwnerDistance = 32f;
         private Character character;
         private Character target;

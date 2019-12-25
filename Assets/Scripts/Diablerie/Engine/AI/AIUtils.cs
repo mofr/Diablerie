@@ -9,7 +9,8 @@ namespace Diablerie.Engine.AI
     
         public static Character GetNearestEnemy(Character requester, float radius)
         {
-            int visibleCount = Physics2D.OverlapCircleNonAlloc(requester.transform.position, radius, visibleColliders);
+            float unityRadius = radius * Iso.tileSize;
+            int visibleCount = Physics2D.OverlapCircleNonAlloc(requester.transform.position, unityRadius, visibleColliders);
             for (int i = 0; i < visibleCount; ++i)
             {
                 var collider = visibleColliders[i];

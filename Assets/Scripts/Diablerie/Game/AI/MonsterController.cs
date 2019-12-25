@@ -11,8 +11,8 @@ namespace Diablerie.Game.AI
     {
         private Character character;
         private Character target;
-        readonly float viewRadius = 6f;
-        readonly float maxAgroDistance = 15f;
+        readonly float viewRadius = 25f;
+        readonly float maxAgroDistance = 40f;
         bool tauntSaid = false;
 
         void Awake()
@@ -39,7 +39,6 @@ namespace Diablerie.Game.AI
                 var newPosition = character.iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
                 character.GoTo(newPosition);
                 yield return new WaitForSeconds(Random.Range(1f, 2f));
-                while (!isActiveAndEnabled) yield return null;
             }
         }
 
