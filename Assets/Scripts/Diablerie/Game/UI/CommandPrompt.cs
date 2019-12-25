@@ -98,25 +98,30 @@ namespace Diablerie.Game.UI
 
                 if (parts[1] == "item")
                 {
-                    string code = parts[2];
-                    ItemDrop.Drop(code, pos, 100);
+                    string subname = parts[2].ToLower();
+                    var uniqueItem = UniqueItem.sheet.Find(s => s.nameStr.ToLower().Contains(subname));
+                    if (uniqueItem != null)
+                    {
+                        ItemDrop.Drop(uniqueItem, pos);
+                    }
+                    else
+                    {
+                        string code = parts[2];
+                        ItemDrop.Drop(code, pos, 100);
+                    }
+
                     return;
                 }
 
                 if (parts[1] == "itemset")
                 {
-                    string subname = parts[2];
+                    string subname = parts[2].ToLower();
                     var set = ItemSet.sheet.Find(s => s.id.ToLower().Contains(subname));
                     if (set != null)
                     {
                         foreach(var setItem in set.items)
                         {
-                            var item = Item.Create(setItem.itemCode);
-                            item.quality = Item.Quality.Set;
-                            item.level = setItem.level;
-                            item.identified = false;
-                            ItemDrop.GenerateSetItem(item);
-                            Pickup.Create(pos, item);
+                            ItemDrop.Drop(setItem, pos);
                         }
                     }
                     return;

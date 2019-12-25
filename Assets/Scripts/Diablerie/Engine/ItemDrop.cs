@@ -97,6 +97,9 @@ namespace Diablerie.Engine
 
         static UniqueItem SelectUniqueForItem(Item item)
         {
+            if (item.info.uniques.Count == 0)
+                return null;
+            
             int probSum = 0;
             foreach (var unique in item.info.uniques)
             {
@@ -137,15 +140,8 @@ namespace Diablerie.Engine
             return null;
         }
 
-        public static bool GenerateUnique(Item item)
+        private static void GenerateUnique(Item item, UniqueItem unique)
         {
-            if (item.info.uniques.Count == 0)
-                return false;
-
-            UniqueItem unique = SelectUniqueForItem(item);
-            if (unique == null)
-                return false;
-
             item.name = unique.name;
             item.unique = unique;
             item.levelReq = unique.levelReq;
@@ -163,11 +159,9 @@ namespace Diablerie.Engine
                 prop.max = mod.max;
                 item.properties.Add(prop);
             }
-
-            return true;
         }
 
-        public static bool GenerateSetItem(Item item)
+        private static bool GenerateSetItem(Item item)
         {
             if (item.info.setItems.Count == 0)
                 return false;
@@ -227,9 +221,13 @@ namespace Diablerie.Engine
 
         static void GenerateItemProperties(Item item)
         {
-            if (item.quality == Item.Quality.Unique && !GenerateUnique(item))
+            if (item.quality == Item.Quality.Unique)
             {
-                item.quality = Item.Quality.Rare;
+                UniqueItem uniqueItem = SelectUniqueForItem(item);
+                if (uniqueItem != null)
+                    GenerateUnique(item, uniqueItem);
+                else
+                    item.quality = Item.Quality.Rare;
             }
 
             if (item.quality == Item.Quality.Set && !GenerateSetItem(item))
@@ -296,7 +294,27 @@ namespace Diablerie.Engine
             Drop(code, pos, itemLevel, new QualityFactors());
         }
 
-        static void Drop(string code, Vector3 pos, int itemLevel, QualityFactors qualityFactors = new QualityFactors())
+        public static void Drop(UniqueItem uniqueItem, Vector3 pos)
+        {
+            var item = Item.Create(uniqueItem.code);
+            item.quality = Item.Quality.Unique;
+            item.level = uniqueItem.level;
+            item.identified = false;
+            GenerateUnique(item, uniqueItem);
+            Pickup.Create(pos, item);
+        }
+
+        public static void Drop(SetItem setItem, Vector3 pos)
+        {
+            var item = Item.Create(setItem.itemCode); // TODO generate exactly setItem
+            item.quality = Item.Quality.Set;
+            item.level = setItem.level;
+            item.identified = false;
+            GenerateSetItem(item);
+            Pickup.Create(pos, item);
+        }
+
+        static void Drop(string code, Vector3 pos, int itemLevel, QualityFactors qualityFactors)
         {
             var treasureClass = TreasureClass.Find(code);
             if (treasureClass == null)
