@@ -119,8 +119,11 @@ namespace Diablerie.Engine
             return null;
         }
 
-        static SetItem SelectSetItem(Item item)
+        private static SetItem SelectSetItem(Item item)
         {
+            if (item.info.setItems.Count == 0)
+                return null;
+            
             int probSum = 0;
             foreach (var setItem in item.info.setItems)
             {
@@ -161,15 +164,8 @@ namespace Diablerie.Engine
             }
         }
 
-        private static bool GenerateSetItem(Item item)
+        private static void GenerateSetItem(Item item, SetItem setItem)
         {
-            if (item.info.setItems.Count == 0)
-                return false;
-
-            SetItem setItem = SelectSetItem(item);
-            if (setItem == null)
-                return false;
-
             item.name = setItem.name;
             item.setItem = setItem;
             item.levelReq = setItem.levelReq;
@@ -215,8 +211,6 @@ namespace Diablerie.Engine
                     item.setItemProperties[blockIndex].Add(prop);
                 }
             }
-
-            return true;
         }
 
         static void GenerateItemProperties(Item item)
@@ -230,9 +224,13 @@ namespace Diablerie.Engine
                     item.quality = Item.Quality.Rare;
             }
 
-            if (item.quality == Item.Quality.Set && !GenerateSetItem(item))
+            if (item.quality == Item.Quality.Set)
             {
-                item.quality = Item.Quality.Rare;
+                SetItem setItem = SelectSetItem(item);
+                if (setItem != null)
+                    GenerateSetItem(item, setItem);
+                else
+                    item.quality = Item.Quality.Rare;
             }
 
             if (item.quality == Item.Quality.Magic)
@@ -306,11 +304,11 @@ namespace Diablerie.Engine
 
         public static void Drop(SetItem setItem, Vector3 pos)
         {
-            var item = Item.Create(setItem.itemCode); // TODO generate exactly setItem
+            var item = Item.Create(setItem.itemCode);
             item.quality = Item.Quality.Set;
             item.level = setItem.level;
             item.identified = false;
-            GenerateSetItem(item);
+            GenerateSetItem(item, setItem);
             Pickup.Create(pos, item);
         }
 
