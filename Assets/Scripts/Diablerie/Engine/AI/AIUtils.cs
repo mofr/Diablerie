@@ -11,6 +11,8 @@ namespace Diablerie.Engine.AI
         {
             float unityRadius = radius * Iso.tileSize;
             int visibleCount = Physics2D.OverlapCircleNonAlloc(requester.transform.position, unityRadius, visibleColliders);
+            Character nearest = null;
+            float minDistance = radius;
             for (int i = 0; i < visibleCount; ++i)
             {
                 var collider = visibleColliders[i];
@@ -19,11 +21,13 @@ namespace Diablerie.Engine.AI
                     continue;
                 if (IsAttackable(requester, visibleCharacter))
                 {
-                    return visibleCharacter;
+                    float distance = Vector2.Distance(visibleCharacter.iso.pos, requester.iso.pos);
+                    if (nearest == null || distance < minDistance)
+                        nearest = visibleCharacter;
                 }
             }
 
-            return null;
+            return nearest;
         }
     
         public static bool IsAttackable(Character attacker, Character target)
