@@ -25,11 +25,13 @@ namespace Diablerie.Game.UI
 
         public static void Show()
         {
+            Time.timeScale = 0;
             GetInstance().ShowInternal();
         }
 
         public static void Hide()
         {
+            Time.timeScale = 1;
             GetInstance().HideInternal();
         }
 
@@ -69,7 +71,7 @@ namespace Diablerie.Game.UI
             layoutGroupTransform.anchoredPosition = new Vector2(0, 0);
             AddMenuItem("OPTIONS", enabled: false);
             AddMenuItem("EXIT GAME", GameManager.QuitGame);
-            AddMenuItem("RETURN TO GAME", HideInternal);
+            AddMenuItem("RETURN TO GAME", Hide);
             HideInternal();
             leftStar = CreateStar(true);
             rightStar = CreateStar(false);
@@ -110,6 +112,7 @@ namespace Diablerie.Game.UI
             animator.sprites = sprites;
             animator.fps = 20;
             animator.reversed = left;
+            animator.useUnscaledTime = true;
             animator.OffsetTime(left ? 0.1f : 0);
             var spriteRenderer = star.GetComponent<SpriteRenderer>();
             spriteRenderer.sortingLayerName = "UI";

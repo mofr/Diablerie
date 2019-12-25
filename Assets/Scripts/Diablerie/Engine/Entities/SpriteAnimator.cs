@@ -8,6 +8,7 @@ namespace Diablerie.Engine.Entities
         public bool loop = true;
         public float fps = 25;
         public bool reversed = false;
+        public bool useUnscaledTime = false;
         public event System.Action OnFinish;
 
         new SpriteRenderer renderer;
@@ -86,8 +87,11 @@ namespace Diablerie.Engine.Entities
                     triggerAction();
                 frameIndex = newFrameIndex;
             }
-            
-            time += Time.deltaTime;
+
+            if (useUnscaledTime)
+                time += Time.unscaledDeltaTime;
+            else
+                time += Time.deltaTime;
         }
 
         void LateUpdate()
