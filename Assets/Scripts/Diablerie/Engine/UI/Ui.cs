@@ -1,5 +1,4 @@
-﻿using Diablerie.Game.UI;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Diablerie.Engine.UI
 {
@@ -9,24 +8,19 @@ namespace Diablerie.Engine.UI
         public static Canvas canvas;
     
         public Label labelPrefab;
-        public Label screenLabelPrefab;
-        public EnemyBar enemyBarPrefab;
         public SoftwareCursor softwareCursorPrefab;
 
-        [HideInInspector]
-        public Label label;
-
-        [HideInInspector]
-        public Label screenLabel;
+        private Label label;
+        private ScreenLabel screenLabel;
 
         void Awake()
         {
             instance = this;
             canvas = FindObjectOfType<Canvas>();
             label = Instantiate(instance.labelPrefab, transform);
-            screenLabel = Instantiate(instance.screenLabelPrefab, canvas.transform);
             label.gameObject.SetActive(false);
-            screenLabel.gameObject.SetActive(false);
+            screenLabel = new ScreenLabel(canvas.transform);
+            screenLabel.Enabled = false;
             Instantiate(instance.softwareCursorPrefab, canvas.transform);
         }
 
@@ -44,14 +38,14 @@ namespace Diablerie.Engine.UI
 
         public static void ShowScreenLabel(Vector2 position, string text)
         {
-            instance.screenLabel.text.text = text;
-            instance.screenLabel.rectTransform.anchoredPosition = position;
-            instance.screenLabel.gameObject.SetActive(true);
+            instance.screenLabel.Text = text;
+            instance.screenLabel.Enabled = true;
+            instance.screenLabel.SetPosition(position);
         }
 
         public static void HideScreenLabel()
         {
-            instance.screenLabel.gameObject.SetActive(false);
+            instance.screenLabel.Enabled = false;
         }
     }
 }
