@@ -75,6 +75,7 @@ Go to act 5 `/act 5`
 From highest priority to lowest:
 1. Implement all original Diablo II functionality. It will be cross-platform, easily run on modern systems in high resolution.
 2. Have a good separation of the Game and the Engine, so that engine can be used separately to create Diablo-like games.
+3. Create an original game in the setting of Diablo.
 
 ## Why Unity?
 Unity is simple yet powerful game engine. It saves a lot of time for doing very basic stuff. There a lot of people who already familiar with Unity. Also it simple enough to dive into for new developers.
