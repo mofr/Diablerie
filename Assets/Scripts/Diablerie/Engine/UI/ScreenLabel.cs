@@ -1,3 +1,5 @@
+using System;
+using Diablerie.Engine.Utility;
 using Diablerie.Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,14 +9,16 @@ namespace Diablerie.Engine.UI
     public class ScreenLabel
     {
         private GameObject root;
-        private Text text;
         private RectTransform rectTransform;
-        
-        public ScreenLabel(Transform parent)
+        private RectTransform parentTransform;
+        private Text text;
+
+        public ScreenLabel(RectTransform parentTransform)
         {
+            this.parentTransform = parentTransform;
             root = new GameObject("ScreenLabel");
             rectTransform = root.AddComponent<RectTransform>();
-            rectTransform.SetParent(parent, false);
+            rectTransform.SetParent(this.parentTransform, false);
             rectTransform.anchorMin = new Vector2(0, 0);
             rectTransform.anchorMax = new Vector2(0, 0);
             rectTransform.pivot = new Vector2(0.5f, 0);
@@ -38,25 +42,35 @@ namespace Diablerie.Engine.UI
             text.supportRichText = true;
             text.raycastTarget = false;
             var backgroundImage = root.AddComponent<Image>();
-            backgroundImage.color = new Color(0, 0, 0, 224);
+            backgroundImage.color = new Color(0, 0, 0, 0.95f);
             backgroundImage.raycastTarget = false;
         }
 
-        public bool Enabled
+        public void Show(Vector2 position, string text)
         {
-            get => root.activeSelf;
-            set => root.SetActive(value);
+            if (!root.activeSelf || rectTransform.anchoredPosition != position || this.text.text != text)
+            {
+                this.text.text = text;
+                rectTransform.anchoredPosition = position;
+                root.SetActive(true);
+                FitIntoParent();
+            }
         }
 
-        public string Text
+        public void Hide()
         {
-            get => text.text;
-            set => text.text = value;
+            root.SetActive(false);
         }
 
-        public void SetPosition(Vector2 position)
+        private void FitIntoParent()
         {
-            rectTransform.anchoredPosition = position;
+            Canvas.ForceUpdateCanvases();
+            Rect rect = Tools.RectTransformToScreenRect(rectTransform);
+            Vector2 parentSize = parentTransform.rect.size;
+            float leftOverflow = -Math.Min(rect.xMin, 0);
+            float rightOverflow = Math.Max(rect.xMax - parentSize.x, 0);
+            float topOverflow = Math.Max(rect.yMax - parentSize.y, 0);
+            rectTransform.anchoredPosition -= new Vector2(leftOverflow + rightOverflow, topOverflow);
         }
     }
 }
