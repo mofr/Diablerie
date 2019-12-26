@@ -69,6 +69,30 @@ Go to act 4 `/act 4`
 
 Go to act 5 `/act 5`
 
+# FAQ
+
+## What the goals of the Diablerie project?
+From highest priority to lowest:
+1. Implement all original Diablo II functionality. It will be cross-platform, easily run on modern systems in high resolution.
+2. Have a good separation of the Game and the Engine, so that engine can be used separately to create Diablo-like games.
+
+## Why Unity?
+Unity is simple yet powerful game engine. It saves a lot of time for doing very basic stuff. There a lot of people who already familiar with Unity. Also it simple enough to dive into for new developers.
+A lot of people have performance concerns about Unity. It shouldn't be an issue, and in case of serious bottlenecks it's possible to offload heavy computations to C++ libraries (as it's already done with MPQ loading code).
+New Unity Data-Oriented Tech Stack is also available and provides great performance.
+
+## Why C#
+C# is popular, simple and performance enough language for today to make a game like Diablo. The main reason however is because using Unity implies using C#.
+
+## Can I Play Diablerie without original Diablo II?
+No, you can't. Original game resources are property of Blizzard and distributing it is not legal.
+
+## Can I make mods for Diablerie?
+Yes! This is one of the main goals of the project.
+
+## Can I make my own game based on Diablerie engine?
+Yes. The project consists of two parts: Engine and Game. One of the Diablerie goals is to have good separation of the Game (which is actually Diablo II remaster) and the Engine, which can be used to create Diablo II clones.
+
 # Credits
 
 Paul Siramy - ds1edit editor, great thanks for source code. Very helpful and detailed tutorials related to diablo 2 internals.
