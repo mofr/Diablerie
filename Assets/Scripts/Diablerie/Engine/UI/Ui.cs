@@ -7,7 +7,6 @@ namespace Diablerie.Engine.UI
         public static Ui instance;
         public static Canvas canvas;
     
-        public Label labelPrefab;
         public SoftwareCursor softwareCursorPrefab;
 
         private Label label;
@@ -17,8 +16,8 @@ namespace Diablerie.Engine.UI
         {
             instance = this;
             canvas = FindObjectOfType<Canvas>();
-            label = Instantiate(instance.labelPrefab, transform);
-            label.gameObject.SetActive(false);
+            label = new Label(transform);
+            label.Hide();
             screenLabel = new ScreenLabel(canvas.transform as RectTransform);
             screenLabel.Hide();
             Instantiate(instance.softwareCursorPrefab, canvas.transform);
@@ -26,14 +25,12 @@ namespace Diablerie.Engine.UI
 
         public static void ShowLabel(Vector2 position, string text)
         {
-            instance.label.text.text = text;
-            instance.label.transform.position = position;
-            instance.label.gameObject.SetActive(true);
+            instance.label.Show(position, text);
         }
 
         public static void HideLabel()
         {
-            instance.label.gameObject.SetActive(false);
+            instance.label.Hide();
         }
 
         public static void ShowScreenLabel(Vector2 position, string text)
