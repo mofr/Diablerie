@@ -8,17 +8,24 @@ namespace Diablerie.Engine
 {
     class MouseSelection : MonoBehaviour
     {
-        static readonly Vector3 Expand = new Vector3(25, 20) / Iso.pixelsPerUnit;
+        private static readonly Vector3 Expand = new Vector3(25, 20) / Iso.pixelsPerUnit;
 
-        [HideInInspector]
-        public static Entity current;
-        static Entity previous;
-        static Vector3 mousePos;
-        static Vector3 currentPosition;
+        public static MouseSelection instance;
+        
+        public Entity current;
+        private Entity previous;
+        private Vector3 mousePos;
+        private Vector3 currentPosition;
+        private bool highlightItems;
+
+        void Awake()
+        {
+            instance = this;
+        }
 
         void Update()
         {
-            if (current != null)
+            if (current != null && !highlightItems)
             {
                 var character = current.GetComponent<Character>();
                 if (character && character.monStat != null)
@@ -65,26 +72,31 @@ namespace Diablerie.Engine
             mousePos.z = 0;
         }
 
-        private static void ShowLabel()
+        public void SetHighlightItems(bool highlightItems)
+        {
+            this.highlightItems = highlightItems;
+        }
+
+        private void ShowLabel()
         {
             EnemyBar.instance.character = null;
-            var labelPosition = current.transform.position + (Vector3)current.titleOffset / Iso.pixelsPerUnit;
+            var labelPosition = current.transform.position + (Vector3) current.titleOffset / Iso.pixelsPerUnit;
             Ui.ShowLabel(labelPosition, current.title);
         }
 
-        private static void ShowEnemyBar(Character character)
+        private void ShowEnemyBar(Character character)
         {
             EnemyBar.instance.character = character;
             Ui.HideLabel();
         }
 
-        private static void ShowNothing()
+        private void ShowNothing()
         {
             EnemyBar.instance.character = null;
             Ui.HideLabel();
         }
 
-        public static void Submit(Entity entity)
+        public void Submit(Entity entity)
         {
             if (entity == PlayerController.instance.character)
                 return;

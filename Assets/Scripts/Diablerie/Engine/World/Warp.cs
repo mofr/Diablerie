@@ -55,7 +55,7 @@ namespace Diablerie.Engine.World
 
         private void OnRenderObject()
         {
-            MouseSelection.Submit(this);
+            MouseSelection.instance.Submit(this);
         }
 
         private Warp FindTargetWarp()

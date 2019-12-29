@@ -499,7 +499,7 @@ namespace Diablerie.Engine.Entities
             if (selectable && monStat != null)
                 selectable = monStat.interact || (!monStat.npc && monStat.killable);
             if (selectable)
-                MouseSelection.Submit(this);
+                MouseSelection.instance.Submit(this);
         }
     }
 }

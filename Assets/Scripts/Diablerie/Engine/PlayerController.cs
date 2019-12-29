@@ -243,9 +243,9 @@ namespace Diablerie.Engine
         void DrawDebugPath()
         {
             Vector3 targetPosition;
-            if (MouseSelection.current != null)
+            if (MouseSelection.instance.current != null)
             {
-                targetPosition = Iso.MapToIso(MouseSelection.current.transform.position);
+                targetPosition = Iso.MapToIso(MouseSelection.instance.current.transform.position);
             }
             else
             {
@@ -267,6 +267,8 @@ namespace Diablerie.Engine
 
         void HandleKeyboard()
         {
+            bool highlightItems = Input.GetKey(KeyCode.LeftAlt) | Input.GetKey(KeyCode.RightAlt);
+            MouseSelection.instance.SetHighlightItems(highlightItems);
             if (InventoryPanel.instance.visible || CharstatPanel.instance.visible)
             {
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
@@ -357,13 +359,13 @@ namespace Diablerie.Engine
                     continue;
             
                 usingSkills = true;
-                if (MouseSelection.current != null)
+                if (MouseSelection.instance.current != null)
                 {
-                    var targetCharacter = MouseSelection.current.GetComponent<Character>();
+                    var targetCharacter = MouseSelection.instance.current.GetComponent<Character>();
                     if (targetCharacter != null)
                         character.UseSkill(skill, targetCharacter);
                     else
-                        character.UseSkill(skill, Iso.MapToIso(MouseSelection.current.transform.position));
+                        character.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.current.transform.position));
                 }
                 else
                 {
@@ -383,9 +385,9 @@ namespace Diablerie.Engine
                 }
                 else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    if (MouseSelection.current != null)
+                    if (MouseSelection.instance.current != null)
                     {
-                        var targetCharacter = MouseSelection.current.GetComponent<Character>();
+                        var targetCharacter = MouseSelection.instance.current.GetComponent<Character>();
                         if (targetCharacter != null)
                         {
                             if (targetCharacter.monStat != null && targetCharacter.monStat.npc)
@@ -399,7 +401,7 @@ namespace Diablerie.Engine
                         }
                         else
                         {
-                            character.Use(MouseSelection.current);
+                            character.Use(MouseSelection.instance.current);
                         }
                     }
                     else

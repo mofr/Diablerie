@@ -131,7 +131,7 @@ namespace Diablerie.Engine.Entities
         void OnRenderObject()
         {
             if (objectInfo.draw && objectInfo.selectable[mode])
-                MouseSelection.Submit(this);
+                MouseSelection.instance.Submit(this);
         }
     }
 }

@@ -122,7 +122,7 @@ namespace Diablerie.Engine.Entities
 
         private void OnRenderObject()
         {
-            MouseSelection.Submit(this);
+            MouseSelection.instance.Submit(this);
         }
     }
 }
