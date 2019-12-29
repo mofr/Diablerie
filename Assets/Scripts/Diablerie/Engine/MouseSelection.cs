@@ -1,4 +1,5 @@
-﻿using Diablerie.Engine.Entities;
+﻿using System.Collections.Generic;
+using Diablerie.Engine.Entities;
 using Diablerie.Engine.UI;
 using Diablerie.Engine.Utility;
 using Diablerie.Game.UI;
@@ -17,10 +18,13 @@ namespace Diablerie.Engine
         private Vector3 mousePos;
         private Vector3 currentPosition;
         private bool highlightItems;
+        private PickupHighlighter pickupHighlighter;
+        private HashSet<Pickup> pickups = new HashSet<Pickup>();
 
         void Awake()
         {
             instance = this;
+            pickupHighlighter = new PickupHighlighter();
         }
 
         void Update()
@@ -52,6 +56,11 @@ namespace Diablerie.Engine
             {
                 ShowNothing();
             }
+            
+            if (!highlightItems)
+                pickups.Clear();
+            pickupHighlighter.Show(pickups);
+            pickups.Clear();
 
             if (PlayerController.instance.FixedSelection())
             {
@@ -100,6 +109,9 @@ namespace Diablerie.Engine
         {
             if (entity == PlayerController.instance.character)
                 return;
+
+            if (entity is Pickup pickup)
+                pickups.Add(pickup);
 
             Bounds bounds = entity.bounds;
 

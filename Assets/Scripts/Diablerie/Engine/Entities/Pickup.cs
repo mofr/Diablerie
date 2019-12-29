@@ -89,7 +89,7 @@ namespace Diablerie.Engine.Entities
 
         public override Vector2 titleOffset
         {
-            get { return new Vector2(0, 24); }
+            get { return new Vector2(0, 20); }
         }
 
         public override Bounds bounds
