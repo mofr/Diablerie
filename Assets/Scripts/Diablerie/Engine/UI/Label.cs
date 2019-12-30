@@ -6,9 +6,14 @@ namespace Diablerie.Engine.UI
 {
     public class Label
     {
+        private static readonly Color BackgroundColor = new Color(0, 0, 0, 0.95f); 
+        private static readonly Color HighlightedBackgroundColor = new Color(0.05f, 0.15f, 0.4f, 0.95f);
+        
         private GameObject root;
         private RectTransform rectTransform;
         private Text text;
+        private bool highlighed;
+        private Image backgroundImage;
 
         public Label(Transform parentTransform)
         {
@@ -22,6 +27,7 @@ namespace Diablerie.Engine.UI
             var canvas = root.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.WorldSpace;
             canvas.sortingLayerName = "UI";
+            root.AddComponent<GraphicRaycaster>();
             var contentFitter = root.AddComponent<ContentSizeFitter>();
             contentFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
             contentFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
@@ -41,9 +47,9 @@ namespace Diablerie.Engine.UI
             text.font = Fonts.GetFont16();
             text.supportRichText = true;
             text.raycastTarget = false;
-            var backgroundImage = root.AddComponent<Image>();
-            backgroundImage.color = new Color(0, 0, 0, 0.95f);
-            backgroundImage.raycastTarget = false;
+            backgroundImage = root.AddComponent<Image>();
+            backgroundImage.color = BackgroundColor;
+            backgroundImage.raycastTarget = true;
         }
 
         public void Show(Vector2 position, string text)
@@ -59,6 +65,21 @@ namespace Diablerie.Engine.UI
         public void Hide()
         {
             root.SetActive(false);
+        }
+
+        public GameObject gameObject => root;
+
+        public bool Highlighed
+        {
+            get => highlighed;
+            set
+            {
+                if (value != highlighed)
+                {
+                    highlighed = value;
+                    backgroundImage.color = highlighed ? HighlightedBackgroundColor : BackgroundColor;
+                }
+            }
         }
     }
 }

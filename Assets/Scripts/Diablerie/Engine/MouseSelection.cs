@@ -13,7 +13,7 @@ namespace Diablerie.Engine
 
         public static MouseSelection instance;
         
-        public Entity current;
+        private Entity hotEntity;
         private Entity previous;
         private Vector3 mousePos;
         private Vector3 currentPosition;
@@ -29,9 +29,16 @@ namespace Diablerie.Engine
 
         void Update()
         {
-            if (current != null && !highlightItems)
+            if (!highlightItems)
+                pickups.Clear();
+            pickupHighlighter.Show(pickups);
+            pickups.Clear();
+            if (highlightItems && pickupHighlighter.Hot != null)
+                hotEntity = pickupHighlighter.Hot;
+            
+            if (hotEntity != null && !highlightItems)
             {
-                var character = current.GetComponent<Character>();
+                var character = hotEntity.GetComponent<Character>();
                 if (character && character.monStat != null)
                 {
                     if (character.monStat.interact)
@@ -56,11 +63,6 @@ namespace Diablerie.Engine
             {
                 ShowNothing();
             }
-            
-            if (!highlightItems)
-                pickups.Clear();
-            pickupHighlighter.Show(pickups);
-            pickups.Clear();
 
             if (PlayerController.instance.FixedSelection())
             {
@@ -71,15 +73,17 @@ namespace Diablerie.Engine
             {
                 previous.selected = false;
             }
-            if (current != null)
+            if (hotEntity != null)
             {
-                current.selected = true;
+                hotEntity.selected = true;
             }
-            previous = current;
-            current = null;
+            previous = hotEntity;
+            hotEntity = null;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
         }
+
+        public Entity HotEntity => hotEntity;
 
         public void SetHighlightItems(bool highlightItems)
         {
@@ -89,8 +93,8 @@ namespace Diablerie.Engine
         private void ShowLabel()
         {
             EnemyBar.instance.character = null;
-            var labelPosition = current.transform.position + (Vector3) current.titleOffset / Iso.pixelsPerUnit;
-            Ui.ShowLabel(labelPosition, current.title);
+            var labelPosition = hotEntity.transform.position + (Vector3) hotEntity.titleOffset / Iso.pixelsPerUnit;
+            Ui.ShowLabel(labelPosition, hotEntity.title);
         }
 
         private void ShowEnemyBar(Character character)
@@ -117,7 +121,7 @@ namespace Diablerie.Engine
 
             if (PlayerController.instance.FixedSelection())
             {
-                if (entity == current)
+                if (entity == hotEntity)
                 {
                     currentPosition = bounds.center;
                 }
@@ -128,10 +132,10 @@ namespace Diablerie.Engine
             if (!bounds.Contains(mousePos))
                 return;
 
-            bool betterMatch = current == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
+            bool betterMatch = hotEntity == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
             if (betterMatch)
             {
-                current = entity;
+                hotEntity = entity;
                 currentPosition = bounds.center;
             }
         }

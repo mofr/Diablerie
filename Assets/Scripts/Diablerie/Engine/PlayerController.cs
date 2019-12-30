@@ -243,9 +243,9 @@ namespace Diablerie.Engine
         void DrawDebugPath()
         {
             Vector3 targetPosition;
-            if (MouseSelection.instance.current != null)
+            if (MouseSelection.instance.HotEntity != null)
             {
-                targetPosition = Iso.MapToIso(MouseSelection.instance.current.transform.position);
+                targetPosition = Iso.MapToIso(MouseSelection.instance.HotEntity.transform.position);
             }
             else
             {
@@ -359,13 +359,13 @@ namespace Diablerie.Engine
                     continue;
             
                 usingSkills = true;
-                if (MouseSelection.instance.current != null)
+                if (MouseSelection.instance.HotEntity != null)
                 {
-                    var targetCharacter = MouseSelection.instance.current.GetComponent<Character>();
+                    var targetCharacter = MouseSelection.instance.HotEntity.GetComponent<Character>();
                     if (targetCharacter != null)
                         character.UseSkill(skill, targetCharacter);
                     else
-                        character.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.current.transform.position));
+                        character.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.HotEntity.transform.position));
                 }
                 else
                 {
@@ -385,9 +385,9 @@ namespace Diablerie.Engine
                 }
                 else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    if (MouseSelection.instance.current != null)
+                    if (MouseSelection.instance.HotEntity != null)
                     {
-                        var targetCharacter = MouseSelection.instance.current.GetComponent<Character>();
+                        var targetCharacter = MouseSelection.instance.HotEntity.GetComponent<Character>();
                         if (targetCharacter != null)
                         {
                             if (targetCharacter.monStat != null && targetCharacter.monStat.npc)
@@ -401,7 +401,7 @@ namespace Diablerie.Engine
                         }
                         else
                         {
-                            character.Use(MouseSelection.instance.current);
+                            character.Use(MouseSelection.instance.HotEntity);
                         }
                     }
                     else
