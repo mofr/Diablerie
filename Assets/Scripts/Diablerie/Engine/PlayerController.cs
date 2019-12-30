@@ -39,6 +39,8 @@ namespace Diablerie.Engine
             KeyCode.F6,
         };
         private List<SkillInfo> hotSkills;
+        private SkillInfo leftSkill;
+        private SkillInfo rightSkill;
 
         private int selectingSkillIndex = 0;
 
@@ -96,6 +98,9 @@ namespace Diablerie.Engine
                 SkillInfo.Find("Inferno Sentry"),
                 SkillInfo.Find("Death Sentry"),
             };
+            
+            leftSkill = SkillInfo.Attack;
+            rightSkill = SkillInfo.Attack;
         }
 
         void Start()
@@ -372,10 +377,6 @@ namespace Diablerie.Engine
                     character.UseSkill(skill, IsoInput.mousePosition);
                 }
             }
-
-            // move to PlayerController members once Datasheets loading done not in static section
-            SkillInfo leftSkill = SkillInfo.Attack;
-            SkillInfo rightSkill = SkillInfo.Attack;
 
             if (!usingSkills)
             {
