@@ -81,5 +81,7 @@ namespace Diablerie.Engine.UI
                 }
             }
         }
+
+        public RectTransform RectTransform => rectTransform;
     }
 }

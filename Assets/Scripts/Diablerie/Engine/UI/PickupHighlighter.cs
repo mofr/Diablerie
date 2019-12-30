@@ -14,6 +14,7 @@ namespace Diablerie.Engine.UI
         private List<RaycastResult> raycastResults = new List<RaycastResult>();
         private Pickup hotPickup;
         private LabelPool labelPool;
+        private readonly PickupLabelLayout layout = new PickupLabelLayout(1);
 
         public PickupHighlighter(LabelPool labelPool)
         {
@@ -26,8 +27,8 @@ namespace Diablerie.Engine.UI
 
         public void Show(ISet<Pickup> pickups, bool updateHot = true)
         {
-            SyncLabels(pickups);
-            UpdatePositions();
+            CreateLabels(pickups);
+            layout.Arrange(labels);
             if (updateHot)
                 Hot = CalculateHotPickup();
         }
@@ -53,7 +54,7 @@ namespace Diablerie.Engine.UI
             }
         }
 
-        private void SyncLabels(ISet<Pickup> pickups)
+        private void CreateLabels(ISet<Pickup> pickups)
         {
             toRemove.Clear();
             foreach (var pickup in labels.Keys)
@@ -76,17 +77,6 @@ namespace Diablerie.Engine.UI
                     labels.Add(pickup, label);
                     pickupsByGameObjects.Add(label.gameObject, pickup);
                 }
-            }
-        }
-
-        private void UpdatePositions()
-        {
-            foreach (KeyValuePair<Pickup, Label> entry in labels)
-            {
-                Pickup pickup = entry.Key;
-                Label label = entry.Value;
-                var position = pickup.transform.position + (Vector3) pickup.titleOffset / Iso.pixelsPerUnit;
-                label.Show(position, pickup.title);
             }
         }
 
