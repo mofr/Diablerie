@@ -11,7 +11,13 @@ namespace Diablerie.Engine.Datasheets
 
         public static void Load()
         {
-            sheet = Datasheet.Load<UniqueItem>("data/global/excel/UniqueItems.txt");
+            List<UniqueItem> loadedItems = Datasheet.Load<UniqueItem>("data/global/excel/UniqueItems.txt");
+            sheet = new List<UniqueItem>(loadedItems.Count);
+            foreach (var item in loadedItems)
+            {
+                if (item.nameStr != null)
+                    sheet.Add(item);
+            }
             foreach(var unique in sheet)
             {
                 unique.name = Translation.Find(unique.nameStr);
