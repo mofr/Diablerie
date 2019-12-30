@@ -14,12 +14,13 @@ namespace Diablerie.Engine
         public static MouseSelection instance;
         
         private Entity hotEntity;
+        private Entity newHotEntity;
         private Entity previous;
         private Vector3 mousePos;
         private Vector3 currentPosition;
         private bool highlightItems;
         private PickupHighlighter pickupHighlighter;
-        private HashSet<Pickup> pickups = new HashSet<Pickup>();
+        private readonly HashSet<Pickup> pickups = new HashSet<Pickup>();
 
         void Awake()
         {
@@ -29,13 +30,20 @@ namespace Diablerie.Engine
 
         void Update()
         {
+            bool updateHotEntity = !PlayerController.instance.FixedSelection();
             if (!highlightItems)
                 pickups.Clear();
-            pickupHighlighter.Show(pickups);
+            pickupHighlighter.Show(pickups, updateHotEntity);
             pickups.Clear();
-            if (highlightItems && pickupHighlighter.Hot != null)
-                hotEntity = pickupHighlighter.Hot;
-            
+            if (updateHotEntity)
+            {
+                if (highlightItems && pickupHighlighter.Hot != null)
+                    hotEntity = pickupHighlighter.Hot;
+                else
+                    hotEntity = newHotEntity;
+            }
+            newHotEntity = null;
+
             if (hotEntity != null && !highlightItems)
             {
                 var character = hotEntity.GetComponent<Character>();
@@ -64,11 +72,6 @@ namespace Diablerie.Engine
                 ShowNothing();
             }
 
-            if (PlayerController.instance.FixedSelection())
-            {
-                return;
-            }
-
             if (previous != null)
             {
                 previous.selected = false;
@@ -78,7 +81,6 @@ namespace Diablerie.Engine
                 hotEntity.selected = true;
             }
             previous = hotEntity;
-            hotEntity = null;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
         }
@@ -121,7 +123,7 @@ namespace Diablerie.Engine
 
             if (PlayerController.instance.FixedSelection())
             {
-                if (entity == hotEntity)
+                if (entity == newHotEntity)
                 {
                     currentPosition = bounds.center;
                 }
@@ -132,10 +134,10 @@ namespace Diablerie.Engine
             if (!bounds.Contains(mousePos))
                 return;
 
-            bool betterMatch = hotEntity == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
+            bool betterMatch = newHotEntity == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
             if (betterMatch)
             {
-                hotEntity = entity;
+                newHotEntity = entity;
                 currentPosition = bounds.center;
             }
         }

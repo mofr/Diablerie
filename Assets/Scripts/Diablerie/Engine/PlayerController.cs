@@ -383,7 +383,7 @@ namespace Diablerie.Engine
                 {
                     character.UseSkill(rightSkill, IsoInput.mousePosition);
                 }
-                else if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+                else if (Input.GetMouseButton(0))
                 {
                     if (MouseSelection.instance.HotEntity != null)
                     {
@@ -420,7 +420,7 @@ namespace Diablerie.Engine
 
         public bool FixedSelection()
         {
-            return Input.GetMouseButton(0) || _mouseItem != null || EventSystem.current.IsPointerOverGameObject() || usingSkills;
+            return Input.GetMouseButton(0) || _mouseItem != null || usingSkills;
         }
 
         void Update()
@@ -436,8 +436,8 @@ namespace Diablerie.Engine
                 return;
 
             flush = false;
-
-            if (EventSystem.current.IsPointerOverGameObject())
+            
+            if (EventSystem.current.IsPointerOverGameObject() && MouseSelection.instance.HotEntity == null)
                 return;
 
             ControlCharacter();

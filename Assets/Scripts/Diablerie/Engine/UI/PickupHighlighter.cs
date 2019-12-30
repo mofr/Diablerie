@@ -22,11 +22,12 @@ namespace Diablerie.Engine.UI
             };
         }
 
-        public void Show(ISet<Pickup> pickups)
+        public void Show(ISet<Pickup> pickups, bool updateHot = true)
         {
             SyncLabels(pickups);
             UpdatePositions();
-            Hot = CalculateHotPickup();
+            if (updateHot)
+                Hot = CalculateHotPickup();
         }
 
         public Pickup Hot
