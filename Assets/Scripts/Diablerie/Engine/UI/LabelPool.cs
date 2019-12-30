@@ -5,8 +5,8 @@ namespace Diablerie.Engine.UI
 {
     public class LabelPool
     {
-        private Transform parent;
-        private List<Label> pool = new List<Label>();
+        private readonly Transform parent;
+        private readonly List<Label> pool = new List<Label>();
 
         public LabelPool(Transform parent)
         {
