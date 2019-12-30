@@ -15,7 +15,6 @@ namespace Diablerie.Engine
         
         private Entity hotEntity;
         private Entity newHotEntity;
-        private Entity previous;
         private Vector3 mousePos;
         private Vector3 currentPosition;
         private bool highlightItems;
@@ -38,20 +37,20 @@ namespace Diablerie.Engine
             if (updateHotEntity)
             {
                 if (highlightItems && pickupHighlighter.Hot != null)
-                    hotEntity = pickupHighlighter.Hot;
+                    HotEntity = pickupHighlighter.Hot;
                 else
-                    hotEntity = newHotEntity;
+                    HotEntity = newHotEntity;
             }
             newHotEntity = null;
 
-            if (hotEntity != null && !highlightItems)
+            if (HotEntity != null && !highlightItems)
             {
-                var character = hotEntity.GetComponent<Character>();
+                var character = HotEntity.GetComponent<Character>();
                 if (character && character.monStat != null)
                 {
                     if (character.monStat.interact)
                     {
-                        ShowLabel();
+                        ShowLabel(HotEntity);
                     }
                     else if (character.monStat.killable)
                     {
@@ -64,7 +63,7 @@ namespace Diablerie.Engine
                 }
                 else
                 {
-                    ShowLabel();
+                    ShowLabel(HotEntity);
                 }
             }
             else
@@ -72,31 +71,35 @@ namespace Diablerie.Engine
                 ShowNothing();
             }
 
-            if (previous != null)
-            {
-                previous.selected = false;
-            }
-            if (hotEntity != null)
-            {
-                hotEntity.selected = true;
-            }
-            previous = hotEntity;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
         }
 
-        public Entity HotEntity => hotEntity;
+        public Entity HotEntity
+        {
+            get { return hotEntity; }
+            private set
+            {
+                if (hotEntity == value)
+                    return;
+                if (hotEntity != null)
+                    hotEntity.selected = false;
+                hotEntity = value;
+                if (hotEntity != null)
+                    hotEntity.selected = true;
+            }
+        }
 
         public void SetHighlightItems(bool highlightItems)
         {
             this.highlightItems = highlightItems;
         }
 
-        private void ShowLabel()
+        private void ShowLabel(Entity entity)
         {
             EnemyBar.instance.character = null;
-            var labelPosition = hotEntity.transform.position + (Vector3) hotEntity.titleOffset / Iso.pixelsPerUnit;
-            Ui.ShowLabel(labelPosition, hotEntity.title);
+            var labelPosition = entity.transform.position + (Vector3) entity.titleOffset / Iso.pixelsPerUnit;
+            Ui.ShowLabel(labelPosition, entity.title);
         }
 
         private void ShowEnemyBar(Character character)
