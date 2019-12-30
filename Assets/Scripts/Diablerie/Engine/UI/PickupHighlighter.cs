@@ -13,9 +13,11 @@ namespace Diablerie.Engine.UI
         private PointerEventData pointerData;
         private List<RaycastResult> raycastResults = new List<RaycastResult>();
         private Pickup hotPickup;
+        private LabelPool labelPool;
 
-        public PickupHighlighter()
+        public PickupHighlighter(LabelPool labelPool)
         {
+            this.labelPool = labelPool;
             pointerData = new PointerEventData (EventSystem.current)
             {
                 pointerId = -1,
@@ -64,14 +66,14 @@ namespace Diablerie.Engine.UI
                 Label label = labels[pickup];
                 labels.Remove(pickup);
                 pickupsByGameObjects.Remove(label.gameObject);
-                label.Hide();  // TODO return to pool
+                labelPool.Return(label);
             }
             foreach (var pickup in pickups)
             {
                 if (!labels.ContainsKey(pickup))
                 {
-                    var label = new Label(null);
-                    labels.Add(pickup, label);  // TODO get from pool
+                    var label = labelPool.Get();
+                    labels.Add(pickup, label);
                     pickupsByGameObjects.Add(label.gameObject, pickup);
                 }
             }

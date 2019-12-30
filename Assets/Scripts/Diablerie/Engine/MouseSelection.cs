@@ -20,11 +20,13 @@ namespace Diablerie.Engine
         private bool highlightPickups;
         private PickupHighlighter pickupHighlighter;
         private readonly HashSet<Pickup> pickups = new HashSet<Pickup>();
+        private LabelPool pickupLabelPool;
 
         void Awake()
         {
             instance = this;
-            pickupHighlighter = new PickupHighlighter();
+            pickupLabelPool = new LabelPool(transform);
+            pickupHighlighter = new PickupHighlighter(pickupLabelPool);
         }
 
         void Update()
