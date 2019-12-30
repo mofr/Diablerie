@@ -17,7 +17,7 @@ namespace Diablerie.Engine
         private Entity newHotEntity;
         private Vector3 mousePos;
         private Vector3 currentPosition;
-        private bool highlightItems;
+        private bool highlightPickups;
         private PickupHighlighter pickupHighlighter;
         private readonly HashSet<Pickup> pickups = new HashSet<Pickup>();
 
@@ -30,20 +30,20 @@ namespace Diablerie.Engine
         void Update()
         {
             bool updateHotEntity = !PlayerController.instance.FixedSelection();
-            if (!highlightItems)
+            if (!highlightPickups)
                 pickups.Clear();
             pickupHighlighter.Show(pickups, updateHotEntity);
             pickups.Clear();
             if (updateHotEntity)
             {
-                if (highlightItems && pickupHighlighter.Hot != null)
+                if (highlightPickups && pickupHighlighter.Hot != null)
                     HotEntity = pickupHighlighter.Hot;
                 else
                     HotEntity = newHotEntity;
             }
             newHotEntity = null;
 
-            if (HotEntity != null && !highlightItems)
+            if (HotEntity != null && !highlightPickups)
             {
                 var character = HotEntity.GetComponent<Character>();
                 if (character && character.monStat != null)
@@ -90,9 +90,9 @@ namespace Diablerie.Engine
             }
         }
 
-        public void SetHighlightItems(bool highlightItems)
+        public void SetHighlightPickups(bool highlightPickups)
         {
-            this.highlightItems = highlightItems;
+            this.highlightPickups = highlightPickups;
         }
 
         private void ShowLabel(Entity entity)

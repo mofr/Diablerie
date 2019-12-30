@@ -267,8 +267,8 @@ namespace Diablerie.Engine
 
         void HandleKeyboard()
         {
-            bool highlightItems = Input.GetKey(KeyCode.LeftAlt) | Input.GetKey(KeyCode.RightAlt);
-            MouseSelection.instance.SetHighlightItems(highlightItems);
+            bool highlightPickups = Input.GetKey(KeyCode.LeftAlt) | Input.GetKey(KeyCode.RightAlt);
+            MouseSelection.instance.SetHighlightPickups(highlightPickups);
             if (InventoryPanel.instance.visible || CharstatPanel.instance.visible)
             {
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
