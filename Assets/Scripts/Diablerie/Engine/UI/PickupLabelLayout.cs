@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Diablerie.Engine.Entities;
+using Diablerie.Engine.Utility;
 using UnityEngine;
 
 namespace Diablerie.Engine.UI
 {
     public class PickupLabelLayout
     {
-        private readonly List<Rect> placedRects = new List<Rect>();
+        private readonly SortedList<float, Rect> placedRects = new SortedList<float, Rect>(new DuplicateKeyComparer<float>());
         private float verticalPadding;
 
         public PickupLabelLayout(float verticalPaddingInPixels)
@@ -26,6 +27,7 @@ namespace Diablerie.Engine.UI
                 var position = pickup.transform.position + (Vector3) pickup.titleOffset / Iso.pixelsPerUnit;
                 label.Show(position, pickup.title);
                 var rect = new Rect(position, label.RectTransform.rect.size / Iso.pixelsPerUnit);
+                rect.x -= rect.width / 2;
                 Vector3 offset = PutRect(rect);
                 label.Show(position + offset, pickup.title);
             }
@@ -34,16 +36,15 @@ namespace Diablerie.Engine.UI
         private Vector2 PutRect(Rect rect)
         {
             var initialRect = rect;
-            for (int i = 0; i < placedRects.Count; i++)
+            foreach (Rect placedRect in placedRects.Values)
             {
-                Rect placedRect = placedRects[i];
                 if (rect.Overlaps(placedRect))
                 {
                     rect.y = placedRect.yMax + verticalPadding;
                 }
             }
             
-            placedRects.Add(rect);
+            placedRects.Add(rect.y, rect);
             return rect.position - initialRect.position;
         }
     }
