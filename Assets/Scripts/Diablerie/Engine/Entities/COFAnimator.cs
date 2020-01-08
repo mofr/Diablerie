@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Diablerie.Engine.IO.D2Formats;
+using Diablerie.Engine.Utility;
 using UnityEngine;
 
 namespace Diablerie.Engine.Entities
@@ -70,10 +71,6 @@ namespace Diablerie.Engine.Entities
                     }
                 }
             }
-        }
-
-        void Start()
-        {
         }
 
         public COF cof
@@ -146,7 +143,7 @@ namespace Diablerie.Engine.Entities
                 shadowObject.transform.localScale = new Vector3(1, 0.5f);
                 layer.shadow = shadowObject.AddComponent<SpriteRenderer>();
                 layer.shadow.material = shadowMaterial;
-                layer.shadow.sortingLayerName = "Shadow";
+                layer.shadow.sortingLayerID = SortingLayers.Shadow;
                 layers.Add(layer);
             }
         

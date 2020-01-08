@@ -1,4 +1,5 @@
-﻿using Diablerie.Game;
+﻿using Diablerie.Engine.Utility;
+using Diablerie.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,7 +27,7 @@ namespace Diablerie.Engine.UI
             rectTransform.localScale = new Vector3(1 / Iso.pixelsPerUnit, 1 / Iso.pixelsPerUnit);
             var canvas = root.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.WorldSpace;
-            canvas.sortingLayerName = "UI";
+            canvas.sortingLayerID = SortingLayers.WorldUI;
             root.AddComponent<GraphicRaycaster>();
             var contentFitter = root.AddComponent<ContentSizeFitter>();
             contentFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;

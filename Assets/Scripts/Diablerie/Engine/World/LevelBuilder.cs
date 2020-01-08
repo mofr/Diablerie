@@ -540,7 +540,7 @@ namespace Diablerie.Engine.World
                     new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height)
                 };
 
-                meshRenderer.sortingLayerName = tile.orientation == 0 ? "Floor" : "Roof";
+                meshRenderer.sortingLayerID = tile.orientation == 0 ? SortingLayers.Floor : SortingLayers.Roof;
                 meshRenderer.sortingOrder = orderInLayer;
 
                 gameObject.name += tile.orientation == 0 ? " (floor)" : " (roof)";
@@ -563,7 +563,7 @@ namespace Diablerie.Engine.World
                     new Vector2 ((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
                     new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
                 };
-                meshRenderer.sortingLayerName = "LowerWall";
+                meshRenderer.sortingLayerID = SortingLayers.LowerWall;
                 meshRenderer.sortingOrder = orderInLayer;
             
                 gameObject.name += " (lower wall)";

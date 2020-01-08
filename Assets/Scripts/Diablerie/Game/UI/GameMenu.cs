@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Diablerie.Engine;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.IO.D2Formats;
+using Diablerie.Engine.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -53,7 +54,7 @@ namespace Diablerie.Game.UI
             var canvas = root.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
             canvas.worldCamera = Camera.main;
-            canvas.sortingLayerName = "UI";
+            canvas.sortingLayerID = SortingLayers.UI;
             raycaster = root.AddComponent<GraphicRaycaster>();
             var behaviour = root.AddComponent<InternalBehaviour>();
             behaviour.menu = this;
@@ -115,7 +116,7 @@ namespace Diablerie.Game.UI
             animator.useUnscaledTime = true;
             animator.OffsetTime(left ? 0.1f : 0);
             var spriteRenderer = star.GetComponent<SpriteRenderer>();
-            spriteRenderer.sortingLayerName = "UI";
+            spriteRenderer.sortingLayerID = SortingLayers.UI;
             return star;
         }
 
