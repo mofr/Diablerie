@@ -1,37 +1,36 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Diablerie.Engine.UI
 {
-    public class Ui : MonoBehaviour
+    public class Ui : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public static Ui instance;
-        public static Canvas canvas;
     
         public SoftwareCursor softwareCursorPrefab;
-
-        private Label label;
+        
         private ScreenLabel screenLabel;
+        private GameObject currentHover;
 
         void Awake()
         {
             instance = this;
-            canvas = FindObjectOfType<Canvas>();
-            label = new Label(transform);
-            label.Hide();
-            screenLabel = new ScreenLabel(canvas.transform as RectTransform);
+            screenLabel = new ScreenLabel(transform as RectTransform);
             screenLabel.Hide();
-            Instantiate(instance.softwareCursorPrefab, canvas.transform);
+            Instantiate(instance.softwareCursorPrefab, transform);
+        }
+        
+        public void OnPointerEnter(PointerEventData eventData) {
+            if (eventData.pointerCurrentRaycast.gameObject != null) {
+                currentHover = eventData.pointerCurrentRaycast.gameObject;
+            }
         }
 
-        public static void ShowLabel(Vector2 position, string text)
-        {
-            instance.label.Show(position, text);
+        public void OnPointerExit(PointerEventData eventData) {
+            currentHover = null;
         }
-
-        public static void HideLabel()
-        {
-            instance.label.Hide();
-        }
+        
+        public static bool Hover => instance.currentHover != null;
 
         public static void ShowScreenLabel(Vector2 position, string text)
         {

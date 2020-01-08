@@ -21,12 +21,15 @@ namespace Diablerie.Engine
         private PickupHighlighter pickupHighlighter;
         private readonly HashSet<Pickup> pickups = new HashSet<Pickup>();
         private LabelPool pickupLabelPool;
+        private Label label;
 
         void Awake()
         {
             instance = this;
             pickupLabelPool = new LabelPool(transform);
             pickupHighlighter = new PickupHighlighter(pickupLabelPool);
+            label = new Label(transform);
+            label.Hide();
         }
 
         void Update()
@@ -38,7 +41,9 @@ namespace Diablerie.Engine
             pickups.Clear();
             if (updateHotEntity)
             {
-                if (highlightPickups && pickupHighlighter.Hot != null)
+                if (Ui.Hover)
+                    HotEntity = null;
+                else if (pickupHighlighter.Hot != null)
                     HotEntity = pickupHighlighter.Hot;
                 else
                     HotEntity = newHotEntity;
@@ -101,19 +106,19 @@ namespace Diablerie.Engine
         {
             EnemyBar.instance.character = null;
             var labelPosition = entity.transform.position + (Vector3) entity.titleOffset / Iso.pixelsPerUnit;
-            Ui.ShowLabel(labelPosition, entity.title);
+            label.Show(labelPosition, entity.title);
         }
 
         private void ShowEnemyBar(Character character)
         {
             EnemyBar.instance.character = character;
-            Ui.HideLabel();
+            label.Hide();
         }
 
         private void ShowNothing()
         {
             EnemyBar.instance.character = null;
-            Ui.HideLabel();
+            label.Hide();
         }
 
         public void Submit(Entity entity)

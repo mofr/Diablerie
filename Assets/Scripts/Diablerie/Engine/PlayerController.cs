@@ -438,7 +438,7 @@ namespace Diablerie.Engine
 
             flush = false;
             
-            if (EventSystem.current.IsPointerOverGameObject() && MouseSelection.instance.HotEntity == null)
+            if (Ui.Hover && MouseSelection.instance.HotEntity == null)
                 return;
 
             ControlCharacter();
