@@ -36,11 +36,7 @@ namespace Diablerie.Engine
             pickups.Clear();
             if (highlightPickups)
             {
-                foreach (var entity in WorldState.instance.Entities)
-                {
-                    if (entity is Pickup pickup)
-                        pickups.Add(pickup);
-                }
+                FindVisiblePickups();
             }
             pickupHighlighter.Show(pickups, updateHotEntity);
             
@@ -101,6 +97,24 @@ namespace Diablerie.Engine
         public void SetHighlightPickups(bool highlightPickups)
         {
             this.highlightPickups = highlightPickups;
+        }
+
+        private void FindVisiblePickups()
+        {
+            foreach (var entity in WorldState.instance.Entities)
+            {
+                if (entity is Pickup pickup)
+                {
+                    Bounds bounds = entity.bounds;
+                    Vector2 minPosition = Camera.main.WorldToViewportPoint(bounds.min);
+                    if (minPosition.x >= 1 || minPosition.y >= 1)
+                        continue;
+                    Vector2 maxPosition = Camera.main.WorldToViewportPoint(bounds.max);
+                    if (maxPosition.x <= 0 || maxPosition.y <= 0)
+                        continue;
+                    pickups.Add(pickup);
+                }
+            }
         }
 
         private void ShowLabel(Entity entity)
