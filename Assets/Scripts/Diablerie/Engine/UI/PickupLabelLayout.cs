@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Diablerie.Engine.Entities;
@@ -28,14 +29,15 @@ namespace Diablerie.Engine.UI
                 label.Show(position, pickup.title);
                 var rect = new Rect(position, label.RectTransform.rect.size / Iso.pixelsPerUnit);
                 rect.x -= rect.width / 2;
-                Vector3 offset = PutRect(rect);
+                Rect placedRect = PutRect(rect);
+                Vector3 offset = placedRect.position - rect.position;
                 label.Show(position + offset, pickup.title);
             }
         }
 
-        private Vector2 PutRect(Rect rect)
+        private Rect PutRect(Rect rect)
         {
-            var initialRect = rect;
+            FitIntoTheScreen(ref rect);
             foreach (Rect placedRect in placedRects.Values)
             {
                 if (rect.Overlaps(placedRect))
@@ -43,9 +45,22 @@ namespace Diablerie.Engine.UI
                     rect.y = placedRect.yMax + verticalPadding;
                 }
             }
-            
+
             placedRects.Add(rect.y, rect);
-            return rect.position - initialRect.position;
+            return rect;
+        }
+
+        private void FitIntoTheScreen(ref Rect rect)
+        {
+            Vector2 screenSize = Ui.instance.RectTransform.sizeDelta;
+            Vector2 minPosition = Camera.main.WorldToViewportPoint(rect.min);
+            Vector2 maxPosition = Camera.main.WorldToViewportPoint(rect.max);
+            float leftOverflow = Math.Min(minPosition.x, 0);
+            float rightOverflow = Math.Max(maxPosition.x - 1, 0);
+            float topOverflow = Math.Max(maxPosition.y - 1, 0);
+            float horizontalOffset = -(leftOverflow + rightOverflow) * screenSize.x / Iso.pixelsPerUnit;
+            float verticalOffset = -topOverflow * screenSize.y / Iso.pixelsPerUnit;
+            rect.position += new Vector2(horizontalOffset, verticalOffset);
         }
     }
 }

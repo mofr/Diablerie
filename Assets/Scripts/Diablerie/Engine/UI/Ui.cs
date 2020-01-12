@@ -6,7 +6,8 @@ namespace Diablerie.Engine.UI
     public class Ui : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public static Ui instance;
-    
+
+        private RectTransform rectTransform;
         public SoftwareCursor softwareCursorPrefab;
         
         private ScreenLabel screenLabel;
@@ -15,9 +16,10 @@ namespace Diablerie.Engine.UI
         void Awake()
         {
             instance = this;
-            screenLabel = new ScreenLabel(transform as RectTransform);
+            rectTransform = transform as RectTransform;
+            screenLabel = new ScreenLabel(rectTransform);
             screenLabel.Hide();
-            Instantiate(instance.softwareCursorPrefab, transform);
+            Instantiate(instance.softwareCursorPrefab, rectTransform);
         }
         
         public void OnPointerEnter(PointerEventData eventData) {
@@ -31,6 +33,8 @@ namespace Diablerie.Engine.UI
         }
         
         public static bool Hover => instance.currentHover != null;
+
+        public RectTransform RectTransform => rectTransform;
 
         public static void ShowScreenLabel(Vector2 position, string text)
         {
