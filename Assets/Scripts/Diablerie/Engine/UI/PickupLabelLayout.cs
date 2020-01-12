@@ -27,8 +27,7 @@ namespace Diablerie.Engine.UI
                 Label label = entry.Value;
                 var position = pickup.transform.position + (Vector3) pickup.titleOffset / Iso.pixelsPerUnit;
                 label.Show(position, pickup.title);
-                var rect = new Rect(position, label.RectTransform.rect.size / Iso.pixelsPerUnit);
-                rect.x -= rect.width / 2;
+                var rect = label.GetScreenRect();
                 Rect placedRect = PutRect(rect);
                 Vector3 offset = placedRect.position - rect.position;
                 label.Show(position + offset, pickup.title);

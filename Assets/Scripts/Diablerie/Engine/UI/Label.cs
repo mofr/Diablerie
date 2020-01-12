@@ -67,6 +67,13 @@ namespace Diablerie.Engine.UI
         {
             root.SetActive(false);
         }
+        
+        public Rect GetScreenRect()
+        {
+            var rect = new Rect(rectTransform.anchoredPosition, rectTransform.rect.size / Iso.pixelsPerUnit);
+            rect.x -= rect.width / 2;
+            return rect;
+        }
 
         public GameObject gameObject => root;
 
