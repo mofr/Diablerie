@@ -61,6 +61,7 @@ namespace Diablerie.Engine.UI
                 this.text.text = text;
                 rectTransform.anchoredPosition = position;
                 root.SetActive(true);
+                Canvas.ForceUpdateCanvases();
                 if (fitIntoTheScreen)
                     FitIntoTheScreen();
             }
@@ -73,7 +74,6 @@ namespace Diablerie.Engine.UI
         
         private void FitIntoTheScreen()
         {
-            Canvas.ForceUpdateCanvases();
             var rect = GetScreenRect();
             Vector2 screenSize = Ui.instance.RectTransform.sizeDelta;
             Vector2 minPosition = Camera.main.WorldToViewportPoint(rect.min);
