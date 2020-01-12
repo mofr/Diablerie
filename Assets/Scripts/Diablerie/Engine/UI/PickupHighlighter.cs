@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Diablerie.Engine.Entities;
+using Diablerie.Engine.LibraryExtensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -90,9 +91,7 @@ namespace Diablerie.Engine.UI
                 return null;
 
             var gameObject = raycastResults[0].gameObject;
-            if (pickupsByGameObjects.TryGetValue(gameObject, out var pickup))
-                return pickup;
-            return null;
+            return pickupsByGameObjects.GetValueOrDefault(gameObject);
         }
     }
 }
