@@ -1,12 +1,23 @@
-﻿using UnityEngine;
+﻿using Diablerie.Engine.World;
+using UnityEngine;
 
 namespace Diablerie.Engine.Entities
 {
     public class Entity : MonoBehaviour
     {
-        COFAnimator animator;
-        string _title = null;
+        private COFAnimator animator;
+        private string _title = null;
 
+        protected virtual void Awake()
+        {
+            WorldState.instance.Add(this);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            WorldState.instance.Remove(this);
+        }
+        
         protected virtual void Start()
         {
             animator = GetComponent<COFAnimator>();
@@ -16,6 +27,8 @@ namespace Diablerie.Engine.Entities
         {
             get { return animator.bounds; }
         }
+
+        public virtual bool selectable => true;
 
         public virtual bool selected
         {

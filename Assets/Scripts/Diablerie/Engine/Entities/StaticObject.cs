@@ -36,14 +36,15 @@ namespace Diablerie.Engine.Entities
             get { return objectInfo.operateRange; }
         }
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             iso = GetComponent<Iso>();
             animator = GetComponent<COFAnimator>();
             animator.equip = gear;
         }
 
-        override protected void Start()
+        protected override void Start()
         {
             base.Start();
             SetMode(modeName);
@@ -128,10 +129,6 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void OnRenderObject()
-        {
-            if (objectInfo.draw && objectInfo.selectable[mode])
-                MouseSelection.instance.Submit(this);
-        }
+        public override bool selectable => objectInfo.draw && objectInfo.selectable[mode];
     }
 }

@@ -65,8 +65,9 @@ namespace Diablerie.Engine.Entities
         private Character _targetCharacter;
         private Vector2 _targetPoint;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             iso = GetComponent<Iso>();
             _animator = GetComponent<COFAnimator>();
         }
@@ -493,13 +494,15 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void OnRenderObject()
+        public override bool selectable
         {
-            bool selectable = !_dead && !_dying;
-            if (selectable && monStat != null)
-                selectable = monStat.interact || (!monStat.npc && monStat.killable);
-            if (selectable)
-                MouseSelection.instance.Submit(this);
+            get
+            {
+                bool selectable = !_dead && !_dying;
+                if (selectable && monStat != null)
+                    selectable = monStat.interact || (!monStat.npc && monStat.killable);
+                return selectable;
+            }
         }
     }
 }

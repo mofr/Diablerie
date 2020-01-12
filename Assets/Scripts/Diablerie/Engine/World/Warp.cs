@@ -53,11 +53,6 @@ namespace Diablerie.Engine.World
             get { return new Vector2(info.selectX + info.selectDX / 2, info.selectDY / 2); }
         }
 
-        private void OnRenderObject()
-        {
-            MouseSelection.instance.Submit(this);
-        }
-
         private Warp FindTargetWarp()
         {
             for (int i = 0; i < targetLevel.vis.Length; ++i)

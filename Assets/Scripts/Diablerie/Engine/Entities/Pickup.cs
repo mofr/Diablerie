@@ -54,12 +54,14 @@ namespace Diablerie.Engine.Entities
             return pickup;
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             if (materialProperties == null)
                 materialProperties = new MaterialPropertyBlock();
             CollisionMap.SetBlocked(Iso.MapToIso(transform.position), CollisionLayers.Item);
             animator = GetComponent<SpriteAnimator>();
+            renderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnDisable()
@@ -70,7 +72,6 @@ namespace Diablerie.Engine.Entities
         protected override void Start()
         {
             base.Start();
-            renderer = GetComponent<SpriteRenderer>();
             renderer.sortingOrder = Iso.SortingOrder(transform.position);
         }
 
@@ -118,11 +119,6 @@ namespace Diablerie.Engine.Entities
                 AudioManager.instance.Play("druid_cantcarry_1");
                 Flip();
             }
-        }
-
-        private void OnRenderObject()
-        {
-            MouseSelection.instance.Submit(this);
         }
     }
 }

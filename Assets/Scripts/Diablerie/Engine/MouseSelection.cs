@@ -2,6 +2,7 @@
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.UI;
 using Diablerie.Engine.Utility;
+using Diablerie.Engine.World;
 using Diablerie.Game.UI;
 using UnityEngine;
 
@@ -34,6 +35,11 @@ namespace Diablerie.Engine
 
         void Update()
         {
+            foreach (var entity in WorldState.instance.Entities)
+            {
+                if (entity.selectable)
+                    Submit(entity);
+            }
             bool updateHotEntity = !PlayerController.instance.FixedSelection();
             if (!highlightPickups)
                 pickups.Clear();
@@ -121,7 +127,7 @@ namespace Diablerie.Engine
             label.Hide();
         }
 
-        public void Submit(Entity entity)
+        private void Submit(Entity entity)
         {
             if (entity == PlayerController.instance.character)
                 return;
