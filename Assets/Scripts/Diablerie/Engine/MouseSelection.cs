@@ -15,9 +15,6 @@ namespace Diablerie.Engine
         public static MouseSelection instance;
         
         private Entity hotEntity;
-        private Entity newHotEntity;
-        private Vector3 mousePos;
-        private Vector3 currentPosition;
         private bool highlightPickups;
         private PickupHighlighter pickupHighlighter;
         private readonly HashSet<Pickup> pickups = new HashSet<Pickup>();
@@ -35,16 +32,18 @@ namespace Diablerie.Engine
 
         void Update()
         {
-            foreach (var entity in WorldState.instance.Entities)
-            {
-                if (entity.selectable)
-                    Submit(entity);
-            }
             bool updateHotEntity = !PlayerController.instance.FixedSelection();
-            if (!highlightPickups)
-                pickups.Clear();
-            pickupHighlighter.Show(pickups, updateHotEntity);
             pickups.Clear();
+            if (highlightPickups)
+            {
+                foreach (var entity in WorldState.instance.Entities)
+                {
+                    if (entity is Pickup pickup)
+                        pickups.Add(pickup);
+                }
+            }
+            pickupHighlighter.Show(pickups, updateHotEntity);
+            
             if (updateHotEntity)
             {
                 if (Ui.Hover)
@@ -52,9 +51,8 @@ namespace Diablerie.Engine
                 else if (pickupHighlighter.Hot != null)
                     HotEntity = pickupHighlighter.Hot;
                 else
-                    HotEntity = newHotEntity;
+                    HotEntity = CalcHotEntity();
             }
-            newHotEntity = null;
 
             if (HotEntity != null && !highlightPickups)
             {
@@ -83,9 +81,6 @@ namespace Diablerie.Engine
             {
                 ShowNothing();
             }
-
-            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
         }
 
         public Entity HotEntity
@@ -127,35 +122,34 @@ namespace Diablerie.Engine
             label.Hide();
         }
 
-        private void Submit(Entity entity)
+        private Entity CalcHotEntity()
         {
-            if (entity == PlayerController.instance.character)
-                return;
-
-            if (entity is Pickup pickup)
-                pickups.Add(pickup);
-
-            Bounds bounds = entity.bounds;
-
-            if (PlayerController.instance.FixedSelection())
+            Vector3 currentPosition = new Vector3();
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Entity bestMatch = null;
+            foreach (var entity in WorldState.instance.Entities)
             {
-                if (entity == newHotEntity)
+                if (!entity.selectable)
+                    continue;
+                
+                if (entity == PlayerController.instance.character)
+                    continue;
+
+                Bounds bounds = entity.bounds;
+                bounds.Expand(Expand);
+                if (!bounds.Contains(mousePos))
+                    continue;
+
+                bool betterMatch = bestMatch == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
+                if (betterMatch)
                 {
+                    bestMatch = entity;
                     currentPosition = bounds.center;
                 }
-                return;
             }
 
-            bounds.Expand(Expand);
-            if (!bounds.Contains(mousePos))
-                return;
-
-            bool betterMatch = newHotEntity == null || Tools.ManhattanDistance(mousePos, bounds.center) < Tools.ManhattanDistance(mousePos, currentPosition);
-            if (betterMatch)
-            {
-                newHotEntity = entity;
-                currentPosition = bounds.center;
-            }
+            return bestMatch;
         }
     }
 }
