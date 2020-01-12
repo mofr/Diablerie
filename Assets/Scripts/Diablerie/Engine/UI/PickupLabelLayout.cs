@@ -36,7 +36,6 @@ namespace Diablerie.Engine.UI
 
         private Rect PutRect(Rect rect)
         {
-            FitIntoTheScreen(ref rect);
             foreach (Rect placedRect in placedRects.Values)
             {
                 if (rect.Overlaps(placedRect))
@@ -47,19 +46,6 @@ namespace Diablerie.Engine.UI
 
             placedRects.Add(rect.y, rect);
             return rect;
-        }
-
-        private void FitIntoTheScreen(ref Rect rect)
-        {
-            Vector2 screenSize = Ui.instance.RectTransform.sizeDelta;
-            Vector2 minPosition = Camera.main.WorldToViewportPoint(rect.min);
-            Vector2 maxPosition = Camera.main.WorldToViewportPoint(rect.max);
-            float leftOverflow = Math.Min(minPosition.x, 0);
-            float rightOverflow = Math.Max(maxPosition.x - 1, 0);
-            float topOverflow = Math.Max(maxPosition.y - 1, 0);
-            float horizontalOffset = -(leftOverflow + rightOverflow) * screenSize.x / Iso.pixelsPerUnit;
-            float verticalOffset = -topOverflow * screenSize.y / Iso.pixelsPerUnit;
-            rect.position += new Vector2(horizontalOffset, verticalOffset);
         }
     }
 }

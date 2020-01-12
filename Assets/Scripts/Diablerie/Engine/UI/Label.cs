@@ -1,4 +1,5 @@
-﻿using Diablerie.Engine.Utility;
+﻿using System;
+using Diablerie.Engine.Utility;
 using Diablerie.Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,19 +54,36 @@ namespace Diablerie.Engine.UI
             backgroundImage.raycastTarget = true;
         }
 
-        public void Show(Vector2 position, string text)
+        public void Show(Vector2 position, string text, bool fitIntoTheScreen = true)
         {
             if (!root.activeSelf || rectTransform.anchoredPosition != position || this.text.text != text)
             {
                 this.text.text = text;
                 rectTransform.anchoredPosition = position;
                 root.SetActive(true);
+                if (fitIntoTheScreen)
+                    FitIntoTheScreen();
             }
         }
 
         public void Hide()
         {
             root.SetActive(false);
+        }
+        
+        private void FitIntoTheScreen()
+        {
+            Canvas.ForceUpdateCanvases();
+            var rect = GetScreenRect();
+            Vector2 screenSize = Ui.instance.RectTransform.sizeDelta;
+            Vector2 minPosition = Camera.main.WorldToViewportPoint(rect.min);
+            Vector2 maxPosition = Camera.main.WorldToViewportPoint(rect.max);
+            float leftOverflow = Math.Min(minPosition.x, 0);
+            float rightOverflow = Math.Max(maxPosition.x - 1, 0);
+            float topOverflow = Math.Max(maxPosition.y - 1, 0);
+            float horizontalOffset = -(leftOverflow + rightOverflow) * screenSize.x / Iso.pixelsPerUnit;
+            float verticalOffset = -topOverflow * screenSize.y / Iso.pixelsPerUnit;
+            rectTransform.anchoredPosition += new Vector2(horizontalOffset, verticalOffset);
         }
         
         public Rect GetScreenRect()
