@@ -23,13 +23,9 @@ namespace Diablerie.Engine.Entities
 
         public SpriteRenderer Renderer => _renderer;
 
-        public void SetSprites(Sprite[] sprites, bool needRestart = false)
+        public void SetSprites(Sprite[] sprites)
         {
             _sprites = sprites;
-            if (needRestart)
-            {
-                Restart();
-            }
         }
 
         public void Restart()
