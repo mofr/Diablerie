@@ -27,7 +27,7 @@ namespace Diablerie.Engine.Entities
             var palette = Palette.GetPalette(PaletteType.Act1);
             var spritesheet = DC6.Load(flippyFile, palette);
             var animator = gameObject.AddComponent<SpriteAnimator>();
-            animator.sprites = spritesheet.GetSprites(dir);
+            animator.SetSprites(spritesheet.GetSprites(dir));
             animator.loop = false;
             var pickup = gameObject.AddComponent<Pickup>();
             pickup.title = title;
