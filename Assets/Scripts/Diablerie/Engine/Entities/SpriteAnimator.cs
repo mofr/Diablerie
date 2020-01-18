@@ -6,102 +6,121 @@ namespace Diablerie.Engine.Entities
     public class SpriteAnimator : MonoBehaviour
     {
         public bool loop = true;
+        public bool hideOnFinish = false;
         public float fps = 25;
         public bool reversed = false;
         public bool useUnscaledTime = false;
         public event System.Action OnFinish;
 
-        new SpriteRenderer renderer;
-        Sprite[] _sprites;
-        float time = 0;
-        int frameIndex = 0;
-        bool _finished = false;
+        private SpriteRenderer _renderer;
+        private Sprite[] _sprites;
+        private float _time = 0;
+        private int _frameIndex = 0;
+        private bool _finished = false;
 
-        int triggerFrame = -1;
-        System.Action triggerAction;
+        private int _triggerFrame = -1;
+        private System.Action _triggerAction;
 
-        public Sprite[] sprites
+        public void SetSprites(Sprite[] sprites, bool needRestart = false)
         {
-            get
+            _sprites = sprites;
+            if (needRestart)
             {
-                return _sprites;
+                Restart();
             }
-
-            set
-            {
-                _sprites = value;
-            }
+        }
+        
+        public void SetSortingOrder(int sortingOrder)
+        {
+            _renderer.sortingOrder = sortingOrder;
         }
 
         public void Restart()
         {
-            time = 0;
-            frameIndex = 0;
+            _time = 0;
+            _frameIndex = 0;
             _finished = false;
         }
 
         private void Awake()
         {
-            renderer = GetComponent<SpriteRenderer>();
-            renderer.material = Materials.normal;
+            _renderer = GetComponent<SpriteRenderer>();
+            _renderer.material = Materials.normal;
         }
 
         public void SetTrigger(int frame, System.Action action)
         {
-            triggerFrame = frame;
-            triggerAction = action;
+            _triggerFrame = frame;
+            _triggerAction = action;
         }
 
         public void OffsetTime(float offset)
         {
-            time += offset;
+            _time += offset;
         }
 
-        void Update()
+        private void Update()
         {
             if (_sprites == null || _finished)
                 return;
 
-            int newFrameIndex = (int)(time * fps);
-            if (newFrameIndex >= sprites.Length)
+            int newFrameIndex = (int)(_time * fps);
+            if (newFrameIndex >= _sprites.Length)
             {
                 if (loop)
                 {
-                    newFrameIndex %= sprites.Length;
+                    newFrameIndex %= _sprites.Length;
                 }
                 else
                 {
-                    newFrameIndex = sprites.Length - 1;
-                    if (!_finished)
-                    {
-                        _finished = true;
-                        if (OnFinish != null)
-                            OnFinish();
-                    }
+                    newFrameIndex = _sprites.Length - 1;
+                    _finished = true;
                 }
             }
 
-            if (frameIndex != newFrameIndex)
+            if (_frameIndex != newFrameIndex)
             {
-                if (frameIndex < triggerFrame && newFrameIndex >= triggerFrame)
-                    triggerAction();
-                frameIndex = newFrameIndex;
+                if (_frameIndex < _triggerFrame && newFrameIndex >= _triggerFrame)
+                    _triggerAction();
+                _frameIndex = newFrameIndex;
             }
 
             if (useUnscaledTime)
-                time += Time.unscaledDeltaTime;
+                _time += Time.unscaledDeltaTime;
             else
-                time += Time.deltaTime;
+                _time += Time.deltaTime;
+
+            if (_finished)
+            {
+                if (OnFinish != null)
+                    OnFinish();
+            }
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
-            if (_sprites == null || _finished)
+            if (_sprites == null)
+            {
+                _renderer.sprite = null;
                 return;
-            int spriteIndex = frameIndex;
+            }
+
+            if (_finished)
+            {
+                if (hideOnFinish)
+                {
+                    _renderer.sprite = null;
+                }
+                return;
+            }
+            
+            var spriteIndex = _frameIndex;
             if (reversed)
+            {
                 spriteIndex = _sprites.Length - spriteIndex - 1;
-            renderer.sprite = _sprites[spriteIndex];
+            }
+            
+            _renderer.sprite = _sprites[spriteIndex];
         }
     }
 }

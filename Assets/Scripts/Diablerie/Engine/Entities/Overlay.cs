@@ -31,7 +31,7 @@ namespace Diablerie.Engine.Entities
             var overlay = overlayObject.AddComponent<Overlay>();
             overlay.animator = overlayObject.AddComponent<SpriteAnimator>();
             overlay.animator.loop = loop;
-            overlay.animator.sprites = spritesheet.GetSprites(0);
+            overlay.animator.SetSprites(spritesheet.GetSprites(0));
             overlay.animator.fps = overlayInfo.fps * speed * 1.5f; // 1.5 multiplier is set to match original animation speed
             if (!loop)
                 overlay.animator.OnFinish += overlay.OnAnimationFinish;

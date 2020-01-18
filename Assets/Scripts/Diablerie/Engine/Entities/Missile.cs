@@ -77,7 +77,7 @@ namespace Diablerie.Engine.Entities
 
             var spritesheet = Spritesheet.Load(missileInfo.spritesheetFilename);
             int direction = Iso.Direction(start, target, spritesheet.directionCount);
-            missile.animator.sprites = spritesheet.GetSprites(direction);
+            missile.animator.SetSprites(spritesheet.GetSprites(direction));
             missile.animator.loop = missileInfo.loopAnim != 0;
             missile.animator.fps = missileInfo.fps;
         

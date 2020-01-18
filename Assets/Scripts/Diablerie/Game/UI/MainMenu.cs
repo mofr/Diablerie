@@ -103,8 +103,8 @@ namespace Diablerie.Game.UI
             var leftLogoAnimator = left.AddComponent<SpriteAnimator>();
             var rightLogoAnimator = right.AddComponent<SpriteAnimator>();
 
-            leftLogoAnimator.sprites = leftLogo.GetSprites(0);
-            rightLogoAnimator.sprites = rightLogo.GetSprites(0);
+            leftLogoAnimator.SetSprites(leftLogo.GetSprites(0));
+            rightLogoAnimator.SetSprites(rightLogo.GetSprites(0));
 
             left.transform.SetParent(logo.transform, false);
             right.transform.SetParent(logo.transform, false);

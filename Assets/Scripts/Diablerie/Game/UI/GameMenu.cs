@@ -109,7 +109,7 @@ namespace Diablerie.Game.UI
             float offset = GetMenuWidth() / 2 + StarPadding;
             star.transform.localPosition = new Vector3((left ? -offset : offset) - width / 2, -height / 2);
             var animator = star.AddComponent<SpriteAnimator>();
-            animator.sprites = sprites;
+            animator.SetSprites(sprites);
             animator.fps = 20;
             animator.reversed = left;
             animator.useUnscaledTime = true;
