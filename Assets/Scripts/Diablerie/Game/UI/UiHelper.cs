@@ -7,12 +7,12 @@ namespace Diablerie.Game.UI
 {
     public static class UiHelper
     {
-        public static GameObject CreateAnimatedObject(string name, string spritePath = "", PaletteType paletteType = PaletteType.Act1, bool loop = true, bool hideOnEnd = false, int sortingOrder = 0)
+        public static GameObject CreateAnimatedObject(string name, string spritePath = "", PaletteType paletteType = PaletteType.Act1, bool loop = true, bool hideOnFinish = false, int sortingOrder = 0)
         {
             var gameObject = new GameObject(name);
             var animator = gameObject.AddComponent<SpriteAnimator>();
             animator.loop = loop;
-            animator.hideOnFinish = hideOnEnd;
+            animator.hideOnFinish = hideOnFinish;
             animator.Renderer.sortingOrder = sortingOrder;
 
             if (!string.IsNullOrEmpty(spritePath))
