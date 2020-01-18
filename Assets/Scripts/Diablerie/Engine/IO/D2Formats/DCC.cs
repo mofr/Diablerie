@@ -13,6 +13,7 @@ namespace Diablerie.Engine.IO.D2Formats
 
         string filename;
         byte[] bytes;
+        Color32[] palette;
         Header header;
         Sprite[][] sprites;
 
@@ -407,7 +408,7 @@ namespace Diablerie.Engine.IO.D2Formats
             pixelBuffer[pb_idx + 1].frame = -1;
         }
 
-        static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, Sprite[] sprites)
+        static void MakeFrames(Header header, Direction dir, FrameBuffer frameBuffer, Streams streams, List<Texture2D> textures, Sprite[] sprites, Color32[] palette)
         {
             const int padding = 2;
             int textureWidth = Mathf.NextPowerOfTwo((dir.box.width + padding) * header.framesPerDir);
@@ -510,7 +511,7 @@ namespace Diablerie.Engine.IO.D2Formats
                                 for (int x = 0; x < cell.w; ++x)
                                 {
                                     int pix = streams.pixelCode.ReadLessThanByte(nb_bit);
-                                    Color32 color = Palette.palette[pbe.val[pix]];
+                                    Color32 color = palette[pbe.val[pix]];
                                     frame.texturePixels[offset + x] = color;
                                 }
                                 offset -= textureWidth;
@@ -594,18 +595,18 @@ namespace Diablerie.Engine.IO.D2Formats
 
             FrameBuffer frameBuffer = CreateFrameBuffer(dir.box); // dcc_prepare_buffer_cells
             FillPixelBuffer(header, frameBuffer, dir, streams); // dcc_fill_pixel_buffer
-            MakeFrames(header, dir, frameBuffer, streams, textures, sprites[directionIndex]); // dcc_make_frames
+            MakeFrames(header, dir, frameBuffer, streams, textures, sprites[directionIndex], palette); // dcc_make_frames
 
             UnityEngine.Profiling.Profiler.EndSample();
         }
 
-        public static DCC Load(string filename, bool loadAllDirections = false, bool mpq = true)
+        public static DCC Load(string filename, Color32[] palette, bool loadAllDirections = false, bool mpq = true)
         {
             UnityEngine.Profiling.Profiler.BeginSample("DCC.Load");
             try
             {
                 var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
-                DCC dcc = Load(filename, bytes, loadAllDirections);
+                DCC dcc = Load(filename, bytes, palette, loadAllDirections);
                 return dcc;
             }
             finally
@@ -614,13 +615,14 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        static DCC Load(string filename, byte[] bytes, bool loadAllDirections = false)
+        static DCC Load(string filename, byte[] bytes, Color32[] palette, bool loadAllDirections = false)
         {
             DCC dcc = new DCC();
             dcc.bytes = bytes;
             dcc.header = new Header();
             dcc.textures = new List<Texture2D>();
             dcc.filename = filename;
+            dcc.palette = palette;
 
             using (var stream = new MemoryStream(dcc.bytes))
             using (var reader = new BinaryReader(stream))

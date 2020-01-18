@@ -100,7 +100,6 @@ namespace Diablerie.Game.UI
 
         private GameObject CreateStar(bool left)
         {
-            Palette.LoadPalette(0);
             var spritesheet = Spritesheet.Load(@"data\global\ui\CURSOR\pentspin");
             var sprites = spritesheet.GetSprites(0);
             float width = sprites[0].rect.width;

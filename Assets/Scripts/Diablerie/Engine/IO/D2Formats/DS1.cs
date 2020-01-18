@@ -108,12 +108,12 @@ namespace Diablerie.Engine.IO.D2Formats
 
                 if (ds1.version >= 3)
                 {
-                    Palette.LoadPalette(act);
+                    var palette = Palette.GetPalette(act);
                     ds1.dt1Files = ReadDependencies(reader);
                     ds1.tileSampler = new DT1.Sampler();
                     foreach (var dt1Filename in ds1.dt1Files)
                     {
-                        var dt1 = DT1.Load(dt1Filename);
+                        var dt1 = DT1.Load(dt1Filename, palette);
                         ds1.tileSampler.Add(dt1.tiles);
                     }
                 }

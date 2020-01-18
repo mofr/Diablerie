@@ -7,5 +7,6 @@ namespace Diablerie.Game.World
     {
         public GameObject root;
         public Vector2i entry;
+        protected Color32[] palette;
     }
 }

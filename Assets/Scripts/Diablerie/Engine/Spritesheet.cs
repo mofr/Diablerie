@@ -11,26 +11,35 @@ namespace Diablerie.Engine
         public int directionCount;
         public abstract Sprite[] GetSprites(int direction);
 
-        public static Spritesheet Load(string filename)
+        public static Spritesheet Load(string filename, PaletteType paletteType = PaletteType.Act1)
         {
             string lowerFilename = filename.ToLower();
             if (cache.ContainsKey(lowerFilename))
             {
                 return cache[lowerFilename];
             }
+            
+            var palette = Palette.GetPalette(paletteType);
 
             Spritesheet spritesheet = null;
             try
             {
-                var dcc = DCC.Load(filename + ".dcc");
+                var dcc = DCC.Load(filename + ".dcc", palette);
                 spritesheet = dcc;
                 spritesheet.directionCount = dcc.directionCount;
             }
             catch (System.IO.FileNotFoundException)
             {
-                var dc6 = DC6.Load(filename + ".dc6");
-                spritesheet = dc6;
-                spritesheet.directionCount = dc6.directionCount;
+                try
+                {
+                    var dc6 = DC6.Load(filename + ".dc6", palette);
+                    spritesheet = dc6;
+                    spritesheet.directionCount = dc6.directionCount;
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    Debug.LogWarning(filename + " not found in MPQ");
+                }
             }
 
             cache.Add(lowerFilename, spritesheet);

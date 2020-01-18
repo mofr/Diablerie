@@ -97,7 +97,9 @@ namespace Diablerie.Engine
             {
                 if (_invSprite == null || _invSpriteIdentified != identified)
                 {
-                    var dc6 = DC6.Load(invFile);
+                    // todo: Maybe add customized palette
+                    var palette = Palette.GetPalette(PaletteType.Act1);
+                    var dc6 = DC6.Load(invFile, palette);
                     _invSprite = dc6.GetSprites(0)[0];
                     _invSpriteIdentified = identified;
                 }

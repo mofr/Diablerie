@@ -22,6 +22,7 @@ namespace Diablerie.Engine.World
         private int popPad = 0;
         DT1.Sampler tileSampler = new DT1.Sampler();
         MonStat[] monStats;
+        Color32[] palette;
 
         static readonly int mapEntryIndex = DT1.Tile.Index(30, 11, 10);
         static readonly int townEntryIndex = DT1.Tile.Index(30, 0, 10);
@@ -32,15 +33,17 @@ namespace Diablerie.Engine.World
         static DT1.Sampler specialTiles = new DT1.Sampler();
         static LevelBuilder()
         {
-            Palette.LoadPalette(0);
-            var dt1 = DT1.Load(Application.streamingAssetsPath + "/ds1edit.dt1", mpq: false);
+            // todo: Maybe add customized palette
+            var palette = Palette.GetPalette(PaletteType.Act1);
+            var dt1 = DT1.Load(Application.streamingAssetsPath + "/ds1edit.dt1", palette, mpq: false);
             specialTiles.Add(dt1.tiles);
         }
 
-        public LevelBuilder(string name, int gridX = -1, int gridY = -1)
+        public LevelBuilder(string name, Color32[] palette, int gridX = -1, int gridY = -1)
         {
             info = LevelInfo.Find(name);
             this.name = info.levelName;
+            this.palette = palette;
 
             if (info.preset != null)
             {
@@ -89,7 +92,7 @@ namespace Diablerie.Engine.World
             {
                 foreach (var dt1Filename in info.type.dt1Files)
                 {
-                    var dt1 = DT1.Load(dt1Filename);
+                    var dt1 = DT1.Load(dt1Filename, palette);
                     tileSampler.Add(dt1.tiles);
                 }
             }

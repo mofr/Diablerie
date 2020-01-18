@@ -10,7 +10,9 @@ namespace Diablerie.Game.World
     {
         public Act1()
         {
-            var town = new LevelBuilder("Act 1 - Town");
+            palette = Palette.GetPalette(PaletteType.Act1);
+            
+            var town = new LevelBuilder("Act 1 - Town", palette);
             var bloodMoor = CreateBloodMoor();
 
             var townOffset = new Vector2i(bloodMoor.gridWidth * bloodMoor.gridX - town.gridWidth * town.gridX, bloodMoor.gridHeight * bloodMoor.gridY);
@@ -29,11 +31,11 @@ namespace Diablerie.Game.World
             entry = town.FindEntry() + townOffset;
         }
 
-        static LevelBuilder CreateDenOfEvil()
+        private LevelBuilder CreateDenOfEvil()
         {
-            var builder = new LevelBuilder("Act 1 - Cave 1");
-            var palette = new Maze.Palette();
-            palette.special = new LevelPreset[][] {
+            var builder = new LevelBuilder("Act 1 - Cave 1", palette);
+            var mazePalette = new Maze.Palette();
+            mazePalette.special = new LevelPreset[][] {
                 new LevelPreset[] {
                     LevelPreset.Find("Act 1 - Cave Prev W"),
                     LevelPreset.Find("Act 1 - Cave Prev E"),
@@ -47,19 +49,19 @@ namespace Diablerie.Game.World
                     LevelPreset.Find("Act 1 - Cave Den Of Evil N")
                 }
             };
-            palette.rooms = new LevelPreset[16];
+            mazePalette.rooms = new LevelPreset[16];
             for (int i = 0; i < 15; ++i)
-                palette.rooms[i + 1] = LevelPreset.sheet[53 + i];
-            palette.themedRooms = new LevelPreset[16];
+                mazePalette.rooms[i + 1] = LevelPreset.sheet[53 + i];
+            mazePalette.themedRooms = new LevelPreset[16];
             for (int i = 0; i < 15; ++i)
-                palette.themedRooms[i + 1] = LevelPreset.sheet[68 + i];
-            Maze.Generate(builder, palette);
+                mazePalette.themedRooms[i + 1] = LevelPreset.sheet[68 + i];
+            Maze.Generate(builder, mazePalette);
             return builder;
         }
 
-        static LevelBuilder CreateBloodMoor()
+        private LevelBuilder CreateBloodMoor()
         {
-            var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", 8, 8);
+            var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", palette, 8, 8);
             var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
             var uRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Uriver.ds1");
             var lRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Lriver.ds1");
