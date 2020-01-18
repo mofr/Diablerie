@@ -33,14 +33,14 @@ namespace Diablerie.Game.UI
             className = name;
             CharStatsInfo classInfo = CharStatsInfo.Find(className);
             dummy = CreateDummy(classInfo);
-            dummy.transform.position = Camera.main.ScreenToWorldPoint(rectTransform.position);
+            dummy.transform.position = UiHelper.ScreenToWorldPoint(rectTransform.position);
             dummyAnimator = dummy.GetComponent<COFAnimator>();
             dummyAnimator.cof = GetCof(classInfo, "TN");
         }
 
         void LateUpdate()
         {
-            dummy.transform.position = Camera.main.ScreenToWorldPoint(rectTransform.position);
+            dummy.transform.position = UiHelper.ScreenToWorldPoint(rectTransform.position);
         }
 
         public void OnPointerClick(PointerEventData eventData)

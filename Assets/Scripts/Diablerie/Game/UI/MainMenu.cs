@@ -47,9 +47,7 @@ namespace Diablerie.Game.UI
 
         private void LateUpdate()
         {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(logoPlaceholder.position);
-            pos.z = 0;
-            logo.transform.position = pos;
+            logo.transform.position = UiHelper.ScreenToWorldPoint(logoPlaceholder.position);
             
             if (Input.GetKeyDown(KeyCode.Escape))
                 GameManager.QuitGame();
@@ -92,19 +90,10 @@ namespace Diablerie.Game.UI
 
         static GameObject CreateLogo()
         {
-            GameObject logo = new GameObject("logo");
+            var logo = new GameObject("logo");
 
-            var leftLogo = Spritesheet.Load(@"data\global\ui\FrontEnd\d2LogoFireLeft");
-            var rightLogo = Spritesheet.Load(@"data\global\ui\FrontEnd\d2LogoFireRight");
-
-            var left = new GameObject("leftLogo");
-            var right = new GameObject("rightLogo");
-
-            var leftLogoAnimator = left.AddComponent<SpriteAnimator>();
-            var rightLogoAnimator = right.AddComponent<SpriteAnimator>();
-
-            leftLogoAnimator.SetSprites(leftLogo.GetSprites(0));
-            rightLogoAnimator.SetSprites(rightLogo.GetSprites(0));
+            var left = UiHelper.CreateAnimatedObject("leftLogo", @"data\global\ui\FrontEnd\d2LogoFireLeft");
+            var right = UiHelper.CreateAnimatedObject("rightLogo", @"data\global\ui\FrontEnd\d2LogoFireRight");
 
             left.transform.SetParent(logo.transform, false);
             right.transform.SetParent(logo.transform, false);
