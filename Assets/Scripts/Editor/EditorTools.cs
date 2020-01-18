@@ -42,17 +42,18 @@ namespace Editor
             }
 
             var lowerPath = assetPath.ToLower();
+            Color32[] palette;
             if (lowerPath.Contains("act2"))
-                Palette.LoadPalette(1);
+                palette = Palette.GetPalette(PaletteType.Act2);
             else if (lowerPath.Contains("act3"))
-                Palette.LoadPalette(2);
+                palette = Palette.GetPalette(PaletteType.Act3);
             else if (lowerPath.Contains("act4"))
-                Palette.LoadPalette(3);
+                palette = Palette.GetPalette(PaletteType.Act4);
             else if (lowerPath.Contains("act5"))
-                Palette.LoadPalette(4);
+                palette = Palette.GetPalette(PaletteType.Act5);
             else
-                Palette.LoadPalette(0);
-            var dt1 = DT1.Load(assetPath, mpq: false);
+                palette = Palette.GetPalette(PaletteType.Act1);
+            var dt1 = DT1.Load(assetPath, palette, mpq: false);
             int i = 0;
             foreach (var texture in dt1.textures)
             {
@@ -77,8 +78,8 @@ namespace Editor
         {
             var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
-            Palette.LoadPalette(0);
-            DCC dcc = DCC.Load(assetPath, loadAllDirections: true, mpq: false);
+            var palette = Palette.GetPalette(PaletteType.Act1);
+            DCC dcc = DCC.Load(assetPath, palette, loadAllDirections: true, mpq: false);
             SaveTextures(assetPath, dcc.textures);
         }
 
@@ -94,8 +95,8 @@ namespace Editor
         {
             var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
 
-            Palette.LoadPalette(0);
-            DC6 dc6 = DC6.Load(assetPath, loadAllDirections: true, mpq: false);
+            var palette = Palette.GetPalette(PaletteType.Act1);
+            DC6 dc6 = DC6.Load(assetPath, palette, loadAllDirections: true, mpq: false);
             SaveTextures(assetPath, dc6.textures);
         }
 
@@ -125,12 +126,13 @@ namespace Editor
         {
             var assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
             var name = Path.GetFileNameWithoutExtension(assetPath);
+            var palette = Palette.GetPalette(PaletteType.Act1);
 
             int textureSize = 1024;
             if (name.Contains("font16") || name.Contains("font24") || name.Contains("font30"))
                 textureSize = 512;
 
-            var dc6 = DC6.Load(assetPath, mpq: false, textureSize: textureSize, loadAllDirections: true);
+            var dc6 = DC6.Load(assetPath, palette, mpq: false, textureSize: textureSize, loadAllDirections: true);
             if (dc6.textures.Count != 1)
             {
                 Debug.LogError("Font not fit into a single texture");

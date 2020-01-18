@@ -33,13 +33,13 @@ namespace Diablerie.Engine.IO.D2Formats
         int[] offsets;
         byte[] bytes;
         int textureSize = -1;
+        Color32[] palette;
 
-        public static DC6 Load(string filename, bool mpq = true, int textureSize = -1, bool loadAllDirections = false)
+        public static DC6 Load(string filename, Color32[] palette, bool mpq = true, int textureSize = -1, bool loadAllDirections = false)
         {
             UnityEngine.Profiling.Profiler.BeginSample("DC6.DecodeDirection");
             try
             {
-                Palette.LoadPalette(0);
                 var bytes = mpq ? Mpq.ReadAllBytes(filename) : File.ReadAllBytes(filename);
 
                 using (var stream = new MemoryStream(bytes))
@@ -54,7 +54,7 @@ namespace Diablerie.Engine.IO.D2Formats
                         return null;
                     }
 
-                    DC6 dc6 = Load(stream, reader, bytes, textureSize, loadAllDirections);
+                    DC6 dc6 = Load(stream, reader, bytes, palette, textureSize, loadAllDirections);
                     return dc6;
                 }
             }
@@ -64,7 +64,7 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        static DC6 Load(Stream stream, BinaryReader reader, byte[] bytes, int textureSize = -1, bool loadAllDirections = false)
+        static DC6 Load(Stream stream, BinaryReader reader, byte[] bytes, Color32[] palette, int textureSize = -1, bool loadAllDirections = false)
         {
             var dc6 = new DC6();
             reader.ReadInt32();
@@ -74,6 +74,7 @@ namespace Diablerie.Engine.IO.D2Formats
             dc6.offsets = new int[dc6.directionCount * dc6.framesPerDirection];
             dc6.bytes = bytes;
             dc6.textureSize = textureSize;
+            dc6.palette = palette;
             for(int i = 0; i < dc6.offsets.Length; ++i)
             {
                 dc6.offsets[i] = reader.ReadInt32();
@@ -186,7 +187,7 @@ namespace Diablerie.Engine.IO.D2Formats
                     textures.Add(texture);
                 }
 
-                DrawFrame(bytes, frame.dataOffset, frame.dataSize, pixels, textureWidth, textureHeight, pack.x, pack.y + frame.height);
+                DrawFrame(bytes, frame.dataOffset, frame.dataSize, pixels, palette, textureWidth, textureHeight, pack.x, pack.y + frame.height);
                 frame.texture = texture;
                 frame.textureX = pack.x;
                 frame.textureY = pack.y;
@@ -204,7 +205,7 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        static void DrawFrame(byte[] data, int offset, int size, Color32[] pixels, int textureWidth, int textureHeight, int x0, int y0)
+        static void DrawFrame(byte[] data, int offset, int size, Color32[] pixels, Color32[] palette, int textureWidth, int textureHeight, int x0, int y0)
         {
             int dst = textureWidth * (textureHeight - 1) - y0 * textureWidth;
             int i2, x = x0, c, c2;
@@ -228,7 +229,7 @@ namespace Diablerie.Engine.IO.D2Formats
                         c2 = data[offset];
                         ++offset;
                         i++;
-                        pixels[dst + x] = Palette.palette[c2];
+                        pixels[dst + x] = palette[c2];
                         x++;
                     }
                 }

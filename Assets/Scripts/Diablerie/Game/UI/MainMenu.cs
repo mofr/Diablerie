@@ -92,8 +92,6 @@ namespace Diablerie.Game.UI
 
         static GameObject CreateLogo()
         {
-            Palette.LoadPalette(0);
-
             GameObject logo = new GameObject("logo");
 
             var leftLogo = Spritesheet.Load(@"data\global\ui\FrontEnd\d2LogoFireLeft");

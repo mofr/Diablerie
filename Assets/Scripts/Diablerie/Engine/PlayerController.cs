@@ -43,6 +43,7 @@ namespace Diablerie.Engine
         private SkillInfo rightSkill;
 
         private int selectingSkillIndex = 0;
+        private Color32[] palette;
 
         void Awake()
         {
@@ -54,6 +55,9 @@ namespace Diablerie.Engine
                 if (player != null)
                     SetCharacter(player.GetComponent<Character>());
             }
+            
+            // todo: Maybe add customized palette
+            palette = Palette.GetPalette(PaletteType.Act1);
 
             hotSkills = new List<SkillInfo>();
             hotSkills.AddRange(Enumerable.Repeat((SkillInfo)null, 6));
@@ -229,7 +233,7 @@ namespace Diablerie.Engine
 
                 if (_mouseItem != null)
                 {
-                    var dc6 = DC6.Load(_mouseItem.invFile, loadAllDirections: true);
+                    var dc6 = DC6.Load(_mouseItem.invFile, palette, loadAllDirections: true);
                     var texture = dc6.textures[0];
                     var frame = dc6.directions[0].frames[0];
                     var hotSpot = new Vector2(frame.width / 2, frame.height / 2);

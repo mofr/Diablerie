@@ -23,7 +23,9 @@ namespace Diablerie.Engine.Entities
             position = Iso.MapToWorld(position);
             var gameObject = new GameObject(name);
             gameObject.transform.position = position;
-            var spritesheet = DC6.Load(flippyFile);
+            // todo: Maybe add customized palette
+            var palette = Palette.GetPalette(PaletteType.Act1);
+            var spritesheet = DC6.Load(flippyFile, palette);
             var animator = gameObject.AddComponent<SpriteAnimator>();
             animator.sprites = spritesheet.GetSprites(dir);
             animator.loop = false;
