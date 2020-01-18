@@ -21,6 +21,8 @@ namespace Diablerie.Engine.Entities
         private int _triggerFrame = -1;
         private System.Action _triggerAction;
 
+        public SpriteRenderer Renderer => _renderer;
+
         public void SetSprites(Sprite[] sprites, bool needRestart = false)
         {
             _sprites = sprites;
@@ -28,11 +30,6 @@ namespace Diablerie.Engine.Entities
             {
                 Restart();
             }
-        }
-        
-        public void SetSortingOrder(int sortingOrder)
-        {
-            _renderer.sortingOrder = sortingOrder;
         }
 
         public void Restart()
@@ -62,9 +59,11 @@ namespace Diablerie.Engine.Entities
         private void Update()
         {
             if (_sprites == null || _finished)
+            {
                 return;
+            }
 
-            int newFrameIndex = (int)(_time * fps);
+            var newFrameIndex = (int)(_time * fps);
             if (newFrameIndex >= _sprites.Length)
             {
                 if (loop)
@@ -81,19 +80,24 @@ namespace Diablerie.Engine.Entities
             if (_frameIndex != newFrameIndex)
             {
                 if (_frameIndex < _triggerFrame && newFrameIndex >= _triggerFrame)
+                {
                     _triggerAction();
+                }
                 _frameIndex = newFrameIndex;
             }
 
             if (useUnscaledTime)
+            {
                 _time += Time.unscaledDeltaTime;
+            }
             else
+            {
                 _time += Time.deltaTime;
+            }
 
             if (_finished)
             {
-                if (OnFinish != null)
-                    OnFinish();
+                OnFinish?.Invoke();
             }
         }
 
