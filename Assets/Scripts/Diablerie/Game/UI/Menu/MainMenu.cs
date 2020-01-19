@@ -21,18 +21,18 @@ namespace Diablerie.Game.UI.Menu
         
         private void Awake()
         {
-            //classSelectMenu.SetActive(false);
-            singlePlayerButton.OnClick += SinglePlayerButtonOnOnClick;
-            exitButton.OnClick += ExitButtonOnOnClick;
+            classSelectMenu.SetActive(false);
+            singlePlayerButton.OnClick += SinglePlayerButtonOnClick;
+            exitButton.OnClick += ExitButtonOnClick;
 
-            classSelectMenu.GetComponent<ClassSelectMenu>().exitButton.OnClick += OloloButtonOnOnClick;
+            classSelectMenu.GetComponent<ClassSelectMenu>().exitButton.OnClick += ClassSelectMenuExitButtonOnClick;
 
             _logo = CreateLogo();
             _logo.transform.position = UiHelper.ScreenToWorldPoint(logoPlaceholder.position);
             _logo.transform.parent = logoPlaceholder;
         }
 
-        private void OloloButtonOnOnClick()
+        private void ClassSelectMenuExitButtonOnClick()
         {
             mainMenu.SetActive(true);
             classSelectMenu.SetActive(false);
@@ -40,17 +40,18 @@ namespace Diablerie.Game.UI.Menu
 
         private void OnDestroy()
         {
-            singlePlayerButton.OnClick -= SinglePlayerButtonOnOnClick;
-            exitButton.OnClick -= ExitButtonOnOnClick;
+            classSelectMenu.GetComponent<ClassSelectMenu>().exitButton.OnClick -= ClassSelectMenuExitButtonOnClick;
+            singlePlayerButton.OnClick -= SinglePlayerButtonOnClick;
+            exitButton.OnClick -= ExitButtonOnClick;
         }
 
-        private void SinglePlayerButtonOnOnClick()
+        private void SinglePlayerButtonOnClick()
         {
             mainMenu.SetActive(false);
             classSelectMenu.SetActive(true);
         }
         
-        private void ExitButtonOnOnClick()
+        private static void ExitButtonOnClick()
         {
             GameManager.QuitGame();
         }
