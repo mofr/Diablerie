@@ -246,10 +246,8 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
 
             _mainAnimator = _main.GetComponent<SpriteAnimator>();
             _mainAnimator.OnFinish += MainAnimatorOnFinish;
-            _mainAnimator.useUnscaledTime = true;
             
             _overlayAnimator = _overlay.GetComponent<SpriteAnimator>();
-            _overlayAnimator.useUnscaledTime = true;
             
             _sound = new GameObject("sound");
             _sound.transform.parent = _rectTransform;
