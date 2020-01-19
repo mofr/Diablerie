@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Diablerie.Engine;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.UI;
 using Diablerie.Game.UI.Menu.ClassSelect;
@@ -60,8 +61,8 @@ namespace Diablerie.Game.UI.Menu
         {
             var logo = new GameObject("logo");
 
-            var left = UiHelper.CreateAnimatedObject("leftLogo", @"data\global\ui\FrontEnd\d2LogoFireLeft");
-            var right = UiHelper.CreateAnimatedObject("rightLogo", @"data\global\ui\FrontEnd\d2LogoFireRight");
+            var left = UiHelper.CreateAnimatedObject("leftLogo", @"data\global\ui\FrontEnd\d2LogoFireLeft", material: Materials.softAdditive, sortingOrder: 1);
+            var right = UiHelper.CreateAnimatedObject("rightLogo", @"data\global\ui\FrontEnd\d2LogoFireRight", material: Materials.softAdditive, sortingOrder: 1);
 
             left.transform.SetParent(logo.transform, false);
             right.transform.SetParent(logo.transform, false);

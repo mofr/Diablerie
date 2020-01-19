@@ -1,4 +1,5 @@
-﻿using Diablerie.Engine.IO.D2Formats;
+﻿using Diablerie.Engine;
+using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.UI;
 using Diablerie.Game.World;
 using UnityEngine;
@@ -47,7 +48,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         
         private void Awake()
         {
-            _fire = UiHelper.CreateAnimatedObject("fire", @"data\global\ui\FrontEnd\fire", PaletteType.Fechar, sortingOrder: 15);
+            _fire = UiHelper.CreateAnimatedObject("fire", @"data\global\ui\FrontEnd\fire", PaletteType.Fechar, Materials.softAdditive, sortingOrder: 15);
             _fire.transform.position = UiHelper.ScreenToWorldPoint(firePlaceholder.position);
             _fire.transform.parent = firePlaceholder;
             
