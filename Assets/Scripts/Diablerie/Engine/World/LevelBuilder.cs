@@ -208,6 +208,7 @@ namespace Diablerie.Engine.World
             UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateDS1");
             InstantiatePopups(ds1, x, y, root);
             InstantiateFloors(ds1, x, y, root);
+            InstantiateShadows(ds1, x, y, root);
             InstantiateWalls(ds1, x, y, root);
             InstantiateObjects(ds1, x, y, root);
             UnityEngine.Profiling.Profiler.EndSample();
@@ -375,6 +376,34 @@ namespace Diablerie.Engine.World
                     }
                     i += ds1.width;
                 }
+            }
+        }
+
+        private void InstantiateShadows(DS1 ds1, int offsetX, int offsetY, Transform root)
+        {
+            var layerObject = new GameObject("shadows");
+            var layerTransform = layerObject.transform;
+            layerTransform.SetParent(root);
+
+            int i = 0;
+            for (int y = 0; y < ds1.height - 1; ++y)
+            {
+                for (int x = 0; x < ds1.width - 1; ++x)
+                {
+                    var cell = ds1.shadows[i + x];
+                    if (cell.prop1 == 0) // no tile here
+                        continue;
+
+                    if ((cell.prop4 & 0x80) != 0)
+                        continue;
+
+                    DT1.Tile tile;
+                    if (ds1.tileSampler.Sample(cell.tileIndex, out tile))
+                    {
+                        CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
+                    }
+                }
+                i += ds1.width;
             }
         }
 
@@ -587,6 +616,10 @@ namespace Diablerie.Engine.World
                     new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
                     new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
                 };
+                if (tile.orientation == 13) // shadows
+                {
+                    meshRenderer.sortingLayerID = SortingLayers.Shadow;
+                }
                 meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
             }
             meshFilter.mesh = mesh;

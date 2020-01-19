@@ -13,6 +13,7 @@ namespace Diablerie.Engine.IO.D2Formats
         int version;
         public Cell[][] walls;
         public Cell[][] floors;
+        public Cell[] shadows;
         public ObjectSpawnInfo[] objects;
         public List<Group> groups;
         public string[] dt1Files;
@@ -192,7 +193,6 @@ namespace Diablerie.Engine.IO.D2Formats
         {
             int wallLayerCount = 1;
             int floorLayerCount = 1;
-            int shadowLayerCount = 1;
             int tagLayerCount = 0;
 
             if (ds1.version >= 4)
@@ -226,13 +226,15 @@ namespace Diablerie.Engine.IO.D2Formats
                 ds1.walls[i] = new Cell[ds1.width * ds1.height];
             }
 
+            ds1.shadows = new Cell[ds1.width * ds1.height];
+
             if (ds1.version < 4)
             {
                 ReadCells(ds1.walls[0], bytes, stream);
                 ReadCells(ds1.floors[0], bytes, stream);
                 ReadOrientations(ds1.walls[0], bytes, stream);
                 stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // tag
-                stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // shadow
+                ReadCells(ds1.shadows, bytes, stream);
             }
             else
             {
@@ -243,10 +245,25 @@ namespace Diablerie.Engine.IO.D2Formats
                 }
                 for (int i = 0; i < floorLayerCount; i++)
                     ReadCells(ds1.floors[i], bytes, stream);
-                if (shadowLayerCount != 0)
-                    stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // shadow
+                ReadCells(ds1.shadows, bytes, stream);
                 if (tagLayerCount != 0)
                     stream.Seek(4 * ds1.width * ds1.height, SeekOrigin.Current); // tag
+            }
+
+            {
+                for (int i = 0; i < ds1.shadows.Length; ++i)
+                {
+                    var cell = ds1.shadows[i];
+                    if (cell.prop1 == 0)
+                        continue;
+                    
+                    cell.orientation = 13;
+                    cell.mainIndex = (cell.prop3 >> 4) + ((cell.prop4 & 0x03) << 4);
+                    cell.subIndex = cell.prop2;
+                    cell.tileIndex = DT1.Tile.Index(cell.mainIndex, cell.subIndex, cell.orientation);
+                    
+                    ds1.shadows[i] = cell;
+                }
             }
 
             for (int w = 0; w < wallLayerCount; w++)
