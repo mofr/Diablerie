@@ -1217,7 +1217,7 @@ PrefabInstance:
     - target: {fileID: 6965195803689800576, guid: 610c17134e7d1a54cb7dba4c73c98360,
         type: 3}
       propertyPath: m_Text
-      value: Exit
+      value: EXIT
       objectReference: {fileID: 0}
     - target: {fileID: 7416183559608583714, guid: 610c17134e7d1a54cb7dba4c73c98360,
         type: 3}
@@ -1389,7 +1389,7 @@ PrefabInstance:
     - target: {fileID: 6965195803689800576, guid: 610c17134e7d1a54cb7dba4c73c98360,
         type: 3}
       propertyPath: m_Text
-      value: Ok
+      value: OK
       objectReference: {fileID: 0}
     - target: {fileID: 7416183559608583714, guid: 610c17134e7d1a54cb7dba4c73c98360,
         type: 3}

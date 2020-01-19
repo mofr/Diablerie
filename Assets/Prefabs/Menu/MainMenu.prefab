@@ -597,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 8832716857826824524, guid: 5798e761dd450a94d94e118fec231eb1,
         type: 3}
       propertyPath: m_Text
-      value: Exit
+      value: EXIT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5798e761dd450a94d94e118fec231eb1, type: 3}
@@ -739,9 +739,7 @@ PrefabInstance:
     - target: {fileID: 8832716857826824524, guid: 5798e761dd450a94d94e118fec231eb1,
         type: 3}
       propertyPath: m_Text
-      value: 'Single player
-
-'
+      value: SINGLE PLAYER
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5798e761dd450a94d94e118fec231eb1, type: 3}

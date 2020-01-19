@@ -22,7 +22,8 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         public event ExitHandler OnExit;
         public event ClickHandler OnClick;
         public event StateChangedHandler OnStateChanged;
-        
+
+        private const int BaseSortingOrder = 12;
         private const string BasePath = @"data\global\ui\FrontEnd";
 
         private string _className;
@@ -30,7 +31,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         private RectTransform _rectTransform;
         private GameObject _main;
         private GameObject _overlay;
-        private GameObject _music;
+        private GameObject _sound;
         private SpriteAnimator _mainAnimator;
         private SpriteAnimator _overlayAnimator;
         private AudioSource _audioSource;
@@ -186,7 +187,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                         OverlaySprites = null,
                         Loop = true,
                         HideOnFinish = false,
-                        SortingOrderShift = 0,
+                        SortingOrderShift = -10,
                         Fps = 15
                     }
                 },
@@ -211,7 +212,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                         OverlaySprites = classAnimationInfo.HasBackTransitionOverlay ? backTransitionOverlaySprites?.GetSprites(0) : null,
                         Loop = false,
                         HideOnFinish = true,
-                        SortingOrderShift = -10,
+                        SortingOrderShift = 0,
                         Material = classAnimationInfo.OverlayMaterial,
                         SfxPath = backTransitionSfxPath,
                         Fps = 25
@@ -235,11 +236,11 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
 
             var position = _rectTransform.position;
             
-            _main = UiHelper.CreateAnimatedObject("main", loop: false);
+            _main = UiHelper.CreateAnimatedObject("main", loop: false, sortingOrder: BaseSortingOrder);
             _main.transform.position = UiHelper.ScreenToWorldPoint(position);
             _main.transform.parent = _rectTransform;
 
-            _overlay = UiHelper.CreateAnimatedObject("overlay", loop: false, sortingOrder: classAnimationInfo.OverlaySortingOrder);
+            _overlay = UiHelper.CreateAnimatedObject("overlay", loop: false, sortingOrder: BaseSortingOrder + classAnimationInfo.OverlaySortingOrder);
             _overlay.transform.position = UiHelper.ScreenToWorldPoint(position);
             _overlay.transform.parent = _rectTransform;
 
@@ -250,8 +251,10 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
             _overlayAnimator = _overlay.GetComponent<SpriteAnimator>();
             _overlayAnimator.useUnscaledTime = true;
             
-            _music = new GameObject();
-            _audioSource = _music.AddComponent<AudioSource>();
+            _sound = new GameObject("sound");
+            _sound.transform.parent = _rectTransform;
+            
+            _audioSource = _sound.AddComponent<AudioSource>();
             _audioSource.loop = false;
 
             ChangeState(ClassSelectorState.BackIdle);
