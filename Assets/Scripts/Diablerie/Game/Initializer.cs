@@ -4,6 +4,7 @@ using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Game.UI;
+using Diablerie.Game.UI.Menu;
 using UnityEngine;
 
 namespace Diablerie.Game
