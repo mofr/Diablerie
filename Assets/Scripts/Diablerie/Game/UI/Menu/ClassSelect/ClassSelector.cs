@@ -23,7 +23,6 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         public event ClickHandler OnClick;
         public event StateChangedHandler OnStateChanged;
 
-        private const int BaseSortingOrder = 12;
         private const string BasePath = @"data\global\ui\FrontEnd";
 
         private string _className;
@@ -165,14 +164,15 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
             _rectTransform = GetComponent<RectTransform>();
             
             var classAnimationInfo = ClassSelectInfo.Find(_className);
-            var backTransitionSprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}BW", PaletteType.Fechar);
-            var backIdleSprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}NU1", PaletteType.Fechar);
-            var backIdleHoverSprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}NU2", PaletteType.Fechar);
-            var backTransitionOverlaySprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}BWs", PaletteType.Fechar);
-            var frontTransitionSprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}FW", PaletteType.Fechar);
-            var frontIdleSprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}NU3", PaletteType.Fechar);
-            var frontTransitionOverlaySprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}FWs", PaletteType.Fechar);
-            var frontIdleOverlaySprites = Spritesheet.Load($@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}NU3s", PaletteType.Fechar);
+            var classPath = $@"{BasePath}\{classAnimationInfo.ClassName}\{classAnimationInfo.Token}";
+            var backTransitionSprites = Spritesheet.Load($"{classPath}BW", PaletteType.Fechar);
+            var backIdleSprites = Spritesheet.Load($"{classPath}NU1", PaletteType.Fechar);
+            var backIdleHoverSprites = Spritesheet.Load($"{classPath}NU2", PaletteType.Fechar);
+            var backTransitionOverlaySprites = classAnimationInfo.HasBackTransitionOverlay ? Spritesheet.Load($@"{classPath}BWs", PaletteType.Fechar) : null;
+            var frontTransitionSprites = Spritesheet.Load($"{classPath}FW", PaletteType.Fechar);
+            var frontIdleSprites = Spritesheet.Load($"{classPath}NU3", PaletteType.Fechar);
+            var frontTransitionOverlaySprites = classAnimationInfo.HasFrontTransitionOverlay ? Spritesheet.Load($@"{classPath}FWs", PaletteType.Fechar) : null;
+            var frontIdleOverlaySprites = classAnimationInfo.HasFrontIdleOverlay ? Spritesheet.Load($@"{classPath}NU3s", PaletteType.Fechar) : null;
             var frontTransitionSfxPath = $@"data\global\sfx\cursor\intro\{classAnimationInfo.ClassName} select.wav";
             var backTransitionSfxPath =$@"data\global\sfx\cursor\intro\{classAnimationInfo.ClassName} deselect.wav";
             
@@ -188,7 +188,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                         Loop = true,
                         HideOnFinish = false,
                         SortingOrderShift = -10,
-                        Fps = 15
+                        Fps = classAnimationInfo.BackIdleFps
                     }
                 },
                 {
@@ -196,12 +196,12 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                     new ClassSelectorStateInfo
                     {
                         Sprites = frontIdleSprites.GetSprites(0),
-                        OverlaySprites = classAnimationInfo.HasFrontIdleOverlay ? frontIdleOverlaySprites?.GetSprites(0) : null,
+                        OverlaySprites = frontIdleOverlaySprites?.GetSprites(0),
                         Loop = true,
                         HideOnFinish = false,
                         SortingOrderShift = 0,
                         Material = classAnimationInfo.OverlayMaterial,
-                        Fps = 25
+                        Fps = classAnimationInfo.FrontIdleFps
                     }
                 },
                 {
@@ -209,7 +209,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                     new ClassSelectorStateInfo
                     {
                         Sprites = backTransitionSprites.GetSprites(0),
-                        OverlaySprites = classAnimationInfo.HasBackTransitionOverlay ? backTransitionOverlaySprites?.GetSprites(0) : null,
+                        OverlaySprites = backTransitionOverlaySprites?.GetSprites(0),
                         Loop = false,
                         HideOnFinish = true,
                         SortingOrderShift = 0,
@@ -223,7 +223,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                     new ClassSelectorStateInfo
                     {
                         Sprites = frontTransitionSprites.GetSprites(0),
-                        OverlaySprites = classAnimationInfo.HasFrontTransitionOverlay ? frontTransitionOverlaySprites?.GetSprites(0) : null,
+                        OverlaySprites = frontTransitionOverlaySprites?.GetSprites(0),
                         Loop = false,
                         HideOnFinish = true,
                         SortingOrderShift = 10,
@@ -236,11 +236,11 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
 
             var position = _rectTransform.position;
             
-            _main = UiHelper.CreateAnimatedObject("main", loop: false, sortingOrder: BaseSortingOrder);
+            _main = UiHelper.CreateAnimatedObject("main", loop: false, sortingOrder: classAnimationInfo.BaseSortingOrder);
             _main.transform.position = UiHelper.ScreenToWorldPoint(position);
             _main.transform.parent = _rectTransform;
 
-            _overlay = UiHelper.CreateAnimatedObject("overlay", loop: false, sortingOrder: BaseSortingOrder + classAnimationInfo.OverlaySortingOrder);
+            _overlay = UiHelper.CreateAnimatedObject("overlay", loop: false, sortingOrder: classAnimationInfo.BaseSortingOrder + classAnimationInfo.OverlaySortingOrder);
             _overlay.transform.position = UiHelper.ScreenToWorldPoint(position);
             _overlay.transform.parent = _rectTransform;
 

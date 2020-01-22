@@ -14,6 +14,8 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         
         public Material OverlayMaterial { get; set; }
         
+        public int BaseSortingOrder { get; set; }
+        
         public int OverlaySortingOrder { get; set; }
         
         public bool HasBackTransitionOverlay { get; set; }
@@ -21,6 +23,10 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         public bool HasFrontTransitionOverlay { get; set; }
         
         public bool HasFrontIdleOverlay { get; set; }
+        
+        public int BackIdleFps { get; set; }
+        
+        public int FrontIdleFps { get; set; }
 
         public static ClassSelectInfo Find(string className)
         {
@@ -35,10 +41,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "Skilled with the spear and the bow, she is a very versatile fighter.",
                 Token = "AM",
                 OverlayMaterial = Materials.normal,
+                BaseSortingOrder = 12,
                 OverlaySortingOrder = 0,
                 HasBackTransitionOverlay = false,
                 HasFrontTransitionOverlay = false,
-                HasFrontIdleOverlay = false
+                HasFrontIdleOverlay = false,
+                BackIdleFps = 10,
+                FrontIdleFps = 15
             },
             new ClassSelectInfo
             {
@@ -46,10 +55,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "Schooled in the Martial Arts, her mind and body are deadly weapons.",
                 Token = "AS",
                 OverlayMaterial = Materials.normal,
+                BaseSortingOrder = 14,
                 OverlaySortingOrder = 0,
                 HasBackTransitionOverlay = false,
                 HasFrontTransitionOverlay = false,
-                HasFrontIdleOverlay = false
+                HasFrontIdleOverlay = false,
+                BackIdleFps = 10,
+                FrontIdleFps = 15
             }, 
             new ClassSelectInfo
             {
@@ -57,10 +69,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "Summoning undead minions and cursing his enemies are his specialities.",
                 Token = "NE",
                 OverlayMaterial = Materials.softAdditive,
+                BaseSortingOrder = 12,
                 OverlaySortingOrder = -1,
                 HasBackTransitionOverlay = true,
                 HasFrontTransitionOverlay = true,
-                HasFrontIdleOverlay = true
+                HasFrontIdleOverlay = true,
+                BackIdleFps = 10,
+                FrontIdleFps = 15
             }, 
             new ClassSelectInfo
             {
@@ -68,10 +83,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "He is unequaled in close-quarters combat and mastery of weapons.",
                 Token = "BA",
                 OverlayMaterial = Materials.normal,
+                BaseSortingOrder = 14,
                 OverlaySortingOrder = 1,
-                HasBackTransitionOverlay = true,
+                HasBackTransitionOverlay = false,
                 HasFrontTransitionOverlay = true,
-                HasFrontIdleOverlay = false
+                HasFrontIdleOverlay = false,
+                BackIdleFps = 10,
+                FrontIdleFps = 20
             }, 
             new ClassSelectInfo
             {
@@ -79,10 +97,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "He is a natural party leader, holy man, and blessed warrior.",
                 Token = "PA",
                 OverlayMaterial = Materials.normal,
+                BaseSortingOrder = 16,
                 OverlaySortingOrder = 1,
-                HasBackTransitionOverlay = true,
+                HasBackTransitionOverlay = false,
                 HasFrontTransitionOverlay = true,
-                HasFrontIdleOverlay = false
+                HasFrontIdleOverlay = false,
+                BackIdleFps = 10,
+                FrontIdleFps = 15
             }, 
             new ClassSelectInfo
             {
@@ -90,10 +111,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "She has mastered the elemental magicks - fire, lightning, and ice.",
                 Token = "SO",
                 OverlayMaterial = Materials.normal,
+                BaseSortingOrder = 12,
                 OverlaySortingOrder = -1,
                 HasBackTransitionOverlay = true,
                 HasFrontTransitionOverlay = true,
-                HasFrontIdleOverlay = true
+                HasFrontIdleOverlay = true,
+                BackIdleFps = 10,
+                FrontIdleFps = 15
             }, 
             new ClassSelectInfo
             {
@@ -101,10 +125,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
                 Description = "Commanding the forces of nature, he summons wild beasts and raging storms to his side.",
                 Token = "DZ",
                 OverlayMaterial = Materials.normal,
+                BaseSortingOrder = 12,
                 OverlaySortingOrder = 0,
                 HasBackTransitionOverlay = false,
                 HasFrontTransitionOverlay = false,
-                HasFrontIdleOverlay = false
+                HasFrontIdleOverlay = false,
+                BackIdleFps = 10,
+                FrontIdleFps = 15
             }
         };
     }
