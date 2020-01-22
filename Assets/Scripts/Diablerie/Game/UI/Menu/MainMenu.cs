@@ -11,7 +11,10 @@ namespace Diablerie.Game.UI.Menu
     public class MainMenu : MonoBehaviour
     {
         public RectTransform logoPlaceholder;
+        
         public ImageButton singlePlayerButton;
+        public ImageButton multiPlayerButton;
+        public ImageButton cinematicsButton;
         public ImageButton exitButton;
         
         public GameObject classSelectMenu;
@@ -23,7 +26,10 @@ namespace Diablerie.Game.UI.Menu
         private void Awake()
         {
             classSelectMenu.SetActive(false);
+            
             singlePlayerButton.OnClick += SinglePlayerButtonOnClick;
+            multiPlayerButton.Disabled = true;
+            cinematicsButton.Disabled = true;
             exitButton.OnClick += ExitButtonOnClick;
 
             classSelectMenu.GetComponent<ClassSelectMenu>().exitButton.OnClick += ClassSelectMenuExitButtonOnClick;
