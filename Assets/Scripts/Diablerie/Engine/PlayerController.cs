@@ -414,10 +414,6 @@ namespace Diablerie.Engine
                         character.GoTo(IsoInput.mousePosition);
                     }
                 }
-                else
-                {
-                    character.LookAt(IsoInput.mousePosition);
-                }
             }
 
             character.run = run;
