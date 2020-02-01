@@ -1,4 +1,4 @@
-﻿using Diablerie.Engine;
+﻿using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +17,8 @@ namespace Diablerie.Game.UI.ControlPanel
 
         void Update()
         {
-            float currentMana = PlayerController.instance.character.mana;
-            float maxMana = PlayerController.instance.character.maxMana;
+            float currentMana = WorldState.instance.Player.character.mana;
+            float maxMana = WorldState.instance.Player.character.maxMana;
             imgManaBar.fillAmount = currentMana / maxMana;
             label.text = "Mana: " + currentMana + "/" + maxMana;
         }

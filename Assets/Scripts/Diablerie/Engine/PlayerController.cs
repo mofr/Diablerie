@@ -7,9 +7,8 @@ using Diablerie.Engine.UI;
 using Diablerie.Game.UI;
 using Diablerie.Game.UI.Inventory;
 using Diablerie.Game.UI.SkillPanel;
-using Diablerie.Game.World;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Diablerie.Engine
 {
@@ -17,15 +16,10 @@ namespace Diablerie.Engine
     {
         public static PlayerController instance;
 
-        public Character character;
-        public Equipment equip;
-        public Inventory inventory;
-        public CharStat charStat;
+        public Player player;
         public CameraController cameraController;
 
         private bool flush = false;
-        private Iso iso;
-        private Item _mouseItem;
         private bool usingSkills = false;
         private bool run = true;
     
@@ -49,13 +43,6 @@ namespace Diablerie.Engine
         {
             instance = this;
 
-            if (character == null)
-            {
-                var player = GameObject.FindWithTag("Player");
-                if (player != null)
-                    SetCharacter(player.GetComponent<Character>());
-            }
-            
             // todo: Maybe add customized palette
             palette = Palette.GetPalette(PaletteType.Act1);
 
@@ -148,92 +135,30 @@ namespace Diablerie.Engine
             SkillPanel.instance.SetHotSkill(index, skillInfo);
         }
 
-        public void SetCharacter(Character character)
+        public void SetPlayer(Player player)
         {
-            this.character = character;
-            iso = character.GetComponent<Iso>();
-            equip = character.GetComponent<Equipment>();
-            inventory = character.GetComponent<Inventory>();
-            charStat = character.GetComponent<CharStat>();
-            InventoryPanel.instance.equip = equip;
-        }
-
-        public void Use(MiscInfo itemInfo)
-        {
-            Debug.Log("Use item " + itemInfo.name + ", function: " + itemInfo.useFunction);
-            switch (itemInfo.useFunction)
-            {
-                case MiscInfo.UseFunction.None:
-                    break;
-                case MiscInfo.UseFunction.IdentifyItem:
-                    break;
-                case MiscInfo.UseFunction.TownPortal:
-                    var pos = Iso.MapToWorld(iso.pos);
-                    var teleport = WorldBuilder.SpawnObject("TP", pos, fit: true);
-                    teleport.modeName = "OP";
-                    var sound = SoundInfo.Find("player_townportal_cast");
-                    AudioManager.instance.Play(sound, pos);
-                    break;
-                case MiscInfo.UseFunction.Potion:
-                    if (itemInfo.stat1 == "hpregen")
-                        character.health += itemInfo.calc1;
-                    if (itemInfo.stat1 == "manarecovery")
-                        character.mana += itemInfo.calc1;
-                    break;
-                case MiscInfo.UseFunction.RejuvPotion:
-                    if (itemInfo.stat1 == "hitpoints")
-                        character.health += (int)(itemInfo.calc1 / 100.0f * character.maxHealth);
-                    if (itemInfo.stat1 == "mana")
-                        character.mana += (int)(itemInfo.calc1 / 100.0f * character.maxMana);
-                    if (itemInfo.stat2 == "hitpoints")
-                        character.health += (int)(itemInfo.calc2 / 100.0f * character.maxHealth);
-                    if (itemInfo.stat2 == "mana")
-                        character.mana += (int)(itemInfo.calc2 / 100.0f * character.maxMana);
-                    break;
-                case MiscInfo.UseFunction.TemporaryPotion:
-                    break;
-                case MiscInfo.UseFunction.HoradricCube:
-                    break;
-                case MiscInfo.UseFunction.Elixir:
-                    break;
-                case MiscInfo.UseFunction.StaminaPotion:
-                    break;
-            }
+            this.player = player;
+            InventoryPanel.instance.equip = player.equip;
         }
 
         public bool Take(Item item)
         {
-            if (item.info.code == "gld")
-            {
-                inventory.gold += item.quantity;
-                return true;
-            }
-
-            if (InventoryPanel.instance.visible)
-            {
-                mouseItem = item;
-                return true;
-            }
-
-            if (equip.Equip(item))
-                return true;
-
-            return inventory.Put(item);
+            return player.Take(item, preferHands: InventoryPanel.instance.visible);
         }
-
-        public Item mouseItem
+        
+        public Item handsItem
         {
-            get { return _mouseItem; }
+            get { return player.handsItem; }
             set
             {
-                if (_mouseItem == value)
+                if (player.handsItem == value)
                     return;
 
-                _mouseItem = value;
+                player.handsItem = value;
 
-                if (_mouseItem != null)
+                if (player.handsItem != null)
                 {
-                    var dc6 = DC6.Load(_mouseItem.invFile, palette, loadAllDirections: true);
+                    var dc6 = DC6.Load(player.handsItem.invFile, palette, loadAllDirections: true);
                     var texture = dc6.textures[0];
                     var frame = dc6.directions[0].frames[0];
                     var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
@@ -260,7 +185,8 @@ namespace Diablerie.Engine
             {
                 targetPosition = IsoInput.mousePosition;
             }
-            var path = Pathing.BuildPath(iso.pos, targetPosition, size: character.size, self: iso.gameObject);
+            var iso = player.character.iso;
+            var path = Pathing.BuildPath(iso.pos, targetPosition, size: player.character.size, self: player.gameObject);
             Pathing.DebugDrawPath(iso.pos, path);
         }
 
@@ -343,18 +269,18 @@ namespace Diablerie.Engine
 
         void ControlCharacter()
         {
-            if (character == null)
+            if (player == null)
                 return;
 
             DrawDebugPath();
 
-            if (_mouseItem != null)
+            if (player.handsItem != null)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Pickup.Create(character.transform.position, _mouseItem);
+                    Pickup.Create(player.character.transform.position, player.handsItem);
                     FlushInput();
-                    mouseItem = null;
+                    handsItem = null;
                 }
                 return;
             }
@@ -372,13 +298,13 @@ namespace Diablerie.Engine
                 {
                     var targetCharacter = MouseSelection.instance.HotEntity.GetComponent<Character>();
                     if (targetCharacter != null)
-                        character.UseSkill(skill, targetCharacter);
+                        player.character.UseSkill(skill, targetCharacter);
                     else
-                        character.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.HotEntity.transform.position));
+                        player.character.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.HotEntity.transform.position));
                 }
                 else
                 {
-                    character.UseSkill(skill, IsoInput.mousePosition);
+                    player.character.UseSkill(skill, IsoInput.mousePosition);
                 }
             }
 
@@ -386,7 +312,7 @@ namespace Diablerie.Engine
             {
                 if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
                 {
-                    character.UseSkill(rightSkill, IsoInput.mousePosition);
+                    player.character.UseSkill(rightSkill, IsoInput.mousePosition);
                 }
                 else if (Input.GetMouseButton(0))
                 {
@@ -401,27 +327,27 @@ namespace Diablerie.Engine
                             }
                             else
                             {
-                                character.UseSkill(leftSkill, targetCharacter);
+                                player.character.UseSkill(leftSkill, targetCharacter);
                             }
                         }
                         else
                         {
-                            character.Use(MouseSelection.instance.HotEntity);
+                            player.character.Use(MouseSelection.instance.HotEntity);
                         }
                     }
                     else
                     {
-                        character.GoTo(IsoInput.mousePosition);
+                        player.character.GoTo(IsoInput.mousePosition);
                     }
                 }
             }
 
-            character.run = run;
+            player.character.run = run;
         }
 
         public bool FixedSelection()
         {
-            return Input.GetMouseButton(0) || _mouseItem != null || usingSkills;
+            return Input.GetMouseButton(0) || player.handsItem != null || usingSkills;
         }
 
         void Update()
@@ -446,7 +372,7 @@ namespace Diablerie.Engine
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift))
             {
-                UnityEditor.EditorWindow.focusedWindow.maximized ^= true;
+                EditorWindow.focusedWindow.maximized ^= true;
             }
 #endif
         }

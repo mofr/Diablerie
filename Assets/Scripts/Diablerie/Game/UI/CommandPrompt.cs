@@ -2,6 +2,7 @@
 using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
+using Diablerie.Engine.World;
 using Diablerie.Game.World;
 using UnityEngine;
 using UnityEngine.UI;
@@ -158,7 +159,7 @@ namespace Diablerie.Game.UI
                 var stateInfo = StateInfo.FindByCode(stateCode);
                 if (stateInfo != null)
                 {
-                    var player = PlayerController.instance.character.gameObject;
+                    var player = WorldState.instance.Player.gameObject;
                     Overlay.Create(player, stateInfo.castoverlay, loop: false);
                     Overlay.Create(player, stateInfo.overlay1, loop: true);
                     Overlay.Create(player, stateInfo.overlay2, loop: true);

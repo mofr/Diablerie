@@ -3,6 +3,7 @@ using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.UI;
 using Diablerie.Engine.Utility;
+using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,16 +22,17 @@ namespace Diablerie.Game.UI.Inventory
         public Image highlighter;
         public Image itemImage;
         private bool pointerOver = false;
+        private Player player;
 
         private bool CanEquip(Item item)
         {
-            return PlayerController.instance.equip.CanEquip(item, bodyLoc);
+            return player.equip.CanEquip(item, bodyLoc);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             pointerOver = true;
-            var mouseItem = PlayerController.instance.mouseItem;
+            var mouseItem = PlayerController.instance.handsItem;
             if (mouseItem != null && !CanEquip(mouseItem))
                 highlighter.color = Colors.InvItemHighlightForbid;
             else
@@ -54,27 +56,32 @@ namespace Diablerie.Game.UI.Inventory
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            var mouseItem = PlayerController.instance.mouseItem;
+            var mouseItem = PlayerController.instance.handsItem;
             if (mouseItem != null && !CanEquip(mouseItem))
             {
-                string charClass = PlayerController.instance.charStat.info.classNameLower;
+                string charClass = player.charStat.info.classNameLower;
                 AudioManager.instance.Play(charClass + "_impossible_1");
                 return;
             }
 
-            Item[] unequipped = PlayerController.instance.equip.Equip(mouseItem, bodyLoc);
+            Item[] unequipped = player.equip.Equip(mouseItem, bodyLoc);
 
             if (mouseItem != null)
                 AudioManager.instance.Play(mouseItem.useSound);
             else if (unequipped[0] != null)
                 AudioManager.instance.Play(SoundInfo.itemPickup);
 
-            PlayerController.instance.mouseItem = unequipped[0];
+            PlayerController.instance.handsItem = unequipped[0];
             if (unequipped[1] != null)
-                if (!PlayerController.instance.inventory.Put(unequipped[1]))
-                    Pickup.Create(PlayerController.instance.character.transform.position, unequipped[1]);
+                if (!player.inventory.Put(unequipped[1]))
+                    Pickup.Create(player.character.transform.position, unequipped[1]);
         }
 
+        private void OnEnable()
+        {
+            player = WorldState.instance.Player;
+        }
+        
         private void OnDisable()
         {
             pointerOver = false;
@@ -87,7 +94,7 @@ namespace Diablerie.Game.UI.Inventory
             if (!pointerOver)
                 return;
 
-            var mouseItem = PlayerController.instance.mouseItem;
+            var mouseItem = PlayerController.instance.handsItem;
             if (item != null && mouseItem == null)
             {
                 ShowLabel();

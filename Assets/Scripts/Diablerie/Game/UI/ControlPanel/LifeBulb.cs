@@ -1,4 +1,4 @@
-﻿using Diablerie.Engine;
+﻿using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,8 +17,8 @@ namespace Diablerie.Game.UI.ControlPanel
 
         void Update()
         {
-            float currHealth = PlayerController.instance.character.health;
-            float maxHealth = PlayerController.instance.character.maxHealth;
+            float currHealth = WorldState.instance.Player.character.health;
+            float maxHealth = WorldState.instance.Player.character.maxHealth;
             imgHealthBar.fillAmount = currHealth / maxHealth;
             label.text = "Life: " + currHealth + "/" + maxHealth;
         }

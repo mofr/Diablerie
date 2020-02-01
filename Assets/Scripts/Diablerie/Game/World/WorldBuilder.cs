@@ -1,7 +1,7 @@
 ﻿using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
-using Diablerie.Engine.Utility;
+using Diablerie.Engine.World;
 using Diablerie.Game.AI;
 using UnityEngine;
 
@@ -15,8 +15,9 @@ namespace Diablerie.Game.World
         void Start()
         {
             currentAct = CreateAct(1);
-            Vector2i playerPos = currentAct.entry;
-            SpawnPlayer(className, Iso.MapTileToWorld(playerPos));
+            Vector3 playerPos = Iso.MapTileToWorld(currentAct.entry);
+            WorldState.instance.Player = new Player(className, playerPos);
+            PlayerController.instance.SetPlayer(WorldState.instance.Player);
         }
 
         static Act CreateAct(int actNumber)
@@ -49,63 +50,7 @@ namespace Diablerie.Game.World
         {
             Destroy(currentAct.root);
             currentAct = CreateAct(actNumber);
-            PlayerController.instance.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(currentAct.entry)));
-        }
-
-        static void SpawnPlayer(string className, Vector3 pos)
-        {
-            CharStatsInfo info = CharStatsInfo.Find(className);
-            var player = new GameObject("Player");
-            player.tag = "Player";
-            player.transform.position = pos;
-            var character = player.AddComponent<Character>();
-            character.basePath = @"data\global\chars";
-            character.token = info.token;
-            character.weaponClass = info.baseWClass;
-            character.run = true;
-            character.walkSpeed = 7;
-            character.runSpeed = 15;
-            character.maxHealth = 1000;
-            character.health = 1000;
-            character.size = 2;
-            character.party = Party.Good;
-
-            character.equip = player.AddComponent<Equipment>();
-            Inventory.Create(player, 10, 4);
-            var body = player.AddComponent<Rigidbody2D>();
-            body.isKinematic = true;
-            var collider = player.AddComponent<CircleCollider2D>();
-            collider.radius = Iso.tileSizeY;
-            var listenerObject = new GameObject("Audio Listener");
-            listenerObject.AddComponent<AudioListener>();
-            listenerObject.transform.SetParent(player.transform, true);
-            listenerObject.transform.localPosition = new Vector3(0, 0, -1);
-            character.charStat = player.AddComponent<CharStat>();
-            character.charStat.character = character;
-            character.charStat.info = info;
-
-            PlayerController.instance.SetCharacter(character);
-
-            foreach (var startingItem in info.startingItems)
-            {
-                if (startingItem.code == null)
-                    continue;
-
-                var itemInfo = ItemInfo.Find(startingItem.code);
-                for (int i = 0; i < startingItem.count; ++i)
-                {
-                    var item = new Item(itemInfo);
-                    if (startingItem.loc != null)
-                    {
-                        int loc = BodyLoc.GetIndex(startingItem.loc);
-                        character.equip.Equip(item, loc);
-                    }
-                    else
-                    {
-                        PlayerController.instance.Take(item);
-                    }
-                }
-            }
+            WorldState.instance.Player.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(currentAct.entry)));
         }
 
         public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null, Character summoner = null)

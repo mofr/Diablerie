@@ -25,5 +25,7 @@ namespace Diablerie.Engine.World
         }
 
         public IReadOnlyCollection<Entity> Entities => entities;
+
+        public Player Player { get; set; }
     }
 }

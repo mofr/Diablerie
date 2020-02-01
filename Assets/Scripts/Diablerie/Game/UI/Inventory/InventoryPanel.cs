@@ -2,6 +2,7 @@
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.UI;
+using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,17 +55,17 @@ namespace Diablerie.Game.UI.Inventory
 
         public void Update()
         {
-            goldText.text = PlayerController.instance.inventory.gold.ToString();
+            goldText.text = WorldState.instance.Player.inventory.gold.ToString();
         }
 
         public void OnGoldButton()
         {
-            if (PlayerController.instance.inventory.gold > 0)
+            if (WorldState.instance.Player.inventory.gold > 0)
             {
                 var item = Item.Create("gld");
-                item.quantity = PlayerController.instance.inventory.gold;
-                Pickup.Create(PlayerController.instance.character.transform.position, item);
-                PlayerController.instance.inventory.gold = 0;
+                item.quantity = WorldState.instance.Player.inventory.gold;
+                Pickup.Create(WorldState.instance.Player.transform.position, item);
+                WorldState.instance.Player.inventory.gold = 0;
             }
         }
 

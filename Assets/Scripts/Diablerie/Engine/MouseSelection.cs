@@ -147,7 +147,7 @@ namespace Diablerie.Engine
                 if (!entity.selectable)
                     continue;
                 
-                if (entity == PlayerController.instance.character)
+                if (entity == WorldState.instance.Player.character)
                     continue;
 
                 Bounds bounds = entity.bounds;

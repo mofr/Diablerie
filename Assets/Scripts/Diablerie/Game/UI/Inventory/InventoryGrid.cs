@@ -3,6 +3,7 @@ using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.UI;
 using Diablerie.Engine.Utility;
+using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -69,7 +70,7 @@ namespace Diablerie.Game.UI.Inventory
             highlighter = CreateHighlighter();
             highlighter.gameObject.SetActive(false);
 
-            inventory = PlayerController.instance.inventory;
+            inventory = WorldState.instance.Player.inventory;
         }
 
         RawImage CreateHighlighter()
@@ -125,7 +126,7 @@ namespace Diablerie.Game.UI.Inventory
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            var mouseItem = PlayerController.instance.mouseItem;
+            var mouseItem = PlayerController.instance.handsItem;
             var cell = MouseCell();
             if (eventData.button == PointerEventData.InputButton.Left)
             {
@@ -135,7 +136,7 @@ namespace Diablerie.Game.UI.Inventory
                     if (_inventory.Put(mouseItem, cell.x, cell.y, out poppedItem))
                     {
                         AudioManager.instance.Play(mouseItem.dropSound);
-                        PlayerController.instance.mouseItem = poppedItem;
+                        PlayerController.instance.handsItem = poppedItem;
                     }
                 }
                 else
@@ -143,7 +144,7 @@ namespace Diablerie.Game.UI.Inventory
                     Item item = _inventory.Take(cell.x, cell.y);
                     if (item != null)
                     {
-                        PlayerController.instance.mouseItem = item;
+                        PlayerController.instance.handsItem = item;
                         AudioManager.instance.Play(SoundInfo.itemPickup);
                     }
                 }
@@ -163,7 +164,7 @@ namespace Diablerie.Game.UI.Inventory
                     {
                         AudioManager.instance.Play(item.useSound);
                         _inventory.Take(cell.x, cell.y);
-                        PlayerController.instance.Use(item.info.misc);
+                        WorldState.instance.Player.Use(item.info.misc);
                     }
                 }
             }
@@ -199,7 +200,7 @@ namespace Diablerie.Game.UI.Inventory
 
         private Vector2i MouseCell()
         {
-            var mouseItem = PlayerController.instance.mouseItem;
+            var mouseItem = PlayerController.instance.handsItem;
             Vector3 pointerPosition = Input.mousePosition;
             if (mouseItem != null)
             {
@@ -233,7 +234,7 @@ namespace Diablerie.Game.UI.Inventory
             ClearHighlights();
 
             var cell = MouseCell();
-            var mouseItem = PlayerController.instance.mouseItem;
+            var mouseItem = PlayerController.instance.handsItem;
             if (mouseItem != null)
             {
                 SetRect(highlighter, cell.x, cell.y, mouseItem.info.invWidth, mouseItem.info.invHeight);

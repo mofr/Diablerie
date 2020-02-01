@@ -1,5 +1,5 @@
-﻿using Diablerie.Engine;
-using Diablerie.Engine.UI;
+﻿using Diablerie.Engine.UI;
+using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +15,10 @@ namespace Diablerie.Game.UI.ControlPanel
 
         void Update()
         {
-            int level = PlayerController.instance.charStat.level;
-            uint currExp = PlayerController.instance.charStat.experience;
-            uint currLevelExp = PlayerController.instance.charStat.currentLevelExp;
-            uint nextLevelExp = PlayerController.instance.charStat.nextLevelExp;
+            int level = WorldState.instance.Player.charStat.level;
+            uint currExp = WorldState.instance.Player.charStat.experience;
+            uint currLevelExp = WorldState.instance.Player.charStat.currentLevelExp;
+            uint nextLevelExp = WorldState.instance.Player.charStat.nextLevelExp;
             filler.fillAmount = (currExp - currLevelExp) / (float)(nextLevelExp - currLevelExp);
             tooltip.text = "Level " + level + "\nExperience: " + (currExp - currLevelExp) + " / " + (nextLevelExp - currLevelExp);
         }

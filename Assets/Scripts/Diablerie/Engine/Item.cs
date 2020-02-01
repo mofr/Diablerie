@@ -2,6 +2,7 @@
 using System.Text;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
+using Diablerie.Engine.World;
 using UnityEngine;
 
 namespace Diablerie.Engine
@@ -642,7 +643,7 @@ namespace Diablerie.Engine
             foreach(var item in setItem.set.items)
             {
                 sb.Append("\n");
-                bool collected = PlayerController.instance.equip.IsEquipped(item.itemInfo);
+                bool collected = WorldState.instance.Player.equip.IsEquipped(item.itemInfo);
                 string color = collected ? Colors.ItemSetHex : Colors.ItemRedHex;
                 AppendColored(sb, item.name, color);
             }
@@ -650,13 +651,13 @@ namespace Diablerie.Engine
 
         private static CharStatsInfo CurrentCharacterClass()
         {
-            return PlayerController.instance.charStat.info;
+            return WorldState.instance.Player.charStat.info;
         }
 
         private static int EquippedItemsCount(ItemSet set)
         {
             int result = 0;
-            Equipment equip = PlayerController.instance.equip;
+            Equipment equip = WorldState.instance.Player.equip;
             foreach(var setItem in set.items)
             {
                 if (equip.IsEquipped(setItem.itemInfo))

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Diablerie.Engine.World;
+using UnityEngine;
 
 namespace Diablerie.Engine
 {
@@ -19,7 +20,7 @@ namespace Diablerie.Engine
         {
             UpdateSize();
 
-            if (PlayerController.instance == null || PlayerController.instance.character == null)
+            if (WorldState.instance == null || WorldState.instance.Player == null)
                 return;
 
             transform.position = CalcTargetPos();
@@ -41,7 +42,7 @@ namespace Diablerie.Engine
 
         Vector3 CalcTargetPos()
         {
-            Vector3 targetPos = PlayerController.instance.character.transform.position;
+            Vector3 targetPos = WorldState.instance.Player.transform.position;
             targetPos.z = transform.position.z;
 
             targetPos.x += camera.orthographicSize * camera.pixelWidth / camera.pixelHeight * horizontalShift;
