@@ -15,8 +15,6 @@ namespace Diablerie.Engine.Entities
     
         [System.NonSerialized]
         public MonStat monStat;
-        [System.NonSerialized]
-        public CharStat charStat;
         public Equipment equip;
         public float walkSpeed = 3.5f;
         public float runSpeed = 6f;

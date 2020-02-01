@@ -274,7 +274,7 @@ namespace Diablerie.Engine
             var onlyForClass = CharStatsInfo.FindByCode(info.type.classCode);
             if (onlyForClass != null)
             {
-                bool classMatched = CurrentCharacterClass() == onlyForClass;
+                bool classMatched = WorldState.instance.Player.charStatInfo == onlyForClass;
                 if (!classMatched)
                     StartColor(sb, Colors.ItemRedHex);
                 sb.Append("\n(" + onlyForClass.className + " only)");
@@ -647,11 +647,6 @@ namespace Diablerie.Engine
                 string color = collected ? Colors.ItemSetHex : Colors.ItemRedHex;
                 AppendColored(sb, item.name, color);
             }
-        }
-
-        private static CharStatsInfo CurrentCharacterClass()
-        {
-            return WorldState.instance.Player.charStat.info;
         }
 
         private static int EquippedItemsCount(ItemSet set)

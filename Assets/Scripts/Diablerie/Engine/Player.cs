@@ -13,6 +13,7 @@ namespace Diablerie.Engine
         public Equipment equip;
         public Inventory inventory;
         public CharStat charStat;
+        public CharStatsInfo charStatInfo;
         
         private Item _handsItem;
 
@@ -33,15 +34,15 @@ namespace Diablerie.Engine
 
         public Player(string className, Vector3 pos)
         {
-            var info = CharStatsInfo.Find(className);
+            charStatInfo = CharStatsInfo.Find(className);
             gameObject = new GameObject("Player");
             transform = gameObject.transform;
             transform.position = pos;
             gameObject.tag = "Player";
             character = gameObject.AddComponent<Character>();
             character.basePath = @"data\global\chars";
-            character.token = info.token;
-            character.weaponClass = info.baseWClass;
+            character.token = charStatInfo.token;
+            character.weaponClass = charStatInfo.baseWClass;
             character.run = true;
             character.walkSpeed = 7;
             character.runSpeed = 15;
@@ -51,6 +52,7 @@ namespace Diablerie.Engine
             character.party = Party.Good;
 
             equip = gameObject.AddComponent<Equipment>();
+            equip.charInfo = charStatInfo;
             character.equip = equip;
             inventory = Inventory.Create(gameObject, 10, 4);
             var body = gameObject.AddComponent<Rigidbody2D>();
@@ -63,10 +65,8 @@ namespace Diablerie.Engine
             listenerObject.transform.localPosition = new Vector3(0, 0, -1);
             charStat = gameObject.AddComponent<CharStat>();
             charStat.character = character;
-            charStat.info = info;
-            character.charStat = charStat;
 
-            foreach (var startingItem in info.startingItems)
+            foreach (var startingItem in charStatInfo.startingItems)
             {
                 if (startingItem.code == null)
                     continue;

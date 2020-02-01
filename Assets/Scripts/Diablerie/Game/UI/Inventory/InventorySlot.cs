@@ -61,7 +61,7 @@ namespace Diablerie.Game.UI.Inventory
         {
             if (_player.HandsItem != null && !CanEquip(_player.HandsItem))
             {
-                string charClass = _player.charStat.info.classNameLower;
+                string charClass = _player.charStatInfo.classNameLower;
                 AudioManager.instance.Play(charClass + "_impossible_1");
                 return;
             }

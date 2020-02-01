@@ -7,7 +7,6 @@ namespace Diablerie.Engine
     public class CharStat : MonoBehaviour
     {
         public Character character;
-        public CharStatsInfo info;
         public int level = 1;
         public uint experience = 0;
 

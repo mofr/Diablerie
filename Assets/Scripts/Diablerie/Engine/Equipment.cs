@@ -12,8 +12,9 @@ namespace Diablerie.Engine
         public delegate void OnUpdateHandler();
         public event OnUpdateHandler OnUpdate;
 
-        Character character;
-        COFAnimator animator;
+        public CharStatsInfo charInfo;
+        private Character character;
+        private COFAnimator animator;
 
         static string[] armorTypes = new string[] { "LIT", "MED", "HVY" };
         static string[] defaultEquip = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "", "", "", "LIT", "LIT", "", "", "", "", "", "" };
@@ -28,7 +29,7 @@ namespace Diablerie.Engine
                 return false;
 
             var classCode = item.info.type.classCode;
-            if (character.charStat != null && classCode != null && character.charStat.info.code != classCode)
+            if (classCode != null && charInfo.code != classCode)
                 return false;
 
             return true;
