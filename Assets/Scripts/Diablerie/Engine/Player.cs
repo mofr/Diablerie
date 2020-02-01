@@ -13,7 +13,23 @@ namespace Diablerie.Engine
         public Equipment equip;
         public Inventory inventory;
         public CharStat charStat;
-        public Item handsItem; 
+        
+        private Item _handsItem;
+
+        public Item HandsItem
+        {
+            get => _handsItem;
+            set
+            {
+                if (_handsItem == value)
+                    return;
+                _handsItem = value;
+                HandsItemChanged?.Invoke(_handsItem);
+            }
+        }
+
+        public delegate void OnHandsItemChangedHandler(Item item);
+        public event OnHandsItemChangedHandler HandsItemChanged;
 
         public Player(string className, Vector3 pos)
         {
@@ -82,7 +98,7 @@ namespace Diablerie.Engine
 
             if (preferHands)
             {
-                handsItem = item;
+                HandsItem = item;
                 return true;
             }
 

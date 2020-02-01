@@ -16,17 +16,18 @@ namespace Diablerie.Game.UI.Inventory
         IPointerEnterHandler,
         IPointerExitHandler
     {
-        Engine.Inventory _inventory;
+        private Player player;
+        private Engine.Inventory _inventory;
 
-        float cellSizeX;
-        float cellSizeY;
+        private float cellSizeX;
+        private float cellSizeY;
 
-        RawImage highlighter;
-        RectTransform rectTransform;
-        bool pointerOver;
+        private RawImage highlighter;
+        private RectTransform rectTransform;
+        private bool pointerOver;
 
-        List<Image> itemsImages = new List<Image>();
-        List<RawImage> itemsBackgrounds = new List<RawImage>();
+        private List<Image> itemsImages = new List<Image>();
+        private List<RawImage> itemsBackgrounds = new List<RawImage>();
 
         public Engine.Inventory inventory
         {
@@ -70,7 +71,9 @@ namespace Diablerie.Game.UI.Inventory
             highlighter = CreateHighlighter();
             highlighter.gameObject.SetActive(false);
 
-            inventory = WorldState.instance.Player.inventory;
+            // TODO pass the player and the inventory to the constructor (it's required to get rid of prefabs first)
+            player = WorldState.instance.Player;
+            inventory = player.inventory;
         }
 
         RawImage CreateHighlighter()
@@ -126,17 +129,16 @@ namespace Diablerie.Game.UI.Inventory
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            var mouseItem = PlayerController.instance.handsItem;
             var cell = MouseCell();
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (mouseItem != null)
+                if (player.HandsItem != null)
                 {
                     Item poppedItem;
-                    if (_inventory.Put(mouseItem, cell.x, cell.y, out poppedItem))
+                    if (_inventory.Put(player.HandsItem, cell.x, cell.y, out poppedItem))
                     {
-                        AudioManager.instance.Play(mouseItem.dropSound);
-                        PlayerController.instance.handsItem = poppedItem;
+                        AudioManager.instance.Play(player.HandsItem.dropSound);
+                        player.HandsItem = poppedItem;
                     }
                 }
                 else
@@ -144,7 +146,7 @@ namespace Diablerie.Game.UI.Inventory
                     Item item = _inventory.Take(cell.x, cell.y);
                     if (item != null)
                     {
-                        PlayerController.instance.handsItem = item;
+                        player.HandsItem = item;
                         AudioManager.instance.Play(SoundInfo.itemPickup);
                     }
                 }
@@ -200,11 +202,10 @@ namespace Diablerie.Game.UI.Inventory
 
         private Vector2i MouseCell()
         {
-            var mouseItem = PlayerController.instance.handsItem;
             Vector3 pointerPosition = Input.mousePosition;
-            if (mouseItem != null)
+            if (player.HandsItem != null)
             {
-                pointerPosition -= new Vector3(mouseItem.info.invWidth * cellSizeX, mouseItem.info.invHeight * cellSizeY) / 2;
+                pointerPosition -= new Vector3(player.HandsItem.info.invWidth * cellSizeX, player.HandsItem.info.invHeight * cellSizeY) / 2;
                 pointerPosition += new Vector3(cellSizeX, cellSizeY) * 0.5f; // adjust to center of cell
             }
             return GetPointerCell(pointerPosition);
@@ -234,12 +235,11 @@ namespace Diablerie.Game.UI.Inventory
             ClearHighlights();
 
             var cell = MouseCell();
-            var mouseItem = PlayerController.instance.handsItem;
-            if (mouseItem != null)
+            if (player.HandsItem != null)
             {
-                SetRect(highlighter, cell.x, cell.y, mouseItem.info.invWidth, mouseItem.info.invHeight);
+                SetRect(highlighter, cell.x, cell.y, player.HandsItem.info.invWidth, player.HandsItem.info.invHeight);
                 List<int> coveredEntries;
-                highlighter.gameObject.SetActive(_inventory.Fit(mouseItem, cell.x, cell.y, out coveredEntries));
+                highlighter.gameObject.SetActive(_inventory.Fit(player.HandsItem, cell.x, cell.y, out coveredEntries));
                 if (coveredEntries.Count > 1)
                 {
                     highlighter.color = Colors.InvItemHighlightForbid;

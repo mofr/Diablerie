@@ -15,10 +15,10 @@ namespace Diablerie.Engine
     public class PlayerController : MonoBehaviour
     {
         public static PlayerController instance;
-
-        public Player player;
+        
         public CameraController cameraController;
 
+        private Player player;
         private bool flush = false;
         private bool usingSkills = false;
         private bool run = true;
@@ -139,38 +139,31 @@ namespace Diablerie.Engine
         {
             this.player = player;
             InventoryPanel.instance.equip = player.equip;
+            OnHandsItemChanged(player.HandsItem);
+            player.HandsItemChanged += OnHandsItemChanged;
         }
 
         public bool Take(Item item)
         {
             return player.Take(item, preferHands: InventoryPanel.instance.visible);
         }
-        
-        public Item handsItem
+
+        private void OnHandsItemChanged(Item item)
         {
-            get { return player.handsItem; }
-            set
+            if (item != null)
             {
-                if (player.handsItem == value)
-                    return;
-
-                player.handsItem = value;
-
-                if (player.handsItem != null)
-                {
-                    var dc6 = DC6.Load(player.handsItem.invFile, palette, loadAllDirections: true);
-                    var texture = dc6.textures[0];
-                    var frame = dc6.directions[0].frames[0];
-                    var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
+                var dc6 = DC6.Load(item.invFile, palette, loadAllDirections: true);
+                var texture = dc6.textures[0];
+                var frame = dc6.directions[0].frames[0];
+                var hotSpot = new Vector2(frame.width / 2, frame.height / 2);
                 
-                    SoftwareCursor.SetCursor(texture, hotSpot);
-                    Cursor.visible = false;
-                }
-                else
-                {
-                    SoftwareCursor.SetCursor(null);
-                    Cursor.visible = true;
-                }
+                SoftwareCursor.SetCursor(texture, hotSpot);
+                Cursor.visible = false;
+            }
+            else
+            {
+                SoftwareCursor.SetCursor(null);
+                Cursor.visible = true;
             }
         }
 
@@ -274,13 +267,13 @@ namespace Diablerie.Engine
 
             DrawDebugPath();
 
-            if (player.handsItem != null)
+            if (player.HandsItem != null)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Pickup.Create(player.character.transform.position, player.handsItem);
+                    Pickup.Create(player.transform.position, player.HandsItem);
                     FlushInput();
-                    handsItem = null;
+                    player.HandsItem = null;
                 }
                 return;
             }
@@ -347,7 +340,7 @@ namespace Diablerie.Engine
 
         public bool FixedSelection()
         {
-            return Input.GetMouseButton(0) || player.handsItem != null || usingSkills;
+            return Input.GetMouseButton(0) || player.HandsItem != null || usingSkills;
         }
 
         void Update()
