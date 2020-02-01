@@ -3,7 +3,6 @@ using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.UI;
 using Diablerie.Engine.Utility;
-using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,21 +21,26 @@ namespace Diablerie.Game.UI.Inventory
         public Image highlighter;
         public Image itemImage;
         private bool pointerOver = false;
-        private Player player;
+        private Player _player;
+
+        public void SetPlayer(Player player)
+        {
+            _player = player;
+        }
 
         private bool CanEquip(Item item)
         {
-            return player.equip.CanEquip(item, bodyLoc);
+            return _player.equip.CanEquip(item, bodyLoc);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             pointerOver = true;
-            if (player.HandsItem != null && !CanEquip(player.HandsItem))
+            if (_player.HandsItem != null && !CanEquip(_player.HandsItem))
                 highlighter.color = Colors.InvItemHighlightForbid;
             else
                 highlighter.color = Colors.InvItemHighlight;
-            highlighter.gameObject.SetActive(player.HandsItem != null || item != null);
+            highlighter.gameObject.SetActive(_player.HandsItem != null || item != null);
         }
 
         private void ShowLabel()
@@ -55,31 +59,26 @@ namespace Diablerie.Game.UI.Inventory
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (player.HandsItem != null && !CanEquip(player.HandsItem))
+            if (_player.HandsItem != null && !CanEquip(_player.HandsItem))
             {
-                string charClass = player.charStat.info.classNameLower;
+                string charClass = _player.charStat.info.classNameLower;
                 AudioManager.instance.Play(charClass + "_impossible_1");
                 return;
             }
 
-            Item[] unequipped = player.equip.Equip(player.HandsItem, bodyLoc);
+            Item[] unequipped = _player.equip.Equip(_player.HandsItem, bodyLoc);
 
-            if (player.HandsItem != null)
-                AudioManager.instance.Play(player.HandsItem.useSound);
+            if (_player.HandsItem != null)
+                AudioManager.instance.Play(_player.HandsItem.useSound);
             else if (unequipped[0] != null)
                 AudioManager.instance.Play(SoundInfo.itemPickup);
 
-            player.HandsItem = unequipped[0];
+            _player.HandsItem = unequipped[0];
             if (unequipped[1] != null)
-                if (!player.inventory.Put(unequipped[1]))
-                    Pickup.Create(player.transform.position, unequipped[1]);
+                if (!_player.inventory.Put(unequipped[1]))
+                    Pickup.Create(_player.transform.position, unequipped[1]);
         }
 
-        private void OnEnable()
-        {
-            player = WorldState.instance.Player;  // TODO pass to the constructor (get rid of prefabs first)
-        }
-        
         private void OnDisable()
         {
             pointerOver = false;
@@ -92,7 +91,7 @@ namespace Diablerie.Game.UI.Inventory
             if (!pointerOver)
                 return;
 
-            if (item != null && player.HandsItem == null)
+            if (item != null && _player.HandsItem == null)
             {
                 ShowLabel();
             }

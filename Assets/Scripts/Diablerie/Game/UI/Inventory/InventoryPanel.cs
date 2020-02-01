@@ -2,7 +2,6 @@
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.UI;
-using Diablerie.Engine.World;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,27 +14,28 @@ namespace Diablerie.Game.UI.Inventory
         public GameObject panel;
         public Text goldText;
 
-        public Equipment equip
+        public void SetPlayer(Player player)
         {
-            get { return _equip; }
-            set
+            if (_player == player)
+                return;
+
+            if (_player != null)
+                _player.equip.OnUpdate -= UpdateEquip;
+
+            _player = player;
+            if (_player != null)
+                _player.equip.OnUpdate += UpdateEquip;
+
+            foreach (var slot in slots)
             {
-                if (_equip == value)
-                    return;
-
-                if (_equip != null)
-                    _equip.OnUpdate -= UpdateEquip;
-
-                _equip = value;
-                if (_equip != null)
-                    _equip.OnUpdate += UpdateEquip;
-
-                UpdateEquip();
+                slot.SetPlayer(player);
             }
+
+            UpdateEquip();
         }
 
-        Equipment _equip;
-        InventorySlot[] slots;
+        private Player _player;
+        private InventorySlot[] slots;
 
         void Awake()
         {
@@ -49,23 +49,24 @@ namespace Diablerie.Game.UI.Inventory
                 slot.highlighter = slotTransform.Find("highlighter").GetComponent<Image>();
                 slot.itemImage = slotTransform.Find("item").GetComponent<Image>();
                 slot.bodyLoc = i;
+                slot.SetPlayer(_player);
                 slots[i] = slot;
             }
         }
 
         public void Update()
         {
-            goldText.text = WorldState.instance.Player.inventory.gold.ToString();
+            goldText.text = _player.inventory.gold.ToString();
         }
 
         public void OnGoldButton()
         {
-            if (WorldState.instance.Player.inventory.gold > 0)
+            if (_player.inventory.gold > 0)
             {
                 var item = Item.Create("gld");
-                item.quantity = WorldState.instance.Player.inventory.gold;
-                Pickup.Create(WorldState.instance.Player.transform.position, item);
-                WorldState.instance.Player.inventory.gold = 0;
+                item.quantity = _player.inventory.gold;
+                Pickup.Create(_player.transform.position, item);
+                _player.inventory.gold = 0;
             }
         }
 
@@ -80,13 +81,13 @@ namespace Diablerie.Game.UI.Inventory
             get { return panel.activeSelf; }
         }
 
-        void UpdateEquip()
+        private void UpdateEquip()
         {
             for (int i = 0; i < slots.Length; ++i)
             {
                 Item item = null;
-                if (_equip != null)
-                    item = _equip.items[i];
+                if (_player.equip != null)
+                    item = _player.equip.items[i];
 
                 if (item != null)
                 {

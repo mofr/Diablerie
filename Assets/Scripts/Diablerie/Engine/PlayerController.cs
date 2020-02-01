@@ -129,7 +129,7 @@ namespace Diablerie.Engine
             flush = true;
         }
 
-        public void SetHotSkill(int index, SkillInfo skillInfo)
+        private void SetHotSkill(int index, SkillInfo skillInfo)
         {
             hotSkills[index] = skillInfo;
             SkillPanel.instance.SetHotSkill(index, skillInfo);
@@ -138,7 +138,7 @@ namespace Diablerie.Engine
         public void SetPlayer(Player player)
         {
             this.player = player;
-            InventoryPanel.instance.equip = player.equip;
+            InventoryPanel.instance.SetPlayer(player);
             OnHandsItemChanged(player.HandsItem);
             player.HandsItemChanged += OnHandsItemChanged;
         }
