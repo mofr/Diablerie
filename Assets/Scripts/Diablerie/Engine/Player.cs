@@ -62,9 +62,9 @@ namespace Diablerie.Engine
             listenerObject.transform.SetParent(gameObject.transform, true);
             listenerObject.transform.localPosition = new Vector3(0, 0, -1);
             charStat = gameObject.AddComponent<CharStat>();
+            charStat.character = character;
+            charStat.info = info;
             character.charStat = charStat;
-            character.charStat.character = character;
-            character.charStat.info = info;
 
             foreach (var startingItem in info.startingItems)
             {

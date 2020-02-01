@@ -1,4 +1,5 @@
 ﻿using Diablerie.Engine.Entities;
+using Diablerie.Engine.World;
 using UnityEngine;
 
 namespace Diablerie.Engine
@@ -12,9 +13,11 @@ namespace Diablerie.Engine
 
         void OnCharacterDeath(Character target, Character killer)
         {
-            if (target.monStat != null && killer.charStat != null)
+            var player = WorldState.instance.Player;
+            
+            if (target.monStat != null && killer == player.character)
             {
-                killer.charStat.AddExp(target.monStat.stats[0].exp);
+                player.charStat.AddExp(target.monStat.stats[0].exp);
             }
         }
     }
