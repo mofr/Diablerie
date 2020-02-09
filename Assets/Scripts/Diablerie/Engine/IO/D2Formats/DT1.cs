@@ -97,7 +97,7 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        public struct Tile
+        public class Tile
         {
             public int direction;
             public short roofHeight;
@@ -165,6 +165,7 @@ namespace Diablerie.Engine.IO.D2Formats
 
             for (int i = 0; i < tileCount; ++i)
             {
+                dt1.tiles[i] = new Tile();
                 dt1.tiles[i].Read(reader);
             }
 
@@ -219,8 +220,6 @@ namespace Diablerie.Engine.IO.D2Formats
                 {
                     tile.textureY += Math.Min(96, -tile.height);
                 }
-
-                dt1.tiles[i] = tile;
 
                 stream.Seek(tile.blockHeaderPointer, SeekOrigin.Begin);
                 for (int block = 0; block < tile.blockCount; ++block)

@@ -7,6 +7,7 @@ namespace Diablerie.Engine.World
     public class WorldState : MonoBehaviour
     {
         public static WorldState instance;
+        private WorldGrid grid = new WorldGrid(1000, 1000);
         private HashSet<Entity> entities = new HashSet<Entity>();
         private HashSet<Popup> popups = new HashSet<Popup>();
 
@@ -34,6 +35,8 @@ namespace Diablerie.Engine.World
         {
             popups.Remove(popup);
         }
+
+        public WorldGrid Grid => grid;
 
         public IReadOnlyCollection<Entity> Entities => entities;
 

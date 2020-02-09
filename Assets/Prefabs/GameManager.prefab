@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 114153361697340630}
   - component: {fileID: 3843726213684535780}
   - component: {fileID: 114225344187329616}
+  - component: {fileID: -2698014859299188083}
   - component: {fileID: 114936715888369398}
   - component: {fileID: 114367382531674742}
   - component: {fileID: 114538117645717582}
@@ -64,10 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b0d99551cacbf41a185739743303eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  equip: {fileID: 0}
-  inventory: {fileID: 0}
-  charStat: {fileID: 0}
   cameraController: {fileID: 0}
 --- !u!114 &114153361697340630
 MonoBehaviour:
@@ -103,6 +100,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c090b690e9e86824f8d946bf30b5cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2698014859299188083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576811083722074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2208520cc0d4bd192d623abc4d457c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114936715888369398

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.Utility;
+using Diablerie.Game.World;
 using UnityEngine;
+using UnityEngine.Profiling;
 using Random = UnityEngine.Random;
 
 namespace Diablerie.Engine.World
@@ -17,7 +20,7 @@ namespace Diablerie.Engine.World
         public LevelInfo info;
         string name;
         DS1[] grid;
-        private int popPad = 0;
+        private int popPad;
         DT1.Sampler tileSampler = new DT1.Sampler();
         MonStat[] monStats;
         Color32[] palette;
@@ -75,7 +78,7 @@ namespace Diablerie.Engine.World
 
         public LevelBuilder(DS1 ds1)
         {
-            name = System.IO.Path.GetFileName(ds1.filename);
+            name = Path.GetFileName(ds1.filename);
             grid = new DS1[1] { ds1 };
             gridWidth = 1;
             gridHeight = 1;
@@ -178,7 +181,7 @@ namespace Diablerie.Engine.World
 
         public GameObject Instantiate(Vector2i offset)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.Instantiate");
+            Profiler.BeginSample("LevelBuilder.Instantiate");
             var root = new GameObject(name);
 
             if (info != null)
@@ -197,20 +200,20 @@ namespace Diablerie.Engine.World
             InstantiateGrid(offset, root.transform);
             InstantiateDebugGrid(offset, root.transform);
 
-            UnityEngine.Profiling.Profiler.EndSample();
+            Profiler.EndSample();
             return root;
         }
 
         private void Instantiate(DS1 ds1, int x, int y, Transform root)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateDS1");
+            Profiler.BeginSample("LevelBuilder.InstantiateDS1");
             InstantiatePopups(ds1, x, y, root);
             InstantiateFloors(ds1, x, y, root);
             InstantiateShadows(ds1, x, y, root);
             InstantiateSpecialTiles(ds1, x, y, root);
             InstantiateWalls(ds1, x, y, root);
             InstantiateObjects(ds1, x, y, root);
-            UnityEngine.Profiling.Profiler.EndSample();
+            Profiler.EndSample();
         }
 
         private void InstantiateMonsters(int offsetX, int offsetY, Transform root)
@@ -218,7 +221,7 @@ namespace Diablerie.Engine.World
             if (info == null)
                 return;
 
-            UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateMonsters");
+            Profiler.BeginSample("LevelBuilder.InstantiateMonsters");
 
             int density = info.monDen[0];
 
@@ -234,7 +237,7 @@ namespace Diablerie.Engine.World
                     Spawn(monStat, x, y, info.id, root);
                 }
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            Profiler.EndSample();
         }
 
         private static void Spawn(MonStat monStat, int x, int y, int level, Transform root)
@@ -246,7 +249,7 @@ namespace Diablerie.Engine.World
             int count = Random.Range(monStat.minGrp, monStat.maxGrp + 1);
             for (int i = 0; i < count; ++i)
             {
-                var mon = global::Diablerie.Game.World.WorldBuilder.SpawnMonster(monStat, Iso.MapTileToWorld(x, y), root);
+                var mon = WorldBuilder.SpawnMonster(monStat, Iso.MapTileToWorld(x, y), root);
                 mon.level = level;
             }
 
@@ -255,7 +258,7 @@ namespace Diablerie.Engine.World
                 int minionCount = Random.Range(monStat.partyMin, monStat.partyMax);
                 for (int i = 0; i < minionCount; ++i)
                 {
-                    var mon = global::Diablerie.Game.World.WorldBuilder.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
+                    var mon = WorldBuilder.SpawnMonster(monStat.minion1, Iso.MapTileToWorld(x, y), root);
                     mon.level = level;
                 }
             }
@@ -278,7 +281,7 @@ namespace Diablerie.Engine.World
                 {
                     index = Random.Range(0, info.monsters.Count);
                 }
-                while (System.Array.IndexOf(monsterColumns, index) != -1);
+                while (Array.IndexOf(monsterColumns, index) != -1);
                 monsterColumns[i] = index;
                 monStats[i] = MonStat.Find(info.monsters[index]);
             }
@@ -286,7 +289,7 @@ namespace Diablerie.Engine.World
 
         private void InstantiateGrid(Vector2i offset, Transform root)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateGrid");
+            Profiler.BeginSample("LevelBuilder.InstantiateGrid");
             int i = 0;
             for (int y = 0; y < gridHeight; ++y)
             {
@@ -307,12 +310,12 @@ namespace Diablerie.Engine.World
                     }
                 }
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            Profiler.EndSample();
         }
 
         private void InstantiateDebugGrid(Vector2i offset, Transform root)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.InstantiateDebugGrid");
+            Profiler.BeginSample("LevelBuilder.InstantiateDebugGrid");
             var grid = new GameObject("debug grid");
             grid.transform.SetParent(root);
             grid.layer = UnityLayers.SpecialTiles;
@@ -332,7 +335,7 @@ namespace Diablerie.Engine.World
                     line.endWidth = 0.1f;
                     line.material = Materials.normal;
                     line.useWorldSpace = false;
-                    var corners = new Vector3[] {
+                    var corners = new[] {
                         Iso.MapTileToWorld(0, 0),
                         Iso.MapTileToWorld(0 + gridX, 0),
                         Iso.MapTileToWorld(0 + gridX, gridY),
@@ -343,7 +346,7 @@ namespace Diablerie.Engine.World
                     line.SetPositions(corners);
                 }
             }
-            UnityEngine.Profiling.Profiler.EndSample();
+            Profiler.EndSample();
         }
 
         private void InstantiateFloors(DS1 ds1, int offsetX, int offsetY, Transform root)
@@ -367,10 +370,9 @@ namespace Diablerie.Engine.World
                         if ((cell.prop4 & 0x80) != 0)
                             continue;
 
-                        DT1.Tile tile;
-                        if (ds1.tileSampler.Sample(cell.tileIndex, out tile))
+                        if (ds1.tileSampler.Sample(cell.tileIndex, out var tile))
                         {
-                            CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
+                            WorldState.instance.Grid.PutFloor(tile, offsetX + x, offsetY + y, f);
                         }
                     }
                     i += ds1.width;
@@ -399,7 +401,7 @@ namespace Diablerie.Engine.World
                     DT1.Tile tile;
                     if (ds1.tileSampler.Sample(cell.tileIndex, out tile))
                     {
-                        CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
+                        WorldState.instance.Grid.PutShadow(tile, offsetX + x, offsetY + y);
                     }
                 }
                 i += ds1.width;
@@ -458,12 +460,7 @@ namespace Diablerie.Engine.World
 
                         if (sampler.Sample(cell.tileIndex, out var tile))
                         {
-                            var renderer = CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
-                            PutToPopup(cell, renderer, offsetX + x, offsetY + y);
-                        }
-                        else
-                        {
-                            Debug.LogWarning("wall tile not found (index " + cell.mainIndex + " " + cell.subIndex + " " + cell.orientation + ") at " + x + ", " + y);
+                            WorldState.instance.Grid.PutWall(tile, offsetX + x, offsetY + y, w);
                         }
 
                         if (cell.orientation == 3)
@@ -472,11 +469,7 @@ namespace Diablerie.Engine.World
                             int index = DT1.Tile.Index(cell.mainIndex, cell.subIndex, orientation);
                             if (sampler.Sample(index, out tile))
                             {
-                                CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
-                            }
-                            else
-                            {
-                                Debug.LogWarning("wall tile not found (index " + cell.mainIndex + " " + cell.subIndex + " " + orientation + ") at " + x + ", " + y);
+                                WorldState.instance.Grid.PutWall(tile, offsetX + x, offsetY + y, w + 1);
                             }
                         }
                     }
@@ -485,24 +478,12 @@ namespace Diablerie.Engine.World
             }
         }
     
-        private void PutToPopup(DS1.Cell cell, Renderer renderer, int x, int y)
-        {
-            foreach (Popup popup in WorldState.instance.Popups)
-            {
-                if (popup.revealMainIndex == cell.mainIndex && popup.revealArea.Contains(x, y))
-                {
-                    popup.roofs.Add(renderer);
-                }
-            }
-        }
-
         private void CreateSpecialTile(DS1.Cell cell, int x, int y, Transform parent)
         {
             // debug visualization
             if (specialTiles.Sample(cell.tileIndex, out var tile))
             {
-                var renderer = CreateTile(tile, x, y, parent: parent);
-                renderer.gameObject.layer = UnityLayers.SpecialTiles;
+                WorldState.instance.Grid.PutSpecialTile(tile, x, y);
             }
 
             if (info == null)
@@ -539,7 +520,7 @@ namespace Diablerie.Engine.World
 
         private void FillGap(Vector2i offset, int x, int y, Transform root)
         {
-            UnityEngine.Profiling.Profiler.BeginSample("LevelBuilder.FillGap");
+            Profiler.BeginSample("LevelBuilder.FillGap");
             int offsetX = x * gridX;
             int offsetY = y * gridY;
 
@@ -547,127 +528,13 @@ namespace Diablerie.Engine.World
             {
                 for (x = offsetX; x < offsetX + gridX; ++x)
                 {
-                    DT1.Tile tile;
-                    tileSampler.Sample(0, out tile);
-                    CreateTile(tile, offset.x + x, offset.y + y, parent: root);
-                }
-            }
-            UnityEngine.Profiling.Profiler.EndSample();
-        }
-
-        static Renderer CreateTile(DT1.Tile tile, int x, int y, int orderInLayer = 0, Transform parent = null)
-        {
-            var texture = tile.texture;
-            var pos = Iso.MapTileToWorld(x, y);
-
-            GameObject gameObject = new GameObject();
-            gameObject.name = tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
-            gameObject.transform.position = pos;
-            if (parent)
-                gameObject.transform.SetParent(parent);
-            var meshRenderer = gameObject.AddComponent<MeshRenderer>();
-            var meshFilter = gameObject.AddComponent<MeshFilter>();
-            Mesh mesh = new Mesh();
-            float x0 = tile.textureX;
-            float y0 = tile.textureY;
-            float w = tile.width / Iso.pixelsPerUnit;
-            float h = (-tile.height) / Iso.pixelsPerUnit;
-            if (tile.orientation == 0 || tile.orientation == 15)
-            {
-                var topLeft = new Vector3(-1f, 0.5f);
-                if (tile.orientation == 15)
-                    topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
-                mesh.vertices = new Vector3[]
-                {
-                    topLeft,
-                    topLeft + new Vector3(0, -h),
-                    topLeft + new Vector3(w, -h),
-                    topLeft + new Vector3(w, 0)
-                };
-                mesh.triangles = new int[] {2, 1, 0, 3, 2, 0};
-                mesh.uv = new Vector2[]
-                {
-                    new Vector2(x0 / texture.width, -y0 / texture.height),
-                    new Vector2(x0 / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height)
-                };
-
-                meshRenderer.sortingLayerID = tile.orientation == 0 ? SortingLayers.Floor : SortingLayers.Roof;
-                meshRenderer.sortingOrder = orderInLayer;
-
-                gameObject.name += tile.orientation == 0 ? " (floor)" : " (roof)";
-            }
-            else if (tile.orientation > 15)
-            {
-                int upperPart = Math.Min(96, -tile.height);
-                y0 -= upperPart;
-                var topLeft = new Vector3(-1f, upperPart / Iso.pixelsPerUnit - 0.5f);
-                mesh.vertices = new Vector3[] {
-                    topLeft,
-                    topLeft + new Vector3(0, -h),
-                    topLeft + new Vector3(w, -h),
-                    topLeft + new Vector3(w, 0)
-                };
-                mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
-                mesh.uv = new Vector2[] {
-                    new Vector2 (x0 / texture.width, -y0 / texture.height),
-                    new Vector2 (x0 / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2 ((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height)
-                };
-                meshRenderer.sortingLayerID = SortingLayers.LowerWall;
-                meshRenderer.sortingOrder = orderInLayer;
-            
-                gameObject.name += " (lower wall)";
-            }
-            else
-            {
-                var topLeft = new Vector3(-1f, h - 0.5f);
-                mesh.vertices = new Vector3[] {
-                    topLeft,
-                    topLeft + new Vector3(0, -h),
-                    topLeft + new Vector3(w, -h),
-                    topLeft + new Vector3(w, 0)
-                };
-                mesh.triangles = new int[] { 2, 1, 0, 3, 2, 0 };
-                mesh.uv = new Vector2[] {
-                    new Vector2 (x0 / texture.width, (-y0 - tile.height) / texture.height),
-                    new Vector2 (x0 / texture.width, -y0 / texture.height),
-                    new Vector2 ((x0 + tile.width) / texture.width, -y0 / texture.height),
-                    new Vector2 ((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
-                };
-                if (tile.orientation == 13) // shadows
-                {
-                    meshRenderer.sortingLayerID = SortingLayers.Shadow;
-                }
-                meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
-            }
-            meshFilter.mesh = mesh;
-
-            int flagIndex = 0;
-            var collisionMapOffset = Iso.Snap(Iso.MapToIso(pos));
-            DT1.BlockFlags mask = DT1.BlockFlags.Walk | DT1.BlockFlags.PlayerWalk;
-            for (int dy = 2; dy > -3; --dy)
-            {
-                for (int dx = -2; dx < 3; ++dx, ++flagIndex)
-                {
-                    Vector2i subCellPos = collisionMapOffset + new Vector2i(dx, dy);
-                    bool passable = (tile.flags[flagIndex] & mask) == 0;
-                    CollisionLayers blockedLayers = passable ? CollisionLayers.None : CollisionLayers.Walk;
-                    if (tile.orientation == 0)
+                    if (tileSampler.Sample(0, out var tile))
                     {
-                        CollisionMap.SetBlocked(subCellPos, blockedLayers);
-                    }
-                    else if (CollisionMap.Passable(subCellPos, CollisionLayers.Walk) && !passable)
-                    {
-                        CollisionMap.SetBlocked(subCellPos, blockedLayers);
+                        WorldState.instance.Grid.PutFloor(tile, offset.x + x, offset.y + y, 0);
                     }
                 }
             }
-
-            meshRenderer.material = tile.material;
-            return meshRenderer;
+            Profiler.EndSample();
         }
 
         static bool CreateObject(SpawnPreset obj, int x, int y, int level, Transform root)
@@ -682,7 +549,7 @@ namespace Diablerie.Engine.World
                     return false;
                 }
                 ObjectInfo objectInfo = ObjectInfo.sheet[obj.objectId];
-                var staticObject = global::Diablerie.Game.World.WorldBuilder.SpawnObject(objectInfo, pos, parent: root);
+                var staticObject = WorldBuilder.SpawnObject(objectInfo, pos, parent: root);
                 staticObject.modeName = obj.mode;
                 return true;
             }
@@ -704,20 +571,20 @@ namespace Diablerie.Engine.World
 
             if (monStat != null)
             {
-                global::Diablerie.Game.World.WorldBuilder.SpawnMonster(monStat, pos, root);
+                WorldBuilder.SpawnMonster(monStat, pos, root);
                 return true;
             }
 
             if (superUnique != null)
             {
-                var monster = global::Diablerie.Game.World.WorldBuilder.SpawnMonster(superUnique.monStat, pos, root);
+                var monster = WorldBuilder.SpawnMonster(superUnique.monStat, pos, root);
                 monster.gameObject.name = superUnique.nameStr;
                 monster.title = superUnique.name;
                 monster.level = level;
                 int minionCount = Random.Range(superUnique.minGrp, superUnique.maxGrp + 1);
                 for (int i = 0; i < minionCount; ++i)
                 {
-                    var minion = global::Diablerie.Game.World.WorldBuilder.SpawnMonster(superUnique.monStat, pos, root);
+                    var minion = WorldBuilder.SpawnMonster(superUnique.monStat, pos, root);
                     minion.level = level;
                 }
                 return true;
@@ -727,7 +594,7 @@ namespace Diablerie.Engine.World
             {
                 // Fallens
                 for (int i = 0; i < 4; ++i)
-                    global::Diablerie.Game.World.WorldBuilder.SpawnMonster("fallen1", pos, root);
+                    WorldBuilder.SpawnMonster("fallen1", pos, root);
                 return true;
             }
 
@@ -737,7 +604,7 @@ namespace Diablerie.Engine.World
                 Spawn(MonStat.Find("fallenshaman1"), x, y, level, root);
                 for (int i = 0; i < 4; ++i)
                 {
-                    var fallen = global::Diablerie.Game.World.WorldBuilder.SpawnMonster("fallen1", pos, root);
+                    var fallen = WorldBuilder.SpawnMonster("fallen1", pos, root);
                     fallen.level = level;
                 }
                 return true;
@@ -772,11 +639,13 @@ namespace Diablerie.Engine.World
                             {
                                 return new Vector2i(x, y);
                             }
-                            else if (cell.tileIndex == townEntryIndex)
+
+                            if (cell.tileIndex == townEntryIndex)
                             {
                                 return new Vector2i(x, y);
                             }
-                            else if (cell.tileIndex == townEntry2Index)
+
+                            if (cell.tileIndex == townEntry2Index)
                             {
                                 return new Vector2i(x, y);
                             }
