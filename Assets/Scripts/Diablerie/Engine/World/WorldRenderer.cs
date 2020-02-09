@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.Utility;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Diablerie.Engine.World
 {
     public class WorldRenderer : MonoBehaviour
     {
+        private Dictionary<DT1.Tile, Mesh> meshCache = new Dictionary<DT1.Tile, Mesh>();
+        
         private void Start()
         {
             var grid = WorldState.instance.Grid;
@@ -83,10 +86,9 @@ namespace Diablerie.Engine.World
             }
         }
 
-        public static Renderer CreateTileRenderer(DT1.Tile tile, int x, int y, int orderInLayer = 0,
+        public Renderer CreateTileRenderer(DT1.Tile tile, int x, int y, int orderInLayer = 0,
             Transform parent = null)
         {
-            var texture = tile.texture;
             var pos = Iso.MapTileToWorld(x, y);
 
             GameObject gameObject = new GameObject();
@@ -96,32 +98,9 @@ namespace Diablerie.Engine.World
                 gameObject.transform.SetParent(parent);
             var meshRenderer = gameObject.AddComponent<MeshRenderer>();
             var meshFilter = gameObject.AddComponent<MeshFilter>();
-            Mesh mesh = new Mesh();
-            float x0 = tile.textureX;
-            float y0 = tile.textureY;
-            float w = tile.width / Iso.pixelsPerUnit;
-            float h = (-tile.height) / Iso.pixelsPerUnit;
+            
             if (tile.orientation == 0 || tile.orientation == 15)
             {
-                var topLeft = new Vector3(-1f, 0.5f);
-                if (tile.orientation == 15)
-                    topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
-                mesh.vertices = new[]
-                {
-                    topLeft,
-                    topLeft + new Vector3(0, -h),
-                    topLeft + new Vector3(w, -h),
-                    topLeft + new Vector3(w, 0)
-                };
-                mesh.triangles = new[] {2, 1, 0, 3, 2, 0};
-                mesh.uv = new[]
-                {
-                    new Vector2(x0 / texture.width, -y0 / texture.height),
-                    new Vector2(x0 / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height)
-                };
-
                 meshRenderer.sortingLayerID = tile.orientation == 0 ? SortingLayers.Floor : SortingLayers.Roof;
                 meshRenderer.sortingOrder = orderInLayer;
 
@@ -129,47 +108,12 @@ namespace Diablerie.Engine.World
             }
             else if (tile.orientation > 15)
             {
-                int upperPart = Math.Min(96, -tile.height);
-                y0 -= upperPart;
-                var topLeft = new Vector3(-1f, upperPart / Iso.pixelsPerUnit - 0.5f);
-                mesh.vertices = new[]
-                {
-                    topLeft,
-                    topLeft + new Vector3(0, -h),
-                    topLeft + new Vector3(w, -h),
-                    topLeft + new Vector3(w, 0)
-                };
-                mesh.triangles = new[] {2, 1, 0, 3, 2, 0};
-                mesh.uv = new[]
-                {
-                    new Vector2(x0 / texture.width, -y0 / texture.height),
-                    new Vector2(x0 / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height)
-                };
                 meshRenderer.sortingLayerID = SortingLayers.LowerWall;
                 meshRenderer.sortingOrder = orderInLayer;
-
                 gameObject.name += " (lower wall)";
             }
             else
             {
-                var topLeft = new Vector3(-1f, h - 0.5f);
-                mesh.vertices = new[]
-                {
-                    topLeft,
-                    topLeft + new Vector3(0, -h),
-                    topLeft + new Vector3(w, -h),
-                    topLeft + new Vector3(w, 0)
-                };
-                mesh.triangles = new[] {2, 1, 0, 3, 2, 0};
-                mesh.uv = new[]
-                {
-                    new Vector2(x0 / texture.width, (-y0 - tile.height) / texture.height),
-                    new Vector2(x0 / texture.width, -y0 / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height),
-                    new Vector2((x0 + tile.width) / texture.width, (-y0 - tile.height) / texture.height)
-                };
                 if (tile.orientation == 13) // shadows
                 {
                     meshRenderer.sortingLayerID = SortingLayers.Shadow;
@@ -178,10 +122,66 @@ namespace Diablerie.Engine.World
                 meshRenderer.sortingOrder = Iso.SortingOrder(pos) - 4;
             }
 
-            meshFilter.mesh = mesh;
+            meshFilter.mesh = CreateTileMesh(tile);
 
             meshRenderer.material = tile.material;
             return meshRenderer;
+        }
+
+        private Mesh CreateTileMesh(DT1.Tile tile)
+        {
+            if (meshCache.ContainsKey(tile))
+            {
+                return meshCache[tile];
+            }
+            
+            var texture = tile.texture;
+            float x0 = tile.textureX;
+            float y0 = tile.textureY;
+            float w = tile.width / Iso.pixelsPerUnit;
+            float h = -tile.height / Iso.pixelsPerUnit;
+            Mesh mesh = new Mesh();
+            Vector3 topLeft;
+            
+            if (tile.orientation == 0 || tile.orientation == 15)
+            {
+                topLeft = new Vector3(-1f, 0.5f);
+                if (tile.orientation == 15)
+                    topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
+
+                gameObject.name += tile.orientation == 0 ? " (floor)" : " (roof)";
+            }
+            else if (tile.orientation > 15)
+            {
+                int upperPart = Math.Min(96, -tile.height);
+                y0 -= upperPart;
+                topLeft = new Vector3(-1f, upperPart / Iso.pixelsPerUnit - 0.5f);
+                gameObject.name += " (lower wall)";
+            }
+            else
+            {
+                topLeft = new Vector3(-1f, h - 0.5f);
+                y0 += tile.height;
+            }
+            
+            mesh.vertices = new[]
+            {
+                topLeft,
+                topLeft + new Vector3(0, -h),
+                topLeft + new Vector3(w, -h),
+                topLeft + new Vector3(w, 0)
+            };
+            mesh.uv = new[]
+            {
+                new Vector2(x0 / texture.width, -y0 / texture.height),
+                new Vector2(x0 / texture.width, (-y0 + tile.height) / texture.height),
+                new Vector2((x0 + tile.width) / texture.width, (-y0 + tile.height) / texture.height),
+                new Vector2((x0 + tile.width) / texture.width, -y0 / texture.height)
+            };
+            mesh.triangles = new[] {2, 1, 0, 3, 2, 0};
+            
+            meshCache.Add(tile, mesh);
+            return mesh;
         }
 
         private void PutToPopup(DT1.Tile tile, Renderer renderer, int x, int y)
@@ -194,6 +194,5 @@ namespace Diablerie.Engine.World
                 }
             }
         }
-
     }
 }
