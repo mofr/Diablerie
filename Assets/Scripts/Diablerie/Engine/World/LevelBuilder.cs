@@ -209,6 +209,7 @@ namespace Diablerie.Engine.World
             InstantiatePopups(ds1, x, y, root);
             InstantiateFloors(ds1, x, y, root);
             InstantiateShadows(ds1, x, y, root);
+            InstantiateSpecialTiles(ds1, x, y, root);
             InstantiateWalls(ds1, x, y, root);
             InstantiateObjects(ds1, x, y, root);
             UnityEngine.Profiling.Profiler.EndSample();
@@ -407,6 +408,34 @@ namespace Diablerie.Engine.World
             }
         }
 
+        private void InstantiateSpecialTiles(DS1 ds1, int offsetX, int offsetY, Transform root)
+        {
+            for (int w = 0; w < ds1.walls.Length; ++w)
+            {
+                var layerObject = new GameObject("special_tiles " + (w + 1));
+                var layerTransform = layerObject.transform;
+                layerTransform.SetParent(root);
+
+                var cells = ds1.walls[w];
+                int i = 0;
+                for (int y = 0; y < ds1.height - 1; ++y)
+                {
+                    for (int x = 0; x < ds1.width - 1; ++x)
+                    {
+                        var cell = cells[i + x];
+                        if (cell.prop1 == 0) // no tile here
+                            continue;
+
+                        if (cell.orientation == 10 || cell.orientation == 11)
+                        {
+                            CreateSpecialTile(cell, offsetX + x, offsetY + y, parent: root);
+                        }
+                    }
+                    i += ds1.width;
+                }
+            }
+        }
+    
         private void InstantiateWalls(DS1 ds1, int offsetX, int offsetY, Transform root)
         {
             for (int w = 0; w < ds1.walls.Length; ++w)
@@ -425,16 +454,11 @@ namespace Diablerie.Engine.World
                         var cell = cells[i + x];
                         if (cell.prop1 == 0) // no tile here
                             continue;
-
-                        DT1.Tile tile;
-
-                        if (cell.orientation == 10 || cell.orientation == 11)
-                        {
-                            CreateSpecialTile(cell, offsetX + x, offsetY + y, parent: root);
+                        
+                        if (cell.orientation == 10 || cell.orientation == 11)  // special tiles
                             continue;
-                        }
 
-                        if (sampler.Sample(cell.tileIndex, out tile))
+                        if (sampler.Sample(cell.tileIndex, out var tile))
                         {
                             var renderer = CreateTile(tile, offsetX + x, offsetY + y, parent: layerTransform);
                             PutToPopup(cell, renderer, offsetX + x, offsetY + y);
@@ -477,8 +501,7 @@ namespace Diablerie.Engine.World
         private void CreateSpecialTile(DS1.Cell cell, int x, int y, Transform parent)
         {
             // debug visualization
-            DT1.Tile tile;
-            if (specialTiles.Sample(cell.tileIndex, out tile))
+            if (specialTiles.Sample(cell.tileIndex, out var tile))
             {
                 var renderer = CreateTile(tile, x, y, parent: parent);
                 renderer.gameObject.layer = UnityLayers.SpecialTiles;
