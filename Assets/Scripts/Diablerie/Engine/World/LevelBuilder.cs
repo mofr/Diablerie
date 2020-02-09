@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.Utility;
@@ -18,7 +17,6 @@ namespace Diablerie.Engine.World
         public LevelInfo info;
         string name;
         DS1[] grid;
-        List<Popup> popups = new List<Popup>();
         private int popPad = 0;
         DT1.Sampler tileSampler = new DT1.Sampler();
         MonStat[] monStats;
@@ -166,7 +164,7 @@ namespace Diablerie.Engine.World
                             var popup = Popup.Create(triggerArea, revealArea, walls[i].subIndex);
                             popup.gameObject.name += "_pad" + popPad;  // TODO use popPad to adjust triggerArea
                             popup.transform.SetParent(parent);
-                            popups.Add(popup);
+                            WorldState.instance.Add(popup);
                         }
                         else
                         {
@@ -489,7 +487,7 @@ namespace Diablerie.Engine.World
     
         private void PutToPopup(DS1.Cell cell, Renderer renderer, int x, int y)
         {
-            foreach (Popup popup in popups)
+            foreach (Popup popup in WorldState.instance.Popups)
             {
                 if (popup.revealMainIndex == cell.mainIndex && popup.revealArea.Contains(x, y))
                 {
