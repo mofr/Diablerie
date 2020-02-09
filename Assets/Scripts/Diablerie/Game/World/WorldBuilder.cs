@@ -49,6 +49,7 @@ namespace Diablerie.Game.World
         public static void GoToAct(int actNumber)
         {
             Destroy(currentAct.root);
+            WorldState.instance.Grid.Reset();
             currentAct = CreateAct(actNumber);
             WorldState.instance.Player.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(currentAct.entry)));
         }

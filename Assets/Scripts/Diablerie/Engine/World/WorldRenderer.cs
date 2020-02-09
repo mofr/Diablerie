@@ -8,10 +8,31 @@ namespace Diablerie.Engine.World
 {
     public class WorldRenderer : MonoBehaviour
     {
+        private GameObject root;
+        private bool needRebuild;
         private Dictionary<DT1.Tile, Mesh> meshCache = new Dictionary<DT1.Tile, Mesh>();
-        
+
         private void Start()
         {
+            Rebuild();
+            WorldState.instance.Grid.OnReset += () => needRebuild = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (needRebuild)
+            {
+                Rebuild();
+                needRebuild = false;
+            }
+        }
+
+        private void Rebuild()
+        {
+            if (root)
+                Destroy(root);
+            root = new GameObject("Tiles");
+            Transform rootTransform = root.transform;
             var grid = WorldState.instance.Grid;
             for (int layerIndex = 0; layerIndex < grid.Floors.Length; ++layerIndex)
             {
@@ -25,7 +46,7 @@ namespace Diablerie.Engine.World
                         if (tile == null)
                             continue;
 
-                        CreateTileRenderer(tile, x, y);
+                        CreateTileRenderer(tile, x, y, rootTransform);
                     }
                     i += grid.Width;
                 }
@@ -42,7 +63,7 @@ namespace Diablerie.Engine.World
                         if (tile == null)
                             continue;
 
-                        var renderer = CreateTileRenderer(tile, x, y);
+                        var renderer = CreateTileRenderer(tile, x, y, rootTransform);
                         PutToPopup(tile, renderer, x, y);
                     }
                     i += grid.Width;
@@ -60,7 +81,7 @@ namespace Diablerie.Engine.World
                         if (tile == null)
                             continue;
 
-                        CreateTileRenderer(tile, x, y);
+                        CreateTileRenderer(tile, x, y, rootTransform);
                     }
 
                     i += grid.Width;
@@ -77,7 +98,7 @@ namespace Diablerie.Engine.World
                         if (tile == null)
                             continue;
 
-                        var renderer = CreateTileRenderer(tile, x, y);
+                        var renderer = CreateTileRenderer(tile, x, y, rootTransform);
                         renderer.gameObject.layer = UnityLayers.SpecialTiles;
                     }
 
@@ -86,12 +107,11 @@ namespace Diablerie.Engine.World
             }
         }
 
-        public Renderer CreateTileRenderer(DT1.Tile tile, int x, int y, int orderInLayer = 0,
-            Transform parent = null)
+        private Renderer CreateTileRenderer(DT1.Tile tile, int x, int y, Transform parent = null)
         {
             var pos = Iso.MapTileToWorld(x, y);
 
-            GameObject gameObject = new GameObject();
+            var gameObject = new GameObject();
             gameObject.name = tile.mainIndex + "_" + tile.subIndex + "_" + tile.orientation;
             gameObject.transform.position = pos;
             if (parent)
@@ -102,14 +122,12 @@ namespace Diablerie.Engine.World
             if (tile.orientation == 0 || tile.orientation == 15)
             {
                 meshRenderer.sortingLayerID = tile.orientation == 0 ? SortingLayers.Floor : SortingLayers.Roof;
-                meshRenderer.sortingOrder = orderInLayer;
 
                 gameObject.name += tile.orientation == 0 ? " (floor)" : " (roof)";
             }
             else if (tile.orientation > 15)
             {
                 meshRenderer.sortingLayerID = SortingLayers.LowerWall;
-                meshRenderer.sortingOrder = orderInLayer;
                 gameObject.name += " (lower wall)";
             }
             else
@@ -148,15 +166,12 @@ namespace Diablerie.Engine.World
                 topLeft = new Vector3(-1f, 0.5f);
                 if (tile.orientation == 15)
                     topLeft.y += tile.roofHeight / Iso.pixelsPerUnit;
-
-                gameObject.name += tile.orientation == 0 ? " (floor)" : " (roof)";
             }
             else if (tile.orientation > 15)
             {
                 int upperPart = Math.Min(96, -tile.height);
                 y0 -= upperPart;
                 topLeft = new Vector3(-1f, upperPart / Iso.pixelsPerUnit - 0.5f);
-                gameObject.name += " (lower wall)";
             }
             else
             {

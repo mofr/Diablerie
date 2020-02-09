@@ -11,11 +11,19 @@ namespace Diablerie.Engine.World
         private DT1.Tile[] specialTiles;
         private int width;
         private int height;
+        
+        public delegate void OnResetHandler();
+        public event OnResetHandler OnReset;
 
         public WorldGrid(int width, int height)
         {
             this.width = width;
             this.height = height;
+            Reset();
+        }
+
+        public void Reset()
+        {
             int cellCount = width * height;
             
             for (int i = 0; i < floors.Length; ++i)
@@ -28,6 +36,8 @@ namespace Diablerie.Engine.World
             }
             shadows = new DT1.Tile[cellCount];
             specialTiles = new DT1.Tile[cellCount];
+            
+            OnReset?.Invoke();
         }
 
         public void PutFloor(DT1.Tile tile, int x, int y, int layerIndex)
