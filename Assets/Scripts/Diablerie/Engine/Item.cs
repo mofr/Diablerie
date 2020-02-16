@@ -2,6 +2,7 @@
 using System.Text;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.IO.D2Formats;
+using Diablerie.Engine.LibraryExtensions;
 using Diablerie.Engine.World;
 using UnityEngine;
 
@@ -474,10 +475,11 @@ namespace Diablerie.Engine
                 }
                 else if (block.stat.descFunc == 11)
                 {
-                    sb.Append("Repairs 1 Durability In ");
-                    int paramValue = int.Parse(prop.param);
-                    sb.Append(100 / paramValue);
-                    sb.Append(" Seconds");
+                    string description = Translation.Find("ModStre9u");  // the next line in translation table right after descpos
+                    int seconds = 100 / int.Parse(prop.param);
+                    description = description.ReplaceFirst("%d", "1");
+                    description = description.ReplaceFirst("%d", seconds.ToString());
+                    sb.Append(description);
                 }
                 else if (block.stat.descFunc == 13)
                 {
