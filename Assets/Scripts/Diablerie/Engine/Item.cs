@@ -473,7 +473,7 @@ namespace Diablerie.Engine
                     sb.Append(" ");
                     sb.Append(block.stat.desc2);
                 }
-                else if (block.stat.descFunc == 11)
+                else if (block.stat.descFunc == 11) // self-repair
                 {
                     string description = Translation.Find("ModStre9u");  // the next line in translation table right after descpos
                     int seconds = 100 / int.Parse(prop.param);
