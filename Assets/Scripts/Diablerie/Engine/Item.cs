@@ -475,7 +475,8 @@ namespace Diablerie.Engine
                 else if (block.stat.descFunc == 11)
                 {
                     sb.Append("Repairs 1 Durability In ");
-                    sb.Append(100 / value);
+                    int paramValue = int.Parse(prop.param);
+                    sb.Append(100 / paramValue);
                     sb.Append(" Seconds");
                 }
                 else if (block.stat.descFunc == 13)
@@ -498,7 +499,7 @@ namespace Diablerie.Engine
                     sb.Append("skilltab" + skillTabId);
                     sb.Append(" Skill Levels (");
                     sb.Append(className);
-                    sb.Append(" Only)");
+                    sb.Append(" Only) " + block.stat.descPositive);
                 }
                 else if (block.stat.descFunc == 15)
                 {
