@@ -40,11 +40,11 @@ namespace Diablerie.Engine
         public LoadProgress LoadAll()
         {
             var progress = new LoadProgress();
-            Task.Run(() => LoadAdd(progress));
+            Task.Run(() => LoadAll(progress));
             return progress;
         }
 
-        private void LoadAdd(LoadProgress progress)
+        private void LoadAll(LoadProgress progress)
         {
             var sw = Stopwatch.StartNew();
             List<Action> actions = new List<Action>();
