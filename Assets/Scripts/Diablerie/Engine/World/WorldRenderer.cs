@@ -9,7 +9,7 @@ namespace Diablerie.Engine.World
     public class WorldRenderer : MonoBehaviour
     {
         private GameObject root;
-        private bool needRebuild;
+        private bool needRebuild = true;
         private Dictionary<DT1.Tile, Mesh> meshCache = new Dictionary<DT1.Tile, Mesh>();
 
         private void Start()
