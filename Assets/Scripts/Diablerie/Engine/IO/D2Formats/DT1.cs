@@ -169,7 +169,7 @@ namespace Diablerie.Engine.IO.D2Formats
                 dt1.tiles[i].Read(reader);
             }
 
-            Texture paletteTexture = CreatePaletteTexture(palette);
+            Texture paletteTexture = Palette.CreateTexture(palette);
 
             int textureSize = CalcTextureSize(dt1.tiles);
             var packer = new TexturePacker(textureSize, textureSize);
@@ -254,15 +254,6 @@ namespace Diablerie.Engine.IO.D2Formats
                 texture.LoadRawTextureData(pixels);
                 texture.Apply(false);
             }
-        }
-
-        private static Texture CreatePaletteTexture(Color32[] palette)
-        {
-            Texture2D texture = new Texture2D(256, 1, TextureFormat.RGBA32, false);
-            texture.filterMode = FilterMode.Point;
-            texture.SetPixels32(palette);
-            texture.Apply();
-            return texture;
         }
 
         public static DT1 Load(string filename, Color32[] palette, bool mpq = true)

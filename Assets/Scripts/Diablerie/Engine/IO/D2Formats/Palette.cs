@@ -7,6 +7,7 @@ namespace Diablerie.Engine.IO.D2Formats
     public static class Palette
     {
         private static readonly Dictionary<PaletteType, Color32[]> Palettes = new Dictionary<PaletteType, Color32[]>();
+        private static readonly Dictionary<PaletteType, Texture2D> Textures = new Dictionary<PaletteType, Texture2D>();
         private static readonly Dictionary<PaletteType, string> PaletteMappings = new Dictionary<PaletteType, string> {
             { PaletteType.Act1, @"data\global\palette\ACT1\Pal.PL2" },
             { PaletteType.Act2, @"data\global\palette\ACT2\Pal.PL2" },
@@ -44,6 +45,27 @@ namespace Diablerie.Engine.IO.D2Formats
             return Palettes.ContainsKey(paletteType) ? Palettes[paletteType] : LoadPalette(paletteType);
         }
         
+        public static Texture2D GetPaletteTexture(PaletteType paletteType)
+        {
+            return Textures.ContainsKey(paletteType) ? Textures[paletteType] : CreateTexture(paletteType);
+        }
+        
+        public static Texture2D CreateTexture(Color32[] palette)
+        {
+            Texture2D texture = new Texture2D(256, 1, TextureFormat.RGBA32, false);
+            texture.filterMode = FilterMode.Point;
+            texture.SetPixels32(palette);
+            texture.Apply();
+            return texture;
+        }
+
+        private static Texture2D CreateTexture(PaletteType paletteType)
+        {
+            Texture2D texture = CreateTexture(GetPalette(paletteType));
+            Textures[paletteType] = texture;
+            return texture;
+        }
+
         private static Color32[] LoadPalette(PaletteType paletteType)
         {
             var palette = new Color32[256];
