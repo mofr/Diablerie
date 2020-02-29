@@ -169,11 +169,13 @@ namespace Diablerie.Engine.IO.D2Formats
                 dt1.tiles[i].Read(reader);
             }
 
+            Texture paletteTexture = CreatePaletteTexture(palette);
+
             int textureSize = CalcTextureSize(dt1.tiles);
             var packer = new TexturePacker(textureSize, textureSize);
             Material material = null;
             Texture2D texture = null;
-            Color32[] pixels = null;
+            byte[] pixels = null;
 
             for (int i = 0; i < tileCount; ++i)
             {
@@ -190,16 +192,17 @@ namespace Diablerie.Engine.IO.D2Formats
                 {
                     if (texture != null)
                     {
-                        texture.SetPixels32(pixels);
+                        texture.LoadRawTextureData(pixels);
                         texture.Apply(false);
                     }
 
-                    texture = new Texture2D(textureSize, textureSize, TextureFormat.ARGB32, false);
+                    texture = new Texture2D(textureSize, textureSize, TextureFormat.Alpha8, false);
                     texture.filterMode = FilterMode.Point;
                     dt1.textures.Add(texture);
-                    material = new Material(Shader.Find("Sprite"));
+                    material = new Material(Shader.Find("IndexedSprite"));
                     material.mainTexture = texture;
-                    pixels = new Color32[textureSize * textureSize];
+                    material.SetTexture("_Palette", paletteTexture);
+                    pixels = new byte[textureSize * textureSize];
                 }
 
                 tile.textureX = pack.x;
@@ -237,20 +240,29 @@ namespace Diablerie.Engine.IO.D2Formats
 
                     if (format == 1)
                     {
-                        drawBlockIsometric(pixels, palette, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
+                        drawBlockIsometric(pixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
                     }
                     else
                     {
-                        drawBlockNormal(pixels, palette, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
+                        drawBlockNormal(pixels, textureSize, tile.textureX + x, tile.textureY + y, bytes, blockDataPosition, length);
                     }
                 }
             }
 
             if (texture != null)
             {
-                texture.SetPixels32(pixels);
+                texture.LoadRawTextureData(pixels);
                 texture.Apply(false);
             }
+        }
+
+        private static Texture CreatePaletteTexture(Color32[] palette)
+        {
+            Texture2D texture = new Texture2D(256, 1, TextureFormat.RGBA32, false);
+            texture.filterMode = FilterMode.Point;
+            texture.SetPixels32(palette);
+            texture.Apply();
+            return texture;
         }
 
         public static DT1 Load(string filename, Color32[] palette, bool mpq = true)
@@ -295,7 +307,7 @@ namespace Diablerie.Engine.IO.D2Formats
             }
         }
 
-        static void drawBlockNormal(Color32[] texturePixels, Color32[] palette, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
+        static void drawBlockNormal(byte[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
         {
             if(y0 < 0)
             {
@@ -319,7 +331,7 @@ namespace Diablerie.Engine.IO.D2Formats
                     length -= b2;
                     while (b2 != 0)
                     {
-                        texturePixels[dst + x] = palette[data[ptr]];
+                        texturePixels[dst + x] = data[ptr];
                         ptr++;
                         x++;
                         b2--;
@@ -337,7 +349,7 @@ namespace Diablerie.Engine.IO.D2Formats
         static int[] xjump = { 14, 12, 10, 8, 6, 4, 2, 0, 2, 4, 6, 8, 10, 12, 14 };
         static int[] nbpix = { 4, 8, 12, 16, 20, 24, 28, 32, 28, 24, 20, 16, 12, 8, 4 };
 
-        static void drawBlockIsometric(Color32[] texturePixels, Color32[] palette, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
+        static void drawBlockIsometric(byte[] texturePixels, int textureSize, int x0, int y0, byte[] data, int ptr, int length)
         {
             int dst = texturePixels.Length - y0 * textureSize - textureSize + x0;
             int x, y = 0, n;
@@ -354,7 +366,7 @@ namespace Diablerie.Engine.IO.D2Formats
                 length -= n;
                 while (n != 0)
                 {
-                    texturePixels[dst + x] = palette[data[ptr]];
+                    texturePixels[dst + x] = data[ptr];
                     ptr++;
                     x++;
                     n--;
