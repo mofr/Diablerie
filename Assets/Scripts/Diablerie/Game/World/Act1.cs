@@ -10,9 +10,7 @@ namespace Diablerie.Game.World
     {
         public Act1()
         {
-            palette = Palette.GetPalette(PaletteType.Act1);
-            
-            var town = new LevelBuilder("Act 1 - Town", palette);
+            var town = new LevelBuilder("Act 1 - Town");
             var bloodMoor = CreateBloodMoor();
 
             var townOffset = new Vector2i(bloodMoor.gridWidth * bloodMoor.gridX - town.gridWidth * town.gridX, bloodMoor.gridHeight * bloodMoor.gridY);
@@ -33,7 +31,7 @@ namespace Diablerie.Game.World
 
         private LevelBuilder CreateDenOfEvil()
         {
-            var builder = new LevelBuilder("Act 1 - Cave 1", palette);
+            var builder = new LevelBuilder("Act 1 - Cave 1");
             var mazePalette = new Maze.Palette();
             mazePalette.special = new LevelPreset[][] {
                 new LevelPreset[] {
@@ -61,7 +59,7 @@ namespace Diablerie.Game.World
 
         private LevelBuilder CreateBloodMoor()
         {
-            var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", palette, 8, 8);
+            var bloodMoor = new LevelBuilder("Act 1 - Wilderness 1", 8, 8);
             var riverN = DS1.Load(@"data\global\tiles\act1\outdoors\UriverN.ds1");
             var uRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Uriver.ds1");
             var lRiver = DS1.Load(@"data\global\tiles\act1\outdoors\Lriver.ds1");

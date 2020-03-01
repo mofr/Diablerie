@@ -34,17 +34,16 @@ namespace Diablerie.Engine.World
         static DT1.Sampler specialTiles = new DT1.Sampler();
         static LevelBuilder()
         {
-            // todo: Maybe add customized palette
             var palette = Palette.GetPalette(PaletteType.Act1);
             var dt1 = DT1.Load(Application.streamingAssetsPath + "/ds1edit.dt1", palette, mpq: false);
             specialTiles.Add(dt1.tiles);
         }
 
-        public LevelBuilder(string name, Color32[] palette, int gridX = -1, int gridY = -1)
+        public LevelBuilder(string name, int gridX = -1, int gridY = -1)
         {
             info = LevelInfo.Find(name);
             this.name = info.levelName;
-            this.palette = palette;
+            palette = Palette.GetPalette(info.act);
 
             if (info.preset != null)
             {

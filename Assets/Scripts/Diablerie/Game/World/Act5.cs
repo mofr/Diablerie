@@ -8,9 +8,7 @@ namespace Diablerie.Game.World
     {
         public Act5()
         {
-            palette = Palette.GetPalette(PaletteType.Act5);
-            
-            var town = new LevelBuilder("Act 5 - Town", palette);
+            var town = new LevelBuilder("Act 5 - Town");
             root = town.Instantiate(new Vector2i(0, 0));
             entry = town.FindEntry();
         }
