@@ -8,6 +8,7 @@ namespace Diablerie.Engine
         public static Material normal;
         public static Material softAdditive;
         public static Material shadow;
+        public static Material indexed;
 
         private static MaterialPropertyBlock materialProperties;
 
@@ -18,6 +19,7 @@ namespace Diablerie.Engine
             shadow = new Material(Shader.Find("Skew"));
             shadow.SetFloat("_HorizontalSkew", -0.33f);
             shadow.SetColor("_Color", new Color(0, 0, 0, 0.85f));
+            indexed = new Material(Shader.Find("IndexedSprite"));
         }
 
         private void Awake()

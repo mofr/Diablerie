@@ -199,7 +199,7 @@ namespace Diablerie.Engine.IO.D2Formats
                     texture = new Texture2D(textureSize, textureSize, TextureFormat.Alpha8, false);
                     texture.filterMode = FilterMode.Point;
                     dt1.textures.Add(texture);
-                    material = new Material(Shader.Find("IndexedSprite"));
+                    material = new Material(Materials.indexed);  // TODO use single material and property blocks
                     material.mainTexture = texture;
                     material.SetTexture("_Palette", paletteTexture);
                     pixels = new byte[textureSize * textureSize];
