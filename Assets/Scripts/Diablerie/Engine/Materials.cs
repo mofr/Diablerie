@@ -5,10 +5,6 @@ namespace Diablerie.Engine
     [ExecuteInEditMode]
     public class Materials : MonoBehaviour
     {
-        public Material _normal;
-        public Material _softAdditive;
-        public Material _shadow;
-
         public static Material normal;
         public static Material softAdditive;
         public static Material shadow;
@@ -17,9 +13,11 @@ namespace Diablerie.Engine
 
         private void OnEnable()
         {
-            normal = _normal;
-            softAdditive = _softAdditive;
-            shadow = _shadow;
+            normal = new Material(Shader.Find("Sprite"));
+            softAdditive = new Material(Shader.Find("Legacy Shaders/Particles/Additive (Soft)"));
+            shadow = new Material(Shader.Find("Skew"));
+            shadow.SetFloat("_HorizontalSkew", -0.33f);
+            shadow.SetColor("_Color", new Color(0, 0, 0, 0.85f));
         }
 
         private void Awake()
