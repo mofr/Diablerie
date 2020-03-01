@@ -24,7 +24,6 @@ namespace Diablerie.Engine.Entities
         private List<Layer> layers = new List<Layer>();
         private bool _selected = false;
         private Material shadowMaterial;
-        private static MaterialPropertyBlock materialProperties;
         private bool configChanged = false;
         private bool modeChanged = false;
 
@@ -183,8 +182,6 @@ namespace Diablerie.Engine.Entities
 
         void Awake()
         {
-            if (materialProperties == null)
-                materialProperties = new MaterialPropertyBlock();
             shadowMaterial = new Material(Materials.shadow);
         }
 
