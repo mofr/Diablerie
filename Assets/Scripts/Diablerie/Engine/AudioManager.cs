@@ -2,28 +2,30 @@
 using System.Collections.Generic;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.LibraryExtensions;
-using Diablerie.Engine.World;
 using UnityEngine;
 
 namespace Diablerie.Engine
 {
     public class AudioManager : MonoBehaviour
     {
-        public static AudioManager instance;
+        public static AudioManager instance => _instance;
+        
+        private static AudioManager _instance;
         Dictionary<LevelInfo, AudioSource> songs = new Dictionary<LevelInfo, AudioSource>();
         const float CrossfadeDuration = 10;
         Coroutine eventsCoroutine;
         AudioSource ambient;
         private Dictionary<SoundInfo, float> lastStartedMap = new Dictionary<SoundInfo, float>();
 
+        public static void Initialize()
+        {
+            new GameObject("AudioManager", typeof(AudioManager));
+        }
+        
         private void Awake()
         {
-            if (instance != null)
-            {
-                Destroy(this);
-                return;
-            }
-            instance = this;
+            Debug.Assert(_instance == null);
+            _instance = this;
             Level.OnLevelChange += OnLevelChange;
             DontDestroyOnLoad(this);
         }
@@ -94,7 +96,7 @@ namespace Diablerie.Engine
             var audioSource = Create("Sound " + sound.sound);
             Play(sound, audioSource, delay: delay, volume: volume);
             if (!sound.loop)
-                Object.Destroy(audioSource.gameObject, sound.clip != null ? sound.clip.length + 0.1f : 0);
+                Destroy(audioSource.gameObject, sound.clip != null ? sound.clip.length + 0.1f : 0);
             return audioSource;
         }
 

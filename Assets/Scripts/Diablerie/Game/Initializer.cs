@@ -35,6 +35,7 @@ namespace Diablerie.Game
             Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
             var dataLoader = new DataLoader(paths);
             loadProgress = dataLoader.LoadAll();
+            AudioManager.Initialize();
         }
 
         void Update()
