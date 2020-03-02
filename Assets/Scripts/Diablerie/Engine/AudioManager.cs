@@ -82,6 +82,7 @@ namespace Diablerie.Engine
         public AudioSource Create(string name)
         {
             var gameObject = new GameObject(name);
+            gameObject.transform.SetParent(transform, true);
             var audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.minDistance = 1.5f;
             audioSource.dopplerLevel = 0.0f;
