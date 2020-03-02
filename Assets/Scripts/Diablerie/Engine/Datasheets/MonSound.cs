@@ -47,6 +47,7 @@ namespace Diablerie.Engine.Datasheets
                 sound.weapon2Volume = sound._weapon2Volume / 255f;
                 sound.hitDelay = sound._hitDelay / 25f;
                 sound.deathDelay = sound._deathDelay / 25f;
+                sound.neutralDelay = sound._neuTime / 25f;
                 map.Add(sound.id, sound);
             }
         }
@@ -74,11 +75,11 @@ namespace Diablerie.Engine.Datasheets
         public string _skill4;
         public string _footstep;
         public string _footstepLayer;
-        public string _fsCnt;
-        public string _fsOff;
-        public string _fsPrb;
+        public int _fsCnt;
+        public int _fsOff;
+        public int _fsPrb;
         public string _neutral;
-        public string _neuTime;
+        public int _neuTime;
         public string _init;
         public string _taunt;
         public string _flee;
@@ -149,5 +150,8 @@ namespace Diablerie.Engine.Datasheets
 
         [System.NonSerialized]
         public float deathDelay;
+        
+        [System.NonSerialized]
+        public float neutralDelay;
     }
 }
