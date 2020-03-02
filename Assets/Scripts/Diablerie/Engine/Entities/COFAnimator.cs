@@ -182,7 +182,7 @@ namespace Diablerie.Engine.Entities
 
         void Awake()
         {
-            shadowMaterial = new Material(Materials.shadow);
+            shadowMaterial = new Material(Materials.Shadow);
         }
 
         void Update()

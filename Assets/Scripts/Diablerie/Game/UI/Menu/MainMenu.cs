@@ -67,8 +67,8 @@ namespace Diablerie.Game.UI.Menu
         {
             var logo = new GameObject("logo");
 
-            var left = UiHelper.CreateAnimatedObject("leftLogo", @"data\global\ui\FrontEnd\d2LogoFireLeft", material: Materials.softAdditive, sortingOrder: 1);
-            var right = UiHelper.CreateAnimatedObject("rightLogo", @"data\global\ui\FrontEnd\d2LogoFireRight", material: Materials.softAdditive, sortingOrder: 1);
+            var left = UiHelper.CreateAnimatedObject("leftLogo", @"data\global\ui\FrontEnd\d2LogoFireLeft", material: Materials.SoftAdditive, sortingOrder: 1);
+            var right = UiHelper.CreateAnimatedObject("rightLogo", @"data\global\ui\FrontEnd\d2LogoFireRight", material: Materials.SoftAdditive, sortingOrder: 1);
 
             left.transform.SetParent(logo.transform, false);
             right.transform.SetParent(logo.transform, false);

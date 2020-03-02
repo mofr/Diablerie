@@ -36,7 +36,7 @@ namespace Diablerie.Engine.Entities
             if (!loop)
                 overlay.animator.OnFinish += overlay.OnAnimationFinish;
             overlay.renderer = overlayObject.GetComponent<SpriteRenderer>();
-            overlay.renderer.material = Materials.softAdditive;
+            overlay.renderer.material = Materials.SoftAdditive;
             return overlay;
         }
 

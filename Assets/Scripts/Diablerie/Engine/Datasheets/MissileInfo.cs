@@ -207,7 +207,7 @@ namespace Diablerie.Engine.Datasheets
                     continue;
 
                 row.spritesheetFilename = @"data\global\missiles\" + row.celFile;
-                row.material = row.trans == 0 ? Materials.normal : Materials.softAdditive;
+                row.material = row.trans == 0 ? Materials.Normal : Materials.SoftAdditive;
                 row.lifeTime = row.range / 25.0f;
                 row.explosionMissile = Find(row.explosionMissileId);
                 row.fps = row.animSpeed;

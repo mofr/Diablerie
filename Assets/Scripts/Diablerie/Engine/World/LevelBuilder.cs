@@ -332,7 +332,7 @@ namespace Diablerie.Engine.World
                     var line = cellObject.AddComponent<LineRenderer>();
                     line.startWidth = 0.1f;
                     line.endWidth = 0.1f;
-                    line.material = Materials.normal;
+                    line.material = Materials.Normal;
                     line.useWorldSpace = false;
                     var corners = new[] {
                         Iso.MapTileToWorld(0, 0),

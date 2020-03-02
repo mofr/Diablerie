@@ -2,38 +2,55 @@
 
 namespace Diablerie.Engine
 {
-    [ExecuteInEditMode]
-    public class Materials : MonoBehaviour
+    public class Materials
     {
-        public static Material normal;
-        public static Material softAdditive;
-        public static Material shadow;
-        public static Material indexed;
-
-        private static MaterialPropertyBlock materialProperties;
-
-        private void OnEnable()
+        private static Materials _instance;
+        
+        public static void Initialize()
         {
-            normal = new Material(Shader.Find("Sprite"));
-            softAdditive = new Material(Shader.Find("Legacy Shaders/Particles/Additive (Soft)"));
-            shadow = new Material(Shader.Find("Skew"));
-            shadow.SetFloat("_HorizontalSkew", -0.33f);
-            shadow.SetColor("_Color", new Color(0, 0, 0, 0.85f));
-            indexed = new Material(Shader.Find("IndexedSprite"));
+            Debug.Assert(_instance == null);
+            _instance = new Materials();
         }
 
-        private void Awake()
+        private static Materials Instance
         {
-            if (materialProperties == null)
-                materialProperties = new MaterialPropertyBlock();
+            get
+            {
+                if (_instance == null)
+                    Initialize();
+                return _instance;
+            }
+        }
+        
+        public static Material Normal => Instance._normal;
+        public static Material SoftAdditive => Instance._softAdditive;
+        public static Material Shadow => Instance._shadow;
+        public static Material Indexed => Instance._indexed;
+        
+        private Material _normal;
+        private Material _softAdditive;
+        private Material _shadow;
+        private Material _indexed;
+
+        private MaterialPropertyBlock _materialProperties;
+
+        private Materials()
+        {
+            _normal = new Material(Shader.Find("Sprite"));
+            _softAdditive = new Material(Shader.Find("Legacy Shaders/Particles/Additive (Soft)"));
+            _shadow = new Material(Shader.Find("Skew"));
+            _shadow.SetFloat("_HorizontalSkew", -0.33f);
+            _shadow.SetColor("_Color", new Color(0, 0, 0, 0.85f));
+            _indexed = new Material(Shader.Find("IndexedSprite"));
+            _materialProperties = new MaterialPropertyBlock();
         }
 
         public static void SetRendererHighlighted(Renderer renderer, bool highlighted)
         {
-            renderer.GetPropertyBlock(materialProperties);
-            materialProperties.SetFloat("_Brightness", highlighted ? 3.0f : 1.0f);
-            materialProperties.SetFloat("_Contrast", highlighted ? 1.01f : 1.0f);
-            renderer.SetPropertyBlock(materialProperties);
+            renderer.GetPropertyBlock(Instance._materialProperties);
+            Instance._materialProperties.SetFloat("_Brightness", highlighted ? 3.0f : 1.0f);
+            Instance._materialProperties.SetFloat("_Contrast", highlighted ? 1.01f : 1.0f);
+            renderer.SetPropertyBlock(Instance._materialProperties);
         }
     }
 }

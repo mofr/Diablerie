@@ -95,11 +95,11 @@ namespace Diablerie.Engine.IO.D2Formats
                     int blendMode = reader.ReadByte();
                     if (transparent)
                     {
-                        layer.material = Materials.softAdditive;
+                        layer.material = Materials.SoftAdditive;
                     }
                     else
                     {
-                        layer.material = Materials.normal;
+                        layer.material = Materials.Normal;
                     }
 
                     layer.weaponClass = System.Text.Encoding.Default.GetString(reader.ReadBytes(4), 0, 3);

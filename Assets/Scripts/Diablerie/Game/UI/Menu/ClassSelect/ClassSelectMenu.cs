@@ -48,7 +48,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
         
         private void Awake()
         {
-            _fire = UiHelper.CreateAnimatedObject("fire", @"data\global\ui\FrontEnd\fire", PaletteType.Fechar, Materials.softAdditive, sortingOrder: 15);
+            _fire = UiHelper.CreateAnimatedObject("fire", @"data\global\ui\FrontEnd\fire", PaletteType.Fechar, Materials.SoftAdditive, sortingOrder: 15);
             _fire.transform.position = UiHelper.ScreenToWorldPoint(firePlaceholder.position);
             _fire.transform.parent = firePlaceholder;
             

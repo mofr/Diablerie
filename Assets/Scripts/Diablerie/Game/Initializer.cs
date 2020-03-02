@@ -31,11 +31,12 @@ namespace Diablerie.Game
         
         void Awake()
         {
+            Materials.Initialize();
+            AudioManager.Initialize();
             Datasheet.SetLocation(typeof(BodyLoc), "data/global/excel/bodylocs.txt");
             Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
             var dataLoader = new DataLoader(paths);
             loadProgress = dataLoader.LoadAll();
-            AudioManager.Initialize();
         }
 
         void Update()
