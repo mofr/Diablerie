@@ -37,6 +37,7 @@ namespace Diablerie.Game
             Datasheet.SetLocation(typeof(SoundInfo), "data/global/excel/Sounds.txt");
             var dataLoader = new DataLoader(paths);
             loadProgress = dataLoader.LoadAll();
+            ScreenMessage.Show("Loading... ");
         }
 
         void Update()
@@ -53,11 +54,10 @@ namespace Diablerie.Game
                     ScreenMessage.Hide();
                     Instantiate(mainMenuPrefab);
                 }
-                Destroy(this);
+                Destroy(gameObject);
             }
             else
             {
-                ScreenMessage.Show("Loading... ");
                 if (Input.GetKeyDown(KeyCode.Escape))
                     GameManager.QuitGame();
             }
