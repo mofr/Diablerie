@@ -15,6 +15,8 @@ namespace Diablerie.Game.UI.ControlPanel
 
         void Update()
         {
+            if (WorldState.instance.Player == null)
+                return;
             int level = WorldState.instance.Player.charStat.level;
             uint currExp = WorldState.instance.Player.charStat.experience;
             uint currLevelExp = WorldState.instance.Player.charStat.currentLevelExp;

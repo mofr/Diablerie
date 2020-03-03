@@ -26,6 +26,8 @@ namespace Diablerie.Game.UI.Inventory
             if (_player != null)
                 _player.equip.OnUpdate += UpdateEquip;
 
+            enabled = _player != null;
+            
             foreach (var slot in slots)
             {
                 slot.SetPlayer(player);
@@ -52,6 +54,8 @@ namespace Diablerie.Game.UI.Inventory
                 slot.SetPlayer(_player);
                 slots[i] = slot;
             }
+
+            enabled = false;
         }
 
         public void Update()
