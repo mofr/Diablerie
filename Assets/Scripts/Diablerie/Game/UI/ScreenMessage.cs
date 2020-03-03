@@ -31,6 +31,16 @@ namespace Diablerie.Game.UI
             gameObject = new GameObject("Screen Message");
             var canvas = gameObject.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            
+            var backgroundGameObject = new GameObject("Background");
+            var backgroundImage = backgroundGameObject.AddComponent<RawImage>();
+            backgroundImage.color = Color.black;
+            var backgroundTransform = backgroundGameObject.GetComponent<RectTransform>();
+            backgroundTransform.SetParent(gameObject.transform);
+            backgroundTransform.anchorMin = new Vector2(0, 0);
+            backgroundTransform.anchorMax = new Vector2(1, 1);
+            backgroundTransform.pivot = new Vector2(0.5f, 0.5f);
+            backgroundTransform.anchoredPosition = new Vector2(0, 0);
 
             var textGameObject = new GameObject("Text");
             text = textGameObject.AddComponent<Text>();
@@ -43,6 +53,7 @@ namespace Diablerie.Game.UI
             text.alignment = TextAnchor.MiddleCenter;
             text.color = Color.white;
             text.font = Fonts.GetFont30();
+            Object.DontDestroyOnLoad(gameObject);
         }
 
         private void ShowInternal(string message)
