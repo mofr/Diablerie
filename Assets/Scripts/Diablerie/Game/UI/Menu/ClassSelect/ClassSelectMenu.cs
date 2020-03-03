@@ -36,7 +36,7 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
 
         private IEnumerator LoadGame()
         {
-            ScreenMessage.Show("Generating the world..."); // TODO replace with LoadingScreen
+            LoadingScreen.Show();
             yield return null;
             SceneManager.LoadScene("Game");
         }

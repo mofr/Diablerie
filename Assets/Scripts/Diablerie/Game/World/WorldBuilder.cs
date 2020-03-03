@@ -18,18 +18,23 @@ namespace Diablerie.Game.World
         {
             PlayerController.instance.enabled = false;
             MouseSelection.instance.enabled = false;
-            ScreenMessage.Show("Generating the world...");
+            LoadingScreen.Show(0.5f);
             ScreenFader.SetToBlack();
             yield return null;
             
             currentAct = CreateAct(1);
+            
+            LoadingScreen.Show(0.9f);
+            yield return null;
+            
             WorldState.instance.Player = new Player(className, currentAct.entry);
             PlayerController.instance.SetPlayer(WorldState.instance.Player);
             
+            LoadingScreen.Show(1.0f);
             yield return null; // Workaround to load first DCC while screen is black to avoid visible spikes
             PlayerController.instance.enabled = true;
             MouseSelection.instance.enabled = true;
-            ScreenMessage.Hide();
+            LoadingScreen.Hide();
             ScreenFader.FadeToClear();
         }
 
