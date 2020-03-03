@@ -150,7 +150,7 @@ namespace Diablerie.Game.UI
             {
                 if (int.TryParse(parts[1], out int actNumber))
                 {
-                    WorldBuilder.GoToAct(actNumber);
+                    WorldBuilder.LoadAct(actNumber);
                 }
             }
             else if (parts.Length == 2 && parts[0] == "/addstate")

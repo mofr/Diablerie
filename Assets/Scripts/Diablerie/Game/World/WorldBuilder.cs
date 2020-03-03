@@ -12,26 +12,51 @@ namespace Diablerie.Game.World
     public class WorldBuilder : MonoBehaviour
     {
         public static string className = "Sorceress";
-        private static Act currentAct;
+        
+        private Act _currentAct;
+        private static WorldBuilder instance;
 
-        IEnumerator Start()
+        private void Awake()
+        {
+            instance = this;
+        }
+
+        private void Start()
+        {
+            StartCoroutine(LoadActCoroutine(1));
+        }
+
+        private IEnumerator LoadActCoroutine(int actNumber)
         {
             PlayerController.instance.enabled = false;
             MouseSelection.instance.enabled = false;
-            LoadingScreen.Show(0.5f);
+            LoadingScreen.Show(0.5f);  // It's not zero due to preceding Unity scene load
             ScreenFader.SetToBlack();
             yield return null;
             
-            currentAct = CreateAct(1);
+            if (_currentAct != null)
+                Destroy(_currentAct.root);
+            _currentAct = CreateAct(actNumber);
             
-            LoadingScreen.Show(0.9f);
+            LoadingScreen.Show(0.75f);
             yield return null;
-            
-            WorldState.instance.Player = new Player(className, currentAct.entry);
-            PlayerController.instance.SetPlayer(WorldState.instance.Player);
+
+            if (WorldState.instance.Player == null)
+            {
+                WorldState.instance.Player = new Player(className, _currentAct.entry);
+                PlayerController.instance.SetPlayer(WorldState.instance.Player);
+            }
+            else
+            {
+                WorldState.instance.Player.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(_currentAct.entry)));
+            }
+
+            LoadingScreen.Show(0.9f);
+            yield return null; // Workaround to load first DCC while screen is black to avoid visible spikes
             
             LoadingScreen.Show(1.0f);
-            yield return null; // Workaround to load first DCC while screen is black to avoid visible spikes
+            yield return null;
+            
             PlayerController.instance.enabled = true;
             MouseSelection.instance.enabled = true;
             LoadingScreen.Hide();
@@ -65,11 +90,9 @@ namespace Diablerie.Game.World
             return new Act1();
         }
 
-        public static void GoToAct(int actNumber)
+        public static void LoadAct(int actNumber)
         {
-            Destroy(currentAct.root);
-            currentAct = CreateAct(actNumber);
-            WorldState.instance.Player.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(currentAct.entry)));
+            instance.StartCoroutine(instance.LoadActCoroutine(actNumber));
         }
 
         public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null, Character summoner = null)
