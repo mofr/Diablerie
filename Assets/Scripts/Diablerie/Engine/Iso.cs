@@ -11,7 +11,6 @@ namespace Diablerie.Engine
         public const float tileSize = 0.2f;
         public const float tileSizeY = tileSize / 2;
         public Vector2 pos;
-        public bool macro = false;
         public bool sort = true;
 
         new Renderer renderer;
