@@ -92,6 +92,7 @@ namespace Diablerie.Game.World
 
         public static void LoadAct(int actNumber)
         {
+            AudioManager.instance.Play("player_townportal_enter");
             instance.StartCoroutine(instance.LoadActCoroutine(actNumber));
         }
 
