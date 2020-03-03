@@ -15,8 +15,7 @@ namespace Diablerie.Game.World
         void Start()
         {
             currentAct = CreateAct(1);
-            Vector3 playerPos = Iso.MapTileToWorld(currentAct.entry);
-            WorldState.instance.Player = new Player(className, playerPos);
+            WorldState.instance.Player = new Player(className, currentAct.entry);
             PlayerController.instance.SetPlayer(WorldState.instance.Player);
         }
 

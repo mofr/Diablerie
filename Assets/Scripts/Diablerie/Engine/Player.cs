@@ -1,5 +1,6 @@
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
+using Diablerie.Engine.Utility;
 using Diablerie.Game.World;
 using UnityEngine;
 
@@ -32,12 +33,12 @@ namespace Diablerie.Engine
         public delegate void OnHandsItemChangedHandler(Item item);
         public event OnHandsItemChangedHandler HandsItemChanged;
 
-        public Player(string className, Vector3 pos)
+        public Player(string className, Vector2i pos)
         {
             charStatInfo = CharStatsInfo.Find(className);
             gameObject = new GameObject("Player");
             transform = gameObject.transform;
-            transform.position = pos;
+            transform.position = Iso.MapTileToWorld(pos);
             gameObject.tag = "Player";
             character = gameObject.AddComponent<Character>();
             character.basePath = @"data\global\chars";
