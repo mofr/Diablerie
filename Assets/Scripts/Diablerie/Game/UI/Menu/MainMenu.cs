@@ -93,7 +93,7 @@ namespace Diablerie.Game.UI.Menu
                 _musicStream = Mpq.fs.OpenFile(@"data\global\music\introedit.wav");
                 var clip = Wav.Load("intro music", true, _musicStream);
                 var musicObject = new GameObject("intro music");
-                musicObject.transform.parent = logoPlaceholder;
+                musicObject.transform.parent = transform;
                 var audioSource = musicObject.AddComponent<AudioSource>();
                 audioSource.clip = clip;
                 audioSource.loop = true;
