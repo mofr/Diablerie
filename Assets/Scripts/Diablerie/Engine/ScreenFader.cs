@@ -17,7 +17,6 @@ namespace Diablerie.Engine
 
             GameObject overlayObject = new GameObject("ScreenFader");
             overlay = overlayObject.AddComponent<RawImage>();
-            overlay.color = new Color(0, 0, 0, 0.0f);
             overlay.raycastTarget = false;
 
             Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -26,16 +25,20 @@ namespace Diablerie.Engine
             overlay.rectTransform.anchorMin = new Vector2(0, 0);
             overlay.rectTransform.anchorMax = new Vector2(1, 1);
             overlay.raycastTarget = false;
-        }
-
-        void Start()
-        {
-            FadeToClear();
+            
+            SetToClear();
         }
 
         public static void SetToBlack()
         {
+            instance.overlay.color = new Color(0, 0, 0, 1.0f);
             instance.t = 0;
+        }
+
+        public static void SetToClear()
+        {
+            instance.overlay.color = new Color(0, 0, 0, 0.0f);
+            instance.t = 1;
         }
 
         public static void FadeToBlack(float duration = 0.5f)

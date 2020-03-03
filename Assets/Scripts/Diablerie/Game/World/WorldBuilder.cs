@@ -1,8 +1,10 @@
-﻿using Diablerie.Engine;
+﻿using System.Collections;
+using Diablerie.Engine;
 using Diablerie.Engine.Datasheets;
 using Diablerie.Engine.Entities;
 using Diablerie.Engine.World;
 using Diablerie.Game.AI;
+using Diablerie.Game.UI;
 using UnityEngine;
 
 namespace Diablerie.Game.World
@@ -12,15 +14,28 @@ namespace Diablerie.Game.World
         public static string className = "Sorceress";
         private static Act currentAct;
 
-        void Start()
+        IEnumerator Start()
         {
+            PlayerController.instance.enabled = false;
+            MouseSelection.instance.enabled = false;
+            ScreenMessage.Show("Generating the world...");
+            ScreenFader.SetToBlack();
+            yield return null;
+            
             currentAct = CreateAct(1);
             WorldState.instance.Player = new Player(className, currentAct.entry);
             PlayerController.instance.SetPlayer(WorldState.instance.Player);
+            
+            yield return null; // Workaround to load first DCC while screen is black to avoid visible spikes
+            PlayerController.instance.enabled = true;
+            MouseSelection.instance.enabled = true;
+            ScreenMessage.Hide();
+            ScreenFader.FadeToClear();
         }
 
         static Act CreateAct(int actNumber)
         {
+            WorldState.instance.Grid.Reset();
             if (actNumber == 1)
             {
                 return new Act1();
@@ -48,7 +63,6 @@ namespace Diablerie.Game.World
         public static void GoToAct(int actNumber)
         {
             Destroy(currentAct.root);
-            WorldState.instance.Grid.Reset();
             currentAct = CreateAct(actNumber);
             WorldState.instance.Player.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(currentAct.entry)));
         }
