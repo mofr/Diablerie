@@ -8,11 +8,13 @@ namespace Diablerie.Engine
 {
     public class AudioManager : MonoBehaviour
     {
+        const float CrossfadeDuration = 10;
+        const float FastCrossfadeDuration = 1;
+        
         public static AudioManager instance => _instance;
         
         private static AudioManager _instance;
         Dictionary<LevelInfo, AudioSource> songs = new Dictionary<LevelInfo, AudioSource>();
-        const float CrossfadeDuration = 10;
         Coroutine eventsCoroutine;
         AudioSource ambient;
         private Dictionary<SoundInfo, float> lastStartedMap = new Dictionary<SoundInfo, float>();
@@ -30,32 +32,32 @@ namespace Diablerie.Engine
             DontDestroyOnLoad(this);
         }
 
-        private void OnLevelChange(Level level, Level previous)
+        private void OnLevelChange(LevelInfo level, LevelInfo previous)
         {
             var crossfadeDuration = CrossfadeDuration;
-            if (previous == null || level.info.act != previous.info.act)
+            if (previous == null || level.act != previous.act)
             {
-                crossfadeDuration = 0;
+                crossfadeDuration = FastCrossfadeDuration;
             }
             AudioSource song;
             if (previous != null)
             {
-                song = songs.GetValueOrDefault(previous.info);
+                song = songs.GetValueOrDefault(previous);
                 if (song != null)
-                    AudioFader.Fade(song, previous.info.soundEnv.song.volume, 0, crossfadeDuration);
+                    AudioFader.Fade(song, previous.soundEnv.song.volume, 0, crossfadeDuration);
             }
-            song = songs.GetValueOrDefault(level.info);
+            song = songs.GetValueOrDefault(level);
             if (song == null)
             {
-                song = Play(level.info.soundEnv.song);
+                song = Play(level.soundEnv.song);
                 song.volume = 0;
-                songs[level.info] = song;
+                songs[level] = song;
             }
-            AudioFader.Fade(song, 0, level.info.soundEnv.song.volume, crossfadeDuration);
+            AudioFader.Fade(song, 0, level.soundEnv.song.volume, crossfadeDuration);
 
             if (ambient == null)
                 ambient = Create("Ambient sound");
-            Play(level.info.soundEnv.dayAmbience, ambient);
+            Play(level.soundEnv.dayAmbience, ambient);
 
             if (eventsCoroutine != null)
                 StopCoroutine(eventsCoroutine);
@@ -69,8 +71,8 @@ namespace Diablerie.Engine
         {
             while(isActiveAndEnabled)
             {
-                yield return new WaitForSeconds(Level.current.info.soundEnv.eventDelay);
-                Play(Level.current.info.soundEnv.dayEvent);
+                yield return new WaitForSeconds(Level.Current.soundEnv.eventDelay);
+                Play(Level.Current.soundEnv.dayEvent);
             }
         }
 

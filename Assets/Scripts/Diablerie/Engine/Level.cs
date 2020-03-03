@@ -6,10 +6,12 @@ namespace Diablerie.Engine
 {
     public class Level : MonoBehaviour
     {
-        public static Level current = null;
+        public static LevelInfo Current => _current;
+        
+        private static LevelInfo _current;
         public LevelInfo info;
 
-        public delegate void LevelChangeHandler(Level level, Level previous);
+        public delegate void LevelChangeHandler(LevelInfo level, LevelInfo previous);
         public static event LevelChangeHandler OnLevelChange;
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -17,13 +19,13 @@ namespace Diablerie.Engine
             if (collision.gameObject.tag != "Player")
                 return;
 
-            if (current != null)
+            if (_current != null)
                 LevelEntryTitle.Show("Entering " + info.levelName);
 
-            var previous = current;
-            current = this;
+            var previous = _current;
+            _current = info;
             if (OnLevelChange != null)
-                OnLevelChange(current, previous);
+                OnLevelChange(_current, previous);
         }
     }
 }
