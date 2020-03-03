@@ -1,4 +1,5 @@
-﻿using Diablerie.Engine;
+﻿using System.Collections;
+using Diablerie.Engine;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.UI;
 using Diablerie.Game.World;
@@ -30,6 +31,13 @@ namespace Diablerie.Game.UI.Menu.ClassSelect
             }
             
             WorldBuilder.className = _selected.name;
+            StartCoroutine(LoadGame());
+        }
+
+        private IEnumerator LoadGame()
+        {
+            ScreenMessage.Show("Generating the world..."); // TODO replace with LoadingScreen
+            yield return null;
             SceneManager.LoadScene("Game");
         }
 
