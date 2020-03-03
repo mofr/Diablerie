@@ -11,7 +11,6 @@ namespace Diablerie.Engine
         public const float tileSize = 0.2f;
         public const float tileSizeY = tileSize / 2;
         public Vector2 pos;
-        public bool sort = true;
 
         new Renderer renderer;
 
@@ -130,7 +129,7 @@ namespace Diablerie.Engine
         {
             transform.position = MapToWorld(pos);
 
-            if (sort && renderer)
+            if (renderer)
                 renderer.sortingOrder = SortingOrder(transform.position);
         }
     }
