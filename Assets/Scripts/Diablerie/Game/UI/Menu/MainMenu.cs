@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Diablerie.Engine;
 using Diablerie.Engine.IO.D2Formats;
 using Diablerie.Engine.UI;
