@@ -6,6 +6,82 @@ using System.IO;
 public class Wav
 {
     private const long DataChunkHeader = 0x61746164;
+
+    private Stream _stream;
+    private BinaryReader _reader;
+    private Header _header;
+    private List<DataChunk> _chunks;
+    private int _chunkIndex;
+    private int _sampleIndex;
+    private AudioClip _clip;
+
+    public AudioClip Clip => _clip;
+
+    public static AudioClip Load(string clipName, bool streamData, Stream stream)
+    {
+        var wav = new Wav(clipName, streamData, stream);
+        return wav.Clip;
+    }
+
+    public Wav(string clipName, bool streamData, Stream stream)
+    {
+        _stream = stream;
+        _reader = new BinaryReader(stream);
+        _header = ReadHeader(_reader);
+
+        if (_header.format != 1)
+        {
+            Debug.LogWarning("Only PCM wav is implemented (" + clipName + ")");
+            return;
+        }
+
+        if (_header.bitsPerSample != 16)
+        {
+            Debug.LogWarning("Only 16bit wav is implemented (" + clipName + ")");
+            return;
+        }
+        
+        _chunks = ScanDataChunks(_reader, _header);
+        int lengthSamples = 0;
+        foreach (var chunk in _chunks)
+        {
+            lengthSamples += chunk.blockCount;
+        }
+
+        _clip = AudioClip.Create(clipName, lengthSamples, _header.channels, (int)_header.sampleRate, streamData, ReadCallback, SetPositionCallback);
+    }
+
+    private void ReadCallback(float[] data)
+    {
+        int i = 0;
+        while (i < data.Length && _chunkIndex < _chunks.Count)
+        {
+            var chunk = _chunks[_chunkIndex];
+            int samplesAvailable = chunk.sampleCount + chunk.sampleOffset - _sampleIndex;
+            int samplesToRead = Math.Min(data.Length - i, samplesAvailable);
+            for (int j = 0; j < samplesToRead; ++j, ++i)
+            {
+                data[i] = ReadSample(_reader);
+            }
+            _sampleIndex += samplesToRead;
+            if (i < data.Length)
+                ++_chunkIndex;
+        }
+    }
+
+    private void SetPositionCallback(int pos)
+    {
+        for (_chunkIndex = 0; _chunkIndex < _chunks.Count; ++_chunkIndex)
+        {
+            var chunk = _chunks[_chunkIndex];
+            if (pos >= chunk.sampleOffset && pos < chunk.sampleOffset + chunk.sampleCount)
+            {
+                _stream.Position = chunk.position + (pos - chunk.sampleOffset) * _header.blockAlign;
+                break;
+            }
+        }
+        _sampleIndex = pos;
+    }
     
     struct Header
     {
@@ -30,7 +106,7 @@ public class Wav
         public int blockCount;
     }
 
-    static Header ReadHeader(BinaryReader reader)
+    private static Header ReadHeader(BinaryReader reader)
     {
         var header = new Header();
         header.riffID = reader.ReadBytes(4);
@@ -47,14 +123,6 @@ public class Wav
         return header;
     }
 
-    static float BytesToFloat(byte byte1, byte byte2)
-    {
-        // convert two bytes to one short (little endian)
-        short s = (short)((byte2 << 8) | byte1);
-        // convert to range from -1 to (just below) 1
-        return s / 32768.0F;
-    }
-
     private static float ReadSample(BinaryReader reader)
     {
         byte byte1 = reader.ReadByte();
@@ -62,72 +130,17 @@ public class Wav
         return BytesToFloat(byte1, byte2);
     }
 
-    public static AudioClip Load(string name, bool stream, Stream wavStream)
+    private static float BytesToFloat(byte byte1, byte byte2)
     {
-        var reader = new BinaryReader(wavStream);
-        var header = ReadHeader(reader);
-
-        if (header.format != 1)
-        {
-            Debug.LogWarning("Only PCM wav is implemented (" + name + ")");
-            return null;
-        }
-
-        if (header.bitsPerSample != 16)
-        {
-            Debug.LogWarning("Only 16bit wav is implemented (" + name + ")");
-            return null;
-        }
-        
-        long startPosition = wavStream.Position;
-        var chunks = ScanDataChunks(reader, header);
-        int lengthSamples = 0;
-        foreach (var chunk in chunks)
-        {
-            lengthSamples += chunk.blockCount;
-        }
-        wavStream.Position = startPosition;
-        int chunkIndex = 0;
-        int sampleIndex = 0;
-        int totalRead = 0;
-        
-        // TODO extract reader as a class with its own state (current chunk index etc), probably use Wav
-        var audioClip = AudioClip.Create(name, lengthSamples, header.channels, (int)header.sampleRate, stream, (float[] data) =>
-        {
-            int i = 0;
-            while (i < data.Length && chunkIndex < chunks.Count)
-            {
-                var chunk = chunks[chunkIndex];
-                int samplesAvailable = chunk.sampleCount + chunk.sampleOffset - sampleIndex;
-                int samplesToRead = Math.Min(data.Length - i, samplesAvailable);
-                for (int j = 0; j < samplesToRead; ++j, ++i)
-                {
-                    data[i] = ReadSample(reader);
-                }
-                sampleIndex += samplesToRead;
-                totalRead += samplesToRead;
-                if (i < data.Length)
-                    ++chunkIndex;
-            }
-        }, (int pos) =>
-        {
-            for (chunkIndex = 0; chunkIndex < chunks.Count; ++chunkIndex)
-            {
-                var chunk = chunks[chunkIndex];
-                if (pos >= chunk.sampleOffset && pos < chunk.sampleOffset + chunk.sampleCount)
-                {
-                    wavStream.Position = chunk.position + (pos - chunk.sampleOffset) * header.blockAlign;
-                    break;
-                }
-            }
-            sampleIndex = pos;
-        });
-        
-        return audioClip;
+        // convert two bytes to one short (little endian)
+        short s = (short)((byte2 << 8) | byte1);
+        // convert to range from -1 to (just below) 1
+        return s / 32768.0F;
     }
 
     private static List<DataChunk> ScanDataChunks(BinaryReader reader, Header header)
     {
+        long startPosition = reader.BaseStream.Position;
         var chunks = new List<DataChunk>();
         int sampleOffset = 0;
         try
@@ -155,6 +168,8 @@ public class Wav
         catch (IOException)
         {
         }
+        
+        reader.BaseStream.Position = startPosition;
 
         return chunks;
     }
