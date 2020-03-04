@@ -81,7 +81,9 @@ namespace Diablerie.Engine.Datasheets
 
         public AudioClip clip
         {
-            get {
+            get
+            {
+                // TODO move the method to some asset manager. It should manage the closing of streams as well.
                 if (audioClip != null)
                     return audioClip;
 

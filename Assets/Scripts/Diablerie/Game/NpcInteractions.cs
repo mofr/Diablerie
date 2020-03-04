@@ -12,12 +12,12 @@ namespace Diablerie.Game
             Events.CharacterInteractionStarted += OnInteract;
         }
         
-        public void OnInteract(Character target, Character who)
+        public void OnInteract(Character target, Character initiator)
         {
             if (target.monStat == null || !target.monStat.npc)
                 return;
             Debug.Log("Interact with " + target);
-            who.LookAt(target.iso.pos);
+            initiator.LookAt(target.iso.pos);
             var greetingSound = SoundInfo.Find(target.monStat.id + "_greeting_1");
             AudioManager.instance.Play(greetingSound, target.transform);
         }
