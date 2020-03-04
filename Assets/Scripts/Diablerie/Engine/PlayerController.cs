@@ -316,7 +316,7 @@ namespace Diablerie.Engine
                         {
                             if (targetCharacter.monStat != null && targetCharacter.monStat.npc)
                             {
-                                // todo interact with npc
+                                player.character.Use(MouseSelection.instance.HotEntity);
                             }
                             else
                             {

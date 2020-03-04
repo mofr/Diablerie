@@ -28,7 +28,7 @@ namespace Diablerie.Engine
         {
             Debug.Assert(_instance == null);
             _instance = this;
-            Level.OnLevelChange += OnLevelChange;
+            Events.LevelChanged += OnLevelChange;
             DontDestroyOnLoad(this);
         }
 

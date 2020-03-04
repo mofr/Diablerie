@@ -8,7 +8,7 @@ namespace Diablerie.Engine
     {
         void Start()
         {
-            Character.OnDeath += OnCharacterDeath;
+            Events.CharacterDied += OnCharacterDeath;
         }
 
         void OnCharacterDeath(Character target, Character killer)

@@ -15,9 +15,9 @@ namespace Diablerie.Engine
             public int magic;
         }
 
-        void OnEnable()
+        void Start()
         {
-            Character.OnDeath += OnCharacterDeath;
+            Events.CharacterDied += OnCharacterDeath;
         }
 
         private void OnCharacterDeath(Character target, Character killer)

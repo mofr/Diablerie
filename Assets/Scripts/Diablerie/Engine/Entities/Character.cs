@@ -33,9 +33,6 @@ namespace Diablerie.Engine.Entities
         public delegate void TakeDamageHandler(Character originator, int damage);
         public event TakeDamageHandler OnTakeDamage;
 
-        public delegate void DeathHandler(Character target, Character killer);
-        public static event DeathHandler OnDeath;
-
         private int _directionIndex = 0;
         private float _direction = 0;
     
@@ -116,6 +113,11 @@ namespace Diablerie.Engine.Entities
             {
                 Debug.LogWarning("Can't move character - doesn't fit");
             }
+        }
+
+        public void StopMoving()
+        {
+            _moving = false;
         }
 
         public void UseSkill(SkillInfo skillInfo, Vector3 target)
@@ -443,8 +445,7 @@ namespace Diablerie.Engine.Entities
             
                 CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
 
-                if (OnDeath != null)
-                    OnDeath(this, originator);
+                Events.InvokeCharacterDied(this, originator);
 
                 if (monStat != null)
                     AudioManager.instance.Play(monStat.sound.death, transform, monStat.sound.deathDelay);
@@ -501,6 +502,11 @@ namespace Diablerie.Engine.Entities
                     selectable = monStat.interact || (!monStat.npc && monStat.killable);
                 return selectable;
             }
+        }
+
+        public override void Operate(Character character)
+        {
+            Events.InvokeCharacterInteractionStarted(this, character);
         }
     }
 }

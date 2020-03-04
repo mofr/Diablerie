@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Diablerie.Engine;
 using Diablerie.Engine.Entities;
 using UnityEngine;
 
@@ -11,6 +12,16 @@ public class NpcController : MonoBehaviour
     void Awake()
     {
         _character = GetComponent<Character>();
+        Events.CharacterInteractionStarted += OnInteractionStarted;
+    }
+
+    private void OnInteractionStarted(Character target, Character initiator)
+    {
+        if (target != _character)
+            return;
+        
+        StopCoroutine(_currentAction);
+        _currentAction = StartCoroutine(Interact(initiator));
     }
 
     void OnEnable()
@@ -33,5 +44,13 @@ public class NpcController : MonoBehaviour
             _character.GoTo(target);
             yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
+    }
+    
+    IEnumerator Interact(Character initiator)
+    {
+        _character.StopMoving();
+        _character.LookAt(initiator.iso.pos);
+        yield return new WaitForSeconds(3f); // TODO wait until interaction is finished
+        _currentAction = StartCoroutine(WalkAround());
     }
 }

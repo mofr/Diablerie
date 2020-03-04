@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Diablerie.Engine.Entities
 {
-    public class Entity : MonoBehaviour
+    public abstract class Entity : MonoBehaviour
     {
         private COFAnimator animator;
         private string _title = null;
@@ -54,9 +54,6 @@ namespace Diablerie.Engine.Entities
             get { return 2; }
         }
 
-        public virtual void Operate(Character character = null)
-        {
-            throw new System.NotImplementedException("Entity.Operate shouldn't be called directly");
-        }
+        public abstract void Operate(Character character);
     }
 }

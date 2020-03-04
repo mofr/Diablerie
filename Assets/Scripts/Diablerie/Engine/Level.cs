@@ -11,9 +11,6 @@ namespace Diablerie.Engine
         private static LevelInfo _current;
         public LevelInfo info;
 
-        public delegate void LevelChangeHandler(LevelInfo level, LevelInfo previous);
-        public static event LevelChangeHandler OnLevelChange;
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag != "Player")
@@ -24,8 +21,7 @@ namespace Diablerie.Engine
 
             var previous = _current;
             _current = info;
-            if (OnLevelChange != null)
-                OnLevelChange(_current, previous);
+            Events.InvokeLevelChanged(_current, previous);
         }
     }
 }
