@@ -85,10 +85,10 @@ public class Wav
     
     struct Header
     {
-        public byte[] riffID; // "riff"
+        public uint riffHeader; // "riff"
         public uint size;
-        public byte[] wavID;  // "WAVE"
-        public byte[] fmtID;  // "fmt "
+        public uint wavHeader;  // "WAVE"
+        public uint formatSectionHeader;  // "fmt "
         public uint fmtSize;
         public ushort format;  // PCM = 1, otherwise something compressed 
         public ushort channels;
@@ -109,10 +109,10 @@ public class Wav
     private static Header ReadHeader(BinaryReader reader)
     {
         var header = new Header();
-        header.riffID = reader.ReadBytes(4);
+        header.riffHeader = reader.ReadUInt32();
         header.size = reader.ReadUInt32();
-        header.wavID = reader.ReadBytes(4);
-        header.fmtID = reader.ReadBytes(4);
+        header.wavHeader = reader.ReadUInt32();
+        header.formatSectionHeader = reader.ReadUInt32();
         header.fmtSize = reader.ReadUInt32();
         header.format = reader.ReadUInt16();
         header.channels = reader.ReadUInt16();
