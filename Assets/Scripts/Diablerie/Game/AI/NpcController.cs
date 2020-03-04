@@ -1,24 +1,27 @@
 ﻿using System.Collections;
-using Diablerie.Engine;
 using Diablerie.Engine.Entities;
 using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    Character character;
-    Iso iso;
-    Vector2 initialPosition;
+    private Character _character;
+    private Vector2 _initialPosition;
+    private Coroutine _currentAction;
 
     void Awake()
     {
-        iso = GetComponent<Iso>();
-        character = GetComponent<Character>();
+        _character = GetComponent<Character>();
     }
 
     void OnEnable()
     {
-        initialPosition = iso.pos;
-        StartCoroutine(WalkAround());
+        _initialPosition = _character.iso.pos;
+        _currentAction = StartCoroutine(WalkAround());
+    }
+
+    void OnDisable()
+    {
+        StopCoroutine(_currentAction);
     }
 
     IEnumerator WalkAround()
@@ -26,10 +29,9 @@ public class NpcController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         while (true)
         {
-            var target = initialPosition + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
-            character.GoTo(target);
+            var target = _initialPosition + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
+            _character.GoTo(target);
             yield return new WaitForSeconds(Random.Range(1f, 3f));
-            while (!isActiveAndEnabled) yield return null;
         }
     }
 }
