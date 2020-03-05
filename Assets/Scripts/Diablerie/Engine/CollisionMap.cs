@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Diablerie.Engine
 {
-    [ExecuteInEditMode]
-    public class CollisionMap : MonoBehaviour
+    public class CollisionMap
     {
         private static CollisionMap instance;
 
@@ -14,20 +13,22 @@ namespace Diablerie.Engine
             public GameObject gameObject;
         }
 
-        private int width = 2048;
-        private int height = 2048;
+        private int width;
+        private int height;
         private int origin;
         private Cell[] map;
 
-        void OnEnable()
+        public CollisionMap(int width, int height)
         {
+            instance = this;
+            this.width = width;
+            this.height = height;
             map = new Cell[width * height];
             for (int i = 0; i < map.Length; ++i)
             {
                 map[i].blocked = CollisionLayers.All;
             }
             origin = width * 5 + 5;
-            instance = this;
         }
 
         private int MapToIndex(Vector3 pos)
