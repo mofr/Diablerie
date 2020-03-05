@@ -3,22 +3,27 @@ using UnityEngine.UI;
 
 namespace Diablerie.Engine.UI
 {
-    public class SoftwareCursor : MonoBehaviour
+    public class SoftwareCursor
     {
         private static SoftwareCursor instance;
 
-        public RawImage image;
-        public RectTransform rectTransform;
+        private GameObject _root;
+        private RawImage _image;
+        private RectTransform _rectTransform;
 
-        private void Awake()
+        public SoftwareCursor(RectTransform parentTransform)
         {
+            Debug.Assert(instance == null);
             instance = this;
-            rectTransform = GetComponent<RectTransform>();
-        }
-
-        private void Update()
-        {
-            UpdatePosition();
+            _root = new GameObject("SoftwareCursor");
+            _rectTransform = _root.AddComponent<RectTransform>();
+            _rectTransform.SetParent(parentTransform, false);
+            _rectTransform.anchorMin = new Vector2(0.0f, 0.0f);
+            _rectTransform.anchorMax = new Vector2(0.0f, 0.0f);
+            var behaviour = _root.AddComponent<InternalBehaviour>();
+            behaviour.cursor = this;
+            _image = _root.AddComponent<RawImage>();
+            _image.raycastTarget = false;
         }
 
         public static void SetCursor(Texture2D texture)
@@ -30,21 +35,31 @@ namespace Diablerie.Engine.UI
         {
             if (texture != null)
             {
-                instance.image.texture = texture;
-                instance.rectTransform.sizeDelta = new Vector2(texture.width, texture.height);
-                instance.rectTransform.pivot = new Vector2(hotSpot.x / texture.width, 1 - hotSpot.y / texture.height);
+                instance._image.texture = texture;
+                instance._rectTransform.sizeDelta = new Vector2(texture.width, texture.height);
+                instance._rectTransform.pivot = new Vector2(hotSpot.x / texture.width, 1 - hotSpot.y / texture.height);
                 instance.UpdatePosition();
-                instance.gameObject.SetActive(true);
+                instance._root.SetActive(true);
             }
             else
             {
-                instance.gameObject.SetActive(false);
+                instance._root.SetActive(false);
             }
         }
 
         private void UpdatePosition()
         {
-            rectTransform.anchoredPosition = Input.mousePosition;
+            _rectTransform.anchoredPosition = Input.mousePosition;
+        }
+
+        private class InternalBehaviour : MonoBehaviour
+        {
+            public SoftwareCursor cursor;
+            
+            private void Update()
+            {
+                cursor.UpdatePosition();
+            }
         }
     }
 }

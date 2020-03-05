@@ -8,9 +8,8 @@ namespace Diablerie.Engine.UI
         public static Ui instance;
 
         private RectTransform rectTransform;
-        public SoftwareCursor softwareCursorPrefab;
-        
         private ScreenLabel screenLabel;
+        private SoftwareCursor _softwareCursor;
         private GameObject currentHover;
 
         void Awake()
@@ -19,7 +18,7 @@ namespace Diablerie.Engine.UI
             rectTransform = transform as RectTransform;
             screenLabel = new ScreenLabel(rectTransform);
             screenLabel.Hide();
-            Instantiate(instance.softwareCursorPrefab, rectTransform);
+            _softwareCursor = new SoftwareCursor(rectTransform);
         }
         
         public void OnPointerEnter(PointerEventData eventData) {
