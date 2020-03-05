@@ -9,10 +9,10 @@ namespace Diablerie.Game
     {
         public void Awake()
         {
-            Events.CharacterInteractionStarted += OnInteract;
+            Events.UnitInteractionStarted += OnInteract;
         }
         
-        public void OnInteract(Character target, Character initiator)
+        public void OnInteract(Unit target, Unit initiator)
         {
             if (target.monStat == null || !target.monStat.npc)
                 return;

@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    private Character _character;
+    private Unit _unit;
     private Vector2 _initialPosition;
     private Coroutine _currentAction;
 
     void Awake()
     {
-        _character = GetComponent<Character>();
-        Events.CharacterInteractionStarted += OnInteractionStarted;
+        _unit = GetComponent<Unit>();
+        Events.UnitInteractionStarted += OnInteractionStarted;
     }
 
-    private void OnInteractionStarted(Character target, Character initiator)
+    private void OnInteractionStarted(Unit target, Unit initiator)
     {
-        if (target != _character)
+        if (target != _unit)
             return;
         
         StopCoroutine(_currentAction);
@@ -26,7 +26,7 @@ public class NpcController : MonoBehaviour
 
     void OnEnable()
     {
-        _initialPosition = _character.iso.pos;
+        _initialPosition = _unit.iso.pos;
         _currentAction = StartCoroutine(WalkAround());
     }
 
@@ -41,15 +41,15 @@ public class NpcController : MonoBehaviour
         while (true)
         {
             var target = _initialPosition + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
-            _character.GoTo(target);
+            _unit.GoTo(target);
             yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
     }
     
-    IEnumerator Interact(Character initiator)
+    IEnumerator Interact(Unit initiator)
     {
-        _character.StopMoving();
-        _character.LookAt(initiator.iso.pos);
+        _unit.StopMoving();
+        _unit.LookAt(initiator.iso.pos);
         yield return new WaitForSeconds(3f); // TODO wait until interaction is finished
         _currentAction = StartCoroutine(WalkAround());
     }

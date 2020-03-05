@@ -9,15 +9,15 @@ namespace Diablerie.Game.AI
 {
     public class MonsterController : MonoBehaviour
     {
-        private Character character;
-        private Character target;
+        private Unit _unit;
+        private Unit target;
         readonly float viewRadius = 25f;
         readonly float maxAgroDistance = 40f;
         bool tauntSaid = false;
 
         void Awake()
         {
-            character = GetComponent<Character>();
+            _unit = GetComponent<Unit>();
         }
 
         void OnEnable()
@@ -29,24 +29,24 @@ namespace Diablerie.Game.AI
         {
             while (!target)
             {
-                Character nearestEnemy = AIUtils.GetNearestEnemy(character, viewRadius);
+                Unit nearestEnemy = AIUtils.GetNearestEnemy(_unit, viewRadius);
                 if (nearestEnemy != null)
                 {
                     Attack(nearestEnemy);
                     yield break;
                 }
 
-                var newPosition = character.iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
-                character.GoTo(newPosition);
+                var newPosition = _unit.iso.pos + new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f));
+                _unit.GoTo(newPosition);
                 yield return new WaitForSeconds(Random.Range(1f, 2f));
             }
         }
 
-        private void Attack(Character target)
+        private void Attack(Unit target)
         {
             if (!tauntSaid)
             {
-                AudioManager.instance.Play(character.monStat.sound.taunt, character.transform);
+                AudioManager.instance.Play(_unit.monStat.sound.taunt, _unit.transform);
                 tauntSaid = true;
             }
 
@@ -54,10 +54,10 @@ namespace Diablerie.Game.AI
             StartCoroutine(Attack());
         }
 
-        private bool IsAttackable(Character target)
+        private bool IsAttackable(Unit target)
         {
-            bool targetTooFar = Vector2.Distance(target.iso.pos, character.iso.pos) > maxAgroDistance;
-            return !targetTooFar && AIUtils.IsAttackable(character, target);
+            bool targetTooFar = Vector2.Distance(target.iso.pos, _unit.iso.pos) > maxAgroDistance;
+            return !targetTooFar && AIUtils.IsAttackable(_unit, target);
         }
     
         private IEnumerator Attack()
@@ -66,7 +66,7 @@ namespace Diablerie.Game.AI
             {
                 if (IsAttackable(target))
                 {
-                    character.UseSkill(SkillInfo.Attack, target);
+                    _unit.UseSkill(SkillInfo.Attack, target);
                     yield return new WaitForSeconds(Random.Range(0.5f, 1f));
                 }
                 else

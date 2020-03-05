@@ -13,7 +13,7 @@ namespace Diablerie.Engine
         public event OnUpdateHandler OnUpdate;
 
         public CharStatsInfo charInfo;
-        private Character character;
+        private Unit _unit;
         private COFAnimator animator;
 
         static string[] armorTypes = new string[] { "LIT", "MED", "HVY" };
@@ -122,7 +122,7 @@ namespace Diablerie.Engine
 
         void UpdateAnimator()
         {
-            character.weaponClass = "HTH";
+            _unit.weaponClass = "HTH";
             var equip = animator.equip;
             if (equip == null)
                 equip = new string[defaultEquip.Length];
@@ -147,9 +147,9 @@ namespace Diablerie.Engine
                     if (item.info.weapon != null)
                     {
                         if (item.info.weapon.twoHanded)
-                            character.weaponClass = item.info.weapon.twoHandedWClass;
+                            _unit.weaponClass = item.info.weapon.twoHandedWClass;
                         else
-                            character.weaponClass = item.info.weapon.wClass;
+                            _unit.weaponClass = item.info.weapon.wClass;
                     }
                 }
             }
@@ -158,7 +158,7 @@ namespace Diablerie.Engine
 
         void Awake()
         {
-            character = GetComponent<Character>();
+            _unit = GetComponent<Unit>();
             animator = GetComponent<COFAnimator>();
             items = new Item[BodyLoc.sheet.Count];
         }

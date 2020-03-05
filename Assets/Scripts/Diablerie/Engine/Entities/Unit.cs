@@ -9,7 +9,7 @@ namespace Diablerie.Engine.Entities
     [ExecuteInEditMode]
     [RequireComponent(typeof(Iso))]
     [RequireComponent(typeof(COFAnimator))]
-    public class Character : Entity
+    public class Unit : Entity
     {
         public const int DirectionCount = 32;
     
@@ -30,7 +30,7 @@ namespace Diablerie.Engine.Entities
 
         private static float turnSpeed = 3.5f; // full rotations per second
 
-        public delegate void TakeDamageHandler(Character originator, int damage);
+        public delegate void TakeDamageHandler(Unit originator, int damage);
         public event TakeDamageHandler OnTakeDamage;
 
         private int _directionIndex = 0;
@@ -57,7 +57,7 @@ namespace Diablerie.Engine.Entities
         private Item _skillWeapon;
         private Entity _targetEntity;
         private Entity _operatingWithEntity;
-        private Character _targetCharacter;
+        private Unit _targetUnit;
         private Vector2 _targetPoint;
 
         protected override void Awake()
@@ -81,7 +81,7 @@ namespace Diablerie.Engine.Entities
                 return;
             _targetPoint = Iso.MapToIso(entity.transform.position);
             _targetEntity = entity;
-            _targetCharacter = null;
+            _targetUnit = null;
             _skillInfo = null;
         }
 
@@ -96,7 +96,7 @@ namespace Diablerie.Engine.Entities
             _moving = true;
             _targetPoint = target;
             _targetEntity = null;
-            _targetCharacter = null;
+            _targetUnit = null;
             _skillInfo = null;
         }
 
@@ -111,7 +111,7 @@ namespace Diablerie.Engine.Entities
             }
             else
             {
-                Debug.LogWarning("Can't move character - doesn't fit");
+                Debug.LogWarning("Can't move unit - doesn't fit");
             }
         }
 
@@ -130,7 +130,7 @@ namespace Diablerie.Engine.Entities
             _skillInfo = skillInfo;
         }
 
-        public void UseSkill(SkillInfo skillInfo, Character target)
+        public void UseSkill(SkillInfo skillInfo, Unit target)
         {
             if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
                 return;
@@ -139,11 +139,11 @@ namespace Diablerie.Engine.Entities
                 return;
 
             _targetEntity = null;
-            _targetCharacter = target;
+            _targetUnit = target;
             _skillInfo = skillInfo;
         }
     
-        public bool CanUseSkill(SkillInfo skillInfo, Character target)
+        public bool CanUseSkill(SkillInfo skillInfo, Unit target)
         {
             if (!skillInfo.targetAlly && target.party == party)
                 return false;
@@ -193,14 +193,14 @@ namespace Diablerie.Engine.Entities
             if (_dead || _dying || _resurrecting || _usingSkill || _skillInfo == null || overrideMode != null)
                 return;
 
-            if (_targetCharacter != null)
+            if (_targetUnit != null)
             {
-                _targetPoint = _targetCharacter.iso.pos;
+                _targetPoint = _targetUnit.iso.pos;
             }
 
             bool ranged = _skillWeapon != null && _skillWeapon.info.type.shoots != null;
 
-            if (ranged || _skillInfo.IsRangeOk(this, _targetCharacter, _targetPoint))
+            if (ranged || _skillInfo.IsRangeOk(this, _targetUnit, _targetPoint))
             {
                 LookAtImmediately(_targetPoint);
                 _usingSkill = true;
@@ -405,7 +405,7 @@ namespace Diablerie.Engine.Entities
             _directionIndex = _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
         }
 
-        public void TakeDamage(int damage, Character originator = null)
+        public void TakeDamage(int damage, Unit originator = null)
         {
             if (_dying || _dead || _resurrecting)
                 return;
@@ -424,7 +424,7 @@ namespace Diablerie.Engine.Entities
                 if (damage > maxHealth * 0.1f)
                 {
                     overrideMode = "GH";
-                    _targetCharacter = null;
+                    _targetUnit = null;
                     _moving = false;
                     _usingSkill = false;
                     _skillInfo = null;
@@ -438,14 +438,14 @@ namespace Diablerie.Engine.Entities
                 if (originator)
                     LookAtImmediately(originator.iso.pos);
                 _dying = true;
-                _targetCharacter = null;
+                _targetUnit = null;
                 _moving = false;
                 _usingSkill = false;
                 _skillInfo = null;
             
                 CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
 
-                Events.InvokeCharacterDied(this, originator);
+                Events.InvokeUnitDied(this, originator);
 
                 if (monStat != null)
                     AudioManager.instance.Play(monStat.sound.death, transform, monStat.sound.deathDelay);
@@ -456,7 +456,7 @@ namespace Diablerie.Engine.Entities
         {
             if (_usingSkill && _animator.cof.mode == _skillInfo.anim)
             {
-                _skillInfo.Do(this, _targetCharacter, _targetPoint);
+                _skillInfo.Do(this, _targetUnit, _targetPoint);
             }
             else if (_operatingWithEntity != null && overrideMode == "KK")
             {
@@ -467,7 +467,7 @@ namespace Diablerie.Engine.Entities
         void OnAnimationFinish()
         {
             _operatingWithEntity = null;
-            _targetCharacter = null;
+            _targetUnit = null;
             _usingSkill = false;
             _resurrecting = false;
             _skillInfo = null;
@@ -504,9 +504,9 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        public override void Operate(Character character)
+        public override void Operate(Unit unit)
         {
-            Events.InvokeCharacterInteractionStarted(this, character);
+            Events.InvokeUnitInteractionStarted(this, unit);
         }
     }
 }

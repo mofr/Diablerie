@@ -14,15 +14,15 @@ namespace Diablerie.Engine.Entities
         float speed;
         MissileInfo info;
         SkillInfo skillInfo;
-        Character originator;
+        Unit originator;
         private float lifeTime;
 
-        public static Missile Create(string missileId, Vector3 target, Character originator)
+        public static Missile Create(string missileId, Vector3 target, Unit originator)
         {
             return Create(missileId, originator.iso.pos, target, originator);
         }
 
-        public static Missile Create(string missileId, Vector3 start, Vector3 target, Character originator)
+        public static Missile Create(string missileId, Vector3 start, Vector3 target, Unit originator)
         {
             var missileInfo = MissileInfo.Find(missileId);
             if (missileInfo == null)
@@ -34,7 +34,7 @@ namespace Diablerie.Engine.Entities
             return Create(missileInfo, start, target, originator);
         }
 
-        public static void CreateRadially(string missileId, Vector3 start, Character originator, int missileCount)
+        public static void CreateRadially(string missileId, Vector3 start, Unit originator, int missileCount)
         {
             var missileInfo = MissileInfo.Find(missileId);
             if (missileInfo == null)
@@ -45,7 +45,7 @@ namespace Diablerie.Engine.Entities
             CreateRadially(missileInfo, start, originator, missileCount);
         }
 
-        public static void CreateRadially(MissileInfo missileInfo, Vector3 start, Character originator, int missileCount)
+        public static void CreateRadially(MissileInfo missileInfo, Vector3 start, Unit originator, int missileCount)
         {
             float angle = 0;
             float angleStep = 360.0f / missileCount;
@@ -58,7 +58,7 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        public static Missile Create(MissileInfo missileInfo, Vector3 start, Vector3 target, Character originator)
+        public static Missile Create(MissileInfo missileInfo, Vector3 start, Vector3 target, Unit originator)
         {
             var gameObject = new GameObject("missile_" + missileInfo.missile);
             var missile = gameObject.AddComponent<Missile>();
@@ -122,23 +122,23 @@ namespace Diablerie.Engine.Entities
             var hit = CollisionMap.Raycast(iso.pos, newPos, distance, size: info.size, ignore: originator.gameObject);
             if (hit)
             {
-                Character hitCharacter = null;
+                Unit hitUnit = null;
                 if (hit.gameObject != null)
                 {
-                    hitCharacter = hit.gameObject.GetComponent<Character>();
-                    if (hitCharacter != null)
+                    hitUnit = hit.gameObject.GetComponent<Unit>();
+                    if (hitUnit != null)
                     {
                         int damage = CalcDamage();
-                        hitCharacter.TakeDamage(damage, originator);
+                        hitUnit.TakeDamage(damage, originator);
                         if (info.progOverlay != null)
-                            Overlay.Create(hitCharacter.gameObject, info.progOverlay, false);
+                            Overlay.Create(hitUnit.gameObject, info.progOverlay, false);
                     }
                 }
                 if (info.explosionMissile != null)
                     Missile.Create(info.explosionMissile, hit.pos, hit.pos, originator);
 
                 AudioManager.instance.Play(info.hitSound, Iso.MapToWorld(hit.pos));
-                AudioManager.instance.Play(SoundInfo.GetHitSound(info.hitClass, hitCharacter), Iso.MapToWorld(hit.pos));
+                AudioManager.instance.Play(SoundInfo.GetHitSound(info.hitClass, hitUnit), Iso.MapToWorld(hit.pos));
 
                 if (info.clientHitFunc == "14")
                 {
@@ -158,7 +158,7 @@ namespace Diablerie.Engine.Entities
                 }
             
                 // todo pierce is actually is pierce skill with a chance to pierce
-                if ((!info.pierce || hitCharacter == null) && info.collideKill)
+                if ((!info.pierce || hitUnit == null) && info.collideKill)
                 {
                     Destroy(gameObject);
                 }

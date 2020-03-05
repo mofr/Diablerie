@@ -106,7 +106,7 @@ namespace Diablerie.Engine.Entities
             animator.Restart();
         }
 
-        public override void Operate(Character character)
+        public override void Operate(Unit unit)
         {
             if (item == null)
                 Destroy(gameObject);

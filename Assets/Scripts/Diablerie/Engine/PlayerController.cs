@@ -178,8 +178,8 @@ namespace Diablerie.Engine
             {
                 targetPosition = IsoInput.mousePosition;
             }
-            var iso = player.character.iso;
-            var path = Pathing.BuildPath(iso.pos, targetPosition, size: player.character.size, self: player.gameObject);
+            var iso = player.unit.iso;
+            var path = Pathing.BuildPath(iso.pos, targetPosition, size: player.unit.size, self: player.gameObject);
             Pathing.DebugDrawPath(iso.pos, path);
         }
 
@@ -260,7 +260,7 @@ namespace Diablerie.Engine
             }
         }
 
-        void ControlCharacter()
+        void ControlPlayerUnit()
         {
             if (player == null)
                 return;
@@ -289,15 +289,15 @@ namespace Diablerie.Engine
                 usingSkills = true;
                 if (MouseSelection.instance.HotEntity != null)
                 {
-                    var targetCharacter = MouseSelection.instance.HotEntity.GetComponent<Character>();
-                    if (targetCharacter != null)
-                        player.character.UseSkill(skill, targetCharacter);
+                    var targetUnit = MouseSelection.instance.HotEntity.GetComponent<Unit>();
+                    if (targetUnit != null)
+                        player.unit.UseSkill(skill, targetUnit);
                     else
-                        player.character.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.HotEntity.transform.position));
+                        player.unit.UseSkill(skill, Iso.MapToIso(MouseSelection.instance.HotEntity.transform.position));
                 }
                 else
                 {
-                    player.character.UseSkill(skill, IsoInput.mousePosition);
+                    player.unit.UseSkill(skill, IsoInput.mousePosition);
                 }
             }
 
@@ -305,37 +305,37 @@ namespace Diablerie.Engine
             {
                 if (Input.GetMouseButton(1) || (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButton(0)))
                 {
-                    player.character.UseSkill(rightSkill, IsoInput.mousePosition);
+                    player.unit.UseSkill(rightSkill, IsoInput.mousePosition);
                 }
                 else if (Input.GetMouseButton(0))
                 {
                     if (MouseSelection.instance.HotEntity != null)
                     {
-                        var targetCharacter = MouseSelection.instance.HotEntity.GetComponent<Character>();
-                        if (targetCharacter != null)
+                        var targetUnit = MouseSelection.instance.HotEntity.GetComponent<Unit>();
+                        if (targetUnit != null)
                         {
-                            if (targetCharacter.monStat != null && targetCharacter.monStat.npc)
+                            if (targetUnit.monStat != null && targetUnit.monStat.npc)
                             {
-                                player.character.Use(MouseSelection.instance.HotEntity);
+                                player.unit.Use(MouseSelection.instance.HotEntity);
                             }
                             else
                             {
-                                player.character.UseSkill(leftSkill, targetCharacter);
+                                player.unit.UseSkill(leftSkill, targetUnit);
                             }
                         }
                         else
                         {
-                            player.character.Use(MouseSelection.instance.HotEntity);
+                            player.unit.Use(MouseSelection.instance.HotEntity);
                         }
                     }
                     else
                     {
-                        player.character.GoTo(IsoInput.mousePosition);
+                        player.unit.GoTo(IsoInput.mousePosition);
                     }
                 }
             }
 
-            player.character.run = run;
+            player.unit.run = run;
         }
 
         public bool FixedSelection()
@@ -360,7 +360,7 @@ namespace Diablerie.Engine
             if (Ui.Hover && MouseSelection.instance.HotEntity == null)
                 return;
 
-            ControlCharacter();
+            ControlPlayerUnit();
 
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Space) && Input.GetKey(KeyCode.LeftShift))

@@ -10,7 +10,7 @@ namespace Diablerie.Engine
     {
         public GameObject gameObject;
         public Transform transform;
-        public Character character;
+        public Unit unit;
         public Equipment equip;
         public Inventory inventory;
         public CharStat charStat;
@@ -40,21 +40,21 @@ namespace Diablerie.Engine
             transform = gameObject.transform;
             transform.position = Iso.MapTileToWorld(pos);
             gameObject.tag = "Player";
-            character = gameObject.AddComponent<Character>();
-            character.basePath = @"data\global\chars";
-            character.token = charStatInfo.token;
-            character.weaponClass = charStatInfo.baseWClass;
-            character.run = true;
-            character.walkSpeed = 7;
-            character.runSpeed = 15;
-            character.maxHealth = 1000;
-            character.health = 1000;
-            character.size = 2;
-            character.party = Party.Good;
+            unit = gameObject.AddComponent<Unit>();
+            unit.basePath = @"data\global\chars";
+            unit.token = charStatInfo.token;
+            unit.weaponClass = charStatInfo.baseWClass;
+            unit.run = true;
+            unit.walkSpeed = 7;
+            unit.runSpeed = 15;
+            unit.maxHealth = 1000;
+            unit.health = 1000;
+            unit.size = 2;
+            unit.party = Party.Good;
 
             equip = gameObject.AddComponent<Equipment>();
             equip.charInfo = charStatInfo;
-            character.equip = equip;
+            unit.equip = equip;
             inventory = Inventory.Create(gameObject, 10, 4);
             var body = gameObject.AddComponent<Rigidbody2D>();
             body.isKinematic = true;
@@ -65,7 +65,7 @@ namespace Diablerie.Engine
             listenerObject.transform.SetParent(gameObject.transform, true);
             listenerObject.transform.localPosition = new Vector3(0, 0, -1);
             charStat = gameObject.AddComponent<CharStat>();
-            charStat.character = character;
+            charStat.unit = unit;
 
             foreach (var startingItem in charStatInfo.startingItems)
             {
@@ -119,7 +119,7 @@ namespace Diablerie.Engine
                 case MiscInfo.UseFunction.IdentifyItem:
                     break;
                 case MiscInfo.UseFunction.TownPortal:
-                    var pos = Iso.MapToWorld(character.iso.pos);
+                    var pos = Iso.MapToWorld(unit.iso.pos);
                     var teleport = WorldBuilder.SpawnObject("TP", pos, fit: true);
                     teleport.modeName = "OP";
                     var sound = SoundInfo.Find("player_townportal_cast");
@@ -127,19 +127,19 @@ namespace Diablerie.Engine
                     break;
                 case MiscInfo.UseFunction.Potion:
                     if (itemInfo.stat1 == "hpregen")
-                        character.health += itemInfo.calc1;
+                        unit.health += itemInfo.calc1;
                     if (itemInfo.stat1 == "manarecovery")
-                        character.mana += itemInfo.calc1;
+                        unit.mana += itemInfo.calc1;
                     break;
                 case MiscInfo.UseFunction.RejuvPotion:
                     if (itemInfo.stat1 == "hitpoints")
-                        character.health += (int)(itemInfo.calc1 / 100.0f * character.maxHealth);
+                        unit.health += (int)(itemInfo.calc1 / 100.0f * unit.maxHealth);
                     if (itemInfo.stat1 == "mana")
-                        character.mana += (int)(itemInfo.calc1 / 100.0f * character.maxMana);
+                        unit.mana += (int)(itemInfo.calc1 / 100.0f * unit.maxMana);
                     if (itemInfo.stat2 == "hitpoints")
-                        character.health += (int)(itemInfo.calc2 / 100.0f * character.maxHealth);
+                        unit.health += (int)(itemInfo.calc2 / 100.0f * unit.maxHealth);
                     if (itemInfo.stat2 == "mana")
-                        character.mana += (int)(itemInfo.calc2 / 100.0f * character.maxMana);
+                        unit.mana += (int)(itemInfo.calc2 / 100.0f * unit.maxMana);
                     break;
                 case MiscInfo.UseFunction.TemporaryPotion:
                     break;

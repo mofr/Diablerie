@@ -17,10 +17,10 @@ namespace Diablerie.Engine
 
         void Start()
         {
-            Events.CharacterDied += OnCharacterDeath;
+            Events.UnitDied += OnUnitDeath;
         }
 
-        private void OnCharacterDeath(Character target, Character killer)
+        private void OnUnitDeath(Unit target, Unit killer)
         {
             if (target.monStat == null)
                 return;

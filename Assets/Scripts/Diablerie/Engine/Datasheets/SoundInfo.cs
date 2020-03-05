@@ -26,9 +26,9 @@ namespace Diablerie.Engine.Datasheets
             return map.GetValueOrDefault(soundCode);
         }
 
-        public static SoundInfo GetHitSound(int hitClass, Character hitCharacter)
+        public static SoundInfo GetHitSound(int hitClass, Unit hitUnit)
         {
-            if (hitClass == 10 && hitCharacter != null)
+            if (hitClass == 10 && hitUnit != null)
                 return SoundInfo.Find("impact_arrow_1");
             if (hitClass == 32)
                 return SoundInfo.Find("impact_fire_1");

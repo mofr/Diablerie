@@ -216,22 +216,22 @@ namespace Diablerie.Engine.Datasheets
             return idMap.GetValueOrDefault(id);
         }
 
-        public bool IsRangeOk(Character self, Character targetCharacter, Vector2 targetPoint)
+        public bool IsRangeOk(Unit self, Unit targetUnit, Vector2 targetPoint)
         {
-            if (targetCharacter != null)
+            if (targetUnit != null)
             {
-                targetPoint = targetCharacter.iso.pos;
+                targetPoint = targetUnit.iso.pos;
             }
 
             float radius = self.attackRange + self.size / 2;
-            if (targetCharacter != null)
-                radius += targetCharacter.size / 2;
+            if (targetUnit != null)
+                radius += targetUnit.size / 2;
 
             return range == SkillInfo.Range.NoRestrictions ||
                    Vector2.Distance(self.iso.pos, targetPoint) <= radius;
         }
 
-        public void Do(Character self, Character targetCharacter, Vector3 target)
+        public void Do(Unit self, Unit targetUnit, Vector3 target)
         {
             if (srvDoFunc == 27)
             {
@@ -262,10 +262,10 @@ namespace Diablerie.Engine.Datasheets
                     var missile = Missile.Create("arrow", target, self);
                     missile.weaponDamage = damage;
                 }
-                else if (targetCharacter != null && IsRangeOk(self, targetCharacter, target))
+                else if (targetUnit != null && IsRangeOk(self, targetUnit, target))
                 {
-                    AudioManager.instance.Play(hitClass.hitSound, targetCharacter.transform.position);
-                    targetCharacter.TakeDamage(damage, self);
+                    AudioManager.instance.Play(hitClass.hitSound, targetUnit.transform.position);
+                    targetUnit.TakeDamage(damage, self);
                 }
             }
             else if (srvDoFunc == 17)

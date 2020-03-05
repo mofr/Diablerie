@@ -54,6 +54,6 @@ namespace Diablerie.Engine.Entities
             get { return 2; }
         }
 
-        public abstract void Operate(Character character);
+        public abstract void Operate(Unit unit);
     }
 }

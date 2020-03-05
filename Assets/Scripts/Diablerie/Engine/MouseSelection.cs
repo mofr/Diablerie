@@ -52,16 +52,16 @@ namespace Diablerie.Engine
 
             if (HotEntity != null && !highlightPickups)
             {
-                var character = HotEntity.GetComponent<Character>();
-                if (character && character.monStat != null)
+                var unit = HotEntity.GetComponent<Unit>();
+                if (unit && unit.monStat != null)
                 {
-                    if (character.monStat.interact)
+                    if (unit.monStat.interact)
                     {
                         ShowLabel(HotEntity);
                     }
-                    else if (character.monStat.killable)
+                    else if (unit.monStat.killable)
                     {
-                        ShowEnemyBar(character);
+                        ShowEnemyBar(unit);
                     }
                     else
                     {
@@ -119,20 +119,20 @@ namespace Diablerie.Engine
 
         private void ShowLabel(Entity entity)
         {
-            EnemyBar.instance.character = null;
+            EnemyBar.instance.unit = null;
             var labelPosition = entity.transform.position + (Vector3) entity.titleOffset / Iso.pixelsPerUnit;
             label.Show(labelPosition, entity.title);
         }
 
-        private void ShowEnemyBar(Character character)
+        private void ShowEnemyBar(Unit unit)
         {
-            EnemyBar.instance.character = character;
+            EnemyBar.instance.unit = unit;
             label.Hide();
         }
 
         private void ShowNothing()
         {
-            EnemyBar.instance.character = null;
+            EnemyBar.instance.unit = null;
             label.Hide();
         }
 
@@ -147,7 +147,7 @@ namespace Diablerie.Engine
                 if (!entity.selectable)
                     continue;
                 
-                if (entity == WorldState.instance.Player.character)
+                if (entity == WorldState.instance.Player.unit)
                     continue;
 
                 Bounds bounds = entity.bounds;

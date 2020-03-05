@@ -219,7 +219,7 @@ namespace Diablerie.Engine.Entities
             int sortingOrder = Iso.SortingOrder(transform.position);
             int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
             int spriteIndex = frameStart + frameIndex;
-            int cofDirection = direction * _cof.directionCount / Character.DirectionCount;
+            int cofDirection = direction * _cof.directionCount / Unit.DirectionCount;
             int priority = (cofDirection * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
             for (int i = 0; i < _cof.layerCount; ++i)
             {
@@ -228,7 +228,7 @@ namespace Diablerie.Engine.Entities
                 Layer layer = layers[cofLayer.index];
                 if (!layer.gameObject.activeSelf)
                     continue;
-                int sheetDirection = direction * layer.spritesheet.directionCount / Character.DirectionCount;
+                int sheetDirection = direction * layer.spritesheet.directionCount / Unit.DirectionCount;
                 layer.renderer.sprite = layer.spritesheet.GetSprites(sheetDirection)[spriteIndex];
                 layer.renderer.sortingOrder = sortingOrder;
                 layer.shadow.sprite = layer.renderer.sprite;

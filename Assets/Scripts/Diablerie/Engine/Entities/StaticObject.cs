@@ -88,9 +88,9 @@ namespace Diablerie.Engine.Entities
 
         static string[] treasureClassLetters = new string[] { "A", "B", "C" };
 
-        public override void Operate(Character character)
+        public override void Operate(Unit unit)
         {
-            Debug.Log(character.name + " use " + name + " (operateFn " + objectInfo.operateFn + ")");
+            Debug.Log(unit.name + " use " + name + " (operateFn " + objectInfo.operateFn + ")");
 
             if (objectInfo.operateFn == 1 // bed, caskets
                 || objectInfo.operateFn == 3 // urns

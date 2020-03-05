@@ -48,7 +48,7 @@ namespace Diablerie.Game.World
             }
             else
             {
-                WorldState.instance.Player.character.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(_currentAct.entry)));
+                WorldState.instance.Player.unit.InstantMove(Iso.MapToIso(Iso.MapTileToWorld(_currentAct.entry)));
             }
 
             LoadingScreen.Show(0.9f);
@@ -96,7 +96,7 @@ namespace Diablerie.Game.World
             instance.StartCoroutine(instance.LoadActCoroutine(actNumber));
         }
 
-        public static Character SpawnMonster(string id, Vector3 pos, Transform parent = null, Character summoner = null)
+        public static Unit SpawnMonster(string id, Vector3 pos, Transform parent = null, Unit summoner = null)
         {
             MonStat monStat = MonStat.Find(id);
             if (monStat == null)
@@ -107,7 +107,7 @@ namespace Diablerie.Game.World
             return SpawnMonster(monStat, pos, parent, summoner);
         }
 
-        public static Character SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null, Character summoner = null)
+        public static Unit SpawnMonster(MonStat monStat, Vector3 pos, Transform parent = null, Unit summoner = null)
         {
             pos = Iso.MapToIso(pos);
             if (!CollisionMap.Fit(pos, out pos, monStat.ext.sizeX))
@@ -121,26 +121,26 @@ namespace Diablerie.Game.World
         
             CollisionMap.Move(pos, pos, monStat.ext.sizeX, monster);
 
-            var character = monster.AddComponent<Character>();
-            character.monStat = monStat;
-            character.title = monStat.name;
-            character.basePath = @"data\global\monsters";
-            character.token = monStat.code;
-            character.weaponClass = monStat.ext.baseWeaponClass;
-            character.run = false;
-            character.walkSpeed = monStat.speed;
-            character.runSpeed = monStat.runSpeed;
-            character.size = monStat.ext.sizeX;
-            character.killable = monStat.killable;
+            var unit = monster.AddComponent<Unit>();
+            unit.monStat = monStat;
+            unit.title = monStat.name;
+            unit.basePath = @"data\global\monsters";
+            unit.token = monStat.code;
+            unit.weaponClass = monStat.ext.baseWeaponClass;
+            unit.run = false;
+            unit.walkSpeed = monStat.speed;
+            unit.runSpeed = monStat.runSpeed;
+            unit.size = monStat.ext.sizeX;
+            unit.killable = monStat.killable;
 
             var monLvl = MonLvl.Find(monStat.level[0]);
             if (monLvl != null && !monStat.noRatio)
-                character.health = Random.Range(monLvl.hp[0] * monStat.stats[0].minHP, monLvl.hp[0] * monStat.stats[0].maxHP + 1) / 100;
+                unit.health = Random.Range(monLvl.hp[0] * monStat.stats[0].minHP, monLvl.hp[0] * monStat.stats[0].maxHP + 1) / 100;
             else
-                character.health = Random.Range(monStat.stats[0].minHP, monStat.stats[0].maxHP + 1);
-            character.maxHealth = character.health;
+                unit.health = Random.Range(monStat.stats[0].minHP, monStat.stats[0].maxHP + 1);
+            unit.maxHealth = unit.health;
 
-            var animator = character.GetComponent<COFAnimator>();
+            var animator = unit.GetComponent<COFAnimator>();
             animator.equip = new string[monStat.ext.gearVariants.Length];
             for (int i = 0; i < animator.equip.Length; ++i)
             {
@@ -152,18 +152,18 @@ namespace Diablerie.Game.World
 
             if (summoner != null)
             {
-                character.party = summoner.party;
+                unit.party = summoner.party;
                 var petController = monster.AddComponent<PetController>();
                 petController.owner = summoner;
             }
             else if (monStat.ai == "Npc" || monStat.ai == "Towner" || monStat.ai == "Vendor" || monStat.ai == "Hireable")
             {
-                character.party = Party.Good;
+                unit.party = Party.Good;
                 monster.AddComponent<NpcController>();
             }
             else if (monStat.ai != "Idle" && monStat.ai != "NpcStationary")
             {
-                character.party = Party.Evil;
+                unit.party = Party.Evil;
                 monster.AddComponent<MonsterController>();
             }
 
@@ -172,7 +172,7 @@ namespace Diablerie.Game.World
             var collider = monster.AddComponent<CircleCollider2D>();
             collider.radius = monStat.ext.sizeX * Iso.tileSizeY;
 
-            return character;
+            return unit;
         }
 
         public static StaticObject SpawnObject(ObjectInfo objectInfo, Vector3 pos, bool fit = false, Transform parent = null)

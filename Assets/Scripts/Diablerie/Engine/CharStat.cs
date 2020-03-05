@@ -6,7 +6,7 @@ namespace Diablerie.Engine
 {
     public class CharStat : MonoBehaviour
     {
-        public Character character;
+        public Unit unit;
         public int level = 1;
         public uint experience = 0;
 
@@ -39,8 +39,8 @@ namespace Diablerie.Engine
         {
             AudioManager.instance.Play("cursor_level_up");
             level += 1;
-            character.health = character.maxHealth;
-            character.mana = character.maxMana;
+            unit.health = unit.maxHealth;
+            unit.mana = unit.maxMana;
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Diablerie.Engine.World
             return null;
         }
 
-        public override void Operate(Character character)
+        public override void Operate(Unit unit)
         {
             var targetWarp = FindTargetWarp();
             if (targetWarp == null)
@@ -81,8 +81,8 @@ namespace Diablerie.Engine.World
             ScreenFader.SetToBlack();
             ScreenFader.FadeToClear();
             var target = Iso.MapToIso(targetWarp.transform.position);
-            character.InstantMove(target);
-            character.GoTo(target + new Vector3(targetWarp.info.exitWalkX, targetWarp.info.exitWalkY));
+            unit.InstantMove(target);
+            unit.GoTo(target + new Vector3(targetWarp.info.exitWalkX, targetWarp.info.exitWalkY));
         }
     }
 }

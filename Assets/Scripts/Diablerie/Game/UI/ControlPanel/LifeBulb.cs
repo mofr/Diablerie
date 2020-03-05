@@ -19,8 +19,8 @@ namespace Diablerie.Game.UI.ControlPanel
         {
             if (WorldState.instance.Player == null)
                 return;
-            float currHealth = WorldState.instance.Player.character.health;
-            float maxHealth = WorldState.instance.Player.character.maxHealth;
+            float currHealth = WorldState.instance.Player.unit.health;
+            float maxHealth = WorldState.instance.Player.unit.maxHealth;
             imgHealthBar.fillAmount = currHealth / maxHealth;
             label.text = "Life: " + currHealth + "/" + maxHealth;
         }

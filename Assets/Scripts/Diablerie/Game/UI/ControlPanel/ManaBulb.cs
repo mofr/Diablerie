@@ -19,8 +19,8 @@ namespace Diablerie.Game.UI.ControlPanel
         {
             if (WorldState.instance.Player == null)
                 return;
-            float currentMana = WorldState.instance.Player.character.mana;
-            float maxMana = WorldState.instance.Player.character.maxMana;
+            float currentMana = WorldState.instance.Player.unit.mana;
+            float maxMana = WorldState.instance.Player.unit.maxMana;
             imgManaBar.fillAmount = currentMana / maxMana;
             label.text = "Mana: " + currentMana + "/" + maxMana;
         }

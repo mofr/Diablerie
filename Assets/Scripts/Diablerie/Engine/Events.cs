@@ -5,23 +5,23 @@ namespace Diablerie.Engine
 {
     public class Events
     {
-        public delegate void DeathHandler(Character target, Character killer);
-        public static event DeathHandler CharacterDied;
+        public delegate void DeathHandler(Unit target, Unit killer);
+        public static event DeathHandler UnitDied;
 
-        public delegate void InteractHandler(Character target, Character initiator);
-        public static event InteractHandler CharacterInteractionStarted;
+        public delegate void InteractHandler(Unit target, Unit initiator);
+        public static event InteractHandler UnitInteractionStarted;
         
         public delegate void LevelChangeHandler(LevelInfo level, LevelInfo previous);
         public static event LevelChangeHandler LevelChanged;
 
-        public static void InvokeCharacterDied(Character target, Character killer)
+        public static void InvokeUnitDied(Unit target, Unit killer)
         {
-            CharacterDied?.Invoke(target, killer);
+            UnitDied?.Invoke(target, killer);
         }
         
-        public static void InvokeCharacterInteractionStarted(Character target, Character initiator)
+        public static void InvokeUnitInteractionStarted(Unit target, Unit initiator)
         {
-            CharacterInteractionStarted?.Invoke(target, initiator);
+            UnitInteractionStarted?.Invoke(target, initiator);
         }
 
         public static void InvokeLevelChanged(LevelInfo level, LevelInfo previous)

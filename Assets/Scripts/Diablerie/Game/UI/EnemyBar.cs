@@ -9,7 +9,7 @@ namespace Diablerie.Game.UI
         public static EnemyBar instance;
 
         [HideInInspector]
-        public Character character;
+        public Unit unit;
 
         [SerializeField]
         Slider slider;
@@ -25,12 +25,12 @@ namespace Diablerie.Game.UI
 
         void LateUpdate()
         {
-            slider.gameObject.SetActive(character != null);
-            if (character)
+            slider.gameObject.SetActive(unit != null);
+            if (unit)
             {
-                title.text = character.title;
-                slider.maxValue = character.maxHealth;
-                slider.value = character.health;
+                title.text = unit.title;
+                slider.maxValue = unit.maxHealth;
+                slider.value = unit.health;
             }
         }
     }

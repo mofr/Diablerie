@@ -8,14 +8,14 @@ namespace Diablerie.Engine
     {
         void Start()
         {
-            Events.CharacterDied += OnCharacterDeath;
+            Events.UnitDied += UnitDeath;
         }
 
-        void OnCharacterDeath(Character target, Character killer)
+        void UnitDeath(Unit target, Unit killer)
         {
             var player = WorldState.instance.Player;
             
-            if (target.monStat != null && killer == player.character)
+            if (target.monStat != null && killer == player.unit)
             {
                 player.charStat.AddExp(target.monStat.stats[0].exp);
             }

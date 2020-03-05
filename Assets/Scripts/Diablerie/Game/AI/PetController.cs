@@ -8,18 +8,18 @@ namespace Diablerie.Game.AI
 {
     public class PetController : MonoBehaviour
     {
-        public Character owner;
+        public Unit owner;
         public float roamRadius = 12f;
         public float agroRadius = 15f;
         public float agroOwnerRadius = 25f;
         public float maxOwnerDistance = 32f;
-        private Character character;
-        private Character target;
+        private Unit _unit;
+        private Unit target;
         private Vector2 _maintainOffset;
 
         void Awake()
         {
-            character = GetComponent<Character>();
+            _unit = GetComponent<Unit>();
         }
 
         void OnEnable()
@@ -37,7 +37,7 @@ namespace Diablerie.Game.AI
                 {
                     if (owner == null)
                         yield return null;
-                    _maintainOffset = character.iso.pos - owner.iso.pos;
+                    _maintainOffset = _unit.iso.pos - owner.iso.pos;
                 }
                 else
                 {
@@ -51,7 +51,7 @@ namespace Diablerie.Game.AI
         {
             while (!target)
             {
-                character.LookAt(character.iso.pos + new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
+                _unit.LookAt(_unit.iso.pos + new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
                 yield return new WaitForSeconds(Random.Range(1f, 2f));
             }
         }
@@ -64,7 +64,7 @@ namespace Diablerie.Game.AI
                     yield return null;
                 if (!IsOwnerTooFar())
                 {
-                    Character nearestEnemy = AIUtils.GetNearestEnemy(character, agroRadius);
+                    Unit nearestEnemy = AIUtils.GetNearestEnemy(_unit, agroRadius);
                     if (nearestEnemy == null)
                         nearestEnemy = AIUtils.GetNearestEnemy(owner, agroOwnerRadius);
                     if (nearestEnemy != null)
@@ -75,17 +75,17 @@ namespace Diablerie.Game.AI
                 }
 
                 var newPosition = owner.iso.pos + _maintainOffset;
-                character.GoTo(newPosition);
+                _unit.GoTo(newPosition);
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
             }
         }
 
         private bool IsOwnerTooFar()
         {
-            return Vector2.Distance(character.iso.pos, owner.iso.pos) > maxOwnerDistance;
+            return Vector2.Distance(_unit.iso.pos, owner.iso.pos) > maxOwnerDistance;
         }
 
-        private void Attack(Character target)
+        private void Attack(Unit target)
         {
             this.target = target;
             StartCoroutine(Attack());
@@ -95,9 +95,9 @@ namespace Diablerie.Game.AI
         {
             while (true)
             {
-                if (AIUtils.IsAttackable(character, target) && !IsOwnerTooFar())
+                if (AIUtils.IsAttackable(_unit, target) && !IsOwnerTooFar())
                 {
-                    character.UseSkill(SkillInfo.Attack, target);
+                    _unit.UseSkill(SkillInfo.Attack, target);
                     yield return new WaitForSeconds(0.1f);
                 }
                 else
