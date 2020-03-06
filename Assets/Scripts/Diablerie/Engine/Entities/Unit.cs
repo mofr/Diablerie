@@ -30,9 +30,6 @@ namespace Diablerie.Engine.Entities
 
         private static float turnSpeed = 3.5f; // full rotations per second
 
-        public delegate void TakeDamageHandler(Unit originator, int damage);
-        public event TakeDamageHandler OnTakeDamage;
-
         private int _directionIndex = 0;
         private float _direction = 0;
     
@@ -71,8 +68,7 @@ namespace Diablerie.Engine.Entities
         {
             base.Start();
             CollisionMap.Move(iso.pos, iso.pos, size, gameObject);
-            if (monStat != null)
-                AudioManager.instance.Play(monStat.sound.init, transform);
+            Events.InvokeUnitInitialized(this);
         }
 
         public void Use(Entity entity)
@@ -205,31 +201,12 @@ namespace Diablerie.Engine.Entities
                 LookAtImmediately(_targetPoint);
                 _usingSkill = true;
                 _moving = false;
+                Events.InvokeUnitStartedSkill(this, _skillInfo);
+                
                 if (_skillInfo.castOverlay != null)
                 {
                     // TODO set overlay speed to spell cast rate
                     Overlay.Create(gameObject, loop: false, overlayInfo: _skillInfo.castOverlay);
-                }
-
-                AudioManager.instance.Play(_skillInfo.startSound, transform);
-
-                if (_skillInfo == SkillInfo.Attack)
-                {
-                    if (monStat != null)
-                    {
-                        AudioManager.instance.Play(monStat.sound.weapon1, transform, 
-                            delay: monStat.sound.weapon1Delay, volume: monStat.sound.weapon1Volume);
-                        AudioManager.instance.Play(monStat.sound.attack1, transform, 
-                            delay: monStat.sound.attack1Delay);
-                    }
-                    else
-                    {
-                        Item weapon = equip == null ? null : equip.GetWeapon();
-                        WeaponHitClass hitClass = WeaponHitClass.HandToHand;
-                        if (weapon != null)
-                            hitClass = weapon.info.weapon.hitClass;
-                        AudioManager.instance.Play(hitClass.sound, transform);
-                    }
                 }
             }
             else
@@ -419,8 +396,6 @@ namespace Diablerie.Engine.Entities
             health -= damage;
             if (health > 0)
             {
-                if (OnTakeDamage != null)
-                    OnTakeDamage(originator, damage);
                 if (damage > maxHealth * 0.1f)
                 {
                     overrideMode = "GH";
@@ -430,8 +405,7 @@ namespace Diablerie.Engine.Entities
                     _skillInfo = null;
                 }
 
-                if (monStat != null)
-                    AudioManager.instance.Play(monStat.sound.hit, transform, monStat.sound.hitDelay);
+                Events.InvokeUnitTookDamage(this, damage);
             }
             else
             {
@@ -446,9 +420,6 @@ namespace Diablerie.Engine.Entities
                 CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
 
                 Events.InvokeUnitDied(this, originator);
-
-                if (monStat != null)
-                    AudioManager.instance.Play(monStat.sound.death, transform, monStat.sound.deathDelay);
             }
         }
 
