@@ -13,7 +13,7 @@ namespace Diablerie.Engine.Entities
         public string modeName = "NU";
         public ObjectInfo objectInfo;
 
-        readonly static string[] gear = { "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT" };
+        static readonly string[] gear = { "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT" };
 
         private int _mode;
         private COFAnimator _animator;
@@ -26,6 +26,8 @@ namespace Diablerie.Engine.Entities
         public override Vector2 titleOffset => new Vector2(0, -objectInfo.nameOffset);
 
         public override float operateRange => objectInfo.operateRange;
+
+        public int ModeIndex => _mode;
 
         protected override void Awake()
         {
@@ -49,7 +51,7 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void SetMode(string modeName)
+        public void SetMode(string modeName)
         {
             if (objectInfo.draw)
             {
@@ -77,47 +79,9 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        static string[] treasureClassLetters = new string[] { "A", "B", "C" };
-
         public override void Operate(Unit unit)
         {
-            Debug.Log(unit.name + " use " + name + " (operateFn " + objectInfo.operateFn + ")");
-
-            if (objectInfo.operateFn == 1 // bed, caskets
-                || objectInfo.operateFn == 3 // urns
-                || objectInfo.operateFn == 4 // chests
-                || objectInfo.operateFn == 5 // barrels
-                || objectInfo.operateFn == 14 // crates
-                || objectInfo.operateFn == 51 // jungle objects
-            )
-            {
-                AudioManager.instance.Play("object_chest_large");
-
-                var levelInfo = LevelInfo.sheet[85]; // todo determine current level
-                string tc = "Act " + (levelInfo.act + 1);
-                var actLevels = LevelInfo.byAct[levelInfo.act];
-                int lowest = actLevels[0].id;
-                int highest = actLevels[actLevels.Count - 1].id;
-                int letterIndex = (levelInfo.id - lowest) / ((highest - lowest + 1) / 3);
-                string letter = treasureClassLetters[letterIndex];
-                tc += " Chest " + letter;
-                Debug.Log(tc);
-                ItemDrop.Drop(tc, transform.position, levelInfo.id);
-                SetMode("OP");
-            }
-            else if (objectInfo.operateFn == 23)
-            {
-                // waypoint
-                if (COF.ModeNames[2][_mode] != "OP")
-                {
-                    AudioManager.instance.Play("object_waypoint_open");
-                    SetMode("OP");
-                }
-            }
-            else
-            {
-                SetMode("OP");
-            }
+            Events.InvokeStaticObjectOperate(this, unit);
         }
 
         public override bool selectable => objectInfo.draw && objectInfo.selectable[_mode];

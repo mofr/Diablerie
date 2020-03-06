@@ -26,6 +26,9 @@ namespace Diablerie.Engine
         public delegate void LootFlippedHandler(Loot loot);
         public static event LootFlippedHandler LootFlipped; // Consider using something more generic like entity mode
 
+        public delegate void StaticObjectOperateHandler(StaticObject staticObject, Unit unit);
+        public static event StaticObjectOperateHandler StaticObjectOperate;
+
         public static void InvokeUnitInteractionStarted(Unit target, Unit initiator)
         {
             UnitInteractionStarted?.Invoke(target, initiator);
@@ -59,6 +62,11 @@ namespace Diablerie.Engine
         public static void InvokeLootFlipped(Loot loot)
         {
             LootFlipped?.Invoke(loot);
+        }
+
+        public static void InvokeStaticObjectOperate(StaticObject staticObject, Unit unit)
+        {
+            StaticObjectOperate?.Invoke(staticObject, unit);
         }
     }
 }

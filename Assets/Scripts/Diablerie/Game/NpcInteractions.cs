@@ -12,7 +12,7 @@ namespace Diablerie.Game
             Events.UnitInteractionStarted += OnInteract;
         }
         
-        public void OnInteract(Unit target, Unit initiator)
+        private void OnInteract(Unit target, Unit initiator)
         {
             if (target.monStat == null || !target.monStat.npc)
                 return;
