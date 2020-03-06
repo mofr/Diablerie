@@ -15,33 +15,24 @@ namespace Diablerie.Engine.Entities
 
         readonly static string[] gear = { "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT" };
 
-        int mode;
-        COFAnimator animator;
-        Iso iso;
+        private int _mode;
+        private COFAnimator _animator;
+        private Iso _iso;
 
-        public ObjectInfo info
-        {
-            get { return objectInfo; }
-        }
+        public ObjectInfo info => objectInfo;
 
         public override bool isAttackable => objectInfo.isAttackable;
 
-        public override Vector2 titleOffset
-        {
-            get { return new Vector2(0, -objectInfo.nameOffset); }
-        }
+        public override Vector2 titleOffset => new Vector2(0, -objectInfo.nameOffset);
 
-        public override float operateRange
-        {
-            get { return objectInfo.operateRange; }
-        }
+        public override float operateRange => objectInfo.operateRange;
 
         protected override void Awake()
         {
             base.Awake();
-            iso = GetComponent<Iso>();
-            animator = GetComponent<COFAnimator>();
-            animator.equip = gear;
+            _iso = GetComponent<Iso>();
+            _animator = GetComponent<COFAnimator>();
+            _animator.equip = gear;
         }
 
         protected override void Start()
@@ -52,7 +43,7 @@ namespace Diablerie.Engine.Entities
 
         void OnAnimationFinish()
         {
-            if (mode == 1)
+            if (_mode == 1)
             {
                 SetMode("ON");
             }
@@ -65,24 +56,24 @@ namespace Diablerie.Engine.Entities
                 int newMode = System.Array.IndexOf(COF.ModeNames[2], modeName);
                 if (newMode == -1 || !objectInfo.mode[newMode])
                 {
-                    Debug.LogWarning("Failed to set mode '" + modeName + "' of object " + name);
+                    Debug.LogWarning("Failed to set _mode '" + modeName + "' of object " + name);
                     return;
                 }
 
-                if (objectInfo.hasCollision[mode])
-                    CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, true, gameObject);
+                if (objectInfo.hasCollision[_mode])
+                    CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, true, gameObject);
 
-                mode = newMode;
+                _mode = newMode;
 
                 var cof = COF.Load(@"data\global\objects", objectInfo.token, "HTH", modeName);
-                animator.shadow = objectInfo.blocksLight[mode];
-                animator.cof = cof;
-                animator.loop = objectInfo.cycleAnim[mode];
-                animator.SetFrameRange(objectInfo.start[mode], objectInfo.frameCount[mode]);
-                animator.frameDuration = objectInfo.frameDuration[mode];
+                _animator.shadow = objectInfo.blocksLight[_mode];
+                _animator.cof = cof;
+                _animator.loop = objectInfo.cycleAnim[_mode];
+                _animator.SetFrameRange(objectInfo.start[_mode], objectInfo.frameCount[_mode]);
+                _animator.frameDuration = objectInfo.frameDuration[_mode];
 
-                if (objectInfo.hasCollision[mode])
-                    CollisionMap.SetPassable(Iso.Snap(iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);
+                if (objectInfo.hasCollision[_mode])
+                    CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);
             }
         }
 
@@ -117,7 +108,7 @@ namespace Diablerie.Engine.Entities
             else if (objectInfo.operateFn == 23)
             {
                 // waypoint
-                if (COF.ModeNames[2][mode] != "OP")
+                if (COF.ModeNames[2][_mode] != "OP")
                 {
                     AudioManager.instance.Play("object_waypoint_open");
                     SetMode("OP");
@@ -129,6 +120,6 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        public override bool selectable => objectInfo.draw && objectInfo.selectable[mode];
+        public override bool selectable => objectInfo.draw && objectInfo.selectable[_mode];
     }
 }
