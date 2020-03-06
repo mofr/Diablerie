@@ -22,7 +22,6 @@ namespace Diablerie.Engine.Entities
             position = Iso.MapToWorld(position);
             var gameObject = new GameObject(name);
             gameObject.transform.position = position;
-            // todo: Maybe add customized palette
             var palette = Palette.GetPalette(PaletteType.Act1);
             var spritesheet = DC6.Load(flippyFile, palette);
             var animator = gameObject.AddComponent<SpriteAnimator>();
@@ -48,7 +47,6 @@ namespace Diablerie.Engine.Entities
             }
             var pickup = Create(position, item.flippyFile, item.info.name, title, dir);
             pickup.item = item;
-            AudioManager.instance.Play(item.dropSound, pickup.transform.position, delay: item.dropSoundDelay);
             pickup.Flip();
             return pickup;
         }
@@ -97,7 +95,9 @@ namespace Diablerie.Engine.Entities
 
         void Flip()
         {
-            AudioManager.instance.Play(SoundInfo.itemFlippy, transform.position);
+            // TODO Events.PickupFlipped(item, position)
+            AudioManager.instance.Play(SoundInfo.itemFlippy, transform);
+            AudioManager.instance.Play(item.dropSound, transform, delay: item.dropSoundDelay);
             animator.Restart();
         }
 
@@ -108,12 +108,12 @@ namespace Diablerie.Engine.Entities
 
             if (PlayerController.instance.Take(item))
             {
+                // TODO Events.ItemPickedUp(item)
                 AudioManager.instance.Play(SoundInfo.itemPickup);
                 Destroy(gameObject);
             }
             else
             {
-                AudioManager.instance.Play("druid_cantcarry_1");
                 Flip();
             }
         }

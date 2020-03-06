@@ -145,7 +145,13 @@ namespace Diablerie.Engine
 
         public bool Take(Item item)
         {
-            return player.Take(item, preferHands: InventoryPanel.instance.visible);
+            bool took = player.Take(item, preferHands: InventoryPanel.instance.visible);
+            if (!took)
+            {
+                AudioManager.instance.Play(player.charStatInfo.classNameLower + "_cantcarry_1");
+            }
+
+            return took;
         }
 
         private void OnHandsItemChanged(Item item)
