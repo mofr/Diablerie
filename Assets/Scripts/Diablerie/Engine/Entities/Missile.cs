@@ -7,15 +7,19 @@ namespace Diablerie.Engine.Entities
     {
         public int weaponDamage = 0;
 
-        new SpriteRenderer renderer;
-        SpriteAnimator animator;
-        Iso iso;
-        Vector2 dir;
-        float speed;
-        MissileInfo info;
-        SkillInfo skillInfo;
-        Unit originator;
-        private float lifeTime;
+        private SpriteRenderer _renderer;
+        private SpriteAnimator _animator;
+        private Iso _iso;
+        private Vector2 _dir;
+        private float _speed;
+        private MissileInfo _info;
+        private SkillInfo _skillInfo;
+        private Unit _originator;
+        private float _lifeTime;
+
+        public MissileInfo Info => _info;
+        
+        public float LifeTime => _lifeTime;
 
         public static Missile Create(string missileId, Vector3 target, Unit originator)
         {
@@ -62,24 +66,24 @@ namespace Diablerie.Engine.Entities
         {
             var gameObject = new GameObject("missile_" + missileInfo.missile);
             var missile = gameObject.AddComponent<Missile>();
-            missile.animator = gameObject.AddComponent<SpriteAnimator>();
-            missile.renderer = gameObject.GetComponent<SpriteRenderer>();
-            missile.iso = gameObject.AddComponent<Iso>();
+            missile._animator = gameObject.AddComponent<SpriteAnimator>();
+            missile._renderer = gameObject.GetComponent<SpriteRenderer>();
+            missile._iso = gameObject.AddComponent<Iso>();
         
-            missile.info = missileInfo;
-            missile.originator = originator;
-            missile.speed = missileInfo.velocity;
-            missile.iso.pos = start;
-            missile.dir = (target - start).normalized;
-            missile.renderer.material = missileInfo.material;
-            missile.skillInfo = SkillInfo.Find(missileInfo.skill);
-            missile.lifeTime = 0;
+            missile._info = missileInfo;
+            missile._originator = originator;
+            missile._speed = missileInfo.velocity;
+            missile._iso.pos = start;
+            missile._dir = (target - start).normalized;
+            missile._renderer.material = missileInfo.material;
+            missile._skillInfo = SkillInfo.Find(missileInfo.skill);
+            missile._lifeTime = 0;
 
             var spritesheet = Spritesheet.Load(missileInfo.spritesheetFilename);
             int direction = Iso.Direction(start, target, spritesheet.directionCount);
-            missile.animator.SetSprites(spritesheet.GetSprites(direction));
-            missile.animator.loop = missileInfo.loopAnim != 0;
-            missile.animator.fps = missileInfo.fps;
+            missile._animator.SetSprites(spritesheet.GetSprites(direction));
+            missile._animator.loop = missileInfo.loopAnim != 0;
+            missile._animator.fps = missileInfo.fps;
         
             AudioManager.instance.Play(missileInfo.travelSound, missile.transform);
 
@@ -91,13 +95,13 @@ namespace Diablerie.Engine.Entities
             int damage = weaponDamage;
 
             // todo take skill level into account
-            if (skillInfo != null)
+            if (_skillInfo != null)
             {
-                damage += Random.Range(skillInfo.eMin, skillInfo.eMax + 1) + Random.Range(skillInfo.minDamage, skillInfo.maxDamage + 1);
+                damage += Random.Range(_skillInfo.eMin, _skillInfo.eMax + 1) + Random.Range(_skillInfo.minDamage, _skillInfo.maxDamage + 1);
             }
             else
             {
-                damage += Random.Range(info.eMin, info.eMax + 1) + Random.Range(info.minDamage, info.maxDamage + 1);
+                damage += Random.Range(_info.eMin, _info.eMax + 1) + Random.Range(_info.minDamage, _info.maxDamage + 1);
             }
 
             return damage;
@@ -105,21 +109,21 @@ namespace Diablerie.Engine.Entities
 
         void Update()
         {
-            lifeTime += Time.deltaTime;
-            if (lifeTime > info.lifeTime)
+            _lifeTime += Time.deltaTime;
+            if (_lifeTime > _info.lifeTime)
             {
-                if (info.serverHitFunc == "29")
+                if (_info.serverHitFunc == "29")
                 {
-                    Missile.CreateRadially(info.clientHitSubMissileId[0], iso.pos, originator, 16);
+                    Missile.CreateRadially(_info.clientHitSubMissileId[0], _iso.pos, _originator, 16);
                 }
                 Destroy(gameObject);
             }
 
-            speed += Mathf.Clamp(info.accel * Time.deltaTime, 0, info.maxVelocity);
-            float distance = speed * Time.deltaTime;
-            var posDiff = dir * distance;
-            var newPos = iso.pos + posDiff;
-            var hit = CollisionMap.Raycast(iso.pos, newPos, distance, size: info.size, ignore: originator.gameObject);
+            _speed += Mathf.Clamp(_info.accel * Time.deltaTime, 0, _info.maxVelocity);
+            float distance = _speed * Time.deltaTime;
+            var posDiff = _dir * distance;
+            var newPos = _iso.pos + posDiff;
+            var hit = CollisionMap.Raycast(_iso.pos, newPos, distance, size: _info.size, ignore: _originator.gameObject);
             if (hit)
             {
                 Unit hitUnit = null;
@@ -129,58 +133,58 @@ namespace Diablerie.Engine.Entities
                     if (hitUnit != null)
                     {
                         int damage = CalcDamage();
-                        hitUnit.Hit(damage, originator);
-                        if (info.progOverlay != null)
-                            Overlay.Create(hitUnit.gameObject, info.progOverlay, false);
+                        hitUnit.Hit(damage, _originator);
+                        if (_info.progOverlay != null)
+                            Overlay.Create(hitUnit.gameObject, _info.progOverlay, false);
                     }
                 }
-                if (info.explosionMissile != null)
-                    Missile.Create(info.explosionMissile, hit.pos, hit.pos, originator);
+                if (_info.explosionMissile != null)
+                    Missile.Create(_info.explosionMissile, hit.pos, hit.pos, _originator);
 
-                AudioManager.instance.Play(info.hitSound, Iso.MapToWorld(hit.pos));
-                AudioManager.instance.Play(SoundInfo.GetHitSound(info.hitClass, hitUnit), Iso.MapToWorld(hit.pos));
+                AudioManager.instance.Play(_info.hitSound, Iso.MapToWorld(hit.pos));
+                AudioManager.instance.Play(SoundInfo.GetHitSound(_info.hitClass, hitUnit), Iso.MapToWorld(hit.pos));
 
-                if (info.clientHitFunc == "14")
+                if (_info.clientHitFunc == "14")
                 {
                     // glacial spike, freezing arrow
-                    Missile.Create(info.clientHitSubMissileId[0], hit.pos, hit.pos, originator);
+                    Missile.Create(_info.clientHitSubMissileId[0], hit.pos, hit.pos, _originator);
                     int subMissileCount = Random.Range(3, 5);
                     for (int i = 0; i < subMissileCount; ++i)
                     {
                         var offset = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-                        Missile.Create(info.clientHitSubMissileId[1], hit.pos, hit.pos - offset, originator);
+                        Missile.Create(_info.clientHitSubMissileId[1], hit.pos, hit.pos - offset, _originator);
                     }
                 }
-                else if (info.serverHitFunc == "29")
+                else if (_info.serverHitFunc == "29")
                 {
                     // Frozen orb
-                    Missile.CreateRadially(info.clientHitSubMissileId[0], iso.pos, originator, 16);
+                    Missile.CreateRadially(_info.clientHitSubMissileId[0], _iso.pos, _originator, 16);
                 }
             
                 // todo pierce is actually is pierce skill with a chance to pierce
-                if ((!info.pierce || hitUnit == null) && info.collideKill)
+                if ((!_info.pierce || hitUnit == null) && _info.collideKill)
                 {
                     Destroy(gameObject);
                 }
             }
 
-            if (info.serverDoFunc == 15)
+            if (_info.serverDoFunc == 15)
             {
                 // Frozen orb
-                int frequency = info.parameters[0].value * 25;
+                int frequency = _info.parameters[0].value * 25;
                 float spawnPeriod = 1.0f / frequency;
-                float directionIncrement = info.parameters[1].value * 25 * Mathf.PI;
-                int missileToSpawn = (int)((lifeTime + Time.deltaTime) / spawnPeriod) - (int)(lifeTime / spawnPeriod);
+                float directionIncrement = _info.parameters[1].value * 25 * Mathf.PI;
+                int missileToSpawn = (int)((_lifeTime + Time.deltaTime) / spawnPeriod) - (int)(_lifeTime / spawnPeriod);
                 for (int i = 0; i < missileToSpawn; ++i)
                 {
                     var dir = new Vector2(1, 0);
-                    var rot = Quaternion.AngleAxis(lifeTime * directionIncrement, new Vector3(0, 0, 1));
+                    var rot = Quaternion.AngleAxis(_lifeTime * directionIncrement, new Vector3(0, 0, 1));
                     var offset = (Vector2) (rot * dir);
-                    Missile.Create(info.clientSubMissileId[0], iso.pos, iso.pos + offset, originator);
+                    Missile.Create(_info.clientSubMissileId[0], _iso.pos, _iso.pos + offset, _originator);
                 }
             }
 
-            iso.pos = newPos;
+            _iso.pos = newPos;
         }
     }
 }
