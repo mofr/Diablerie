@@ -99,7 +99,11 @@ namespace Diablerie.Engine
             var audioSource = Create("Sound " + sound.sound);
             Play(sound, audioSource, delay: delay, volume: volume);
             if (!sound.loop)
-                Destroy(audioSource.gameObject, sound.clip != null ? sound.clip.length + 0.1f : 0);
+            {
+                float lifeTime = sound.clip != null ? sound.clip.length + 0.1f : 0;
+                Destroy(audioSource.gameObject, delay + lifeTime);
+            }
+
             return audioSource;
         }
 

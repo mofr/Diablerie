@@ -189,6 +189,8 @@ namespace Diablerie.Engine
             }
         }
 
+        public float dropSoundDelay => dropSoundFrame / 25.0f;
+
         void StartColor(StringBuilder sb, string color)
         {
             sb.Append("<color=#");

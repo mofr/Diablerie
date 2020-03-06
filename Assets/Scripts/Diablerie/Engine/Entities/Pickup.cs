@@ -8,7 +8,6 @@ namespace Diablerie.Engine.Entities
     {
         new SpriteRenderer renderer;
         SpriteAnimator animator;
-        static MaterialPropertyBlock materialProperties;
         bool _selected = false;
         Item item;
 
@@ -49,9 +48,7 @@ namespace Diablerie.Engine.Entities
             }
             var pickup = Create(position, item.flippyFile, item.info.name, title, dir);
             pickup.item = item;
-            pickup.animator.SetTrigger(item.dropSoundFrame, () => {
-                AudioManager.instance.Play(item.dropSound, pickup.transform.position);
-            });
+            AudioManager.instance.Play(item.dropSound, pickup.transform.position, delay: item.dropSoundDelay);
             pickup.Flip();
             return pickup;
         }
@@ -59,8 +56,6 @@ namespace Diablerie.Engine.Entities
         protected override void Awake()
         {
             base.Awake();
-            if (materialProperties == null)
-                materialProperties = new MaterialPropertyBlock();
             CollisionMap.SetBlocked(Iso.MapToIso(transform.position), CollisionLayers.Item);
             animator = GetComponent<SpriteAnimator>();
             renderer = GetComponent<SpriteRenderer>();
