@@ -15,17 +15,17 @@ namespace Diablerie.Engine
         public static MouseSelection instance;
         
         private Entity hotEntity;
-        private bool highlightPickups;
-        private PickupHighlighter pickupHighlighter;
-        private readonly HashSet<Pickup> pickups = new HashSet<Pickup>();
-        private LabelPool pickupLabelPool;
+        private bool highlightLoot;
+        private LootHighlighter _lootHighlighter;
+        private readonly HashSet<Loot> loots = new HashSet<Loot>();
+        private LabelPool lootLabelPool;
         private Label label;
 
         void Awake()
         {
             instance = this;
-            pickupLabelPool = new LabelPool(transform);
-            pickupHighlighter = new PickupHighlighter(pickupLabelPool);
+            lootLabelPool = new LabelPool(transform);
+            _lootHighlighter = new LootHighlighter(lootLabelPool);
             label = new Label(transform);
             label.Hide();
         }
@@ -33,24 +33,24 @@ namespace Diablerie.Engine
         void Update()
         {
             bool updateHotEntity = !PlayerController.instance.FixedSelection();
-            pickups.Clear();
-            if (highlightPickups)
+            loots.Clear();
+            if (highlightLoot)
             {
-                FindVisiblePickups();
+                FindVisibleLoots();
             }
-            pickupHighlighter.Show(pickups, updateHotEntity);
+            _lootHighlighter.Show(loots, updateHotEntity);
             
             if (updateHotEntity)
             {
                 if (Ui.Hover)
                     HotEntity = null;
-                else if (pickupHighlighter.Hot != null)
-                    HotEntity = pickupHighlighter.Hot;
+                else if (_lootHighlighter.Hot != null)
+                    HotEntity = _lootHighlighter.Hot;
                 else
                     HotEntity = CalcHotEntity();
             }
 
-            if (HotEntity != null && !highlightPickups)
+            if (HotEntity != null && !highlightLoot)
             {
                 var unit = HotEntity.GetComponent<Unit>();
                 if (unit && unit.monStat != null)
@@ -94,16 +94,16 @@ namespace Diablerie.Engine
             }
         }
 
-        public void SetHighlightPickups(bool highlightPickups)
+        public void SetHighlightLoot(bool highlightLoot)
         {
-            this.highlightPickups = highlightPickups;
+            this.highlightLoot = highlightLoot;
         }
 
-        private void FindVisiblePickups()
+        private void FindVisibleLoots()
         {
             foreach (var entity in WorldState.instance.Entities)
             {
-                if (entity is Pickup pickup)
+                if (entity is Loot loot)
                 {
                     Bounds bounds = entity.bounds;
                     Vector2 minPosition = Camera.main.WorldToViewportPoint(bounds.min);
@@ -112,7 +112,7 @@ namespace Diablerie.Engine
                     Vector2 maxPosition = Camera.main.WorldToViewportPoint(bounds.max);
                     if (maxPosition.x <= 0 || maxPosition.y <= 0)
                         continue;
-                    pickups.Add(pickup);
+                    loots.Add(loot);
                 }
             }
         }

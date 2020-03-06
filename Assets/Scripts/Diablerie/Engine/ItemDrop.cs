@@ -299,7 +299,7 @@ namespace Diablerie.Engine
             item.level = uniqueItem.level;
             item.identified = false;
             GenerateUnique(item, uniqueItem);
-            Pickup.Create(pos, item);
+            Loot.Create(pos, item);
         }
 
         public static void Drop(SetItem setItem, Vector3 pos)
@@ -309,7 +309,7 @@ namespace Diablerie.Engine
             item.level = setItem.level;
             item.identified = false;
             GenerateSetItem(item, setItem);
-            Pickup.Create(pos, item);
+            Loot.Create(pos, item);
         }
 
         static void Drop(string code, Vector3 pos, int itemLevel, QualityFactors qualityFactors)
@@ -333,7 +333,7 @@ namespace Diablerie.Engine
                 }
                 GenerateItemProperties(item);
                 GenerateItemQuantity(item);
-                Pickup.Create(pos, item);
+                Loot.Create(pos, item);
             }
             else
             {

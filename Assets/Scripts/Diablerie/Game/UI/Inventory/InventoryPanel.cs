@@ -69,7 +69,7 @@ namespace Diablerie.Game.UI.Inventory
             {
                 var item = Item.Create("gld");
                 item.quantity = _player.inventory.gold;
-                Pickup.Create(_player.transform.position, item);
+                Loot.Create(_player.transform.position, item);
                 _player.inventory.gold = 0;
             }
         }

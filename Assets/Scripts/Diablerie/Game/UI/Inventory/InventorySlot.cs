@@ -76,7 +76,7 @@ namespace Diablerie.Game.UI.Inventory
             _player.HandsItem = unequipped[0];
             if (unequipped[1] != null)
                 if (!_player.inventory.Put(unequipped[1]))
-                    Pickup.Create(_player.transform.position, unequipped[1]);
+                    Loot.Create(_player.transform.position, unequipped[1]);
         }
 
         private void OnDisable()

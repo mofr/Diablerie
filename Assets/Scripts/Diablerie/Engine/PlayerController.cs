@@ -146,7 +146,11 @@ namespace Diablerie.Engine
         public bool Take(Item item)
         {
             bool took = player.Take(item, preferHands: InventoryPanel.instance.visible);
-            if (!took)
+            if (took)
+            {
+                AudioManager.instance.Play(SoundInfo.itemPickup);
+            }
+            else
             {
                 AudioManager.instance.Play(player.charStatInfo.classNameLower + "_cantcarry_1");
             }
@@ -201,8 +205,8 @@ namespace Diablerie.Engine
 
         void HandleKeyboard()
         {
-            bool highlightPickups = Input.GetKey(KeyCode.LeftAlt) | Input.GetKey(KeyCode.RightAlt);
-            MouseSelection.instance.SetHighlightPickups(highlightPickups);
+            bool highlightLoot = Input.GetKey(KeyCode.LeftAlt) | Input.GetKey(KeyCode.RightAlt);
+            MouseSelection.instance.SetHighlightLoot(highlightLoot);
             if (InventoryPanel.instance.visible || CharstatPanel.instance.visible)
             {
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space))
@@ -277,7 +281,7 @@ namespace Diablerie.Engine
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Pickup.Create(player.transform.position, player.HandsItem);
+                    Loot.Create(player.transform.position, player.HandsItem);
                     FlushInput();
                     player.HandsItem = null;
                 }

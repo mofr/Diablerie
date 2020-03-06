@@ -90,10 +90,10 @@ namespace Diablerie.Game.UI
             if (parts.Length >= 2 && parts[0] == "/spawn")
             {
                 var pos = Iso.MapToWorld(IsoInput.mouseTile);
-                if (parts[1] == "pickup")
+                if (parts[1] == "flippy")
                 {
                     string flippyFile = @"data\global\items\flp" + parts[2] + ".dc6";
-                    Pickup.Create(pos, flippyFile, flippyFile);
+                    Loot.Create(pos, flippyFile, flippyFile);
                     return;
                 }
 

@@ -6,30 +6,30 @@ using UnityEngine;
 
 namespace Diablerie.Engine.UI
 {
-    public class PickupLabelLayout
+    public class LootLabelLayout
     {
         private readonly SortedList<float, Rect> placedRects = new SortedList<float, Rect>(new DuplicateKeyComparer<float>());
         private float verticalPadding;
 
-        public PickupLabelLayout(float verticalPaddingInPixels)
+        public LootLabelLayout(float verticalPaddingInPixels)
         {
             verticalPadding = verticalPaddingInPixels / Iso.pixelsPerUnit;
         }
 
-        public void Arrange(IReadOnlyCollection<KeyValuePair<Pickup, Label>> labels)
+        public void Arrange(IReadOnlyCollection<KeyValuePair<Loot, Label>> labels)
         {
             var sortedLabels = labels.OrderBy(x => x.Key.transform.position.y);
             placedRects.Clear();
-            foreach (KeyValuePair<Pickup, Label> entry in sortedLabels)
+            foreach (KeyValuePair<Loot, Label> entry in sortedLabels)
             {
-                Pickup pickup = entry.Key;
+                Loot loot = entry.Key;
                 Label label = entry.Value;
-                var position = pickup.transform.position + (Vector3) pickup.titleOffset / Iso.pixelsPerUnit;
-                label.Show(position, pickup.title);
+                var position = loot.transform.position + (Vector3) loot.titleOffset / Iso.pixelsPerUnit;
+                label.Show(position, loot.title);
                 var rect = label.GetScreenRect();
                 Rect placedRect = PutRect(rect);
                 Vector3 offset = placedRect.position - rect.position;
-                label.Show(position + offset, pickup.title);
+                label.Show(position + offset, loot.title);
             }
         }
 

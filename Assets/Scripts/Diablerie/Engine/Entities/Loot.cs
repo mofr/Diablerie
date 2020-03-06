@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace Diablerie.Engine.Entities
 {
-    public class Pickup : Entity
+    public class Loot : Entity
     {
         new SpriteRenderer renderer;
         SpriteAnimator animator;
         bool _selected = false;
         Item item;
 
-        public static Pickup Create(Vector3 position, string flippyFile, string name, string title = null, int dir = 0)
+        public static Loot Create(Vector3 position, string flippyFile, string name, string title = null, int dir = 0)
         {
             position = Iso.MapToIso(position);
             if (!CollisionMap.Fit(position, out position, mask: CollisionLayers.Item))
             {
-                Debug.LogError("Can't fit pickup");
+                Debug.LogError("Can't fit loot");
                 return null;
             }
             position = Iso.MapToWorld(position);
@@ -27,12 +27,12 @@ namespace Diablerie.Engine.Entities
             var animator = gameObject.AddComponent<SpriteAnimator>();
             animator.SetSprites(spritesheet.GetSprites(dir));
             animator.loop = false;
-            var pickup = gameObject.AddComponent<Pickup>();
-            pickup.title = title;
-            return pickup;
+            var loot = gameObject.AddComponent<Loot>();
+            loot.title = title;
+            return loot;
         }
 
-        public static Pickup Create(Vector3 position, Item item)
+        public static Loot Create(Vector3 position, Item item)
         {
             var title = item.GetTitle();
             int dir = 0;
@@ -45,10 +45,10 @@ namespace Diablerie.Engine.Entities
                 else if (item.quantity >= 100)
                     dir = 1;
             }
-            var pickup = Create(position, item.flippyFile, item.info.name, title, dir);
-            pickup.item = item;
-            pickup.Flip();
-            return pickup;
+            var loot = Create(position, item.flippyFile, item.info.name, title, dir);
+            loot.item = item;
+            loot.Flip();
+            return loot;
         }
 
         protected override void Awake()
@@ -95,7 +95,7 @@ namespace Diablerie.Engine.Entities
 
         void Flip()
         {
-            // TODO Events.PickupFlipped(item, position)
+            // TODO Events.LootFlipped(item, position)
             AudioManager.instance.Play(SoundInfo.itemFlippy, transform);
             AudioManager.instance.Play(item.dropSound, transform, delay: item.dropSoundDelay);
             animator.Restart();
@@ -108,8 +108,6 @@ namespace Diablerie.Engine.Entities
 
             if (PlayerController.instance.Take(item))
             {
-                // TODO Events.ItemPickedUp(item)
-                AudioManager.instance.Play(SoundInfo.itemPickup);
                 Destroy(gameObject);
             }
             else
