@@ -83,15 +83,9 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        public override Vector2 titleOffset
-        {
-            get { return new Vector2(0, 20); }
-        }
+        public override Vector2 titleOffset => new Vector2(0, 20);
 
-        public override Bounds bounds
-        {
-            get { return renderer.bounds; }
-        }
+        public override Bounds bounds => renderer.bounds;
 
         void Flip()
         {
