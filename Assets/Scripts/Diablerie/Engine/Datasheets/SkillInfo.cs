@@ -265,7 +265,7 @@ namespace Diablerie.Engine.Datasheets
                 else if (targetUnit != null && IsRangeOk(self, targetUnit, target))
                 {
                     AudioManager.instance.Play(hitClass.hitSound, targetUnit.transform.position);
-                    targetUnit.TakeDamage(damage, self);
+                    targetUnit.Hit(damage, self);
                 }
             }
             else if (srvDoFunc == 17)

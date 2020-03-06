@@ -405,7 +405,7 @@ namespace Diablerie.Engine.Entities
             _directionIndex = _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
         }
 
-        public void TakeDamage(int damage, Unit originator = null)
+        public void Hit(int damage, Unit originator = null)
         {
             if (_dying || _dead || _resurrecting)
                 return;

@@ -129,7 +129,7 @@ namespace Diablerie.Engine.Entities
                     if (hitUnit != null)
                     {
                         int damage = CalcDamage();
-                        hitUnit.TakeDamage(damage, originator);
+                        hitUnit.Hit(damage, originator);
                         if (info.progOverlay != null)
                             Overlay.Create(hitUnit.gameObject, info.progOverlay, false);
                     }
