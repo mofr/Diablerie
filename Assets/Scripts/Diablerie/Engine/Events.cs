@@ -33,6 +33,9 @@ namespace Diablerie.Engine
         public delegate void MissileMovedHandler(Missile missile);
         public static event MissileMovedHandler MissileMoved;
 
+        public delegate void MissileCreatedHandler(Missile missile);
+        public static event MissileCreatedHandler MissileCreated;
+
         public delegate void MissileHitHandler(Missile missile, Vector2 pos, GameObject gameObject);
         public static event MissileHitHandler MissileHit;
 
@@ -82,6 +85,11 @@ namespace Diablerie.Engine
         public static void InvokeMissileMoved(Missile missile)
         {
             MissileMoved?.Invoke(missile);
+        }
+
+        public static void InvokeMissileCreated(Missile missile)
+        {
+            MissileCreated?.Invoke(missile);
         }
 
         public static void InvokeMissileHit(Missile missile, Vector2 pos, GameObject gameObject)

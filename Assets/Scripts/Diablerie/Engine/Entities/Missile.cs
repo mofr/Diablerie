@@ -91,7 +91,7 @@ namespace Diablerie.Engine.Entities
             missile._animator.loop = missileInfo.loopAnim != 0;
             missile._animator.fps = missileInfo.fps;
         
-            AudioManager.instance.Play(missileInfo.travelSound, missile.transform);
+            Events.InvokeMissileCreated(missile);
 
             return missile;
         }

@@ -9,9 +9,15 @@ namespace Diablerie.Game
     {
         public void Awake()
         {
+            Events.MissileCreated += OnMissileCreated;
             Events.MissileMoved += OnMissileMove;
             Events.MissileHit += OnMissileHit;
             Events.MissileLifetimeEnd += OnMissileLifetimeEnd;
+        }
+
+        private void OnMissileCreated(Missile missile)
+        {
+            AudioManager.instance.Play(missile.Info.travelSound, missile.transform);
         }
 
         private static void OnMissileMove(Missile missile)
