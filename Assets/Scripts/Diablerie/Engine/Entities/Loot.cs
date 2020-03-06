@@ -6,10 +6,11 @@ namespace Diablerie.Engine.Entities
 {
     public class Loot : Entity
     {
-        new SpriteRenderer renderer;
-        SpriteAnimator animator;
-        bool _selected = false;
-        Item item;
+        public Item item;
+        
+        private SpriteRenderer _renderer;
+        private SpriteAnimator _animator;
+        private bool _selected;
 
         public static Loot Create(Vector3 position, string flippyFile, string name, string title = null, int dir = 0)
         {
@@ -55,8 +56,8 @@ namespace Diablerie.Engine.Entities
         {
             base.Awake();
             CollisionMap.SetBlocked(Iso.MapToIso(transform.position), CollisionLayers.Item);
-            animator = GetComponent<SpriteAnimator>();
-            renderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<SpriteAnimator>();
+            _renderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnDisable()
@@ -67,7 +68,7 @@ namespace Diablerie.Engine.Entities
         protected override void Start()
         {
             base.Start();
-            renderer.sortingOrder = Iso.SortingOrder(transform.position);
+            _renderer.sortingOrder = Iso.SortingOrder(transform.position);
         }
 
         public override bool selected
@@ -78,21 +79,19 @@ namespace Diablerie.Engine.Entities
                 if (_selected != value)
                 {
                     _selected = value;
-                    Materials.SetRendererHighlighted(renderer, _selected);
+                    Materials.SetRendererHighlighted(_renderer, _selected);
                 }
             }
         }
 
         public override Vector2 titleOffset => new Vector2(0, 20);
 
-        public override Bounds bounds => renderer.bounds;
+        public override Bounds bounds => _renderer.bounds;
 
         void Flip()
         {
-            // TODO Events.LootFlipped(item, position)
-            AudioManager.instance.Play(SoundInfo.itemFlippy, transform);
-            AudioManager.instance.Play(item.dropSound, transform, delay: item.dropSoundDelay);
-            animator.Restart();
+            _animator.Restart();
+            Events.InvokeLootFlipped(this);
         }
 
         public override void Operate(Unit unit)

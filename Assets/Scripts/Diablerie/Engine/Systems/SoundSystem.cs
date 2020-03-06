@@ -12,6 +12,7 @@ namespace Diablerie.Engine.Systems
             Events.UnitStartedSkill += OnUnitStartedSkill;
             Events.UnitTookDamage += OnUnitTookDamage;
             Events.UnitDied += OnUnitDied;
+            Events.LootFlipped += OnLootFlipped;
         }
 
         private void OnUnitInitialized(Unit unit)
@@ -54,6 +55,12 @@ namespace Diablerie.Engine.Systems
         {
             if (unit.monStat != null)
                 AudioManager.instance.Play(unit.monStat.sound.death, unit.transform, unit.monStat.sound.deathDelay);
+        }
+
+        private void OnLootFlipped(Loot loot)
+        {
+            AudioManager.instance.Play(SoundInfo.itemFlippy, loot.transform);
+            AudioManager.instance.Play(loot.item.dropSound, loot.transform, delay: loot.item.dropSoundDelay);
         }
     }
 }

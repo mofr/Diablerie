@@ -23,6 +23,9 @@ namespace Diablerie.Engine
         public delegate void LevelChangeHandler(LevelInfo level, LevelInfo previous);
         public static event LevelChangeHandler LevelChanged;
 
+        public delegate void LootFlippedHandler(Loot loot);
+        public static event LootFlippedHandler LootFlipped; // Consider using something more generic like entity mode
+
         public static void InvokeUnitInteractionStarted(Unit target, Unit initiator)
         {
             UnitInteractionStarted?.Invoke(target, initiator);
@@ -51,6 +54,11 @@ namespace Diablerie.Engine
         public static void InvokeLevelChanged(LevelInfo level, LevelInfo previous)
         {
             LevelChanged?.Invoke(level, previous);
+        }
+
+        public static void InvokeLootFlipped(Loot loot)
+        {
+            LootFlipped?.Invoke(loot);
         }
     }
 }
