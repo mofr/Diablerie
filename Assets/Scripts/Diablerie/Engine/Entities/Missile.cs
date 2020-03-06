@@ -17,6 +17,10 @@ namespace Diablerie.Engine.Entities
         private Unit _originator;
         private float _lifeTime;
 
+        public Unit Originator => _originator;
+        
+        public Iso Iso => _iso;
+
         public MissileInfo Info => _info;
         
         public float LifeTime => _lifeTime;
@@ -168,21 +172,7 @@ namespace Diablerie.Engine.Entities
                 }
             }
 
-            if (_info.serverDoFunc == 15)
-            {
-                // Frozen orb
-                int frequency = _info.parameters[0].value * 25;
-                float spawnPeriod = 1.0f / frequency;
-                float directionIncrement = _info.parameters[1].value * 25 * Mathf.PI;
-                int missileToSpawn = (int)((_lifeTime + Time.deltaTime) / spawnPeriod) - (int)(_lifeTime / spawnPeriod);
-                for (int i = 0; i < missileToSpawn; ++i)
-                {
-                    var dir = new Vector2(1, 0);
-                    var rot = Quaternion.AngleAxis(_lifeTime * directionIncrement, new Vector3(0, 0, 1));
-                    var offset = (Vector2) (rot * dir);
-                    Missile.Create(_info.clientSubMissileId[0], _iso.pos, _iso.pos + offset, _originator);
-                }
-            }
+            Events.InvokeMissileMoved(this);
 
             _iso.pos = newPos;
         }

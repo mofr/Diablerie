@@ -29,6 +29,9 @@ namespace Diablerie.Engine
         public delegate void StaticObjectOperateHandler(StaticObject staticObject, Unit unit);
         public static event StaticObjectOperateHandler StaticObjectOperate;
 
+        public delegate void MissileMovedHandler(Missile missile);
+        public static event MissileMovedHandler MissileMoved;
+
         public static void InvokeUnitInteractionStarted(Unit target, Unit initiator)
         {
             UnitInteractionStarted?.Invoke(target, initiator);
@@ -67,6 +70,11 @@ namespace Diablerie.Engine
         public static void InvokeStaticObjectOperate(StaticObject staticObject, Unit unit)
         {
             StaticObjectOperate?.Invoke(staticObject, unit);
+        }
+
+        public static void InvokeMissileMoved(Missile missile)
+        {
+            MissileMoved?.Invoke(missile);
         }
     }
 }
