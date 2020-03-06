@@ -23,6 +23,8 @@ namespace Diablerie.Engine.Entities
 
         public MissileInfo Info => _info;
         
+        public SkillInfo SkillInfo => _skillInfo;
+        
         public float LifeTime => _lifeTime;
 
         public static Missile Create(string missileId, Vector3 target, Unit originator)
@@ -94,23 +96,6 @@ namespace Diablerie.Engine.Entities
             return missile;
         }
 
-        int CalcDamage()
-        {
-            int damage = weaponDamage;
-
-            // todo take skill level into account
-            if (_skillInfo != null)
-            {
-                damage += Random.Range(_skillInfo.eMin, _skillInfo.eMax + 1) + Random.Range(_skillInfo.minDamage, _skillInfo.maxDamage + 1);
-            }
-            else
-            {
-                damage += Random.Range(_info.eMin, _info.eMax + 1) + Random.Range(_info.minDamage, _info.maxDamage + 1);
-            }
-
-            return damage;
-        }
-
         void Update()
         {
             _lifeTime += Time.deltaTime;
@@ -130,46 +115,7 @@ namespace Diablerie.Engine.Entities
             var hit = CollisionMap.Raycast(_iso.pos, newPos, distance, size: _info.size, ignore: _originator.gameObject);
             if (hit)
             {
-                Unit hitUnit = null;
-                if (hit.gameObject != null)
-                {
-                    hitUnit = hit.gameObject.GetComponent<Unit>();
-                    if (hitUnit != null)
-                    {
-                        int damage = CalcDamage();
-                        hitUnit.Hit(damage, _originator);
-                        if (_info.progOverlay != null)
-                            Overlay.Create(hitUnit.gameObject, _info.progOverlay, false);
-                    }
-                }
-                if (_info.explosionMissile != null)
-                    Missile.Create(_info.explosionMissile, hit.pos, hit.pos, _originator);
-
-                AudioManager.instance.Play(_info.hitSound, Iso.MapToWorld(hit.pos));
-                AudioManager.instance.Play(SoundInfo.GetHitSound(_info.hitClass, hitUnit), Iso.MapToWorld(hit.pos));
-
-                if (_info.clientHitFunc == "14")
-                {
-                    // glacial spike, freezing arrow
-                    Missile.Create(_info.clientHitSubMissileId[0], hit.pos, hit.pos, _originator);
-                    int subMissileCount = Random.Range(3, 5);
-                    for (int i = 0; i < subMissileCount; ++i)
-                    {
-                        var offset = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-                        Missile.Create(_info.clientHitSubMissileId[1], hit.pos, hit.pos - offset, _originator);
-                    }
-                }
-                else if (_info.serverHitFunc == "29")
-                {
-                    // Frozen orb
-                    Missile.CreateRadially(_info.clientHitSubMissileId[0], _iso.pos, _originator, 16);
-                }
-            
-                // todo pierce is actually is pierce skill with a chance to pierce
-                if ((!_info.pierce || hitUnit == null) && _info.collideKill)
-                {
-                    Destroy(gameObject);
-                }
+                Events.InvokeMissileHit(this, hit.pos, hit.gameObject);
             }
 
             Events.InvokeMissileMoved(this);
