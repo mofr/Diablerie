@@ -36,6 +36,9 @@ namespace Diablerie.Engine
         public delegate void MissileHitHandler(Missile missile, Vector2 pos, GameObject gameObject);
         public static event MissileHitHandler MissileHit;
 
+        public delegate void MissileLifetimeEndHandler(Missile missile);
+        public static event MissileLifetimeEndHandler MissileLifetimeEnd;
+
         public static void InvokeUnitInteractionStarted(Unit target, Unit initiator)
         {
             UnitInteractionStarted?.Invoke(target, initiator);
@@ -84,6 +87,11 @@ namespace Diablerie.Engine
         public static void InvokeMissileHit(Missile missile, Vector2 pos, GameObject gameObject)
         {
             MissileHit?.Invoke(missile, pos, gameObject);
+        }
+
+        public static void InvokeMissileLifetimeEnd(Missile missile)
+        {
+            MissileLifetimeEnd?.Invoke(missile);
         }
     }
 }

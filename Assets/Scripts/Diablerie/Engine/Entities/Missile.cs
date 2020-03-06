@@ -101,10 +101,7 @@ namespace Diablerie.Engine.Entities
             _lifeTime += Time.deltaTime;
             if (_lifeTime > _info.lifeTime)
             {
-                if (_info.serverHitFunc == "29")
-                {
-                    Missile.CreateRadially(_info.clientHitSubMissileId[0], _iso.pos, _originator, 16);
-                }
+                Events.InvokeMissileLifetimeEnd(this);
                 Destroy(gameObject);
             }
 

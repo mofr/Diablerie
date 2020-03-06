@@ -11,6 +11,7 @@ namespace Diablerie.Game
         {
             Events.MissileMoved += OnMissileMove;
             Events.MissileHit += OnMissileHit;
+            Events.MissileLifetimeEnd += OnMissileLifetimeEnd;
         }
 
         private static void OnMissileMove(Missile missile)
@@ -101,6 +102,18 @@ namespace Diablerie.Game
             }
 
             return damage;
+        }
+
+        private void OnMissileLifetimeEnd(Missile missile)
+        {
+            var info = missile.Info;
+            var iso = missile.Iso;
+            var originator = missile.Originator;
+            
+            if (info.serverHitFunc == "29")
+            {
+                Missile.CreateRadially(info.clientHitSubMissileId[0], iso.pos, originator, 16);
+            }
         }
     }
 }
