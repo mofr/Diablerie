@@ -38,7 +38,7 @@ namespace Diablerie.Game
                 string letter = TreasureClassLetters[letterIndex];
                 tc += " Chest " + letter;
                 Debug.Log(tc);
-                ItemDrop.Drop(tc, transform.position, levelInfo.id);
+                ItemDrop.Drop(tc, staticObject.transform.position, levelInfo.id);
                 staticObject.SetMode("OP");
             }
             else if (staticObject.info.operateFn == 23)
