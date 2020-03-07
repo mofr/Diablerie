@@ -20,7 +20,6 @@ namespace Diablerie.Engine.Entities
         private int frameCounter = 0;
         private int _overrideFrame = -1; // TODO New field to replace frame counter
         private int frameCount = 0;
-        private int frameStart = 0;
         private List<Layer> layers = new List<Layer>();
         private bool _selected = false;
         private Material shadowMaterial;
@@ -81,7 +80,6 @@ namespace Diablerie.Engine.Entities
                 {
                     modeChanged = _cof == null || _cof.mode != value.mode;
                     _cof = value;
-                    frameCount = 0;
                     configChanged = true;
                 }
             }
@@ -105,13 +103,6 @@ namespace Diablerie.Engine.Entities
             _overrideFrame = frame;
         }
 
-        public void SetFrameRange(int start, int count)
-        {
-            frameStart = start;
-            frameCount = count != 0 ? count : _cof.framesPerDirection;
-            configChanged = true;
-        }
-
         public void Restart()
         {
             time = 0;
@@ -125,8 +116,7 @@ namespace Diablerie.Engine.Entities
 
             configChanged = false;
             frameDuration = _cof.frameDuration;
-            if (frameCount == 0)
-                frameCount = _cof.framesPerDirection;
+            frameCount = _cof.framesPerDirection;
 
             if (modeChanged)
             {
@@ -197,8 +187,6 @@ namespace Diablerie.Engine.Entities
 
             UpdateConfiguration();
 
-            if (frameCounter >= frameCount)
-                return;
             time += Time.deltaTime * speed;
             while (time >= frameDuration)
             {
@@ -223,7 +211,7 @@ namespace Diablerie.Engine.Entities
             int sortingOrder = Iso.SortingOrder(transform.position);
             int frameIndex = _overrideFrame == -1 ? frameCounter : _overrideFrame;
             frameIndex = Mathf.Min(frameIndex, frameCount - 1);
-            int spriteIndex = frameStart + frameIndex;
+            int spriteIndex = frameIndex;
             int cofDirection = direction * _cof.directionCount / Unit.DirectionCount;
             int priority = (cofDirection * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
             for (int i = 0; i < _cof.layerCount; ++i)
