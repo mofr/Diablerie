@@ -28,7 +28,7 @@ namespace Diablerie.Engine.Entities
             get { return _renderer.bounds; }
         }
 
-        public virtual bool selectable => _renderer != null;
+        public virtual bool selectable => true;
 
         public virtual bool selected
         {
