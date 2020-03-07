@@ -19,6 +19,7 @@ namespace Diablerie.Engine.Entities
         private string[] _equip;
         private float time = 0;
         private int frameCounter = 0;
+        private int _overrideFrame = -1; // TODO New field to replace frame counter
         private int frameCount = 0;
         private int frameStart = 0;
         private List<Layer> layers = new List<Layer>();
@@ -98,6 +99,11 @@ namespace Diablerie.Engine.Entities
                     configChanged = true;
                 }
             }
+        }
+
+        public void SetFrame(int frame)
+        {
+            _overrideFrame = frame;
         }
 
         public void SetFrameRange(int start, int count)
@@ -217,7 +223,8 @@ namespace Diablerie.Engine.Entities
                 return;
             UpdateConfiguration();
             int sortingOrder = Iso.SortingOrder(transform.position);
-            int frameIndex = Mathf.Min(frameCounter, frameCount - 1);
+            int frameIndex = _overrideFrame == -1 ? frameCounter : _overrideFrame;
+            frameIndex = Mathf.Min(frameIndex, frameCount - 1);
             int spriteIndex = frameStart + frameIndex;
             int cofDirection = direction * _cof.directionCount / Unit.DirectionCount;
             int priority = (cofDirection * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);

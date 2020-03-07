@@ -196,6 +196,9 @@ namespace Diablerie.Game.World
 
             gameObject.transform.SetParent(parent, true);
 
+            if (objectInfo.draw)
+                gameObject.AddComponent<StaticObjectRenderer>();
+
             return staticObject;
         }
 
