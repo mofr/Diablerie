@@ -425,7 +425,7 @@ namespace Diablerie.Engine.Entities
 
         void OnAnimationMiddle()
         {
-            if (_usingSkill && _renderer.cof.mode == _skillInfo.anim)
+            if (_usingSkill)
             {
                 _skillInfo.Do(this, _targetUnit, _targetPoint);
             }
