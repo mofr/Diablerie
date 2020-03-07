@@ -50,7 +50,7 @@ namespace Diablerie.Engine.Entities
 
         public void SetMode(string modeName)
         {
-            int newMode = System.Array.IndexOf(COF.ModeNames[2], modeName);
+            int newMode = System.Array.IndexOf(COF.StaticObjectModes, modeName);
             if (newMode == -1 || !objectInfo.mode[newMode])
             {
                 Debug.LogWarning("Failed to set mode '" + modeName + "' of object " + name);

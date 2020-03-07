@@ -22,7 +22,7 @@ namespace Diablerie.Engine.Entities
         {
             var info = _staticObject.info;
             var mode = _staticObject.ModeIndex;
-            var modeName = COF.ModeNames[2][mode];
+            var modeName = COF.StaticObjectModes[mode];
 
             if (!info.mode[mode])
             {

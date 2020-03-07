@@ -28,11 +28,15 @@ namespace Diablerie.Engine.IO.D2Formats
             public Material material;
         }
 
-        public static readonly string[][] ModeNames = {
-            new string[] { "DT", "NU", "WL", "RN", "GH", "TN", "TW", "A1", "A2", "BL", "SC", "TH", "KK", "S1", "S2", "S3", "S4", "DD", "GH", "GH" }, // player (plrmode.txt)
-            new string[] { "DT", "NU", "WL", "GH", "A1", "A2", "BL", "SC", "S1", "S2", "S3", "S4", "DD", "GH", "xx", "RN" }, // monsters (monmode.txt)
-            new string[] { "NU", "OP", "ON", "S1", "S2", "S3", "S4", "S5" } // objects (objmode.txt)
-        };
+        // plrmode.txt
+        public static readonly string[] PlayerModes = {"DT", "NU", "WL", "RN", "GH", "TN", "TW", "A1", "A2", "BL", "SC", "TH", "KK", "S1", "S2", "S3", "S4", "DD", "GH", "GH"};
+        
+        // monmode.txt
+        public static readonly string[] MonsterModes = {"DT", "NU", "WL", "GH", "A1", "A2", "BL", "SC", "S1", "S2", "S3", "S4", "DD", "GH", "xx", "RN"};
+        
+        // objmode.txt
+        public static readonly string[] StaticObjectModes = {"NU", "OP", "ON", "S1", "S2", "S3", "S4", "S5"}; 
+        
         public static readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
         static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 

@@ -44,7 +44,7 @@ namespace Diablerie.Game
             else if (staticObject.info.operateFn == 23)
             {
                 // waypoint
-                if (COF.ModeNames[2][staticObject.ModeIndex] != "OP")
+                if (COF.StaticObjectModes[staticObject.ModeIndex] != "OP")
                 {
                     AudioManager.instance.Play("object_waypoint_open");
                     staticObject.SetMode("OP");
