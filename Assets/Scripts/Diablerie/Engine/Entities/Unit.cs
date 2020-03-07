@@ -360,11 +360,9 @@ namespace Diablerie.Engine.Entities
             string mode = Mode;
             string weaponClass = this.weaponClass;
             _renderer.speed = 1.0f;
-            _renderer.loop = true;
             if (mode == "DT" || mode == "DD")
             {
                 weaponClass = "HTH";
-                _renderer.loop = false;
             }
 
             _renderer.cof = COF.Load(basePath, token, weaponClass, mode);

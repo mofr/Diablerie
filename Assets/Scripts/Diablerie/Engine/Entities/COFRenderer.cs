@@ -10,7 +10,6 @@ namespace Diablerie.Engine.Entities
     class COFRenderer : MonoBehaviour
     {
         public int direction = 0;
-        public bool loop = true;
         public float speed = 1.0f;
         public float frameDuration = 1.0f / 12.0f;
         public bool shadow = true;
@@ -198,7 +197,7 @@ namespace Diablerie.Engine.Entities
 
             UpdateConfiguration();
 
-            if (!loop && frameCounter >= frameCount)
+            if (frameCounter >= frameCount)
                 return;
             time += Time.deltaTime * speed;
             while (time >= frameDuration)
@@ -211,8 +210,7 @@ namespace Diablerie.Engine.Entities
                 if (frameCounter == frameCount)
                 {
                     SendMessage("OnAnimationFinish", SendMessageOptions.DontRequireReceiver);
-                    if (loop)
-                        frameCounter = 0;
+                    frameCounter = 0;
                 }
             }
         }
