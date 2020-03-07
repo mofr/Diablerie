@@ -21,26 +21,25 @@ namespace Diablerie.Engine.Entities
         private void Update()
         {
             var info = _staticObject.info;
-            var mode = _staticObject.ModeIndex;
-            var modeName = COF.StaticObjectModes[mode];
+            var mode = _staticObject.Mode;
 
-            if (!info.mode[mode])
+            if (!info.mode[mode.index])
             {
                 _renderer.cof = null;
                 return;
             }
 
-            if (_renderer.cof == null || _renderer.cof.mode != modeName)
+            if (_renderer.cof == null || _renderer.cof.mode != mode.token)
             {
-                var cof = COF.Load(@"data\global\objects", info.token, "HTH", modeName);
-                _renderer.shadow = info.blocksLight[mode];
+                var cof = COF.Load(@"data\global\objects", info.token, "HTH", mode.token);
+                _renderer.shadow = info.blocksLight[mode.index];
                 _renderer.cof = cof;
             }
 
-            int frame = (int)(_staticObject.AnimationTime * info.frameCount[mode] / _staticObject.AnimationDuration);
-            frame = Mathf.Min(frame, info.frameCount[mode]);
+            int frame = (int)(_staticObject.AnimationTime * info.frameCount[mode.index] / _staticObject.AnimationDuration);
+            frame = Mathf.Min(frame, info.frameCount[mode.index]);
             frame = Mathf.Max(frame, 0);
-            frame += info.start[mode];
+            frame += info.start[mode.index];
             _renderer.SetFrame(frame);
         }
     }

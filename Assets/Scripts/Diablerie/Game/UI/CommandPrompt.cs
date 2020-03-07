@@ -135,7 +135,10 @@ namespace Diablerie.Game.UI
                 {
                     var obj = WorldBuilder.SpawnObject(objectInfo, pos, fit: true);
                     if (obj != null && parts.Length > 2)
-                        obj.SetMode(parts[2]);
+                    {
+                        var mode = StaticObjectMode.GetByToken(parts[2], StaticObjectMode.Neutral);
+                        obj.SetMode(mode);
+                    }
                 }
                 else
                 {

@@ -39,20 +39,20 @@ namespace Diablerie.Game
                 tc += " Chest " + letter;
                 Debug.Log(tc);
                 ItemDrop.Drop(tc, staticObject.transform.position, levelInfo.id);
-                staticObject.SetMode("OP");
+                staticObject.SetMode(StaticObjectMode.Operating);
             }
             else if (staticObject.info.operateFn == 23)
             {
                 // waypoint
-                if (COF.StaticObjectModes[staticObject.ModeIndex] != "OP")
+                if (staticObject.Mode != StaticObjectMode.Operating)
                 {
                     AudioManager.instance.Play("object_waypoint_open");
-                    staticObject.SetMode("OP");
+                    staticObject.SetMode(StaticObjectMode.Operating);
                 }
             }
             else
             {
-                staticObject.SetMode("OP");
+                staticObject.SetMode(StaticObjectMode.Operating);
             }
         }
     }

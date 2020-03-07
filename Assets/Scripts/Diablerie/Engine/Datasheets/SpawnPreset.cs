@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Diablerie.Engine.Entities;
 using Diablerie.Engine.IO.D2Formats;
 
 namespace Diablerie.Engine.Datasheets
@@ -16,13 +17,16 @@ namespace Diablerie.Engine.Datasheets
         public int direction = 0;
         public string _base;
         public string token;
-        public string mode;
+        public string modeToken;
         public string weaponClass;
         [Datasheet.Sequence(length = 16)]
         public string[] gear;
         public string colormap;
         public string index;
         public string eol;
+
+        [System.NonSerialized]
+        public StaticObjectMode mode;
 
         public static List<SpawnPreset> sheet;
         static Dictionary<long, SpawnPreset> lookup;
@@ -33,6 +37,7 @@ namespace Diablerie.Engine.Datasheets
             lookup = new Dictionary<long, SpawnPreset>();
             foreach (SpawnPreset obj in sheet)
             {
+                obj.mode = StaticObjectMode.GetByToken(obj.modeToken, StaticObjectMode.Neutral);
                 lookup.Add(Key(obj.act - 1, obj.type, obj.id), obj);
             }
         }

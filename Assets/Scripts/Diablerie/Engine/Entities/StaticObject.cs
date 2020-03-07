@@ -11,7 +11,7 @@ namespace Diablerie.Engine.Entities
     {
         public ObjectInfo objectInfo;
 
-        private int _mode;
+        private StaticObjectMode _mode = StaticObjectMode.Neutral;
         private Iso _iso;
         private float _animationTime;
         private float _animationDuration;
@@ -20,7 +20,7 @@ namespace Diablerie.Engine.Entities
         public override bool isAttackable => objectInfo.isAttackable;
         public override Vector2 titleOffset => new Vector2(0, -objectInfo.nameOffset);
         public override float operateRange => objectInfo.operateRange;
-        public int ModeIndex => _mode;
+        public StaticObjectMode Mode => _mode;
         public float AnimationTime => _animationTime;
         public float AnimationDuration => _animationDuration;
 
@@ -42,29 +42,28 @@ namespace Diablerie.Engine.Entities
 
         void FinishAnimation()
         {
-            if (_mode == 1)
+            if (_mode == StaticObjectMode.Operating)
             {
-                SetMode("ON");
+                SetMode(StaticObjectMode.On);
             }
         }
 
-        public void SetMode(string modeName)
+        public void SetMode(StaticObjectMode mode)
         {
-            int newMode = System.Array.IndexOf(COF.StaticObjectModes, modeName);
-            if (newMode == -1 || !objectInfo.mode[newMode])
+            if (!objectInfo.mode[mode.index])
             {
-                Debug.LogWarning("Failed to set mode '" + modeName + "' of object " + name);
+                Debug.LogWarning("Failed to set mode '" + mode + "' of object " + name);
                 return;
             }
 
-            if (objectInfo.hasCollision[_mode])
+            if (objectInfo.hasCollision[_mode.index])
                 CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, true, gameObject);
-            if (objectInfo.hasCollision[newMode])
+            if (objectInfo.hasCollision[mode.index])
                 CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);
 
-            _mode = newMode;
+            _mode = mode;
             _animationTime = 0;
-            _animationDuration = objectInfo.frameCount[_mode] * objectInfo.frameDuration[_mode];
+            _animationDuration = objectInfo.frameCount[_mode.index] * objectInfo.frameDuration[_mode.index];
         }
 
         public override void Operate(Unit unit)
@@ -72,6 +71,6 @@ namespace Diablerie.Engine.Entities
             Events.InvokeStaticObjectOperate(this, unit);
         }
 
-        public override bool selectable => objectInfo.draw && objectInfo.selectable[_mode];
+        public override bool selectable => objectInfo.draw && objectInfo.selectable[_mode.index];
     }
 }

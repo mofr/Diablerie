@@ -18,7 +18,7 @@ class SpawnPresetLoader : Datasheet.Loader<SpawnPreset>
                 stream.Read(ref record.direction);
                 stream.Read(ref record._base);
                 stream.Read(ref record.token);
-                stream.Read(ref record.mode);
+                stream.Read(ref record.modeToken);
                 stream.Read(ref record.weaponClass);
                 record.gear = new string[16];
                     stream.Read(ref record.gear[0]);
