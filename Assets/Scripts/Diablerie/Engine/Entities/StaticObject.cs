@@ -9,7 +9,6 @@ namespace Diablerie.Engine.Entities
     [System.Diagnostics.DebuggerDisplay("{name}")]
     public class StaticObject : Entity
     {
-        public string modeName = "NU";
         public ObjectInfo objectInfo;
 
         private int _mode;
@@ -29,12 +28,6 @@ namespace Diablerie.Engine.Entities
         {
             base.Awake();
             _iso = GetComponent<Iso>();
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-            SetMode(modeName);
         }
 
         private void Update()
@@ -57,24 +50,21 @@ namespace Diablerie.Engine.Entities
 
         public void SetMode(string modeName)
         {
-            if (objectInfo.draw)
+            int newMode = System.Array.IndexOf(COF.ModeNames[2], modeName);
+            if (newMode == -1 || !objectInfo.mode[newMode])
             {
-                int newMode = System.Array.IndexOf(COF.ModeNames[2], modeName);
-                if (newMode == -1 || !objectInfo.mode[newMode])
-                {
-                    Debug.LogWarning("Failed to set mode '" + modeName + "' of object " + name);
-                    return;
-                }
-
-                if (objectInfo.hasCollision[_mode])
-                    CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, true, gameObject);
-                if (objectInfo.hasCollision[newMode])
-                    CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);
-
-                _mode = newMode;
-                _animationTime = 0;
-                _animationDuration = objectInfo.frameCount[_mode] * objectInfo.frameDuration[_mode];
+                Debug.LogWarning("Failed to set mode '" + modeName + "' of object " + name);
+                return;
             }
+
+            if (objectInfo.hasCollision[_mode])
+                CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, true, gameObject);
+            if (objectInfo.hasCollision[newMode])
+                CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);
+
+            _mode = newMode;
+            _animationTime = 0;
+            _animationDuration = objectInfo.frameCount[_mode] * objectInfo.frameDuration[_mode];
         }
 
         public override void Operate(Unit unit)

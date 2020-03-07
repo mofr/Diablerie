@@ -39,6 +39,7 @@ namespace Diablerie.Engine.Entities
 
             int frame = (int)(_staticObject.AnimationTime * info.frameCount[mode] / _staticObject.AnimationDuration);
             frame = Mathf.Min(frame, info.frameCount[mode]);
+            frame = Mathf.Max(frame, 0);
             frame += info.start[mode];
             _renderer.SetFrame(frame);
         }

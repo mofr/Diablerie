@@ -121,7 +121,7 @@ namespace Diablerie.Engine
                 case MiscInfo.UseFunction.TownPortal:
                     var pos = Iso.MapToWorld(unit.iso.pos);
                     var teleport = WorldBuilder.SpawnObject("TP", pos, fit: true);
-                    teleport.modeName = "OP";
+                    teleport.SetMode("OP");
                     var sound = SoundInfo.Find("player_townportal_cast");
                     AudioManager.instance.Play(sound, pos);
                     break;

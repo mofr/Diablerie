@@ -549,7 +549,7 @@ namespace Diablerie.Engine.World
                 }
                 ObjectInfo objectInfo = ObjectInfo.sheet[obj.objectId];
                 var staticObject = WorldBuilder.SpawnObject(objectInfo, pos, parent: root);
-                staticObject.modeName = obj.mode;
+                staticObject.SetMode(obj.mode);
                 return true;
             }
 
