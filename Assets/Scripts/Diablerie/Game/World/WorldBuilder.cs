@@ -140,14 +140,14 @@ namespace Diablerie.Game.World
                 unit.health = Random.Range(monStat.stats[0].minHP, monStat.stats[0].maxHP + 1);
             unit.maxHealth = unit.health;
 
-            var animator = unit.GetComponent<COFAnimator>();
-            animator.equip = new string[monStat.ext.gearVariants.Length];
-            for (int i = 0; i < animator.equip.Length; ++i)
+            var renderer = unit.GetComponent<COFRenderer>();
+            renderer.equip = new string[monStat.ext.gearVariants.Length];
+            for (int i = 0; i < renderer.equip.Length; ++i)
             {
                 var variants = monStat.ext.gearVariants[i];
                 if (variants == null)
                     continue;
-                animator.equip[i] = variants[Random.Range(0, variants.Length)];
+                renderer.equip[i] = variants[Random.Range(0, variants.Length)];
             }
 
             if (summoner != null)

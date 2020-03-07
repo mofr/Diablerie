@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Diablerie.Engine.Entities
 {
     [RequireComponent(typeof(Iso))]
-    [RequireComponent(typeof(COFAnimator))]
+    [RequireComponent(typeof(COFRenderer))]
     [ExecuteInEditMode]
     [System.Diagnostics.DebuggerDisplay("{name}")]
     public class StaticObject : Entity
@@ -16,7 +16,7 @@ namespace Diablerie.Engine.Entities
         static readonly string[] gear = { "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT", "LIT" };
 
         private int _mode;
-        private COFAnimator _animator;
+        private COFRenderer _renderer;
         private Iso _iso;
 
         public ObjectInfo info => objectInfo;
@@ -33,8 +33,8 @@ namespace Diablerie.Engine.Entities
         {
             base.Awake();
             _iso = GetComponent<Iso>();
-            _animator = GetComponent<COFAnimator>();
-            _animator.equip = gear;
+            _renderer = GetComponent<COFRenderer>();
+            _renderer.equip = gear;
         }
 
         protected override void Start()
@@ -68,11 +68,11 @@ namespace Diablerie.Engine.Entities
                 _mode = newMode;
 
                 var cof = COF.Load(@"data\global\objects", objectInfo.token, "HTH", modeName);
-                _animator.shadow = objectInfo.blocksLight[_mode];
-                _animator.cof = cof;
-                _animator.loop = objectInfo.cycleAnim[_mode];
-                _animator.SetFrameRange(objectInfo.start[_mode], objectInfo.frameCount[_mode]);
-                _animator.frameDuration = objectInfo.frameDuration[_mode];
+                _renderer.shadow = objectInfo.blocksLight[_mode];
+                _renderer.cof = cof;
+                _renderer.loop = objectInfo.cycleAnim[_mode];
+                _renderer.SetFrameRange(objectInfo.start[_mode], objectInfo.frameCount[_mode]);
+                _renderer.frameDuration = objectInfo.frameDuration[_mode];
 
                 if (objectInfo.hasCollision[_mode])
                     CollisionMap.SetPassable(Iso.Snap(_iso.pos), objectInfo.sizeX, objectInfo.sizeY, false, gameObject);

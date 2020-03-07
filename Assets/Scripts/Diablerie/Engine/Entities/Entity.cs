@@ -5,7 +5,7 @@ namespace Diablerie.Engine.Entities
 {
     public abstract class Entity : MonoBehaviour
     {
-        private COFAnimator animator;
+        private COFRenderer _renderer;
         private string _title = null;
 
         protected virtual void Awake()
@@ -20,20 +20,20 @@ namespace Diablerie.Engine.Entities
         
         protected virtual void Start()
         {
-            animator = GetComponent<COFAnimator>();
+            _renderer = GetComponent<COFRenderer>();
         }
 
         public virtual Bounds bounds
         {
-            get { return animator.bounds; }
+            get { return _renderer.bounds; }
         }
 
         public virtual bool selectable => true;
 
         public virtual bool selected
         {
-            get { return animator.selected; }
-            set { animator.selected = value; }
+            get { return _renderer.selected; }
+            set { _renderer.selected = value; }
         }
 
         public string title

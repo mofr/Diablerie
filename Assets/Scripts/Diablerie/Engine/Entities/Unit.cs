@@ -8,7 +8,7 @@ namespace Diablerie.Engine.Entities
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(Iso))]
-    [RequireComponent(typeof(COFAnimator))]
+    [RequireComponent(typeof(COFRenderer))]
     public class Unit : Entity
     {
         public const int DirectionCount = 32;
@@ -34,7 +34,7 @@ namespace Diablerie.Engine.Entities
         private float _direction = 0;
     
         public Iso iso; // readonly
-        private COFAnimator _animator;
+        private COFRenderer _renderer;
         private List<Pathing.Step> path = new List<Pathing.Step>();
         private float _traveled = 0;
         private int _desiredDirection = 0;
@@ -61,7 +61,7 @@ namespace Diablerie.Engine.Entities
         {
             base.Awake();
             iso = GetComponent<Iso>();
-            _animator = GetComponent<COFAnimator>();
+            _renderer = GetComponent<COFRenderer>();
         }
 
         protected override void Start()
@@ -359,16 +359,16 @@ namespace Diablerie.Engine.Entities
         {
             string mode = Mode;
             string weaponClass = this.weaponClass;
-            _animator.speed = 1.0f;
-            _animator.loop = true;
+            _renderer.speed = 1.0f;
+            _renderer.loop = true;
             if (mode == "DT" || mode == "DD")
             {
                 weaponClass = "HTH";
-                _animator.loop = false;
+                _renderer.loop = false;
             }
 
-            _animator.cof = COF.Load(basePath, token, weaponClass, mode);
-            _animator.direction = _directionIndex;
+            _renderer.cof = COF.Load(basePath, token, weaponClass, mode);
+            _renderer.direction = _directionIndex;
         }
 
         public void LookAt(Vector3 target)
@@ -425,7 +425,7 @@ namespace Diablerie.Engine.Entities
 
         void OnAnimationMiddle()
         {
-            if (_usingSkill && _animator.cof.mode == _skillInfo.anim)
+            if (_usingSkill && _renderer.cof.mode == _skillInfo.anim)
             {
                 _skillInfo.Do(this, _targetUnit, _targetPoint);
             }

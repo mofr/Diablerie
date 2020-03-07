@@ -14,7 +14,7 @@ namespace Diablerie.Engine
 
         public CharStatsInfo charInfo;
         private Unit _unit;
-        private COFAnimator animator;
+        private COFRenderer _renderer;
 
         static string[] armorTypes = new string[] { "LIT", "MED", "HVY" };
         static string[] defaultEquip = new string[] { "LIT", "LIT", "LIT", "LIT", "LIT", "", "", "", "LIT", "LIT", "", "", "", "", "", "" };
@@ -123,7 +123,7 @@ namespace Diablerie.Engine
         void UpdateAnimator()
         {
             _unit.weaponClass = "HTH";
-            var equip = animator.equip;
+            var equip = _renderer.equip;
             if (equip == null)
                 equip = new string[defaultEquip.Length];
             System.Array.Copy(defaultEquip, equip, defaultEquip.Length);
@@ -153,13 +153,13 @@ namespace Diablerie.Engine
                     }
                 }
             }
-            animator.equip = equip;
+            _renderer.equip = equip;
         }
 
         void Awake()
         {
             _unit = GetComponent<Unit>();
-            animator = GetComponent<COFAnimator>();
+            _renderer = GetComponent<COFRenderer>();
             items = new Item[BodyLoc.sheet.Count];
         }
 

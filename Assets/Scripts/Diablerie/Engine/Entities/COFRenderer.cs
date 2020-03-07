@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Diablerie.Engine.Entities
 {
     [ExecuteInEditMode]
-    class COFAnimator : MonoBehaviour
+    class COFRenderer : MonoBehaviour
     {
         public int direction = 0;
         public bool loop = true;
