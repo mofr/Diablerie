@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using Diablerie.Engine.LibraryExtensions;
+using UnityEngine;
 
 namespace Diablerie.Engine.IO.D2Formats
 {
@@ -9,6 +12,38 @@ namespace Diablerie.Engine.IO.D2Formats
         public int speed;
         public byte[] flags;
         public float frameDuration;
+        
+        // values from charstats.txt
+        static Dictionary<string, float> referenceFrameCount = new Dictionary<string, float>() {
+            {"AMWL", 6},
+            {"AMRN", 4},
+            {"SOWL", 8},
+            {"SORN", 5},
+            {"NEWL", 9},
+            {"NERN", 5},
+            {"PAWL", 8},
+            {"PARN", 5},
+            {"BAWL", 7},
+            {"BARN", 4},
+            {"DZWL", 9},
+            {"DZRN", 5},
+            {"AIWL", 6},
+            {"AIRN", 4},
+        };
+
+        public static float GetFrameDuration(string token, string mode, string weaponClass)
+        {
+            AnimData animData = new AnimData();
+            if (!AnimData.Find(token + mode + weaponClass, ref animData))
+            {
+                Debug.LogWarning("animdata not found " + (token + mode + weaponClass));
+                return 1 / 25.0f;
+            }
+
+            float refFrameCount = referenceFrameCount.GetValueOrDefault(token + mode, animData.framesPerDir);
+            float frameDuration = animData.frameDuration * animData.framesPerDir / refFrameCount;
+            return frameDuration;
+        }
 
         public static bool Find(string name, ref AnimData animData)
         {

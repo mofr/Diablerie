@@ -58,6 +58,12 @@ namespace Diablerie.Engine.Entities
         private Unit _targetUnit;
         private Vector2 _targetPoint;
         
+        // Animation
+        private float _animationTime;
+        private float _animationFrameDuration;
+        private int _animationFrame;
+        private int _animationFrameCount;
+        
         public string Mode => _mode;
         
         #region Unity Lifecycle
@@ -85,6 +91,7 @@ namespace Diablerie.Engine.Entities
             Turn();
             UpdateMode();
             Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
+            UpdateAnimation();
         }
 
         private void LateUpdate()
@@ -349,7 +356,15 @@ namespace Diablerie.Engine.Entities
         private void UpdateMode()
         {
             string newMode = CalcMode();
-            _mode = newMode;
+            if (_mode != newMode)
+            {
+                _mode = newMode;
+                _animationFrame = 0;
+                _animationFrameDuration = AnimData.GetFrameDuration(token, _mode, weaponClass);
+                AnimData animData = new AnimData();
+                AnimData.Find(token + _mode + weaponClass, ref animData);
+                _animationFrameCount = animData.framesPerDir;
+            }
         }
 
         private string CalcMode()
@@ -381,6 +396,52 @@ namespace Diablerie.Engine.Entities
             return "NU";
         }
 
+        private void UpdateAnimation()
+        {
+            _animationTime += Time.deltaTime;
+            while (_animationTime >= _animationFrameDuration && _animationFrameDuration > 0)
+            {
+                _animationTime -= _animationFrameDuration;
+                if (_animationFrame < _animationFrameCount)
+                    _animationFrame += 1;
+                if (_animationFrame == _animationFrameCount / 2)
+                    OnAnimationMiddle();
+                if (_animationFrame == _animationFrameCount)
+                {
+                    OnAnimationFinish();
+                    _animationFrame = 0;
+                }
+            }
+        }
+        
+        void OnAnimationMiddle()
+        {
+            if (_usingSkill)
+            {
+                _skillInfo.Do(this, _targetUnit, _targetPoint);
+            }
+            else if (_operatingWithEntity != null && overrideMode == "KK")
+            {
+                _operatingWithEntity.Operate(this);
+            }
+        }
+
+        void OnAnimationFinish()
+        {
+            _operatingWithEntity = null;
+            _targetUnit = null;
+            _usingSkill = false;
+            _resurrecting = false;
+            _skillInfo = null;
+            overrideMode = null;
+            if (_dying)
+            {
+                _dying = false;
+                _dead = true;
+            }
+            UpdateMode();
+        }
+
         private void UpdateRenderer()
         {
             string weaponClass = this.weaponClass;
@@ -392,6 +453,7 @@ namespace Diablerie.Engine.Entities
 
             _renderer.cof = COF.Load(basePath, token, weaponClass, _mode);
             _renderer.direction = _directionIndex;
+            _renderer.SetFrame(_animationFrame);
         }
 
         public void Hit(int damage, Unit originator = null)
@@ -433,37 +495,6 @@ namespace Diablerie.Engine.Entities
 
                 Events.InvokeUnitDied(this, originator);
             }
-        }
-
-        void OnAnimationMiddle()
-        {
-            if (_usingSkill)
-            {
-                _skillInfo.Do(this, _targetUnit, _targetPoint);
-            }
-            else if (_operatingWithEntity != null && overrideMode == "KK")
-            {
-                _operatingWithEntity.Operate(this);
-            }
-        }
-
-        void OnAnimationFinish()
-        {
-            _operatingWithEntity = null;
-            _targetUnit = null;
-            _usingSkill = false;
-            _resurrecting = false;
-            _skillInfo = null;
-            overrideMode = null;
-            if (_dying)
-            {
-                _dying = false;
-                _dead = true;
-            }
-            UpdateMode();
-        
-            // It's needed to call here, otherwise animator can loop the finished animation few frames more than needed
-            UpdateRenderer();
         }
 
         public override Vector2 titleOffset

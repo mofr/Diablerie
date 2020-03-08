@@ -186,21 +186,6 @@ namespace Diablerie.Engine.Entities
                 return;
 
             UpdateConfiguration();
-
-            time += Time.deltaTime * speed;
-            while (time >= frameDuration)
-            {
-                time -= frameDuration;
-                if (frameCounter < frameCount)
-                    frameCounter += 1;
-                if (frameCounter == frameCount / 2)
-                    SendMessage("OnAnimationMiddle", SendMessageOptions.DontRequireReceiver);
-                if (frameCounter == frameCount)
-                {
-                    SendMessage("OnAnimationFinish", SendMessageOptions.DontRequireReceiver);
-                    frameCounter = 0;
-                }
-            }
         }
 
         void LateUpdate()

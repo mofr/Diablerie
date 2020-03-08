@@ -40,24 +40,6 @@ namespace Diablerie.Engine.IO.D2Formats
         public static readonly string[] layerNames = { "HD", "TR", "LG", "RA", "LA", "RH", "LH", "SH", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8" };
         static Dictionary<string, COF> cache = new Dictionary<string, COF>();
 
-        // values from charstats.txt
-        static Dictionary<string, float> referenceFrameCount = new Dictionary<string, float>() {
-            {"AMWL", 6},
-            {"AMRN", 4},
-            {"SOWL", 8},
-            {"SORN", 5},
-            {"NEWL", 9},
-            {"NERN", 5},
-            {"PAWL", 8},
-            {"PARN", 5},
-            {"BAWL", 7},
-            {"BARN", 4},
-            {"DZWL", 9},
-            {"DZRN", 5},
-            {"AIWL", 6},
-            {"AIRN", 4},
-        };
-
         public static COF Load(string basePath, string token, string weaponClass, string mode)
         {
             var filename = basePath + @"\" + token + @"\cof\" + token + mode + weaponClass + ".cof";
@@ -116,17 +98,7 @@ namespace Diablerie.Engine.IO.D2Formats
                 cof.priority = reader.ReadBytes(cof.directionCount * cof.framesPerDirection * cof.layerCount);
             }
 
-            AnimData animData = new AnimData();
-            if (AnimData.Find(token + mode + weaponClass, ref animData))
-            {
-                cof.frameDuration = animData.frameDuration;
-                float refFrameCount = referenceFrameCount.GetValueOrDefault(token + mode, animData.framesPerDir);
-                cof.frameDuration *= animData.framesPerDir / refFrameCount;
-            }
-            else
-            {
-                Debug.LogWarning("animdata not found " + (token + mode + weaponClass));
-            }
+            cof.frameDuration = AnimData.GetFrameDuration(token, mode, weaponClass);
 
             cache.Add(filename, cof);
 
