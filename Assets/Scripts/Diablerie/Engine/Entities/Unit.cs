@@ -445,7 +445,6 @@ namespace Diablerie.Engine.Entities
         private void UpdateRenderer()
         {
             string weaponClass = this.weaponClass;
-            _renderer.speed = 1.0f;
             if (_mode == "DT" || _mode == "DD")
             {
                 weaponClass = "HTH";
@@ -453,7 +452,7 @@ namespace Diablerie.Engine.Entities
 
             _renderer.cof = COF.Load(basePath, token, weaponClass, _mode);
             _renderer.direction = _directionIndex;
-            _renderer.SetFrame(_animationFrame);
+            _renderer.frame = _animationFrame;
         }
 
         public void Hit(int damage, Unit originator = null)

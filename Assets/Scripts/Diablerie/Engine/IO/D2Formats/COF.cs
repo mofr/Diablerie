@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Diablerie.Engine.LibraryExtensions;
 using UnityEngine;
 
 namespace Diablerie.Engine.IO.D2Formats
@@ -13,7 +12,6 @@ namespace Diablerie.Engine.IO.D2Formats
         public int directionCount;
         public int layerCount;
         public byte[] priority;
-        public float frameDuration = 1.0f / 25.0f;
         public string basePath;
         public string token;
         public string mode;
@@ -97,8 +95,6 @@ namespace Diablerie.Engine.IO.D2Formats
                 stream.Seek(cof.framesPerDirection, SeekOrigin.Current);
                 cof.priority = reader.ReadBytes(cof.directionCount * cof.framesPerDirection * cof.layerCount);
             }
-
-            cof.frameDuration = AnimData.GetFrameDuration(token, mode, weaponClass);
 
             cache.Add(filename, cof);
 

@@ -40,7 +40,7 @@ namespace Diablerie.Engine.Entities
             frame = Mathf.Min(frame, info.frameCount[mode.index]);
             frame = Mathf.Max(frame, 0);
             frame += info.start[mode.index];
-            _renderer.SetFrame(frame);
+            _renderer.frame = frame;
         }
     }
 }

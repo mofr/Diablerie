@@ -9,24 +9,18 @@ namespace Diablerie.Engine.Entities
     [ExecuteInEditMode]
     class COFRenderer : MonoBehaviour
     {
-        public int direction = 0;
-        public float speed = 1.0f;
-        public float frameDuration = 1.0f / 12.0f;
+        public int direction;
         public bool shadow = true;
+        public int frame;
     
         private COF _cof;
         private string[] _equip;
-        private float time = 0;
-        private int frameCounter = 0;
-        private int _overrideFrame = -1; // TODO New field to replace frame counter
-        private int frameCount = 0;
-        private List<Layer> layers = new List<Layer>();
         private bool _selected = false;
-        private Material shadowMaterial;
-        private bool configChanged = false;
-        private bool modeChanged = false;
+        private Material _shadowMaterial;
+        private bool _configChanged = false;
+        private List<Layer> _layers = new List<Layer>();
 
-        struct Layer
+        private struct Layer
         {
             public GameObject gameObject;
             public SpriteRenderer renderer;
@@ -40,9 +34,9 @@ namespace Diablerie.Engine.Entities
             get
             {
                 Bounds bounds = new Bounds();
-                for(int i = 0; i < layers.Count; ++i)
+                for(int i = 0; i < _layers.Count; ++i)
                 {
-                    var layer = layers[i];
+                    var layer = _layers[i];
                     if (!layer.gameObject.activeSelf)
                         continue;
                     if (i == 0)
@@ -63,7 +57,7 @@ namespace Diablerie.Engine.Entities
                 if (_selected != value)
                 {
                     _selected = value;
-                    foreach (var layer in layers)
+                    foreach (var layer in _layers)
                     {
                         Materials.SetRendererHighlighted(layer.renderer, _selected);
                     }
@@ -78,9 +72,8 @@ namespace Diablerie.Engine.Entities
             {
                 if (_cof != value)
                 {
-                    modeChanged = _cof == null || _cof.mode != value.mode;
                     _cof = value;
-                    configChanged = true;
+                    _configChanged = true;
                 }
             }
         }
@@ -93,38 +86,50 @@ namespace Diablerie.Engine.Entities
                 if (_equip == null || value == null || Equals(_equip, value))
                 {
                     _equip = value;
-                    configChanged = true;
+                    _configChanged = true;
                 }
             }
         }
 
-        public void SetFrame(int frame)
+        private void Awake()
         {
-            _overrideFrame = frame;
+            _shadowMaterial = new Material(Materials.Shadow);
         }
 
-        public void Restart()
+        private void LateUpdate()
         {
-            time = 0;
-            frameCounter = 0;
+            if (_cof == null || _equip == null)
+                return;
+            UpdateConfiguration();
+            int sortingOrder = Iso.SortingOrder(transform.position);
+            int showFrame = Mathf.Min(frame, _cof.framesPerDirection - 1);
+            int cofDirection = direction * _cof.directionCount / Unit.DirectionCount;
+            int priority = (cofDirection * _cof.framesPerDirection * _cof.layerCount) + (showFrame * _cof.layerCount);
+            for (int i = 0; i < _cof.layerCount; ++i)
+            {
+                int layerIndex = _cof.priority[priority + i];
+                var cofLayer = _cof.compositLayers[layerIndex];
+                Layer layer = _layers[cofLayer.index];
+                if (!layer.gameObject.activeSelf)
+                    continue;
+                int sheetDirection = direction * layer.spritesheet.directionCount / Unit.DirectionCount;
+                layer.renderer.sprite = layer.spritesheet.GetSprites(sheetDirection)[showFrame];
+                layer.renderer.sortingOrder = sortingOrder;
+                layer.shadow.sprite = layer.renderer.sprite;
+                var pos = layer.transform.position;
+                pos.z = -i * 0.01f;
+                layer.transform.position = pos;
+            }
         }
 
-        void UpdateConfiguration()
+        private void UpdateConfiguration()
         {
-            if (_cof == null || _equip == null || !configChanged)
+            if (_cof == null || _equip == null || !_configChanged)
                 return;
 
-            configChanged = false;
-            frameDuration = _cof.frameDuration;
-            frameCount = _cof.framesPerDirection;
+            _configChanged = false;
 
-            if (modeChanged)
-            {
-                Restart();
-                modeChanged = false;
-            }
-
-            for (int i = layers.Count; i < _cof.layerCount; ++i)
+            for (int i = _layers.Count; i < _cof.layerCount; ++i)
             {
                 var cofLayer = _cof.layers[i];
                 Layer layer = new Layer();
@@ -136,14 +141,14 @@ namespace Diablerie.Engine.Entities
                 shadowObject.transform.SetParent(layer.transform, false);
                 shadowObject.transform.localScale = new Vector3(1, 0.5f);
                 layer.shadow = shadowObject.AddComponent<SpriteRenderer>();
-                layer.shadow.material = shadowMaterial;
+                layer.shadow.material = _shadowMaterial;
                 layer.shadow.sortingLayerID = SortingLayers.Shadow;
-                layers.Add(layer);
+                _layers.Add(layer);
             }
         
-            for (int i = 0; i < layers.Count; ++i)
+            for (int i = 0; i < _layers.Count; ++i)
             {
-                var layer = layers[i];
+                var layer = _layers[i];
                 if (i >= _cof.layerCount)
                 {
                     layer.gameObject.SetActive(false);
@@ -163,7 +168,7 @@ namespace Diablerie.Engine.Entities
                 {
                     layer.spritesheet = Spritesheet.Load(spritesheetFilename);
                     layer.renderer.material = cofLayer.material;
-                    layers[i] = layer;
+                    _layers[i] = layer;
                     layer.gameObject.SetActive(true);
                     layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
                 }
@@ -172,47 +177,6 @@ namespace Diablerie.Engine.Entities
                     Debug.LogWarning("Spreadsheet file not found \"" + spritesheetFilename + "\"");
                     layer.gameObject.SetActive(false);
                 }
-            }
-        }
-
-        void Awake()
-        {
-            shadowMaterial = new Material(Materials.Shadow);
-        }
-
-        void Update()
-        {
-            if (_cof == null || _equip == null)
-                return;
-
-            UpdateConfiguration();
-        }
-
-        void LateUpdate()
-        {
-            if (_cof == null || _equip == null)
-                return;
-            UpdateConfiguration();
-            int sortingOrder = Iso.SortingOrder(transform.position);
-            int frameIndex = _overrideFrame == -1 ? frameCounter : _overrideFrame;
-            frameIndex = Mathf.Min(frameIndex, frameCount - 1);
-            int spriteIndex = frameIndex;
-            int cofDirection = direction * _cof.directionCount / Unit.DirectionCount;
-            int priority = (cofDirection * _cof.framesPerDirection * _cof.layerCount) + (frameIndex * _cof.layerCount);
-            for (int i = 0; i < _cof.layerCount; ++i)
-            {
-                int layerIndex = _cof.priority[priority + i];
-                var cofLayer = _cof.compositLayers[layerIndex];
-                Layer layer = layers[cofLayer.index];
-                if (!layer.gameObject.activeSelf)
-                    continue;
-                int sheetDirection = direction * layer.spritesheet.directionCount / Unit.DirectionCount;
-                layer.renderer.sprite = layer.spritesheet.GetSprites(sheetDirection)[spriteIndex];
-                layer.renderer.sortingOrder = sortingOrder;
-                layer.shadow.sprite = layer.renderer.sprite;
-                var pos = layer.transform.position;
-                pos.z = -i * 0.01f;
-                layer.transform.position = pos;
             }
         }
     }
