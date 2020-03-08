@@ -44,7 +44,7 @@ namespace Diablerie.Engine.Entities
         private bool _usingSkill = false;
         private bool _resurrecting = false;
         public string overrideMode;
-        private string _mode = "NU";
+        private string _mode;
         public bool killable = true;
         public int health = 100;
         public int maxHealth = 100;
@@ -80,6 +80,7 @@ namespace Diablerie.Engine.Entities
             base.Start();
             CollisionMap.Move(iso.pos, iso.pos, size, gameObject);
             Events.InvokeUnitInitialized(this);
+            UpdateMode();
         }
         
         void Update()
@@ -89,9 +90,8 @@ namespace Diablerie.Engine.Entities
             _hasMoved = false;
             MoveToTargetPoint();
             Turn();
-            UpdateMode();
-            Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
             UpdateAnimation();
+            Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
         }
 
         private void LateUpdate()
@@ -184,6 +184,8 @@ namespace Diablerie.Engine.Entities
         
         #endregion
     
+        #region Commands execution
+        
         public bool CanUseSkill(SkillInfo skillInfo, Unit target)
         {
             if (!skillInfo.targetAlly && target.party == party)
@@ -352,52 +354,14 @@ namespace Diablerie.Engine.Entities
             _hasMoved = true;
             return true;
         }
+        
+        #endregion
 
-        private void UpdateMode()
-        {
-            string newMode = CalcMode();
-            if (_mode != newMode)
-            {
-                _mode = newMode;
-                _animationFrame = 0;
-                _animationFrameDuration = AnimData.GetFrameDuration(token, _mode, weaponClass);
-                AnimData animData = new AnimData();
-                AnimData.Find(token + _mode + weaponClass, ref animData);
-                _animationFrameCount = animData.framesPerDir;
-            }
-        }
-
-        private string CalcMode()
-        {
-            if (_resurrecting && monStat != null)
-            {
-                return monStat.ext.resurrectMode;
-            }
-            if (_dying)
-            {
-                return "DT";
-            }
-            if (_dead)
-            {
-                return "DD";
-            }
-            if (_hasMoved)
-            {
-                return run ? "RN" : "WL";
-            }
-            if (_usingSkill)
-            {
-                return _skillInfo.anim;
-            }
-            if (overrideMode != null)
-            {
-                return overrideMode;
-            }
-            return "NU";
-        }
-
+        #region Animation
+        
         private void UpdateAnimation()
         {
+            UpdateMode();
             _animationTime += Time.deltaTime;
             while (_animationTime >= _animationFrameDuration && _animationFrameDuration > 0)
             {
@@ -442,6 +406,49 @@ namespace Diablerie.Engine.Entities
             UpdateMode();
         }
 
+        private void UpdateMode()
+        {
+            string newMode = CalcMode();
+            if (_mode != newMode)
+            {
+                _mode = newMode;
+                _animationFrame = 0;
+                _animationFrameDuration = AnimData.GetFrameDuration(token, _mode, weaponClass);
+                AnimData animData = new AnimData();
+                AnimData.Find(token + _mode + weaponClass, ref animData);
+                _animationFrameCount = animData.framesPerDir;
+            }
+        }
+
+        private string CalcMode()
+        {
+            if (_resurrecting && monStat != null)
+            {
+                return monStat.ext.resurrectMode;
+            }
+            if (_dying)
+            {
+                return "DT";
+            }
+            if (_dead)
+            {
+                return "DD";
+            }
+            if (_hasMoved)
+            {
+                return run ? "RN" : "WL";
+            }
+            if (_usingSkill)
+            {
+                return _skillInfo.anim;
+            }
+            if (overrideMode != null)
+            {
+                return overrideMode;
+            }
+            return "NU";
+        }
+
         private void UpdateRenderer()
         {
             string weaponClass = this.weaponClass;
@@ -454,6 +461,8 @@ namespace Diablerie.Engine.Entities
             _renderer.direction = _directionIndex;
             _renderer.frame = _animationFrame;
         }
+        
+        #endregion
 
         public void Hit(int damage, Unit originator = null)
         {
