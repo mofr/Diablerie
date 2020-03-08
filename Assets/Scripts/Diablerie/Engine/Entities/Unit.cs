@@ -56,6 +56,8 @@ namespace Diablerie.Engine.Entities
         private Entity _operatingWithEntity;
         private Unit _targetUnit;
         private Vector2 _targetPoint;
+        
+        #region Unity Lifecycle
 
         protected override void Awake()
         {
@@ -69,6 +71,36 @@ namespace Diablerie.Engine.Entities
             base.Start();
             CollisionMap.Move(iso.pos, iso.pos, size, gameObject);
             Events.InvokeUnitInitialized(this);
+        }
+        
+        void Update()
+        {
+            TryUseSkill();
+            OperateWithTarget();
+            _hasMoved = false;
+            MoveToTargetPoint();
+            Turn();
+            Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
+        }
+
+        private void LateUpdate()
+        {
+            UpdateRenderer();
+        }
+
+        #endregion
+        
+        #region Commands
+
+        public void LookAt(Vector3 target)
+        {
+            if (!_moving)
+                _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
+        }
+
+        public void LookAtImmediately(Vector3 target)
+        {
+            _directionIndex = _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
         }
 
         public void Use(Entity entity)
@@ -138,6 +170,8 @@ namespace Diablerie.Engine.Entities
             _targetUnit = target;
             _skillInfo = skillInfo;
         }
+        
+        #endregion
     
         public bool CanUseSkill(SkillInfo skillInfo, Unit target)
         {
@@ -148,43 +182,7 @@ namespace Diablerie.Engine.Entities
             return true;
         }
 
-        void AbortPath()
-        {
-            path.Clear();
-            _traveled = 0;
-        }
-
-        void OperateWithTarget()
-        {
-            if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
-                return;
-        
-            if (_targetEntity)
-            {
-                var distance = Vector2.Distance(iso.pos, Iso.MapToIso(_targetEntity.transform.position));
-                if (distance <= size + _targetEntity.operateRange)
-                {
-                    _moving = false;
-                    if (_targetEntity.isAttackable)
-                    {
-                        _operatingWithEntity = _targetEntity;
-                        overrideMode = "KK";
-                    }
-                    else
-                    {
-                        _targetEntity.Operate(this);
-                    }
-                    _targetEntity = null;
-                    PlayerController.instance.FlushInput();  // Very strange to see it here, remove
-                }
-                else
-                {
-                    _moving = true;
-                }
-            }
-        }
-
-        void TryUseSkill()
+        private void TryUseSkill()
         {
             if (_dead || _dying || _resurrecting || _usingSkill || _skillInfo == null || overrideMode != null)
                 return;
@@ -215,22 +213,66 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void Update()
+        private void OperateWithTarget()
         {
-            TryUseSkill();
-            OperateWithTarget();
-            _hasMoved = false;
-            MoveToTargetPoint();
-            Turn();
-            Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
+            if (_dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
+                return;
+        
+            if (_targetEntity)
+            {
+                var distance = Vector2.Distance(iso.pos, Iso.MapToIso(_targetEntity.transform.position));
+                if (distance <= size + _targetEntity.operateRange)
+                {
+                    _moving = false;
+                    if (_targetEntity.isAttackable)
+                    {
+                        _operatingWithEntity = _targetEntity;
+                        overrideMode = "KK";
+                    }
+                    else
+                    {
+                        _targetEntity.Operate(this);
+                    }
+                    _targetEntity = null;
+                    PlayerController.instance.FlushInput();  // Very strange to see it here, remove
+                }
+                else
+                {
+                    _moving = true;
+                }
+            }
         }
 
-        private void LateUpdate()
+        private void MoveToTargetPoint()
         {
-            UpdateAnimation();
+            if (!_moving || _dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
+                return;
+
+            var newPath = Pathing.BuildPath(iso.pos, _targetPoint, size: size, self: gameObject);
+            if (newPath.Count == 0)
+            {
+                _moving = false;
+                return;
+            }
+            if (path.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
+            {
+                AbortPath();
+                path.AddRange(newPath);
+            }
+        
+            if (path.Count == 1 && Vector2.Distance(path[0].pos, _targetPoint) < 1.0f)
+            {
+                // smooth straightforward movement
+                var pathStep = path[0];
+                pathStep.pos = _targetPoint;
+                pathStep.direction = _targetPoint - iso.pos;
+                path[0] = pathStep;
+            }
+
+            MoveAlongPath();
         }
 
-        void Turn()
+        private void Turn()
         {
             if (!_dead && !_dying && !_resurrecting && !_usingSkill && overrideMode == null && _directionIndex != _desiredDirection)
             {
@@ -242,7 +284,7 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void MoveAlongPath()
+        private void MoveAlongPath()
         {
             Vector2 step = path[0].direction;
             float stepLen = step.magnitude;
@@ -285,36 +327,13 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void MoveToTargetPoint()
+        private void AbortPath()
         {
-            if (!_moving || _dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
-                return;
-
-            var newPath = Pathing.BuildPath(iso.pos, _targetPoint, size: size, self: gameObject);
-            if (newPath.Count == 0)
-            {
-                _moving = false;
-                return;
-            }
-            if (path.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
-            {
-                AbortPath();
-                path.AddRange(newPath);
-            }
-        
-            if (path.Count == 1 && Vector2.Distance(path[0].pos, _targetPoint) < 1.0f)
-            {
-                // smooth straightforward movement
-                var pathStep = path[0];
-                pathStep.pos = _targetPoint;
-                pathStep.direction = _targetPoint - iso.pos;
-                path[0] = pathStep;
-            }
-
-            MoveAlongPath();
+            path.Clear();
+            _traveled = 0;
         }
 
-        bool Move(Vector2 movement)
+        private bool Move(Vector2 movement)
         {
             var newPos = iso.pos + movement;
             CollisionMap.Move(iso.pos, newPos, size, gameObject);
@@ -355,7 +374,7 @@ namespace Diablerie.Engine.Entities
             }
         }
 
-        void UpdateAnimation()
+        private void UpdateRenderer()
         {
             string mode = Mode;
             string weaponClass = this.weaponClass;
@@ -367,17 +386,6 @@ namespace Diablerie.Engine.Entities
 
             _renderer.cof = COF.Load(basePath, token, weaponClass, mode);
             _renderer.direction = _directionIndex;
-        }
-
-        public void LookAt(Vector3 target)
-        {
-            if (!_moving)
-                _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
-        }
-
-        public void LookAtImmediately(Vector3 target)
-        {
-            _directionIndex = _desiredDirection = Iso.Direction(iso.pos, target, DirectionCount);
         }
 
         public void Hit(int damage, Unit originator = null)
@@ -448,7 +456,7 @@ namespace Diablerie.Engine.Entities
             }
         
             // It's needed to call here, otherwise animator can loop the finished animation few frames more than needed
-            UpdateAnimation();
+            UpdateRenderer();
         }
 
         public override Vector2 titleOffset
