@@ -44,6 +44,7 @@ namespace Diablerie.Engine.Entities
         private bool _usingSkill = false;
         private bool _resurrecting = false;
         public string overrideMode;
+        private string _mode = "NU";
         public bool killable = true;
         public int health = 100;
         public int maxHealth = 100;
@@ -56,6 +57,8 @@ namespace Diablerie.Engine.Entities
         private Entity _operatingWithEntity;
         private Unit _targetUnit;
         private Vector2 _targetPoint;
+        
+        public string Mode => _mode;
         
         #region Unity Lifecycle
 
@@ -80,6 +83,7 @@ namespace Diablerie.Engine.Entities
             _hasMoved = false;
             MoveToTargetPoint();
             Turn();
+            UpdateMode();
             Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
         }
 
@@ -342,49 +346,51 @@ namespace Diablerie.Engine.Entities
             return true;
         }
 
-        public string Mode
+        private void UpdateMode()
         {
-            get
+            string newMode = CalcMode();
+            _mode = newMode;
+        }
+
+        private string CalcMode()
+        {
+            if (_resurrecting && monStat != null)
             {
-                if (_resurrecting && monStat != null)
-                {
-                    return monStat.ext.resurrectMode;
-                }
-                if (_dying)
-                {
-                    return "DT";
-                }
-                if (_dead)
-                {
-                    return "DD";
-                }
-                if (_hasMoved)
-                {
-                    return run ? "RN" : "WL";
-                }
-                if (_usingSkill)
-                {
-                    return _skillInfo.anim;
-                }
-                if (overrideMode != null)
-                {
-                    return overrideMode;
-                }
-                return "NU";
+                return monStat.ext.resurrectMode;
             }
+            if (_dying)
+            {
+                return "DT";
+            }
+            if (_dead)
+            {
+                return "DD";
+            }
+            if (_hasMoved)
+            {
+                return run ? "RN" : "WL";
+            }
+            if (_usingSkill)
+            {
+                return _skillInfo.anim;
+            }
+            if (overrideMode != null)
+            {
+                return overrideMode;
+            }
+            return "NU";
         }
 
         private void UpdateRenderer()
         {
-            string mode = Mode;
             string weaponClass = this.weaponClass;
             _renderer.speed = 1.0f;
-            if (mode == "DT" || mode == "DD")
+            if (_mode == "DT" || _mode == "DD")
             {
                 weaponClass = "HTH";
             }
 
-            _renderer.cof = COF.Load(basePath, token, weaponClass, mode);
+            _renderer.cof = COF.Load(basePath, token, weaponClass, _mode);
             _renderer.direction = _directionIndex;
         }
 
@@ -454,6 +460,7 @@ namespace Diablerie.Engine.Entities
                 _dying = false;
                 _dead = true;
             }
+            UpdateMode();
         
             // It's needed to call here, otherwise animator can loop the finished animation few frames more than needed
             UpdateRenderer();
