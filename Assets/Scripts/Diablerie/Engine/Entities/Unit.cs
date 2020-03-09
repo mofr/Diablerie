@@ -87,7 +87,6 @@ namespace Diablerie.Engine.Entities
         {
             TryUseSkill();
             OperateWithTarget();
-            _hasMoved = false;
             MoveToTargetPoint();
             Turn();
             UpdateAnimation();
@@ -276,6 +275,7 @@ namespace Diablerie.Engine.Entities
 
         private void MoveToTargetPoint()
         {
+            _hasMoved = false;
             if (!_moving || _dead || _dying || _resurrecting || _usingSkill || overrideMode != null)
                 return;
 
@@ -285,6 +285,7 @@ namespace Diablerie.Engine.Entities
                 _moving = false;
                 return;
             }
+            _hasMoved = true;
             if (path.Count == 0 || newPath[newPath.Count - 1].pos != path[path.Count - 1].pos)
             {
                 AbortPath();
@@ -369,7 +370,6 @@ namespace Diablerie.Engine.Entities
             var newPos = iso.pos + movement;
             CollisionMap.Move(iso.pos, newPos, size, gameObject);
             iso.pos = newPos;
-            _hasMoved = true;
             return true;
         }
         
