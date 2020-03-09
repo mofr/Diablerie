@@ -31,18 +31,10 @@ namespace Diablerie.Engine.IO.D2Formats
             {"AIRN", 4},
         };
 
-        public static float GetFrameDuration(string token, string mode, string weaponClass)
+        public float GetCorrectedFrameDuration(string token, string mode)
         {
-            AnimData animData = new AnimData();
-            if (!AnimData.Find(token + mode + weaponClass, ref animData))
-            {
-                Debug.LogWarning("animdata not found " + (token + mode + weaponClass));
-                return 1 / 25.0f;
-            }
-
-            float refFrameCount = referenceFrameCount.GetValueOrDefault(token + mode, animData.framesPerDir);
-            float frameDuration = animData.frameDuration * animData.framesPerDir / refFrameCount;
-            return frameDuration;
+            float refFrameCount = referenceFrameCount.GetValueOrDefault(token + mode, framesPerDir);
+            return frameDuration * framesPerDir / refFrameCount;
         }
 
         public static bool Find(string name, ref AnimData animData)

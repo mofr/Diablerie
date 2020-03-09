@@ -58,9 +58,8 @@ namespace Diablerie.Engine.Entities
         
         // Animation
         private float _animationTime;
-        private float _animationFrameDuration;
         private int _animationFrame;
-        private int _animationFrameCount;
+        private AnimData _animData;
         
         public string Mode => _mode;
 
@@ -359,14 +358,14 @@ namespace Diablerie.Engine.Entities
         {
             UpdateMode();
             _animationTime += Time.deltaTime;
-            while (_animationTime >= _animationFrameDuration && _animationFrameDuration > 0)
+            while (_animationTime >= _animData.frameDuration && _animData.frameDuration > 0)
             {
-                _animationTime -= _animationFrameDuration;
-                if (_animationFrame < _animationFrameCount)
+                _animationTime -= _animData.frameDuration;
+                if (_animationFrame < _animData.framesPerDir)
                     _animationFrame += 1;
-                if (_animationFrame == _animationFrameCount / 2)
+                if (_animationFrame == _animData.framesPerDir / 2)
                     OnAnimationMiddle();
-                if (_animationFrame == _animationFrameCount)
+                if (_animationFrame == _animData.framesPerDir)
                 {
                     OnAnimationFinish();
                     _animationFrame = 0;
@@ -409,10 +408,8 @@ namespace Diablerie.Engine.Entities
             {
                 _mode = newMode;
                 _animationFrame = 0;
-                _animationFrameDuration = AnimData.GetFrameDuration(token, _mode, weaponClass);
-                AnimData animData = new AnimData();
-                AnimData.Find(token + _mode + weaponClass, ref animData);
-                _animationFrameCount = animData.framesPerDir;
+                AnimData.Find(token + _mode + weaponClass, ref _animData);
+                _animData.frameDuration = _animData.GetCorrectedFrameDuration(token, _mode);
             }
         }
 
