@@ -164,19 +164,16 @@ namespace Diablerie.Engine.Entities
                 }
 
                 var spritesheetFilename = _cof.GetSpritesheetFilename(cofLayer, equip);
-                try
+                layer.spritesheet = Spritesheet.Load(spritesheetFilename);
+                if (layer.spritesheet == null)
                 {
-                    layer.spritesheet = Spritesheet.Load(spritesheetFilename);
-                    layer.renderer.material = cofLayer.material;
-                    _layers[i] = layer;
-                    layer.gameObject.SetActive(true);
-                    layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
-                }
-                catch (FileNotFoundException e)
-                {
-                    Debug.LogWarning("Spreadsheet file not found \"" + spritesheetFilename + "\"");
                     layer.gameObject.SetActive(false);
+                    continue;
                 }
+                layer.renderer.material = cofLayer.material;
+                layer.gameObject.SetActive(true);
+                layer.shadow.gameObject.SetActive(cofLayer.shadow && shadow);
+                _layers[i] = layer;
             }
         }
     }
