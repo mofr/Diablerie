@@ -8,7 +8,6 @@ namespace Diablerie.Engine.Entities
 {
     [ExecuteInEditMode]
     [RequireComponent(typeof(Iso))]
-    [RequireComponent(typeof(COFRenderer))]
     public class Unit : Entity
     {
         public const int DirectionCount = 32;
@@ -34,7 +33,6 @@ namespace Diablerie.Engine.Entities
         private float _direction = 0;
     
         public Iso iso; // readonly
-        private COFRenderer _renderer;
         private List<Pathing.Step> path = new List<Pathing.Step>();
         private float _traveled = 0;
         private int _desiredDirection = 0;
@@ -65,14 +63,17 @@ namespace Diablerie.Engine.Entities
         private int _animationFrameCount;
         
         public string Mode => _mode;
-        
+
+        public int DirectionIndex => _directionIndex;
+
+        public int AnimationFrame => _animationFrame;
+
         #region Unity Lifecycle
 
         protected override void Awake()
         {
             base.Awake();
             iso = GetComponent<Iso>();
-            _renderer = GetComponent<COFRenderer>();
         }
 
         protected override void Start()
@@ -92,11 +93,6 @@ namespace Diablerie.Engine.Entities
             Turn();
             UpdateAnimation();
             Iso.DebugDrawTile(iso.pos, party == Party.Good ? Color.green : Color.red, 0.3f);
-        }
-
-        private void LateUpdate()
-        {
-            UpdateRenderer();
         }
 
         #endregion
@@ -449,19 +445,6 @@ namespace Diablerie.Engine.Entities
             return "NU";
         }
 
-        private void UpdateRenderer()
-        {
-            string weaponClass = this.weaponClass;
-            if (_mode == "DT" || _mode == "DD")
-            {
-                weaponClass = "HTH";
-            }
-
-            _renderer.cof = COF.Load(basePath, token, weaponClass, _mode);
-            _renderer.direction = _directionIndex;
-            _renderer.frame = _animationFrame;
-        }
-        
         #endregion
 
         public void Hit(int damage, Unit originator = null)

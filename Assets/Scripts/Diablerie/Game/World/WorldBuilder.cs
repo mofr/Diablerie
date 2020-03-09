@@ -140,6 +140,7 @@ namespace Diablerie.Game.World
                 unit.health = Random.Range(monStat.stats[0].minHP, monStat.stats[0].maxHP + 1);
             unit.maxHealth = unit.health;
 
+            monster.AddComponent<UnitRenderer>();
             var renderer = unit.GetComponent<COFRenderer>();
             renderer.equip = new string[monStat.ext.gearVariants.Length];
             for (int i = 0; i < renderer.equip.Length; ++i)

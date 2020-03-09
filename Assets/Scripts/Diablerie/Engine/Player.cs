@@ -52,6 +52,7 @@ namespace Diablerie.Engine
             unit.size = 2;
             unit.party = Party.Good;
 
+            gameObject.AddComponent<COFRenderer>();
             equip = gameObject.AddComponent<Equipment>();
             equip.charInfo = charStatInfo;
             unit.equip = equip;
@@ -66,6 +67,7 @@ namespace Diablerie.Engine
             listenerObject.transform.localPosition = new Vector3(0, 0, -1);
             charStat = gameObject.AddComponent<CharStat>();
             charStat.unit = unit;
+            gameObject.AddComponent<UnitRenderer>();
 
             foreach (var startingItem in charStatInfo.startingItems)
             {
