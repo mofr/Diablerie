@@ -96,7 +96,7 @@ namespace Diablerie.Engine.Entities
 
         #endregion
         
-        #region Commands
+        #region Commands and mode transitions
 
         public void LookAt(Vector3 target)
         {
@@ -175,6 +175,28 @@ namespace Diablerie.Engine.Entities
             _targetEntity = null;
             _targetUnit = target;
             _skillInfo = skillInfo;
+        }
+
+        public void Kill(Unit killer = null)
+        {
+            _dying = true;
+            _targetUnit = null;
+            _moving = false;
+            _usingSkill = false;
+            _skillInfo = null;
+            
+            CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
+
+            Events.InvokeUnitDied(this, killer);
+        }
+
+        public void GetHit()
+        {
+            overrideMode = "GH";
+            _targetUnit = null;
+            _moving = false;
+            _usingSkill = false;
+            _skillInfo = null;
         }
         
         #endregion
@@ -459,29 +481,14 @@ namespace Diablerie.Engine.Entities
             if (health > 0)
             {
                 if (damage > maxHealth * 0.1f)
-                {
-                    overrideMode = "GH";
-                    _targetUnit = null;
-                    _moving = false;
-                    _usingSkill = false;
-                    _skillInfo = null;
-                }
-
+                    GetHit();
                 Events.InvokeUnitTookDamage(this, damage);
             }
             else
             {
                 if (originator)
                     LookAtImmediately(originator.iso.pos);
-                _dying = true;
-                _targetUnit = null;
-                _moving = false;
-                _usingSkill = false;
-                _skillInfo = null;
-            
-                CollisionMap.SetPassable(Iso.Snap(iso.pos), size, size, true, gameObject);
-
-                Events.InvokeUnitDied(this, originator);
+                Kill(originator);
             }
         }
 
