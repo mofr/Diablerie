@@ -197,6 +197,7 @@ namespace Diablerie.Engine.Entities
             _moving = false;
             _usingSkill = false;
             _skillInfo = null;
+            UpdateMode();
         }
         
         #endregion
