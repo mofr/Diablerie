@@ -4,6 +4,8 @@
 
 [![Linux Build Status](http://diablerie.zond.org/build/image/?target=linux)](http://diablerie.zond.org/download/?target=linux)
 
+[![Code Status](https://www.codefactor.io/repository/github/liberodark/Diablerie/badge)](https://www.codefactor.io/repository/github/liberodark/Diablerie)
+
 ![alt tag](https://raw.github.com/mofr/Diablerie/master/Screenshots/rogue_camp.png)
 
 This is a recreation of Diablo 2 game from Blizzard.
