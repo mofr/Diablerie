@@ -495,15 +495,11 @@ namespace Diablerie.Engine
                 else if (block.stat.descFunc == 14)
                 {
                     string skillTabId = prop.param;
-                    var charStat = CharStatsInfo.FindByCode(prop.classSpecific);
-                    string className = charStat != null ? charStat.className : "NULL";
-                    sb.Append(sign);
-                    sb.Append(value);
-                    sb.Append(" to ");
-                    sb.Append("skilltab" + skillTabId);
-                    sb.Append(" Skill Levels (");
+                    string className = CharStatsInfo.sheet[block.value].className;
+                    sb.Append(block.stat.descPositive.ReplaceFirst("%d", value.ToString()));
+                    sb.Append(" (");
                     sb.Append(className);
-                    sb.Append(" Only) " + block.stat.descPositive);
+                    sb.Append(" Only)");
                 }
                 else if (block.stat.descFunc == 15)
                 {
