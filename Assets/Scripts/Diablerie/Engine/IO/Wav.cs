@@ -59,10 +59,10 @@ public class Wav
             var chunk = _chunks[_chunkIndex];
             int samplesAvailable = chunk.sampleCount + chunk.sampleOffset - _sampleIndex;
             int samplesToRead = Math.Min(data.Length - i, samplesAvailable);
-            for (int j = 0; j < samplesToRead; ++j, ++i)
-            {
-                data[i] = ReadSample(_reader);
-            }
+            // When smaplesToRead reaches 35000 or above, reading a float a time will consumes about 3 seconds, which stalls the whole game.
+            // Use bunch read to spped up.
+            ReadSample(_reader, data, i, samplesToRead);
+            i += samplesToRead;
             _sampleIndex += samplesToRead;
             if (i < data.Length)
                 ++_chunkIndex;
@@ -128,6 +128,19 @@ public class Wav
         byte byte1 = reader.ReadByte();
         byte byte2 = reader.ReadByte();
         return BytesToFloat(byte1, byte2);
+    }
+
+    private static void ReadSample(BinaryReader reader, float[] sampleBuffer, int startIndex, int sampleCount)
+    {
+        byte[] buffer = new byte[sampleCount * 2];
+        reader.BaseStream.Read(buffer, 0, buffer.Length);
+        for (int i = 0; i < buffer.Length; i += 2)
+        {
+            byte byte1 = buffer[i];
+            byte byte2 = buffer[i + 1];
+            short s = (short)((byte2 << 8) | byte1);
+            sampleBuffer[startIndex + i / 2] = s / 32768.0F;
+        }
     }
 
     private static float BytesToFloat(byte byte1, byte byte2)
