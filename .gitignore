@@ -38,3 +38,4 @@ UpgradeLog*
 *.mpq
 
 .idea
+/.vs
